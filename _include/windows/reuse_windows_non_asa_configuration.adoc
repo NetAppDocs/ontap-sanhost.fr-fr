@@ -1,0 +1,16 @@
+= 
+:allow-uri-read: 
+
+
+Pour la configuration non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes.
+
+Les chemins ayant les priorités les plus élevées sont actifs/optimisés, ce qui signifie qu'ils sont gérés par le contrôleur où se trouve l'agrégat.
+
+Les chemins avec les priorités les plus basses sont actifs, mais ne sont pas optimisés car ils sont servis à partir d'un autre contrôleur.
+
+
+NOTE: Les chemins non optimisés sont utilisés uniquement lorsqu'aucun chemin optimisé n'est disponible.
+
+L'exemple suivant montre la sortie correcte d'une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés.
+
+image::nonasa.png[pas de asa]

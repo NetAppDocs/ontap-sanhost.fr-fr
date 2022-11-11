@@ -1,0 +1,315 @@
+---
+sidebar: sidebar 
+permalink: hu_luhu_71.html 
+keywords: host utilities, unified, oracle, linux, 7.1, netapp, ontap 
+summary: 'Décrit l"utilisation de Linux Unified Host Utilities 7.1 avec ONTAP' 
+---
+= Utilitaires d'hôtes unifiés Linux 7.1
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toc: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:toc-position: content
+
+
+
+
+== Conditions préalables
+
+* Pour un fonctionnement fiable, vous devez vérifier que l'ensemble de votre configuration iSCSI, FC ou FCoE est prise en charge.
++
+Vous pouvez utiliser le https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^] pour vérifier votre configuration.
+
+* Vous devez installer les packages de gestion HBA fournis par les fournisseurs sur leurs sites Web.
++
+Le logiciel de gestion permet aux commandes SAN Tool Kit de collecter des informations sur les HBA FC, telles que leurs WWPN. Pour que l'adaptateur FCP show fonctionne, vérifiez que les packages suivants sont installés :
+
++
+** QLogic HBA – CLI QConvergeConsole
+** HBA Emulex - interface de ligne de commande d'application principale OneCommand Manager
+** HBA Brocade – CLI de l'utilitaire de commande Brocade
+
+
+
+
+LES paquets RPM "libhbaapi" et "libhbalinux" disponibles pour chaque distribution Linux doivent être installés sur le système d'exploitation hôte.
+
+
+
+== Kit D'outils SAN
+
+Linux Unified Host Utilities est un logiciel hôte NetApp qui fournit un kit d'outils de ligne de commandes sur votre hôte Linux.
+
+Le kit d'outils est installé automatiquement lorsque vous installez le pack NetApp Host Utilities. Ce kit contient le `sanlun` Utilitaire, qui vous aide à gérer les LUN et les HBA. Le `sanlun` La commande renvoie les informations relatives aux LUN mappées sur votre hôte, aux chemins d'accès multiples et aux informations nécessaires à la création des groupes initiateurs.
+
+Dans l'exemple suivant, le `sanlun lun show` La commande renvoie les informations relatives à la LUN.
+
+[listing]
+----
+# sanlun lun show all
+controller(7mode/E-Series)/            device     host               lun
+vserver(cDOT/FlashRay)   lun-pathname  filename   adapter  protocol  size    Product
+-------------------------------------------------------------------------
+data_vserver          /vol/vol1/lun1   /dev/sdb   host16   FCP       120.0g  cDOT
+data_vserver          /vol/vol1/lun1   /dev/sdc   host15   FCP       120.0g  cDOT
+data_vserver          /vol/vol2/lun2   /dev/sdd   host16   FCP       120.0g  cDOT
+data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDOT
+----
+
+NOTE: Ce kit est commun à toutes les configurations et tous les protocoles des utilitaires hôtes. En conséquence, certains de ses contenus s'appliquent à une configuration, mais pas à une autre. Le fait d'utiliser des composants non utilisés n'affecte pas les performances de votre système.
+
+
+NOTE: Le kit SAN n'est pas pris en charge sur Citrix XenServer, Oracle VM et l'hyperviseur Red Hat Enterprise Virtualization.
+
+
+
+== Installez Linux Unified Host Utilities
+
+Le pack logiciel NetApp Linux Unified Host Utilities est disponible sur le link:https://mysupport.netapp.com/NOW/cgi-bin/software/?product=Host+Utilities+-+SAN&platform=Linux["Site de support NetApp"^] dans un fichier .rpm 32 bits ou 64 bits.
+
+L'installation de Linux Unified Host Utilities est fortement recommandée, mais n'est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
+
+.Étapes
+. Si une version de Linux Unified Host Utilities est déjà installée, utilisez la commande suivante pour la supprimer :
++
+`rpm -e netapp_linux_unified_host_utilities-7-1`
+
++
+Pour les versions antérieures de Linux Host Utilities, accédez au répertoire dans lequel le logiciel de l'utilitaire hôte est installé et entrez le `uninstall` commande.
+
+. Téléchargez le pack logiciel Linux Unified Host Utilities 32 bits ou 64 bits à partir du link:https://mysupport.netapp.com/NOW/cgi-bin/software/?product=Host+Utilities+-+SAN&platform=Linux["Site de support NetApp"^] à votre hôte.
+. Accédez au répertoire dans lequel vous avez téléchargé le pack logiciel et utilisez la commande suivante pour l'installer :
++
+`rpm -ivh netapp_linux_unified_host_utilities-7-1.x86_xx.rpm`
+
++
+[listing]
+----
+Verifying...                          ################################# [100%]
+Preparing...                          ################################# [100%]
+Updating / installing...
+   1:netapp_linux_unified_host_utiliti################################# [100%]
+----
+. Vérifiez l'installation :
++
+`sanlun version`
+
++
+[listing]
+----
+sanlun version 7.1.386.1644
+----
+
+
+
+
+== Exemple de référence de commande
+
+
+
+=== Répertorie tous les initiateurs hôtes mappés sur l'hôte
+
+[listing]
+----
+# sanlun fcp show adapter -v
+
+adapter name:      host15
+WWPN:              10000090fa022736
+WWNN:              20000090fa022736
+driver name:       lpfc
+model:             LPe16002B-M6
+model description: Emulex LPe16002B-M6 PCIe 2-port 16Gb Fibre Channel Adapter
+serial number:     FC24637890
+hardware version:  0000000b 00000010 00000000
+driver version:    12.8.0.5; HBAAPI(I) v2.3.d, 07-12-10
+firmware version:  12.8.340.8
+Number of ports:   1
+port type:         Fabric
+port state:        Operational
+supported speed:   4 GBit/sec, 8 GBit/sec, 16 GBit/sec
+negotiated speed:  16 GBit/sec
+OS device name:    /sys/class/scsi_host/host15
+
+adapter name:      host16
+WWPN:              10000090fa022737
+WWNN:              20000090fa022737
+driver name:       lpfc
+model:             LPe16002B-M6
+model description: Emulex LPe16002B-M6 PCIe 2-port 16Gb Fibre Channel Adapter
+serial number:     FC24637890
+hardware version:  0000000b 00000010 00000000
+driver version:    12.8.0.5; HBAAPI(I) v2.3.d, 07-12-10
+firmware version:  12.8.340.8
+Number of ports:   1
+port type:         Fabric
+port state:        Operational
+supported speed:   4 GBit/sec, 8 GBit/sec, 16 GBit/sec
+negotiated speed:  16 GBit/sec
+OS device name:    /sys/class/scsi_host/host16
+----
+
+
+=== Répertorie toutes les LUN mappées à l'hôte
+
+[listing]
+----
+# sanlun lun show -p -v all
+
+                    ONTAP Path: vs_sanboot:/vol/sanboot_169/lun
+                           LUN: 0
+                      LUN Size: 150g
+                       Product: cDOT
+                   Host Device: 3600a0980383143393124515873683561
+              Multipath Policy: service-time 0
+                DM-MP Features: 3 queue_if_no_path pg_init_retries 50
+              Hardware Handler: 1 alua
+            Multipath Provider: Native
+----------- --------- ---------- ------- ------------ ---------- ----------
+            host      vserver            host:
+dm-mp       path      path       /dev/   chan:        vserver    major:
+state       state     type       node    id:lun       LIF        minor
+----------- --------- ---------- ------- ------------ ---------- ----------
+active      up        primary    sdq    15:0:5:0     lif_18      65:0
+active      up        primary    sds    16:0:5:0     lif_17      65:32
+active      up        primary    sdac   16:0:7:0     lif_25      65:192
+active      up        primary    sdad   15:0:7:0     lif_26      65:208
+active      up        secondary  sdt    15:0:4:0     lif_20      65:48
+active      up        secondary  sdr    15:0:6:0     lif_19      65:16
+active      up        secondary  sdad   16:0:4:0     lif_27      66:96
+active      up        secondary  sdan   16:0:6:0     lif_28      66:112
+----
+
+
+=== Répertorie toutes les LUN mappées à l'hôte à partir d'un SVM donné
+
+[listing]
+----
+# sanlun lun show -p -v vs_sanboot
+
+                    ONTAP Path: vs_sanboot:/vol/sanboot_169/lun
+                           LUN: 0
+                      LUN Size: 160g
+                       Product: cDOT
+                   Host Device: 3600a0980383143393124515873683561
+              Multipath Policy: service-time 0
+                DM-MP Features: 3 queue_if_no_path pg_init_retries 50
+              Hardware Handler: 1 alua
+            Multipath Provider: Native
+----------- --------- ---------- ------- ------------ --------------- ----------
+            host      vserver            host:
+dm-mp       path      path       /dev/   chan:        vserver         major:
+state       state     type       node    id:lun       LIF             minor
+----------- --------- ---------- ------- ------------ --------------- ----------
+active      up        primary    sdce    15:0:5:0     lif_16g_5       69:32
+active      up        primary    sdfk    16:0:5:0     lif_16g_7       130:96
+active      up        primary    sdfm    16:0:7:0     lif_16g_8       130:128
+active      up        primary    sdcg    15:0:7:0     lif_16g_6       69:64
+active      up        secondary  sdcd    15:0:4:0     lif_16g_1       69:16
+active      up        secondary  sdcf    15:0:6:0     lif_16g_2       69:48
+active      up        secondary  sdfj    16:0:4:0     lif_16g_3       130:80
+active      up        secondary  sdfl    16:0:6:0     lif_16g_4       130:112
+----
+
+
+=== Répertorie tous les attributs d'une LUN donnée mappée sur l'hôte
+
+[listing]
+----
+# sanlun lun show -p -v vs_sanboot:/vol/sanboot_169/lun
+
+                    ONTAP Path: vs_sanboot:/vol/sanboot_169/lun
+                           LUN: 0
+                      LUN Size: 160g
+                       Product: cDOT
+                   Host Device: 3600a0980383143393124515873683561
+              Multipath Policy: service-time 0
+                DM-MP Features: 3 queue_if_no_path pg_init_retries 50
+              Hardware Handler: 1 alua
+            Multipath Provider: Native
+----------- --------- ---------- ------- ------------ ----------------- ----------
+            host      vserver            host:
+dm-mp       path      path       /dev/   chan:        vserver           major:
+state       state     type       node    id:lun       LIF               minor
+----------- --------- ---------- ------- ------------ ----------------- ----------
+active      up        primary    sdce    15:0:5:0     lif_16g_5         69:32
+active      up        primary    sdfk    16:0:5:0     lif_16g_7         130:96
+active      up        primary    sdfm    16:0:7:0     lif_16g_8         130:128
+active      up        primary    sdcg    15:0:7:0     lif_16g_6         69:64
+active      up        secondary  sdcd    15:0:4:0     lif_16g_1         69:16
+active      up        secondary  sdcf    15:0:6:0     lif_16g_2         69:48
+active      up        secondary  sdfj    16:0:4:0     lif_16g_3         130:80
+active      up        secondary  sdfl    16:0:6:0     lif_16g_4         130:112
+----
+
+
+=== Lister l'identité du SVM ONTAP depuis laquelle une LUN donnée est mappée sur l'hôte
+
+[listing]
+----
+# sanlun lun show -m -v vs_sanboot:/vol/sanboot_169/lun
+                                                             device          host                  lun
+vserver                       lun-pathname                   filename        adapter    protocol   size    product
+---------------------------------------------------------------------------------------------------------------
+vs_sanboot                    /vol/sanboot_169/lun           /dev/sdfm       host16     FCP        160g    cDOT
+             LUN Serial number: 81C91$QXsh5a
+         Controller Model Name: AFF-A400
+          Vserver FCP nodename: 2008d039ea1308e5
+          Vserver FCP portname: 2010d039ea1308e5
+              Vserver LIF name: lif_16g_8
+            Vserver IP address: 10.141.12.165
+                                10.141.12.161
+                                10.141.12.163
+           Vserver volume name: sanboot_169     MSID::0x000000000000000000000000809E7CC3
+         Vserver snapshot name:
+----
+
+
+=== Répertorie les attributs de LUN ONTAP par nom de fichier de périphérique hôte
+
+[listing]
+----
+# sanlun lun show -d /dev/sdce
+controller(7mode/E-Series)/                          device        host                lun
+vserver(cDOT/FlashRay)      lun-pathname           filename      adapter    protocol   size    product
+----------------------------------------------------------------------------------------------------
+vs_sanboot                 /vol/sanboot_169/lun    /dev/sdce     host15     FCP        160g    cDOT
+[root@sr630-13-169 ~]#
+----
+
+
+=== Lister tous les WWPN des LIF cibles des SVM liés à l'hôte
+
+[listing]
+----
+# sanlun lun show -wwpn
+controller(7mode/E-Series)/   target                                            device          host       lun
+vserver(cDOT/FlashRay)        wwpn               lun-pathname                   filename        adapter    size    product
+-----------------------------------------------------------------------------------------------------------------------
+vs_169_16gEmu                 202cd039ea1308e5   /vol/VOL_8g_169_2_8/lun        /dev/sdlo       host18     10g     cDOT
+vs_169_16gEmu                 202cd039ea1308e5   /vol/VOL_8g_169_2_9/lun        /dev/sdlp       host18     10g     cDOT
+vs_169_16gEmu                 202cd039ea1308e5   /vol/VOL_8g_169_2_7/lun        /dev/sdln       host18     10g     cDOT
+vs_169_16gEmu                 202cd039ea1308e5   /vol/VOL_8g_169_2_5/lun        /dev/sdll       host18     10g     cDOT
+----
+
+
+=== Lister les LUN ONTAP vus sur l'hôte par un WWPN LIF cible du SVM donné
+
+[listing]
+----
+# sanlun lun show -wwpn 2010d039ea1308e5
+controller(7mode/E-Series)/   target                                     device         host       lun
+vserver(cDOT/FlashRay)        wwpn               lun-pathname            filename       adapter    size    product
+---------------------------------------------------------------------------------------------------------------
+vs_sanboot                    2010d039ea1308e5   /vol/sanboot_169/lun    /dev/sdfm      host16     160g    cDOT
+----
+
+
+== Fichier de notification
+
+link:https://library.netapp.com/ecm/ecm_download_file/ECMLP2559115["Fichier de notification des utilitaires d'hôte unifié Linux"^]

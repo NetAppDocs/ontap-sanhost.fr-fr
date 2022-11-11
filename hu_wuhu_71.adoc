@@ -1,0 +1,521 @@
+---
+sidebar: sidebar 
+permalink: hu_wuhu_71.html 
+keywords: windows, host, utilities, 7.1, hba, fibre, channel, SANtricity, netapp, san, host, e-series, platform 
+summary: 'Windows Unified Host Utilities comprend un programme d"installation qui définit les paramètres d"enregistrement et d"adaptateur HBA Windows requis. L"hôte Windows gère ainsi correctement les comportements du système de stockage pour les plateformes NetApp ONTAP et E-Series.' 
+---
+= Utilitaires d'hôtes unifiés Windows 7.1
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toc: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:toc-position: content
+
+
+
+
+== Qu'est-ce que les utilitaires d'hôtes Windows
+
+Windows Unified Host Utilities comprend un programme d'installation qui définit les paramètres Windows d'enregistrement et d'adaptateur de bus hôte (HBA) nécessaires. L'hôte Windows gère ainsi correctement les comportements du système de stockage pour les plateformes NetApp ONTAP et E-Series.
+
+Lorsque vous installez le logiciel Host Utilities, le programme d'installation définit les paramètres de registre Windows requis et d'adaptateur de bus hôte (HBA).
+
+Les programmes et fichiers suivants sont installés sur l'ordinateur hôte Windows. Le répertoire par défaut est `C:\Program Files\NetApp\Windows Host Utilities`.
+
+|===
+| Programme | Objectif 
+
+
+| `emulexhba.reg` | Programme de dépannage ; exécutez ce programme uniquement si le personnel du support technique vous y invite. 
+
+
+| `\NetAppQCLI\fcconfig.exe` | Utilisé par le programme d'installation pour définir les paramètres HBA. 
+
+
+| `\NetAppQCLI\fcconfig.ini` | Utilisé par le programme d'installation pour définir les paramètres HBA. 
+
+
+| `\NetAppQCLI\*.*` | Utilisé par le programme d'installation pour définir les paramètres HBA Fibre Channel de QLogic. 
+
+
+| `san_version.exe` | Affiche la version des utilitaires hôtes et des HBA Fibre Channel. 
+|===
+
+
+== Configurations prises en charge par les utilitaires hôtes
+
+Les utilitaires hôtes prennent en charge différents protocoles, configurations hôtes et options de chemins d'accès multiples Windows. Pour plus d'informations, voir https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^].
+
+
+
+== Vérifiez la configuration de l'hôte et du système de stockage
+
+Avant d'installer les utilitaires hôtes, vérifiez que la version des utilitaires hôtes prend en charge la configuration de l'hôte et du système de stockage afin que le logiciel s'installe correctement.
+
+.Étapes
+. Vérifiez la configuration prise en charge dans le http://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"^].
+. Vérifier les correctifs requis pour l'hôte respectif sur le link:https://docs.netapp.com/us-en/ontap-sanhost/index.html["Documentation Windows de l'hôte SAN"].
++
+
+NOTE: link:https://docs.netapp.com/us-en/ontap-sanhost/hu_windows_2022.html["Utilisation de Windows Server 2022 avec ONTAP"] fournit des instructions sur link:https://docs.netapp.com/us-en/ontap-sanhost/hu_windows_2022.html#installing-windows-hotfixes["Installation des correctifs Windows"] Pour Windows Server 2022. Reportez-vous aux documents Windows de la catégorie configurations hôte pour trouver les informations de correctif appropriées pour les versions antérieures de Windows Server.
+
+. Ajoutez la licence iSCSI ou FCP et démarrez le service cible.
++
+Les protocoles Fibre Channel et iSCSI ne nécessitent pas de licence sur les systèmes de stockage E-Series utilisant SANtricity Storage Manager.
+
+. Vérifiez le câblage
++
+Voir la https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sanconf/home.html?cp=14_7["Guide de configuration SAN"^] Pour votre version de ONTAP ou https://mysupport.netapp.com/ecm/ecm_get_file/ECMLP2773533["Guide du câblage matériel E-Series"^] pour des informations détaillées sur le câblage et la configuration.
+
+
+
+
+
+== Configuration des HBA FC et des commutateurs
+
+Installer et configurer un ou plusieurs adaptateurs de bus hôte Fibre Channel pris en charge pour les connexions Fibre Channel au système de stockage.
+
+Le programme d'installation de Windows Host Utilities définit les paramètres Fibre Channel HBA requis.
+
+
+NOTE: Ne modifiez pas les paramètres HBA manuellement.
+
+.Étapes
+. Installez une ou plusieurs cartes HBA Fibre Channel prises en charge conformément aux instructions fournies par le fournisseur HBA.
+. Obtenez les pilotes HBA et les utilitaires de gestion pris en charge et installez-les conformément aux instructions fournies par le fournisseur de l'adaptateur HBA.
+. Connectez les HBA à vos commutateurs Fibre Channel ou directement au système de stockage.
+. Créez des zones sur le commutateur Fibre Channel en fonction de la documentation de votre commutateur Fibre Channel.
+. Pour ONTAP, segmenter le commutateur par WWPN. Veillez à utiliser le WWPN des LIFs et non des ports physiques des contrôleurs de stockage. Pour plus d'informations, voir https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sanconf/home.html?cp=14_7["Guide de configuration SAN"^].
+
+
+
+
+== Installez les utilitaires hôtes
+
+Le programme d'installation installe le package Host Utilities et définit les paramètres du registre Windows et HBA.
+
+Vous devez indiquer si vous souhaitez inclure la prise en charge des chemins d'accès multiples lors de l'installation du pack logiciel Windows Unified Host Utilities. Le programme d'installation vous demande le choix suivant. Vous pouvez également exécuter une installation silencieuse (sans surveillance) à partir d'une invite de commande Windows.
+
+.Prise en charge des chemins d'accès
+* Choisissez MPIO si vous disposez de plusieurs chemins entre l'hôte Windows ou la machine virtuelle et le système de stockage.
+* Choisissez non MPIO uniquement si vous utilisez un chemin d'accès unique au système de stockage.
+* La sélection MPIO n'est pas disponible sur les systèmes Windows XP et Windows Vista ; les E/S multivoies ne sont pas prises en charge sur ces systèmes d'exploitation invités.
+* Pour les invités Hyper-V, les disques bruts (pass-through) n'apparaissent pas dans le système d'exploitation invité si vous choisissez la prise en charge des chemins d'accès multiples. Vous pouvez utiliser des disques bruts ou MPIO, mais vous ne pouvez pas les utiliser les deux dans le système d'exploitation invité.
+
+
+
+
+=== Installez les utilitaires hôtes de manière interactive
+
+Pour installer le progiciel Host Utilities de manière interactive, vous devez exécuter le programme d'installation Host Utilities et suivre les invites.
+
+.Étapes
+. Téléchargez le fichier exécutable à partir de https://mysupport.netapp.com/site/["Site de support NetApp"^].
+. Accédez au répertoire à partir duquel vous avez téléchargé le fichier exécutable.
+. Exécutez le `netapp_windows_host_utilities_7.1_x64` classez et suivez les instructions à l'écran.
+. Redémarrez l'hôte Windows lorsque vous y êtes invité.
+
+
+
+
+=== Installez les utilitaires hôtes à partir d'une ligne de commande
+
+* Vous pouvez effectuer une installation silencieuse (sans surveillance) des utilitaires hôtes en entrant les commandes appropriées à l'invite de commande de Windows.
+* Le package d'installation des utilitaires hôtes doit se trouver dans un chemin accessible par l'hôte Windows.
+* Suivez les instructions d'installation interactive des utilitaires hôtes pour obtenir le package d'installation.
+* Le système redémarre automatiquement lorsque l'installation est terminée.
+
+
+.Étapes
+. Entrez la commande suivante à l'invite de commande Windows :
++
+`msiexec /i installer.msi /quiet MULTIPATHING= {0 | 1} [INSTALLDIR=inst_path]`
+
++
+** où installer est le nom du `.msi` Fichier pour votre architecture CPU ;
+** MULTIPATHING indique si la prise en charge de MPIO est installée. Les valeurs autorisées sont 0 pour non, 1 pour oui
+** `inst_path` Est le chemin d'installation des fichiers Host Utilities. Le chemin par défaut est `C:\Program Files\NetApp\Windows Host Utilities\`.
+
+
+
+
+
+NOTE: Pour voir les options Microsoft installer (MSI) standard pour la journalisation et d'autres fonctions, entrez `msiexec /help` À l'invite de commande Windows. Par exemple :
+`msiexec /i install.msi /quiet /l*v <install.log> LOGVERBOSE=1`
+
+
+
+== Mettre à niveau les utilitaires hôtes
+
+Le nouveau package d'installation Host Utilities doit se trouver dans un chemin accessible par l'hôte Windows. Suivez les instructions d'installation interactive des utilitaires hôtes pour obtenir le package d'installation.
+
+
+
+=== Mettre à niveau les utilitaires hôtes de manière interactive
+
+Pour installer le progiciel Host Utilities de manière interactive, vous devez exécuter le programme d'installation Host Utilities et suivre les invites.
+
+.Étapes
+. Accédez au répertoire à partir duquel vous avez téléchargé le fichier exécutable.
+. Exécutez le fichier exécutable et suivez les instructions à l'écran.
+. Redémarrez l'hôte Windows lorsque vous y êtes invité.
+. Vérifier la version de l'utilitaire hôte après le redémarrage :
++
+.. Ouvrez *panneau de configuration*.
+.. Accédez à *Programme et fonctionnalités* et vérifiez la version de l'utilitaire hôte.
+
+
+
+
+
+
+=== Mettez à niveau les utilitaires hôtes à partir de la ligne de commande
+
+Vous pouvez effectuer une installation silencieuse (sans surveillance) des nouveaux utilitaires hôtes en entrant les commandes appropriées à l'invite de commande de Windows. Le package d'installation New Host Utilities doit se trouver dans un chemin accessible par l'hôte Windows. Suivez les instructions d'installation interactive des utilitaires hôtes pour obtenir le package d'installation.
+
+.Étapes
+. Entrez la commande suivante à l'invite de commande Windows :
++
+`msiexec /i installer.msi /quiet MULTIPATHING= {0 | 1} [INSTALLDIR=inst_path]`
+
++
+** où `installer` est le nom du `.msi` Fichier pour votre architecture CPU.
+** MULTIPATHING indique si la prise en charge de MPIO est installée. Les valeurs autorisées sont 0 pour non, 1 pour oui
+** `inst_path` Est le chemin d'installation des fichiers Host Utilities. Le chemin par défaut est `C:\Program Files\NetApp\Windows Host Utilities\`.
+
+
+
+
+
+NOTE: Pour voir les options Microsoft installer (MSI) standard pour la journalisation et d'autres fonctions, entrez `msiexec /help` À l'invite de commande Windows. Par exemple :
+`msiexec /i install.msi /quiet /l*v <install.log> LOGVERBOSE=1`
+
+Le système redémarre automatiquement lorsque l'installation est terminée.
+
+
+
+== Réparer et supprimer les utilitaires hôtes Windows
+
+Vous pouvez utiliser l'option réparation du programme d'installation des utilitaires hôtes pour mettre à jour les paramètres de registre HBA et Windows. Vous pouvez supprimer entièrement les utilitaires hôtes, soit de manière interactive, soit de la ligne de commande de Windows.
+
+
+
+=== Réparez ou supprimez les utilitaires hôtes Windows de manière interactive
+
+L'option réparer met à jour le registre Windows et les HBA Fibre Channel avec les paramètres requis. Vous pouvez également supprimer entièrement les utilitaires hôtes.
+
+.Étapes
+. Ouvrez Windows *programmes et fonctionnalités* (Windows Server 2012 R2, Windows Server 2016, Windows Server 2019).
+. Sélectionnez *NetApp Windows Unified Host Utilities*.
+. Cliquez sur *Modifier*.
+. Cliquez sur *réparer* ou *Supprimer*, selon les besoins.
+. Suivez les instructions à l'écran.
+
+
+
+
+=== Réparez ou supprimez les utilitaires hôtes Windows de la ligne de commande
+
+L'option réparer met à jour le registre Windows et les HBA Fibre Channel avec les paramètres requis. Vous pouvez également supprimer entièrement les utilitaires hôtes d'une ligne de commande Windows.
+
+.Étapes
+. Entrez la commande suivante sur la ligne de commande Windows pour réparer les utilitaires hôtes Windows :
++
+`msiexec {/uninstall | /f]installer.msi [/quiet]`
+
++
+** `/uninstall` Supprime entièrement les utilitaires hôtes.
+** `/f` répare l'installation.
+** `installer.msi` Est le nom du programme d'installation de Windows Host Utilities sur votre système.
+** `/quiet` supprime tous les commentaires et redémarre automatiquement le système sans message d'invite à la fin de la commande.
+
+
+
+
+
+
+== Présentation des paramètres utilisés par les utilitaires hôtes
+
+Les utilitaires hôtes nécessitent certains paramètres de registre et de paramètres pour garantir que l'hôte Windows gère correctement le comportement du système de stockage.
+
+Les utilitaires d'hôtes Windows définissent les paramètres qui affectent la façon dont l'hôte Windows réagit à un délai ou à une perte de données. Les valeurs particulières ont été sélectionnées pour s'assurer que l'hôte Windows gère correctement les événements, tels que le basculement d'un contrôleur du système de stockage vers son contrôleur partenaire.
+
+Toutes les valeurs ne s'appliquent pas pour le DSM pour SANtricity Storage Manager ; cependant, les valeurs définies par les utilitaires hôtes et celles définies par le DSM pour SANtricity Storage Manager ne génèrent pas de conflits. Les adaptateurs de bus hôte (HBA) Fibre Channel et iSCSI possèdent également des paramètres à définir pour assurer les meilleures performances et gérer avec succès les événements du système de stockage.
+
+Le programme d'installation fourni avec Windows Unified Host Utilities définit les paramètres HBA Windows et Fibre Channel aux valeurs prises en charge.
+
+
+NOTE: Vous devez définir manuellement les paramètres HBA iSCSI.
+
+Le programme d'installation définit des valeurs différentes selon que vous spécifiez la prise en charge MPIO (Multi-Path I/O) lors de l'exécution du programme d'installation,
+
+Vous ne devez pas modifier ces valeurs à moins d'en être dirigé par le support technique.
+
+
+
+== Valeurs de registre définies par les utilitaires d'hôtes unifiés Windows
+
+Le programme d'installation de Windows Unified Host Utilities définit automatiquement les valeurs de registre en fonction des choix que vous faites lors de l'installation. Vous devez connaître ces valeurs de registre, la version du système d'exploitation. Les valeurs suivantes sont définies par le programme d'installation de Windows Unified Host Utilities. Toutes les valeurs sont décimales, sauf indication contraire. HKLM est l'abréviation de HKEY_LOCAL_MACHINE.
+
+[cols="~, 10, ~"]
+|===
+| Clé de registre | Valeur | Une fois réglé 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services \msdsm\Parameters \dsmMaximumRetryTimeDuringStatetransition | 120 | Lorsque la prise en charge de MPIO est spécifiée et que votre serveur est Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, Windows Server 2012 R2 ou Windows Server 2016, sauf si Data ONTAP DSM est détecté 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services \msdsm\Parameters \dsmMaximumStateTransitionTime | 120 | Lorsque la prise en charge de MPIO est spécifiée et que votre serveur est Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, Windows Server 2012 R2 ou Windows Server 2016, sauf si Data ONTAP DSM est détecté 
+
+
+.2+| HKLM\SYSTEM\CurrentControlSet\Services\msdsm \Parameters\dspSupportedDeviceList | « NETAPPLUN » | Lorsque la prise en charge de MPIO est spécifiée 
+
+
+| « LUN NETAPP », « LUN NETAPP C-MODE » | Lorsque la prise en charge de MPIO est spécifiée, sauf si Data ONTAP DSM est détecté 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Control\Class \{iSCSI_driver_GUID}\ ID_instance\Paramètres \IPSecConfigTimeout | 60 | Toujours, sauf lorsque Data ONTAP DSM est détecté 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Control \Class\{iSCSI_Driver_GUID} \ ID_instance\Paramètres\LinkDownTime | 10 | Toujours 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services\ClusDisk \Parameters\ManageDisksOnSystemBases | 1 | Toujours, sauf lorsque Data ONTAP DSM est détecté 
+
+
+.2+| HKLM\SYSTEM\CurrentControlSet\Control \Class\{iSCSI_Driver_GUID} \ instance_ID\Parameters\MaxestRequestHoldTime | 120 | Lorsqu'aucun support MPIO n'est sélectionné 
+
+
+| 30 | Toujours, sauf lorsque Data ONTAP DSM est détecté 
+
+
+.2+| HKLM\SYSTEM\CurrentControlSet \Control\MPDEV\MPIOSupportedDeviceList | « LUN NETAPP » | Lorsque la prise en charge de MPIO est spécifiée 
+
+
+| « LUN NETAPP », « LUN NETAPP C-MODE » | Lorsque MPIO est pris en charge, sauf si Data ONTAP DSM est détecté 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services\mpio \Parameters\PathRecovery yInterval | 40 | Lorsque votre serveur est Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, Windows Server 2012 R2 ou Windows Server 2016 uniquement 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services\mpio \Parameters\PathVerifyEnabled | 0 | Lorsque la prise en charge de MPIO est spécifiée, sauf si Data ONTAP DSM est détecté 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services\msdsm \Parameters\PathVerifyEnabled | 0 | Lorsque la prise en charge de MPIO est spécifiée, sauf si Data ONTAP DSM est détecté 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services \msdsm\Parameters\PathVerifyEnabled | 0 | Lorsque la prise en charge de MPIO est spécifiée et que votre serveur est Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, Windows Server 2012 R2 ou Windows Server 2016, sauf si Data ONTAP DSM est détecté 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services \msiscdsm\Parameters\PathVerifyEnabled | 0 | Lorsque la prise en charge de MPIO est spécifiée et que votre serveur est Windows Server 2003, sauf si Data ONTAP DSM est détecté 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services\vnetapp \Parameters\PathVerifyEnabled | 0 | Lorsque la prise en charge de MPIO est spécifiée, sauf si Data ONTAP DSM est détecté 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services\mpio \Parameters\PDORemovePeriod | 130 | Lorsque la prise en charge de MPIO est spécifiée, sauf si Data ONTAP DSM est détecté 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services\msdsm \Parameters\PDORemovePeriod | 130 | Lorsque la prise en charge de MPIO est spécifiée et que votre serveur est Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, Windows Server 2012 R2 ou Windows Server 2016, sauf si Data ONTAP DSM est détecté 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services\msiscdsm \Parameters\PDORemovePeriod | 130 | Lorsque la prise en charge de MPIO est spécifiée et que votre serveur est Windows Server 2003, sauf si Data ONTAP DSM est détecté 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services \vnetapp \Parameters\PDORemovePeriod | 130 | Lorsque la prise en charge de MPIO est spécifiée, sauf si Data ONTAP DSM est détecté 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services \mpio\Parameters\RetyCount | 6 | Lorsque la prise en charge de MPIO est spécifiée, sauf si Data ONTAP DSM est détecté 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services\msdsm \Parameters\RetyCount | 6 | Lorsque la prise en charge de MPIO est spécifiée et que votre serveur est Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, Windows Server 2012 R2 ou Windows Server 2016, sauf si Data ONTAP DSM est détecté 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services \mscdsm\Parameters\RetyCount | 6 | Lorsque la prise en charge de MPIO est spécifiée et que votre serveur est Windows Server 2003, sauf si Data ONTAP DSM est détecté 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services \vnetapp\Parameters\RetyCount | 6 | Lorsque la prise en charge de MPIO est spécifiée, sauf si Data ONTAP DSM est détecté 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services \mpio\Parameters\RetryInterval | 1 | Lorsque la prise en charge de MPIO est spécifiée, sauf si Data ONTAP DSM est détecté 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services \msdsm\Parameters\RetyInterval | 1 | Lorsque la prise en charge de MPIO est spécifiée et que votre serveur est Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, Windows Server 2012 R2 ou Windows Server 2016, sauf si Data ONTAP DSM est détecté 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services \vnetapp\Parameters\RetyInterval | 1 | Lorsque la prise en charge de MPIO est spécifiée, sauf si Data ONTAP DSM est détecté 
+
+
+.2+| HKLM\SYSTEM\CurrentControlSet \Services\disk\TimeOutValue | 120 | Lorsqu'aucune prise en charge MPIO n'est sélectionnée, sauf si Data ONTAP DSM est détecté 
+
+
+| 60 | Lorsque la prise en charge de MPIO est spécifiée, sauf si Data ONTAP DSM est détecté 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services\mpio \Parameters\UseCustomPathRecovery yInterval | 1 | Lorsque votre serveur est Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, Windows Server 2012 R2 ou Windows Server 2016 uniquement 
+|===
+Reportez-vous à la https://docs.microsoft.com/en-us/troubleshoot/windows-server/performance/windows-registry-advanced-users["Documents Microsoft"^] pour plus de détails sur les paramètres du registre.
+
+
+
+== Valeurs de HBA FC définies par les utilitaires hôtes Windows
+
+Sur les systèmes utilisant Fibre Channel, le programme d'installation Host Utilities définit les valeurs de délai requises pour les HBA FC Emulex et QLogic. Pour les HBA Emulex Fibre Channel, le programme d'installation définit les paramètres suivants lorsque MPIO est sélectionné :
+
+|===
+| Type de propriété | Valeur de propriété 
+
+
+| LinkTimeOut | 1 
+
+
+| NodeTimeOut | 10 
+|===
+Pour les HBA Emulex Fibre Channel, le programme d'installation définit les paramètres suivants lorsque MPIO n'est pas sélectionné :
+
+|===
+| Type de propriété | Valeur de propriété 
+
+
+| LinkTimeOut | 30 
+
+
+| NodeTimeOut | 120 
+|===
+Pour les HBA Fibre Channel QLogic, le programme d'installation définit les paramètres suivants lorsque MPIO est sélectionné :
+
+|===
+| Type de propriété | Valeur de propriété 
+
+
+| LinkDownTimeOut | 1 
+
+
+| PortDownloyCount | 10 
+|===
+Pour les HBA Fibre Channel QLogic, le programme d'installation définit les paramètres suivants lorsque MPIO n'est pas sélectionné :
+
+|===
+| Type de propriété | Valeur de propriété 
+
+
+| LinkDownTimeOut | 30 
+
+
+| PortDownloyCount | 120 
+|===
+
+NOTE: Les noms des paramètres peuvent varier légèrement selon le programme. Par exemple, dans le programme QConvergeConsole de QLogic, le paramètre s'affiche comme `Link Down Timeout`. Utilitaires hôtes `fcconfig.ini` fichier affiche ce paramètre comme l'un ou l'autre `LinkDownTimeOut` ou `MpioLinkDownTimeOut`, Selon que MPIO est spécifié ou non. Cependant, tous ces noms font référence au même paramètre HBA.
+
+Reportez-vous à la section https://www.broadcom.com/support/download-search["Emulex"^] ou https://driverdownloads.qlogic.com/QLogicDriverDownloads_UI/Netapp_search.aspx["QLogic"^] site pour en savoir plus sur les paramètres d'expiration.
+
+
+
+== Dépannage
+
+Cette section décrit les techniques générales de dépannage des utilitaires hôtes Windows. Assurez-vous de consulter les dernières notes de version pour connaître les problèmes connus et les solutions.
+
+.Différentes zones pour identifier les problèmes d'interopérabilité possibles
+* Pour identifier les problèmes d'interopérabilité potentiels, vous devez vérifier que les utilitaires hôtes prennent en charge votre combinaison de logiciels de système d'exploitation hôte, de matériel hôte, de logiciel ONTAP et de matériel de système de stockage.
+* Vous devez consulter la matrice d'interopérabilité.
+* Vous devez vérifier que vous disposez de la bonne configuration iSCSI.
+* Si les LUN iSCSI ne sont pas disponibles après un redémarrage, vous devez vérifier que la cible est répertoriée comme persistante dans l'onglet cibles persistantes de l'interface utilisateur graphique de l'initiateur iSCSI Microsoft.
+* Si les applications utilisant les LUN affichent des erreurs au démarrage, vous devez vérifier que les applications sont configurées pour dépendre du service iSCSI.
+* Pour les chemins Fibre Channel vers les contrôleurs de stockage qui exécutent ONTAP, vous devez vérifier que les commutateurs FC sont zonés à l'aide des WWPN des LIFs cibles, et non pas des WWPN des ports physiques du nœud.
+* Vous devez vérifier le link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71_rn.html["Notes de version pour les utilitaires hôtes Windows"] pour rechercher des problèmes connus. Les notes de mise à jour incluent une liste des problèmes connus et des limites.
+* Vous devez consulter les informations de dépannage dans le https://docs.netapp.com/ontap-9/index.jsp["Guide d'administration DU SAN"^] Pour votre version de ONTAP.
+* Vous devez effectuer une recherche https://mysupport.netapp.com/site/bugs-online/["Bogues en ligne"^] pour les problèmes récemment découverts.
+* Dans le champ types de bug, sous recherche avancée, vous devez sélectionner ISCSI - Windows, puis cliquer sur Go. Vous devez répéter la recherche pour Bug Type FCP -Windows.
+* Vous devez collecter des informations sur votre système.
+* Enregistrez tous les messages d'erreur affichés sur l'hôte ou la console du système de stockage.
+* Collectez les fichiers journaux de l'hôte et du système de stockage.
+* Notez les symptômes du problème et toutes les modifications apportées à l'hôte ou au système de stockage juste avant l'apparition du problème.
+* Si vous ne parvenez pas à résoudre le problème, vous pouvez contacter le support technique NetApp.
+
+
+http://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"^]
+https://mysupport.netapp.com/portal/documentation["Documentation NetApp"^]
+https://mysupport.netapp.com/NOW/cgi-bin/bol["NetApp bogues en ligne"^]
+
+
+
+=== Description des modifications apportées aux utilitaires hôtes aux paramètres du pilote FC HBA
+
+Lors de l'installation des pilotes HBA Emulex ou QLogic requis sur un système FC, plusieurs paramètres sont vérifiés et, dans certains cas, modifiés.
+
+Les utilitaires hôtes définissent les valeurs des paramètres suivants si MS DSM pour Windows MPIO est détecté :
+
+* LinkTimeOut – définit la durée en secondes pendant laquelle le port hôte attend avant de reprendre les E/S après l'arrêt d'une liaison physique.
+* NodeTimeOut – définit la durée en secondes avant que le port hôte ne reconnaisse qu'une connexion au périphérique cible est interrompue.
+
+
+Lors de la résolution des problèmes de carte HBA, vérifiez que ces paramètres ont les valeurs correctes. Les valeurs correctes dépendent de deux facteurs :
+
+* Fournisseur du HBA
+* Que vous utilisiez le logiciel de chemins d'accès multiples (MPIO)
+
+
+Vous pouvez corriger les paramètres HBA en exécutant l'option de réparation du programme d'installation des utilitaires hôtes Windows.
+
+
+
+==== Vérifiez les paramètres du pilote HBA Emulex sur les systèmes FC
+
+Si vous disposez d'un système Fibre Channel, vous devez vérifier les paramètres du pilote HBA Emulex. Ces paramètres doivent exister pour chaque port de l'adaptateur HBA.
+
+.Étapes
+. Ouvrez OnCommand Manager.
+. Sélectionnez l'adaptateur HBA approprié dans la liste et cliquez sur l'onglet *Paramètres du pilote*.
++
+Les paramètres du pilote s'affichent.
+
+. Si vous utilisez le logiciel MPIO, vérifiez que vous disposez des paramètres de pilote suivants :
++
+** LinkTimeOut - 1
+** NodeTimeOut - 10
+
+
+. Si vous n'utilisez pas le logiciel MPIO, vérifiez que vous disposez des paramètres de pilote suivants :
++
+** LinkTimeOut - 30
+** NodeTimeOut - 120
+
+
+
+
+
+
+==== Vérifiez les paramètres du pilote HBA QLogic sur les systèmes FC
+
+Sur les systèmes FC, vous devez vérifier les paramètres du pilote HBA QLogic. Ces paramètres doivent exister pour chaque port de l'adaptateur HBA.
+
+.Étapes
+. Ouvrez QConvergeConsole, puis cliquez sur *Connect* dans la barre d'outils.
++
+La boîte de dialogue se connecter à l'hôte s'affiche.
+
+. Sélectionnez l'hôte approprié dans la liste, puis cliquez sur *Connect*.
++
+La liste des HBA s'affiche dans le volet FC HBA.
+
+. Sélectionnez le port HBA approprié dans la liste, puis cliquez sur l'onglet *Paramètres*.
+. Sélectionnez *Paramètres avancés de port HBA* dans la section *Sélectionner les paramètres*.
+. Si vous utilisez le logiciel MPIO, vérifiez que vous disposez des paramètres de pilote suivants :
++
+** Délai d'attente de la liaison descendante (linkdwnto) - 1
+** Nombre de tentatives de port en panne (portdwnrc) - 10
+
+
+. Si vous n'utilisez pas le logiciel MPIO, vérifiez que vous disposez des paramètres de pilote suivants :
++
+** Délai d'attente de la liaison descendante (linkdwnto) - 30
+** Nombre de tentatives de port en panne (portdwnrc) - 120
+
+
+

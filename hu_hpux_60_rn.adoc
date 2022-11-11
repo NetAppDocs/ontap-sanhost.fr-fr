@@ -1,0 +1,73 @@
+---
+sidebar: sidebar 
+permalink: hu_hpux_60_rn.html 
+keywords: host utilities, hpux, 6.0, netapp, ontap, release, notes 
+summary: Notes de version pour HPUX Host Utilities 6.0 
+---
+= Notes de version de HP-UX Host Utilities 6.0
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toc: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:toc-position: content
+
+
+Ce document Notes de mise à jour contient les dernières informations relatives à la version 6.0 des utilitaires d'hôtes HP-UX, y compris les mises à jour concernant les problèmes connus, les limitations, ainsi que la configuration et la gestion de votre système de stockage ONTAP. Le document Notes de mise à jour est mis à jour lorsque de nouvelles informations sur l'utilisation des utilitaires hôtes HP-UX deviennent disponibles.
+
+
+
+== À propos de la version 6.0 de HP-UX Host Utilities
+
+Les utilitaires hôtes HP-UX prennent en charge plusieurs environnements HP-UX et plusieurs protocoles. Les utilitaires hôtes HP-UX prennent en charge les environnements suivants :
+
+* MPIO natif
+* Veritas Dynamic Multipathing (DMP)
+
+
+
+NOTE: Pour effacer immédiatement l'environnement utilisé, ce document indique parfois "DMP" pour l'environnement Veritas DMP et "MPIO" pour l'environnement HP-UX natif. Dans certains cas, les commandes que vous utilisez peuvent varier en fonction des pilotes que vous utilisez. Dans ce cas, les types d'environnement et de pilote sont spécifiés.
+
+
+
+== Améliorations de HP-UX Host Utilities 6.0
+
+Les notes de mise à jour sont mises à jour entre les versions de produit dès que de nouvelles informations sont disponibles. Les utilitaires hôtes HP-UX 6.0 continuent de prendre en charge les versions suivantes :
+
+* HP-UX 11iv2
+* HP-UX 11iv3
+
+
+
+
+== Problèmes connus et limites
+
+Il n'y a aucun problème connu pour la version 6.0 de HP-UX.
+
+
+
+== À propos de la documentation sur la configuration de l'hôte SAN
+
+La documentation relative aux utilitaires d'hôte SAN est incluse dans le link:https://docs.netapp.com/us-en/ontap-sanhost/index.html["Documentation relative à la configuration d'hôte SAN ONTAP."] La documentation relative à la configuration d'hôte SAN ONTAP peut être cumulée, couvrant toutes les versions actuelles d'hôte SAN. Les différences fonctionnelles entre les versions sont notées dans le contexte.
+
+
+
+== Où trouver la documentation produit et d'autres informations
+
+Vous pouvez accéder à la documentation de tous les produits NetApp et consulter d'autres ressources d'informations sur les produits, notamment des rapports techniques et des livres blancs, sur la page Documentation sur les produits du site NetApp.
+
+*Configuration et gestion de votre système de stockage ONTAP*
+
+* Le link:https://docs.netapp.com/us-en/ontap/setup-upgrade/index.html["Guide de configuration du logiciel ONTAP pour votre version de ONTAP"^]
+* Le link:https://docs.netapp.com/us-en/ontap/san-management/index.html["Guide d'administration SAN de ONTAP pour votre version de ONTAP"^]
+* Le link:https://library.netapp.com/ecm/ecm_download_file/ECMLP2492508["Notes de mise à jour ONTAP pour votre version de ONTAP"^]
+* link:https://imt.netapp.com/matrix/#welcome["Matrice d'interopérabilité NetApp"^]
+* link:https://hwu.netapp.com/["Hardware Universe"^] (Anciennement le Guide de configuration du système)
+* link:https://docs.netapp.com/us-en/ontap-sanhost/index.html["Topologies SAN Fibre Channel prises en charge"]
+* link:https://mysupport.netapp.com/documentation/productlibrary/index.html?productID=61343["Configuration de l'hôte pour les utilitaires hôtes"^]
+

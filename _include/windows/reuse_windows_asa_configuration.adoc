@@ -1,0 +1,10 @@
+= 
+:allow-uri-read: 
+
+
+Pour la configuration des baies SAN (ASA), il doit y avoir un groupe de chemins avec des priorités uniques. Tous les chemins sont optimisés/actifs, c'est-à-dire qu'ils sont gérés par le contrôleur et que les E/S sont envoyées sur tous les chemins actifs.
+
+image::asa.png[ASA]
+
+
+NOTE: N'utilisez pas un nombre excessif de chemins pour une seule LUN. Il ne faut pas plus de quatre chemins. Plus de huit chemins peuvent entraîner des problèmes de chemin lors des défaillances du stockage.

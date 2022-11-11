@@ -1,0 +1,19 @@
+= 
+:allow-uri-read: 
+
+
+Si les limites des blocs de données d'une partition de disque ne sont pas alignées avec les limites des blocs de la LUN sous-jacente, le système de stockage doit souvent effectuer deux opérations de lecture ou d'écriture de blocs pour chaque bloc du système d'exploitation, lecture ou écriture. Les lectures et écritures de blocs supplémentaires dues à l'alignement incorrect peuvent entraîner de sérieux problèmes de performances.
+
+Le mauvais alignement est causé par l'emplacement du secteur de départ pour chaque partition définie par l'enregistrement d'amorçage maître.
+
+
+NOTE: Les partitions créées par Windows Server 2016 doivent être alignées par défaut.
+
+Utilisez le `Get-NaVirtualDiskAlignment` Cmdlet dans le kit ONTAP PowerShell pour vérifier si les partitions sont alignées avec les LUN sous-jacentes. Si les partitions ne sont pas alignées correctement, utilisez le `Repair-NaVirtualDiskAlignment` Cmdlet pour créer un nouveau fichier VHD avec l’alignement correct. Cette applet de commande copie toutes les partitions dans le nouveau fichier. Le fichier VHD d'origine n'est ni modifié ni supprimé. L'ordinateur virtuel doit être arrêté pendant que les données sont copiées.
+
+Vous pouvez télécharger le kit ONTAP PowerShell sur la page des communautés NetApp. Vous devez décompresser le `DataONTAP.zip` fichier dans l'emplacement spécifié par la variable d'environnement `%PSModulePath%` (ou utilisez le `Install.ps1` script à faire pour vous). Une fois l'installation terminée, utilisez le `Show-NaHelp` cmdlet pour obtenir de l'aide pour les applets de commande.
+
+Le kit PowerShell ne prend en charge que les fichiers VHD de taille fixe avec des partitions de type MBR. Les disques durs virtuels utilisant des disques dynamiques Windows ou des partitions GPT ne sont pas pris en charge. De plus, le kit PowerShell requiert une taille de partition minimale de 4 Go. Les partitions plus petites ne peuvent pas être correctement alignées.
+
+
+NOTE: Pour les machines virtuelles Linux utilisant le chargeur de démarrage GRUB sur un VHD, vous devez mettre à jour la configuration de démarrage après avoir exécuté le kit d'outils PowerShell.

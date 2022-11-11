@@ -1,0 +1,32 @@
+= 
+:allow-uri-read: 
+
+
+Sur les systèmes utilisant FC, les valeurs de délai suivantes pour les HBA FC Emulex et QLogic sont requises lorsque MPIO est sélectionné.
+
+Pour les HBA Fibre Channel d'Emulex :
+
+[cols="2*"]
+|===
+| Type de propriété | Valeur de propriété 
+
+
+| LinkTimeOut | 1 
+
+
+| NodeTimeOut | 10 
+|===
+Pour les HBA Fibre Channel QLogic :
+
+[cols="2*"]
+|===
+| Type de propriété | Valeur de propriété 
+
+
+| LinkDownTimeOut | 1 
+
+
+| PortDownloyCount | 10 
+|===
+
+NOTE: Windows Unified Host Utility définit ces valeurs. Pour obtenir des informations détaillées sur les réglages recommandés, reportez-vous au link:https://library.netapp.com/ecmdocs/ECMLP2789202/html/index.html["Guide d'installation des utilitaires hôtes Windows 7.1"^].

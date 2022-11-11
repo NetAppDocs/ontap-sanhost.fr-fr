@@ -1,0 +1,237 @@
+---
+sidebar: sidebar 
+permalink: nvme_windows_2012r2.html 
+keywords: nvme, windows, enterprise 
+summary: 'Configuration d"hôte NVMe/FC pour Windows Server 2012 R2 avec ONTAP' 
+---
+= Configuration d'hôte NVMe/FC pour Windows Server 2012 R2 avec ONTAP
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toc: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:toc-position: content
+
+
+
+
+== Prise en charge
+
+NVMe/FC est pris en charge sur ONTAP 9.7 ou version ultérieure pour Windows Server 2012.
+
+Notez que l'initiateur Broadcom peut prendre en charge le trafic NVMe/FC et FCP via les mêmes ports d'adaptateur FC 32G. Pour FCP et FC/NVMe, utilisez MSDSM comme option MPIO (Microsoft Multipath I/O).
+
+Voir la link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] Pour obtenir la liste des contrôleurs et adaptateurs FC pris en charge, Pour obtenir la liste la plus récente des configurations et versions prises en charge, consultez le link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^].
+
+
+NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans ce contenu pour configurer les clients cloud connectés à link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] et link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["Amazon FSX pour ONTAP"^].
+
+
+
+== Limites connues
+
+Windows Failover Cluster (WFC) n'est pas pris en charge par ONTAP NVMe/FC, car ONTAP ne prend pas encore en charge les réservations permanentes avec NVMe/FC.
+
+
+NOTE: Le pilote externe fourni par Broadcom pour Windows NVMe/FC n'est pas un véritable pilote NVMe/FC, mais un pilote NVMe SCSI translation ⇄. Cette surcharge translationnelle n'a pas forcément d'impact sur les performances, mais elle neapporte les bénéfices obtenus par la technologie NVMe/FC. Ainsi, sur les serveurs Windows, les performances de NVMe/FC et FCP sont identiques, contrairement à celles d'autres systèmes d'exploitation tels que Linux, où les performances de NVMe/FC sont nettement supérieures à celles du protocole FCP.
+
+
+
+== Activez NVMe/FC sur un hôte initiateur Windows
+
+Effectuez la procédure suivante pour activer FC/NVMe sur l'hôte de l'initiateur Windows :
+
+.Étapes
+. Installez l'utilitaire OneCommand Manager sur l'hôte Windows.
+. Sur chacun des ports d'initiateur HBA, définissez les paramètres suivants du pilote HBA :
++
+** EnableNVMe = 1
+** NVMEMode = 0
+** LimTransferSize=1
+
+
+. Redémarrez l'hôte.
+
+
+
+
+== Configurez la carte Broadcom FC sous Windows pour NVMe/FC
+
+Avec la carte Broadcom pour FC/NVMe dans un environnement Windows, a `+hostnqn+` Est associé à chaque port HBA (Host bus adapter). Le `+hostnqn+` est formaté comme suit.
+
+....
+nqn.2017-01.com.broadcom:ecd:nvmf:fc:100000109b1b9765
+nqn.2017-01.com.broadcom:ecd:nvmf:fc:100000109b1b9766
+....
+
+
+=== Activez MPIO pour les périphériques NVMe sur l'hôte Windows
+
+. Installer link:link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71.html["Kit utilitaire hôte Windows 7.1"] Pour définir les paramètres du pilote communs à FC et NVMe.
+. Ouvrez les propriétés MPIO.
+. Dans l'onglet *Discover Multi-Paths*, ajoutez l'ID de périphérique répertorié pour NVMe.
++
+MPIO connaît les périphériques NVMe, visibles au niveau de la gestion des disques.
+
+. Ouvrez *Disk Management* et accédez à *Disk Properties*.
+. Dans l'onglet *MPIO*, cliquez sur *Détails*.
+. Définissez les paramètres MSDSM suivants :
++
+** PathVerifiedPeriod: *10*
+** PathVerifyEnabled : *Activer*
+** RetryCount: *6*
+** Intervalle de rérémanence : *1*
+** PDODOedRemiod: *130*
+
+
+. Sélectionnez la stratégie MPIO *Round Robin with Subset*.
+. Modifiez les valeurs du registre :
++
+[listing]
+----
+HKLM\SYSTEM\CurrentControlSet\Services\mpio\Parameters\PathRecoveryInterval DWORD -> 30
+
+HKLM\SYSTEM\CurrentControlSet\Services\mpio \Parameters\ UseCustomPathRecoveryInterval  DWORD-> 1
+----
+. Redémarrez l'hôte.
++
+La configuration NVMe est désormais terminée sur l'hôte Windows.
+
+
+
+
+
+== Validation de la spécification NVMe/FC
+
+. Vérifiez que le type de port est FC+NVMe.
++
+La NVMe est activée, mais vous devriez consulter la `+Port Type+` listé comme `+FC+NVMe+`, comme suit.
+
++
+[listing]
+----
+PS C:\Program Files\Emulex\Util\OCManager> .\hbacmd listhba
+
+Manageable HBA List
+
+Port WWN       : 10:00:00:10:9b:1b:97:65
+Node WWN       : 20:00:00:10:9b:1b:97:65
+Fabric Name    : 10:00:c4:f5:7c:a5:32:e0
+Flags          : 8000e300
+Host Name      : INTEROP-57-159
+Mfg            : Emulex Corporation
+Serial No.     : FC71367217
+Port Number    : 0
+Mode           : Initiator
+PCI Bus Number : 94
+PCI Function   : 0
+Port Type      : FC+NVMe
+Model          : LPe32002-M2
+
+Port WWN       : 10:00:00:10:9b:1b:97:66
+Node WWN       : 20:00:00:10:9b:1b:97:66
+Fabric Name    : 10:00:c4:f5:7c:a5:32:e0
+Flags          : 8000e300
+Host Name      : INTEROP-57-159
+Mfg            : Emulex Corporation
+Serial No.     : FC71367217
+Port Number    : 1
+Mode           : Initiator
+PCI Bus Number : 94
+PCI Function   : 1
+Port Type      : FC+NVMe
+Model          : LPe32002-M2
+----
+. Vérifiez que les sous-systèmes NVMe/FC ont été détectés
++
+Le `+nvme-list+` La commande répertorie les sous-systèmes NVMe/FC détectés.
+
++
+[listing]
+----
+PS C:\Program Files\Emulex\Util\OCManager> .\hbacmd nvme-list 10:00:00:10:9b:1b:97:65
+
+Discovered NVMe Subsystems for 10:00:00:10:9b:1b:97:65
+
+NVMe Qualified Name     :  nqn.1992-08.com.netapp:sn.a3b74c32db2911eab229d039ea141105:subsystem.win_nvme_interop-57-159
+Port WWN                :  20:09:d0:39:ea:14:11:04
+Node WWN                :  20:05:d0:39:ea:14:11:04
+Controller ID           :  0x0180
+Model Number            :  NetApp ONTAP Controller
+Serial Number           :  81CGZBPU5T/uAAAAAAAB
+Firmware Version        :  FFFFFFFF
+Total Capacity          :  Not Available
+Unallocated Capacity    :  Not Available
+
+NVMe Qualified Name     :  nqn.1992-08.com.netapp:sn.a3b74c32db2911eab229d039ea141105:subsystem.win_nvme_interop-57-159
+Port WWN                :  20:06:d0:39:ea:14:11:04
+Node WWN                :  20:05:d0:39:ea:14:11:04
+Controller ID           :  0x0181
+Model Number            :  NetApp ONTAP Controller
+Serial Number           :  81CGZBPU5T/uAAAAAAAB
+Firmware Version        :  FFFFFFFF
+Total Capacity          :  Not Available
+Unallocated Capacity    :  Not Available
+Note: At present Namespace Management is not supported by NetApp Arrays.
+----
++
+[listing]
+----
+PS C:\Program Files\Emulex\Util\OCManager> .\hbacmd nvme-list 10:00:00:10:9b:1b:97:66
+
+Discovered NVMe Subsystems for 10:00:00:10:9b:1b:97:66
+
+NVMe Qualified Name     :  nqn.1992-08.com.netapp:sn.a3b74c32db2911eab229d039ea141105:subsystem.win_nvme_interop-57-159
+Port WWN                :  20:07:d0:39:ea:14:11:04
+Node WWN                :  20:05:d0:39:ea:14:11:04
+Controller ID           :  0x0140
+Model Number            :  NetApp ONTAP Controller
+Serial Number           :  81CGZBPU5T/uAAAAAAAB
+Firmware Version        :  FFFFFFFF
+Total Capacity          :  Not Available
+Unallocated Capacity    :  Not Available
+
+NVMe Qualified Name     :  nqn.1992-08.com.netapp:sn.a3b74c32db2911eab229d039ea141105:subsystem.win_nvme_interop-57-159
+Port WWN                :  20:08:d0:39:ea:14:11:04
+Node WWN                :  20:05:d0:39:ea:14:11:04
+Controller ID           :  0x0141
+Model Number            :  NetApp ONTAP Controller
+Serial Number           :  81CGZBPU5T/uAAAAAAAB
+Firmware Version        :  FFFFFFFF
+Total Capacity          :  Not Available
+Unallocated Capacity    :  Not Available
+
+Note: At present Namespace Management is not supported by NetApp Arrays.
+----
+. Vérifier que les espaces de noms ont été créés.
++
+Le `+nvme-list-ns+` La commande répertorie les espaces de noms d'une cible NVMe spécifiée qui répertorie les espaces de noms connectés à l'hôte.
+
++
+[listing]
+----
+PS C:\Program Files\Emulex\Util\OCManager> .\HbaCmd.exe nvme-list-ns 10:00:00:10:9b:1b:97:66 20:08:d0:39:ea:14:11:04 nq
+.1992-08.com.netapp:sn.a3b74c32db2911eab229d039ea141105:subsystem.win_nvme_interop-57-159 0
+
+
+Active Namespaces (attached to controller 0x0141):
+
+                                       SCSI           SCSI           SCSI
+   NSID           DeviceName        Bus Number    Target Number     OS LUN
+-----------  --------------------  ------------  ---------------   ---------
+0x00000001   \\.\PHYSICALDRIVE9         0               1              0
+0x00000002   \\.\PHYSICALDRIVE10        0               1              1
+0x00000003   \\.\PHYSICALDRIVE11        0               1              2
+0x00000004   \\.\PHYSICALDRIVE12        0               1              3
+0x00000005   \\.\PHYSICALDRIVE13        0               1              4
+0x00000006   \\.\PHYSICALDRIVE14        0               1              5
+0x00000007   \\.\PHYSICALDRIVE15        0               1              6
+0x00000008   \\.\PHYSICALDRIVE16        0               1              7
+
+----
+

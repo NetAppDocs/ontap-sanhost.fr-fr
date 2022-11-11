@@ -1,0 +1,146 @@
+---
+sidebar: sidebar 
+permalink: hu_windows_2022.html 
+keywords: windows, enterprise 
+summary: Utilisation de Windows Server 2022 avec ONTAP 
+---
+= Utilisation de Windows Server 2022 avec ONTAP
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toc: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:toc-position: content
+
+
+
+
+== Démarrage du système d'exploitation
+
+Il existe deux options pour démarrer le système d'exploitation : par démarrage local ou par démarrage SAN. Pour le démarrage local, vous installez le système d'exploitation sur le disque dur local (SSD, SATA, RAID, etc.). Pour le démarrage SAN, reportez-vous aux instructions ci-dessous.
+
+
+
+=== Démarrage SAN
+
+Si vous choisissez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser la matrice d'interopérabilité NetApp pour vérifier que votre se, votre HBA, votre micrologiciel HBA, votre BIOS de démarrage HBA et votre version de ONTAP sont pris en charge.
+
+. Mappez la LUN de démarrage SAN sur l'hôte.
+. Vérifiez que plusieurs chemins sont disponibles. N'oubliez pas que plusieurs chemins ne seront disponibles qu'après la mise en service et l'exécution du système d'exploitation hôte sur les chemins.
+. Activez le démarrage SAN dans le BIOS du serveur pour les ports auxquels la LUN de démarrage SAN est mappée. Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la documentation spécifique au fournisseur.
+. Redémarrez l'hôte pour vérifier que le démarrage est réussi.
+
+
+
+
+== Installation des correctifs Windows
+
+Nous vous suggérons d'utiliser la dernière mise à jour cumulative* à installer sur le serveur.
+
+
+NOTE: Accédez au link:https://www.catalog.update.microsoft.com/Search.aspx?q=update%20%22windows%20server%202022%22["Catalogue de mises à jour Microsoft 2022"^] Site Web pour obtenir et installer les correctifs Windows requis pour votre version de Windows.
+
+. Téléchargez les correctifs à partir du site de support Microsoft.
+
+
+
+NOTE: Certains correctifs ne sont pas disponibles pour le téléchargement direct. Dans ce cas, vous devrez demander un correctif au personnel de support Microsoft.
+
+. Suivez les instructions fournies par Microsoft pour installer les correctifs.
+
+
+
+TIP: De nombreux correctifs nécessitent un redémarrage de votre hôte Windows, mais vous pouvez choisir d'attendre le redémarrage de l'hôte jusqu'à _after_ que vous installiez ou mettez à niveau les utilitaires hôtes.
+
+
+
+== Installation des utilitaires d'hôtes unifiés Windows
+
+LES utilitaires d'hôtes unifiés Windows (WUHU) sont des programmes logiciels dont la documentation permet de connecter des ordinateurs hôtes aux disques virtuels (LUN) sur un SAN NetApp. Nous vous recommandons de télécharger et d'installer la dernière version du kit d'utilitaires. Pour plus d'informations sur la configuration DE WUHU, reportez-vous à la section link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71.html["DOCUMENTATION WUHU 7.1"].
+
+
+
+== Chemins d'accès multiples
+
+Vous devez installer le logiciel MPIO et configurer des chemins d'accès multiples si votre hôte Windows possède plusieurs chemins d'accès au système de stockage. Sans le logiciel MPIO, le système d'exploitation peut voir chaque chemin en tant que disque distinct, ce qui peut entraîner une corruption des données. Le logiciel MPIO présente un seul disque au système d'exploitation pour tous les chemins, et un module DSM (Device-Specific module) gère le basculement de chemin.
+
+Sur un système Windows, les deux principaux composants d'une solution MPIO sont un DSM et Windows MPIO. MPIO n'est pas pris en charge pour Windows XP ou Windows Vista fonctionnant sur une machine virtuelle Hyper- V.
+
+
+NOTE: Lorsque vous sélectionnez la prise en charge MPIO, Windows Unified Host Utilities active la fonctionnalité MPIO incluse de Windows Server 2022.
+
+
+
+== Configuration SAN
+
+
+
+=== Configuration non ASA
+
+Pour la configuration non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes.
+
+Les chemins ayant les priorités les plus élevées sont actifs/optimisés, ce qui signifie qu'ils sont gérés par le contrôleur où se trouve l'agrégat.
+
+Les chemins avec les priorités les plus basses sont actifs, mais ne sont pas optimisés car ils sont servis à partir d'un autre contrôleur.
+
+
+NOTE: Les chemins non optimisés sont utilisés uniquement lorsqu'aucun chemin optimisé n'est disponible.
+
+L'exemple suivant montre la sortie correcte d'une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés.
+
+image::nonasa.png[pas de asa]
+
+
+
+=== Toute la configuration de la baie SAN
+
+Pour la configuration des baies SAN (ASA), il doit y avoir un groupe de chemins avec des priorités uniques. Tous les chemins sont optimisés/actifs, c'est-à-dire qu'ils sont gérés par le contrôleur et que les E/S sont envoyées sur tous les chemins actifs.
+
+image::asa.png[ASA]
+
+
+NOTE: N'utilisez pas un nombre excessif de chemins pour une seule LUN. Il ne faut pas plus de quatre chemins. Plus de huit chemins peuvent entraîner des problèmes de chemin lors des défaillances du stockage.
+
+
+
+== Paramètres recommandés
+
+Sur les systèmes utilisant FC, les valeurs de délai suivantes pour les HBA FC Emulex et QLogic sont requises lorsque MPIO est sélectionné.
+
+Pour les HBA Fibre Channel d'Emulex :
+
+[cols="2*"]
+|===
+| Type de propriété | Valeur de propriété 
+
+
+| LinkTimeOut | 1 
+
+
+| NodeTimeOut | 10 
+|===
+Pour les HBA Fibre Channel QLogic :
+
+[cols="2*"]
+|===
+| Type de propriété | Valeur de propriété 
+
+
+| LinkDownTimeOut | 1 
+
+
+| PortDownloyCount | 10 
+|===
+
+NOTE: Windows Unified Host Utility définit ces valeurs. Pour obtenir des informations détaillées sur les réglages recommandés, reportez-vous au link:https://library.netapp.com/ecmdocs/ECMLP2789202/html/index.html["Guide d'installation des utilitaires hôtes Windows 7.1"^].
+
+
+
+== Limites connues
+
+Aucun problème connu pour Windows Server 2022.

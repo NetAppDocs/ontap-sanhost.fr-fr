@@ -1,0 +1,5 @@
+= 
+:allow-uri-read: 
+
+
+LES utilitaires d'hôtes unifiés Windows (WUHU) sont des programmes logiciels dont la documentation permet de connecter des ordinateurs hôtes aux disques virtuels (LUN) sur un SAN NetApp. Nous vous recommandons de télécharger et d'installer la dernière version du kit d'utilitaires. Pour plus d'informations sur la configuration DE WUHU, reportez-vous à la section link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71.html["DOCUMENTATION WUHU 7.1"].

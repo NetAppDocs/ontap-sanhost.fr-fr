@@ -1,0 +1,25 @@
+= 
+:allow-uri-read: 
+
+
+. Vous pouvez définir le paramètre du pilote lpfc_log_verbose sur l'une des valeurs suivantes pour enregistrer les événements NVMe/FC.
++
+[listing]
+----
+#define LOG_NVME 0x00100000 /* NVME general events. */
+#define LOG_NVME_DISC 0x00200000 /* NVME Discovery/Connect events. */
+#define LOG_NVME_ABTS 0x00400000 /* NVME ABTS events. */
+#define LOG_NVME_IOERR 0x00800000 /* NVME IO Error events. */
+----
+. Après avoir défini l'une de ces valeurs, exécutez `dracut-f` et redémarrez l'hôte.
+. Après le redémarrage, vérifiez les paramètres.
++
+[listing]
+----
+# cat /etc/modprobe.d/lpfc.conf
+options lpfc lpfc_log_verbose=0xf00083
+
+# cat /sys/module/lpfc/parameters/lpfc_log_verbose
+15728771
+----
+

@@ -1,0 +1,394 @@
+---
+sidebar: sidebar 
+permalink: nvme_rhel_82.html 
+keywords: nvme, linux, rhel, red hat, enterprise 
+summary: 'Comment configurer l"hôte NVMe/FC pour RHEL 8.2 avec ONTAP' 
+---
+= Configuration d'hôte NVMe/FC pour RHEL 8.2 avec ONTAP
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toc: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:toc-position: content
+
+
+
+
+== Prise en charge
+
+NVMe/FC est pris en charge sur ONTAP 9.6 ou version ultérieure pour RHEL 8.2. L'hôte RHEL 8.2 exécute le trafic NVMe et SCSI via les mêmes ports d'adaptateur Fibre Channel (FC). Voir la link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] Pour obtenir la liste des contrôleurs et adaptateurs FC pris en charge, Pour obtenir la liste la plus récente des configurations et versions prises en charge, reportez-vous au link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^].
+
+
+NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans ce contenu pour configurer les clients cloud connectés à link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] et link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["Amazon FSX pour ONTAP"^].
+
+
+
+== Limites connues
+
+Pour RHEL 8.2, le chemin d'accès multiples NVMe intégré au noyau reste désactivé par défaut. Par conséquent, vous devez l'activer manuellement. Les étapes à suivre sont décrites dans la section suivante, « activation de NVMe/FC sur RHEL 8.2 ».
+
+
+
+== Activez NVMe/FC sur RHEL 8.2
+
+. Installez Red Hat Enterprise Linux 8.2 GA sur le serveur.
++
+Si vous effectuez une mise à niveau de RHEL 8.1 vers RHEL 8.2 à l'aide de `yum update/upgrade`, votre `/etc/nvme/host*` il se peut que des fichiers soient perdus. Pour éviter toute perte de fichier, procédez comme suit :
+
++
+.. Sauvegardez votre `/etc/nvme/host*` fichiers.
+.. Si vous avez un modifié manuellement `udev` règle, supprimer :
++
+[listing]
+----
+/lib/udev/rules.d/71-nvme-iopolicy-netapp-ONTAP.rules
+----
+.. Effectuez la mise à niveau.
+.. Une fois la mise à niveau terminée, exécutez la commande suivante :
++
+[listing]
+----
+yum remove nvme-cli
+----
+.. Restaurez les fichiers hôte à `/etc/nvme/`.
++
+[listing]
+----
+yum install nvmecli
+----
+.. Copiez l'original `/etc/nvme/host*` contenu de la sauvegarde vers les fichiers hôtes réels à `/etc/nvme/`.
+
+
+. Une fois l'installation terminée, vérifiez que vous exécutez le noyau Red Hat Enterprise Linux spécifié.
++
+[listing]
+----
+# uname -r
+4.18.0-193.el8.x86_64
+----
++
+Voir la link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^] pour obtenir la liste la plus récente des versions prises en charge.
+
+. Installez le pack nvme-cli.
++
+[listing]
+----
+# rpm -qa|grep nvme-cli
+nvme-cli-1.9.5.el8.x86_64
+----
+. Activez le chemins d'accès multiples NVMe dans le noyau.
++
+[listing]
+----
+# grubby –args=nvme_core.multipath=Y –update-kernel /boot/vmlinuz-4.18.0-193.el8.x86_64
+----
+. Sur l'hôte RHEL 8.2, vérifiez la chaîne NQN hôte dans /etc/nvme/hostnqn et vérifiez qu'elle correspond à la chaîne NQN hôte du sous-système correspondant de la baie ONTAP.
++
+[listing]
+----
+# cat /etc/nvme/hostnqn
+nqn.2014-08.org.nvmexpress:uuid:9ed5b327-b9fc-4cf5-97b3-1b5d986345d1
+
+
+::> vserver nvme subsystem host show -vserver vs_fcnvme_141
+Vserver      Subsystem        Host           NQN
+----------- --------------- ----------- ---------------
+  vs_fcnvme_141
+    nvme_141_1
+        nqn.2014-08.org.nvmexpress:uuid:9ed5b327-b9fc-4cf5-97b3-1b5d986345d1
+----
++
+Si les chaînes NQN hôte ne correspondent pas, utilisez le `vserver modify` Commande pour mettre à jour la chaîne NQN hôte sur le sous-système de la baie ONTAP correspondant afin qu'elle corresponde à la chaîne NQM hôte de /etc/nvme/hostnqn sur l'hôte.
+
+. Redémarrez l'hôte.
+. Mettez à jour le `enable_foreign` réglage _ (facultatif)_.
++
+Si vous prévoyez d'exécuter à la fois le trafic NVMe et SCSI sur le même hôte RHEL 8.2 existant, nous vous recommandons d'utiliser, respectivement, les chemins d'accès multiples NVMe in-kernel pour les espaces de noms ONTAP et les chemins d'accès multiples dm-multipathing pour les LUN ONTAP. Vous devez également répertorier les espaces de noms ONTAP dans dm-multipath pour empêcher dm-multipath de réclamer ces périphériques d'espace de noms. Pour ce faire, ajoutez le `enable_foreign` configuration du fichier /etc/multipath.conf, comme indiqué ci-dessous.
+
++
+[listing]
+----
+# cat /etc/multipath.conf
+defaults {
+   enable_foreign NONE
+}
+----
+. Redémarrez le démon multipathd en exécutant un `systemctl restart multipathd`.
+
+
+
+
+== Configurez la carte FC Broadcom pour NVMe/FC
+
+Pour consulter la liste la plus récente des cartes prises en charge, reportez-vous à la section link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^].
+
+.Étapes
+. Vérifiez que vous utilisez la carte prise en charge.
++
+[listing]
+----
+# cat /sys/class/scsi_host/host*/modelname
+LPe32002-M2
+LPe32002-M2
+----
++
+[listing]
+----
+# cat /sys/class/scsi_host/host*/modeldesc
+Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
+Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
+----
+. Vérifiez-le `lpfc_enable_fc4_type` est défini sur "*3*".
++
+[listing]
+----
+# cat /sys/module/lpfc/parameters/lpfc_enable_fc4_type
+3
+----
+. Vérifier que les ports initiateurs sont opérationnels et que les LIFs cibles sont bien voir.
++
+[listing]
+----
+# cat /sys/class/fc_host/host*/port_name
+0x100000109b1c1204
+0x100000109b1c1205
+----
++
+[listing]
+----
+# cat /sys/class/fc_host/host*/port_state
+Online
+Online
+----
++
+[listing]
+----
+# cat /sys/class/scsi_host/host*/nvme_info
+NVME Initiator Enabled
+XRI Dist lpfc0 Total 6144 IO 5894 ELS 250
+NVME LPORT lpfc0 WWPN x100000109b1c1204 WWNN x200000109b1c1204 DID x011d00 ONLINE
+NVME RPORT WWPN x203800a098dfdd91 WWNN x203700a098dfdd91 DID x010c07 TARGET DISCSRVC ONLINE
+NVME RPORT WWPN x203900a098dfdd91 WWNN x203700a098dfdd91 DID x011507 TARGET DISCSRVC ONLINE
+NVME Statistics
+LS: Xmt 0000000f78 Cmpl 0000000f78 Abort 00000000
+LS XMIT: Err 00000000 CMPL: xb 00000000 Err 00000000
+Total FCP Cmpl 000000002fe29bba Issue 000000002fe29bc4 OutIO 000000000000000a
+abort 00001bc7 noxri 00000000 nondlp 00000000 qdepth 00000000 wqerr 00000000 err 00000000
+FCP CMPL: xb 00001e15 Err 0000d906
+NVME Initiator Enabled
+XRI Dist lpfc1 Total 6144 IO 5894 ELS 250
+NVME LPORT lpfc1 WWPN x100000109b1c1205 WWNN x200000109b1c1205 DID x011900 ONLINE
+NVME RPORT WWPN x203d00a098dfdd91 WWNN x203700a098dfdd91 DID x010007 TARGET DISCSRVC ONLINE
+NVME RPORT WWPN x203a00a098dfdd91 WWNN x203700a098dfdd91 DID x012a07 TARGET DISCSRVC ONLINE
+NVME Statistics
+LS: Xmt 0000000fa8 Cmpl 0000000fa8 Abort 00000000
+LS XMIT: Err 00000000 CMPL: xb 00000000 Err 00000000
+Total FCP Cmpl 000000002e14f170 Issue 000000002e14f17a OutIO 000000000000000a
+abort 000016bb noxri 00000000 nondlp 00000000 qdepth 00000000 wqerr 00000000 err 00000000
+FCP CMPL: xb 00001f50 Err 0000d9f8
+----
+. Activez la taille d'E/S de 1 Mo _ (facultatif)_.
++
+Le `lpfc_sg_seg_cnt` Il est nécessaire de définir le paramètre sur 256 pour que le pilote lpfc puisse émettre des demandes d'E/S d'une taille maximale de 1 Mo.
+
++
+[listing]
+----
+# cat /etc/modprobe.d/lpfc.conf
+options lpfc lpfc_sg_seg_cnt=256
+----
+. Exécutez un `dracut -f` puis redémarrez l'hôte.
+. Après le démarrage de l'hôte, vérifiez que lpfc_sg_seg_CNT est défini sur 256.
++
+[listing]
+----
+# cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
+256
+----
+. Vérifiez que vous utilisez le micrologiciel lpfc Broadcom recommandé ainsi que le pilote de la boîte de réception.
++
+[listing]
+----
+# cat /sys/class/scsi_host/host*/fwrev
+12.6.182.8, sli-4:2:c
+12.6.182.8, sli-4:2:c
+----
++
+[listing]
+----
+# cat /sys/module/lpfc/version
+0:12.6.0.2
+----
+. Vérifiez-le `lpfc_enable_fc4_type` est défini sur "*3*".
++
+[listing]
+----
+# cat /sys/module/lpfc/parameters/lpfc_enable_fc4_type
+3
+----
+. Vérifier que les ports initiateurs sont opérationnels et que les LIFs cibles sont bien voir.
++
+[listing]
+----
+# cat /sys/class/fc_host/host*/port_name
+0x100000109b1c1204
+0x100000109b1c1205
+----
++
+[listing]
+----
+# cat /sys/class/fc_host/host*/port_state
+Online
+Online
+----
++
+[listing]
+----
+# cat /sys/class/scsi_host/host*/nvme_info
+NVME Initiator Enabled
+XRI Dist lpfc0 Total 6144 IO 5894 ELS 250
+NVME LPORT lpfc0 WWPN x100000109b1c1204 WWNN x200000109b1c1204 DID x011d00 ONLINE
+NVME RPORT WWPN x203800a098dfdd91 WWNN x203700a098dfdd91 DID x010c07 TARGET DISCSRVC ONLINE
+NVME RPORT WWPN x203900a098dfdd91 WWNN x203700a098dfdd91 DID x011507 TARGET DISCSRVC ONLINE
+NVME Statistics
+LS: Xmt 0000000f78 Cmpl 0000000f78 Abort 00000000
+LS XMIT: Err 00000000 CMPL: xb 00000000 Err 00000000
+Total FCP Cmpl 000000002fe29bba Issue 000000002fe29bc4 OutIO 000000000000000a
+abort 00001bc7 noxri 00000000 nondlp 00000000 qdepth 00000000 wqerr 00000000 err 00000000
+FCP CMPL: xb 00001e15 Err 0000d906
+NVME Initiator Enabled
+XRI Dist lpfc1 Total 6144 IO 5894 ELS 250
+NVME LPORT lpfc1 WWPN x100000109b1c1205 WWNN x200000109b1c1205 DID x011900 ONLINE
+NVME RPORT WWPN x203d00a098dfdd91 WWNN x203700a098dfdd91 DID x010007 TARGET DISCSRVC ONLINE
+NVME RPORT WWPN x203a00a098dfdd91 WWNN x203700a098dfdd91 DID x012a07 TARGET DISCSRVC ONLINE
+NVME Statistics
+LS: Xmt 0000000fa8 Cmpl 0000000fa8 Abort 00000000
+LS XMIT: Err 00000000 CMPL: xb 00000000 Err 00000000
+Total FCP Cmpl 000000002e14f170 Issue 000000002e14f17a OutIO 000000000000000a
+abort 000016bb noxri 00000000 nondlp 00000000 qdepth 00000000 wqerr 00000000 err 00000000
+FCP CMPL: xb 00001f50 Err 0000d9f8
+----
+. Activez la taille d'E/S de 1 Mo _ (facultatif)_.
++
+Le `lpfc_sg_seg_cnt` Il est nécessaire de définir le paramètre sur 256 pour que le pilote lpfc puisse émettre des demandes d'E/S d'une taille maximale de 1 Mo.
+
++
+[listing]
+----
+# cat /etc/modprobe.d/lpfc.conf
+options lpfc lpfc_sg_seg_cnt=256
+----
+. Exécutez un `dracut -f` puis redémarrez l'hôte.
+. Après le démarrage de l'hôte, vérifiez que lpfc_sg_seg_CNT est défini sur 256.
++
+[listing]
+----
+# cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
+256
+----
+
+
+
+
+== Validation de la spécification NVMe/FC
+
+. Vérifiez les paramètres NVMe/FC suivants.
++
+[listing]
+----
+# cat /sys/module/nvme_core/parameters/multipath
+Y
+----
++
+[listing]
+----
+# cat /sys/class/nvme-subsystem/nvme-subsys*/model
+NetApp ONTAP Controller
+NetApp ONTAP Controller
+----
++
+[listing]
+----
+# cat /sys/class/nvme-subsystem/nvme-subsys*/iopolicy
+round-robin
+round-robin
+----
+. Vérifier que les espaces de noms sont créés.
++
+[listing]
+----
+# nvme list
+Node SN Model Namespace Usage Format FW Rev
+---------------- -------------------- -----------------------
+/dev/nvme0n1 80BADBKnB/JvAAAAAAAC NetApp ONTAP Controller 1 53.69 GB / 53.69 GB 4 KiB + 0 B FFFFFFFF
+----
+. Vérifiez le statut des chemins ANA.
++
+[listing]
+----
+# nvme list-subsys/dev/nvme0n1
+Nvme-subsysf0 – NQN=nqn.1992-08.com.netapp:sn.341541339b9511e8a9b500a098c80f09:subsystem.rhel_141_nvme_ss_10_0
+\
++- nvme0 fc traddr=nn-0x202c00a098c80f09:pn-0x202d00a098c80f09 host_traddr=nn-0x20000090fae0ec61:pn-0x10000090fae0ec61 live optimized
++- nvme1 fc traddr=nn-0x207300a098dfdd91:pn-0x207600a098dfdd91 host_traddr=nn-0x200000109b1c1204:pn-0x100000109b1c1204 live inaccessible
++- nvme2 fc traddr=nn-0x207300a098dfdd91:pn-0x207500a098dfdd91 host_traddr=nn-0x200000109b1c1205:pn-0x100000109b1c1205 live optimized
++- nvme3 fc traddr=nn-0x207300a098dfdd91:pn-0x207700a098dfdd91 host traddr=nn-0x200000109b1c1205:pn-0x100000109b1c1205 live inaccessible
+----
+. Vérifier le plug-in NetApp pour les systèmes ONTAP.
++
+[listing]
+----
+
+# nvme netapp ontapdevices -o column
+Device   Vserver  Namespace Path             NSID   UUID   Size
+-------  -------- -------------------------  ------ ----- -----
+/dev/nvme0n1   vs_nvme_10       /vol/rhel_141_vol_10_0/rhel_141_ns_10_0    1        55baf453-f629-4a18-9364-b6aee3f50dad   53.69GB
+
+# nvme netapp ontapdevices -o json
+{
+   "ONTAPdevices" : [
+   {
+        Device" : "/dev/nvme0n1",
+        "Vserver" : "vs_nvme_10",
+        "Namespace_Path" : "/vol/rhel_141_vol_10_0/rhel_141_ns_10_0",
+         "NSID" : 1,
+         "UUID" : "55baf453-f629-4a18-9364-b6aee3f50dad",
+         "Size" : "53.69GB",
+         "LBA_Data_Size" : 4096,
+         "Namespace_Size" : 13107200
+    }
+]
+----
+
+
+
+
+== Journal Verbose LPFC
+
+. Vous pouvez définir le paramètre du pilote lpfc_log_verbose sur l'une des valeurs suivantes pour enregistrer les événements NVMe/FC.
++
+[listing]
+----
+#define LOG_NVME 0x00100000 /* NVME general events. */
+#define LOG_NVME_DISC 0x00200000 /* NVME Discovery/Connect events. */
+#define LOG_NVME_ABTS 0x00400000 /* NVME ABTS events. */
+#define LOG_NVME_IOERR 0x00800000 /* NVME IO Error events. */
+----
+. Après avoir défini l'une de ces valeurs, exécutez `dracut-f` et redémarrez l'hôte.
+. Après le redémarrage, vérifiez les paramètres.
++
+[listing]
+----
+# cat /etc/modprobe.d/lpfc.conf
+options lpfc lpfc_log_verbose=0xf00083
+
+# cat /sys/module/lpfc/parameters/lpfc_log_verbose
+15728771
+----
+

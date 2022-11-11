@@ -1,0 +1,273 @@
+---
+sidebar: sidebar 
+permalink: hu_ol_64.html 
+keywords: host utilities, oracle, linux, 6.4, netapp, ontap 
+summary: 'Décrit l"utilisation d"Oracle Linux 6.4 avec ONTAP' 
+---
+= Utilisation d'Oracle Linux 6.4 avec NetApp ONTAP
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toc: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:toc-position: content
+
+
+
+
+== Installation de Linux Unified Host Utilities
+
+Le pack logiciel NetApp Linux Unified Host Utilities est disponible sur le link:https://mysupport.netapp.com/NOW/cgi-bin/software/?product=Host+Utilities+-+SAN&platform=Linux["Site de support NetApp"^] dans un fichier .rpm 32 bits et 64 bits. Si vous ne savez pas quel fichier est adapté à votre configuration, utilisez le link:https://mysupport.netapp.com/matrix/#welcome["Matrice d'interopérabilité NetApp"^] pour vérifier celui dont vous avez besoin.
+
+L'installation de Linux Unified Host Utilities est fortement recommandée, mais n'est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
+
+Si une version de Linux Unified Host Utilities est actuellement installée, vous devez la mettre à niveau ou la supprimer et utiliser les étapes suivantes pour installer la dernière version.
+
+. Téléchargez le pack logiciel Linux Unified Host Utilities 32 bits ou 64 bits à partir du link:https://mysupport.netapp.com/NOW/cgi-bin/software/?product=Host+Utilities+-+SAN&platform=Linux["Site de support NetApp"^] Sur votre hôte.
+. Utilisez la commande suivante pour installer le pack logiciel :
++
+`rpm -ivh netapp_linux_unified_host_utilities-7-1.x86_64`
+
+
+
+
+NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans ce contenu pour configurer les clients cloud connectés à link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] et link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["Amazon FSX pour ONTAP"^].
+
+
+
+== Kit D'outils SAN
+
+Le kit d'outils est installé automatiquement lorsque vous installez le pack NetApp Host Utilities. Ce kit contient le `sanlun` Utilitaire, qui vous aide à gérer les LUN et les HBA. Le `sanlun` La commande renvoie les informations relatives aux LUN mappées sur votre hôte, aux chemins d'accès multiples et aux informations nécessaires à la création des groupes initiateurs.
+
+Dans l'exemple suivant, le `sanlun lun show` La commande renvoie les informations relatives à la LUN.
+
+[listing]
+----
+# sanlun lun show all
+controller(7mode/E-Series)/            device     host               lun
+vserver(cDOT/FlashRay)   lun-pathname  filename   adapter  protocol  size    Product
+-------------------------------------------------------------------------
+data_vserver          /vol/vol1/lun1   /dev/sdb   host16   FCP       120.0g  cDOT
+data_vserver          /vol/vol1/lun1   /dev/sdc   host15   FCP       120.0g  cDOT
+data_vserver          /vol/vol2/lun2   /dev/sdd   host16   FCP       120.0g  cDOT
+data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDOT
+----
+
+
+== SAN Booting
+
+Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser le https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^] Pour vérifier que votre système d'exploitation, votre adaptateur de bus hôte, votre micrologiciel HBA, votre BIOS de démarrage HBA et votre version de ONTAP sont pris en charge.
+
+.Étapes
+. Mappez la LUN de démarrage SAN sur l'hôte.
+. Vérifiez que plusieurs chemins sont disponibles.
++
+N'oubliez pas que plusieurs chemins ne seront disponibles qu'après la mise en service et l'exécution du système d'exploitation hôte sur les chemins.
+
+. Activez le démarrage SAN dans le BIOS du serveur pour les ports auxquels la LUN de démarrage SAN est mappée.
++
+Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la documentation spécifique au fournisseur.
+
+. Redémarrez l'hôte pour vérifier que le démarrage est réussi.
+
+
+
+
+== Chemins d'accès multiples
+
+Pour Oracle Linux 6.4, le fichier /etc/multipath.conf doit exister, mais vous n'avez pas besoin d'apporter de modifications spécifiques au fichier. Oracle Linux 6.4 est compilé avec tous les paramètres requis pour reconnaître et gérer correctement les LUN ONTAP. Pour activer le gestionnaire ALUA, effectuez les opérations suivantes :
+
+.Étapes
+. Créez une sauvegarde de l'image initrd.
+. Ajoutez la valeur de paramètre suivante au noyau pour ALUA et non-ALUA à fonctionner :
+`rdloaddriver=scsi_dh_alua`
++
+....
+kernel /vmlinuz-3.8.13-68.1.2.el6uek.x86_64 ro root=/dev/mapper/vg_ibmx3550m421096-lv_root rd_NO_LUKSrd_LVM_LV=vg_ibmx3550m421096/lv_root LANG=en_US.UTF-8 rd_NO_MDSYSFONT=latarcyrheb-sun16 crashkernel=256M KEYBOARDTYPE=pc KEYTABLE=us rd_LVM_LV=vg_ibmx3550m421096/lv_swap rd_NO_DM rhgb quiet rdloaddriver=scsi_dh_alua
+....
+. Utilisez le `mkinitrd` commande pour recréer l'image-initrd. Oracle 6x et les versions ultérieures utilisent l'une ou l'autre : la commande : `mkinitrd -f /boot/ initrd-"uname -r".img uname -r`Ou la commande : `dracut -f`
+. Redémarrez l'hôte.
+. Vérifiez la sortie du `cat /proc/cmdline` pour vérifier que le paramètre est terminé. Vous pouvez utiliser le `multipath -ll` Commande pour vérifier les paramètres des LUN ONTAP. Il devrait y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant les priorités les plus élevées sont actifs/optimisés, ce qui signifie qu'ils sont gérés par le contrôleur où se trouve l'agrégat. Les chemins avec les priorités les plus basses sont actifs, mais ne sont pas optimisés car ils sont servis à partir d'un autre contrôleur. Les chemins non optimisés sont utilisés uniquement lorsqu'aucun chemin optimisé n'est disponible.
+
+
+L'exemple suivant montre la sortie correcte pour une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés :
+
+[listing]
+----
+# multipath -ll
+3600a09803831347657244e527766394e dm-5 NETAPP,LUN C-Mode
+size=80G features='4 queue_if_no_path pg_init_retries 50 retain_attached_hw_handle' hwhandler='1 alua' wp=rw
+|-+- policy='round-robin 0' prio=50 status=active
+| |- 0:0:26:37 sdje 8:384   active ready running
+| |- 0:0:25:37 sdik 135:64  active ready running
+|-+- policy='round-robin 0' prio=10 status=enabled
+  |- 0:0:18:37 sdda 70:128  active ready running
+  |- 0:0:19:37 sddu 71:192  active ready running
+----
+
+NOTE: N'utilisez pas un nombre excessif de chemins pour une seule LUN. Pas plus de 4 chemins ne devraient être nécessaires. Plus de 8 chemins peuvent entraîner des problèmes de chemin pendant les défaillances du stockage.
+
+
+
+== Paramètres recommandés
+
+Oracle Linux 6.4 OS est compilé pour reconnaître les LUN ONTAP et définir automatiquement tous les paramètres de configuration correctement.
+
+Le fichier multipath.conf doit exister pour que le démon multipath démarre, mais vous pouvez créer un fichier vide à zéro octet à l'aide de la commande :
+`touch /etc/multipath.conf`Lors de la première création de ce fichier, vous devrez peut-être activer et démarrer les services multipathing.
+
+[listing]
+----
+# chkconfig multipathd on
+# /etc/init.d/multipathd start
+----
+Il n'est pas nécessaire d'ajouter quelque chose directement à multipath.conf, sauf si vous ne souhaitez pas que les périphériques soient gérés par multipath ou que vous disposez de paramètres existants qui remplacent les paramètres par défaut. Vous pouvez ajouter la syntaxe suivante au fichier multipath.conf pour exclure les périphériques indésirables.
+
+
+NOTE: Remplacez le <DevId> par la chaîne WWID du périphérique que vous souhaitez exclure. Utilisez la commande suivante pour déterminer l'identifiant WWID :
+
+....
+blacklist {
+        wwid <DevId>
+        devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
+        devnode "^hd[a-z]"
+        devnode "^cciss.*"
+}
+....
+Dans cet exemple, sda est le disque SCSI local que nous avons besoin de blacklist.
+
+. Exécutez la commande suivante pour déterminer l'identifiant WWID :
++
+....
+# /lib/udev/scsi_id -gud /dev/sda
+360030057024d0730239134810c0cb833
+....
+. Ajoutez cet identifiant WWID à la strophe "liste noire" dans /etc/multipath.conf :
++
+....
+blacklist {
+     wwid   360030057024d0730239134810c0cb833
+     devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
+     devnode "^hd[a-z]"
+     devnode "^cciss.*"
+}
+....
+
+
+Vous devez toujours vérifier votre `/etc/multipath.conf` fichier pour les paramètres hérités, notamment dans la section par défaut, qui peut remplacer les paramètres par défaut. Le tableau ci-dessous indique la critique `multipathd` Paramètres des LUN ONTAP et des valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il doit être corrigé par des strophes ultérieurs dans `multipath.conf` Qui s'appliquent spécifiquement aux LUN ONTAP. Si ce n'est pas le cas, les LUN de ONTAP peuvent ne pas fonctionner comme prévu. Ces valeurs par défaut ne doivent être remplacées qu'en consultation avec les fournisseurs de NetApp et/ou du système d'exploitation, et uniquement lorsque l'impact est totalement compris.
+
+[cols="2*"]
+|===
+| Paramètre | Réglage 
+
+
+| détecter_prio | oui 
+
+
+| dev_loss_tmo | « infini » 
+
+
+| du rétablissement | immédiate 
+
+
+| fast_io_fail_tmo | 5 
+
+
+| caractéristiques | "3 queue_if_no_path pg_init_retries 50" 
+
+
+| flush_on_last_del | « oui » 
+
+
+| gestionnaire_matériel | « 0 » 
+
+
+| no_path_réessayer | file d'attente 
+
+
+| path_checker | « tur » 
+
+
+| path_groupage_policy | « group_by_prio » 
+
+
+| sélecteur de chemin | « round-robin 0 » 
+
+
+| intervalle_interrogation | 5 
+
+
+| prio | « ONTAP » 
+
+
+| solution netapp | LUN.* 
+
+
+| conservez_attaed_hw_handler | oui 
+
+
+| rr_weight | « uniforme » 
+
+
+| noms_conviviaux_conviviaux | non 
+
+
+| fournisseur | NETAPP 
+|===
+L'exemple suivant montre comment corriger une valeur par défaut remplacée. Dans ce cas, le `multipath.conf` fichier définit les valeurs pour `path_checker` et `detect_prio` Non compatible avec les LUN ONTAP. S'ils ne peuvent pas être supprimés en raison d'autres baies SAN toujours connectées à l'hôte, ces paramètres peuvent être corrigés spécifiquement pour les LUN ONTAP avec une strophe de périphérique.
+
+[listing]
+----
+defaults {
+ path_checker readsector0
+ detect_prio no
+ }
+devices {
+ device {
+ vendor "NETAPP "
+ product "LUN.*"
+ path_checker tur
+ detect_prio yes
+ }
+}
+----
+
+NOTE: Pour configurer Oracle Linux 6.4 RedHat Enterprise Kernel (RHCK), utilisez le link:hu_rhel_64.html#recommended-settings["paramètres recommandés"] Pour Red Hat Enterprise Linux (RHEL) 6.4.
+
+
+
+== Problèmes connus et limites
+
+[cols="4*"]
+|===
+| ID de bug NetApp | Titre | Description | ID Bugzilla 
+
+
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=713555["713555"^] | Les réinitialisations de l'adaptateur QLogic sont observées sur les OL6.4 et OL5.9 avec UEK2 en cas de défaillances de contrôleur, telles que Takeover/giveback et reboot | Les réinitialisations de l'adaptateur QLogic sont observées sur les hôtes OL6.4 dotés d'UEK2 (kernel-uek-2.6.39-400.17.1.el6uek) ou OL5.9 équipés d'UEK2 (kernel-uek-2.6.39 400.17.1.el5uek) lorsqu'une défaillance du contrôleur se produit (reprise, rétablissement et redémarrages, par exemple). Ces réinitialisations sont intermittentes. Lorsque ces adaptateurs sont remis à zéro, une interruption d'E/S prolongée (parfois plus de 10 minutes) peut se produire jusqu'à ce que la réinitialisation de l'adaptateur réussisse et que l'état des chemins d'accès soit mis à jour par dm-multipath. Dans /var/log/messages, des messages similaires à ce qui suit sont visibles lorsque ce bogue est touché: Kernel: Qla2xxx [0000:11:00.0]-8018:0: ADAPTATEUR RÉINITIALISÉ ÉMIS nexus=0:2:13. Ceci est observé avec la version du noyau: Sur OL6.4: Kernel-uek-2.6.39-400.17.1.el6uek sur OL5.9: Kernel-uek-2.6.39-400.17.1.el5uek | link:https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=13999["13999"^] 
+
+
+| link:htthttps://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=715217["715217"^] | Un retard dans la récupération du chemin sur les hôtes OL6.4 ou OL5.9 avec UEK2 peut entraîner une reprise différée des E/S sur les défaillances du contrôleur ou de la structure | Lorsqu'une panne du contrôleur (basculement ou rétablissement du stockage, redémarrage, etc.) ou une défaillance de la structure (désactivation ou activation du port FC) se produit avec des E/S sur les hôtes Oracle Linux 6.4 ou Oracle Linux 5.9 équipés du noyau UEK2, la récupération du chemin par DM-Multipath prend beaucoup de temps (4 minutes). à 10 min). Parfois, lors de la récupération des chemins à l'état actif, les erreurs de pilote lpfc suivantes sont également observées : noyau : sd 0:0:8:3 : [sdlt] résultat : hostbyte=DID_ERROR driverbyte=DRIVER_OK en raison de ce retard dans la récupération du chemin pendant les événements de panne, la reprise des E/S. Versions OL 6.4: Device-mapper-1.02.77-9.el6 device-mapper-multipath-0.4.9-64.0.1.el6 kernel-uek-2.6.39-400.17.1.el6uek OL 5.9 versions: Device-mapper-1.02.77-9.el5 device-mapper-multipath-0.4.9-64.0.1.elek-400.17.1.2.6.39..1.eluek-...1.1.1.1.eluek-.1.1..1.1.1.1 | link:https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=14001["14001"^] 
+
+
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=709911["709911"^] | DM Multipath sur OL6.4 et OL5.9 iSCSI avec noyau UEK2 prend beaucoup de temps pour mettre à jour l'état du chemin de LUN après des défaillances de stockage | Sur les systèmes exécutant Oracle Linux 6 Update4 et Oracle Linux 5 Update 9 iSCSI avec Unbreakable Enterprise Kernel version 2 (UEK2), un problème a été détecté lors des événements de défaillance de stockage où DM Multipath (DMMP) prend environ 15 minutes pour mettre à jour l'état du chemin des périphériques Device Mapper (DM) (LUN). Si vous exécutez la commande « multipath -ll » pendant cet intervalle, le chemin d'accès est indiqué comme « failed ready run » (échec de l'exécution) pour ce périphérique DM (LUN). Le statut du chemin est finalement mis à jour en tant que « actif prêt en cours d'exécution ». Ce problème est rencontré avec la version suivante : Oracle Linux 6 mise à jour 4 : UEK2 noyau : 2.6.39-400.17.1.el6uek.x86_64 Multipath : device-mapper-multipath-0.4.9-64.0.1.el6.x86_64 iSCSI: iscsi-initiator-utils-6.2.0.873-2.0.1.el6.5 mise à jour : iSCSI-39.9.64.9.6.2.400.17.1.2.6.64.64.0.0.4..1.iSCSI-0.872.1..1..64.1..1..1.1...1.1.1.1.iSCSI-.16.0.1.1.1.1.1.1..1.1.1.1. | link:http://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=13984["13984"^] 
+
+
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=739909["739909"^] | L'appel système SG_IO ioctl échoue sur les périphériques dm-multipath après une panne FC sur les hôtes OL6.x et OL5.x avec UEK2 | Un problème est détecté sur les hôtes Oracle Linux 6.x avec le noyau UEK2 et les hôtes Oracle Linux 5.x avec le noyau UEK2. Les commandes sg_* sur un périphérique multichemin échouent avec le code d'erreur EAGAIN (erreur) après une erreur de structure qui fait descendre tous les chemins du groupe de chemins actif. Ce problème s'affiche uniquement lorsqu'aucune E/S n'est présente aux périphériques à chemins d'accès multiples. Voici un exemple : # sg_inq -v /dev/mapper/3600a098041764937303f436c75324370 demande cdb : 12 00 00 00 24 00 ioctl(SG_IO v3) a échoué avec os_err (errno) = 11 requête : transmettre via l'erreur os : ressource HDI_ioctl_GET temporairement indisponible : Ressource temporairement indisponible [11] la REQUÊTE SCSI et la récupération des informations ATA ont échoué sur /dev/mapper/3600a098041764937303f436c75324370 # ce problème se produit car le basculement du groupe de chemins vers d'autres groupes actifs n'est pas activé pendant les appels ioctl() lorsqu'aucune E/S n'est en cours sur le périphérique DM-Multipath. Le problème a été observé sur les versions suivantes des packages kernel-uek et device-mapper-multipath : OL6.4 versions: Kernel-uek-2.6.39-400.17.1.el6uek device-mapper-multipath-0.4.9-64.0.el6 OL5.9 versions: Kernel-uek-2.6.39-400.17.1.64.0.melek-0.4.9.1.mel5..mel5.1.1.melek..1.1.1.mel6 | link:https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=14082["14082"^] 
+|===
+
+NOTE: Pour les problèmes connus liés à Oracle Linux (noyau compatible Red Hat), consultez le link:hu_rhel_64.html#known-problems-and-limitations["problèmes connus"] Pour Red Hat Enterprise Linux (RHEL) 6.4.
+
+
+
+== Notes de version
+
+
+
+=== Mise en miroir ASM
+
+La mise en miroir ASM peut nécessiter des modifications des paramètres de chemins d'accès multiples Linux pour permettre à ASM de reconnaître un problème et de basculer vers un autre groupe de défaillances. La plupart des configurations ASM sur ONTAP reposent sur une redondance externe. La protection des données est assurée par la baie externe et ASM ne met pas en miroir les données. Certains sites utilisent ASM avec redondance normale pour fournir une mise en miroir bidirectionnelle, généralement entre différents sites. Voir link:https://www.netapp.com/us/media/tr-3633.pdf["Les bases de données Oracle sur ONTAP"^] pour plus d'informations.

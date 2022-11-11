@@ -1,0 +1,263 @@
+---
+sidebar: sidebar 
+permalink: hu_solaris_114.html 
+keywords: host utilities, solaris, 114, netapp, ontap 
+summary: Décrit comment utiliser IBM AIX 7.2 et/ou PowerVM VIOS 3.1 avec ONTAP 
+---
+= Utilisation de Solaris 11.4 avec NetApp ONTAP
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toc: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:toc-position: content
+
+
+
+
+== Installation des utilitaires d'hôte Solaris
+
+Vous pouvez télécharger le fichier compressé contenant les packs logiciels d'utilitaires hôtes à partir du site de support NetApp. Une fois le fichier installé, vous devez le décompresser pour obtenir les packs logiciels dont vous avez besoin pour installer les utilitaires hôtes.
+
+.Étapes
+. Téléchargez une copie du fichier compressé contenant les utilitaires d'hôte à partir du link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab["Site de support NetApp"^] vers un répertoire de votre hôte.
+. Accédez au répertoire contenant le téléchargement.
+. Décompressez le fichier.
++
+L'exemple suivant décompresse les fichiers d'un système SPARC. Pour les plates-formes x86-64, utilisez le package x86/x64.
+
++
+`gunzip netapp_solaris_host_utilities_6_2N20170913_0304_sparc.tar.gz`
+
+. Utilisez le `tar xvf` commande permettant de déclasser le fichier.
++
+`tar xvf netapp_solaris_host_utilities_6_2N20170913_0304_sparc.tar`
+
+. Ajoutez les paquets que vous avez extraits du fichier tar à votre hôte.
++
+`pkgadd -d NTAPSANTool.pkg`
+
++
+Les packages sont ajoutés au répertoire /opt/NTAP/SANTooolkit/bin.
+
++
+Pour terminer l'installation, vous devez configurer les paramètres de l'hôte pour votre environnement (MPxIO dans ce cas) à l'aide de  `host_config` commande.
+
++
+La commande host_config a le format suivant :
+
++
+`/opt/NTAP/SANToolkit/bin/host_config <-setup> <-protocol fcp|iscsi|mixed> <-multipath mpxio|dmp| non> [-noalua] [-mcc 60|90|120]`
+
++
+La commande host_config effectue les opérations suivantes :
+
++
+** Modifie les paramètres des pilotes Fibre Channel et SCSI pour les systèmes X86 et SPARC
+** Fournit des paramètres d'expiration SCSI pour les deux configurations MPxIO
+** Définit les informations VID/PID
+** Active ou désactive ALUA
+** Configure les paramètres ALUA utilisés par MPxIO et les pilotes SCSI pour les systèmes X86 et SPARC.
+
+
+. Redémarrez l'hôte.
+
+
+
+
+== Kit D'outils SAN
+
+Le kit d'outils est installé automatiquement lorsque vous installez le pack NetApp Host Utilities. Ce kit contient le `sanlun` Utilitaire, qui vous aide à gérer les LUN et les HBA. Le `sanlun` La commande renvoie les informations relatives aux LUN mappées sur votre hôte, aux chemins d'accès multiples et aux informations nécessaires à la création des groupes initiateurs.
+
+Dans l'exemple suivant, le `sanlun lun show` La commande renvoie les informations relatives à la LUN.
+
+[listing]
+----
+#sanlun lun show
+
+controller(7mode)/                 device                                            host             lun
+vserver(Cmode)     lun-pathname    filename                                         adapter protocol  size  mode
+------------------------------------------------------------------------------------------------------
+data_vserver       /vol/vol1/lun1  /dev/rdsk/c0t600A098038314362692451465A2F4F39d0s2  qlc1  FCP       60g   C
+data_vserver       /vol/vol2/lun2  /dev/rdsk/c0t600A098038314362705D51465A626475d0s2  qlc1  FCP       20g   C
+----
+
+
+== SAN Booting
+
+Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser le link:https://mysupport.netapp.com/matrix/imt.jsp?components=71102;&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^] Pour vérifier que votre système d'exploitation, votre adaptateur de bus hôte, votre micrologiciel HBA, votre BIOS de démarrage HBA et votre version de ONTAP sont pris en charge.
+
+LE démarrage SAN est le processus de configuration d'un disque connecté au SAN (un LUN) en tant que périphérique d'amorçage pour un hôte Solaris.
+
+Vous pouvez configurer une LUN de démarrage SAN pour qu'elle fonctionne dans un environnement Solaris MPxIO en utilisant le protocole FC et en exécutant Solaris Host Utilities. La méthode que vous utilisez pour configurer une LUN de démarrage SAN peut varier en fonction de votre gestionnaire de volumes et de votre système de fichiers. Voir la link:https://library.netapp.com/ecmdocs/ECMLP2748974/html/frameset.html["Solaris Host Utilities - Guide d'installation et de configuration"^] Pour plus de détails sur le démarrage de LUN SAN dans un environnement MPIO Solaris.
+
+
+
+== Chemins d'accès multiples
+
+Les chemins d'accès multiples vous permettent de configurer plusieurs chemins réseau entre l'hôte et le système de stockage. En cas de défaillance d'un chemin, le trafic continue sur les chemins restants. Les chemins d'accès multiples d'E/S (MPxIO) Oracle Solaris sont activés par défaut pour Solaris 11.4. Le paramètre par défaut dans `/kernel/drv/fp.conf` passe à mpxio-disable=« no ».
+
+
+
+=== Configuration non ASA
+
+Pour la configuration non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant les priorités les plus élevées sont actifs/optimisés, ce qui signifie qu'ils sont gérés par le contrôleur où se trouve l'agrégat. Les chemins avec les priorités les plus basses sont actifs, mais ne sont pas optimisés car ils sont servis à partir d'un autre contrôleur. Les chemins non optimisés sont utilisés uniquement lorsqu'aucun chemin optimisé n'est disponible.
+
+L'exemple suivant montre la sortie correcte pour une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés :
+
+Les priorités de chemin d'accès sont affichées dans la section *Etat d'accès* pour chaque LUN du système d'exploitation natif `mpathadm show lu <LUN>` commande.
+
+
+
+=== Configuration de la baie SAN
+
+Dans toutes les configurations ASA (SAN Array), tous les chemins d'accès à une LUN donnée sont actifs et optimisés. Autrement dit, les E/S peuvent être servies par tous les chemins simultanément, ce qui assure de meilleures performances.
+
+L'exemple suivant montre la sortie correcte pour une LUN ONTAP :
+
+La sortie du `sanlun` La commande est la même pour les configurations ASA et non ASA.
+
+Les priorités de chemin d'accès sont affichées dans la section *Etat d'accès* pour chaque LUN du système d'exploitation natif `mpathadm show lu <LUN>` commande.
+
+[listing]
+----
+#sanlun lun show -pv sparc-s7-16-49:/vol/solaris_vol_1_0/solaris_lun
+
+                    ONTAP Path: sparc-s7-16-49:/vol/solaris_vol_1_0/solaris_lun
+                           LUN: 0
+                      LUN Size: 30g
+                   Host Device: /dev/rdsk/c0t600A098038314362692451465A2F4F39d0s2
+                          Mode: C
+            Multipath Provider: Sun Microsystems
+              Multipath Policy: Native
+----
+
+NOTE: Toutes les configurations ASA (SAN Arrays) sont prises en charge à partir de ONTAP 9.8 pour les hôtes Solaris.
+
+
+
+== Paramètres recommandés
+
+Voici certains paramètres recommandés pour les systèmes Solaris 11.4 SPARC et x86_64 avec des LUN NetApp ONTAP. Ces valeurs de paramètres sont définies par les utilitaires hôtes. Pour plus de paramètres pour les systèmes Solaris 11.4, consultez Oracle DOC ID: 2595926.1
+
+[cols="2*"]
+|===
+| Paramètre | Valeur 
+
+
+| accelerateur_max | 8 
+
+
+| not_ready_retries | 300 
+
+
+| nombre_de_tentatives_occupé | 30 
+
+
+| réinit_tentatives | 30 
+
+
+| accélérateur_min | 2 
+
+
+| timeout_retries | 10 
+
+
+| taille_bloc_physique | 4096 
+|===
+
+
+=== Paramètres recommandés pour MetroCluster
+
+Par défaut, le système d'exploitation Solaris échouera I/OS au bout de 20 secondes si tous les chemins d'accès à une LUN sont perdus. Ceci est contrôlé par le `fcp_offline_delay` paramètre. Valeur par défaut pour `fcp_offline_delay` Est parfaitement adapté aux clusters ONTAP standard. Cependant, dans les configurations MetroCluster, la valeur de `fcp_offline_delay` Doit être augmenté à *120s* pour s'assurer que les E/S ne sont pas prématurément hors service pendant les opérations, y compris les basculements non planifiés. Pour plus d'informations et pour connaître les modifications recommandées par défaut, consultez NetApp link:https://kb.netapp.com/app/answers/answer_view/a_id/1001373/loc/en_US["KB1001373"^].
+
+
+
+== Virtualisation Oracle Solaris
+
+* Les options de virtualisation Solaris comprennent les domaines logiques Solaris (également appelés LDOM ou Oracle VM Server pour SPARC), les domaines dynamiques Solaris, les zones Solaris et les conteneurs Solaris. Ces technologies ont été généralement reconnues comme « Oracle Virtual machines », malgré le fait qu'elles soient basées sur des architectures très différentes.
+* Dans certains cas, plusieurs options peuvent être utilisées ensemble, telles qu'un conteneur Solaris, dans un domaine logique Solaris spécifique.
+* NetApp prend généralement en charge l'utilisation de ces technologies de virtualisation, lorsque la configuration globale est prise en charge par Oracle et que toute partition bénéficiant d'un accès direct aux LUN est répertoriée sur le link:https://mysupport.netapp.com/matrix/imt.jsp?components=95803;&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^] dans une configuration prise en charge. Cela inclut les conteneurs racine, les domaines d'E/S LDOM et les LDOM utilisant NPIV pour accéder aux LUN.
+* Les partitions et/ou les machines virtuelles qui utilisent uniquement des ressources de stockage virtualisées, telles que vdsk, n'ont pas besoin d'être précises car elles ne disposent pas d'un accès direct aux LUN NetApp. Seule la partition/machine virtuelle ayant un accès direct à la LUN sous-jacente, telle qu'un domaine d'E/S LDOM, doit être trouvée dans le link:https://mysupport.netapp.com/matrix/imt.jsp?components=95803;&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^].
+
+
+
+
+=== Paramètres recommandés pour la virtualisation
+
+Lorsque des LUN sont utilisées comme unités de disque virtuel dans un LDOM, la source de l'LUN est masquée par la virtualisation et LDOM ne détecte pas correctement les tailles de bloc. Pour éviter ce problème, le système d'exploitation LDOM doit être corrigé pour Oracle Bug 15824910 et A. `vdc.conf` le fichier doit être créé pour définir la taille de bloc du disque virtuel sur 4096. Consultez Oracle Doc 2157669.1 pour plus d'informations.
+
+Pour vérifier le correctif, procédez comme suit :
+
+. Créez un zpool.
+. Courez `zdb -C` par rapport au zpool et vérifier que la valeur de *shift* est 12.
++
+Si la valeur de *shift* n'est pas de 12, vérifier que le correctif correct a été installé et vérifier à nouveau le contenu de `vdc.conf`.
+
++
+Ne pas continuer jusqu'à ce que *shift* indique une valeur de 12.
+
+
+
+
+NOTE: Des correctifs sont disponibles pour Oracle bug 15824910 sur différentes versions de Solaris. Contactez Oracle si vous avez besoin d'aide pour déterminer le meilleur correctif du noyau.
+
+
+
+== Paramètres recommandés pour la continuité de l'activité SnapMirror
+
+Pour garantir la continuité des applications client Solaris lors d'un basculement de site non planifié dans un environnement SnapMirror Business Continuity (SM-BC), le paramètre suivant doit être configuré sur l'hôte Solaris 11.4. Ce paramètre remplacera le module de basculement – `f_tpgs` afin d'éviter que le chemin du code qui détecte la contradiction ne soit exécutée.
+
+
+NOTE: Depuis ONTAP 9.9.1, les configurations de paramétrage SM-BC sont prises en charge par l'hôte Solaris 11.4.
+
+Suivez les instructions pour configurer le paramètre de neutralisation :
+
+. Créer un fichier de configuration `/etc/driver/drv/scsi_vhci.conf` Avec une entrée similaire à ce qui suit pour le type de stockage NetApp connecté à l'hôte :
++
+[listing]
+----
+scsi-vhci-failover-override =
+"NETAPP  LUN","f_tpgs"
+----
+. Utiliser `devprop` et `mdb` les commandes pour vérifier que la neutralisation a bien été appliquée :
++
+`root@host-A:~# devprop -v -n /scsi_vhci scsi-vhci-failover-override      scsi-vhci-failover-override=NETAPP  LUN + f_tpgs
+root@host-A:~# echo "*scsi_vhci_dip::print -x struct dev_info devi_child | ::list struct dev_info devi_sibling| ::print struct dev_info devi_mdi_client| ::print mdi_client_t ct_vprivate| ::print struct scsi_vhci_lun svl_lun_wwn svl_fops_name"| mdb -k`
+
++
+[listing]
+----
+svl_lun_wwn = 0xa002a1c8960 "600a098038313477543f524539787938"
+svl_fops_name = 0xa00298d69e0 "conf f_tpgs"
+----
+
+
+
+NOTE: `conf` sera ajouté au `svl_fops_name` lorsqu'un `scsi-vhci-failover-override` a été appliqué. Pour plus d'informations et pour connaître les modifications recommandées par défaut, consultez l'article de la base de connaissances NetApp https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapMirror/Solaris_Host_support_recommended_settings_in_SnapMirror_Business_Continuity_(SM-BC)_configuration["Prise en charge de Solaris Host Paramètres recommandés dans la configuration de SnapMirror Business Continuity (SM-BC)"^].
+
+
+
+== Problèmes connus et limites
+
+[cols="4*"]
+|===
+| ID de bug NetApp | Titre | Description | ID Oracle 
+
+
+| 1362435 | Modifications de liaison des pilotes FC HUK 6.2 et Solaris_11.4 | Solaris 11.4 et HUK recommandations. La liaison du pilote FC passe de ssd(4D) à sd(4D). Déplacez la configuration dans laquelle vous vous êtes `ssd.conf` à `sd.conf` Comme détaillé dans Oracle (Doc ID 2595926.1). Le comportement varie selon le système Solaris 11.4 nouvellement installé et mis à niveau à partir de 11.3 ou de versions inférieures. | (ID doc. 2595926.1) 
+
+
+| 1366780 | Problème de LIF Solaris au niveau de GB avec une carte HBA Emulex 32G sur un Arch x86 | Vu avec la version 12.6.x du micrologiciel Emulex sur la plateforme x86_64 | SR 3-24746803021 
+
+
+| 1368957 | "Solaris 11.x `cfgadm -c configure` Résultant en une erreur d'E/S au niveau de la configuration Emulex de bout en bout » | Exécution `cfgadm -c configure` Sur les configurations de bout en bout d'Emulex, les erreurs d'E/S sont générées. Il est fixé dans 9.5P17, 9.6P14 , 9.7P13 et 9.8P2 | NA 
+
+
+| 1345622 | Création de rapports de chemin anormal sur les hôtes Solaris avec ASA/Pports à l'aide de commandes natives OS | Problèmes intermittents de rapport de chemin sur Solaris 11.4 avec ASA | NA 
+|===

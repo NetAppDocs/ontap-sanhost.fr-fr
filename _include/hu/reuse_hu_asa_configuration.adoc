@@ -1,0 +1,11 @@
+= Configuration de la baie SAN
+:allow-uri-read: 
+
+
+
+
+=== Configuration de la baie SAN
+
+Dans toutes les configurations ASA (SAN Array), tous les chemins d'accès à une LUN donnée sont actifs et optimisés. Autrement dit, les E/S peuvent être servies par tous les chemins simultanément, ce qui assure de meilleures performances.
+
+L'exemple suivant montre la sortie correcte pour une LUN ONTAP :

@@ -1,0 +1,46 @@
+= 
+:allow-uri-read: 
+
+
+Après exécution `mbralign` Sur les disques pour corriger l'alignement MBR avec PowerShell Toolkit sur les systèmes d'exploitation invités Linux à l'aide du chargeur de démarrage GRUB, vous devez réinstaller GRUB pour vous assurer que le système d'exploitation invité démarre correctement.
+
+L'applet de commande PowerShell Toolkit est terminée sur le fichier VHD de la machine virtuelle. Cette rubrique s'applique uniquement aux systèmes d'exploitation invités Linux utilisant le chargeur de démarrage GRUB et `SystemRescueCd`.
+
+. Montez l'image ISO du disque 1 des CD d'installation pour la version correcte de Linux pour la machine virtuelle.
+. Ouvrez la console de la machine virtuelle dans Hyper-V Manager.
+. Si la machine virtuelle est en cours d'exécution et affichée sur l'écran GRUB, cliquez dans la zone d'affichage pour vous assurer qu'elle est active, puis cliquez sur l'icône de la barre d'outils *Ctrl-Alt-Suppr* pour redémarrer la machine virtuelle. Si la machine virtuelle n'est pas en cours d'exécution, démarrez-la, puis cliquez immédiatement dans la zone d'affichage pour vous assurer qu'elle est active.
+. Dès que l'écran de démarrage du BIOS VMware s'affiche, appuyez une fois sur la touche *Esc*. Le menu de démarrage s'affiche.
+. Dans le menu de démarrage, sélectionnez *CD-ROM*.
+. Sur l'écran de démarrage Linux, entrez : `linux rescue`
+. Prenez les valeurs par défaut pour Anaconda (les écrans de configuration bleu/rouge). La mise en réseau est facultative.
+. Lancer GRUB en entrant : `grub`
+. S'il n'y a qu'un seul disque virtuel dans cette machine virtuelle, ou s'il y a plusieurs disques, mais que le premier est le disque d'amorçage, exécutez les commandes GRUB suivantes :
+
+
+[listing]
+----
+root (hd0,0)
+setup (hd0)
+quit
+----
+Si vous avez plusieurs disques virtuels dans la machine virtuelle, et que le disque de démarrage n'est pas le premier disque, ou que vous corrigez GRUB en démarrant à partir du VHD de sauvegarde mal aligné, entrez la commande suivante pour identifier le disque de démarrage :
+
+[listing]
+----
+find /boot/grub/stage1
+----
+Exécutez ensuite les commandes suivantes :
+
+[listing]
+----
+root (boot_disk,0)
+setup (boot_disk)
+quit
+----
+
+NOTE: Notez bien que `boot_disk`, ci-dessus, est un espace réservé pour l'identificateur de disque réel du disque d'amorçage.
+
+. Appuyez sur *Ctrl-D* pour vous déconnecter.
+
+
+Le sauvetage Linux s'arrête, puis redémarre.

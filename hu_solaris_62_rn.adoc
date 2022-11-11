@@ -1,0 +1,92 @@
+---
+sidebar: sidebar 
+permalink: hu_solaris_62_rn.html 
+keywords: host utilities, solaris, 6.2 netapp, ontap 
+summary: Notes de version pour Solaris Host Utilities 6.2 
+---
+= Notes de mise à jour de Solaris Host Utilities 6.2
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toc: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:toc-position: content
+
+
+[role="lead"]
+Ce document contient les dernières informations relatives aux utilitaires hôtes Solaris 6.2, notamment les mises à jour concernant les problèmes connus, les limitations, la configuration et la gestion de vos systèmes de stockage ONTAP.
+
+Le document Notes de mise à jour est mis à jour lorsque de nouvelles informations sur l'utilisation des utilitaires hôtes Solaris deviennent disponibles.
+
+
+
+== À propos de la version 6.2 de Solaris Host Utilities
+
+Solaris Host Utilities 6.2 prend en charge plusieurs environnements Solaris et plusieurs protocoles.
+
+Les environnements d'utilitaires hôtes principaux sont les suivants :
+
+* Système d'exploitation natif avec MPxIO avec protocole Fibre Channel (FC) ou iSCSI sur un système utilisant un processeur SPARC ou x86/64.
+* Veritas Dynamic Multipathing (DMP) avec le protocole FC ou iSCSI sur un système utilisant un processeur SPARC et avec le protocole iSCSI sur le système utilisant un processeur x86/64.
+
+
+Le logiciel Host Utilities est fourni sous la forme d'un fichier compressé unique. Vous pouvez télécharger le fichier compressé et la documentation à partir du link:https://mysupport.netapp.com/site/["Site de support NetApp"^]. La configuration d'hôte SAN ONTAP fournit des instructions d'installation et de configuration des utilitaires hôtes pour qu'ils fonctionnent avec votre environnement et votre protocole.
+
+
+
+== Améliorations de Solaris Host Utilities 6.2
+
+Les notes de mise à jour sont mises à jour entre les versions de produit dès que de nouvelles informations sont disponibles.
+
+Solaris Unified Host Utilities 6.2 continue de prendre en charge les versions suivantes de Solaris :
+
+* Série Solaris 11.x
+* Série Solaris 10.x
+
+
+
+
+== Problèmes connus et limites
+
+Pour utiliser efficacement les utilitaires hôtes, notez que les performances peuvent être affectées par des problèmes connus liés à une fonction particulière, comme un réseau, ou par des fonctionnalités que les utilitaires hôtes ne prennent pas en charge, telles qu'une version spécifique d'un système d'exploitation.
+
+[cols="3"]
+|===
+| ID de bug | Titre | Description 
+
+
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/BURT/1385189["1385189"^] | Modifications de liaison du pilote FC Solaris 11.4 requises dans HUK 6.2 | Solaris 11.4 et HUK recommandations. La liaison du pilote FC est modifiée de `ssd(4D)` à `sd(4D)`. Déplacez la configuration dans laquelle vous vous êtes `ssd.conf` à `sd.conf` Comme indiqué dans Oracle (Doc ID 2595926.1). Le comportement varie selon le système Solaris 11.4 nouvellement installé et mis à niveau à partir de 11.3 ou de versions inférieures. 
+|===
+link:https://mysupport.netapp.com/site/["NetApp bogues en ligne"^] fournit des informations complètes pour la plupart des problèmes connus, y compris des solutions de contournement suggérées si possible. Voici quelques combinaisons de mots-clés et types de bogue que vous pouvez utiliser :
+
+* FCP General : affiche les bogues FC et HBA qui ne sont pas associés à un hôte spécifique
+* FCP - Solaris
+
+
+
+
+== À propos de la documentation sur la configuration de l'hôte SAN
+
+La documentation relative aux utilitaires d'hôte SAN est incluse dans le link:https://docs.netapp.com/us-en/ontap-sanhost/index.html["Configuration de l'hôte SAN ONTAP"] documentation : La documentation relative à la configuration DE L'HÔTE SAN ONTAP peut être cumulée. Elle couvre toutes les versions d'HÔTE SAN actuelles. Les différences fonctionnelles entre les versions sont notées dans le contexte.
+
+
+
+== Où trouver la documentation produit et d'autres informations
+
+Vous pouvez accéder à la documentation de tous les produits NetApp et consulter d'autres ressources d'informations sur les produits, notamment des rapports techniques et des livres blancs, sur la page Documentation sur les produits du site NetApp.
+
+*Configuration et gestion de votre système de stockage ONTAP*
+
+* Le link:https://docs.netapp.com/us-en/ontap/setup-upgrade/index.html["Guide de configuration du logiciel ONTAP"^] Pour votre version de ONTAP
+* Le link:https://docs.netapp.com/us-en/ontap/san-management/index.html["Guide d'administration du SAN ONTAP"^] Pour votre version de ONTAP
+* Le link:https://library.netapp.com/ecm/ecm_download_file/ECMLP2492508["Notes de version de ONTAP"^] Pour votre version de ONTAP
+* link:https://imt.netapp.com/matrix/#welcome["Matrice d'interopérabilité NetApp"^]
+* link:https://hwu.netapp.com/["Hardware Universe"^] (Anciennement le Guide de configuration du système)
+* link:https://docs.netapp.com/us-en/ontap-sanhost/index.html["Topologies SAN Fibre Channel prises en charge"^]
+* link:https://mysupport.netapp.com/documentation/productlibrary/index.html?productID=61343["Configuration de l'hôte pour les utilitaires hôtes"^]
+

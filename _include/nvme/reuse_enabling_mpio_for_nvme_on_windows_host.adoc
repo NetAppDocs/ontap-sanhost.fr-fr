@@ -1,0 +1,35 @@
+= 
+:allow-uri-read: 
+
+
+. Installer link:link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71.html["Kit utilitaire hôte Windows 7.1"] Pour définir les paramètres du pilote communs à FC et NVMe.
+. Ouvrez les propriétés MPIO.
+. Dans l'onglet *Discover Multi-Paths*, ajoutez l'ID de périphérique répertorié pour NVMe.
++
+MPIO connaît les périphériques NVMe, visibles au niveau de la gestion des disques.
+
+. Ouvrez *Disk Management* et accédez à *Disk Properties*.
+. Dans l'onglet *MPIO*, cliquez sur *Détails*.
+. Définissez les paramètres MSDSM suivants :
++
+** PathVerifiedPeriod: *10*
+** PathVerifyEnabled : *Activer*
+** RetryCount: *6*
+** Intervalle de rérémanence : *1*
+** PDODOedRemiod: *130*
+
+
+. Sélectionnez la stratégie MPIO *Round Robin with Subset*.
+. Modifiez les valeurs du registre :
++
+[listing]
+----
+HKLM\SYSTEM\CurrentControlSet\Services\mpio\Parameters\PathRecoveryInterval DWORD -> 30
+
+HKLM\SYSTEM\CurrentControlSet\Services\mpio \Parameters\ UseCustomPathRecoveryInterval  DWORD-> 1
+----
+. Redémarrez l'hôte.
++
+La configuration NVMe est désormais terminée sur l'hôte Windows.
+
+

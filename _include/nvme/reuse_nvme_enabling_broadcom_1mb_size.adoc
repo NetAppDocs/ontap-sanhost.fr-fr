@@ -1,0 +1,23 @@
+= 
+:allow-uri-read: 
+
+
+Le paramètre lpfc_sg_seg_CNT doit être défini sur 256 pour que l'hôte puisse émettre des E/S de 1 Mo
+
+.Étapes
+. Réglez le `lpfc_sg_seg_cnt` paramètre à 256.
++
+[listing]
+----
+# cat /etc/modprobe.d/lpfc.conf
+options lpfc lpfc_sg_seg_cnt=256
+----
+. Exécutez un `dracut -f` et redémarrez l'hôte.
+. Vérifiez-le `lpfc_sg_seg_cnt` est 256.
++
+[listing]
+----
+# cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
+256
+----
+

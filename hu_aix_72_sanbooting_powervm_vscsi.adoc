@@ -1,0 +1,214 @@
+---
+sidebar: sidebar 
+permalink: hu_aix_72_sanbooting_powervm_vscsi.html 
+keywords: host utilities, aix, powervm, 7.2 netapp, ontap, luns, configure, discover, configuring, discovering 
+summary: Décrit comment utiliser découverte et configurer des LUN avec PowerVM vSCSI 
+---
+= (PowerVM vSCSI) détection et configuration des LUN
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toc: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:toc-position: content
+
+
+[role="lead"]
+Lorsque vous utilisez des serveurs PowerVM vSCSI et VIO, vous devez utiliser la connexion padmin et les commandes appropriées pour configurer et détecter des LUN.
+
+.Étapes
+. Connectez-vous à l'hôte en tant que padmin.
+. Sur l'hôte AIX, entrez la commande suivante pour détecter les LUN nouvellement créés :
++
+`cfgdev`
+
++
+La commande cfgdev cause :
+
++
+** Les initiateurs pour se connecter à la structure.
+** Le système pour rechercher de nouveaux dispositifs.
+** Le système doit créer de nouvelles entrées de périphérique dans lesquelles les nouveaux LUN sont mappés en tant que périphériques MPIO à l'aide du PCM par défaut.
+
+
+. Pour vérifier que les périphériques hdisk MPIO ont été créés, entrez la commande suivante :
++
+`lsdev -type disk`
+
++
+Les LUN apparaissent sur l'hôte sous forme de disques. Vous pouvez utiliser ces disques de la même manière que vous utilisez des disques locaux sur l'hôte.
+
++
+Notez les numéros d'instance hdisk. Vous les utilisez lorsque vous effectuez la configuration du chemin.
+
++
+Le `lsdev -type disk` commande génère le type de sortie suivant. La sortie dans cet exemple a été tronquée.
+
++
+[listing]
+----
+vioserver$ lsdev -type disk NetApp
+name     status      description
+hdisk0   Available   16 Bit LVD SCSI Disk Drive
+hdisk1   Available   16 Bit LVD SCSI Disk Drive
+hdisk2   Available   MPIO NetApp FCP Default PCM Disk
+hdisk3   Available   MPIO NetApp FCP Default PCM Disk
+hdisk4   Available   MPIO NetApp FCP Default PCM Disk
+hdisk5   Available   MPIO NetApp FCP Default PCM Disk
+hdisk6   Available   MPIO NetApp FCP Default PCM Disk
+----
+. Pour obtenir des informations concernant la configuration, entrez la commande suivante :
++
+`lsdev -dev hdisk_name -attr`
+
++
+Le `lsdev -dev hdisk_name -attr` la commande génère la sortie suivante :
+
++
+[listing]
+----
+vioserver$ lsdev -dev hdisk2 -attr
+attribute value                   description                user-settable
+PCM   PCM/friend/NetApp   PCM Path Control Module          False
+PR_key_value    none                             Persistent Reserve Key Value            True
+algorithm       round_robin                      Algorithm                               True
+clr_q           no                               Device CLEARS its Queue on error        True
+dist_err_pcnt   0                                Distributed Error Sample Time           True
+dist_tw_width   50                               Distributed Error Sample Time           True
+hcheck_cmd      inquiry                          Health Check Command                    True
+hcheck_interval 30                               Health Check Interval                   True
+hcheck_mode     nonactive                        Health Check Mode                       True
+location                                         Location Label                          True
+lun_id          0x2000000000000                  Logical Unit Number ID                  False
+lun_reset_spt   yes                              LUN Level Reset                         True
+max_transfer    0x100000                         Maximum TRANSFER Size                   True
+node_name       0x500a0980894ae0e0               FC Node Name                            False
+pvid            00067fbad453a1da0000000000000000 Physical volume identifier              False
+q_err           yes                              Use QERR bit                            True
+q_type          simple                           Queuing TYPE                            True
+qfull_dly       2                                Delay in seconds for SCSI TASK SET FULL True
+queue_depth     64                               Queue DEPTH                             True
+reassign_to     120                              REASSIGN time out value                 True
+reserve_policy  no_reserve                       Reserve Policy                          True
+rw_timeout      30                               READ/WRITE time out value               True
+scsi_id         0xd10001                         SCSI ID                                 False
+start_timeout   60                               START unit time out value               True
+ww_name         0x500a0984994ae0e0               FC World Wide Name                      False
+----
+. Si votre configuration ne prend pas en charge ALUA, vous devez exécuter l'utilitaire dotpaths pour définir les priorités du chemin. L'utilitaire dotpaths est installé lors de l'installation des utilitaires hôtes. N'utilisez pas l'utilitaire dotpaths si ALUA est activé. Passez à l' `oem_setup_env` mode pour exécuter les dotpaths en entrant la commande suivante :
++
+`oem_setup_env`
+
++
+Lorsque vous saisissez le `oem_setup_env` mode, l'invite de ligne de commande passe d'un signe dollar à un signe dièse et vous restez dans `oem_setup_env` mode jusqu'à ce que vous l'arrêtez en entrant une commande telle que exit.
+
++
+``# vioserver$ oem_setup_env`
+
+. Si votre configuration prend en charge ALUA, vous pouvez l'utiliser pour définir la priorité des chemins d'accès. Vérifiez que le protocole ALUA est activé :
++
+`lun igroup show -instance igroup_name`
+
++
+.. Si ALUA n'est pas activé, activez-le :
++
+`igroup set igroup_name alua yes`
+
+
+
+. Si votre configuration ne prend pas en charge ALUA, vous devez exécuter l'utilitaire dotpaths pour définir les priorités du chemin. L'utilitaire dotpaths est installé lors de l'installation des utilitaires hôtes. N'utilisez pas l'utilitaire dotpaths si ALUA est activé.
++
+.. Pour définir la priorité de toutes les LUN Data ONTAP, entrez :
++
+`dotpaths`
+
+.. Pour définir la priorité d'un ensemble spécifique d'entrée de disque :
++
+`dotpaths [-hqv] [hdiskN ...]`
+
++
+Utilisez le `-v` option pour activer le mode détaillé et afficher toutes les priorités. Utilisez le `-q` option permettant de rechercher toutes les priorités ou les priorités individuelles des disques.
+
++
+Voici un exemple d'utilisation de l'utilitaire dotpaths :
+
++
+[listing]
+----
+vioserver# dotpaths -v
+hdisk2 (path 0): Optimized path - Setting priority to 255
+hdisk2 (path 1): Optimized path - Setting priority to 255
+hdisk2 (path 2): Unoptimized path - Current priority of 1 is correct
+hdisk2 (path 3): Unoptimized path - Current priority of 1 is correct
+...
+Path priority set and/or verified for 22 disks, 86 total paths.
+vioserver#
+----
+
+
+. Pour vérifier que l'hôte a détecté les LUN, entrez la commande suivante :
++
+`# sanlun lun show -p`
+
++
+Cet exemple montre la sortie type de l' `sanlun lun show -p` commande pour une configuration à connexion directe. Elle inclut également le `sanlun lun show -d hdisk9 -v` commande pour afficher des informations sur hdisk9. La sortie de cette commande a été tronquée.
+
++
+[listing]
+----
+sanlun lun show -p
+
+                    ONTAP Path: fas3170-aix03:/vol/ibmbc_aix01b14_fcp_vol8/ibmbc-aix01b14_fcp_lun0
+                           LUN: 8
+                      LUN Size: 3g
+           Controller CF State: Cluster Enabled
+            Controller Partner: fas3170-aix04
+                   Host Device: hdisk9
+                          Mode: 7
+            Multipath Provider: AIX Native
+        Multipathing Algorithm: round_robin
+--------- ----------- ------ ------- ------------- ----------
+host      controller  AIX            controller    AIX MPIO
+path      path        MPIO   host    target        path
+state     type        path   adapter port          priority
+--------- ----------- ------ ------- ------------- ----------
+up        secondary   path0  fcs0    3b              1
+up        primary     path1  fcs0    3a              1
+up        secondary   path2  fcs0    3a              1
+up        primary     path3  fcs0    3b              1
+up        secondary   path4  fcs0    4b              1
+up        secondary   path5  fcs0    4a              1
+up        primary     path6  fcs0    4b              1
+up        primary     path7  fcs0    4a              1
+up        secondary   path8  fcs1    3b              1
+up        primary     path9  fcs1    3a              1
+up        secondary   path10 fcs1    3a              1
+up        primary     path11 fcs1    3b              1
+up        secondary   path12 fcs1    4b              1
+up        secondary   path13 fcs1    4a              1
+up        primary     path14 fcs1    4b              1
+up        primary     path15 fcs1    4a              1
+----
++
+[listing]
+----
+sanlun lun show -vd hdisk10
+                                                                      device          host                  lun
+vserver              lun-pathname                                     filename        adapter    protocol   size    mode
+------------------------------------------------------------------------------------------------------------------------
+GPFS_p520_FC         /vol/GPFS_p520_FC_FlexVol_2/GPFS_p520_FC_LUN_2_4 hdisk10         fcs3       FCP        100g    C
+             LUN Serial number: 1k/yM$-ia5HC
+         Controller Model Name: N5600
+          Vserver FCP nodename: 200200a0980c892f
+          Vserver FCP portname: 200a00a0980c892f
+              Vserver LIF name: GPFS_p520_FC_2
+            Vserver IP address: 10.225.121.100
+           Vserver volume name: GPFS_p520_FC_FlexVol_2  MSID::0x00000000000000000000000080000420
+         Vserver snapshot name:
+----
+
