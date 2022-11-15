@@ -143,7 +143,7 @@ blacklist {
         devnode "^cciss.*"
 }
 ....
-Dans cet exemple, `sda` Est le disque SCSI local dont nous avons besoin pour faire une liste noire.
+Dans cet exemple, `sda` Est le disque SCSI local que nous devons ajouter à la liste noire.
 
 .Étapes
 . Exécutez la commande suivante pour déterminer l'identifiant WWID :

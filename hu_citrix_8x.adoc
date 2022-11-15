@@ -127,7 +127,7 @@ blacklist {
 
 NOTE: Remplacez le *<DevID>* par la chaîne WWID du périphérique que vous souhaitez exclure.
 
-Dans cet exemple pour Citrix Hypervisor 8.x, `sda` Est le disque SCSI local dont nous avons besoin pour la liste noire.
+Dans cet exemple pour Citrix Hypervisor 8.x, `sda` Est le disque SCSI local que nous devons ajouter à la liste noire.
 
 . Exécutez la commande suivante pour déterminer l'identifiant WWID :
 +

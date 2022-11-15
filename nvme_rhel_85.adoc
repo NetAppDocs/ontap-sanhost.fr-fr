@@ -250,8 +250,9 @@ Contrairement à NVMe/FC, NVMe/TCP ne propose pas de fonctionnalité de connexio
 * *Pas de connexion automatique pendant le démarrage de l'hôte* NVMe/TCP ne peut pas se connecter automatiquement lors du démarrage de l'hôte.
 
 
-Pour passer confortablement aux événements de basculement ONTAP tels que les SFO, il est conseillé de définir une période de tentatives plus longue, comme par exemple 30 minutes, en ajustant le `ctrl_loss_tmo` minuterie. Voici les détails :
+Vous devez définir la période de nouvelle tentative pour les événements de basculement sur au moins 30 minutes afin d'éviter les délais. Vous pouvez augmenter la période de relance en augmentant la valeur du temporisateur ctrl_Loss_tmo. Voici les détails :
 
+.Étapes
 . Vérifiez si le port initiateur peut récupérer les données de la page du journal de découverte sur les LIF NVMe/TCP prises en charge :
 +
 [listing]
@@ -299,7 +300,7 @@ sectype: none
 # nvme discover -t tcp -w 192.168.2.9 -a 192.168.2.56
 # nvme discover -t tcp -w 192.168.2.9 -a 192.168.2.57
 ----
-. Exécutez le `nvme connect-all` Contrôlez l'ensemble des LIF cible initiateur-initiateur NVMe/TCP prises en charge sur l'ensemble des nœuds. Assurez-vous de passer plus longtemps `ctrl_loss_tmo` période (par exemple, 30 minutes, qui peut être définie à l'aide de `-l 1800`) pendant le connect-all afin qu'il retente pendant une période plus longue en cas de perte de chemin. Par exemple :
+. Exécutez le `nvme connect-all` Contrôlez l'ensemble des LIF cible initiateur-initiateur NVMe/TCP prises en charge sur l'ensemble des nœuds. Assurez-vous de définir une plus longue durée `ctrl_loss_tmo` période de relance de la minuterie (par exemple, 30 minutes, qui peuvent être réglées à `-l 1800`) pendant le connect-all afin qu'il retente pendant une période plus longue en cas de perte de chemin. Par exemple :
 +
 [listing]
 ----

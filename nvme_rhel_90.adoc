@@ -43,7 +43,7 @@ NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans ce cont
 * Contrairement à NVMe/FC, NVMe/TCP ne propose pas de fonctionnalité de connexion automatique. Cela tient compte de deux principales limitations sur l'hôte Linux :
 +
 ** Pas de reconnexion automatique après rétablissement des chemins - NVMe/TCP ne peut pas se reconnecter automatiquement à un chemin qui est rétabli au-delà de la valeur par défaut `ctrl-loss-tmo` de 10 minutes après un chemin descendant.
-** Pas de connexion automatique pendant le démarrage de l'hôte - NVMe/TCP ne peut pas se connecter automatiquement lors du démarrage de l'hôte. Pour passer confortablement en cas d'événements de basculement ONTAP, tels que les SFO pour NVMe/TCP, il est recommandé de définir une période de tentatives plus longue (par exemple, 30 minutes) en ajustant le `ctrl_loss_tmo` minuterie.
+** Pas de connexion automatique pendant le démarrage de l'hôte - NVMe/TCP ne peut pas se connecter automatiquement lors du démarrage de l'hôte. Vous devez définir la période de nouvelle tentative pour les événements de basculement sur au moins 30 minutes afin d'éviter les délais. Vous pouvez augmenter la période de relance en augmentant la valeur du temporisateur ctrl_Loss_tmo.
 
 
 
@@ -235,7 +235,7 @@ La vérification `ql2xnvmeenable` Est défini pour que l'adaptateur Marvell puis
 Contrairement à NVMe/FC, NVMe/TCP ne propose pas de fonctionnalité de connexion automatique. Cette situation s'explique par deux principales limitations de l'hôte Linux NVMe/TCP :
 
 * Pas de reconnexion automatique après rétablissement des chemins - NVMe/TCP ne peut pas se reconnecter automatiquement à un chemin qui est rétabli au-delà de la valeur par défaut `ctrl-loss-tmo` de 10 minutes après un chemin descendant.
-* Pas de connexion automatique pendant le démarrage de l'hôte - NVMe/TCP ne peut pas se connecter automatiquement lors du démarrage de l'hôte. Pour passer confortablement aux événements de basculement ONTAP tels que les SFO, il est conseillé de définir une période de tentatives plus longue, comme par exemple 30 minutes, en ajustant le `ctrl_loss_tmo` minuterie. Voici les détails :
+* Pas de connexion automatique pendant le démarrage de l'hôte - NVMe/TCP ne peut pas se connecter automatiquement lors du démarrage de l'hôte. Vous devez définir la période de nouvelle tentative pour les événements de basculement sur au moins 30 minutes afin d'éviter les délais. Vous pouvez augmenter la période de relance en augmentant la valeur du temporisateur ctrl_Loss_tmo. Voici les détails :
 
 
 .Étapes
@@ -287,7 +287,7 @@ sectype: none
 # nvme discover -t tcp -w 192.168.2.9 -a 192.168.2.56
 # nvme discover -t tcp -w 192.168.2.9 -a 192.168.2.57
 ----
-. Courez `nvme connect-all` Contrôlez l'ensemble des LIF cible initiateur-initiateur NVMe/TCP prises en charge sur l'ensemble des nœuds. Assurez-vous de passer plus longtemps `ctrl_loss_tmo` période (par exemple, 30 minutes, qui peuvent être réglées par `-l 1800`) au cours de la connexion-all de sorte qu'il réessaie pendant une période plus longue en cas de perte de chemin. Par exemple :
+. Courez `nvme connect-all` Contrôlez l'ensemble des LIF cible initiateur-initiateur NVMe/TCP prises en charge sur l'ensemble des nœuds. Assurez-vous de définir une plus longue durée `ctrl_loss_tmo` période de relance de la minuterie (par exemple, 30 minutes, qui peuvent être réglées à `-l 1800`) au cours de la connexion-all de sorte qu'il réessaie pendant une période plus longue en cas de perte de chemin. Par exemple :
 +
 [listing]
 ----

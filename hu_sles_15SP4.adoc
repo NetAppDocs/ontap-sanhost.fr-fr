@@ -146,7 +146,7 @@ Vous pouvez ajouter la syntaxe suivante à la `multipath.conf` fichier pour excl
 
 Remplacer l' `<DevId>` avec le `WWID` chaîne du périphérique à exclure. Utiliser la commande suivante pour déterminer le `WWID`:
 
-Dans cet exemple, `sda` Est le disque SCSI local dont nous avons besoin pour faire une liste noire.
+Dans cet exemple, `sda` Est le disque SCSI local que nous devons ajouter à la liste noire.
 
 .Étapes
 . Exécutez la commande suivante pour déterminer le `WWID`:
