@@ -2977,7 +2977,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-11-15 09:06:34 +0000">11/15/2022</time>
+    <time datetime="2022-11-15 15:52:08 +0000">11/15/2022</time>
     
   
 
@@ -3318,9 +3318,10 @@ QLE2742 FW:v9.06.02 DVR:v10.02.00.200-k</pre>
 </ul>
 </div>
 <div class="paragraph">
-<p>Pour passer confortablement en cas d&#8217;événements de basculement ONTAP tels que les SFO, il est conseillé de définir une période de tentatives plus longue de 30 minutes en ajustant le <code>ctrl_loss_tmo</code> minuterie. Voici les détails :</p>
+<p>Vous devez définir la période de nouvelle tentative pour les événements de basculement sur au moins 30 minutes afin d&#8217;éviter les délais. Vous pouvez augmenter la période de relance en augmentant la valeur du temporisateur ctrl_Loss_tmo. Voici les détails :</p>
 </div>
 <div class="olist arabic">
+<div class="title">Étapes</div>
 <ol class="arabic">
 <li>
 <p>Vérifiez si le port initiateur peut récupérer les données de la page du journal de découverte sur les LIF NVMe/TCP prises en charge :</p>
@@ -3374,7 +3375,7 @@ sectype: none
 </div>
 </li>
 <li>
-<p>Courez <code>nvme connect-all</code> Contrôlez l&#8217;ensemble des LIF cible initiateur-initiateur NVMe/TCP prises en charge sur l&#8217;ensemble des nœuds. Assurez-vous de passer plus longtemps <code>ctrl_loss_tmo</code> période (par exemple, 30 minutes, qui peuvent être réglées par <code>-l 1800</code>) au cours de la connexion-all de sorte qu&#8217;il réessaie pendant une période plus longue en cas de perte de chemin. Par exemple :</p>
+<p>Courez <code>nvme connect-all</code> Contrôlez l&#8217;ensemble des LIF cible initiateur-initiateur NVMe/TCP prises en charge sur l&#8217;ensemble des nœuds. Assurez-vous de définir une plus longue durée <code>ctrl_loss_tmo</code> période de relance de la minuterie (par exemple, 30 minutes, qui peuvent être réglées à <code>-l 1800</code>) au cours de la connexion-all de sorte qu&#8217;il réessaie pendant une période plus longue en cas de perte de chemin. Par exemple :</p>
 <div class="listingblock">
 <div class="content">
 <pre># nvme connect-all -t tcp -w 192.168.1.8 -a 192.168.1.51 -l 1800
