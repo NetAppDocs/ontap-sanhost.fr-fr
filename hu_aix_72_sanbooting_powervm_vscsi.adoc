@@ -108,6 +108,7 @@ ww_name         0x500a0984994ae0e0               FC World Wide Name             
 Lorsque vous saisissez le `oem_setup_env` mode, l'invite de ligne de commande passe d'un signe dollar à un signe dièse et vous restez dans `oem_setup_env` mode jusqu'à ce que vous l'arrêtez en entrant une commande telle que exit.
 
 +
+.Exemple
 ``# vioserver$ oem_setup_env`
 
 . Si votre configuration prend en charge ALUA, vous pouvez l'utiliser pour définir la priorité des chemins d'accès. Vérifiez que le protocole ALUA est activé :
@@ -156,6 +157,7 @@ vioserver#
 `# sanlun lun show -p`
 
 +
+.Exemple
 Cet exemple montre la sortie type de l' `sanlun lun show -p` commande pour une configuration à connexion directe. Elle inclut également le `sanlun lun show -d hdisk9 -v` commande pour afficher des informations sur hdisk9. La sortie de cette commande a été tronquée.
 
 +

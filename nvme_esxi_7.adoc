@@ -164,6 +164,7 @@ uuid.5084e29a6bb24fbca5ba076eda8ecd7e : NVMe Fibre Channel Disk (uuid.5084e29a6b
 NOTE: Dans ONTAP 9.7, la taille de bloc par défaut d'un namespace NVMe/FC est de 4 Ko. Cette taille par défaut n'est pas compatible avec ESXi. Par conséquent, lors de la création d'espaces de noms pour ESXi, vous devez définir la taille du bloc d'espace de noms comme 512 octets. Vous pouvez le faire en utilisant le `vserver nvme namespace create` commande.
 
 +
+.Exemple
 `vserver nvme namespace create -vserver vs_1 -path /vol/nsvol/namespace1 -size 100g -ostype vmware -block-size 512B`
 
 +

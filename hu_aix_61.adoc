@@ -18,7 +18,7 @@ summary: Décrit comment utiliser IBM AIX 7.2 et/ou PowerVM VIOS 3.1 avec ONTAP
 :toc-position: content
 
 
-.Ce dont vous avez besoin, 8217;ll
+.Ce dont vous avez besoin
 * Pour un fonctionnement fiable, vous devez vérifier que l'ensemble de votre configuration iSCSI, FC ou FCoE est prise en charge.
 +
 Vous pouvez utiliser le https://mysupport.netapp.com/matrix/imt.jsp?components=65623%3B64703%3B&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^] pour vérifier votre configuration.

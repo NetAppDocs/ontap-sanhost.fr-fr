@@ -28,6 +28,7 @@ Ce document fournit des instructions sur les paramètres de configuration des h�
 
 == Démarrage SAN de l'hyperviseur
 
+.Ce dont vous avez besoin
 Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser le https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^] Pour vérifier que votre système d'exploitation, votre adaptateur de bus hôte, votre micrologiciel HBA, votre BIOS de démarrage HBA et votre version de ONTAP sont pris en charge.
 
 .Étapes
@@ -72,6 +73,7 @@ system        tpgs_on          MW_PSP_RR 	      NetApp arrays with ALUA support
 
 Dans toutes les configurations ASA (SAN Array), tous les chemins d'accès à une LUN donnée sont actifs et optimisés. Autrement dit, les E/S peuvent être servies par tous les chemins simultanément, ce qui assure de meilleures performances.
 
+.Exemple
 L'exemple suivant montre la sortie correcte pour une LUN ONTAP :
 
 *`esxcli storage nmp device list -d naa.600a098038304759563f4e7837574453`*
@@ -122,6 +124,7 @@ Dans l'exemple ci-dessus, la LUN a été mappée à partir d'un stockage NetApp 
 
 Pour la configuration non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant les priorités les plus élevées sont actifs/optimisés, ce qui signifie qu'ils sont gérés par le contrôleur où se trouve l'agrégat. Les chemins avec les priorités les plus basses sont actifs, mais ne sont pas optimisés car ils sont servis à partir d'un autre contrôleur. Les chemins non optimisés sont utilisés uniquement lorsqu'aucun chemin optimisé n'est disponible.
 
+.Exemple
 L'exemple suivant montre la sortie correcte pour une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés :
 
 *`esxcli storage nmp path list -d naa.600a098038313530772b4d673979372f`*

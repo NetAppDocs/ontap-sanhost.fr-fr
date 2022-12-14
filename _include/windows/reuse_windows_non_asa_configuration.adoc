@@ -11,6 +11,7 @@ Les chemins avec les priorités les plus basses sont actifs, mais ne sont pas op
 
 NOTE: Les chemins non optimisés sont utilisés uniquement lorsqu'aucun chemin optimisé n'est disponible.
 
+.Exemple
 L'exemple suivant montre la sortie correcte d'une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés.
 
 image::nonasa.png[pas de asa]

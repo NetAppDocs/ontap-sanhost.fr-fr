@@ -18,7 +18,7 @@ summary: 'Décrit l"utilisation de Linux Unified Host Utilities 7.1 avec ONTAP'
 :toc-position: content
 
 
-.Ce dont vous avez besoin, 8217;ll
+.Ce dont vous avez besoin
 * Pour un fonctionnement fiable, vous devez vérifier que l'ensemble de votre configuration iSCSI, FC ou FCoE est prise en charge.
 
 
@@ -30,6 +30,7 @@ Vous pouvez utiliser le link:https://mysupport.netapp.com/matrix/imt.jsp?compone
 
 HP-UX Host Utilities est un logiciel hôte NetApp qui fournit un kit d'outils de ligne de commande sur votre hôte HP-UX. Le kit d'outils est installé lorsque vous installez le pack NetApp Host Utilities. Ce kit contient le `sanlun` Utilitaire qui vous aide à gérer les LUN et les HBA. Le `sanlun` La commande renvoie les informations relatives aux LUN mappées sur votre hôte, aux chemins d'accès multiples et aux informations nécessaires à la création des groupes initiateurs.
 
+.Exemple
 Dans l'exemple suivant, le `sanlun lun show` La commande renvoie les informations relatives à la LUN.
 
 [listing]

@@ -48,6 +48,7 @@ Linux Unified Host Utilities est un logiciel hôte NetApp qui fournit un kit d'o
 
 Le kit d'outils est installé automatiquement lorsque vous installez le pack NetApp Host Utilities. Ce kit contient le `sanlun` Utilitaire, qui vous aide à gérer les LUN et les HBA. Le `sanlun` La commande renvoie les informations relatives aux LUN mappées sur votre hôte, aux chemins d'accès multiples et aux informations nécessaires à la création des groupes initiateurs.
 
+.Exemple
 Dans l'exemple suivant, le `sanlun lun show` La commande renvoie les informations relatives à la LUN.
 
 [listing]

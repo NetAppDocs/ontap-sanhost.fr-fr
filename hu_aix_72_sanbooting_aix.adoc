@@ -131,6 +131,7 @@ Utilisez le `-v` option pour activer le mode détaillé et afficher toutes les p
 `# sanlun lun show`
 
 +
+.Exemple
 Cet exemple montre la sortie type de l' `sanlun lun show` Dans un environnement de chemins d'accès multiples MPIO.
 
 +

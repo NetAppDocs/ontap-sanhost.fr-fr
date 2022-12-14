@@ -360,6 +360,7 @@ Le programme d'installation de Windows Unified Host Utilities définit automatiq
 
 | HKLM\SYSTEM\CurrentControlSet\Services\mpio \Parameters\UseCustomPathRecovery yInterval | 1 | Lorsque votre serveur est Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, Windows Server 2012 R2 ou Windows Server 2016 uniquement 
 |===
+.Informations associées
 Reportez-vous à la https://docs.microsoft.com/en-us/troubleshoot/windows-server/performance/windows-registry-advanced-users["Documents Microsoft"^] pour plus de détails sur les paramètres du registre.
 
 
@@ -413,6 +414,7 @@ Pour les HBA Fibre Channel QLogic, le programme d'installation définit les para
 
 NOTE: Les noms des paramètres peuvent varier légèrement selon le programme. Par exemple, dans le programme QConvergeConsole de QLogic, le paramètre s'affiche comme `Link Down Timeout`. Utilitaires hôtes `fcconfig.ini` fichier affiche ce paramètre comme l'un ou l'autre `LinkDownTimeOut` ou `MpioLinkDownTimeOut`, Selon que MPIO est spécifié ou non. Cependant, tous ces noms font référence au même paramètre HBA.
 
+.Informations associées
 Reportez-vous à la section https://www.broadcom.com/support/download-search["Emulex"^] ou https://driverdownloads.qlogic.com/QLogicDriverDownloads_UI/Netapp_search.aspx["QLogic"^] site pour en savoir plus sur les paramètres d'expiration.
 
 
@@ -439,6 +441,7 @@ Cette section décrit les techniques générales de dépannage des utilitaires h
 * Si vous ne parvenez pas à résoudre le problème, vous pouvez contacter le support technique NetApp.
 
 
+.Informations associées
 http://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"^]
 https://mysupport.netapp.com/portal/documentation["Documentation NetApp"^]
 https://mysupport.netapp.com/NOW/cgi-bin/bol["NetApp bogues en ligne"^]

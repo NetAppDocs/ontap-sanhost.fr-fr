@@ -28,6 +28,7 @@ Ce document décrit les paramètres de configuration des hôtes SAN ONTAP pour l
 
 == SAN Booting
 
+.Ce dont vous avez besoin
 Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser le link:https://mysupport.netapp.com/matrix/imt.jsp?components=91241;&solution=236&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^] Pour vérifier que votre système d'exploitation, votre adaptateur de bus hôte, votre micrologiciel HBA, votre BIOS de démarrage HBA et votre version de ONTAP sont pris en charge.
 
 .Étapes
@@ -55,6 +56,7 @@ Pour Citrix Hypervisor (CH) 8.x `/etc/multipath.conf` le fichier doit exister, m
 
 Pour la configuration des baies SAN (ASA), il doit y avoir un groupe de chemins avec des priorités uniques. Tous les chemins sont actifs/optimisés, ce qui signifie qu'ils sont gérés par le contrôleur et que les E/S sont envoyées sur tous les chemins actifs.
 
+.Exemple
 L'exemple suivant montre la sortie correcte pour une LUN ONTAP avec quatre chemins actifs/optimisés :
 
 ....
@@ -76,6 +78,7 @@ NOTE: N'utilisez pas un nombre excessif de chemins pour une seule LUN. Pas plus 
 
 Pour la configuration non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant les priorités les plus élevées sont actifs/optimisés, ce qui signifie qu'ils sont gérés par le contrôleur où se trouve l'agrégat. Les chemins avec les priorités les plus basses sont actifs, mais ne sont pas optimisés car ils sont servis à partir d'un autre contrôleur. Les chemins non optimisés sont utilisés uniquement lorsqu'aucun chemin optimisé n'est disponible.
 
+.Exemple
 L'exemple suivant montre la sortie correcte pour une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés :
 
 ....
@@ -127,6 +130,7 @@ blacklist {
 
 NOTE: Remplacez le *<DevID>* par la chaîne WWID du périphérique que vous souhaitez exclure.
 
+.Exemple
 Dans cet exemple pour Citrix Hypervisor 8.x, `sda` Est le disque SCSI local que nous devons ajouter à la liste noire.
 
 . Exécutez la commande suivante pour déterminer l'identifiant WWID :
@@ -209,6 +213,7 @@ Le tableau suivant présente les paramètres *multipathd* critiques pour les LUN
 
 | `vendor` | NETAPP 
 |===
+.Exemple
 L'exemple suivant illustre comment corriger une valeur par défaut remplacée. Dans ce cas, le fichier *multipath.conf* définit les valeurs pour *path_Checker* et *Detect_prio* qui ne sont pas compatibles avec les LUN ONTAP. S'ils ne peuvent pas être supprimés en raison d'autres baies SAN connectées à l'hôte, ces paramètres peuvent être corrigés spécifiquement pour les LUN ONTAP avec une strophe de périphérique.
 
 [listing]
