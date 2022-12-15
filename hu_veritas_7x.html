@@ -2959,7 +2959,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-11-15 09:06:34 +0000">11/15/2022</time>
+    <time datetime="2022-12-14 18:14:49 +0000">12/14/2022</time>
     
   
 
@@ -3000,6 +3000,7 @@
 <p>L&#8217;installation de Linux Unified Host Utilities est fortement recommandée, mais n&#8217;est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.</p>
 </div>
 <div class="paragraph">
+<div class="title">Ce dont vous avez besoin</div>
 <p>Si une version de Linux Unified Host Utilities est actuellement installée, vous devez la mettre à niveau ou la supprimer et utiliser les étapes suivantes pour installer la dernière version.</p>
 </div>
 <div class="olist arabic">
@@ -3025,6 +3026,7 @@
 <p>Le kit d&#8217;outils est installé automatiquement lorsque vous installez le pack NetApp Host Utilities. Ce kit contient le <code>sanlun</code> Utilitaire, qui vous aide à gérer les LUN et les HBA. Le <code>sanlun</code> La commande renvoie les informations relatives aux LUN mappées sur votre hôte, aux chemins d&#8217;accès multiples et aux informations nécessaires à la création des groupes initiateurs.</p>
 </div>
 <div class="paragraph">
+<div class="title">Exemple</div>
 <p>Dans l&#8217;illustration suivante, le <code>sanlun show</code> La commande renvoie les informations relatives à la LUN.</p>
 </div>
 <div class="listingblock">
@@ -3054,6 +3056,7 @@ enabled     up      active/non-optimized sdas   13:0:1:0   lif_9      66:192</pr
 <h2 id="san-booting">SAN Booting</h2>
 <div class="sectionbody">
 <div class="paragraph">
+<div class="title">Ce dont vous avez besoin</div>
 <p>Si vous décidez d&#8217;utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser le <a href="https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&amp;solution=1&amp;isHWU&amp;src=IMT" target="_blank" rel="noopener">"Matrice d&#8217;interopérabilité NetApp"</a> Pour vérifier que votre système d&#8217;exploitation, votre adaptateur de bus hôte, votre micrologiciel HBA, votre BIOS de démarrage HBA et votre version de ONTAP sont pris en charge.</p>
 </div>
 <div class="paragraph">
@@ -3091,6 +3094,7 @@ enabled     up      active/non-optimized sdas   13:0:1:0   lif_9      66:192</pr
 <p>Vous devez vérifier que votre configuration répond à la configuration système requise. Pour plus d&#8217;informations, consultez la matrice d&#8217;interopérabilité NetApp et la matrice Veritas HCL.</p>
 </div>
 <div class="paragraph">
+<div class="title">Exemple</div>
 <p>Dans cet exemple, le <code>vxdmpadm</code> La commande est utilisée pour vérifier que VxDMP Multipath est connecté à la baie cible ONTAP.</p>
 </div>
 <div class="listingblock">
@@ -3109,6 +3113,7 @@ sfrac0_47  ENABLED  SFRAC       4      4     0    sfrac0</pre>
 <p>Avec Veritas Dynamic Multipathing (VxDMP), vous devez effectuer des tâches de configuration afin de réclamer des LUN NetApp comme périphériques Veritas Multipath. Vous devez disposer de l&#8217;ASL (Array support Library) et des packages APM (Array Policy module) installés par Veritas pour les systèmes de stockage NetApp. Pendant que l&#8217;installation du logiciel Veritas charge les packages ASL APM par défaut avec le produit, il est recommandé d&#8217;utiliser les derniers packages pris en charge répertoriés sur le portail d&#8217;assistance Veritas.</p>
 </div>
 <div class="paragraph">
+<div class="title">Exemple</div>
 <p>L&#8217;exemple suivant montre la configuration de Veritas support Library (ASL) et de Array Policy module (APM).</p>
 </div>
 <div class="listingblock">
@@ -3138,6 +3143,7 @@ ARRAY_TYPE  ALUA, A/A</pre>
 <p>Dans toutes les configurations ASA (SAN Array), tous les chemins d&#8217;accès à une LUN donnée sont actifs et optimisés. Autrement dit, les E/S peuvent être servies par tous les chemins simultanément, ce qui assure de meilleures performances.</p>
 </div>
 <div class="paragraph">
+<div class="title">Exemple</div>
 <p>L&#8217;exemple suivant montre la sortie correcte pour une LUN ONTAP :</p>
 </div>
 <div class="listingblock">
@@ -3169,6 +3175,7 @@ N&#8217;utilisez pas un nombre excessif de chemins pour une seule LUN. Pas plus 
 <p>Pour la configuration non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant les priorités les plus élevées sont actifs/optimisés, ce qui signifie qu&#8217;ils sont gérés par le contrôleur où se trouve l&#8217;agrégat. Les chemins avec les priorités les plus basses sont actifs, mais ne sont pas optimisés car ils sont servis à partir d&#8217;un autre contrôleur. Les chemins non optimisés sont utilisés uniquement lorsqu&#8217;aucun chemin optimisé n&#8217;est disponible.</p>
 </div>
 <div class="paragraph">
+<div class="title">Exemple</div>
 <p>L&#8217;exemple suivant montre la sortie correcte pour une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés :</p>
 </div>
 <div class="listingblock">
@@ -3238,6 +3245,7 @@ N&#8217;utilisez pas un nombre excessif de chemins pour une seule LUN. Pas plus 
 <p>Les valeurs de ces données réglables peuvent être vérifiées de façon dynamique à l&#8217;aide de <code>#vxdmpadm gettune</code>.</p>
 </div>
 <div class="paragraph">
+<div class="title">Exemple</div>
 <p>L&#8217;exemple suivant montre les tunables DMP effectifs VxRables sur l&#8217;hôte SAN.</p>
 </div>
 <div class="listingblock">

@@ -2959,7 +2959,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-11-15 15:52:08 +0000">11/15/2022</time>
+    <time datetime="2022-12-14 18:14:49 +0000">12/14/2022</time>
     
   
 
@@ -2991,6 +2991,7 @@
 <p>L&#8217;installation de Linux Unified Host Utilities est fortement recommandée, mais n&#8217;est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.</p>
 </div>
 <div class="paragraph">
+<div class="title">Ce dont vous avez besoin</div>
 <p>Si une version de Linux Unified Host Utilities est actuellement installée, vous devez la mettre à niveau ou la supprimer et utiliser les étapes suivantes pour installer la dernière version.</p>
 </div>
 <div class="olist arabic">
@@ -3028,6 +3029,7 @@ Vous pouvez utiliser les paramètres de configuration fournis dans ce contenu po
 <p>Le kit d&#8217;outils est installé automatiquement lorsque vous installez le pack NetApp Host Utilities. Ce kit contient le <code>sanlun</code> Utilitaire, qui vous aide à gérer les LUN et les HBA. Le <code>sanlun</code> La commande renvoie les informations relatives aux LUN mappées sur votre hôte, aux chemins d&#8217;accès multiples et aux informations nécessaires à la création des groupes initiateurs.</p>
 </div>
 <div class="paragraph">
+<div class="title">Exemple</div>
 <p>Dans l&#8217;exemple suivant, le <code>sanlun lun show</code> La commande renvoie les informations relatives à la LUN.</p>
 </div>
 <div class="listingblock">
@@ -3048,6 +3050,7 @@ data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDO
 <h2 id="san-booting">SAN Booting</h2>
 <div class="sectionbody">
 <div class="paragraph">
+<div class="title">Ce dont vous avez besoin</div>
 <p>Si vous décidez d&#8217;utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser le <a href="https://mysupport.netapp.com/matrix/imt.jsp?components=91241;&amp;solution=236&amp;isHWU&amp;src=IMT" target="_blank" rel="noopener">"Matrice d&#8217;interopérabilité NetApp"</a> Pour vérifier que votre système d&#8217;exploitation, votre adaptateur de bus hôte, votre micrologiciel HBA, votre BIOS de démarrage HBA et votre version de ONTAP sont pris en charge.</p>
 </div>
 <div class="olist arabic">
@@ -3090,6 +3093,7 @@ data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDO
 <p>Dans toutes les configurations ASA (SAN Array), tous les chemins d&#8217;accès à une LUN donnée sont actifs et optimisés. Autrement dit, les E/S peuvent être servies par tous les chemins simultanément, ce qui assure de meilleures performances.</p>
 </div>
 <div class="paragraph">
+<div class="title">Exemple</div>
 <p>L&#8217;exemple suivant montre la sortie correcte pour une LUN ONTAP :</p>
 </div>
 <div class="listingblock">
@@ -3123,6 +3127,7 @@ N&#8217;utilisez pas un nombre excessif de chemins pour une seule LUN. Pas plus 
 <p>Pour la configuration non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant les priorités les plus élevées sont actifs/optimisés, ce qui signifie qu&#8217;ils sont gérés par le contrôleur où se trouve l&#8217;agrégat. Les chemins avec les priorités les plus basses sont actifs, mais ne sont pas optimisés car ils sont servis à partir d&#8217;un autre contrôleur. Les chemins non optimisés sont utilisés uniquement lorsqu&#8217;aucun chemin optimisé n&#8217;est disponible.</p>
 </div>
 <div class="paragraph">
+<div class="title">Exemple</div>
 <p>L&#8217;exemple suivant montre la sortie correcte pour une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés :</p>
 </div>
 <div class="listingblock">
@@ -3191,6 +3196,7 @@ N&#8217;utilisez pas un nombre excessif de chemins pour une seule LUN. Pas plus 
 </div>
 </div>
 <div class="paragraph">
+<div class="title">Exemple</div>
 <p>Dans cet exemple, <code>sda</code> Est le disque SCSI local que nous devons ajouter à la liste noire.</p>
 </div>
 <div class="olist arabic">
@@ -3313,6 +3319,7 @@ N&#8217;utilisez pas un nombre excessif de chemins pour une seule LUN. Pas plus 
 </tbody>
 </table>
 <div class="paragraph">
+<div class="title">Exemple</div>
 <p>L&#8217;exemple suivant montre comment corriger une valeur par défaut remplacée. Dans ce cas, le <code>multipath.conf</code> fichier définit les valeurs pour <code>path_checker</code> et <code>no_path_retry</code> Non compatible avec les LUN ONTAP. S&#8217;ils ne peuvent pas être supprimés en raison d&#8217;autres baies SAN toujours connectées à l&#8217;hôte, ces paramètres peuvent être corrigés spécifiquement pour les LUN ONTAP avec une strophe de périphérique.</p>
 </div>
 <div class="listingblock">
