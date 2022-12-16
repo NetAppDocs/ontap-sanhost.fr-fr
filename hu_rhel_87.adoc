@@ -38,7 +38,7 @@ Si une version de Linux Unified Host Utilities est actuellement installée, vous
 
 
 
-NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans ce document pour configurer les clients Cloud connectés à link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] et link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["Amazon FSX pour ONTAP"^].
+NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans cette rubrique pour configurer les clients Cloud connectés à link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] et link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["Amazon FSX pour ONTAP"^].
 
 
 
@@ -283,7 +283,7 @@ Vous pouvez également utiliser les paramètres recommandés pour configurer la 
 | ID de bug NetApp | Titre | Description | ID Bugzilla 
 
 
-| 1501048 | Paramètre d'expiration de la couche de transport FC `dev_loss_tmo` Pour les ports cible SCSI distants, indique une valeur négative (-1) |  `dev_loss_tmo` Le paramètre timeout représente le nombre de secondes par défaut que le transport FC doit isoler pour éviter la perte d'un port distant. Lorsque cette valeur est dépassée, la cible scsi est supprimée de l'hôte. La valeur de ce paramètre doit être un entier positif. Cependant dans RHEL 8.7, `sysfs` le système de fichiers renvoie une valeur négative (-1) pour le `dev_loss_tmo` Paramètre de délai d'expiration pour les périphériques SCSI. Voici l'exemple de ligne de commande pour vérifier le `dev_loss_tmo` paramètre sur un hôte actif :
+| 1501048 | Paramètre d'expiration de la couche de transport FC `dev_loss_tmo` Pour les ports cible SCSI distants, indique une valeur négative (-1) |  `dev_loss_tmo` Le paramètre timeout représente le nombre de secondes par défaut que le transport FC doit isoler pour éviter la perte d'un port distant. Lorsque cette valeur est dépassée, la cible SCSI est supprimée de l'hôte. La valeur de ce paramètre doit être un entier positif. Cependant dans RHEL 8.7, `sysfs` le système de fichiers renvoie une valeur négative (-1) pour le `dev_loss_tmo` Paramètre de délai d'expiration pour les périphériques SCSI. Voici l'exemple de ligne de commande pour vérifier le `dev_loss_tmo` paramètre sur un hôte actif :
 `# cat /sys/devices/pci*/*/*/host*/rport*/fc_remote_ports/rport*/dev_loss_tmo
 4294967295`. Il n'existe aucune solution pour ce problème dans RHEL 8.7. | link:https://bugzilla.redhat.com/show_bug.cgi?id=2124297["2124297"^] 
 |===
