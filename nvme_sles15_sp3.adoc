@@ -25,7 +25,7 @@ summary: Décrit comment configurer NVMe/FC pour SUSE Linux Enterprise Server 15
 NVMe over Fabrics ou NVMe-of (y compris NVMe/FC et autres transports) est pris en charge avec SUSE Linux Enterprise Server 15 SP3 (SLES15 SP3) avec ANA (Asymmetric namespace Access). ANA est l'équivalent ALUA de l'environnement NVMe-of et est actuellement implémentée avec NVMe Multipath dans le noyau. Les détails de l'activation de NVMe-of avec NVMe Multipath intégré au noyau à l'aide d'ANA sur SLES15 SP3 et ONTAP en tant que cible ont été documentés ici.
 
 
-NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans ce contenu pour configurer les clients cloud connectés à link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] et link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["Amazon FSX pour ONTAP"^].
+NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans ce document pour configurer les clients Cloud connectés à link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] et link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["Amazon FSX pour ONTAP"^].
 
 
 
