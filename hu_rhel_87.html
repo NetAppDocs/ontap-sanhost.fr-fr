@@ -668,8 +668,6 @@
           
 
 
-
-
         </li>
       </ul>
     
@@ -1245,8 +1243,6 @@
             RHEL 9
           </a>
           
-
-
 
 
         </li>
@@ -1851,13 +1847,6 @@
       </a>
       <ul style="display: none;">
         <li 
-      data-pdf-exists="true" 
-      data-pdf-filename="9.1"
-      data-li-level="4#" 
-      class=" "
-    ><a class="na-navbar-padding" href="/fr-fr/ontap-sanhost/nvme_rhel_91.html">
-        9.1
-      </a></li><li 
       data-pdf-exists="true" 
       data-pdf-filename="9.0"
       data-li-level="4#" 
@@ -2520,13 +2509,6 @@
       <ul style="display: none;">
         <li 
       data-pdf-exists="true" 
-      data-pdf-filename="9.1"
-      data-li-level="4#" 
-      class=" "
-    ><a class="na-navbar-padding" href="/fr-fr/ontap-sanhost/hu_rhel_91.html">
-        9.1
-      </a></li><li 
-      data-pdf-exists="true" 
       data-pdf-filename="9.0"
       data-li-level="4#" 
       class=" "
@@ -2995,7 +2977,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-12-16 19:07:06 +0000">12/16/2022</time>
+    <time datetime="2022-12-16 21:36:08 +0000">12/16/2022</time>
     
   
 
@@ -3051,7 +3033,7 @@
 <img src="/us-en/ontap-sanhost/images/note.svg" alt="Note">
 </td>
 <td class="content">
-Vous pouvez utiliser les paramètres de configuration fournis dans ce document pour configurer les clients Cloud connectés à <a href="https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html" target="_blank" rel="noopener">"Cloud Volumes ONTAP"</a> et <a href="https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html" target="_blank" rel="noopener">"Amazon FSX pour ONTAP"</a>.
+Vous pouvez utiliser les paramètres de configuration fournis dans cette rubrique pour configurer les clients Cloud connectés à <a href="https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html" target="_blank" rel="noopener">"Cloud Volumes ONTAP"</a> et <a href="https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html" target="_blank" rel="noopener">"Amazon FSX pour ONTAP"</a>.
 </td>
 </tr>
 </table>
@@ -3406,7 +3388,7 @@ devices {
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1501048</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Paramètre d&#8217;expiration de la couche de transport FC <code>dev_loss_tmo</code> Pour les ports cible SCSI distants, indique une valeur négative (-1)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dev_loss_tmo</code> Le paramètre timeout représente le nombre de secondes par défaut que le transport FC doit isoler pour éviter la perte d&#8217;un port distant. Lorsque cette valeur est dépassée, la cible scsi est supprimée de l&#8217;hôte. La valeur de ce paramètre doit être un entier positif. Cependant dans RHEL 8.7, <code>sysfs</code> le système de fichiers renvoie une valeur négative (-1) pour le <code>dev_loss_tmo</code> Paramètre de délai d&#8217;expiration pour les périphériques SCSI. Voici l&#8217;exemple de ligne de commande pour vérifier le <code>dev_loss_tmo</code> paramètre sur un hôte actif :<br>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dev_loss_tmo</code> Le paramètre timeout représente le nombre de secondes par défaut que le transport FC doit isoler pour éviter la perte d&#8217;un port distant. Lorsque cette valeur est dépassée, la cible SCSI est supprimée de l&#8217;hôte. La valeur de ce paramètre doit être un entier positif. Cependant dans RHEL 8.7, <code>sysfs</code> le système de fichiers renvoie une valeur négative (-1) pour le <code>dev_loss_tmo</code> Paramètre de délai d&#8217;expiration pour les périphériques SCSI. Voici l&#8217;exemple de ligne de commande pour vérifier le <code>dev_loss_tmo</code> paramètre sur un hôte actif :<br>
 <code># cat /sys/devices/pci*/<strong>/</strong>/host*/rport*/fc_remote_ports/rport*/dev_loss_tmo<br>
 4294967295</code>. Il n&#8217;existe aucune solution pour ce problème dans RHEL 8.7.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://bugzilla.redhat.com/show_bug.cgi?id=2124297" target="_blank" rel="noopener">"2124297"</a></p></td>

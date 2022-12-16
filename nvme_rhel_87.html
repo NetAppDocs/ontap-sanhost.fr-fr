@@ -668,8 +668,6 @@
           
 
 
-
-
         </li>
       </ul>
     
@@ -1247,8 +1245,6 @@
             RHEL 9
           </a>
           
-
-
 
 
         </li>
@@ -1851,13 +1847,6 @@
       </a>
       <ul style="display: none;">
         <li 
-      data-pdf-exists="true" 
-      data-pdf-filename="9.1"
-      data-li-level="4#" 
-      class=" "
-    ><a class="na-navbar-padding" href="/fr-fr/ontap-sanhost/nvme_rhel_91.html">
-        9.1
-      </a></li><li 
       data-pdf-exists="true" 
       data-pdf-filename="9.0"
       data-li-level="4#" 
@@ -2520,13 +2509,6 @@
       <ul style="display: none;">
         <li 
       data-pdf-exists="true" 
-      data-pdf-filename="9.1"
-      data-li-level="4#" 
-      class=" "
-    ><a class="na-navbar-padding" href="/fr-fr/ontap-sanhost/hu_rhel_91.html">
-        9.1
-      </a></li><li 
-      data-pdf-exists="true" 
       data-pdf-filename="9.0"
       data-li-level="4#" 
       class=" "
@@ -2995,7 +2977,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-12-16 19:07:06 +0000">12/16/2022</time>
+    <time datetime="2022-12-16 21:36:08 +0000">12/16/2022</time>
     
   
 
@@ -3024,7 +3006,7 @@
 <h2 id="prise-en-charge">Prise en charge</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Le protocole NVMe over Fabrics ou NVMe-of (y compris NVMe/FC et autres transports) est pris en charge avec RHEL 8.7 avec ANA (accès à l&#8217;espace de noms asymétrique). ANA est l&#8217;équivalent ALUA de l&#8217;environnement NVMe-of, qui est actuellement implémenté avec NVMe Multipath dans le noyau. Les détails relatifs à l&#8217;activation de NVMe-of avec NVMe Multipath intégré au noyau en utilisant ANA sur RHEL 8.7 et ONTAP comme cible ont été documentés ici.</p>
+<p>Le protocole NVMe over Fabrics ou NVMe-of (y compris NVMe/FC et autres transports) est pris en charge avec RHEL 8.7 avec ANA (accès à l&#8217;espace de noms asymétrique). ANA est l&#8217;équivalent ALUA de l&#8217;environnement NVMe-of, qui est actuellement implémenté avec NVMe Multipath dans le noyau. Cette rubrique contient des détails sur l&#8217;activation de NVMe-of avec NVMe Multipath intégré au noyau en utilisant ANA sur RHEL 8.7 et ONTAP comme cible.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -3033,7 +3015,7 @@
 <img src="/us-en/ontap-sanhost/images/note.svg" alt="Note">
 </td>
 <td class="content">
-Vous pouvez utiliser les paramètres de configuration fournis dans ce document pour configurer les clients Cloud connectés à <a href="https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html" target="_blank" rel="noopener">"Cloud Volumes ONTAP"</a> et <a href="https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html" target="_blank" rel="noopener">"Amazon FSX pour ONTAP"</a>.
+Vous pouvez utiliser les paramètres de configuration fournis dans cette rubrique pour configurer les clients Cloud connectés à <a href="https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html" target="_blank" rel="noopener">"Cloud Volumes ONTAP"</a> et <a href="https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html" target="_blank" rel="noopener">"Amazon FSX pour ONTAP"</a>.
 </td>
 </tr>
 </table>
@@ -3078,7 +3060,7 @@ Vous pouvez utiliser les paramètres de configuration fournis dans ce document p
 <div class="title">Étapes</div>
 <ol class="arabic">
 <li>
-<p>Installez RHEL 8.7 sur le serveur. Une fois l&#8217;installation terminée, vérifiez que vous exécutez le noyau RHEL 8.7 spécifié. Voir la <a href="https://mysupport.netapp.com/matrix/" target="_blank" rel="noopener">"Matrice d&#8217;interopérabilité NetApp"</a> pour obtenir la liste la plus récente des versions prises en charge.</p>
+<p>Installez RHEL 8.7 sur le serveur.</p>
 </li>
 <li>
 <p>Une fois l&#8217;installation terminée, vérifiez que vous exécutez le noyau RHEL 8.7 spécifié. Voir la <a href="https://mysupport.netapp.com/matrix/" target="_blank" rel="noopener">"Matrice d&#8217;interopérabilité NetApp"</a> pour obtenir la liste la plus récente des versions prises en charge.</p>
@@ -3255,7 +3237,7 @@ FCP CMPL: xb 0000006b Err 00017f99</pre>
 </ol>
 </div>
 <div class="sect3">
-<h4 id="activation-dune-taille-des-de-1-mo-en-option">Activation d&#8217;une taille d&#8217;E/S de 1 Mo (en option)</h4>
+<h4 id="activer-la-taille-des-1-mo-facultatif">Activer la taille d&#8217;E/S 1 Mo (facultatif)</h4>
 <div class="paragraph">
 <p>ONTAP signale un DTO (MAX Data Transfer Size) de 8 dans les données Identify Controller, ce qui signifie que la taille maximale de la demande d&#8217;E/S doit être de 1 Mo. Toutefois, pour émettre des demandes d&#8217;E/S de 1 Mo pour l&#8217;hôte NVMe/FC Broadcom, le paramètre lpfc <code>lpfc_sg_seg_cnt</code> doit également être incrémenté jusqu&#8217;à 256 à partir de la valeur par défaut 64. Pour ce faire, suivez les instructions suivantes :</p>
 </div>
@@ -3308,7 +3290,7 @@ QLE2772 FW:v9.08.02 DVR:v10.02.07.400-k-debug</pre>
 </div>
 </li>
 <li>
-<p>La vérification <code>ql2xnvmeenable</code> Est défini pour que l&#8217;adaptateur Marvell puisse fonctionner comme un initiateur NVMe/FC à l&#8217;aide de la commande suivante :</p>
+<p>La vérification <code>ql2xnvmeenable</code> Est défini, ce qui permet à l&#8217;adaptateur Marvell de fonctionner comme un initiateur NVMe/FC à l&#8217;aide de la commande suivante :</p>
 <div class="listingblock">
 <div class="content">
 <pre># cat /sys/module/qla2xxx/parameters/ql2xnvmeenable
@@ -3576,7 +3558,7 @@ NSID  UUID                                   Size
 <p>Avant de commencer tout dépannage pour toute panne NVMe/FC, vérifiez que vous exécutez une configuration conforme aux spécifications de IMT, puis suivez les étapes suivantes pour déboguer les problèmes côté hôte.</p>
 </div>
 <div class="sect2">
-<h3 id="journal-verbose-lpfc">Journal Verbose LPFC</h3>
+<h3 id="consignation-détaillée-lpfc">Consignation détaillée LPFC</h3>
 <div class="olist arabic">
 <div class="title">Étapes</div>
 <ol class="arabic">
@@ -3611,7 +3593,7 @@ options lpfc lpfc_log_verbose=0xf00083
 </div>
 </div>
 <div class="sect2">
-<h3 id="qla2xxx-journalisation-verbose">Qla2xxx journalisation Verbose</h3>
+<h3 id="consignation-détaillée-qla2xxx">consignation détaillée qla2xxx</h3>
 <div class="paragraph">
 <p>Il n&#8217;y a pas de journalisation qla2xxx spécifique similaire pour NVMe/FC que pour le pilote lpfc. Par conséquent, vous pouvez définir le niveau de consignation général qla2xxx en procédant comme suit :</p>
 </div>
@@ -3668,7 +3650,7 @@ options qla2xxx ql2xnvmeenable=1 ql2xextended_error_logging=0x1e400000
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="erreurs-et-solutions-nvme-cli-courantes">Erreurs et solutions nvme-cli courantes</h3>
+<h3 id="solutions-de-contournement-et-erreurs-nvme-cli-courantes">Solutions de contournement et erreurs nvme-cli courantes</h3>
 <div class="paragraph">
 <p>Les erreurs affichées par <code>nvme-cli</code> lors de la découverte nvme, les opérations nvme connect ou nvme connect-toutes les opérations et les solutions de contournement sont affichées dans le tableau suivant :</p>
 </div>
