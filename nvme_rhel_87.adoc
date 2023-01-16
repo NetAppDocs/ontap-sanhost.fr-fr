@@ -26,7 +26,7 @@ summary: Comment configurer NVMe-of Host pour RHEL 8.7 avec ONTAP
 Le protocole NVMe over Fabrics ou NVMe-of (y compris NVMe/FC et autres transports) est pris en charge avec RHEL 8.7 avec ANA (accès à l'espace de noms asymétrique). ANA est l'équivalent ALUA de l'environnement NVMe-of, qui est actuellement implémenté avec NVMe Multipath dans le noyau. Cette rubrique contient des détails sur l'activation de NVMe-of avec NVMe Multipath intégré au noyau en utilisant ANA sur RHEL 8.7 et ONTAP comme cible.
 
 
-NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans cette rubrique pour configurer les clients Cloud connectés à link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] et link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["Amazon FSX pour ONTAP"^].
+NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans ce document pour configurer les clients Cloud connectés à link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] et link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["Amazon FSX pour ONTAP"^].
 
 
 
@@ -526,7 +526,7 @@ options qla2xxx ql2xnvmeenable=1 ql2xextended_error_logging=0x1e400000
 | ID de bug NetApp | Titre | Description | ID Bugzilla 
 
 
-| 1479047 | Les hôtes RHEL 8.x NVMe-of créent des contrôleurs de découverte persistants dupliqués | Sur les hôtes NVMe-of (NVMe over Fabrics), vous pouvez créer des contrôleurs de découverte persistants (CDP) en fournissant le `-p` à la `nvme discover` commande. Pour une combinaison initiateur-cible spécifiée, la création d'un PDC est attendue avec chaque appel du `nvme discover` commande. Toutefois, depuis ONTAP 9.10.1, les hôtes NVMe-of Red Hat Enterprise Linux (RHEL) 8.x finissent par créer des CDP en double avec chaque invocation du `nvme discover` commande avec `-p` option. Cela entraîne un gaspillage des ressources sur l'hôte et la cible. | 2087000 
+| 1479047 | Les hôtes NVMe-of RHEL 8.7 créent des contrôleurs de découverte persistants dupliqués | Sur les hôtes NVMe over Fabrics (NVMe-of), vous pouvez utiliser la commande nvme Discover -p pour créer des contrôleurs de découverte persistants (CDP). Lorsque cette commande est utilisée, un seul PDC doit être créé par combinaison initiateur-cible. Toutefois, si vous exécutez ONTAP 9.10.1 et Red Hat Enterprise Linux (RHEL) 8.7 avec un hôte NVMe-of, un PDC en double est créé à chaque exécution de « nvme Discover -p ». Cela entraîne une utilisation inutile des ressources sur l'hôte et la cible. | 2087000 
 |===
 
 

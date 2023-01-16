@@ -26,7 +26,7 @@ summary: Comment configurer NVMe-of Host pour RHEL 9.0 avec ONTAP
 La spécification NVMe-of (y compris NVMe/FC et NVMe/TCP) est prise en charge avec RHEL 9.0 avec un accès à l'espace de noms asymétrique (ANA) requis pour les basculements de stockage (SFO) sur la baie ONTAP. ANA est l'équivalent ALUA de l'environnement NVM-of et est actuellement implémenté avec NVMe Multipath dans le noyau. Ce document contient les détails de l'activation de NVMe-of avec NVMe Multipath intégré au noyau en utilisant ANA sur RHEL 9.0 et ONTAP comme cible.
 
 
-NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans cette rubrique pour configurer les clients Cloud connectés à link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] et link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["Amazon FSX pour ONTAP"^].
+NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans ce document pour configurer les clients Cloud connectés à link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] et link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["Amazon FSX pour ONTAP"^].
 
 
 
@@ -34,18 +34,6 @@ NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans cette r
 
 * Depuis RHEL 9.0, NVMe/TCP n'est plus une fonctionnalité de prévisualisation technologique (contrairement à RHEL 8), mais une fonction d'entreprise entièrement prise en charge.
 * Démarrage de RHEL 9.0, la fonctionnalité de chemins d'accès multiples NVMe dans le noyau est activée par défaut pour les espaces de noms NVMe, sans la nécessité de paramètres explicites (contrairement à RHEL 8).
-
-
-
-
-== Limites
-
-* Contrairement à NVMe/FC, NVMe/TCP ne propose pas de fonctionnalité de connexion automatique. Cela tient compte de deux principales limitations sur l'hôte Linux :
-+
-** Pas de reconnexion automatique après rétablissement des chemins - NVMe/TCP ne peut pas se reconnecter automatiquement à un chemin qui est rétabli au-delà de la valeur par défaut `ctrl-loss-tmo` de 10 minutes après un chemin descendant.
-** Pas de connexion automatique pendant le démarrage de l'hôte - NVMe/TCP ne peut pas se connecter automatiquement lors du démarrage de l'hôte. Vous devez définir la période de nouvelle tentative pour les événements de basculement sur au moins 30 minutes afin d'éviter les délais. Vous pouvez augmenter la période de relance en augmentant la valeur du temporisateur ctrl_Loss_tmo.
-
-
 
 
 
@@ -232,11 +220,13 @@ La vérification `ql2xnvmeenable` Est défini pour que l'adaptateur Marvell puis
 
 == Configurez NVMe/TCP
 
-Contrairement à NVMe/FC, NVMe/TCP ne propose pas de fonctionnalité de connexion automatique. Cette situation s'explique par deux principales limitations de l'hôte Linux NVMe/TCP :
+Contrairement à NVMe/FC, NVMe/TCP ne propose pas de fonctionnalité de connexion automatique. Cela a mis en place deux limitations majeures sur l'hôte Linux NVMe/TCP :
 
-* Pas de reconnexion automatique après rétablissement des chemins - NVMe/TCP ne peut pas se reconnecter automatiquement à un chemin qui est rétabli au-delà de la valeur par défaut `ctrl-loss-tmo` de 10 minutes après un chemin descendant.
-* Pas de connexion automatique pendant le démarrage de l'hôte - NVMe/TCP ne peut pas se connecter automatiquement lors du démarrage de l'hôte. Vous devez définir la période de nouvelle tentative pour les événements de basculement sur au moins 30 minutes afin d'éviter les délais. Vous pouvez augmenter la période de relance en augmentant la valeur du temporisateur ctrl_Loss_tmo. Voici les détails :
+* *Pas de reconnexion automatique après rétablissement des chemins* NVMe/TCP ne peut pas se reconnecter automatiquement à un chemin qui est rétabli au-delà de la valeur par défaut `ctrl-loss-tmo` minuterie de 10 minutes après un chemin descendant.
+* *Pas de connexion automatique pendant le démarrage de l'hôte* NVMe/TCP ne peut pas se connecter automatiquement lors du démarrage de l'hôte.
 
+
+Vous devez définir la période de nouvelle tentative pour les événements de basculement sur au moins 30 minutes afin d'éviter les délais. Vous pouvez augmenter la période de relance en augmentant la valeur du temporisateur ctrl_Loss_tmo. Voici les détails :
 
 .Étapes
 . Vérifiez si le port initiateur est en mesure de récupérer les données de la page du journal de découverte via les LIF NVMe/TCP prises en charge :
@@ -302,6 +292,7 @@ sectype: none
 
 == Validez NVMf
 
+.Étapes
 . Vérifier que le chemin d'accès multiples NVMe dans le noyau est activé en cochant la case :
 +
 [listing]
@@ -491,6 +482,17 @@ options qla2xxx ql2xnvmeenable=1 ql2xextended_error_logging=0x1e400000
 # cat /sys/module/qla2xxx/parameters/ql2xextended_error_logging
 507510784
 ----
+
+
+== Problèmes connus
+
+[cols="10,30,30,10"]
+|===
+| ID de bug NetApp | Titre | Description | ID Bugzilla 
+
+
+| 1479047 | Les hôtes NVMe-of RHEL 9.0 créent des contrôleurs de découverte persistants dupliqués | Sur les hôtes NVMe over Fabrics (NVMe-of), vous pouvez utiliser la commande nvme Discover -p pour créer des contrôleurs de découverte persistants (CDP). Lorsque cette commande est utilisée, un seul PDC doit être créé par combinaison initiateur-cible. Toutefois, si vous exécutez ONTAP 9.10.1 et Red Hat Enterprise Linux (RHEL) 9.0 avec un hôte NVMe-of, un PDC en double est créé à chaque exécution de « nvme Discover -p ». Cela entraîne une utilisation inutile des ressources sur l'hôte et la cible. | 2087000 
+|===
 
 
 === Solutions de contournement et erreurs nvme-cli courantes
