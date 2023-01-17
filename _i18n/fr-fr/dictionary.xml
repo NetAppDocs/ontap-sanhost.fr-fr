@@ -504,9 +504,6 @@
   <block id="29cafbf989ec1577f968e04d52752f5e" category="paragraph">Il n'y a aucun problème connu pour RHEL 9.0.</block>
   <block id="1da730d18c28f088385f1eaca3cb2f71" category="summary">Décrit la configuration de NVMe-of pour ESXi 7.x avec ONTAP</block>
   <block id="38a445b35a68bb2b838316376b083c19" category="doc">Configuration NVMe-of de l'hôte pour ESXi 7.x avec ONTAP</block>
-  <block id="0f97c82c57e5402681bd180ec7889f9a" category="list-text">NVMe over Fibre Channel (NVMe/FC) est pris en charge sur ONTAP 9.7 ou version ultérieure.</block>
-  <block id="6cbc9fed5483c62cf8d3ec78d1467ec4" category="list-text">Depuis 7,0U3c et versions ultérieures, la fonction NVMe/TCP est prise en charge pour l'hyperviseur ESXi.</block>
-  <block id="cc2bd6356672cd21ca706ee5860d746e" category="list-text">Depuis ONTAP 9.10.1 et versions ultérieures, la fonctionnalité NVMe/TCP est prise en charge pour ONTAP.</block>
   <block id="98f770b0af18ca763421bac22b4b6805" category="section-title">Caractéristiques</block>
   <block id="48041afc31abe79fadb7695b8cbfd4f7" category="list-text">L'hôte initiateur ESXi peut exécuter à la fois le trafic NVMe/FC et FCP via les mêmes ports d'adaptateur. Voir la <block ref="d46722d88b0f3e3641b7ffb0d0a65333" category="inline-link-macro-rx"></block> Pour obtenir la liste des contrôleurs et adaptateurs FC pris en charge, Voir la <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block> pour obtenir la liste la plus récente des configurations et versions prises en charge.</block>
   <block id="1149b7a7ae9be623a3a7a3f347ff721f" category="list-text">La fonctionnalité NVMe/FC est prise en charge depuis ONTAP 9.9.1 P3 pour ESXi 7.0, la mise à jour 3.</block>
@@ -993,8 +990,6 @@
   <block id="aec81109cc90f6dcce296e00814fd999" category="paragraph">Dans l'exemple ci-dessus, deux espaces de noms sont mappés à l'hôte Oracle Linux 7.8 ANA. Ces LIF sont visibles via quatre LIF cibles : deux LIF de nœud local et deux autres LIF de nœud partenaire/distant. Cette configuration s'affiche sous la forme de deux chemins ANA optimisés et de deux chemins ANA inaccessibles pour chaque espace de noms de l'hôte.</block>
   <block id="4d1a5dc427910a8f8e64f05cd745f04b" category="section-title">Activation d'une taille d'E/S de 1 Mo pour Broadcom NVMe/FC</block>
   <block id="5526e4fbaeff80cd5d23977ccd71e110" category="doc">Utilisation d'IBM AIX 7.2 et/ou PowerVM (VIOS 3.1) avec NetApp ONTAP</block>
-  <block id="326165d98b3f356087f845a446619afc" category="section-title">Installation des utilitaires d'hôte AIX/VIOS</block>
-  <block id="8bd93b2eff143ccd3ead742068cf4430" category="paragraph">Vous pouvez télécharger le fichier compressé contenant les packs logiciels d'utilitaires hôtes à partir du site de support NetApp. Une fois le fichier créé, vous devez le décompresser pour obtenir les deux packages logiciels dont vous avez besoin pour installer les utilitaires hôtes.</block>
   <block id="1306166f349020a2e91d6b8afe8455fb" category="paragraph">NetApp AIX Host Utilities 6.1 est la dernière version. Cette version résout le problème de fuite de mémoire signalé dans les versions précédentes. Reportez-vous à la section des notes de version pour plus d'informations.</block>
   <block id="be02c5fbd2d78a32d06d7da8385cae85" category="list-text">Sur un hôte PowerVM, connectez-vous en tant que *padmin*, puis entrez le<block ref="cf9ef914abc1d1025acbd5649d68a228" prefix=" " category="inline-code"></block> commande pour devenir root.</block>
   <block id="a40ecef4a09b118c1f7f8b069486d849" category="list-text">Décompressez le fichier et extrayez le pack logiciel SAN Toolkit.</block>
@@ -2754,4 +2749,13 @@
   <block id="de92f8bcc4d493d57927d45de496dfcd" category="cell">Les hôtes NVMe-of RHEL 8.6 créent des contrôleurs de découverte persistants dupliqués</block>
   <block id="67eaffbea4f4f435b98dfd9d82b810fe" category="cell">Sur les hôtes NVMe over Fabrics (NVMe-of), vous pouvez utiliser la commande nvme Discover -p pour créer des contrôleurs de découverte persistants (CDP). Lorsque cette commande est utilisée, un seul PDC doit être créé par combinaison initiateur-cible. Toutefois, si vous exécutez ONTAP 9.10.1 et Red Hat Enterprise Linux (RHEL) 8.6 avec un hôte NVMe-of, un PDC en double est créé à chaque exécution de « nvme Discover -p ». Cela entraîne une utilisation inutile des ressources sur l'hôte et la cible.</block>
   <block id="796d3a90e43ce105cbf37298c5065f7e" category="sidebar">9.1</block>
+  <block id="19c0ae184ff29a5cb77c04c8bea684af" category="list-text">Depuis ONTAP 9.7, la prise en charge de NVMe over Fibre Channel (NVMe/FC) est ajoutée pour les versions de VMware vSphere.</block>
+  <block id="3a34596144aee2d13108623781ca1789" category="list-text">Depuis 7,0U3c, la fonction NVMe/TCP est prise en charge pour l'hyperviseur ESXi.</block>
+  <block id="98f0b197b8132a81e5d6da89bc6ded25" category="list-text">La fonctionnalité NVMe/TCP est prise en charge par ONTAP depuis la version ONTAP 9.10.1.</block>
+  <block id="8f782d5cde04c444d313ce732c4c1552" category="section-title">Installation des utilitaires hôtes AIX/VIOS</block>
+  <block id="98ffdd0945470204439692dc82dc8d98" category="paragraph">Vous devez installer le kit d'utilitaires hôtes AIX lors de l'utilisation d'AIX MPIO avec un système de stockage NetApp ONTAP.</block>
+  <block id="9aab5807a16ac54dff9ec8e124181169" category="paragraph">Vous pouvez télécharger le fichier compressé contenant les packs logiciels d'utilitaires hôtes à partir du site de support NetApp. Une fois le fichier créé, vous devez le décompresser pour obtenir les deux logiciels dont vous avez besoin pour installer les utilitaires hôtes.</block>
+  <block id="191896e66abb860542afaf3bc97289fc" category="section-title">Kit SAN</block>
+  <block id="01281e2990c631b64037834e8b22bd4c" category="cell">rw_timeout (disque)</block>
+  <block id="a97f41c78bd6ac237cc0a78dbc8e3557" category="section-title">Paramètres recommandés pour MetroCluster</block>
 </blocks>

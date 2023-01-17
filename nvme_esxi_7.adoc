@@ -22,9 +22,9 @@ summary: Décrit la configuration de NVMe-of pour ESXi 7.x avec ONTAP
 
 == Prise en charge
 
-* NVMe over Fibre Channel (NVMe/FC) est pris en charge sur ONTAP 9.7 ou version ultérieure.
-* Depuis 7,0U3c et versions ultérieures, la fonction NVMe/TCP est prise en charge pour l'hyperviseur ESXi.
-* Depuis ONTAP 9.10.1 et versions ultérieures, la fonctionnalité NVMe/TCP est prise en charge pour ONTAP.
+* Depuis ONTAP 9.7, la prise en charge de NVMe over Fibre Channel (NVMe/FC) est ajoutée pour les versions de VMware vSphere.
+* Depuis 7,0U3c, la fonction NVMe/TCP est prise en charge pour l'hyperviseur ESXi.
+* La fonctionnalité NVMe/TCP est prise en charge par ONTAP depuis la version ONTAP 9.10.1.
 
 
 
