@@ -1,0 +1,19 @@
+= 
+:allow-uri-read: 
+
+
+Il n'existe pas de connexion qla2xxx spécifique similaire pour NVMe/FC et pour le `lpfc` conducteur. Par conséquent, vous pouvez définir le niveau de consignation général qla2xxx en procédant comme suit :
+
+.Étapes
+. Ajoutez le `ql2xextended_error_logging=0x1e400000` valeur au correspondant `modprobe qla2xxx conf` fichier.
+. Recréez le `initramfs` en cours d'exécution `dracut -f` puis redémarrez l'hôte.
+. Après le redémarrage, vérifiez que la journalisation détaillée est appliquée comme suit :
++
+[listing]
+----
+# cat /etc/modprobe.d/qla2xxx.conf
+options qla2xxx ql2xnvmeenable=1 ql2xextended_error_logging=0x1e400000
+# cat /sys/module/qla2xxx/parameters/ql2xextended_error_logging
+507510784
+----
+

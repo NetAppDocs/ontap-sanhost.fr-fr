@@ -232,7 +232,7 @@ Device   Vserver  Namespace Path             NSID   UUID   Size
 
 == Activation d'une taille d'E/S de 1 Mo pour Broadcom NVMe/FC
 
-Le paramètre lpfc_sg_seg_CNT doit être défini sur 256 pour que l'hôte puisse émettre des E/S de 1 Mo
+Le `lpfc_sg_seg_cnt` Le paramètre doit être défini sur 256 pour que l'hôte puisse émettre des E/S de 1 Mo
 
 .Étapes
 . Réglez le `lpfc_sg_seg_cnt` paramètre à 256.

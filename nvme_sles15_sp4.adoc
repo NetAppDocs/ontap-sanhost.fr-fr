@@ -499,7 +499,7 @@ NSID  UUID                                   Size
 
 === Journal Verbose LPFC
 
-. Vous pouvez définir le paramètre du pilote lpfc_log_verbose sur l'une des valeurs suivantes pour enregistrer les événements NVMe/FC.
+. Réglez le `lpfc_log_verbose` Paramètre du pilote sur l'une des valeurs suivantes pour enregistrer les événements NVMe/FC.
 +
 [listing]
 ----
@@ -508,8 +508,8 @@ NSID  UUID                                   Size
 #define LOG_NVME_ABTS 0x00400000 /* NVME ABTS events. */
 #define LOG_NVME_IOERR 0x00800000 /* NVME IO Error events. */
 ----
-. Après avoir défini l'une de ces valeurs, exécutez `dracut-f` et redémarrez l'hôte.
-. Après le redémarrage, vérifiez les paramètres.
+. Une fois les valeurs définies, exécutez le `dracut-f` commande et redémarre l'hôte.
+. Vérifiez les paramètres.
 +
 [listing]
 ----
