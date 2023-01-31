@@ -70,7 +70,7 @@ La commande host_config effectue les opérations suivantes :
 
 
 
-== Kit D'outils SAN
+== Kit SAN
 
 Le kit d'outils est installé automatiquement lorsque vous installez le pack NetApp Host Utilities. Ce kit contient le `sanlun` Utilitaire, qui vous aide à gérer les LUN et les HBA. Le `sanlun` La commande renvoie les informations relatives aux LUN mappées sur votre hôte, aux chemins d'accès multiples et aux informations nécessaires à la création des groupes initiateurs.
 
@@ -89,7 +89,7 @@ data_vserver       /vol/vol2/lun2  /dev/rdsk/c0t600A098038314362705D51465A626475
 ----
 
 
-== SAN Booting
+== Démarrage SAN
 
 .Ce dont vous avez besoin
 Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser le link:https://mysupport.netapp.com/matrix/imt.jsp?components=71102;&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^] Pour vérifier que votre système d'exploitation, votre adaptateur de bus hôte, votre micrologiciel HBA, votre BIOS de démarrage HBA et votre version de ONTAP sont pris en charge.
@@ -215,21 +215,21 @@ NOTE: Des correctifs sont disponibles pour Oracle bug 15824910 sur différentes 
 
 == Paramètres recommandés pour la continuité de l'activité SnapMirror
 
-Pour garantir la continuité des applications client Solaris lors d'un basculement de site non planifié dans un environnement SnapMirror Business Continuity (SM-BC), le paramètre suivant doit être configuré sur l'hôte Solaris 11.4. Ce paramètre remplacera le module de basculement – `f_tpgs` afin d'éviter que le chemin du code qui détecte la contradiction ne soit exécutée.
+Afin de s'assurer que les applications client Solaris sont sans interruption lorsqu'un basculement de site non planifié se produit dans un environnement SnapMirror Business Continuity (SM-BC), le paramètre suivant doit être configuré sur l'hôte Solaris 11.4. Ce paramètre remplacera le module de basculement – `f_tpgs` afin d'éviter que le chemin du code qui détecte la contradiction ne soit exécutée.
 
 
 NOTE: Depuis ONTAP 9.9.1, les configurations de paramétrage SM-BC sont prises en charge par l'hôte Solaris 11.4.
 
 Suivez les instructions pour configurer le paramètre de neutralisation :
 
-. Créer un fichier de configuration `/etc/driver/drv/scsi_vhci.conf` Avec une entrée similaire à ce qui suit pour le type de stockage NetApp connecté à l'hôte :
+. Créez le fichier de configuration `/etc/driver/drv/scsi_vhci.conf` Avec une entrée similaire à ce qui suit pour le type de stockage NetApp connecté à l'hôte :
 +
 [listing]
 ----
 scsi-vhci-failover-override =
 "NETAPP  LUN","f_tpgs"
 ----
-. Utiliser `devprop` et `mdb` les commandes pour vérifier que la neutralisation a bien été appliquée :
+. Utiliser `devprop` et `mdb` les commandes pour vérifier que le paramètre de substitution a été appliqué avec succès :
 +
 `root@host-A:~# devprop -v -n /scsi_vhci scsi-vhci-failover-override      scsi-vhci-failover-override=NETAPP  LUN + f_tpgs
 root@host-A:~# echo "*scsi_vhci_dip::print -x struct dev_info devi_child | ::list struct dev_info devi_sibling| ::print struct dev_info devi_mdi_client| ::print mdi_client_t ct_vprivate| ::print struct scsi_vhci_lun svl_lun_wwn svl_fops_name"| mdb -k`
@@ -243,11 +243,11 @@ svl_fops_name = 0xa00298d69e0 "conf f_tpgs"
 
 
 
-NOTE: `conf` sera ajouté au `svl_fops_name` lorsqu'un `scsi-vhci-failover-override` a été appliqué. Pour plus d'informations et pour connaître les modifications recommandées par défaut, consultez l'article de la base de connaissances NetApp https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapMirror/Solaris_Host_support_recommended_settings_in_SnapMirror_Business_Continuity_(SM-BC)_configuration["Prise en charge de Solaris Host Paramètres recommandés dans la configuration de SnapMirror Business Continuity (SM-BC)"^].
+NOTE: `conf` sera ajouté à `svl_fops_name` quand `scsi-vhci-failover-override` a été appliqué. Pour plus d'informations et pour connaître les modifications recommandées par défaut, consultez l'article de la base de connaissances NetApp https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapMirror/Solaris_Host_support_recommended_settings_in_SnapMirror_Business_Continuity_(SM-BC)_configuration["Prise en charge de Solaris Host Paramètres recommandés dans la configuration de SnapMirror Business Continuity (SM-BC)"^].
 
 
 
-== Problèmes connus et limites
+== Problèmes et limites connus
 
 [cols="4*"]
 |===
