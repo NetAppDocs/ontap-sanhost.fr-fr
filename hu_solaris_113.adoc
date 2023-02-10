@@ -182,7 +182,7 @@ Par défaut, le système d'exploitation Solaris échouera I/OS au bout de 20 sec
 
 
 
-== Virtualisation Oracle solaris
+== Virtualisation Oracle Solaris
 
 * Les options de virtualisation Solaris comprennent les domaines logiques Solaris (également appelés LDOM ou Oracle VM Server pour SPARC), les domaines dynamiques Solaris, les zones Solaris et les conteneurs Solaris. Ces technologies ont été généralement reconnues comme « Oracle Virtual machines », malgré le fait qu'elles soient basées sur des architectures très différentes.
 * Dans certains cas, plusieurs options peuvent être utilisées ensemble, telles qu'un conteneur Solaris, dans un domaine logique Solaris spécifique.
@@ -215,7 +215,7 @@ NOTE: Des correctifs sont disponibles pour Oracle bug 15824910 sur différentes 
 
 == Paramètres recommandés pour la continuité de l'activité SnapMirror
 
-Afin de s'assurer que les applications client Solaris sont sans interruption lorsqu'un basculement de site non planifié se produit dans un environnement SnapMirror Business Continuity (SM-BC), le paramètre suivant doit être configuré sur l'hôte Solaris 11.3. Ce paramètre remplacera le module de basculement – `f_tpgs` pour empêcher le chemin du code qui détecte la contradiction à exécuter.
+Afin de vérifier que les applications client Solaris sont sans perturbation lorsqu'un basculement de site non planifié se produit dans un environnement SnapMirror Business Continuity (SM-BC), vous devez configurer le paramètre suivant sur l'hôte Solaris 11.3. Ce paramètre remplace le module de basculement `f_tpgs` empêcher l'exécution du chemin du code qui détecte la contradiction.
 
 
 NOTE: Depuis ONTAP 9.9.1, les configurations de paramétrage SM-BC sont prises en charge par l'hôte Solaris 11.3.
@@ -230,7 +230,7 @@ Suivez les instructions pour configurer le paramètre de neutralisation :
 scsi-vhci-failover-override =
 "NETAPP  LUN","f_tpgs"
 ----
-. Utilisez le `devprop` et `mdb` les commandes pour vérifier que le paramètre de substitution a été appliqué avec succès :
+. Utilisez le `devprop` et `mdb` commandes pour vérifier que le paramètre de substitution a bien été appliqué :
 +
 `root@host-A:~# devprop -v -n /scsi_vhci scsi-vhci-failover-override      scsi-vhci-failover-override=NETAPP  LUN + f_tpgs
 root@host-A:~# echo "*scsi_vhci_dip::print -x struct dev_info devi_child | ::list struct dev_info devi_sibling| ::print struct dev_info devi_mdi_client| ::print mdi_client_t ct_vprivate| ::print struct scsi_vhci_lun svl_lun_wwn svl_fops_name"| mdb -k`
@@ -244,7 +244,7 @@ svl_fops_name = 0xa00298d69e0 "conf f_tpgs"
 
 
 
-NOTE: `conf` sera ajouté à `svl_fops_name` quand `scsi-vhci-failover-override` a été appliqué. Pour plus d'informations et pour connaître les modifications recommandées par défaut, consultez l'article de la base de connaissances NetApp https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapMirror/Solaris_Host_support_recommended_settings_in_SnapMirror_Business_Continuity_(SM-BC)_configuration["Prise en charge de Solaris Host Paramètres recommandés dans la configuration de SnapMirror Business Continuity (SM-BC)"^].
+NOTE: Après `scsi-vhci-failover-override` a été appliqué, `conf` est ajouté à `svl_fops_name`. Pour plus d'informations et pour connaître les modifications recommandées par défaut, consultez l'article de la base de connaissances NetApp https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapMirror/Solaris_Host_support_recommended_settings_in_SnapMirror_Business_Continuity_(SM-BC)_configuration["Prise en charge de Solaris Host Paramètres recommandés dans la configuration de SnapMirror Business Continuity (SM-BC)"^].
 
 
 

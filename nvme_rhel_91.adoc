@@ -448,34 +448,42 @@ NSID UUID                                   Size
 
 
 
+== Problèmes connus
+
+[cols="10,30,30,10"]
+|===
+| ID de bug NetApp | Titre | Description | ID Bugzilla 
+
+
+| 1503468 | `nvme list-subsys` la commande renvoie la liste de contrôleurs nvme répétée pour un sous-système donné | Le `nvme list-subsys` cette commande doit renvoyer une liste unique de contrôleurs nvme associés à un sous-système donné. Dans RHEL 9.1, le `nvme list-subsys` La commande renvoie les contrôleurs nvme avec leur état ANA respectif pour tous les espaces de noms appartenant à un sous-système donné. Cependant, l'état ANA est un attribut par espace de nom. Il serait donc idéal d'afficher des entrées uniques de contrôleur nvme avec l'état de chemin si vous listez la syntaxe de commande de sous-système pour un espace de noms donné. | 2130106 
+|===
+
+
 == Dépannage
 
 Avant de procéder à tout dépannage suite à une défaillance NVMe/FC, vérifiez que vous exécutez une configuration conforme aux spécifications de l'outil de matrice d'interopérabilité (IMT), puis procédez aux étapes suivantes pour déboguer les problèmes côté hôte.
 
 
 
-=== Consignation détaillée LPFC
+=== consignation détaillée lpfc
 
 .Étapes
-. Réglez le `lpfc_log_verbose` Paramètre du pilote sur l'une des valeurs suivantes pour enregistrer les événements NVMe/FC :
+. Réglez le `lpfc_log_verbose` Paramètre du pilote sur l'une des valeurs suivantes pour enregistrer les événements NVMe/FC.
 +
 [listing]
 ----
-
 #define LOG_NVME 0x00100000 /* NVME general events. */
 #define LOG_NVME_DISC 0x00200000 /* NVME Discovery/Connect events. */
 #define LOG_NVME_ABTS 0x00400000 /* NVME ABTS events. */
 #define LOG_NVME_IOERR 0x00800000 /* NVME IO Error events. */
-
 ----
-. Après avoir défini l'une de ces valeurs, exécutez `dracut-f` pour recréer le `initramfs` et redémarrez l'hôte.
-. Après le redémarrage, vérifiez les paramètres :
+. Une fois les valeurs définies, exécutez le `dracut-f` commande et redémarre l'hôte.
+. Vérifiez les paramètres.
 +
 [listing]
 ----
 # cat /etc/modprobe.d/lpfc.conf
 options lpfc lpfc_log_verbose=0xf00083
-
 
 # cat /sys/module/lpfc/parameters/lpfc_log_verbose
 15728771
@@ -504,32 +512,21 @@ options qla2xxx ql2xnvmeenable=1 ql2xextended_error_logging=0x1e400000
 
 
 
-== Problèmes connus
-
-[cols="10,30,30,10"]
-|===
-| ID de bug NetApp | Titre | Description | ID Bugzilla 
-
-
-| 1503468 | `nvme list-subsys` la commande renvoie la liste de contrôleurs nvme répétée pour un sous-système donné | Le `nvme list-subsys` cette commande doit renvoyer une liste unique de contrôleurs nvme associés à un sous-système donné. Dans RHEL 9.1, le `nvme list-subsys` La commande renvoie les contrôleurs nvme avec leur état ANA respectif pour tous les espaces de noms appartenant à un sous-système donné. Cependant, l'état ANA est un attribut par espace de nom. Il serait donc idéal d'afficher des entrées uniques de contrôleur nvme avec l'état de chemin si vous listez la syntaxe de commande de sous-système pour un espace de noms donné. | 2130106 
-|===
-
-
 === Solutions de contournement et erreurs nvme-cli courantes
 
-Les erreurs affichées par `nvme-cli` pendant `nvme discover`, `nvme connect` ou `nvme connect-all` les opérations et les solutions de contournement sont indiquées dans le tableau suivant :
+Les erreurs affichées par `nvme-cli` pendant `nvme discover`, `nvme connect`, ou `nvme connect-all` les opérations et les solutions de contournement sont indiquées dans le tableau suivant :
 
 [cols="20, 20, 50"]
 |===
 | Erreurs affichées par `nvme-cli` | Cause probable | Solution de contournement 
 
 
-| `Failed to write to /dev/nvme-fabrics: Invalid argument` | Syntaxe incorrecte | Assurez-vous d'utiliser la syntaxe correcte pour les commandes nvme ci-dessus. 
+| `Failed to write to /dev/nvme-fabrics: Invalid argument` | Syntaxe incorrecte | Vérifiez que vous utilisez la syntaxe correcte pour le `nvme discover`, `nvme connect`, et `nvme connect-all` commandes. 
 
 
-| `Failed to write to /dev/nvme-fabrics: No such file or directory` | Plusieurs problèmes peuvent déclencher cette action. La transmission de mauvais arguments aux commandes nvme est l'une des causes courantes.  a| 
-* Assurez-vous d'avoir transmis les arguments corrects (par exemple, chaîne WWNN, chaîne WWPN, etc.) aux commandes.
-* Si les arguments sont corrects, mais que vous voyez toujours cette erreur, vérifiez si `/sys/class/scsi_host/host*/nvme_info` La sortie est correcte, l'initiateur NVMe apparaît comme `Enabled`, Et les LIFs cibles NVMe/FC s'affichent correctement ici sous les sections ports distants. Exemple :
+| `Failed to write to /dev/nvme-fabrics: No such file or directory` | Plusieurs problèmes peuvent déclencher cette situation, par exemple, la fourniture d'arguments incorrects vers les commandes NVMe est l'une des causes courantes.  a| 
+* Vérifiez que vous avez transmis les arguments corrects (par exemple, chaîne WWNN, chaîne WWPN, etc.) aux commandes.
+* Si les arguments sont corrects, mais que vous voyez toujours cette erreur, vérifiez si l' `/sys/class/scsi_host/host*/nvme_info` La sortie de la commande est correcte, l'initiateur NVMe est affiché comme `Enabled`, Et les LIFs cibles NVMe/FC sont correctement affichées sous les sections ports distants. Exemple :
 +
 [listing]
 ----
@@ -550,22 +547,22 @@ LS: Xmt 0000000000000006 Cmpl 0000000000000006
 FCP: Rd 0000000000000073 Wr 0000000000000005 IO 0000000000000031
 Cmpl 00000000000000a8 Outstanding 0000000000000001
 ----
-* Si les LIFs cibles ne s'affichent pas comme ci-dessus dans la sortie nvme_info, vérifiez le `/var/log/messages` et `dmesg` Sortie pour toute défaillance NVMe/FC suspecte, puis rapport ou correction en conséquence.
+* Si les LIFs cibles ne sont pas affichées comme ci-dessus dans `nvme_info` sortie de la commande, vérifiez le `/var/log/messages` et `dmesg` Les sorties de commande permettent de détecter toute défaillance NVMe/FC suspecte, puis de signaler ou corriger en conséquence.
 
 
 
 
 | `No discovery log entries to fetch`  a| 
-Généralement vu si `/etc/nvme/hostnqn` La chaîne n'a pas été ajoutée au sous-système correspondant de la baie NetApp ou incorrecte `hostnqn` la chaîne a été ajoutée au sous-système respectif.
+Généralement observé lorsque l' `/etc/nvme/hostnqn` La chaîne n'a pas été ajoutée au sous-système correspondant de la baie NetApp ou incorrecte `hostnqn` la chaîne a été ajoutée au sous-système respectif.
  a| 
-Assurez-vous que le système est exact `/etc/nvme/hostnqn` La chaîne est ajoutée au sous-système correspondant de la baie NetApp (vérifiez via le `vserver nvme subsystem host show` commande).
+Vérifiez que le code est exact `/etc/nvme/hostnqn` Une chaîne est ajoutée au sous-système correspondant de la baie NetApp (vérifiez à l'aide de la `vserver nvme subsystem host show` commande).
 
 
 
 | `Failed to write to /dev/nvme-fabrics: Operation already in progress`  a| 
-Indique si les associations de contrôleur ou l'opération spécifiée sont déjà créées ou en cours de création. Cela peut se produire dans le cadre des scripts de connexion automatique installés ci-dessus.
+Observé lorsque les associations de contrôleur ou l'opération spécifiée sont déjà créées ou en cours de création. Cela peut se produire dans le cadre des scripts de connexion automatique installés ci-dessus.
  a| 
-Aucune. Pour `nvme discover`, essayez d'exécuter cette commande après un certain temps. Pour `nvme connect` et `connect-all`, exécutez le `nvme list` commande pour vérifier que les périphériques d'espace de noms sont déjà créés et affichés sur l'hôte.
+Aucune. Essayez d'exécuter le `nvme discover` commande à nouveau après un certain temps. Pour `nvme connect` et `connect-all`, exécutez le `nvme list` commande pour vérifier que les périphériques d'espace de noms sont déjà créés et affichés sur l'hôte.
 
 |===
 
