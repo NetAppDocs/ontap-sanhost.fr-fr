@@ -35,7 +35,7 @@ NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans ce docu
 * Avec Oracle Linux 8.6, `nvme-fc auto-connect` des scripts sont inclus dans le stockage natif `nvme-cli` création de package. Vous pouvez vous appuyer sur ces scripts de connexion automatique natifs au lieu d'installer les scripts de connexion automatique fournis par le fournisseur externe.
 * Avec Oracle Linux 8.6, une fonctionnalité native `udev` la règle est fournie dans le cadre du `nvme-cli` Une solution qui permet l'équilibrage de la charge Round-Robin pour les chemins d'accès multiples NVMe. Par conséquent, vous n'avez plus besoin de créer cette règle manuellement.
 * Avec Oracle Linux 8.6, le trafic NVMe et SCSI peut être exécuté sur le même hôte existant. En fait, ce devrait être la configuration hôte couramment déployée. Par conséquent, vous pouvez configurer dm-multipath comme d'habitude pour les LUN SCSI entraînant la création de périphériques mpath, tandis que le protocole NVMe multipath peut être utilisé pour configurer les périphériques multipathing NVMe-of (par exemple, `/dev/nvmeXnY`) sur l'hôte.
-* Avec Oracle Linux 8.6, le plug-in NetApp natif `nvme-cli` Le package peut afficher les détails ONTAP ainsi que les espaces de noms ONTAP.
+* Avec Oracle Linux 8.6, le plug-in NetApp en natif `nvme-cli` Le package peut afficher les détails ONTAP ainsi que les espaces de noms ONTAP.
 
 
 
@@ -62,7 +62,7 @@ Reportez-vous à la link:https://mysupport.netapp.com/matrix/["Matrice d'interop
 # uname -r
 5.4.17-2136.307.3.1.el8uek.x86_64
 ----
-. Installer le `nvme-cli` création de package.
+. Installer le `nvme-cli` groupe :
 +
 [listing]
 ----
@@ -82,7 +82,7 @@ vs_ol_nvme  nvme_ss_ol_1    nqn.2014-08.org.nvmexpress:uuid:9ed5b327-b9fc-4cf5-9
 ----
 +
 
-NOTE: Si les chaînes hostnqn ne correspondent pas, vous devez utiliser le `vserver modify` Commande permettant de mettre à jour la chaîne hostnqn sur votre sous-système de matrice ONTAP correspondant pour qu'elle corresponde à la chaîne hostnqn de `/etc/nvme/hostnqn` sur l'hôte.
+NOTE: Si le `hostnqn` les chaînes ne correspondent pas, vous devez utiliser le `vserver modify` commande pour mettre à jour le `hostnqn` Chaîne du sous-système de la matrice ONTAP correspondant à la `hostnqn` chaîne de `/etc/nvme/hostnqn` sur l'hôte :
 
 . Redémarrez l'hôte.
 +
@@ -107,7 +107,7 @@ Redémarrez le démon multipathd en exécutant `systemctl restart multipathd` co
 == Configuration de la carte FC Broadcom pour NVMe/FC
 
 .Étapes
-. Vérifiez que vous utilisez la carte prise en charge. Pour consulter la liste la plus récente des cartes prises en charge, reportez-vous à la section link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^] .
+. Vérifiez que vous utilisez la carte prise en charge. Pour consulter la liste la plus récente des cartes prises en charge, reportez-vous à la section link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^]:
 +
 [listing]
 ----
@@ -118,7 +118,7 @@ LPe32002-M2
 Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
 Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
 ----
-. Vérifiez que vous utilisez la carte Broadcom recommandée `lpfc` micrologiciel et pilote de boîte de réception. Pour obtenir la liste la plus récente des versions de pilote de carte et de micrologiciel prises en charge, reportez-vous à la section link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^] .
+. Vérifiez que vous utilisez la carte Broadcom recommandée `lpfc` micrologiciel et pilote de boîte de réception. Pour obtenir la liste la plus récente des versions de pilote de carte et de micrologiciel prises en charge, reportez-vous à la section link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^]:
 +
 [listing]
 ----
@@ -129,14 +129,14 @@ Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
 # cat /sys/module/lpfc/version
 0:12.8.0.11
 ----
-. Vérifiez-le `lpfc_enable_fc4_type` est défini sur `3`.
+. Vérifiez-le `lpfc_enable_fc4_type` est défini sur `3`:
 +
 [listing]
 ----
 # cat /sys/module/lpfc/parameters/lpfc_enable_fc4_type
 3
 ----
-. Vérifiez que les ports initiateurs sont opérationnels et que vous pouvez voir les LIFs cibles.
+. Vérifier que les ports initiateurs sont opérationnels et que les LIFs cibles sont visibles :
 +
 [listing]
 ----
@@ -201,7 +201,7 @@ options lpfc lpfc_sg_seg_cnt=256
 == Configurez l'adaptateur FC Marvell/QLogic pour NVMe/FC
 
 .Étapes
-. Vérifiez que vous exécutez les versions de pilote et de micrologiciel de carte prises en charge. Le pilote natif de la boîte de réception qla2xxx inclus dans le noyau OL 8.6 GA dispose des derniers correctifs en amont essentiels pour la prise en charge de ONTAP.
+. Vérifiez que vous exécutez les versions de pilote et de micrologiciel de carte prises en charge. Le pilote natif de la boîte de réception qla2xxx inclus dans le noyau OL 8.6 GA dispose des derniers correctifs en amont essentiels à la prise en charge de ONTAP :
 +
 [listing]
 ----
@@ -231,7 +231,7 @@ Contrairement à NVMe/FC, NVMe/TCP ne propose pas de fonctionnalité de connexio
 Vous devez définir la période de nouvelle tentative pour les événements de basculement sur au moins 30 minutes afin d'éviter les délais. Vous pouvez augmenter la période de relance en augmentant la valeur de l' `ctrl_loss_tmo` minuterie à l'aide de la procédure suivante :
 
 .Étapes
-. Vérifiez que le port initiateur est capable de récupérer les données de la page du journal de découverte sur les LIF NVMe/TCP prises en charge.
+. Vérifiez que le port initiateur peut récupérer les données de la page de journal de découverte sur les LIF NVMe/TCP prises en charge :
 +
 [listing]
 ----
@@ -294,7 +294,7 @@ sectype: none
 == Validation de la spécification NVMe/FC
 
 .Étapes
-. Vérifiez les paramètres NVMe/FC suivants sur l'hôte Oracle Linux 8.6.
+. Vérifiez les paramètres NVMe/FC suivants sur l'hôte Oracle Linux 8.6 :
 +
 [listing]
 ----
@@ -307,7 +307,7 @@ NetApp ONTAP Controller
 round-robin
 round-robin
 ----
-. Vérifiez que les espaces de noms sont créés et correctement découvreurs sur l'hôte.
+. Vérifiez que les espaces de noms sont créés et correctement découverts sur l'hôte :
 +
 [listing]
 ----
@@ -325,7 +325,7 @@ Namespace Usage    Format             FW             Rev
 2                 85.90 GB / 85.90 GB  24 KiB + 0 B  FFFFFFFF
 3                 85.90 GB / 85.90 GB  4 KiB + 0 B   FFFFFFFF
 ----
-. Vérifiez que l'état du contrôleur de chaque chemin est actif et que l'état ANA est correct.
+. Vérifiez que l'état du contrôleur de chaque chemin est actif et que l'état ANA est correct :
 +
 [listing]
 ----
@@ -337,7 +337,7 @@ nvme-subsys0 - NQN=nqn.1992-08.com.netapp:sn.5f5f2c4aa73b11e9967e00a098df41bd:su
 +- nvme2 fc traddr=nn-0x203700a098dfdd91:pn-0x203a00a098dfdd91 host_traddr=nn-0x200000109b1c1205:pn-0x100000109b1c1205 live optimized
 +- nvme3 fc traddr=nn-0x203700a098dfdd91:pn-0x203d00a098dfdd91 host_traddr=nn-0x200000109b1c1205:pn-0x100000109b1c1205 live optimized
 ----
-. Vérifiez que le plug-in NetApp affiche les valeurs correctes pour chaque périphérique d'espace de noms ONTAP.
+. Vérifier que le plug-in NetApp affiche les valeurs correctes pour chaque périphérique d'espace de noms ONTAP :
 +
 [listing]
 ----
