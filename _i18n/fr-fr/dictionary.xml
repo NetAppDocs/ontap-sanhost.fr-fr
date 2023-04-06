@@ -2859,4 +2859,26 @@
   <block id="2777856007ced53036238eb6ac77a35c" category="cell">Les hôtes Oracle Linux 8.5 NVMe-of créent des contrôleurs de détection persistante en double</block>
   <block id="2f0abad3e4805563c626305c7ea008ba" category="cell">Sur les hôtes Oracle Linux 8.5 NVMe over Fabrics (NVMe-of), vous pouvez utiliser le<block ref="70c9b2fe3469aa88746a29ccc6fe9d7a" prefix=" " category="inline-code"></block> Commande permettant de créer des contrôleurs de découverte permanente (CDP). Lorsque cette commande est utilisée, un seul PDC doit être créé par combinaison initiateur-cible. Toutefois, si vous exécutez ONTAP 9.10.1 et Oracle Linux 8.5 avec un hôte NVMe-of, un PDC en double est créé à chaque fois<block ref="70c9b2fe3469aa88746a29ccc6fe9d7a" prefix=" " category="inline-code"></block> est exécuté. Cela entraîne une utilisation inutile des ressources sur l'hôte et la cible.</block>
   <block id="049cf7a01c96a6039648d00060516545" category="paragraph">Avant de procéder au dépannage en cas de panne NVMe/FC, assurez-vous que vous exécutez une configuration conforme aux spécifications IMT, puis passez aux étapes suivantes pour corriger tout problème côté hôte.</block>
+  <block id="e9c44bbfd795a5d63d74c6a77afee70d" category="summary">Les mentions légales donnent accès aux déclarations de copyright, aux marques, aux brevets, etc.</block>
+  <block id="30d965eef5ba25c6b9998ae38270b43e" category="doc">Mentions légales</block>
+  <block id="6016a2b341113bf496b719905398ecd2" category="section-title">Droits d'auteur</block>
+  <block id="de6edae22bc37b97b38a15c7f8af62e2" category="paragraph"><block ref="de6edae22bc37b97b38a15c7f8af62e2" category="inline-link-rx"></block></block>
+  <block id="126a02652da6de02962cf1b654fd6376" category="section-title">Marques déposées</block>
+  <block id="c4ce4761e466527d26b3e3d5ed1006fd" category="paragraph">NetApp, le logo NETAPP et les marques mentionnées sur la page des marques commerciales NetApp sont des marques commerciales de NetApp, Inc. Les autres noms de sociétés et de produits peuvent être des marques commerciales de leurs propriétaires respectifs.</block>
+  <block id="a93bc0a57623c2facaa010825c808507" category="paragraph"><block ref="a93bc0a57623c2facaa010825c808507" category="inline-link-rx"></block></block>
+  <block id="be89498d2f8a22ce47c02ba9795fe2af" category="section-title">Brevets</block>
+  <block id="d0b19d36be2c5f16e9aef46c8a452d3d" category="paragraph">Vous trouverez une liste actuelle des brevets appartenant à NetApp à l'adresse suivante :</block>
+  <block id="547ea2e305891e64d8e744949b0aca2c" category="paragraph"><block ref="547ea2e305891e64d8e744949b0aca2c" category="inline-link-rx"></block></block>
+  <block id="56c34c6410dd45c5cec44149ad0ce037" category="section-title">Politique de confidentialité</block>
+  <block id="50921fca0d376fca62102a5e608994e2" category="paragraph"><block ref="50921fca0d376fca62102a5e608994e2" category="inline-link-rx"></block></block>
+  <block id="c0227cef6f07a8cd2ac72f2945b031aa" category="section-title">Source ouverte</block>
+  <block id="6de6f1db3c6d9273da9d8e254b666753" category="paragraph">Fournit des informations sur les droits d'auteur tiers et les licences utilisées dans ce produit.</block>
+  <block id="b3299575ec25f288b8a86816f1af45af" category="inline-link-macro">Avis pour AIX</block>
+  <block id="052ed5f67b081d47dbc2b3895228d738" category="list-text"><block ref="052ed5f67b081d47dbc2b3895228d738" category="inline-link-macro-rx"></block></block>
+  <block id="427a239761c886d37a93bd4b61520766" category="inline-link-macro">Avis pour Linux</block>
+  <block id="a9e1c34a219d92c373cbc90dfdb82cf1" category="list-text"><block ref="a9e1c34a219d92c373cbc90dfdb82cf1" category="inline-link-macro-rx"></block></block>
+  <block id="cacc0e75410f25ef36bc2b6e76334eca" category="inline-link-macro">Avis pour Solaris</block>
+  <block id="acad552cc1f69d130b13381f823afd65" category="list-text"><block ref="acad552cc1f69d130b13381f823afd65" category="inline-link-macro-rx"></block></block>
+  <block id="c44700394b9a4063439bc92ea42d5e41" category="inline-link-macro">Remarque pour Windows</block>
+  <block id="9d9a9c7064b8193ac433a5365fe1afdb" category="list-text"><block ref="9d9a9c7064b8193ac433a5365fe1afdb" category="inline-link-macro-rx"></block></block>
 </blocks>
