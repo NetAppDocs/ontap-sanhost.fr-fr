@@ -2,10 +2,4 @@
 :allow-uri-read: 
 
 
-Contrairement à NVMe/FC, NVMe/TCP ne propose pas de fonctionnalité de connexion automatique. Cela a mis en place deux limitations majeures sur l'hôte Linux NVMe/TCP :
-
-* *Pas de reconnexion automatique après la rétablissement des chemins* - NVMe/TCP ne peut pas se reconnecter automatiquement à un chemin qui est rétabli au-delà de la valeur par défaut `ctrl-loss-tmo` minuterie de 10 minutes après un chemin descendant.
-* *Pas de connexion automatique pendant le démarrage de l'hôte* - NVMe/TCP ne peut pas se connecter automatiquement pendant le démarrage de l'hôte.
-
-
-Vous devez définir la période de nouvelle tentative pour les événements de basculement sur au moins 30 minutes afin d'éviter les délais. Vous pouvez augmenter la période de relance en augmentant la valeur de l' `ctrl_loss_tmo` minuterie à l'aide de la procédure suivante :
+NVMe/TCP ne dispose pas de la fonctionnalité de connexion automatique. Par conséquent, si un chemin tombe en panne et n'est pas rétabli dans le délai par défaut de 10 minutes, NVMe/TCP ne peut pas se reconnecter automatiquement. Pour éviter une temporisation, vous devez définir la période de nouvelle tentative pour les événements de basculement sur incident à au moins 30 minutes.

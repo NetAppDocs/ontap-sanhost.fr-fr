@@ -1,16 +1,16 @@
 ---
 sidebar: sidebar 
-permalink: hu_centos_83.html 
-keywords: host utilities, centos, linux, 8.3, netapp, ontap 
-summary: 'Décrit l"utilisation de CentOS 8.3 avec ONTAP' 
+permalink: hu_ol_90.html 
+keywords: host utilities, oracle, linux, 9.0, netapp, ontap 
+summary: Décrit comment utiliser Oracle Linux 9.0 avec ONTAP 
 ---
-= Utilisation de CentOS 8.3 avec NetApp ONTAP
+= Utilisation d'Oracle Linux 9.0 avec NetApp ONTAP
 :toc: macro
 :hardbreaks:
-:toclevels: 1
+:toclevels: 1P
 :allow-uri-read: 
 :toc: 
-:toclevels: 1
+:toclevels: 1P
 :nofooter: 
 :icons: font
 :linkattrs: 
@@ -20,7 +20,7 @@ summary: 'Décrit l"utilisation de CentOS 8.3 avec ONTAP'
 
 
 
-== Installation de Linux Unified Host Utilities
+== Installez Linux Unified Host Utilities
 
 Le pack logiciel NetApp Linux Unified Host Utilities est disponible sur le link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab["Site de support NetApp"^] dans un fichier .rpm 64 bits.
 
@@ -38,16 +38,12 @@ Si une version de Linux Unified Host Utilities est actuellement installée, vous
 
 
 
-NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans ce document pour configurer les clients Cloud connectés à link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] et link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["Amazon FSX pour ONTAP"^].
 
+== Kit SAN
 
+Le kit d'outils est installé automatiquement lorsque vous installez le pack NetApp Host Utilities. Ce kit fournit l'utilitaire sanlun, qui vous aide à gérer les LUN et les HBA. La commande sanlun renvoie des informations sur les LUN mappées sur votre hôte, les chemins d'accès multiples et les informations nécessaires à la création des groupes initiateurs.
 
-== Kit D'outils SAN
-
-Le kit d'outils est installé automatiquement lorsque vous installez le pack NetApp Host Utilities. Ce kit contient le `sanlun` Utilitaire, qui vous aide à gérer les LUN et les HBA. Le `sanlun` La commande renvoie les informations relatives aux LUN mappées sur votre hôte, aux chemins d'accès multiples et aux informations nécessaires à la création des groupes initiateurs.
-
-.Exemple
-Dans l'exemple suivant, le `sanlun lun show` La commande renvoie les informations relatives à la LUN.
+Dans l'exemple suivant, la commande sanlun lun show renvoie des informations relatives aux LUN.
 
 [listing]
 ----
@@ -60,17 +56,17 @@ Exemple de résultat :
 controller(7mode/E-Series)/            device     host               lun
 vserver(cDOT/FlashRay)   lun-pathname  filename   adapter  protocol  size    Product
 -------------------------------------------------------------------------
-data_vserver          /vol/vol1/lun1   /dev/sdb   host16   FCP       120.0g  cDOT
-data_vserver          /vol/vol1/lun1   /dev/sdc   host15   FCP       120.0g  cDOT
-data_vserver          /vol/vol2/lun2   /dev/sdd   host16   FCP       120.0g  cDOT
-data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDOT
+data_vserver          /vol/vol1/lun1   /dev/sdb   host16   FCP       80.0g  cDOT
+data_vserver          /vol/vol1/lun1   /dev/sdc   host15   FCP       80.0g  cDOT
+data_vserver          /vol/vol2/lun2   /dev/sdd   host16   FCP       80.0g  cDOT
+data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       80.0g  cDOT
 ----
 
 
-== SAN Booting
+== Démarrage SAN
 
 .Ce dont vous avez besoin
-Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser le link:https://mysupport.netapp.com/matrix/imt.jsp?components=91241;&solution=236&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^] Pour vérifier que votre système d'exploitation, votre adaptateur de bus hôte, votre micrologiciel HBA, votre BIOS de démarrage HBA et votre version de ONTAP sont pris en charge.
+Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser le link:https://mysupport.netapp.com/matrix/imt.jsp?components=91863;&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^] Pour vérifier que votre système d'exploitation, votre adaptateur de bus hôte, votre micrologiciel HBA, votre BIOS de démarrage HBA et votre version de ONTAP sont pris en charge.
 
 .Étapes
 . Mappez la LUN de démarrage SAN sur l'hôte.
@@ -89,9 +85,11 @@ Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la docum
 
 == Chemins d'accès multiples
 
-Pour CentOS 8.3, le fichier /etc/multipath.conf doit exister, mais vous n'avez pas besoin d'apporter de modifications spécifiques au fichier. CentOS 8.3 est compilé avec tous les paramètres nécessaires pour reconnaître et gérer correctement les LUN ONTAP.
+Pour Oracle Linux (OL) 9.0 `/etc/multipath.conf` le fichier doit exister, mais il n'est pas nécessaire d'apporter des modifications spécifiques au fichier. OL 9.0 est compilé avec tous les paramètres requis pour reconnaître et gérer correctement les LUN ONTAP.
 
-Vous pouvez utiliser le `multipath -ll` Commande pour vérifier les paramètres des LUN ONTAP. Les sections suivantes fournissent un exemple de résultat de chemins d'accès multiples pour une LUN mappée aux rôles ASA et non ASA.
+Vous pouvez utiliser le `multipath -ll` Commande pour vérifier les paramètres des LUN ONTAP.
+
+Les sections suivantes fournissent un exemple de résultat de chemins d'accès multiples pour une LUN mappée aux rôles ASA et non ASA.
 
 
 
@@ -107,11 +105,11 @@ L'exemple suivant montre la sortie correcte pour une LUN ONTAP :
 # multipath -ll
 3600a098038303634722b4d59646c4436 dm-28 NETAPP,LUN C-Mode
 size=80G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
-`-+- policy='service-time 0' prio=50 status=active
-  |- 11:0:7:1    sdfi   130:64   active ready running
-  |- 11:0:9:1    sdiy  8:288     active ready running
-  |- 11:0:10:1  sdml 69:464   active ready running
-  |- 11:0:11:1  sdpt  131:304  active ready running
+|-+- policy='service-time 0' prio=50 status=active
+  |- 11:0:7:6   sdbz 68:208  active ready running
+  |- 11:0:11:6  sddn 71:80   active ready running
+  |- 11:0:15:6  sdfb 129:208 active ready running
+  |- 12:0:1:6   sdgp 132:80  active ready running
 ----
 
 NOTE: N'utilisez pas un nombre excessif de chemins pour une seule LUN. Pas plus de 4 chemins ne devraient être nécessaires. Plus de 8 chemins peuvent entraîner des problèmes de chemin pendant les défaillances du stockage.
@@ -128,7 +126,7 @@ L'exemple suivant montre la sortie correcte pour une LUN ONTAP avec deux chemins
 [listing]
 ----
 # multipath -ll
-3600a098038303634722b4d59646c4436 dm-28 NETAPP,LUN C-Mode
+3600a0980383036347ffb4d59646c4436 dm-28 NETAPP,LUN C-Mode
 size=80G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
 |-+- policy='service-time 0' prio=50 status=active
 | |- 16:0:6:35 sdwb  69:624  active ready running
@@ -144,7 +142,9 @@ NOTE: N'utilisez pas un nombre excessif de chemins pour une seule LUN. Pas plus 
 
 == Paramètres recommandés
 
-Le système d'exploitation CentOS 8.3 est compilé pour reconnaître les LUN ONTAP et définir automatiquement tous les paramètres de configuration, pour les configurations ASA et non ASA. Le `multipath.conf` le fichier doit exister pour que le démon multivoie démarre, mais vous pouvez créer un fichier vide de zéro octet à l'aide de la commande :
+Le système d'exploitation Oracle Linux 9.0 est compilé pour reconnaître les LUN ONTAP et définir automatiquement tous les paramètres de configuration correctement pour les configurations ASA et non ASA.
+
+Le `multipath.conf` le fichier doit exister pour que le démon multivoie démarre, mais vous pouvez créer un fichier vide de zéro octet à l'aide de la commande :
 `touch /etc/multipath.conf`
 
 Lors de la première création de ce fichier, vous devrez peut-être activer et démarrer les services multipathing.
@@ -202,7 +202,7 @@ Le tableau suivant indique le niveau critique `multipathd` Paramètres des LUN O
 | détecter_prio | oui 
 
 
-| dev_loss_tmo | « infini » 
+| dev_loss_tmo | infini 
 
 
 | du rétablissement | immédiate 
@@ -211,31 +211,31 @@ Le tableau suivant indique le niveau critique `multipathd` Paramètres des LUN O
 | fast_io_fail_tmo | 5 
 
 
-| caractéristiques | « 2 pg_init_retries 50 » 
+| caractéristiques | 2 pg_init_retries 50 
 
 
-| flush_on_last_del | « oui » 
+| flush_on_last_del | oui 
 
 
-| gestionnaire_matériel | « 0 » 
+| gestionnaire_matériel | 0 
 
 
 | no_path_réessayer | file d'attente 
 
 
-| path_checker | « tur » 
+| path_checker | tur 
 
 
-| path_groupage_policy | « group_by_prio » 
+| path_groupage_policy | group_by_prio 
 
 
-| sélecteur de chemin | « temps-service 0 » 
+| sélecteur de chemin | temps de service 0 
 
 
 | intervalle_interrogation | 5 
 
 
-| prio | « ONTAP » 
+| prio | ONTAP 
 
 
 | solution netapp | LUN.* 
@@ -244,7 +244,7 @@ Le tableau suivant indique le niveau critique `multipathd` Paramètres des LUN O
 | conservez_attaed_hw_handler | oui 
 
 
-| rr_weight | « uniforme » 
+| rr_weight | uniforme 
 
 
 | noms_conviviaux_conviviaux | non 
@@ -258,30 +258,32 @@ L'exemple suivant montre comment corriger une valeur par défaut remplacée. Dan
 [listing]
 ----
 defaults {
-   path_checker      readsector0
-   no_path_retry      fail
-}
-
+ path_checker readsector0
+ no_path_retry fail
+ }
 devices {
-   device {
-      vendor         "NETAPP  "
-      product         "LUN.*"
-      no_path_retry     queue
-      path_checker      tur
-   }
+ device {
+ vendor "NETAPP "
+ product "LUN.*"
+ no_path_retry queue
+ path_checker tur
+ }
 }
 ----
 
+NOTE: Pour configurer Oracle Linux 9.0 RedHat Enterprise Kernel (RHCK), utilisez le link:hu_rhel_86.html#recommended-settings["paramètres recommandés"] Pour Red Hat Enterprise Linux (RHEL) 9.0.
 
-=== Paramètres KVM
+
+
+== Paramètres KVM
 
 Vous pouvez également utiliser les paramètres recommandés pour configurer la machine virtuelle basée sur le noyau (KVM). Aucune modification n'est nécessaire pour configurer KVM car le LUN est mappé à l'hyperviseur.
 
 
 
-== Problèmes connus et limites
+== Problèmes connus
 
-Pour les problèmes connus liés à CentOS (noyau compatible Red Hat), consultez le link:hu_rhel_83.html#known-problems-and-limitations["problèmes connus"] Pour Red Hat Enterprise Linux (RHEL) 8.3.
+Il n'y a aucun problème connu pour Oracle Linux 9.0.
 
 
 
@@ -291,4 +293,4 @@ Pour les problèmes connus liés à CentOS (noyau compatible Red Hat), consultez
 
 === Mise en miroir ASM
 
-La mise en miroir ASM peut nécessiter des modifications des paramètres de chemins d'accès multiples Linux pour permettre à ASM de reconnaître un problème et de basculer vers un autre groupe de défaillances. La plupart des configurations ASM sur ONTAP reposent sur une redondance externe. La protection des données est assurée par la baie externe et ASM ne met pas en miroir les données. Certains sites utilisent ASM avec redondance normale pour fournir une mise en miroir bidirectionnelle, généralement entre différents sites. Voir link:https://www.netapp.com/us/media/tr-3633.pdf["Les bases de données Oracle sur ONTAP"^] pour plus d'informations.
+La mise en miroir ASM peut nécessiter des modifications des paramètres de chemins d'accès multiples Linux pour permettre à ASM de reconnaître un problème et de basculer vers un autre groupe de défaillances. La plupart des configurations ASM sur ONTAP reposent sur une redondance externe. La protection des données est assurée par la baie externe et ASM ne met pas en miroir les données. Certains sites utilisent ASM avec redondance normale pour fournir une mise en miroir bidirectionnelle, généralement entre différents sites. Voir bases de données Oracle sur ONTAP pour plus d'informations.
