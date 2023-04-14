@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
 permalink: hu_wuhu_71_rn.html 
-keywords: host utilities, linux, 7.1, netapp, ontap, release, notes 
-summary: Notes de version pour Windows Unified Host Utilities 7.1 
+keywords: host utilities, linux, 7.1, 7.2, netapp, ontap, release, notes 
+summary: Notes de version pour Windows Unified Host Utilities 
 ---
-= Notes de version de Windows Unified Host Utilities 7.1
+= Notes de version des utilitaires d'hôtes unifiés Windows
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -18,15 +18,16 @@ summary: Notes de version pour Windows Unified Host Utilities 7.1
 :toc-position: content
 
 
-Ce document Notes de mise à jour contient les dernières informations relatives à la version 7.1 de Windows Unified Host Utilities, y compris les mises à jour concernant les nouvelles fonctionnalités, les améliorations et les problèmes connus. Le document est mis à jour lorsque de nouvelles informations sur l'utilisation des utilitaires hôtes Windows deviennent disponibles.
+[role="lead"]
+Ce document contient les informations les plus récentes sur les versions 7.2 et 7.1 de Windows Unified Host Utilities, notamment les mises à jour concernant les nouvelles fonctionnalités, les améliorations et les problèmes connus. Le document est mis à jour lorsque de nouvelles informations sur l'utilisation des utilitaires hôtes Windows deviennent disponibles.
 
 
 
-== À propos de la version 7.1 de Windows Unified Host Utilities
+== A propos des utilitaires d'hôtes unifiés Windows
 
 Les utilitaires d'hôtes unifiés Windows vous permettent de connecter un ordinateur hôte Windows aux systèmes de stockage NetApp. Les utilitaires hôtes unifiés Windows incluent un programme d'installation qui définit les valeurs de registre Windows et HBA requises.
 
-Windows Unified Host Utilities 7.1 continue de prendre en charge les versions suivantes de Windows :
+Windows Unified Host Utilities continue à prendre en charge les versions suivantes de Windows :
 
 * Windows 2012
 * Windows 2012R2
@@ -40,9 +41,11 @@ NOTE: NetApp qualifie d'autres composants entre les différentes versions du log
 
 
 
-== Fonctionnalités dans cette version des utilitaires hôtes
+== Caractéristiques
 
-Les utilitaires d'hôtes unifiés Windows 7.1 comprennent la prise en charge des systèmes de stockage E-Series, la prise en charge de ONTAP 9 et versions ultérieures, ainsi que des délais iSCSI améliorés pour un basculement plus rapide.
+* Windows Unified Host Utilities 7.2 inclut la prise en charge des paramètres du pilote NVMe/FC et des correctifs pour les cartes des nouveaux fournisseurs.
+* Les utilitaires d'hôtes unifiés Windows 7.1 comprennent la prise en charge des systèmes de stockage E-Series, la prise en charge de ONTAP 9 et versions ultérieures, ainsi que des délais iSCSI améliorés pour un basculement plus rapide.
+
 
 
 
@@ -56,25 +59,25 @@ Pour plus d'informations sur un bogue individuel et explorer d'autres outils li�
 
 === Installation des correctifs requis
 
-Pour garantir la réussite de l'installation ou de la mise à niveau des utilitaires hôtes unifiés de Windows, vous devez installer un correctif spécifique de Windows. Certains correctifs sont un composant des mises à jour Windows.
+Pour garantir la réussite de l'installation ou de la mise à niveau de Windows Unified Host Utilities, vous devez installer un correctif Windows spécifique. Certains correctifs sont un composant des mises à jour Windows.
 
-Reportez-vous à la link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71.html["Documentation relative aux utilitaires d'hôtes Windows"] pour les besoins spécifiques de votre configuration de hot fix.
+Reportez-vous à la link:hu_wuhu_72.html["Documentation relative aux utilitaires d'hôtes Windows"] pour les besoins spécifiques de votre configuration de hot fix.
 
 
 
 == Problèmes connus
 
-Certains comportements inattendus et potentiellement indésirables, ainsi que, dans certains cas, des solutions de contournement pour éviter ces comportements, ont été identifiés dans cette version.
+Certains comportements inattendus et potentiellement indésirables, ainsi que, dans certains cas, des solutions de contournement pour éviter ces comportements, ont été identifiés dans la version 7.1.
 
 [cols="30, 30, 20"]
 |===
 | Titre | Description | Solution de contournement 
 
 
-| Exécution du `linux_gos_timeout-install.sh` Le script n'est plus nécessaire sur les invités Hyper-V exécutant Red Hat Enterprise Linux ou SUSE Linux Enterprise Server | Vous n'avez plus besoin d'exécuter le `linux_gos_timeout-install.sh` Script permettant de modifier les délais d'expiration des disques sur les invités Red Hat Enterprise Linux 5, Red Hat Enterprise Linux 6 ou SUSE Linux Enterprise Server 11 Hyper-V en raison de l'utilisation des paramètres de délai par défaut. Le `linux_gos_timeout-install.sh` Le script inclus dans les versions précédentes des utilitaires hôtes n'est plus inclus dans les utilitaires d'hôtes unifiés Windows. Windows Unified Host Utilities 7.1 utilise les paramètres par défaut d'expiration des disques. | NA 
+| Exécution du `linux_gos_timeout-install.sh` Le script n'est plus nécessaire sur les invités Hyper-V exécutant Red Hat Enterprise Linux ou SUSE Linux Enterprise Server | Vous n'avez plus besoin d'exécuter le `linux_gos_timeout-install.sh` Script permettant de modifier les délais d'expiration des disques sur les invités Red Hat Enterprise Linux 5, Red Hat Enterprise Linux 6 ou SUSE Linux Enterprise Server 11 Hyper-V en raison de l'utilisation des paramètres de délai par défaut. Le `linux_gos_timeout-install.sh` Le script inclus dans les versions précédentes des utilitaires hôtes n'est plus inclus dans les utilitaires d'hôtes unifiés Windows. Windows Unified Host Utilities 7.1 utilise les paramètres par défaut d'expiration des disques. | Sans objet 
 
 
-| Les sessions iSCSI ne se connectent pas après le redémarrage avec des IPv4 mixtes et IPv6 | Dans une configuration MPIO (Multipath I/O) ou dans une configuration MCS (multiple Connections per session) comportant à la fois des noeuds finaux IPv4 et IPv6, certaines sessions iSCSI risquent de ne pas se reconnecter après le redémarrage de l'hôte Windows. | Pour vous assurer que tous vos chemins iSCSI reviennent après un redémarrage, utilisez tous les noeuds finaux IPv4 ou tous IPv6. Ne pas combiner IPv4 et IPv6. 
+| Les sessions iSCSI ne se connectent pas après le redémarrage avec des IPv4 mixtes et IPv6 | Dans une configuration MPIO (Multipath I/O) ou dans une configuration MCS (multiple Connections per session) comportant à la fois des noeuds finaux IPv4 et IPv6, certaines sessions iSCSI risquent de ne pas se reconnecter après le redémarrage de l'hôte Windows. | Pour vérifier que tous vos chemins iSCSI reviennent après un redémarrage, utilisez soit tous les noeuds finaux IPv4, soit tous IPv6. Ne pas combiner IPv4 et IPv6. 
 
 
 | MCS n'est pas pris en charge par le démarrage logiciel iSCSI | Lors de l'utilisation du démarrage logiciel iSCSI avec plusieurs connexions iSCSI par session (MCS), la connexion de démarrage iSCSI ne peut pas être protégée. Cela peut entraîner une déconnexion de la LUN de démarrage, entraînant la défaillance de l'hôte. | Microsoft ne prend pas en charge MCS pour les hôtes démarrés par le logiciel iSCSI. Utilisez MPIO comme solution haute disponibilité. Notez que le mélange de MPIO et MCS n'est pas pris en charge. 
@@ -83,9 +86,9 @@ link:https://mysupport.netapp.com/site/bugs-online/product["NetApp bogues en lig
 
 
 
-== À propos de la documentation sur la configuration de l'hôte SAN
+== À propos de la documentation sur la configuration des hôtes SAN
 
-La documentation relative aux utilitaires d'hôte SAN est incluse dans le link:https://docs.netapp.com/us-en/ontap-sanhost/index.html["Documentation relative à la configuration d'hôte SAN ONTAP"]. La documentation relative à la configuration DE L'HÔTE SAN ONTAP peut être cumulée. Elle couvre toutes les versions d'HÔTE SAN actuelles. Les différences fonctionnelles entre les versions sont notées dans le contexte.
+La documentation relative aux utilitaires hôtes SAN est incluse dans le link:https://docs.netapp.com/us-en/ontap-sanhost/index.html["Documentation sur la configuration des hôtes SAN ONTAP"]. La documentation relative à la configuration des hôtes SAN ONTAP est cumulative et couvre toutes les versions actuelles des hôtes SAN. Les différences fonctionnelles entre les versions sont notées dans le contexte.
 
 
 
@@ -106,7 +109,7 @@ Vous pouvez accéder à la documentation de tous les produits NetApp et consulte
 * Guide de configuration et de provisionnement de SANtricity Storage Manager pour Windows Express adapté à votre protocole
 * Guide de configuration et de provisionnement de SANtricity Storage Manager pour votre système d'exploitation, votre protocole et votre version de SANtricity.
 * Référence d'installation du logiciel SANtricity Storage Manager spécifique pour votre version de SANtricity.
-* Le guide du pilote multivoie SANtricity Storage Manager, spécifique à votre version de SANtricity.
+* Guide du pilote multivoie du gestionnaire de stockage SANtricity spécifique à votre version de SANtricity.
 * Notes de mise à jour de SANtricity Storage Manager pour votre version de SANtricity.
 
 

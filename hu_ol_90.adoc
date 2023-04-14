@@ -41,9 +41,9 @@ Si une version de Linux Unified Host Utilities est actuellement installée, vous
 
 == Kit SAN
 
-Le kit d'outils est installé automatiquement lorsque vous installez le pack NetApp Host Utilities. Ce kit fournit l'utilitaire sanlun, qui vous aide à gérer les LUN et les HBA. La commande sanlun renvoie des informations sur les LUN mappées sur votre hôte, les chemins d'accès multiples et les informations nécessaires à la création des groupes initiateurs.
+Le kit d'outils est installé automatiquement lorsque vous installez le pack NetApp Host Utilities. Ce kit contient le `sanlun` Utilitaire, qui vous aide à gérer les LUN et les HBA. Le `sanlun` La commande renvoie les informations relatives aux LUN mappées sur votre hôte, aux chemins d'accès multiples et aux informations nécessaires à la création des groupes initiateurs.
 
-Dans l'exemple suivant, la commande sanlun lun show renvoie des informations relatives aux LUN.
+Dans l'exemple suivant, le `sanlun lun show` La commande renvoie les informations relatives à la LUN.
 
 [listing]
 ----
@@ -277,7 +277,7 @@ NOTE: Pour configurer Oracle Linux 9.0 RedHat Enterprise Kernel (RHCK), utilisez
 
 == Paramètres KVM
 
-Vous pouvez également utiliser les paramètres recommandés pour configurer la machine virtuelle basée sur le noyau (KVM). Aucune modification n'est nécessaire pour configurer KVM car le LUN est mappé à l'hyperviseur.
+Vous pouvez également utiliser les paramètres recommandés pour configurer KVM (Kernel-based Virtual machine). Aucune modification n'est nécessaire pour configurer KVM car le LUN est mappé à l'hyperviseur.
 
 
 
@@ -293,4 +293,4 @@ Il n'y a aucun problème connu pour Oracle Linux 9.0.
 
 === Mise en miroir ASM
 
-La mise en miroir ASM peut nécessiter des modifications des paramètres de chemins d'accès multiples Linux pour permettre à ASM de reconnaître un problème et de basculer vers un autre groupe de défaillances. La plupart des configurations ASM sur ONTAP reposent sur une redondance externe. La protection des données est assurée par la baie externe et ASM ne met pas en miroir les données. Certains sites utilisent ASM avec redondance normale pour fournir une mise en miroir bidirectionnelle, généralement entre différents sites. Voir bases de données Oracle sur ONTAP pour plus d'informations.
+La mise en miroir ASM peut nécessiter des modifications des paramètres de chemins d'accès multiples Linux pour permettre à ASM de reconnaître un problème et de basculer vers un autre groupe de pannes. La plupart des configurations ASM sur ONTAP reposent sur une redondance externe. La protection des données est assurée par la baie externe et ASM ne met pas en miroir les données. Certains sites utilisent ASM avec redondance normale pour fournir une mise en miroir bidirectionnelle, généralement entre différents sites. Voir bases de données Oracle sur ONTAP pour plus d'informations.

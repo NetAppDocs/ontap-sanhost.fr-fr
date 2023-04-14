@@ -19,7 +19,7 @@ summary:
 
 
 [role="lead"]
-NVMe over Fabrics (NVMe-of), y compris NVMe/FC et d'autres moyens de transport, est pris en charge avec Oracle Linux 9.0 avec ANA (Asymmetric Namespace Access). Dans les environnements NVMe-of, ANA est l'équivalent des chemins d'accès multiples ALUA dans les environnements iSCSI et FC. Il est implémenté avec les chemins d'accès multiples NVMe intégrés au noyau.
+NVMe over Fabrics (NVMe-of), y compris NVMe/FC et d'autres moyens de transport, est pris en charge avec Oracle Linux (OL) 9.0 avec ANA (Asymmetric Namespace Access). Dans les environnements NVMe-of, ANA est l'équivalent des chemins d'accès multiples ALUA dans les environnements iSCSI et FC. Il est implémenté avec les chemins d'accès multiples NVMe intégrés au noyau.
 
 Pour plus d'informations sur les configurations prises en charge, reportez-vous au link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^].
 
@@ -43,7 +43,7 @@ Il n'y a pas de limites connues.
 Vous pouvez valider les versions minimales du logiciel OL 9.0 prises en charge à l'aide de la procédure suivante.
 
 .Étapes
-. Installez Oracle Linux 9.0 GA sur le serveur. Une fois l'installation terminée, vérifiez que vous exécutez le noyau Oracle Linux 9.0 GA spécifié.
+. Installez OL 9.0 GA sur le serveur. Une fois l'installation terminée, vérifiez que vous exécutez le noyau OL 9.0 GA spécifié.
 +
 [listing]
 ----
@@ -353,7 +353,7 @@ options lpfc lpfc_sg_seg_cnt=256
 == Validez la spécification NVMe-of
 
 .Étapes
-. Vérifiez les paramètres NVMe/FC suivants sur l'hôte Oracle Linux 9.0 :
+. Vérifiez les paramètres NVMe/FC suivants sur l'hôte OL 9.0 :
 +
 [listing]
 ----
@@ -497,7 +497,7 @@ Avant de dépanner toute panne NVMe/FC, vérifiez que vous exécutez une configu
 
 === Activer la journalisation détaillée
 
-Si vous rencontrez des problèmes avec votre configuration, la journalisation détaillée peut fournir des informations précieuses essentielles au dépannage.
+Si vous rencontrez un problème avec votre configuration, la journalisation détaillée peut fournir des informations essentielles pour le dépannage.
 
 .Étapes
 La procédure de définition de la journalisation détaillée pour Qlogic (qla2xxx) est différente de la procédure de définition de la journalisation détaillée LPFC.
