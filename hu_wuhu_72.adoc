@@ -45,7 +45,7 @@ Les programmes et fichiers suivants sont installés sur l'ordinateur hôte Windo
 
 == Configurations prises en charge par les utilitaires hôtes
 
-Les utilitaires hôtes prennent en charge différentes configurations d'hôtes Windows, différents protocoles et différentes options de chemins d'accès multiples. Pour plus d'informations, reportez-vous à la section https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^].
+Les utilitaires hôtes prennent en charge différentes configurations d'hôtes Windows, différents protocoles et différentes options de chemins d'accès multiples. Pour plus d'informations, reportez-vous à la section https://["Matrice d'interopérabilité NetApp"^].
 
 
 
@@ -54,7 +54,7 @@ Les utilitaires hôtes prennent en charge différentes configurations d'hôtes W
 Avant d'installer les utilitaires hôtes, vous devez vérifier que la version des utilitaires hôtes prend en charge la configuration de votre hôte et de votre système de stockage afin que le logiciel s'installe correctement.
 
 .Étapes
-. Vérifiez la configuration prise en charge dans le http://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"^].
+. Vérifiez la configuration prise en charge dans le http://["Matrice d'interopérabilité NetApp"^].
 . Vérifiez les correctifs requis pour l'hôte respectif dans le link:https://docs.netapp.com/us-en/ontap-sanhost/index.html["Documentation Windows de l'hôte SAN"].
 +
 
@@ -66,7 +66,7 @@ Les protocoles FC et iSCSI ne nécessitent pas de licence sur les systèmes de s
 
 . Vérifiez votre câblage.
 +
-Voir la https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sanconf/home.html?cp=14_7["Guide de configuration SAN"^] Pour votre version ONTAP ou https://mysupport.netapp.com/ecm/ecm_get_file/ECMLP2773533["Guide du câblage matériel E-Series"^] pour des informations détaillées sur le câblage et la configuration.
+Voir la https://["Guide de configuration SAN"^] Pour votre version ONTAP ou https://["Guide du câblage matériel E-Series"^] pour des informations détaillées sur le câblage et la configuration.
 
 
 
@@ -86,7 +86,7 @@ CAUTION: Ne modifiez pas les paramètres HBA manuellement.
 . Obtenez les pilotes HBA et les utilitaires de gestion pris en charge et installez-les conformément aux instructions fournies par le fournisseur de l'adaptateur HBA.
 . Connectez les HBA à vos commutateurs FC ou directement au système de stockage.
 . Créez des zones sur le commutateur FC conformément à la documentation de votre commutateur FC.
-. Pour ONTAP, zone le commutateur par WWPN. Veillez à utiliser le WWPN des interfaces logiques (LIF) et non le WWPN des ports physiques des contrôleurs de stockage. Pour plus d'informations, voir https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sanconf/home.html?cp=14_7["Guide de configuration SAN"^].
+. Pour ONTAP, zone le commutateur par WWPN. Veillez à utiliser le WWPN des interfaces logiques (LIF) et non le WWPN des ports physiques des contrôleurs de stockage. Pour plus d'informations, voir https://["Guide de configuration SAN"^].
 
 
 
@@ -111,7 +111,7 @@ La sélection MPIO n'est pas disponible sur les systèmes Windows XP et Windows 
 Pour installer le progiciel des utilitaires hôtes de manière interactive, vous devez exécuter le programme d'installation des utilitaires hôtes et suivre les invites.
 
 .Étapes
-. Téléchargez le fichier exécutable à partir du https://mysupport.netapp.com/site/["Site de support NetApp"^].
+. Téléchargez le fichier exécutable à partir du https://["Site de support NetApp"^].
 . Accédez au répertoire dans lequel vous avez téléchargé le fichier exécutable.
 . Exécutez le `netapp_windows_host_utilities_7.2_x64` classez et suivez les instructions à l'écran.
 . Redémarrez l'hôte Windows lorsque vous y êtes invité.
@@ -432,14 +432,14 @@ Vous pouvez utiliser les techniques de dépannage générales pour les utilitair
 === Différents domaines pour identifier les problèmes d'interopérabilité possibles
 
 * Pour identifier les problèmes d'interopérabilité potentiels, vous devez vous assurer que les utilitaires hôtes prennent en charge votre combinaison de logiciel de système d'exploitation hôte, de matériel hôte, de logiciel ONTAP et de matériel de système de stockage.
-* Vous devez vérifier le http://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"^].
+* Vous devez vérifier le http://["Matrice d'interopérabilité NetApp"^].
 * Vous devez vérifier que vous disposez de la bonne configuration iSCSI.
 * Si les LUN iSCSI ne sont pas disponibles après un redémarrage, vous devez vérifier que la cible est répertoriée comme étant persistante dans l'onglet *cibles persistantes* de l'interface utilisateur de l'initiateur Microsoft iSCSI.
 * Si les applications utilisant les LUN affichent des erreurs au démarrage, vous devez vérifier que les applications sont configurées pour dépendre du service iSCSI.
 * Pour les chemins FC vers les contrôleurs de stockage exécutant ONTAP, vous devez vérifier que les switchs FC sont zonés en utilisant les WWPN des LIF cibles, pas les WWPN des ports physiques sur le nœud.
 * Vous devez vérifier le link:hu_wuhu_71_rn.html["Notes de version"] Pour que les utilitaires hôtes Windows vérifient les problèmes connus. Les notes de mise à jour incluent une liste des problèmes connus et des limites.
 * Vous devez consulter les informations de dépannage du Guide d'administration SAN de votre version de ONTAP.
-* Vous devez effectuer une recherche https://mysupport.netapp.com/site/bugs-online/product["NetApp bogues en ligne"^] pour les problèmes récemment découverts.
+* Vous devez effectuer une recherche https://["NetApp bogues en ligne"^] pour les problèmes récemment découverts.
 +
 ** Dans le champ Type de bogue sous recherche avancée, sélectionnez *iSCSI - Windows*, puis *Go*. Vous devez répéter la recherche pour Bug Type *FCP -Windows*.
 

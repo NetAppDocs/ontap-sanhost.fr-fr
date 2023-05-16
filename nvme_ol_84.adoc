@@ -420,7 +420,7 @@ NSID        UUID                                  Size
 | ID de bug NetApp | Titre | Description | ID Bugzilla 
 
 
-| 1517321 | Les hôtes Oracle Linux 8.4 NVMe-of créent des contrôleurs de détection persistante en double | Sur les hôtes Oracle Linux 8.4 NVMe over Fabrics (NVMe-of), vous pouvez utiliser la commande nvme Discover -p pour créer des contrôleurs CDP (persistent Discovery Controller). Lorsque cette commande est utilisée, un seul PDC doit être créé par combinaison initiateur-cible. Toutefois, si vous exécutez ONTAP 9.10.1 et Oracle Linux 8.4 avec un hôte NVMe-of, un PDC dupliqué est créé chaque fois que « nvme Discover -p » est exécuté. Cela entraîne une utilisation inutile des ressources sur l'hôte et la cible. | https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=18118["18118"^] 
+| 1517321 | Les hôtes Oracle Linux 8.4 NVMe-of créent des contrôleurs de détection persistante en double | Sur les hôtes Oracle Linux 8.4 NVMe over Fabrics (NVMe-of), vous pouvez utiliser la commande nvme Discover -p pour créer des contrôleurs CDP (persistent Discovery Controller). Lorsque cette commande est utilisée, un seul PDC doit être créé par combinaison initiateur-cible. Toutefois, si vous exécutez ONTAP 9.10.1 et Oracle Linux 8.4 avec un hôte NVMe-of, un PDC dupliqué est créé chaque fois que « nvme Discover -p » est exécuté. Cela entraîne une utilisation inutile des ressources sur l'hôte et la cible. | https://["18118"^] 
 |===
 
 

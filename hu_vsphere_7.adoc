@@ -29,7 +29,7 @@ Ce document décrit les paramètres de configuration des hôtes SAN ONTAP pour l
 == Démarrage SAN de l'hyperviseur
 
 .Ce dont vous avez besoin
-Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser le https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^] Pour vérifier que votre système d'exploitation, votre adaptateur de bus hôte, votre micrologiciel HBA, votre BIOS de démarrage HBA et votre version de ONTAP sont pris en charge.
+Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser le https://["Matrice d'interopérabilité NetApp"^] Pour vérifier que votre système d'exploitation, votre adaptateur de bus hôte, votre micrologiciel HBA, votre BIOS de démarrage HBA et votre version de ONTAP sont pris en charge.
 
 .Étapes
 . Mappez la LUN de démarrage SAN sur l'hôte.
@@ -214,9 +214,9 @@ NOTE: Vous devez déployer des outils ONTAP pour VMware vSphere afin d'activer V
 
 NetApp ne recommande pas pour le moment de modifier les paramètres vVvols de la valeur par défaut.
 
-Reportez-vous à la https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^] Pour les versions spécifiques des outils ONTAP ou de VASA Provider pour vos versions spécifiques de vSphere et ONTAP.
+Reportez-vous à la https://["Matrice d'interopérabilité NetApp"^] Pour les versions spécifiques des outils ONTAP ou de VASA Provider pour vos versions spécifiques de vSphere et ONTAP.
 
-Pour plus d'informations sur le provisionnement et la gestion de vvols, reportez-vous également aux outils ONTAP pour la documentation VMware vSphere link:https://docs.netapp.com/us-en/netapp-solutions/hybrid-cloud/vsphere_ontap_ontap_for_vsphere.html["TR-4597"^] et link:https://www.netapp.com/pdf.html?item=/media/13555-tr4400pdf.pdf["TR-4400."^]
+Pour plus d'informations sur le provisionnement et la gestion de vvols, reportez-vous également aux outils ONTAP pour la documentation VMware vSphere link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsphere_ontap_ontap_for_vsphere.html["Tr-4597-VMware vSphere avec ONTAP"^] et link:https://www.netapp.com/pdf.html?item=/media/13555-tr4400pdf.pdf["TR-4400."^]
 
 
 
@@ -337,7 +337,7 @@ Il n'y a pas de problème connu.
 
 == Liens connexes
 
-* link:https://www.netapp.com/media/13550-tr4597.pdf["Tr-4597-VMware vSphere avec ONTAP"^]
+* link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsphere_ontap_ontap_for_vsphere.html["Tr-4597-VMware vSphere avec ONTAP"^]
 * link:https://kb.vmware.com/s/article/2031038["Prise en charge de VMware vSphere 5.x, 6.x et 7.x avec NetApp MetroCluster (2031038)"^]
 * link:https://kb.vmware.com/s/article/83370["NetApp ONTAP avec NetApp SnapMirror, continuité de l'activité (SM-BC) et VMware vSphere Metro Storage Cluster (vMSC)"^]
 
