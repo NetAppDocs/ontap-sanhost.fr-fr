@@ -271,9 +271,13 @@ tcp.vmnic3:34:80:Od:30:ca:el-tcp.unknown-uuid.400bf333abf74ab8b96dc18ffadc3f99
 
 == Problème connu
 
-* La prise en charge du protocole NVMe/FC ESXi 7.0 U3 (et versions ultérieures) est disponible à partir de ONTAP 9.9.1 P3 et versions ultérieures, car les correctifs d'abandon NVMe (publiés par ESXi 7.0 U3 et versions ultérieures) sont disponibles à partir de ONTAP 9.9.1 P3. Consultez le rapport public burt correspondant à l'adresse https://[] pour plus d'informations.
+[cols="10,30,30"]
+|===
+| ID de bug NetApp | Titre | Solution de contournement 
 
 
+| link:https://mysupport.netapp.com/site/bugs-online/product/ONTAP/BURT/1420654["1420654"^] | Nœud ONTAP non opérationnel lorsque le protocole NVMe/FC est utilisé avec ONTAP version 9.9.1 | Rechercher et corriger tout problème de réseau dans la structure hôte. Si cela ne résout pas le problème, mettez à niveau vers un correctif qui corrige ce problème. 
+|===
 
 
 == Liens connexes

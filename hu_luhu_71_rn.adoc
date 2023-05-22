@@ -160,4 +160,4 @@ Vous pouvez accéder à la documentation de tous les produits NetApp et consulte
 * Notes de mise à jour de SANtricity Storage Manager pour votre version de SANtricity.
 
 
-Voir la link:https://docs.netapp.com/us-en/e-series/index.html["Documentation E-Series"] Pour accéder à la documentation relative à SANtricity.
+Voir la link:https://docs.netapp.com/us-en/e-series/index.html["Documentation E-Series"^] Pour accéder à la documentation relative à SANtricity.
