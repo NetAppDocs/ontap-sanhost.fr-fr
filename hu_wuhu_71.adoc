@@ -50,7 +50,7 @@ Les programmes et fichiers suivants sont installés sur l'ordinateur hôte Windo
 
 == Configurations prises en charge par les utilitaires hôtes
 
-Les utilitaires hôtes prennent en charge différents protocoles, configurations hôtes et options de chemins d'accès multiples Windows. Pour plus d'informations, voir https://["Matrice d'interopérabilité NetApp"^].
+Les utilitaires hôtes prennent en charge différents protocoles, configurations hôtes et options de chemins d'accès multiples Windows. Pour plus d'informations, voir https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^].
 
 
 
@@ -59,7 +59,7 @@ Les utilitaires hôtes prennent en charge différents protocoles, configurations
 Avant d'installer les utilitaires hôtes, vérifiez que la version des utilitaires hôtes prend en charge la configuration de l'hôte et du système de stockage afin que le logiciel s'installe correctement.
 
 .Étapes
-. Vérifiez la configuration prise en charge dans le http://["Matrice d'interopérabilité NetApp"^].
+. Vérifiez la configuration prise en charge dans le http://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"^].
 . Vérifier les correctifs requis pour l'hôte respectif sur le link:https://docs.netapp.com/us-en/ontap-sanhost/index.html["Documentation Windows de l'hôte SAN"].
 +
 
@@ -71,7 +71,7 @@ Les protocoles Fibre Channel et iSCSI ne nécessitent pas de licence sur les sys
 
 . Vérifiez le câblage
 +
-Voir la https://["Guide de configuration SAN"^] Pour votre version de ONTAP ou https://["Guide du câblage matériel E-Series"^] pour des informations détaillées sur le câblage et la configuration.
+Voir la https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sanconf/home.html?cp=14_7["Guide de configuration SAN"^] Pour votre version de ONTAP ou https://mysupport.netapp.com/ecm/ecm_get_file/ECMLP2773533["Guide du câblage matériel E-Series"^] pour des informations détaillées sur le câblage et la configuration.
 
 
 
@@ -91,7 +91,7 @@ NOTE: Ne modifiez pas les paramètres HBA manuellement.
 . Obtenez les pilotes HBA et les utilitaires de gestion pris en charge et installez-les conformément aux instructions fournies par le fournisseur de l'adaptateur HBA.
 . Connectez les HBA à vos commutateurs Fibre Channel ou directement au système de stockage.
 . Créez des zones sur le commutateur Fibre Channel en fonction de la documentation de votre commutateur Fibre Channel.
-. Pour ONTAP, segmenter le commutateur par WWPN. Veillez à utiliser le WWPN des LIFs et non des ports physiques des contrôleurs de stockage. Pour plus d'informations, voir https://["Guide de configuration SAN"^].
+. Pour ONTAP, segmenter le commutateur par WWPN. Veillez à utiliser le WWPN des LIFs et non des ports physiques des contrôleurs de stockage. Pour plus d'informations, voir https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sanconf/home.html?cp=14_7["Guide de configuration SAN"^].
 
 
 
@@ -116,7 +116,7 @@ Vous devez indiquer si vous souhaitez inclure la prise en charge des chemins d'a
 Pour installer le progiciel Host Utilities de manière interactive, vous devez exécuter le programme d'installation Host Utilities et suivre les invites.
 
 .Étapes
-. Téléchargez le fichier exécutable à partir de https://["Site de support NetApp"^].
+. Téléchargez le fichier exécutable à partir de https://mysupport.netapp.com/site/["Site de support NetApp"^].
 . Accédez au répertoire à partir duquel vous avez téléchargé le fichier exécutable.
 . Exécutez le `netapp_windows_host_utilities_7.1_x64` classez et suivez les instructions à l'écran.
 . Redémarrez l'hôte Windows lorsque vous y êtes invité.
@@ -361,7 +361,7 @@ Le programme d'installation de Windows Unified Host Utilities définit automatiq
 | HKLM\SYSTEM\CurrentControlSet\Services\mpio \Parameters\UseCustomPathRecovery yInterval | 1 | Lorsque votre serveur est Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, Windows Server 2012 R2 ou Windows Server 2016 uniquement 
 |===
 .Informations associées
-Reportez-vous à la https://["Documents Microsoft"^] pour plus de détails sur les paramètres du registre.
+Reportez-vous à la https://docs.microsoft.com/en-us/troubleshoot/windows-server/performance/windows-registry-advanced-users["Documents Microsoft"^] pour plus de détails sur les paramètres du registre.
 
 
 
@@ -415,7 +415,7 @@ Pour les HBA Fibre Channel QLogic, le programme d'installation définit les para
 NOTE: Les noms des paramètres peuvent varier légèrement selon le programme. Par exemple, dans le programme QConvergeConsole de QLogic, le paramètre s'affiche comme `Link Down Timeout`. Utilitaires hôtes `fcconfig.ini` fichier affiche ce paramètre comme l'un ou l'autre `LinkDownTimeOut` ou `MpioLinkDownTimeOut`, Selon que MPIO est spécifié ou non. Cependant, tous ces noms font référence au même paramètre HBA.
 
 .Informations associées
-Reportez-vous à la section https://["Emulex"^] ou https://["QLogic"^] site pour en savoir plus sur les paramètres d'expiration.
+Reportez-vous à la section https://www.broadcom.com/support/download-search["Emulex"^] ou https://driverdownloads.qlogic.com/QLogicDriverDownloads_UI/Netapp_search.aspx["QLogic"^] site pour en savoir plus sur les paramètres d'expiration.
 
 
 
@@ -431,8 +431,8 @@ Cette section décrit les techniques générales de dépannage des utilitaires h
 * Si les applications utilisant les LUN affichent des erreurs au démarrage, vous devez vérifier que les applications sont configurées pour dépendre du service iSCSI.
 * Pour les chemins Fibre Channel vers les contrôleurs de stockage qui exécutent ONTAP, vous devez vérifier que les commutateurs FC sont zonés à l'aide des WWPN des LIFs cibles, et non pas des WWPN des ports physiques du nœud.
 * Vous devez vérifier le link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71_rn.html["Notes de version pour les utilitaires hôtes Windows"] pour rechercher des problèmes connus. Les notes de mise à jour incluent une liste des problèmes connus et des limites.
-* Vous devez consulter les informations de dépannage dans le https://["Guide d'administration DU SAN"^] Pour votre version de ONTAP.
-* Vous devez effectuer une recherche https://["Bogues en ligne"^] pour les problèmes récemment découverts.
+* Vous devez consulter les informations de dépannage dans le https://docs.netapp.com/ontap-9/index.jsp["Guide d'administration DU SAN"^] Pour votre version de ONTAP.
+* Vous devez effectuer une recherche https://mysupport.netapp.com/site/bugs-online/["Bogues en ligne"^] pour les problèmes récemment découverts.
 * Dans le champ types de bug, sous recherche avancée, vous devez sélectionner ISCSI - Windows, puis cliquer sur Go. Vous devez répéter la recherche pour Bug Type FCP -Windows.
 * Vous devez collecter des informations sur votre système.
 * Enregistrez tous les messages d'erreur affichés sur l'hôte ou la console du système de stockage.
@@ -442,9 +442,9 @@ Cette section décrit les techniques générales de dépannage des utilitaires h
 
 
 .Informations associées
-http://["Matrice d'interopérabilité NetApp"^]
-https://["Documentation NetApp"^]
-https://["NetApp bogues en ligne"^]
+http://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"^]
+https://mysupport.netapp.com/portal/documentation["Documentation NetApp"^]
+https://mysupport.netapp.com/NOW/cgi-bin/bol["NetApp bogues en ligne"^]
 
 
 

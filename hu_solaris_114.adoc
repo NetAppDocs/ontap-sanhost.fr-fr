@@ -96,7 +96,7 @@ Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charg
 
 LE démarrage SAN est le processus de configuration d'un disque connecté au SAN (un LUN) en tant que périphérique d'amorçage pour un hôte Solaris.
 
-Vous pouvez configurer une LUN de démarrage SAN pour qu'elle fonctionne dans un environnement Solaris MPxIO en utilisant le protocole FC et en exécutant Solaris Host Utilities. La méthode que vous utilisez pour configurer une LUN de démarrage SAN peut varier en fonction de votre gestionnaire de volumes et de votre système de fichiers. Voir https://["Installez Solaris Host Utilities"] Pour plus de détails sur les LUN SAN Booting dans un environnement MPIO Solaris.
+Vous pouvez configurer une LUN de démarrage SAN pour qu'elle fonctionne dans un environnement Solaris MPxIO en utilisant le protocole FC et en exécutant Solaris Host Utilities. La méthode que vous utilisez pour configurer une LUN de démarrage SAN peut varier en fonction de votre gestionnaire de volumes et de votre système de fichiers. Voir https://docs.netapp.com/us-en/ontap-sanhost/hu_solaris_62.html["Installez Solaris Host Utilities"] Pour plus de détails sur les LUN SAN Booting dans un environnement MPIO Solaris.
 
 
 
@@ -178,7 +178,7 @@ Voici certains paramètres recommandés pour les systèmes Solaris 11.4 SPARC et
 
 === Paramètres recommandés pour MetroCluster
 
-Par défaut, le système d'exploitation Solaris échouera I/OS au bout de 20 secondes si tous les chemins d'accès à une LUN sont perdus. Ceci est contrôlé par le `fcp_offline_delay` paramètre. Valeur par défaut pour `fcp_offline_delay` Est parfaitement adapté aux clusters ONTAP standard. Cependant, dans les configurations MetroCluster, la valeur de `fcp_offline_delay` Doit être augmenté à *120s* pour s'assurer que les E/S ne sont pas prématurément hors service pendant les opérations, y compris les basculements non planifiés. Pour plus d'informations et pour connaître les modifications recommandées des paramètres par défaut, reportez-vous à l'article de la base de connaissances https://["Considérations relatives à la prise en charge des hôtes Solaris dans une configuration MetroCluster"^].
+Par défaut, le système d'exploitation Solaris échouera I/OS au bout de 20 secondes si tous les chemins d'accès à une LUN sont perdus. Ceci est contrôlé par le `fcp_offline_delay` paramètre. Valeur par défaut pour `fcp_offline_delay` Est parfaitement adapté aux clusters ONTAP standard. Cependant, dans les configurations MetroCluster, la valeur de `fcp_offline_delay` Doit être augmenté à *120s* pour s'assurer que les E/S ne sont pas prématurément hors service pendant les opérations, y compris les basculements non planifiés. Pour plus d'informations et pour connaître les modifications recommandées des paramètres par défaut, reportez-vous à l'article de la base de connaissances https://kb.netapp.com/onprem/ontap/metrocluster/Solaris_host_support_considerations_in_a_MetroCluster_configuration["Considérations relatives à la prise en charge des hôtes Solaris dans une configuration MetroCluster"^].
 
 
 
@@ -244,7 +244,7 @@ svl_fops_name = 0xa00298d69e0 "conf f_tpgs"
 
 
 
-NOTE: Après `scsi-vhci-failover-override` a été appliqué, `conf` est ajouté à `svl_fops_name` . Pour plus d'informations et pour connaître les modifications recommandées par défaut, consultez l'article de la base de connaissances NetApp https://["Prise en charge de Solaris Host Paramètres recommandés dans la configuration de SnapMirror Business Continuity (SM-BC)"^].
+NOTE: Après `scsi-vhci-failover-override` a été appliqué, `conf` est ajouté à `svl_fops_name` . Pour plus d'informations et pour connaître les modifications recommandées par défaut, consultez l'article de la base de connaissances NetApp https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapMirror/Solaris_Host_support_recommended_settings_in_SnapMirror_Business_Continuity_(SM-BC)_configuration["Prise en charge de Solaris Host Paramètres recommandés dans la configuration de SnapMirror Business Continuity (SM-BC)"^].
 
 
 

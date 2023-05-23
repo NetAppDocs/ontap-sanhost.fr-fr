@@ -43,7 +43,7 @@ NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans ce docu
 == Limites connues
 
 * Pour RHEL 8.4, le chemin d'accès multiples NVMe intégré au noyau reste désactivé par défaut. Par conséquent, vous devez l'activer manuellement.
-* NVMe/TCP sur RHEL 8.4 reste une fonction d'aperçu technologique en raison de problèmes ouverts. Reportez-vous à la https://["Notes de version de RHEL 8.4"^] pour plus d'informations.
+* NVMe/TCP sur RHEL 8.4 reste une fonction d'aperçu technologique en raison de problèmes ouverts. Reportez-vous à la https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html-single/8.4_release_notes/index#technology-preview_file-systems-and-storage["Notes de version de RHEL 8.4"^] pour plus d'informations.
 
 
 

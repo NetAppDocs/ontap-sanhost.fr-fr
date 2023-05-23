@@ -48,14 +48,14 @@ Aucune.
 
 == Configuration requise
 
-Reportez-vous à la http://["Matrice d'interopérabilité NetApp (IMT)"^] pour obtenir la liste actuelle des configurations prises en charge.
+Reportez-vous à la http://mysupport.netapp.com/matrix3["Matrice d'interopérabilité NetApp (IMT)"^] pour obtenir la liste actuelle des configurations prises en charge.
 
 
 
 == Activez NVMe/FC avec Oracle Linux 8.3
 
 .Étapes
-. Installez Oracle Linux 8.3 GA sur le serveur. Une fois l'installation terminée, vérifiez que vous exécutez le noyau Oracle Linux 8.3 GA spécifié. Voir la https://["Matrice d'interopérabilité NetApp"^] pour obtenir la liste la plus récente des versions prises en charge.
+. Installez Oracle Linux 8.3 GA sur le serveur. Une fois l'installation terminée, vérifiez que vous exécutez le noyau Oracle Linux 8.3 GA spécifié. Voir la https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^] pour obtenir la liste la plus récente des versions prises en charge.
 +
 [listing]
 ----
@@ -109,7 +109,7 @@ Redémarrez le démon multipathd en exécutant la commande _systemctl restart mu
 == Configurez la carte FC Broadcom pour NVMe/FC
 
 .Étapes
-. Vérifiez que vous utilisez la carte prise en charge. Pour consulter la liste la plus récente des cartes prises en charge, reportez-vous à la section https://["Matrice d'interopérabilité NetApp"^].
+. Vérifiez que vous utilisez la carte prise en charge. Pour consulter la liste la plus récente des cartes prises en charge, reportez-vous à la section https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^].
 +
 [listing]
 ----
@@ -124,7 +124,7 @@ LPe36002-M2
 Emulex LPe36002-M64 2-Port 64Gb Fibre Channel Adapter
 Emulex LPe36002-M64 2-Port 64Gb Fibre Channel Adapter
 ----
-. Vérifiez que vous utilisez le micrologiciel et le pilote recommandés pour la boîte de réception Broadcom lpfc. Pour obtenir la liste la plus récente des pilotes de carte et des versions de micrologiciel pris en charge, reportez-vous au https://["Matrice d'interopérabilité NetApp"^].
+. Vérifiez que vous utilisez le micrologiciel et le pilote recommandés pour la boîte de réception Broadcom lpfc. Pour obtenir la liste la plus récente des pilotes de carte et des versions de micrologiciel pris en charge, reportez-vous au https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^].
 +
 [listing]
 ----
@@ -397,7 +397,7 @@ Device      Vserver         Namespace Path             NSID UUID                
 | ID de bug NetApp | Titre | Description | Oracle Bugzilla 
 
 
-| 1517321 | Les hôtes Oracle Linux 8.3 NVMe-of créent des contrôleurs de détection persistante en double | Sur les hôtes Oracle Linux 8.3 NVMe over Fabrics (NVMe-of), vous pouvez utiliser le `nvme discover -p` Commande permettant de créer des contrôleurs de découverte permanente (CDP). Lorsque cette commande est utilisée, un seul PDC doit être créé par combinaison initiateur-cible. Toutefois, si vous exécutez ONTAP 9.10.1 et Oracle Linux 8.3 avec un hôte NVMe-of, un PDC en double est créé à chaque fois `nvme discover -p` est exécuté. Cela entraîne une utilisation inutile des ressources sur l'hôte et la cible. | https://["18118"^] 
+| 1517321 | Les hôtes Oracle Linux 8.3 NVMe-of créent des contrôleurs de détection persistante en double | Sur les hôtes Oracle Linux 8.3 NVMe over Fabrics (NVMe-of), vous pouvez utiliser le `nvme discover -p` Commande permettant de créer des contrôleurs de découverte permanente (CDP). Lorsque cette commande est utilisée, un seul PDC doit être créé par combinaison initiateur-cible. Toutefois, si vous exécutez ONTAP 9.10.1 et Oracle Linux 8.3 avec un hôte NVMe-of, un PDC en double est créé à chaque fois `nvme discover -p` est exécuté. Cela entraîne une utilisation inutile des ressources sur l'hôte et la cible. | https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=18118["18118"^] 
 |===
 
 

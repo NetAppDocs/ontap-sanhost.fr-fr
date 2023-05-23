@@ -29,7 +29,7 @@ Ce document fournit des instructions sur les paramètres de configuration des h�
 == Démarrage SAN de l'hyperviseur
 
 .Ce dont vous avez besoin
-Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser le https://["Matrice d'interopérabilité NetApp"^] Pour vérifier que votre système d'exploitation, votre adaptateur de bus hôte, votre micrologiciel HBA, votre BIOS de démarrage HBA et votre version de ONTAP sont pris en charge.
+Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser le https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^] Pour vérifier que votre système d'exploitation, votre adaptateur de bus hôte, votre micrologiciel HBA, votre BIOS de démarrage HBA et votre version de ONTAP sont pris en charge.
 
 .Étapes
 . Mappez la LUN de démarrage SAN sur l'hôte.
@@ -192,9 +192,9 @@ NOTE: Vous devez déployer des outils ONTAP pour VMware vSphere afin d'activer V
 
 NetApp ne recommande pas pour le moment de modifier les paramètres vVvols des valeurs par défaut.
 
-Reportez-vous à la https://["Matrice d'interopérabilité NetApp"^] Pour les versions spécifiques des outils ONTAP ou de VASA Provider pour vos versions spécifiques de vSphere et ONTAP.
+Reportez-vous à la https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^] Pour les versions spécifiques des outils ONTAP ou de VASA Provider pour vos versions spécifiques de vSphere et ONTAP.
 
-Pour plus d'informations sur le provisionnement et la gestion de vvols, reportez-vous également aux outils ONTAP pour la documentation VMware vSphere https://["TR-4597"^] et link:https://www.netapp.com/pdf.html?item=/media/13555-tr4400pdf.pdf["TR-4400."^]
+Pour plus d'informations sur le provisionnement et la gestion de vvols, reportez-vous également aux outils ONTAP pour la documentation VMware vSphere https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsphere_ontap_ontap_for_vsphere.html["TR-4597"^] et link:https://www.netapp.com/pdf.html?item=/media/13555-tr4400pdf.pdf["TR-4400."^]
 
 
 
@@ -220,7 +220,7 @@ Le verrouillage ATS est *obligatoire* pour le stockage compatible VAAI et la mis
 | Disk/QFullSampleSize | 0 | 32 | Nombre de FILES D'ATTENTE PLEINES ou OCCUPÉES qu'il faut avant que ESXi ne commence à limiter. 
 |===
 
-NOTE: Activez le paramètre Space-alloc pour que toutes les LUN mappées à VMware vSphere pour que la commande UNMAP fonctionne. Pour plus de détails, reportez-vous à https://["Documentation ONTAP"^].
+NOTE: Activez le paramètre Space-alloc pour que toutes les LUN mappées à VMware vSphere pour que la commande UNMAP fonctionne. Pour plus de détails, reportez-vous à https://docs.netapp.com/ontap-9/index.jsp["Documentation ONTAP"^].
 
 
 
