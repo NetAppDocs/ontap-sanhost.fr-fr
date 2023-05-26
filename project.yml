@@ -49,6 +49,8 @@ sidebar:
         url: "/hu_wuhu_71_rn.html"
   - title: Configurations hôte NVMe-of
     entries:
+    - title: AIX
+      url: "/nvme_aix.html"
     - title: VMware ESXi
       pdf-filename: ESXi NVMeoF
       entries:
