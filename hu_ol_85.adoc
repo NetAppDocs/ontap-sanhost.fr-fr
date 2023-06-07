@@ -149,55 +149,61 @@ NOTE: N'utilisez pas un nombre excessif de chemins pour une seule LUN. Pas plus 
 
 Le système d'exploitation Oracle Linux 8.5 est compilé pour reconnaître les LUN ONTAP et définir automatiquement tous les paramètres de configuration pour les configurations ASA et non ASA.
 
-Le `multipath.conf` le fichier doit exister pour que le démon multivoie démarre, mais vous pouvez créer un fichier vide de zéro octet à l'aide de la commande :
+Le `multipath.conf` le fichier doit exister pour que le démon multivoie démarre, mais vous pouvez créer un fichier vide à zéro octet en utilisant la commande suivante :
+
 `touch /etc/multipath.conf`
 
-Lors de la première création de ce fichier, vous devrez peut-être activer et démarrer les services multipathing.
+La première fois que vous créez ce fichier, vous devrez peut-être activer et démarrer les services multivoies :
 
 [listing]
 ----
 # systemctl enable multipathd
 # systemctl start multipathd
 ----
-Il n'y a aucune exigence d'ajouter directement quoi que ce soit au `multipath.conf` fichier, sauf si vous disposez de périphériques que vous ne voulez pas être gérés par multipath ou si vous avez des paramètres existants qui remplacent les paramètres par défaut.
-
-Vous pouvez ajouter la syntaxe suivante à la `multipath.conf` fichier pour exclure les périphériques indésirables.
-
-Remplacer l' `<DevId>` Avec la chaîne WWID du périphérique à exclure :
-
-....
+* Il n'y a aucune exigence d'ajouter directement quoi que ce soit au `multipath.conf` fichier, sauf si vous disposez de périphériques que vous ne voulez pas être gérés par multipath ou si vous avez des paramètres existants qui remplacent les paramètres par défaut.
+* Pour exclure les périphériques indésirables, ajoutez la syntaxe suivante au `multipath.conf` fichier .
++
+[listing]
+----
 blacklist {
         wwid <DevId>
         devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
         devnode "^hd[a-z]"
         devnode "^cciss.*"
 }
-....
+----
++
+Remplacer l' `<DevId>` avec le `WWID` chaîne du périphérique à exclure.
+
+
+
 .Exemple
 Dans cet exemple, `sda` Est le disque SCSI local que nous devons ajouter à la liste noire.
 
 .Étapes
 . Exécutez la commande suivante pour déterminer l'identifiant WWID :
 +
-....
+[listing]
+----
 # /lib/udev/scsi_id -gud /dev/sda
 360030057024d0730239134810c0cb833
-....
-. Ajoutez cet identifiant WWID à la strophe de la liste noire dans le `/etc/multipath.conf`:
+----
+. Ajoutez le `WWID` à la strophe de liste noire dans `/etc/multipath.conf`:
 +
-....
+[listing]
+----
 blacklist {
      wwid   360030057024d0730239134810c0cb833
      devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
      devnode "^hd[a-z]"
      devnode "^cciss.*"
 }
-....
+----
 
 
-Vous devez toujours vérifier votre `/etc/multipath.conf` fichier pour les paramètres hérités, notamment dans la section par défaut, qui peut remplacer les paramètres par défaut.
+Vous devez toujours vérifier votre `/etc/multipath.conf` fichier pour les paramètres hérités, en particulier dans la section valeurs par défaut, qui peut remplacer les paramètres par défaut.
 
-Le tableau suivant indique le niveau critique `multipathd` Paramètres des LUN ONTAP et des valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il doit être corrigé par des strophes ultérieurs dans le `multipath.conf` Fichier qui s'applique spécifiquement aux LUN ONTAP. Si ce n'est pas le cas, les LUN de ONTAP peuvent ne pas fonctionner comme prévu. Ces valeurs par défaut ne doivent être remplacées qu'en consultation avec les fournisseurs de NetApp et/ou du système d'exploitation, et uniquement lorsque l'impact est totalement compris.
+Le tableau suivant illustre la critique `multipathd` Paramètres des LUN ONTAP et des valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il doit être corrigé par des strophes ultérieurs dans le `multipath.conf` Fichier qui s'applique spécifiquement aux LUN ONTAP. Si ce n'est pas le cas, les LUN de ONTAP risquent de ne pas fonctionner comme prévu. Ces valeurs par défaut doivent être remplacées uniquement en consultation avec NetApp et/ou un fournisseur de système d'exploitation, et uniquement lorsque l'impact est pleinement compris.
 
 [cols="2*"]
 |===

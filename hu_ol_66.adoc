@@ -128,10 +128,11 @@ NOTE: N'utilisez pas un nombre excessif de chemins pour une seule LUN. Il ne fau
 
 Oracle Linux 6.6 OS est compilé pour reconnaître les LUN ONTAP et définir automatiquement tous les paramètres de configuration correctement.
 
-* Le `multipath.conf` le fichier doit exister pour que le démon multivoie démarre, mais vous pouvez créer un fichier vide à zéro octet en utilisant la commande suivante :
-`touch /etc/multipath.conf`.
-* Lors de la première création de ce fichier, vous devrez peut-être activer et démarrer les services multipathing.
+Le `multipath.conf` le fichier doit exister pour que le démon multivoie démarre, mais vous pouvez créer un fichier vide à zéro octet en utilisant la commande suivante :
 
+`touch /etc/multipath.conf`.
+
+Lors de la première création de ce fichier, vous devrez peut-être activer et démarrer les services multipathing.
 
 [listing]
 ----
@@ -139,21 +140,27 @@ Oracle Linux 6.6 OS est compilé pour reconnaître les LUN ONTAP et définir aut
 # /etc/init.d/multipathd start
 ----
 * Il n'y a aucune exigence d'ajouter directement quoi que ce soit au `multipath.conf` fichier sauf si vous avez des périphériques que vous ne souhaitez pas gérer multipath ou si vous avez des paramètres existants qui remplacent les paramètres par défaut.
-* Vous pouvez ajouter la syntaxe suivante à la `multipath.conf` fichier pour exclure les périphériques indésirables.
-* Remplacez le <DevId> par la chaîne WWID du périphérique que vous souhaitez exclure :
-
-
-....
+* Vous pouvez ajouter la syntaxe suivante à la `multipath.conf` fichier pour exclure les périphériques indésirables :
++
+** Remplacez le <DevId> par la chaîne WWID du périphérique que vous souhaitez exclure :
++
+[listing]
+----
 blacklist {
         wwid <DevId>
         devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
         devnode "^hd[a-z]"
         devnode "^cciss.*"
 }
-....
+----
+
+
+
+
 .Exemple
 Dans cet exemple, `sda` Est le disque SCSI local que nous devons ajouter à la liste noire.
 
+.Étapes
 . Exécutez la commande suivante pour déterminer l'identifiant WWID :
 +
 [listing]
@@ -161,21 +168,22 @@ Dans cet exemple, `sda` Est le disque SCSI local que nous devons ajouter à la l
 # /lib/udev/scsi_id -gud /dev/sda
 360030057024d0730239134810c0cb833
 ----
-. Ajoutez cet identifiant WWID à la strophe "liste noire" dans /etc/multipath.conf :
+. Ajoutez ce WWID à la strophe « blacklist » dans `/etc/multipath.conf`:
 +
-....
+[listing]
+----
 blacklist {
      wwid   360030057024d0730239134810c0cb833
      devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
      devnode "^hd[a-z]"
      devnode "^cciss.*"
 }
-....
+----
 
 
 Vous devez toujours vérifier votre `/etc/multipath.conf` fichier pour les paramètres hérités, en particulier dans la section valeurs par défaut, qui peut remplacer les paramètres par défaut.
 
-Le tableau suivant indique le niveau critique `multipathd` Paramètres des LUN ONTAP et des valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, ils doivent être corrigés par les strophes suivantes dans le `multipath.conf` Fichier qui s'applique spécifiquement aux LUN ONTAP. Si ce n'est pas le cas, les LUN de ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut que si vous en avez connaissance avec NetApp et/ou le fournisseur du système d'exploitation, et ce uniquement lorsque vous en avez pleinement conscience.
+Le tableau suivant illustre la critique `multipathd` Paramètres des LUN ONTAP et des valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, ils doivent être corrigés par les strophes suivantes dans le `multipath.conf` Fichier qui s'applique spécifiquement aux LUN ONTAP. Si ce n'est pas le cas, les LUN de ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut que si vous en avez connaissance avec NetApp et/ou le fournisseur du système d'exploitation, et ce uniquement lorsque vous en avez pleinement conscience.
 
 [cols="2*"]
 |===
