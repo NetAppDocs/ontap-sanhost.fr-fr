@@ -32,13 +32,14 @@ Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charg
 . Mappez la LUN de démarrage SAN sur l'hôte.
 . Vérifiez que plusieurs chemins sont disponibles.
 +
-N'oubliez pas que plusieurs chemins ne seront disponibles qu'après la mise en service et l'exécution du système d'exploitation hôte sur les chemins.
+
+NOTE: Plusieurs chemins deviennent disponibles une fois que le système d'exploitation hôte est en cours d'exécution sur les chemins.
 
 . Activez le démarrage SAN dans le BIOS du serveur pour les ports auxquels la LUN de démarrage SAN est mappée.
 +
 Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la documentation spécifique au fournisseur.
 
-. Redémarrez l'hôte pour vérifier que le démarrage est réussi.
+. Redémarrez l'hôte pour vérifier que le démarrage a réussi.
 
 
 
@@ -71,7 +72,7 @@ tpgs_on        VMW_PSP_RR                   NetApp arrays with ALUA support
 
 === Configuration non ASA
 
-Pour la configuration non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant les priorités les plus élevées sont actifs/optimisés, ce qui signifie qu'ils sont gérés par le contrôleur où se trouve l'agrégat. Les chemins avec les priorités les plus basses sont actifs, mais ne sont pas optimisés car ils sont servis à partir d'un autre contrôleur. Les chemins non optimisés sont utilisés uniquement lorsqu'aucun chemin optimisé n'est disponible.
+Pour les configurations non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant les priorités les plus élevées sont actifs/optimisés, ce qui signifie qu'ils sont gérés par le contrôleur où se trouve l'agrégat. Les chemins avec les priorités les plus basses sont actifs, mais ne sont pas optimisés car ils sont servis à partir d'un autre contrôleur. Les chemins non optimisés sont utilisés uniquement lorsqu'aucun chemin optimisé n'est disponible.
 
 .Exemple
 L'exemple suivant montre la sortie correcte pour une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés :
@@ -140,9 +141,9 @@ fc.20000024ff7f4a50:21000024ff7f4a50-fc.2009d039ea3ab21f:2000d039ea3ab21f-naa.60
 ----
 
 
-=== Configuration de la baie SAN
+=== Configurations All SAN Array
 
-Dans toutes les configurations ASA (SAN Array), tous les chemins d'accès à une LUN donnée sont actifs et optimisés. Autrement dit, les E/S peuvent être servies par tous les chemins simultanément, ce qui assure de meilleures performances.
+Dans les configurations ASA, tous les chemins vers une LUN donnée sont actifs et optimisés. Ce qui améliore les performances en assurant le service des opérations d'E/S sur tous les chemins en même temps.
 
 .Exemple
 L'exemple suivant montre la sortie correcte pour une LUN ONTAP :

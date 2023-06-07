@@ -75,13 +75,14 @@ Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charg
 . Mappez la LUN de démarrage SAN sur l'hôte.
 . Vérifiez que plusieurs chemins sont disponibles.
 +
-N'oubliez pas que plusieurs chemins ne seront disponibles qu'après la mise en service et l'exécution du système d'exploitation hôte sur les chemins.
+
+NOTE: Plusieurs chemins deviennent disponibles une fois que le système d'exploitation hôte est en cours d'exécution sur les chemins.
 
 . Activez le démarrage SAN dans le BIOS du serveur pour les ports auxquels la LUN de démarrage SAN est mappée.
 +
 Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la documentation spécifique au fournisseur.
 
-. Redémarrez l'hôte pour vérifier que le démarrage est réussi.
+. Redémarrez l'hôte pour vérifier que le démarrage a réussi.
 
 
 
@@ -126,7 +127,7 @@ size=80G features='4 queue_if_no_path pg_init_retries 50 retain_attached_hw_hand
 |- 12:0:0:0 sdz 65:144 active ready running
 ----
 
-NOTE: N'utilisez pas un nombre excessif de chemins pour une seule LUN. Pas plus de 4 chemins ne devraient être nécessaires. Plus de 8 chemins peuvent entraîner des problèmes de chemin pendant les défaillances du stockage.
+NOTE: N'utilisez pas un nombre excessif de chemins pour une seule LUN. Il ne faut pas plus de quatre chemins. Plus de huit chemins peuvent entraîner des problèmes de chemin lors des défaillances du stockage.
 
 
 
@@ -146,7 +147,7 @@ Il n'y a aucune exigence d'ajouter directement quoi que ce soit au `multipath.co
 
 Vous pouvez ajouter la syntaxe suivante à la `multipath.conf` fichier pour exclure les périphériques indésirables.
 
-Remplacer l' `<DevId>` Avec la chaîne WWID du périphérique que vous souhaitez exclure. Utilisez la commande suivante pour déterminer l'identifiant WWID :
+Remplacer l' `<DevId>` Avec la chaîne WWID du périphérique à exclure :
 
 ....
 blacklist {
@@ -272,4 +273,4 @@ Il n'y a aucun problème connu pour Oracle Linux 7.2.
 
 === Mise en miroir ASM
 
-La mise en miroir ASM peut nécessiter des modifications des paramètres de chemins d'accès multiples Linux pour permettre à ASM de reconnaître un problème et de basculer vers un autre groupe de défaillances. La plupart des configurations ASM sur ONTAP reposent sur une redondance externe. La protection des données est assurée par la baie externe et ASM ne met pas en miroir les données. Certains sites utilisent ASM avec redondance normale pour fournir une mise en miroir bidirectionnelle, généralement entre différents sites. Voir link:https://www.netapp.com/us/media/tr-3633.pdf["Les bases de données Oracle sur ONTAP"^] pour plus d'informations.
+La mise en miroir de gestion automatique du stockage (ASM) peut nécessiter des modifications des paramètres de chemins d'accès multiples Linux pour permettre à ASM de reconnaître un problème et de basculer vers un autre groupe de pannes. La plupart des configurations ASM sur ONTAP reposent sur une redondance externe. La protection des données est assurée par la baie externe et ASM ne met pas en miroir les données. Certains sites utilisent ASM avec redondance normale pour fournir une mise en miroir bidirectionnelle, généralement entre différents sites. Voir link:https://www.netapp.com/us/media/tr-3633.pdf["Les bases de données Oracle sur ONTAP"^] pour plus d'informations.

@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: nvme_ol_90.html 
+permalink: nvme_ol_87.html 
 keywords:  
 summary:  
 ---
-= Configuration d'hôte NVMe/FC pour Oracle Linux 9.0 avec ONTAP
+= Configuration d'hôte NVMe-of pour Oracle Linux 8.7 avec ONTAP
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -19,7 +19,13 @@ summary:
 
 
 [role="lead"]
-NVMe over Fabrics (NVMe-of), y compris NVMe/FC et d'autres moyens de transport, est pris en charge avec Oracle Linux (OL) 9.0 avec ANA (Asymmetric Namespace Access). Dans les environnements NVMe-of, ANA est l'équivalent des chemins d'accès multiples ALUA dans les environnements iSCSI et FC. Il est implémenté avec les chemins d'accès multiples NVMe intégrés au noyau.
+NVMe over Fabrics (NVMe-of), y compris NVMe over Fibre Channel (NVMe/FC) et d'autres moyens de transport, est pris en charge par Oracle Linux (OL) 8.7 avec ANA (Asymmetric Namespace Access). Dans les environnements NVMe-of, ANA est l'équivalent des chemins d'accès multiples ALUA dans les environnements iSCSI et FC. Il est implémenté avec les chemins d'accès multiples NVMe intégrés au noyau.
+
+La prise en charge suivante est disponible pour la configuration hôte NVMe/FC pour OL 8.7 avec ONTAP :
+
+* Prise en charge de NVMe over TCP (NVMe/TCP) en plus de NVMe/FC. Le plug-in NetApp dans le plug-in natif `nvme-cli` Le package affiche les détails des ONTAP pour les namespaces NVMe/FC et NVMe/TCP.
+* Utilisation du trafic existant NVMe et SCSI sur le même hôte sur un adaptateur de bus hôte (HBA) donné, sans les paramètres dm-multipathing explicites pour empêcher la demande d'espaces de noms NVMe.
+
 
 Pour plus d'informations sur les configurations prises en charge, reportez-vous au link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^].
 
@@ -27,7 +33,7 @@ Pour plus d'informations sur les configurations prises en charge, reportez-vous 
 
 == Caractéristiques
 
-* Par défaut, Oracle Linux 9.0 a activé le multipathing NVMe dans le noyau pour les namespaces NVMe. Par conséquent, il n'est pas nécessaire de définir des paramètres explicites.
+* Dans OL 8.7, les chemins d'accès multiples NVMe dans le noyau sont activés par défaut pour les espaces de noms NVMe. Par conséquent, il n'est pas nécessaire de définir des paramètres explicites.
 
 
 
@@ -40,10 +46,10 @@ Il n'y a pas de limites connues.
 
 == Validation des versions logicielles
 
-Vous pouvez valider les versions minimales du logiciel OL 9.0 prises en charge à l'aide de la procédure suivante.
+Vous pouvez utiliser la procédure suivante pour valider les versions minimales du logiciel OL 8.7 prises en charge.
 
 .Étapes
-. Installez OL 9.0 GA sur le serveur. Une fois l'installation terminée, vérifiez que vous exécutez le noyau OL 9.0 GA spécifié.
+. Installez OL 8.7 GA sur le serveur. Une fois l'installation terminée, vérifiez que vous exécutez le noyau OL 8.7 GA spécifié.
 +
 [listing]
 ----
@@ -55,7 +61,7 @@ Vous pouvez valider les versions minimales du logiciel OL 9.0 prises en charge �
 +
 [listing]
 ----
-5.15.0-0.30.19.el9uek.x86_64
+5.15.0-3.60.5.1.el8uek.x86_64
 ----
 . Installer le `nvme-cli` groupe :
 +
@@ -69,9 +75,9 @@ Vous pouvez valider les versions minimales du logiciel OL 9.0 prises en charge �
 +
 [listing]
 ----
-nvme-cli-1.16-3.el9.x86_64
+nvme-cli-1.16-5.el8.x86_64
 ----
-. Sur l'hôte Oracle Linux 9.0, vérifiez le `hostnqn` chaîne à `/etc/nvme/hostnqn`:
+. Sur l'hôte Oracle Linux 8.7, vérifiez le `hostnqn` chaîne à `/etc/nvme/hostnqn`:
 +
 [listing]
 ----
@@ -83,7 +89,7 @@ nvme-cli-1.16-3.el9.x86_64
 +
 [listing]
 ----
-nqn.2014-08.org.nvmexpress:uuid:4c4c4544-0032-3310-8033-b8c04f4c5132
+nqn.2014-08.org.nvmexpress:uuid:791c54eb-545d-4ed3-8d41-91a0a53d4b24
 ----
 . Vérifiez que le `hostnqn` la chaîne correspond au `hostnqn` Chaîne du sous-système correspondant sur la baie ONTAP :
 +
@@ -99,7 +105,7 @@ nqn.2014-08.org.nvmexpress:uuid:4c4c4544-0032-3310-8033-b8c04f4c5132
 ----
 Vserver     Subsystem          Host NQN
 ----------- --------------- ----------------------------------------------------------
-vs_ol_nvme  nvme_ss_ol_1    nqn.2014-08.org.nvmexpress:uuid:4c4c4544-0032-3310-8033-b8c04f4c5132
+vs_ol_nvme  nvme_ss_ol_1    nqn.2014-08.org.nvmexpress:uuid:791c54eb-545d-4ed3-8d41-91a0a53d4b24
 ----
 +
 
@@ -152,11 +158,13 @@ Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
 [listing]
 ----
 # cat /sys/class/scsi_host/host*/fwrev
-14.0.505.11, sli-4:2:c
-14.0.505.11, sli-4:2:c
+12.8.614.23, sli-4:2:c
+12.8.614.23, sli-4:2:c
+
 
 # cat /sys/module/lpfc/version
-0:12.8.0.11
+0:14.0.0.1
+
 ----
 +
 Pour obtenir la liste la plus récente des versions de pilote de carte et de micrologiciel prises en charge, reportez-vous à la section link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^].
@@ -173,50 +181,66 @@ Pour obtenir la liste la plus récente des versions de pilote de carte et de mic
 [listing]
 ----
 # cat /sys/class/fc_host/host*/port_name
-0x100000109b1c1204
-0x100000109b1c1205
+0x100000109b3c081f
+0x100000109b3c0820
+----
++
+[listing]
+----
 # cat /sys/class/fc_host/host*/port_state
 Online
 Online
+----
++
+[listing]
+----
 # cat /sys/class/scsi_host/host*/nvme_info
 NVME Initiator Enabled
 XRI Dist lpfc0 Total 6144 IO 5894 ELS 250
-NVME LPORT lpfc0 WWPN x100000109b1c1204 WWNN x200000109b1c1204 DID x011d00 ONLINE
-NVME RPORT WWPN x203800a098dfdd91 WWNN x203700a098dfdd91 DID x010c07 TARGET DISCSRVC ONLINE
-NVME RPORT WWPN x203900a098dfdd91 WWNN x203700a098dfdd91 DID x011507 TARGET DISCSRVC ONLINE
+NVME LPORT lpfc0 WWPN x100000109b3c081f WWNN x200000109b3c081f DID x060300 ONLINE
+NVME RPORT WWPN x2010d039ea2c3e2d WWNN x200fd039ea2c3e2d DID x061f0e TARGET DISCSRVC ONLINE
+NVME RPORT WWPN x2011d039ea2c3e2d WWNN x200fd039ea2c3e2d DID x06270f TARGET DISCSRVC ONLINE
 NVME Statistics
-LS: Xmt 0000000f78 Cmpl 0000000f78 Abort 00000000
+LS: Xmt 0000000a71 Cmpl 0000000a71 Abort 00000000
 LS XMIT: Err 00000000 CMPL: xb 00000000 Err 00000000
-Total FCP Cmpl 000000002fe29bba Issue 000000002fe29bc4 OutIO 000000000000000a
-abort 00001bc7 noxri 00000000 nondlp 00000000 qdepth 00000000 wqerr 00000000 err 00000000
-FCP CMPL: xb 00001e15 Err 0000d906
+Total FCP Cmpl 00000000558611c6 Issue 000000005578bb69 OutIO fffffffffff2a9a3
+abort 0000007a noxri 00000000 nondlp 00000447 qdepth 00000000 wqerr 00000000 err 00000000
+FCP CMPL: xb 00000a8e Err 0000e2a8
 NVME Initiator Enabled
 XRI Dist lpfc1 Total 6144 IO 5894 ELS 250
-NVME LPORT lpfc1 WWPN x100000109b1c1205 WWNN x200000109b1c1205 DID x011900 ONLINE
-NVME RPORT WWPN x203d00a098dfdd91 WWNN x203700a098dfdd91 DID x010007 TARGET DISCSRVC ONLINE
-NVME RPORT WWPN x203a00a098dfdd91 WWNN x203700a098dfdd91 DID x012a07 TARGET DISCSRVC ONLINE
+NVME LPORT lpfc1 WWPN x100000109b3c0820 WWNN x200000109b3c0820 DID x060200 ONLINE
+NVME RPORT WWPN x2015d039ea2c3e2d WWNN x200fd039ea2c3e2d DID x062e0c TARGET DISCSRVC ONLINE
+NVME RPORT WWPN x2014d039ea2c3e2d WWNN x200fd039ea2c3e2d DID x06290f TARGET DISCSRVC ONLINE
 NVME Statistics
-LS: Xmt 0000000fa8 Cmpl 0000000fa8 Abort 00000000
+LS: Xmt 0000000a69 Cmpl 0000000a69 Abort 00000000
 LS XMIT: Err 00000000 CMPL: xb 00000000 Err 00000000
-Total FCP Cmpl 000000002e14f170 Issue 000000002e14f17a OutIO 000000000000000a
-abort 000016bb noxri 00000000 nondlp 00000000 qdepth 00000000 wqerr 00000000 err 00000000
-FCP CMPL: xb 00001f50 Err 0000d9f8
+Total FCP Cmpl 0000000055814701 Issue 0000000055744b1c OutIO fffffffffff3041b
+abort 00000046 noxri 00000000 nondlp 0000043f qdepth 00000000 wqerr 00000000 err 00000000
+FCP CMPL: xb 00000a89 Err 0000e2f3
+
 ----
 
 
 --
-.Adaptateur FC Marvell/QLogic pour NVMe/FC
+.Adaptateur FC Marvell/Qlogic pour NVMe/FC
 --
 .Étapes
-. Le pilote natif de la boîte de réception qla2xxx inclus dans le noyau OL 9.0 GA dispose des derniers correctifs en amont essentiels pour la prise en charge de ONTAP. Vérifiez que vous exécutez les versions du pilote de carte et du micrologiciel prises en charge :
+. Le pilote natif de la boîte de réception qla2xxx inclus dans le noyau OL 8.7 GA dispose des derniers correctifs en amont essentiels pour la prise en charge de ONTAP. Vérifiez que vous exécutez les versions du pilote de carte et du micrologiciel prises en charge :
 +
 [listing]
 ----
 # cat /sys/class/fc_host/host*/symbolic_name
-QLE2742 FW:v9.08.02 DVR:v10.02.00.106-k
-QLE2742 FW:v9.08.02 DVR:v10.02.00.106-k
 ----
-. Vérifiez-le `ql2xnvmeenable` Est défini pour permettre à l'adaptateur Marvell de fonctionner en tant qu'initiateur NVMe/FC :
++
+*Exemple de sortie*
+
++
+[listing]
+----
+QLE2742 FW:v9.10.11 DVR:v10.02.06.200-k
+QLE2742 FW:v9.10.11 DVR:v10.02.06.200-k
+----
+. Vérifiez-le `ql2xnvmeenable` est défini. L'adaptateur Marvell peut ainsi fonctionner en tant qu'initiateur NVMe/FC :
 +
 [listing]
 ----
@@ -229,7 +253,7 @@ QLE2742 FW:v9.08.02 DVR:v10.02.00.106-k
 ====
 
 
-=== Activation d'une taille d'E/S de 1 Mo (en option)
+=== Activer les E/S de 1 Mo (en option)
 
 ONTAP signale une taille DE transfert MAX Data de 8 DANS les données Identify Controller, ce qui signifie que la taille maximale des demandes d'E/S peut atteindre 1 Mo. Toutefois, pour émettre des demandes d'E/S d'une taille de 1 Mo pour un hôte Broadcom NVMe/FC, vous devez augmenter le `lpfc` valeur du `lpfc_sg_seg_cnt` à 256 à partir de la valeur par défaut de 64.
 
@@ -361,15 +385,24 @@ nvme connect-all -t tcp -w host-traddr -a traddr -l 1800
 La procédure suivante permet de valider NVMe-of.
 
 .Étapes
-. Vérifiez les paramètres NVMe/FC suivants sur l'hôte OL 9.0 :
+. Vérifiez que le protocole NVMe multipath intégré au noyau est activé en vérifiant :
 +
 [listing]
 ----
 # cat /sys/module/nvme_core/parameters/multipath
 Y
+----
+. Vérifiez que les paramètres NVMe-of appropriés (par exemple, `model` réglez sur `NetApp ONTAP Controller` et équilibrage de la charge `iopolicy` réglez sur `round-robin`) Pour les espaces de noms ONTAP respectifs reflètent correctement sur l'hôte :
++
+[listing]
+----
 # cat /sys/class/nvme-subsystem/nvme-subsys*/model
 NetApp ONTAP Controller
 NetApp ONTAP Controller
+----
++
+[listing]
+----
 # cat /sys/class/nvme-subsystem/nvme-subsys*/iopolicy
 round-robin
 round-robin
@@ -401,33 +434,58 @@ Namespace Usage    Format             FW             Rev
 ----
 . Vérifiez que l'état du contrôleur de chaque chemin est actif et que l'état ANA est correct :
 +
+[role="tabbed-block"]
+====
+.NVMe/FC
+--
 [listing]
 ----
 # nvme list-subsys /dev/nvme0n1
 ----
-+
 *Exemple de sortie :*
 
-+
-[listing]
+[listing, subs="+quotes"]
 ----
 nvme-subsys0 - NQN=nqn.1992-08.com.netapp:sn.5f5f2c4aa73b11e9967e00a098df41bd:subsystem.nvme_ss_ol_1
 \
-+- nvme0 fc traddr=nn-0x203700a098dfdd91:pn-0x203800a098dfdd91 host_traddr=nn-0x200000109b1c1204:pn-0x100000109b1c1204 live inaccessible
-+- nvme1 fc traddr=nn-0x203700a098dfdd91:pn-0x203900a098dfdd91 host_traddr=nn-0x200000109b1c1204:pn-0x100000109b1c1204 live inaccessible
-+- nvme2 fc traddr=nn-0x203700a098dfdd91:pn-0x203a00a098dfdd91 host_traddr=nn-0x200000109b1c1205:pn-0x100000109b1c1205 live optimized
-+- nvme3 fc traddr=nn-0x203700a098dfdd91:pn-0x203d00a098dfdd91 host_traddr=nn-0x200000109b1c1205:pn-0x100000109b1c1205 live optimized
++- nvme0 fc traddr=nn-0x203700a098dfdd91:pn-0x203800a098dfdd91 host_traddr=nn-0x200000109b1c1204:pn-0x100000109b1c1204 *live non-optimized*
++- nvme1 fc traddr=nn-0x203700a098dfdd91:pn-0x203900a098dfdd91 host_traddr=nn-0x200000109b1c1204:pn-0x100000109b1c1204 *live non-optimized*
++- nvme2 fc traddr=nn-0x203700a098dfdd91:pn-0x203a00a098dfdd91 host_traddr=nn-0x200000109b1c1205:pn-0x100000109b1c1205 *live optimized*
++- nvme3 fc traddr=nn-0x203700a098dfdd91:pn-0x203d00a098dfdd91 host_traddr=nn-0x200000109b1c1205:pn-0x100000109b1c1205 *live optimized*
+
 ----
+--
+.NVMe/TCP
+--
+[listing]
+----
+# nvme list-subsys /dev/nvme1n40
+----
+*Exemple de sortie :*
+
+[listing, subs="+quotes"]
+----
+nvme-subsys1 - NQN=nqn.1992-08.com.netapp:sn.68c036aaa3cf11edbb95d039ea243511:subsystem.tcp
+\
++- nvme2 tcp traddr=192.168.8.49,trsvcid=4420,host_traddr=192.168.8.1 *live non-optimized*
++- nvme3 tcp traddr=192.168.8.48,trsvcid=4420,host_traddr=192.168.8.1 *live non-optimized*
++- nvme6 tcp traddr=192.168.9.49,trsvcid=4420,host_traddr=192.168.9.1 *live optimized*
++- nvme7 tcp traddr=192.168.9.48,trsvcid=4420,host_traddr=192.168.9.1 *live optimized*
+----
+--
+====
 . Vérifier que le plug-in NetApp affiche les valeurs correctes pour chaque périphérique d'espace de noms ONTAP :
 +
+[role="tabbed-block"]
+====
+.Colonne
+--
 [listing]
 ----
 # nvme netapp ontapdevices -o column
 ----
-+
 *Exemple de sortie :*
 
-+
 [listing]
 ----
 Device        Vserver   Namespace Path
@@ -443,10 +501,17 @@ NSID       UUID                                   Size
 2          04bf9f6e-9031-40ea-99c7-a1a61b2d7d08   85.90GB
 3          264823b1-8e03-4155-80dd-e904237014a4   85.90GB
 ----
-+
+--
+.JSON
+--
 [listing]
 ----
 # nvme netapp ontapdevices -o json
+----
+*Exemple de sortie*
+
+[listing]
+----
 {
 "ONTAPdevices" : [
     {
@@ -482,20 +547,22 @@ NSID       UUID                                   Size
   ]
 }
 ----
+--
+====
 
 
 
 
 == Problèmes connus
 
-La configuration hôte NVMe-OF pour Oracle Linux 9.0 avec ONTAP version présente les problèmes connus suivants :
+La configuration hôte NVMe-of pour OL 8.7 avec ONTAP version présente les problèmes connus suivants :
 
 [cols=""20"]
 |===
 | ID de bug NetApp | Titre | Description | ID Bugzilla 
 
 
-| 1517321 | Les hôtes Oracle Linux 9.0 NVMe-of créent des contrôleurs de détection persistante en double | Sur les hôtes Oracle Linux 9.0 NVMe over Fabrics (NVMe-of), vous pouvez utiliser le `nvme discover -p` Commande permettant de créer des contrôleurs de découverte permanente (CDP). Lorsque cette commande est utilisée, un seul PDC doit être créé par combinaison initiateur-cible. Toutefois, si vous exécutez ONTAP 9.10.1 et Oracle Linux 9.0 avec un hôte NVMe-of, un PDC en double est créé à chaque fois `nvme discover -p` est exécuté. Cela entraîne une utilisation inutile des ressources sur l'hôte et la cible. | https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=18118["18118"^] 
+| 1517321 | Les hôtes Oracle Linux 8.7 NVMe-of créent des contrôleurs de détection persistante en double | Sur les hôtes OL 8.7 NVMe-of, les contrôleurs de découverte permanente (CDP) sont créés en transmettant le `-p` à la `nvme discover` commande. Pour une combinaison initiateur-cible donnée, un seul PDC doit être créé avec chaque appel du `nvme discover` commande. Toutefois, à partir de OL 8.x, les hôtes NVMe-of finissent par créer des CDP dupliqués avec chaque invocation du `nvme discover` commande avec `-p` option. Cela gaspille des ressources sur l'hôte et sur la cible. | https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=18118["18118"^] 
 |===
 
 

@@ -75,13 +75,14 @@ Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charg
 . Mappez la LUN de démarrage SAN sur l'hôte.
 . Vérifiez que plusieurs chemins sont disponibles.
 +
-N'oubliez pas que plusieurs chemins ne seront disponibles qu'après la mise en service et l'exécution du système d'exploitation hôte sur les chemins.
+
+NOTE: Plusieurs chemins deviennent disponibles une fois que le système d'exploitation hôte est en cours d'exécution sur les chemins.
 
 . Activez le démarrage SAN dans le BIOS du serveur pour les ports auxquels la LUN de démarrage SAN est mappée.
 +
 Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la documentation spécifique au fournisseur.
 
-. Redémarrez l'hôte pour vérifier que le démarrage est réussi.
+. Redémarrez l'hôte pour vérifier que le démarrage a réussi.
 
 
 
@@ -119,7 +120,7 @@ size=80G features='4 queue_if_no_path pg_init_retries 50 retain_attached_hw_hand
   |- 0:0:19:37 sddu 71:192  active ready running
 ----
 
-NOTE: N'utilisez pas un nombre excessif de chemins pour une seule LUN. Pas plus de 4 chemins ne devraient être nécessaires. Plus de 8 chemins peuvent entraîner des problèmes de chemin pendant les défaillances du stockage.
+NOTE: N'utilisez pas un nombre excessif de chemins pour une seule LUN. Il ne faut pas plus de quatre chemins. Plus de huit chemins peuvent entraîner des problèmes de chemin lors des défaillances du stockage.
 
 
 
@@ -127,18 +128,20 @@ NOTE: N'utilisez pas un nombre excessif de chemins pour une seule LUN. Pas plus 
 
 Oracle Linux 6.6 OS est compilé pour reconnaître les LUN ONTAP et définir automatiquement tous les paramètres de configuration correctement.
 
-Le fichier multipath.conf doit exister pour que le démon multipath démarre, mais vous pouvez créer un fichier vide à zéro octet à l'aide de la commande :
-`touch /etc/multipath.conf`Lors de la première création de ce fichier, vous devrez peut-être activer et démarrer les services multipathing.
+* Le `multipath.conf` le fichier doit exister pour que le démon multivoie démarre, mais vous pouvez créer un fichier vide à zéro octet en utilisant la commande suivante :
+`touch /etc/multipath.conf`.
+* Lors de la première création de ce fichier, vous devrez peut-être activer et démarrer les services multipathing.
+
 
 [listing]
 ----
 # chkconfig multipathd on
 # /etc/init.d/multipathd start
 ----
-Il n'est pas nécessaire d'ajouter quelque chose directement à multipath.conf, sauf si vous ne souhaitez pas que les périphériques soient gérés par multipath ou que vous disposez de paramètres existants qui remplacent les paramètres par défaut. Vous pouvez ajouter la syntaxe suivante au fichier multipath.conf pour exclure les périphériques indésirables.
+* Il n'y a aucune exigence d'ajouter directement quoi que ce soit au `multipath.conf` fichier sauf si vous avez des périphériques que vous ne souhaitez pas gérer multipath ou si vous avez des paramètres existants qui remplacent les paramètres par défaut.
+* Vous pouvez ajouter la syntaxe suivante à la `multipath.conf` fichier pour exclure les périphériques indésirables.
+* Remplacez le <DevId> par la chaîne WWID du périphérique que vous souhaitez exclure :
 
-
-NOTE: Remplacez le <DevId> par la chaîne WWID du périphérique que vous souhaitez exclure. Utilisez la commande suivante pour déterminer l'identifiant WWID :
 
 ....
 blacklist {
@@ -149,14 +152,15 @@ blacklist {
 }
 ....
 .Exemple
-Dans cet exemple, sda est le disque SCSI local que nous devons ajouter à la liste noire.
+Dans cet exemple, `sda` Est le disque SCSI local que nous devons ajouter à la liste noire.
 
 . Exécutez la commande suivante pour déterminer l'identifiant WWID :
 +
-....
+[listing]
+----
 # /lib/udev/scsi_id -gud /dev/sda
 360030057024d0730239134810c0cb833
-....
+----
 . Ajoutez cet identifiant WWID à la strophe "liste noire" dans /etc/multipath.conf :
 +
 ....
@@ -169,7 +173,9 @@ blacklist {
 ....
 
 
-Vous devez toujours vérifier votre `/etc/multipath.conf` fichier pour les paramètres hérités, notamment dans la section par défaut, qui peut remplacer les paramètres par défaut. Le tableau ci-dessous indique la critique `multipathd` Paramètres des LUN ONTAP et des valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il doit être corrigé par des strophes ultérieurs dans `multipath.conf` Qui s'appliquent spécifiquement aux LUN ONTAP. Si ce n'est pas le cas, les LUN de ONTAP peuvent ne pas fonctionner comme prévu. Ces valeurs par défaut ne doivent être remplacées qu'en consultation avec les fournisseurs de NetApp et/ou du système d'exploitation, et uniquement lorsque l'impact est totalement compris.
+Vous devez toujours vérifier votre `/etc/multipath.conf` fichier pour les paramètres hérités, en particulier dans la section valeurs par défaut, qui peut remplacer les paramètres par défaut.
+
+Le tableau suivant indique le niveau critique `multipathd` Paramètres des LUN ONTAP et des valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, ils doivent être corrigés par les strophes suivantes dans le `multipath.conf` Fichier qui s'applique spécifiquement aux LUN ONTAP. Si ce n'est pas le cas, les LUN de ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut que si vous en avez connaissance avec NetApp et/ou le fournisseur du système d'exploitation, et ce uniquement lorsque vous en avez pleinement conscience.
 
 [cols="2*"]
 |===
@@ -267,4 +273,4 @@ NOTE: Pour les problèmes connus liés à Oracle Linux (noyau compatible Red Hat
 
 === Mise en miroir ASM
 
-La mise en miroir ASM peut nécessiter des modifications des paramètres de chemins d'accès multiples Linux pour permettre à ASM de reconnaître un problème et de basculer vers un autre groupe de défaillances. La plupart des configurations ASM sur ONTAP reposent sur une redondance externe. La protection des données est assurée par la baie externe et ASM ne met pas en miroir les données. Certains sites utilisent ASM avec redondance normale pour fournir une mise en miroir bidirectionnelle, généralement entre différents sites. Voir link:https://www.netapp.com/us/media/tr-3633.pdf["Les bases de données Oracle sur ONTAP"^] pour plus d'informations.
+La mise en miroir de gestion automatique du stockage (ASM) peut nécessiter des modifications des paramètres de chemins d'accès multiples Linux pour permettre à ASM de reconnaître un problème et de basculer vers un autre groupe de pannes. La plupart des configurations ASM sur ONTAP reposent sur une redondance externe. La protection des données est assurée par la baie externe et ASM ne met pas en miroir les données. Certains sites utilisent ASM avec redondance normale pour fournir une mise en miroir bidirectionnelle, généralement entre différents sites. Voir link:https://www.netapp.com/us/media/tr-3633.pdf["Les bases de données Oracle sur ONTAP"^] pour plus d'informations.

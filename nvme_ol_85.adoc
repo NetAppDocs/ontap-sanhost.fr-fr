@@ -181,7 +181,7 @@ FCP CMPL: xb 00000002 Err 00000004
 
 === Activer la taille d'E/S de 1 Mo
 
-Le `lpfc_sg_seg_cnt` Le paramètre doit être défini sur 256 pour que l'hôte puisse émettre des E/S de 1 Mo
+ONTAP signale une taille DE transfert MAX Data de 8 DANS les données Identify Controller, ce qui signifie que la taille maximale des demandes d'E/S peut atteindre 1 Mo. Toutefois, pour émettre des demandes d'E/S d'une taille de 1 Mo pour un hôte Broadcom NVMe/FC, vous devez augmenter le `lpfc` valeur du `lpfc_sg_seg_cnt` à 256 à partir de la valeur par défaut de 64.
 
 .Étapes
 . Réglez le `lpfc_sg_seg_cnt` paramètre à 256.
@@ -200,6 +200,9 @@ options lpfc lpfc_sg_seg_cnt=256
 256
 ----
 
+
+
+NOTE: Cela ne s'applique pas aux hôtes NVMe/FC Qlogic.
 
 
 

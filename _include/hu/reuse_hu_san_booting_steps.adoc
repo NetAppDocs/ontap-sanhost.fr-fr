@@ -6,11 +6,12 @@
 . Mappez la LUN de démarrage SAN sur l'hôte.
 . Vérifiez que plusieurs chemins sont disponibles.
 +
-N'oubliez pas que plusieurs chemins ne seront disponibles qu'après la mise en service et l'exécution du système d'exploitation hôte sur les chemins.
+
+NOTE: Plusieurs chemins deviennent disponibles une fois que le système d'exploitation hôte est en cours d'exécution sur les chemins.
 
 . Activez le démarrage SAN dans le BIOS du serveur pour les ports auxquels la LUN de démarrage SAN est mappée.
 +
 Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la documentation spécifique au fournisseur.
 
-. Redémarrez l'hôte pour vérifier que le démarrage est réussi.
+. Redémarrez l'hôte pour vérifier que le démarrage a réussi.
 

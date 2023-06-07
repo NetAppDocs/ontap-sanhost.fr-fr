@@ -16,7 +16,7 @@ Il n'y a aucune exigence d'ajouter directement quoi que ce soit au `multipath.co
 
 Vous pouvez ajouter la syntaxe suivante à la `multipath.conf` fichier pour exclure les périphériques indésirables.
 
-Remplacer l' `<DevId>` Avec la chaîne WWID du périphérique que vous souhaitez exclure. Utilisez la commande suivante pour déterminer l'identifiant WWID :
+Remplacer l' `<DevId>` Avec la chaîne WWID du périphérique à exclure :
 
 ....
 blacklist {

@@ -24,14 +24,14 @@ summary: 'Décrit l"utilisation de CentOS 8.3 avec ONTAP'
 
 Le pack logiciel NetApp Linux Unified Host Utilities est disponible sur le link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab["Site de support NetApp"^] dans un fichier .rpm 64 bits.
 
-L'installation de Linux Unified Host Utilities est fortement recommandée, mais n'est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
+NetApp recommande vivement d'installer les utilitaires d'hôtes unifiés Linux, mais ce n'est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
 
 .Ce dont vous avez besoin
-Si une version de Linux Unified Host Utilities est actuellement installée, vous devez la mettre à niveau ou la supprimer et utiliser les étapes suivantes pour installer la dernière version.
+Si une version de Linux Unified Host Utilities est actuellement installée, vous devez la mettre à niveau ou la supprimer, puis procéder comme suit pour installer la dernière version.
 
 .Étapes
 . Téléchargez le pack logiciel Linux Unified Host Utilities 64 bits à partir du https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab["Site de support NetApp"^] à votre hôte.
-. Utilisez la commande suivante pour installer le pack logiciel :
+. Installez le pack logiciel :
 +
 `rpm -ivh netapp_linux_unified_host_utilities-7-1.x86_64`
 
@@ -76,13 +76,14 @@ Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charg
 . Mappez la LUN de démarrage SAN sur l'hôte.
 . Vérifiez que plusieurs chemins sont disponibles.
 +
-N'oubliez pas que plusieurs chemins ne seront disponibles qu'après la mise en service et l'exécution du système d'exploitation hôte sur les chemins.
+
+NOTE: Plusieurs chemins deviennent disponibles une fois que le système d'exploitation hôte est en cours d'exécution sur les chemins.
 
 . Activez le démarrage SAN dans le BIOS du serveur pour les ports auxquels la LUN de démarrage SAN est mappée.
 +
 Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la documentation spécifique au fournisseur.
 
-. Redémarrez l'hôte pour vérifier que le démarrage est réussi.
+. Redémarrez l'hôte pour vérifier que le démarrage a réussi.
 
 
 
@@ -95,9 +96,9 @@ Vous pouvez utiliser le `multipath -ll` Commande pour vérifier les paramètres 
 
 
 
-=== Configuration de la baie SAN
+=== Configurations All SAN Array
 
-Dans toutes les configurations ASA (SAN Array), tous les chemins d'accès à une LUN donnée sont actifs et optimisés. Autrement dit, les E/S peuvent être servies par tous les chemins simultanément, ce qui assure de meilleures performances.
+Dans les configurations ASA, tous les chemins vers une LUN donnée sont actifs et optimisés. Ce qui améliore les performances en assurant le service des opérations d'E/S sur tous les chemins en même temps.
 
 .Exemple
 L'exemple suivant montre la sortie correcte pour une LUN ONTAP :
@@ -114,13 +115,13 @@ size=80G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=
   |- 11:0:11:1  sdpt  131:304  active ready running
 ----
 
-NOTE: N'utilisez pas un nombre excessif de chemins pour une seule LUN. Pas plus de 4 chemins ne devraient être nécessaires. Plus de 8 chemins peuvent entraîner des problèmes de chemin pendant les défaillances du stockage.
+NOTE: N'utilisez pas un nombre excessif de chemins pour une seule LUN. Il ne faut pas plus de quatre chemins. Plus de huit chemins peuvent entraîner des problèmes de chemin lors des défaillances du stockage.
 
 
 
 === Configuration non ASA
 
-Pour la configuration non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant les priorités les plus élevées sont actifs/optimisés, ce qui signifie qu'ils sont gérés par le contrôleur où se trouve l'agrégat. Les chemins avec les priorités les plus basses sont actifs, mais ne sont pas optimisés car ils sont servis à partir d'un autre contrôleur. Les chemins non optimisés sont utilisés uniquement lorsqu'aucun chemin optimisé n'est disponible.
+Pour les configurations non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant les priorités les plus élevées sont actifs/optimisés, ce qui signifie qu'ils sont gérés par le contrôleur où se trouve l'agrégat. Les chemins avec les priorités les plus basses sont actifs, mais ne sont pas optimisés car ils sont servis à partir d'un autre contrôleur. Les chemins non optimisés sont utilisés uniquement lorsqu'aucun chemin optimisé n'est disponible.
 
 .Exemple
 L'exemple suivant montre la sortie correcte pour une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés :
@@ -138,7 +139,7 @@ size=80G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=
   |- 15:0:1:35 sdbx  68:176  active ready running
 ----
 
-NOTE: N'utilisez pas un nombre excessif de chemins pour une seule LUN. Pas plus de 4 chemins ne devraient être nécessaires. Plus de 8 chemins peuvent entraîner des problèmes de chemin pendant les défaillances du stockage.
+NOTE: N'utilisez pas un nombre excessif de chemins pour une seule LUN. Il ne faut pas plus de quatre chemins. Plus de huit chemins peuvent entraîner des problèmes de chemin lors des défaillances du stockage.
 
 
 
@@ -158,7 +159,7 @@ Il n'y a aucune exigence d'ajouter directement quoi que ce soit au `multipath.co
 
 Vous pouvez ajouter la syntaxe suivante à la `multipath.conf` fichier pour exclure les périphériques indésirables.
 
-Remplacer l' `<DevId>` Avec la chaîne WWID du périphérique que vous souhaitez exclure. Utilisez la commande suivante pour déterminer l'identifiant WWID :
+Remplacer l' `<DevId>` Avec la chaîne WWID du périphérique à exclure :
 
 ....
 blacklist {
@@ -291,4 +292,4 @@ Pour les problèmes connus liés à CentOS (noyau compatible Red Hat), consultez
 
 === Mise en miroir ASM
 
-La mise en miroir ASM peut nécessiter des modifications des paramètres de chemins d'accès multiples Linux pour permettre à ASM de reconnaître un problème et de basculer vers un autre groupe de défaillances. La plupart des configurations ASM sur ONTAP reposent sur une redondance externe. La protection des données est assurée par la baie externe et ASM ne met pas en miroir les données. Certains sites utilisent ASM avec redondance normale pour fournir une mise en miroir bidirectionnelle, généralement entre différents sites. Voir link:https://www.netapp.com/us/media/tr-3633.pdf["Les bases de données Oracle sur ONTAP"^] pour plus d'informations.
+La mise en miroir de gestion automatique du stockage (ASM) peut nécessiter des modifications des paramètres de chemins d'accès multiples Linux pour permettre à ASM de reconnaître un problème et de basculer vers un autre groupe de pannes. La plupart des configurations ASM sur ONTAP reposent sur une redondance externe. La protection des données est assurée par la baie externe et ASM ne met pas en miroir les données. Certains sites utilisent ASM avec redondance normale pour fournir une mise en miroir bidirectionnelle, généralement entre différents sites. Voir link:https://www.netapp.com/us/media/tr-3633.pdf["Les bases de données Oracle sur ONTAP"^] pour plus d'informations.
