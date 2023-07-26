@@ -4,7 +4,7 @@ permalink: hu_aix_71.html
 keywords: host utilities, aix, 7.1 netapp, ontap 
 summary: Décrit comment utiliser IBM AIX 7.1 avec ONTAP 
 ---
-= Utilisation d'IBM AIX 7.1 avec NetApp ONTAP
+= Utilisez IBM AIX 7.1 avec ONTAP
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -20,7 +20,7 @@ summary: Décrit comment utiliser IBM AIX 7.1 avec ONTAP
 
 
 
-== Installation des utilitaires d'hôte AIX
+== Installez les utilitaires hôtes AIX
 
 Vous devez installer AIX Host Utilities Kit lors de l'utilisation d'AIX MPIO avec stockage NetApp ONTAP.
 
@@ -155,7 +155,7 @@ up     primary  path3  fcs1    fc_aix_4     1
 
 == Paramètres recommandés
 
-Voici certains paramètres recommandés pour les LUN NetApp ONTAP. Les paramètres critiques des LUN ONTAP sont définis automatiquement après l'installation du kit d'utilitaires d'hôtes NetApp.
+Voici quelques paramètres recommandés pour les LUN ONTAP.  Les paramètres critiques des LUN ONTAP sont définis automatiquement après l'installation du kit d'utilitaires d'hôtes NetApp.
 
 [cols="4*"]
 |===

@@ -4,7 +4,7 @@ permalink: hu_solaris_114.html
 keywords: host utilities, solaris, 114, netapp, ontap 
 summary: Décrit comment utiliser IBM AIX 7.2 et/ou PowerVM VIOS 3.1 avec ONTAP 
 ---
-= Utilisation de Solaris 11.4 avec NetApp ONTAP
+= Utilisez Solaris 11.4 avec ONTAP
 :toc: macro
 :hardbreaks:
 :toclevels: 1

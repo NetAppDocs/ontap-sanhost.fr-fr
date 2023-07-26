@@ -4,7 +4,7 @@ permalink: hu_citrix_8x.html
 keywords: host utilities, citrix, hypervisor, 8.0, 8.1, 8.2, netapp, ontap, sanhost 
 summary: 'Décrit l"utilisation de l"hyperviseur Citrix 8.x avec ONTAP' 
 ---
-= Avec l'hyperviseur Citrix avec NetApp ONTAP
+= Utilisez l'hyperviseur Citrix avec ONTAP
 :toc: macro
 :hardbreaks:
 :toclevels: 1

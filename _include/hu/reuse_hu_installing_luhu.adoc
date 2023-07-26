@@ -4,7 +4,7 @@
 
 Le pack logiciel NetApp Linux Unified Host Utilities est disponible sur le link:https://mysupport.netapp.com/NOW/cgi-bin/software/?product=Host+Utilities+-+SAN&platform=Linux["Site de support NetApp"^] dans un fichier .rpm 32 bits ou 64 bits.
 
-L'installation de Linux Unified Host Utilities est fortement recommandée, mais n'est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
+NetApp recommande vivement d'installer les utilitaires d'hôtes unifiés Linux, mais ce n'est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
 
 .Étapes
 . Si une version de Linux Unified Host Utilities est déjà installée, utilisez la commande suivante pour la supprimer :

@@ -4,7 +4,7 @@ permalink: hu_rhel_80.html
 keywords: host utilities, red hat, rhel, linux, 8.0, netapp, ontap 
 summary: Décrit comment utiliser Red Hat Enterprise Linux 8.0 avec ONTAP 
 ---
-= Utilisation de Red Hat Enterprise Linux 8.0 avec NetApp ONTAP
+= Utilisez Red Hat Enterprise Linux 8.0 avec ONTAP
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -20,7 +20,7 @@ summary: Décrit comment utiliser Red Hat Enterprise Linux 8.0 avec ONTAP
 
 
 
-== Installation de Linux Unified Host Utilities
+== Installez Linux Unified Host Utilities
 
 Le pack logiciel NetApp Linux Unified Host Utilities est disponible sur le link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab["Site de support NetApp"^] dans un fichier .rpm 64 bits.
 
@@ -311,12 +311,3 @@ Vous pouvez également utiliser les paramètres recommandés pour configurer la 
 
 | link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1231098["1231098"^] | Les ports distants sont en transit vers l'état bloqué sur RHEL8 avec Emulex LPe32002 32 Go FC pendant les opérations de basculement du stockage | Les ports distants sont en transit vers un état bloqué sur RHEL8 avec Emulex LPe32002 32GBFibre Channel (FC) pendant les opérations de basculement de stockage. Lorsque le nœud de stockage revient à un état optimal, les LIF sont également active et l'état du port distant doit lire « en ligne ». Il arrive que l'état du port distant continue à être « bloqué » ou « absent ». Cet état peut entraîner un chemin « défectueux » vers les LUN au niveau de la couche multivoie. | link:https://bugzilla.redhat.com/show_bug.cgi?id=1705573["1705573"^] 
 |===
-
-
-== Notes de version
-
-
-
-=== Mise en miroir ASM
-
-La mise en miroir de gestion automatique du stockage (ASM) peut nécessiter des modifications des paramètres de chemins d'accès multiples Linux pour permettre à ASM de reconnaître un problème et de basculer vers un autre groupe de pannes. La plupart des configurations ASM sur ONTAP reposent sur une redondance externe. La protection des données est assurée par la baie externe et ASM ne met pas en miroir les données. Certains sites utilisent ASM avec redondance normale pour fournir une mise en miroir bidirectionnelle, généralement entre différents sites. Voir link:https://www.netapp.com/us/media/tr-3633.pdf["Les bases de données Oracle sur ONTAP"^] pour plus d'informations.

@@ -4,7 +4,7 @@ permalink: hu_sles_15.html
 keywords: host utilities, suse linux enterprise server 15, suse, linux, 15, netapp, ontap 
 summary: Décrit comment utiliser SUSE Linux Enterprise Server 15 avec ONTAP 
 ---
-= Utilisation de SUSE Linux Enterprise Server 15 avec NetApp ONTAP
+= Utilisez SUSE Linux Enterprise Server 15 avec ONTAP
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -20,11 +20,11 @@ summary: Décrit comment utiliser SUSE Linux Enterprise Server 15 avec ONTAP
 
 
 
-== Installation de Linux Unified Host Utilities
+== Installez Linux Unified Host Utilities
 
 Le pack logiciel NetApp Linux Unified Host Utilities est disponible sur le link:https://mysupport.netapp.com/NOW/cgi-bin/software/?product=Host+Utilities+-+SAN&platform=Linux["Site de support NetApp"^] dans un fichier .rpm 32 bits et 64 bits. Si vous ne savez pas quel fichier est adapté à votre configuration, utilisez le link:https://mysupport.netapp.com/matrix/#welcome["Matrice d'interopérabilité NetApp"^] pour vérifier celui dont vous avez besoin.
 
-L'installation de Linux Unified Host Utilities est fortement recommandée, mais n'est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
+NetApp recommande vivement d'installer les utilitaires d'hôtes unifiés Linux, mais ce n'est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
 
 .Ce dont vous avez besoin
 Si une version de Linux Unified Host Utilities est actuellement installée, vous devez la mettre à niveau ou la supprimer et utiliser les étapes suivantes pour installer la dernière version.
@@ -291,12 +291,3 @@ devices {
 | link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1154309["1154309"^] | Un hôte SLES 15 avec plus de 20 LUN mappées peut passer en mode maintenance après un redémarrage | Un hôte SLES 15 avec plus de 20 LUN mappées peut passer en mode maintenance après un redémarrage. Le mode de maintenance se transforme en mode utilisateur unique après le message :
 `Give root password for maintenance (or press Control-D to continue)` | link:https://bugzilla.suse.com/show_bug.cgi?id=1104173["1104173"^] 
 |===
-
-
-== Notes de version
-
-
-
-=== Mise en miroir ASM
-
-La mise en miroir de gestion automatique du stockage (ASM) peut nécessiter des modifications des paramètres de chemins d'accès multiples Linux pour permettre à ASM de reconnaître un problème et de basculer vers un autre groupe de pannes. La plupart des configurations ASM sur ONTAP reposent sur une redondance externe. La protection des données est assurée par la baie externe et ASM ne met pas en miroir les données. Certains sites utilisent ASM avec redondance normale pour fournir une mise en miroir bidirectionnelle, généralement entre différents sites. Voir link:https://www.netapp.com/us/media/tr-3633.pdf["Les bases de données Oracle sur ONTAP"^] pour plus d'informations.

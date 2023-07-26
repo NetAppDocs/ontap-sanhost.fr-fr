@@ -4,7 +4,7 @@ permalink: hu_rhel_64.html
 keywords: host utilities, red hat, rhel, linux, 6.4, netapp, ontap 
 summary: Décrit comment utiliser Red Hat Enterprise Linux 6.4 avec ONTAP 
 ---
-= Utilisation de Red Hat Enterprise Linux 6.4 avec NetApp ONTAP
+= Utilisez Red Hat Enterprise Linux 6.4 avec ONTAP
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -20,11 +20,11 @@ summary: Décrit comment utiliser Red Hat Enterprise Linux 6.4 avec ONTAP
 
 
 
-== Installation de Linux Unified Host Utilities
+== Installez Linux Unified Host Utilities
 
 Le pack logiciel NetApp Linux Unified Host Utilities est disponible sur le link:https://mysupport.netapp.com/NOW/cgi-bin/software/?product=Host+Utilities+-+SAN&platform=Linux["Site de support NetApp"^] dans un fichier .rpm 32 bits et 64 bits. Si vous ne savez pas quel fichier est adapté à votre configuration, utilisez le link:https://mysupport.netapp.com/matrix/#welcome["Matrice d'interopérabilité NetApp"^] pour vérifier celui dont vous avez besoin.
 
-L'installation de Linux Unified Host Utilities est fortement recommandée, mais n'est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
+NetApp recommande vivement d'installer les utilitaires d'hôtes unifiés Linux, mais ce n'est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
 
 .Ce dont vous avez besoin
 Si une version de Linux Unified Host Utilities est actuellement installée, vous devez la mettre à niveau ou la supprimer et utiliser les étapes suivantes pour installer la dernière version.
@@ -309,12 +309,3 @@ Vous pouvez également utiliser les paramètres recommandés pour configurer la 
 
 | link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=673009["673009"^] | La création d'un système de fichiers ext4 sur LV réparti sur 15 périphériques multichemins à provisionnement fin et activés pour la suppression déclenche des erreurs de noyau « request boched » | Des erreurs de noyau « requêtes blotchées » ont été détectées lorsque les utilisateurs tentent de créer un système de fichiers ext4 sur des périphériques multichemins à provisionnement fin et activés pour la suppression. Par conséquent, la création du système de fichiers ext4 peut prendre plus de temps et des perturbations occasionnelles se produisent. Ce problème s'est produit uniquement lorsque les utilisateurs tentent de créer le système de fichiers ext4 sur un LV réparti sur 15 périphériques multipathing ou plus, sur des systèmes exécutant Red Hat Enterprise Linux 6.x et Data ONTAP 8.1.3 et versions ultérieures fonctionnant en 7-mode. Le problème se produit parce que le noyau tente à tort de fusionner des requêtes de suppression, qui n'est pas pris en charge sur Red Hat Enterprise Linux 6.x à ce moment-là. Lorsque ce problème se produit, plusieurs instances du message suivant sont écrites dans syslog (/var/log/messages) : kernel : blk : requête bâclée. La création du système de fichiers peut donc prendre plus de temps que prévu. | link:https://bugzilla.redhat.com/show_bug.cgi?id=907844["907844"^] 
 |===
-
-
-== Notes de version
-
-
-
-=== Mise en miroir ASM
-
-La mise en miroir de gestion automatique du stockage (ASM) peut nécessiter des modifications des paramètres de chemins d'accès multiples Linux pour permettre à ASM de reconnaître un problème et de basculer vers un autre groupe de pannes. La plupart des configurations ASM sur ONTAP reposent sur une redondance externe. La protection des données est assurée par la baie externe et ASM ne met pas en miroir les données. Certains sites utilisent ASM avec redondance normale pour fournir une mise en miroir bidirectionnelle, généralement entre différents sites. Voir link:https://www.netapp.com/us/media/tr-3633.pdf["Les bases de données Oracle sur ONTAP"^] pour plus d'informations.

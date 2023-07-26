@@ -4,7 +4,7 @@ permalink: hu_rhel_83.html
 keywords: host utilities, red hat, rhel, linux, 8.3, netapp, ontap 
 summary: Décrit comment utiliser Red Hat Enterprise Linux 8.3 avec ONTAP 
 ---
-= Utilisation de Red Hat Enterprise Linux 8.3 avec NetApp ONTAP
+= Utilisez Red Hat Enterprise Linux 8.3 avec ONTAP
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -20,7 +20,7 @@ summary: Décrit comment utiliser Red Hat Enterprise Linux 8.3 avec ONTAP
 
 
 
-== Installation de Linux Unified Host Utilities
+== Installez Linux Unified Host Utilities
 
 Le pack logiciel NetApp Linux Unified Host Utilities est disponible sur le link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab["Site de support NetApp"^] dans un fichier .rpm 64 bits.
 
@@ -291,13 +291,3 @@ Vous pouvez également utiliser les paramètres recommandés pour configurer la 
 == Problèmes connus et limites
 
 Il n'y a aucun problème connu pour RHEL 8.3.
-
-
-
-== Notes de version
-
-
-
-=== Mise en miroir ASM
-
-La mise en miroir de gestion automatique du stockage (ASM) peut nécessiter des modifications des paramètres de chemins d'accès multiples Linux pour permettre à ASM de reconnaître un problème et de basculer vers un autre groupe de pannes. La plupart des configurations ASM sur ONTAP reposent sur une redondance externe. La protection des données est assurée par la baie externe et ASM ne met pas en miroir les données. Certains sites utilisent ASM avec redondance normale pour fournir une mise en miroir bidirectionnelle, généralement entre différents sites. Voir link:https://www.netapp.com/us/media/tr-3633.pdf["Les bases de données Oracle sur ONTAP"^] pour plus d'informations.

@@ -4,7 +4,7 @@ permalink: hu_ol_84.html
 keywords: host utilities, oracle, linux, 8.4, netapp, ontap 
 summary: 'Décrit l"utilisation d"Oracle Linux 8.4 avec ONTAP' 
 ---
-= Utilisation d'Oracle Linux 8.4 avec NetApp ONTAP
+= Utilisez Oracle Linux 8.4 avec ONTAP
 :toc: macro
 :hardbreaks:
 :toclevels: 1P
@@ -20,7 +20,7 @@ summary: 'Décrit l"utilisation d"Oracle Linux 8.4 avec ONTAP'
 
 
 
-== Installation de Linux Unified Host Utilities
+== Installez Linux Unified Host Utilities
 
 Le pack logiciel NetApp Linux Unified Host Utilities est disponible sur le link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab["Site de support NetApp"^] dans un fichier .rpm 64 bits.
 
