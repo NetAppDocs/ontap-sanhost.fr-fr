@@ -307,12 +307,3 @@ Unable to locate /usr/lib64/libHBAAPI.so library
 Make sure the package installing the library is installed & loaded
 ----| Sans objet 
 |===
-
-
-== Notes de version
-
-
-
-=== Mise en miroir ASM
-
-La mise en miroir ASM peut nécessiter des modifications des paramètres de chemins d'accès multiples Linux pour permettre à ASM de reconnaître un problème et de basculer vers un autre groupe de pannes. La plupart des configurations ASM sur ONTAP reposent sur une redondance externe. La protection des données est assurée par la baie externe et ASM ne met pas en miroir les données. Certains sites utilisent ASM avec redondance normale pour fournir une mise en miroir bidirectionnelle, généralement entre différents sites. Voir bases de données Oracle sur ONTAP pour plus d'informations.

@@ -292,13 +292,3 @@ Vous pouvez également utiliser les paramètres recommandés pour configurer la 
 == Problèmes connus
 
 Il n'y a aucun problème connu pour Oracle Linux 8.7.
-
-
-
-== Notes de mise à jour
-
-
-
-=== Mise en miroir ASM
-
-La mise en miroir de la gestion automatique du stockage (ASM) peut nécessiter des modifications des paramètres de chemins d'accès multiples Linux pour permettre à ASM de reconnaître un problème et de basculer vers un autre groupe de pannes. La plupart des configurations ASM sur ONTAP reposent sur une redondance externe. La protection des données est assurée par la baie externe et ASM ne met pas en miroir les données. Certains sites utilisent ASM avec redondance normale pour fournir une mise en miroir bidirectionnelle, généralement entre différents sites. Voir bases de données Oracle sur ONTAP pour plus d'informations.

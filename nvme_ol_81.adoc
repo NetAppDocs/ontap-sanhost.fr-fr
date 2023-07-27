@@ -234,7 +234,7 @@ Device   Vserver  Namespace Path             NSID   UUID   Size
 
 
 
-== Activez la taille d'E/S 1 Mo pour Broadcom NVMe/FC
+== Taille d'E/S de 1 Mo pour Broadcom NVMe/FC
 
 ONTAP signale une taille DE transfert MAX Data de 8 DANS les données Identify Controller, ce qui signifie que la taille maximale des demandes d'E/S peut atteindre 1 Mo. Toutefois, pour émettre des demandes d'E/S d'une taille de 1 Mo pour un hôte Broadcom NVMe/FC, vous devez augmenter le `lpfc` valeur du `lpfc_sg_seg_cnt` à 256 à partir de la valeur par défaut de 64.
 

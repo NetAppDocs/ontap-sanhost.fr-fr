@@ -42,7 +42,7 @@ NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans ce docu
 
 == Limites connues
 
-Aucune.
+Il n'y a pas de limites connues.
 
 
 
@@ -397,6 +397,8 @@ NSID       UUID                                   Size
 
 == Problèmes connus
 
+La configuration hôte NVMe-of pour OL 8.6 avec ONTAP version présente les problèmes connus suivants :
+
 [cols=""20"]
 |===
 | ID de bug NetApp | Titre | Description | ID Bugzilla 
@@ -404,127 +406,3 @@ NSID       UUID                                   Size
 
 | 1517321 | Les hôtes Oracle Linux 8.6 NVMe-of créent des contrôleurs de détection persistante en double | Sur les hôtes Oracle Linux 8.6 NVMe over Fabrics (NVMe-of), vous pouvez utiliser le `nvme discover -p` Commande permettant de créer des contrôleurs de découverte permanente (CDP). Lorsque cette commande est utilisée, un seul PDC doit être créé par combinaison initiateur-cible. Toutefois, si vous exécutez ONTAP 9.10.1 et Oracle Linux 8.6 avec un hôte NVMe-of, un PDC en double est créé à chaque fois `nvme discover -p` est exécuté. Cela entraîne une utilisation inutile des ressources sur l'hôte et la cible. | https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=18118["18118"^] 
 |===
-
-
-== Dépannage
-
-Avant de commencer tout dépannage pour toute panne NVMe/FC, vérifiez que vous exécutez une configuration conforme aux spécifications de IMT, puis suivez les étapes suivantes pour déboguer les problèmes côté hôte.
-
-
-
-=== consignation détaillée lpfc
-
-.Étapes
-. Réglez le `lpfc_log_verbose` Paramètre du pilote sur l'une des valeurs suivantes pour enregistrer les événements NVMe/FC.
-+
-[listing]
-----
-#define LOG_NVME 0x00100000 /* NVME general events. */
-#define LOG_NVME_DISC 0x00200000 /* NVME Discovery/Connect events. */
-#define LOG_NVME_ABTS 0x00400000 /* NVME ABTS events. */
-#define LOG_NVME_IOERR 0x00800000 /* NVME IO Error events. */
-----
-. Une fois les valeurs définies, exécutez le `dracut-f` commande et redémarre l'hôte.
-. Vérifiez les paramètres.
-+
-[listing]
-----
-# cat /etc/modprobe.d/lpfc.conf
-options lpfc lpfc_log_verbose=0xf00083
-
-# cat /sys/module/lpfc/parameters/lpfc_log_verbose
-15728771
-----
-
-
-
-
-=== consignation détaillée qla2xxx
-
-Il n'existe pas de connexion qla2xxx spécifique similaire pour NVMe/FC et pour le `lpfc` conducteur. Par conséquent, vous pouvez définir le niveau de consignation général qla2xxx en procédant comme suit :
-
-.Étapes
-. Ajoutez le `ql2xextended_error_logging=0x1e400000` valeur au correspondant `modprobe qla2xxx conf` fichier.
-. Recréez le `initramfs` en cours d'exécution `dracut -f` puis redémarrez l'hôte.
-. Après le redémarrage, vérifiez que la journalisation détaillée est appliquée comme suit :
-+
-[listing]
-----
-# cat /etc/modprobe.d/qla2xxx.conf
-options qla2xxx ql2xnvmeenable=1 ql2xextended_error_logging=0x1e400000
-# cat /sys/module/qla2xxx/parameters/ql2xextended_error_logging
-507510784
-----
-
-
-
-
-=== Solutions de contournement et erreurs nvme-cli courantes
-
-Les erreurs affichées par `nvme-cli` pendant `nvme discover`, `nvme connect`, ou `nvme connect-all` les opérations et les solutions de contournement sont indiquées dans le tableau suivant :
-
-[cols="20, 20, 50"]
-|===
-| Erreurs affichées par `nvme-cli` | Cause probable | Solution de contournement 
-
-
-| `Failed to write to /dev/nvme-fabrics: Invalid argument` | Syntaxe incorrecte | Vérifiez que vous utilisez la syntaxe correcte pour le `nvme discover`, `nvme connect`, et `nvme connect-all` commandes. 
-
-
-| `Failed to write to /dev/nvme-fabrics: No such file or directory` | Plusieurs problèmes peuvent déclencher cette situation, par exemple, la fourniture d'arguments incorrects vers les commandes NVMe est l'une des causes courantes.  a| 
-* Vérifiez que vous avez transmis les arguments corrects (par exemple, chaîne WWNN, chaîne WWPN, etc.) aux commandes.
-* Si les arguments sont corrects, mais que vous voyez toujours cette erreur, vérifiez si l' `/sys/class/scsi_host/host*/nvme_info` La sortie de la commande est correcte, l'initiateur NVMe est affiché comme `Enabled`, Et les LIFs cibles NVMe/FC sont correctement affichées sous les sections ports distants. Exemple :
-+
-[listing]
-----
-
-# cat /sys/class/scsi_host/host*/nvme_info
-NVME Initiator Enabled
-NVME LPORT lpfc0 WWPN x10000090fae0ec9d WWNN x20000090fae0ec9d DID x012000 ONLINE
-NVME RPORT WWPN x200b00a098c80f09 WWNN x200a00a098c80f09 DID x010601 TARGET DISCSRVC ONLINE
-NVME Statistics
-LS: Xmt 0000000000000006 Cmpl 0000000000000006
-FCP: Rd 0000000000000071 Wr 0000000000000005 IO 0000000000000031
-Cmpl 00000000000000a6 Outstanding 0000000000000001
-NVME Initiator Enabled
-NVME LPORT lpfc1 WWPN x10000090fae0ec9e WWNN x20000090fae0ec9e DID x012400 ONLINE
-NVME RPORT WWPN x200900a098c80f09 WWNN x200800a098c80f09 DID x010301 TARGET DISCSRVC ONLINE
-NVME Statistics
-LS: Xmt 0000000000000006 Cmpl 0000000000000006
-FCP: Rd 0000000000000073 Wr 0000000000000005 IO 0000000000000031
-Cmpl 00000000000000a8 Outstanding 0000000000000001
-----
-* Si les LIFs cibles ne sont pas affichées comme ci-dessus dans `nvme_info` sortie de la commande, vérifiez le `/var/log/messages` et `dmesg` Les sorties de commande permettent de détecter toute défaillance NVMe/FC suspecte, puis de signaler ou corriger en conséquence.
-
-
-
-
-| `No discovery log entries to fetch`  a| 
-Généralement observé lorsque l' `/etc/nvme/hostnqn` La chaîne n'a pas été ajoutée au sous-système correspondant de la baie NetApp ou incorrecte `hostnqn` la chaîne a été ajoutée au sous-système respectif.
- a| 
-Vérifiez que le code est exact `/etc/nvme/hostnqn` Une chaîne est ajoutée au sous-système correspondant de la baie NetApp (vérifiez à l'aide de la `vserver nvme subsystem host show` commande).
-
-
-
-| `Failed to write to /dev/nvme-fabrics: Operation already in progress`  a| 
-Observé lorsque les associations de contrôleur ou l'opération spécifiée sont déjà créées ou en cours de création. Cela peut se produire dans le cadre des scripts de connexion automatique installés ci-dessus.
- a| 
-Aucune. Essayez d'exécuter le `nvme discover` commande à nouveau après un certain temps. Pour `nvme connect` et `connect-all`, exécutez le `nvme list` commande pour vérifier que les périphériques d'espace de noms sont déjà créés et affichés sur l'hôte.
-
-|===
-
-
-=== Quand contacter le support technique
-
-Si vous rencontrez toujours des problèmes, collectez les fichiers et les sorties de commande suivants et contactez le support technique pour déterminer un niveau de priorité plus poussé :
-
-[listing]
-----
-cat /sys/class/scsi_host/host*/nvme_info
-/var/log/messages
-dmesg
-nvme discover output as in:
-nvme discover --transport=fc --traddr=nn-0x200a00a098c80f09:pn-0x200b00a098c80f09 --host-traddr=nn-0x20000090fae0ec9d:pn-0x10000090fae0ec9d
-nvme list
-nvme list-subsys /dev/nvmeXnY
-----

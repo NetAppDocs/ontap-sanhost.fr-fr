@@ -2,7 +2,7 @@
 :allow-uri-read: 
 
 
-Si vous rencontrez toujours des problèmes, collectez les fichiers et les sorties de commande suivants et contactez le support technique pour déterminer un niveau de priorité plus poussé :
+Si vous rencontrez toujours des problèmes, collectez les fichiers et sorties de commande suivants et contactez link:mysupport.netapp.com["Support NetApp"^] pour un triage ultérieur :
 
 [listing]
 ----

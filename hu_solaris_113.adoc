@@ -20,7 +20,7 @@ summary: 'Décrit l"installation des utilitaires hôtes solaris'
 
 
 
-== Installation des utilitaires d'hôte Solaris
+== Installez les utilitaires d'hôte Solaris
 
 Vous pouvez télécharger le fichier compressé contenant les packs logiciels Host Utilities à partir du link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab["Site de support NetApp"^]. Une fois le fichier installé, vous devez l'extraire pour obtenir les packs logiciels dont vous avez besoin pour installer les utilitaires hôtes.
 

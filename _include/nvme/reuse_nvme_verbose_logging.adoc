@@ -2,6 +2,8 @@
 :allow-uri-read: 
 
 
+Définissez le pilote lpfc pour NVMe/FC.
+
 .Étapes
 . Réglez le `lpfc_log_verbose` Paramètre du pilote sur l'une des valeurs suivantes pour enregistrer les événements NVMe/FC.
 +

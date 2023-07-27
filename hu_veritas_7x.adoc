@@ -18,11 +18,8 @@ summary: Fournit des conseils sur les paramètres de configuration hôte SAN de 
 :toc-position: content
 
 
-
-
-== Introduction
-
-Ce document fournit des conseils sur les paramètres de configuration des hôtes SAN ONTAP pour la version 7 de Veritas Infoscale Storage based pour les plateformes Red Hat Enterprise Linux & Oracle Linux (basées sur RHCK) avec protocoles FC, FCoE et iSCSI.
+[role="lead"]
+Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour la version 7 de Veritas InfoScale Storage Foundation pour les plateformes Red Hat Enterprise Linux et Oracle Linux (RHCK) avec protocoles FC, FCoE et iSCSI.
 
 
 
@@ -283,6 +280,6 @@ Si vous disposez d'un environnement multichemin hétérogène comprenant Veritas
 
 
 
-== Problèmes connus et limites
+== Problèmes connus
 
-Il n'y a pas de problèmes et de limites connus.
+Il n'y a pas de problème connu.

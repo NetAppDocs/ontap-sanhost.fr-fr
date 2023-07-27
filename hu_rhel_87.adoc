@@ -285,3 +285,9 @@ devices {
 === Paramètres KVM
 
 Vous pouvez également utiliser les paramètres recommandés pour configurer la machine virtuelle basée sur le noyau (KVM). Aucune modification n'est nécessaire pour configurer KVM car le LUN est mappé à l'hyperviseur.
+
+
+
+== Problèmes connus
+
+Il n'y a aucun problème connu pour RHEL 8.7.

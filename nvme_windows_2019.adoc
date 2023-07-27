@@ -18,9 +18,8 @@ summary: 'Configuration d"hôte NVMe/FC pour Windows Server 2019 avec ONTAP'
 :toc-position: content
 
 
-
-
-== Prise en charge
+[role="lead"]
+Vous pouvez configurer NVMe over Fibre Channel (NVMe/FC) sur des hôtes exécutant Windows Server 2019 et ONTAP comme cible.
 
 NVMe/FC est pris en charge sur ONTAP 9.7 ou version ultérieure pour Windows Server 2019.
 

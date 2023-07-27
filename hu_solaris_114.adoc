@@ -20,7 +20,7 @@ summary: Décrit comment utiliser IBM AIX 7.2 et/ou PowerVM VIOS 3.1 avec ONTAP
 
 
 
-== Installation des utilitaires d'hôte Solaris
+== Installez les utilitaires d'hôte Solaris
 
 Vous pouvez télécharger le fichier compressé contenant les packs logiciels Host Utilities à partir du link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab["Site de support NetApp"^]. Une fois le fichier disponible, vous devez le décompresser pour obtenir les progiciels dont vous avez besoin pour installer les utilitaires hôtes.
 

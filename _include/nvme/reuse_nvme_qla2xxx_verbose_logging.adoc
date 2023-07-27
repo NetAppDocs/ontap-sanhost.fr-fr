@@ -2,7 +2,7 @@
 :allow-uri-read: 
 
 
-Il n'existe pas de connexion qla2xxx spécifique similaire pour NVMe/FC et pour le `lpfc` conducteur. Par conséquent, vous pouvez définir le niveau de consignation général qla2xxx en procédant comme suit :
+Il n'existe pas de journalisation qla2xxx spécifique pour NVMe/FC similaire à celle du `lpfc` conducteur. Définissez plutôt le niveau de journalisation général qla2xxx.
 
 .Étapes
 . Ajoutez le `ql2xextended_error_logging=0x1e400000` valeur au correspondant `modprobe qla2xxx conf` fichier.

@@ -18,11 +18,8 @@ summary: 'Décrit l"utilisation de l"hyperviseur Citrix 8.x avec ONTAP'
 :toc-position: content
 
 
-
-
-== Introduction
-
-Ce document décrit les paramètres de configuration des hôtes SAN ONTAP pour les versions des systèmes d'exploitation d'hyperviseur Citrix série 8 avec protocoles FC, FCoE et iSCSI.
+[role="lead"]
+Vous pouvez configurer les paramètres de configuration des hôtes SAN ONTAP pour les versions du système d'exploitation de l'hyperviseur Citrix série 8 avec les protocoles FC, FCoE et iSCSI.
 
 
 
