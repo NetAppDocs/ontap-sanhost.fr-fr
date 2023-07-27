@@ -19,7 +19,7 @@ summary: 'Décrit l"utilisation de Citrix XenServer 7.x avec ONTAP'
 
 
 [role="lead"]
-Ce document décrit les paramètres de configuration des hôtes SAN ONTAP pour les versions des systèmes d'exploitation Citrix XenServer 7 avec les protocoles FC, FCoE et iSCSI.
+Vous pouvez configurer les paramètres de configuration d'hôte SAN ONTAP pour les versions du système d'exploitation Citrix XenServer 7 avec les protocoles FC, FCoE et iSCSI.
 
 
 

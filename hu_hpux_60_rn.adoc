@@ -45,21 +45,9 @@ Les notes de mise à jour sont mises à jour entre les versions de produit dès 
 
 
 
-== Problèmes connus et limites
+== Problèmes et limites connus
 
 Il n'y a aucun problème connu pour la version 6.0 de HP-UX.
-
-
-
-== À propos de la documentation sur la configuration de l'hôte SAN
-
-La documentation relative aux utilitaires d'hôte SAN est incluse dans le link:https://docs.netapp.com/us-en/ontap-sanhost/index.html["Documentation relative à la configuration d'hôte SAN ONTAP."] La documentation relative à la configuration d'hôte SAN ONTAP peut être cumulée, couvrant toutes les versions actuelles d'hôte SAN. Les différences fonctionnelles entre les versions sont notées dans le contexte.
-
-
-
-== Où trouver la documentation produit et d'autres informations
-
-Vous pouvez accéder à la documentation de tous les produits NetApp et consulter d'autres ressources d'informations sur les produits, notamment des rapports techniques et des livres blancs, sur la page Documentation sur les produits du site NetApp.
 
 .Informations associées
 *Configuration et gestion de votre système de stockage ONTAP*

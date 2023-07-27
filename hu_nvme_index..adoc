@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
 permalink: hu_nvme_index.html 
-keywords:  
-summary:  
+keywords: nvme, san, host, aix, linux, vsphere, windows 
+summary: 'Vous pouvez configurer certains hôtes SAN pour le protocole NVMe over Fabrics (NVMe-of).' 
 ---
 = Présentation
 :toc: macro

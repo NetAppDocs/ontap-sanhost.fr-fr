@@ -19,72 +19,22 @@ summary: Notes de version pour Linux Unified Host Utilities 7.1
 
 
 [role="lead"]
-Ce document contient les dernières informations relatives à la version 7.1 de Linux Unified Host Utilities, y compris les mises à jour concernant les problèmes et limitations connus, les mises en garde importantes, les nouvelles fonctionnalités et les améliorations. Elle décrit également les problèmes susceptibles d'avoir été détectés depuis la sortie des utilitaires hôtes.
+Les notes de version décrivent les nouvelles fonctionnalités et améliorations, les problèmes connus et les limites, ainsi que les mises en garde importantes pour la configuration et la gestion de votre hôte spécifique avec votre système de stockage ONTAP.
+
+Pour des informations spécifiques sur les versions et mises à jour du système d'exploitation prises en charge par les utilitaires hôtes, consultez le link:https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^].
 
 
 
-== À propos de la version 7.1 de Linux Unified Host Utilities
+== Nouveautés
 
-Les utilitaires hôtes unifiés Linux prennent en charge plusieurs systèmes d'exploitation Linux. Les utilitaires d'hôtes vous permettent de connecter un hôte Linux aux systèmes de stockage NetApp.
+La version 7.1 de Linux Host Utilities contient les nouvelles fonctionnalités et améliorations suivantes :
 
-Linux Unified Host Utilities 7.1 continue de prendre en charge les versions suivantes de Linux :
-
-* Red Hat Enterprise Linux
-* SUSE Linux Enterprise Server
-* Oracle Linux
-* VM Oracle
-* Citrix XenServer
-* Veritas
-
-
-
-NOTE: Pour des informations spécifiques sur les versions et mises à jour du système d'exploitation prises en charge par les utilitaires hôtes, consultez le link:https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^].
-
-Le logiciel Host Utilities est fourni sous forme de fichiers .rpm 32 bits et 64 bits. Vous pouvez télécharger le fichier .rpm correct pour votre architecture hôte et la documentation à partir du link:https://mysupport.netapp.com/site/["Site de support NetApp"^].
-
-Pour obtenir des instructions sur l'installation et la configuration, reportez-vous au link:https://docs.netapp.com/us-en/ontap-sanhost/hu_luhu_71.html["Guide d'installation de Linux Unified Host Utilities 7.1"].
-
-
-
-== Nouveautés de la version 7.1
-
-Linux Host Utilities est désormais appelé _Linux Unified Host Utilities_ car il prend en charge les systèmes de stockage NetApp E-Series exécutant SANtricity ainsi que les systèmes AFF et FAS exécutant ONTAP.
-
+* Les utilitaires d'hôtes Linux sont désormais appelés _utilitaires d'hôtes unifiés Linux_ car ils prennent en charge les systèmes de stockage NetApp E-Series exécutant SANtricity ainsi que les systèmes AFF, FAS et ASA exécutant ONTAP.
++
 
 NOTE: Toute mention d'Host Utilities ou d'Host Utilities Linux dans ce document fait référence à Linux Unified Host Utilities.
 
-* Cette version de Linux Unified Host Utilities prend en charge un package ajusté pour la définition des profils de serveur et l'amélioration des performances d'E/S sur les hôtes Red Hat Enterprise Linux 6 et 7.
-* Linux Unified Host Utilities 7.1 continue de prendre en charge les versions suivantes :
-+
-** Red Hat Enterprise Linux
-** SUSE Linux Enterprise Server
-** Oracle Linux
-** VM Oracle
-** Citrix XenServer
-** Veritas
-
-
-* Red Hat Enterprise Linux 6 et 7 disposent désormais d'un pack ajusté avec un `tuned-adm` commande permettant de définir différents profils de serveur sur l'hôte en fonction de l'environnement.
-+
-** Il inclut un profil de stockage d'entreprise pour les configurations dans lesquelles les LUN des baies de stockage d'entreprise sont utilisées. Vous pouvez également utiliser le profil d'invité virtuel pour Red Hat Enterprise Linux en tant que machine virtuelle invitée. Ces packages permettent d'améliorer considérablement le débit et la latence sur les ONTAP.
-
-
-
-
-
-NOTE: NetApp continue de fonctionner avec les utilitaires hôtes afin d'ajouter la prise en charge des fonctionnalités après la version initiale. Pour obtenir les dernières informations sur les fonctionnalités prises en charge et les nouvelles fonctionnalités ajoutées, reportez-vous au link:https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^].
-
-
-
-== Nouvelles fonctionnalités et améliorations
-
-Les notes de mise à jour sont mises à jour entre les versions de produit dès que de nouvelles informations sont disponibles.
-
-
-
-=== 7.1 améliorations
-
-* Cette version prend notamment en charge :
+* Les systèmes d'exploitation suivants sont désormais pris en charge :
 +
 ** SUSE Linux Enterprise Server série 15
 ** Oracle VM série 3.2
@@ -92,72 +42,39 @@ Les notes de mise à jour sont mises à jour entre les versions de produit dès 
 ** Red Hat Enterprise Linux 6 et 7
 ** SUSE Linux Enterprise Server 11 SP4
 ** KVM et XEN, RHEV 6.4 et 6.5
-** Paramètres Citrix XenServer
+** Citrix XenServer
 
 
-* Ajoute la prise en charge des adaptateurs Fibre Channel 32 Gbit d'Emulex et Qlogic.
-* Correctifs `sanlun lun show -p getting SIGABRT` Dans SLES12SP1, OL7.2, RHEL7.2 et RHEL 6.8.
-* Étend la prise en charge des systèmes d'exploitation Red Hat Linux 6.8, Oracle Linux 6.8, XenServer 7.0, Oracle VM 3.3 et Oracle VM 3.4.
+* Sur les hôtes Red Hat Enterprise Linux (RHEL) 6 et RHEL 7, un package optimisé pour la définition des profils de serveur est désormais pris en charge. Vous pouvez utiliser le `tuned-adm` pour définir différents profils, en fonction de l'environnement.  Par exemple, vous pouvez également utiliser le profil invité virtuel en tant que machine virtuelle invitée et le profil de stockage d'entreprise pour les configurations dans lesquelles les LUN des baies de stockage d'entreprise sont utilisées.  L'utilisation de ces packages optimisés peut améliorer le débit et la latence des ONTAP.
+* Ajoute la prise en charge des cartes Fibre Channel 32 Go de Broadcom Emulex et Marvell Qlogic.
 
+
+
+NOTE: NetApp continue de fonctionner avec les utilitaires hôtes afin d'ajouter la prise en charge des fonctionnalités après la version initiale. Pour obtenir les dernières informations sur les fonctionnalités prises en charge et les nouvelles fonctionnalités ajoutées, reportez-vous au link:https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^].
+
+
+
+== Corrigé dans cette version
+
+Problème intermittent de défaillance du système d'exploitation de l'hôte qui se produit lors de l'exécution du `sanlun lun show -p` La commande dans SLES12SP1, OL7.2, RHEL7.2 et RHEL 6.8 est corrigée dans cette version.
 
 
 
 == Problèmes et limites connus
 
-[cols="10, 30"]
+La version 7.1 de Linux Host Utilities présente les problèmes et limitations connus suivants.
+
+[cols="10, 30, 30"]
 |===
-| ID de bug NetApp | Description 
+| ID de bug NetApp | Titre | Description 
 
 
-| 1457017 |  `sanlun` problèmes d'installation messages d'avertissement relatifs à `libdevmapper.so` et `libnl.so` bibliothèques. Ces avertissements n'affectent pas la fonctionnalité de `sanlun` kit. 
+| 1457017 |  `sanlun` problèmes d'installation messages d'avertissement relatifs à `libdevmapper.so` et `libnl.so` bibliothèques. Ces avertissements n'affectent pas la fonctionnalité de `sanlun` kit. | Lorsque vous exécutez la commande CLI Linux Unified Host Utilities - « sanlun fcp show adapter -v » sur un hôte SAN, la commande échoue et un message d'erreur indique que les dépendances de bibliothèque requises pour la découverte d'un adaptateur de bus hôte (HBA) ne peuvent pas être
+emplacement :
+
+[root@hostname ~]# sanlun fcp show adapter -v
+Impossible de localiser la bibliothèque /usr/lib64/libHBAAPI.so
+Assurez-vous que le package d'installation de la bibliothèque est installé et chargé
+Voir le rapport public 1508554. 
 |===
-link:https://mysupport.netapp.com/site/bugs-online/product["NetApp bogues en ligne"] fournit des informations complètes pour la plupart des problèmes connus, y compris des solutions de contournement suggérées si possible.
-
-Voici quelques combinaisons de mots-clés et types de bogue que vous pouvez utiliser :
-
-* FCP - Linux
-* ISCSI – Linux
-
-
-Reportez-vous à la link:https://docs.netapp.com/us-en/ontap-sanhost/index.html["Documentation relative à la configuration d'hôte SAN ONTAP"] Pour plus d'informations sur les paramètres et les configurations du système d'exploitation hôte.
-
-
-
-== À propos de la documentation sur la configuration de l'hôte SAN
-
-La documentation relative aux utilitaires d'hôte SAN est incluse dans le link:https://docs.netapp.com/us-en/ontap-sanhost/index.html["Documentation relative à la configuration d'hôte SAN ONTAP"]. La documentation relative à la configuration DE L'HÔTE SAN ONTAP peut être cumulée. Elle couvre toutes les versions d'HÔTE SAN actuelles. Les différences fonctionnelles entre les versions sont notées dans le contexte.
-
-
-
-=== Informations supplémentaires
-
-
-
-==== Valeurs par défaut recommandées lors de l'utilisation de pilotes regroupés avec le noyau Linux
-
-Lorsque vous configurez un environnement FC qui utilise les pilotes natifs intégrés au noyau Linux, vous pouvez utiliser les valeurs par défaut des pilotes. Dans les environnements iSCSI où vous utilisez un logiciel de solution iSCSI, vous devez définir manuellement certaines valeurs recommandées en fonction de la version du système d'exploitation que vous utilisez.
-
-
-
-== Où trouver la documentation produit et d'autres informations
-
-Vous pouvez accéder à la documentation de tous les produits NetApp et consulter d'autres ressources d'informations sur les produits, notamment des rapports techniques et des livres blancs, sur la page Documentation sur les produits du site NetApp.
-
-.Informations associées
-*Configuration et gestion de votre système de stockage ONTAP*
-
-* Le link:https://docs.netapp.com/us-en/ontap/setup-upgrade/index.html["Guide de configuration du logiciel ONTAP"^] Pour votre version de ONTAP
-* Le link:https://docs.netapp.com/us-en/ontap/san-management/index.html["Guide d'administration du SAN ONTAP"^] Pour votre version de ONTAP
-* Le link:https://library.netapp.com/ecm/ecm_download_file/ECMLP2492508["Notes de version de ONTAP"^] Pour votre version de ONTAP
-
-
-*Configuration et gestion de votre système de stockage E-Series*
-
-* Guide de configuration et de provisionnement de SANtricity Storage Manager pour Windows Express adapté à votre protocole
-* Guide de configuration et de provisionnement de SANtricity Storage Manager pour votre système d'exploitation, votre protocole et votre version de SANtricity.
-* Référence d'installation du logiciel SANtricity Storage Manager spécifique pour votre version de SANtricity.
-* Le guide du pilote multivoie SANtricity Storage Manager, spécifique à votre version de SANtricity.
-* Notes de mise à jour de SANtricity Storage Manager pour votre version de SANtricity.
-
-
-Voir la link:https://docs.netapp.com/us-en/e-series/index.html["Documentation E-Series"^] Pour accéder à la documentation relative à SANtricity.
+link:https://mysupport.netapp.com/site/bugs-online/product["NetApp bogues en ligne"^] fournit des informations complètes pour la plupart des problèmes connus, y compris des solutions de contournement suggérées si possible.

@@ -23,24 +23,32 @@ sidebar:
         url: "/hu_aix_61_rn.html"
       - title: Installez AIX HU 6.1
         url: "/hu_aix_61.html"
+      - title: Exemple de référence de commande
+        url: "/hu_aix_61_cmd.html"
     - title: Utilitaires hôtes HP-UX
       entries:
       - title: Notes de mise à jour
         url: "/hu_hpux_60_rn.html"
       - title: INSTALLEZ HP-UX HU 6.0
         url: "/hu_hpux_60.html"
+      - title: Exemple de référence de commande
+        url: "/hu_hpux_60_cmd.html"
     - title: Utilitaires d'hôtes unifiés Linux
       entries:
       - title: Notes de mise à jour
         url: "/hu_luhu_71_rn.html"
       - title: Installer LUHU 7.1
         url: "/hu_luhu_71.html"
-    - title: Solaris Host Utilities
+      - title: Exemple de référence de commande
+        url: "/hu_luhu_71_cmd.html"
+    - title: Utilitaires hôtes Solaris
       entries:
       - title: Notes de mise à jour
         url: "/hu_solaris_62_rn.html"
       - title: Installez Solaris HU 6.2
         url: "/hu_solaris_62.html"
+      - title: Exemple de référence de commande
+        url: "/hu_solaris_62_cmd.html"
     - title: Utilitaires d'hôtes unifiés Windows
       entries:
       - title: Notes de mise à jour

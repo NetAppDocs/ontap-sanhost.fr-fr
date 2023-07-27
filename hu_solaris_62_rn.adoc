@@ -51,7 +51,7 @@ Solaris Unified Host Utilities 6.2 continue de prendre en charge les versions su
 
 
 
-== Problèmes connus et limites
+== Problèmes et limites connus
 
 Pour utiliser efficacement les utilitaires hôtes, notez que les performances peuvent être affectées par des problèmes connus liés à une fonction particulière, comme un réseau, ou par des fonctionnalités que les utilitaires hôtes ne prennent pas en charge, telles qu'une version spécifique d'un système d'exploitation.
 
@@ -67,18 +67,6 @@ link:https://mysupport.netapp.com/site/["NetApp bogues en ligne"^] fournit des i
 * FCP General : affiche les bogues FC et HBA qui ne sont pas associés à un hôte spécifique
 * FCP - Solaris
 
-
-
-
-== À propos de la documentation sur la configuration de l'hôte SAN
-
-La documentation relative aux utilitaires d'hôte SAN est incluse dans le link:https://docs.netapp.com/us-en/ontap-sanhost/index.html["Configuration de l'hôte SAN ONTAP"] documentation : La documentation relative à la configuration DE L'HÔTE SAN ONTAP peut être cumulée. Elle couvre toutes les versions d'HÔTE SAN actuelles. Les différences fonctionnelles entre les versions sont notées dans le contexte.
-
-
-
-== Où trouver la documentation produit et d'autres informations
-
-Vous pouvez accéder à la documentation de tous les produits NetApp et consulter d'autres ressources d'informations sur les produits, notamment des rapports techniques et des livres blancs, sur la page Documentation sur les produits du site NetApp.
 
 .Informations associées
 *Configuration et gestion de votre système de stockage ONTAP*

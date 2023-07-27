@@ -7,7 +7,7 @@ Le kit d'outils est installé automatiquement lorsque vous installez le pack Net
 .Exemple
 Dans l'exemple suivant, le `sanlun lun show` La commande renvoie les informations relatives à la LUN.
 
-[listing]
+[source, cli]
 ----
 # sanlun lun show all
 ----

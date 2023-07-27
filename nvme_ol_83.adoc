@@ -395,7 +395,7 @@ Device      Vserver         Namespace Path             NSID UUID                
 
 == Problèmes connus
 
-La configuration hôte NVMe-of pour OL 8.3 avec ONTAP version présente les problèmes connus suivants :
+La configuration hôte NVMe-of pour OL 8.3 avec ONTAP présente les problèmes connus suivants :
 
 [cols="20, 20, 50, 20"]
 |===

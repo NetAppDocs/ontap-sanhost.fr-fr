@@ -290,7 +290,7 @@ Vous pouvez également utiliser les paramètres recommandés pour configurer KVM
 
 == Problèmes connus
 
-La version Oracle Linux 9.2 avec NetApp ONTAP présente les problèmes connus suivants :
+Oracle Linux 9.2 avec ONTAP présente les problèmes connus suivants :
 
 [cols="10,30,30,10"]
 |===
