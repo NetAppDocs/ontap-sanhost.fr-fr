@@ -18,7 +18,7 @@ summary: Notes de version pour HPUX Host Utilities 6.0
 :toc-position: content
 
 
-Ce document Notes de mise à jour contient les dernières informations relatives à la version 6.0 des utilitaires d'hôtes HP-UX, y compris les mises à jour concernant les problèmes connus, les limitations, ainsi que la configuration et la gestion de votre système de stockage ONTAP. Le document Notes de mise à jour est mis à jour lorsque de nouvelles informations sur l'utilisation des utilitaires hôtes HP-UX deviennent disponibles.
+Le document Notes de version contient les dernières informations sur la version 6.0 des utilitaires d'hôtes HP-UX, y compris les mises à jour concernant les problèmes connus, les limitations et la configuration et la gestion de votre système de stockage ONTAP. Le document Notes de mise à jour est mis à jour lorsque de nouvelles informations sur l'utilisation des utilitaires hôtes HP-UX deviennent disponibles.
 
 
 

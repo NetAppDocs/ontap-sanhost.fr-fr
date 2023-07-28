@@ -19,7 +19,7 @@ summary: Notes de version pour Windows Unified Host Utilities
 
 
 [role="lead"]
-Ce document contient les informations les plus récentes sur les versions 7.2 et 7.1 de Windows Unified Host Utilities, notamment les mises à jour concernant les nouvelles fonctionnalités, les améliorations et les problèmes connus. Le document est mis à jour lorsque de nouvelles informations sur l'utilisation des utilitaires hôtes Windows deviennent disponibles.
+Le document Notes de version contient les dernières informations concernant les versions 7.2 et 7.1 de Windows Unified Host Utilities, notamment les mises à jour concernant les nouvelles fonctionnalités, les améliorations et les problèmes connus. Le document est mis à jour lorsque de nouvelles informations sur l'utilisation des utilitaires hôtes Windows deviennent disponibles.
 
 
 
