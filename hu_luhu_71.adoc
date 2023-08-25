@@ -31,7 +31,7 @@ Les distributions Linux suivantes sont prises en charge :
 
 
 .Ce dont vous avez besoin
-Le pack logiciel NetApp Linux Unified Host Utilities est disponible sur le link:https://mysupport.netapp.com/site/["Site de support NetApp"^] dans un fichier .rpm 32 bits ou 64 bits.
+Le pack logiciel NetApp Linux Unified Host Utilities est disponible sur le link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^] dans un fichier .rpm 32 bits ou 64 bits.
 
 * Pour un fonctionnement fiable, vous devez vérifier que l'ensemble de votre configuration iSCSI, FC ou FCoE est prise en charge.
 +
@@ -63,7 +63,7 @@ rpm -e netapp_linux_unified_host_utilities-7-1
 +
 Pour les anciennes versions des utilitaires hôtes Linux, accédez au répertoire dans lequel le logiciel de l'utilitaire hôte est installé et entrez la commande de désinstallation pour supprimer le package installé.
 
-. Téléchargez le pack logiciel Linux Unified Host Utilities 32 bits ou 64 bits à partir du link:https://mysupport.netapp.com/site/["Site de support NetApp"^] à votre hôte.
+. Téléchargez le pack logiciel Linux Unified Host Utilities 32 bits ou 64 bits à partir du link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^] à votre hôte.
 . Accédez au répertoire dans lequel vous avez téléchargé le pack logiciel et utilisez la commande suivante pour l'installer :
 +
 [source, cli]
