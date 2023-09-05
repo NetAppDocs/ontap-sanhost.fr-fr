@@ -22,7 +22,7 @@ summary: 'Décrit l"utilisation d"Oracle Linux 8.4 avec ONTAP'
 
 == Installez Linux Unified Host Utilities
 
-Le pack logiciel NetApp Linux Unified Host Utilities est disponible sur le link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab["Site de support NetApp"^] dans un fichier .rpm 64 bits.
+Le pack logiciel NetApp Linux Unified Host Utilities est disponible sur le link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^] dans un fichier .rpm 64 bits.
 
 NetApp recommande vivement d'installer les utilitaires d'hôtes unifiés Linux, mais ce n'est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
 
@@ -30,7 +30,7 @@ NetApp recommande vivement d'installer les utilitaires d'hôtes unifiés Linux, 
 Si une version de Linux Unified Host Utilities est actuellement installée, vous devez la mettre à niveau ou la supprimer, puis procéder comme suit pour installer la dernière version.
 
 .Étapes
-. Téléchargez le pack logiciel Linux Unified Host Utilities 64 bits à partir du https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab["Site de support NetApp"^] à votre hôte.
+. Téléchargez le pack logiciel Linux Unified Host Utilities 64 bits à partir du https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^] à votre hôte.
 . Installez le pack logiciel :
 +
 `rpm -ivh netapp_linux_unified_host_utilities-7-1.x86_64`

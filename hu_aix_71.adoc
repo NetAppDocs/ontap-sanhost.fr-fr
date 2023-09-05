@@ -22,9 +22,9 @@ summary: Décrit comment utiliser IBM AIX 7.1 avec ONTAP
 
 == Installez les utilitaires hôtes AIX
 
-Vous devez installer AIX Host Utilities Kit lors de l'utilisation d'AIX MPIO avec stockage NetApp ONTAP.
+Vous devez installer le kit d'utilitaires hôtes AIX lors de l'utilisation d'AIX MPIO avec un système de stockage NetApp ONTAP.
 
-Vous pouvez télécharger le fichier compressé contenant les packs logiciels d'utilitaires hôtes à partir du site de support NetApp. Une fois le fichier installé, vous devez l'extraire pour obtenir les deux packs logiciels dont vous avez besoin pour installer les utilitaires hôtes.
+Vous pouvez télécharger le fichier compressé contenant les packs logiciels Host Utilities à partir du link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/6.1/downloads["Site de support NetApp"^]. Une fois le fichier installé, vous devez l'extraire pour obtenir les deux packs logiciels dont vous avez besoin pour installer les utilitaires hôtes.
 
 .Étapes
 . Connectez-vous à votre hôte.

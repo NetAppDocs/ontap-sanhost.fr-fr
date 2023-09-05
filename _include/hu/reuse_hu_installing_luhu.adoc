@@ -2,7 +2,7 @@
 :allow-uri-read: 
 
 
-Le pack logiciel NetApp Linux Unified Host Utilities est disponible sur le link:https://mysupport.netapp.com/NOW/cgi-bin/software/?product=Host+Utilities+-+SAN&platform=Linux["Site de support NetApp"^] dans un fichier .rpm 32 bits ou 64 bits.
+Le pack logiciel NetApp Linux Unified Host Utilities est disponible sur le https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^] dans un fichier .rpm 32 bits ou 64 bits.
 
 NetApp recommande vivement d'installer les utilitaires d'hôtes unifiés Linux, mais ce n'est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
 
@@ -14,7 +14,7 @@ NetApp recommande vivement d'installer les utilitaires d'hôtes unifiés Linux, 
 +
 Pour les versions antérieures de Linux Host Utilities, accédez au répertoire dans lequel le logiciel de l'utilitaire hôte est installé et entrez le `uninstall` commande.
 
-. Téléchargez le pack logiciel Linux Unified Host Utilities 32 bits ou 64 bits à partir du link:https://mysupport.netapp.com/NOW/cgi-bin/software/?product=Host+Utilities+-+SAN&platform=Linux["Site de support NetApp"^] à votre hôte.
+. Téléchargez le progiciel Linux Unified Host Utilities 32 bits ou 64 bits à partir du link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^] à votre hôte.
 . Accédez au répertoire dans lequel vous avez téléchargé le pack logiciel et utilisez la commande suivante pour l'installer :
 +
 `rpm -ivh netapp_linux_unified_host_utilities-7-1.x86_xx.rpm`

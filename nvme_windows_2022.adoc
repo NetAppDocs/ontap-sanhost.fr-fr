@@ -68,7 +68,7 @@ nqn.2017-01.com.broadcom:ecd:nvmf:fc:100000109b1b9766
 
 === Activez MPIO pour les périphériques NVMe sur l'hôte Windows
 
-. Installer link:link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71.html["Kit utilitaire hôte Windows 7.1"] Pour définir les paramètres du pilote communs à FC et NVMe.
+. Installer link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Kit utilitaire hôte Windows 7.1"] Pour définir les paramètres du pilote communs à FC et NVMe.
 . Ouvrez les propriétés MPIO.
 . Dans l'onglet *Discover Multi-Paths*, ajoutez l'ID de périphérique répertorié pour NVMe.
 +
