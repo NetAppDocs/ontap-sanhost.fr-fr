@@ -91,7 +91,7 @@ Pour AIX, le module de contrôle de chemin (PCM) est chargé de contrôler plusi
 
 
 
-=== Configuration non ASA
+=== Configurations non ASA
 
 Pour les configurations non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant les priorités les plus élevées sont actifs/optimisés, ce qui signifie qu'ils sont gérés par le contrôleur où se trouve l'agrégat. Les chemins avec les priorités les plus basses sont actifs, mais ne sont pas optimisés car ils sont servis à partir d'un autre contrôleur. Les chemins non optimisés sont utilisés uniquement lorsqu'aucun chemin optimisé n'est disponible.
 

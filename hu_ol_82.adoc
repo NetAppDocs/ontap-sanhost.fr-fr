@@ -92,13 +92,34 @@ Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la docum
 
 Pour Oracle Linux (OL) 8.2 le fichier /etc/multipath.conf doit exister, mais vous n'avez pas besoin d'apporter de modifications spécifiques au fichier. OL 8.2 est compilé avec tous les paramètres requis pour reconnaître et gérer correctement les LUN ONTAP.
 
-Vous pouvez utiliser le `multipath -ll` Commande pour vérifier les paramètres des LUN ONTAP.
-
-Les sections suivantes fournissent un exemple de sortie multivoie pour les LUN mappées non ASA - rôles.
+Vous pouvez utiliser le `multipath -ll` Commande pour vérifier les paramètres des LUN ONTAP. Les sections suivantes fournissent un exemple de résultat de chemins d'accès multiples pour une LUN mappée aux rôles ASA et non ASA.
 
 
 
-=== Configuration non ASA
+=== Configurations All SAN Array
+
+Dans les configurations ASA, tous les chemins vers une LUN donnée sont actifs et optimisés. Ce qui améliore les performances en assurant le service des opérations d'E/S sur tous les chemins en même temps.
+
+.Exemple
+L'exemple suivant montre la sortie correcte pour une LUN ONTAP :
+
+[listing]
+----
+# multipath -ll
+3600a098038303634722b4d59646c4436 dm-28 NETAPP,LUN C-Mode
+size=80G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+`-+- policy='service-time 0' prio=50 status=active
+  |- 11:0:7:1    sdfi   130:64   active ready running
+  |- 11:0:9:1    sdiy   8:288    active ready running
+  |- 11:0:10:1   sdml   69:464   active ready running
+  |- 11:0:11:1   sdpt   131:304  active ready running
+----
+
+NOTE: N'utilisez pas un nombre excessif de chemins pour une seule LUN. Il ne faut pas plus de quatre chemins. Plus de huit chemins peuvent entraîner des problèmes de chemin lors des défaillances du stockage.
+
+
+
+=== Configurations non ASA
 
 Pour les configurations non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant les priorités les plus élevées sont actifs/optimisés, ce qui signifie qu'ils sont gérés par le contrôleur où se trouve l'agrégat. Les chemins avec les priorités les plus basses sont actifs, mais ne sont pas optimisés car ils sont servis à partir d'un autre contrôleur. Les chemins non optimisés sont utilisés uniquement lorsqu'aucun chemin optimisé n'est disponible.
 
@@ -268,7 +289,7 @@ NOTE: Pour configurer Oracle Linux 8.2 RedHat Enterprise Kernel (RHCK), utilisez
 
 
 
-== Problèmes connus et limites
+== Problèmes connus
 
 Il n'y a aucun problème connu pour Oracle Linux 8.2.
 
