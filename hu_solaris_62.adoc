@@ -4,7 +4,7 @@ permalink: hu_solaris_62.html
 keywords: host utilities, unified, oracle, linux, 7.1, netapp, ontap 
 summary: 'Décrit l"utilisation de Linux Unified Host Utilities 7.1 avec ONTAP' 
 ---
-= Solaris Host Utilities 6.2
+= Installez Solaris Host Utilities 6.2
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -21,47 +21,30 @@ summary: 'Décrit l"utilisation de Linux Unified Host Utilities 7.1 avec ONTAP'
 [role="lead"]
 Les utilitaires d'hôtes unifiés Solaris vous aident à gérer le stockage NetApp ONTAP connecté à un hôte Solaris.
 
-
-
-== Kit D'outils SAN
-
-Solaris Host Utilities est un logiciel hôte NetApp qui fournit un kit d'outils de ligne de commande sur votre hôte Oracle Solaris. Le kit d'outils est installé lorsque vous installez le pack NetApp Host Utilities. Ce kit contient le `sanlun` Utilitaire qui vous aide à gérer les LUN et les HBA. Le `sanlun` La commande renvoie les informations relatives aux LUN mappées sur votre hôte, aux chemins d'accès multiples et aux informations nécessaires à la création des groupes initiateurs.
-
-.Exemple
-Dans l'exemple suivant, le `sanlun lun show` La commande renvoie les informations relatives à la LUN.
-
-[listing]
-----
-#sanlun lun show all
-controller(7mode)/ device host lun
-vserver(Cmode)                     lun-pathname       filename                                       adapter protocol size mode
------------------------------------------------------------------------------------------------------------------------------------
-data_vserver                     /vol/vol1/lun1     /dev/rdsk/c0t600A098038304437522B4E694E49792Dd0s2 qlc3   FCP       10g cDOT
-data_vserver                     /vol/vol0/lun2     /dev/rdsk/c0t600A098038304437522B4E694E497938d0s2 qlc3   FCP       10g cDOT
-data_vserver                     /vol/vol2/lun3     /dev/rdsk/c0t600A098038304437522B4E694E497939d0s2 qlc3   FCP       10g cDOT
-data_vserver                     /vol/vol3/lun4     /dev/rdsk/c0t600A098038304437522B4E694E497941d0s2 qlc3   FCP       10g cDOT
-
-
-----
-
-NOTE: Ce kit est commun à toutes les configurations et tous les protocoles des utilitaires hôtes. En conséquence, une partie de son contenu s'applique à une configuration, mais pas à une autre. Le fait d'utiliser des composants non utilisés n'affecte pas les performances de votre système.
-
-
-
-== Installez Solaris Host Utilities
-
-Solaris Host Utilities 6.2 prend en charge plusieurs environnements Solaris et plusieurs protocoles. Les environnements d'utilitaires hôtes principaux sont les suivants :
+Solaris Host Utilities 6.2 prend en charge plusieurs environnements Solaris et plusieurs protocoles. Les principaux environnements d'utilitaires hôtes sont :
 
 * Système d'exploitation natif avec MPxIO avec protocole Fibre Channel (FC) ou iSCSI sur un système utilisant un processeur SPARC ou x86/64.
-* Veritas Dynamic Multipathing (DMP) avec le protocole FC ou iSCSI sur un système utilisant un processeur SPARC et avec le protocole iSCSI sur le système utilisant un processeur x86/64.
+* Veritas Dynamic Multipathing (DMP) avec le protocole FC ou iSCSI sur un système utilisant un processeur SPARC, ou le protocole iSCSI sur un système utilisant un processeur x86/64.
 
 
+Solaris Unified Host Utilities 6.2 continue de prendre en charge les versions suivantes de Solaris :
 
-NOTE: Le pack logiciel NetApp Solaris Host Utilities est disponible sur le link:https://mysupport.netapp.com/site/["Site de support NetApp"^] dans un format de fichier compressé pour votre processeur. Vous pouvez télécharger le pack logiciel Host Utilities pour votre environnement sur le site de support.
+* Série Solaris 11.x
+* Série Solaris 10.x
+
+
+.Ce dont vous avez besoin
+* Pour un fonctionnement fiable, vérifiez que l'ensemble de votre configuration iSCSI, FC ou FCoE est pris en charge.
+
+
+Vous pouvez utiliser le link:https://mysupport.netapp.com/matrix/imt.jsp?components=71102;&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^] pour vérifier votre configuration.
+
+
+NOTE: Le pack logiciel NetApp Solaris Host Utilities est disponible sur le link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/6.2/downloads["Site de support NetApp"^] dans un format de fichier compressé pour votre processeur. Vous pouvez télécharger le pack logiciel Host Utilities pour votre environnement sur le site de support.
 
 .Étapes
 . Connectez-vous à votre hôte en tant que root.
-. Téléchargez une copie du fichier compressé contenant les utilitaires d'hôte à partir de link:https://mysupport.netapp.com/site/["Site de support NetApp"^] vers un répertoire de votre hôte.
+. Téléchargez une copie du fichier compressé contenant les utilitaires d'hôte à partir du link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/6.2/downloads["Site de support NetApp"^] vers un répertoire de votre hôte.
 +
 Au moment de la préparation de cette documentation, les fichiers compressés étaient appelés :
 
@@ -71,7 +54,7 @@ Au moment de la préparation de cette documentation, les fichiers compressés é
 
 
 . Accédez au répertoire contenant le téléchargement.
-. Décompressez le fichier à l'aide de la commande gunzip
+. Décompressez le fichier à l'aide du `gunzip` commande :
 +
 `# gunzip netapp_solaris_host_utilities_6_2_sparc.tar.gz`
 
@@ -111,7 +94,7 @@ drwxr-xr-x   3 root     sys            4 Jul 22  2019 ..
 -r-xr-xr-x   1 root     sys        12266 Sep 13  2017 host_config.1
 -r-xr-xr-x   1 root     sys         9044 Sep 13  2017 sanlun.1
 ----
-. Une fois que vous avez terminé, vous devez configurer les paramètres de l'hôte pour votre environnement à l'aide de `/opt/NTAP/SANToolkit/bin/host_config` commande :
+. Une fois que vous avez terminé, configurez les paramètres d'hôte de votre environnement à l'aide du `/opt/NTAP/SANToolkit/bin/host_config` commande :
 +
 ** Mpxio
 ** DMP Veritas
@@ -122,3 +105,28 @@ drwxr-xr-x   3 root     sys            4 Jul 22  2019 ..
 `sanlun version`
 
 
+
+
+
+== Kit D'outils SAN
+
+Solaris Host Utilities est un logiciel hôte NetApp qui fournit un kit d'outils de ligne de commande sur votre hôte Oracle Solaris. Le kit d'outils est installé lorsque vous installez le pack NetApp Host Utilities. Ce kit contient le `sanlun` Utilitaire qui vous aide à gérer les LUN et les adaptateurs de bus hôte (HBA). Le `sanlun` La commande renvoie les informations relatives aux LUN mappées sur votre hôte, aux chemins d'accès multiples et aux informations nécessaires à la création des groupes initiateurs.
+
+.Exemple
+Dans l'exemple suivant, le `sanlun lun show` La commande renvoie les informations relatives à la LUN.
+
+[listing]
+----
+#sanlun lun show all
+controller(7mode)/ device host lun
+vserver(Cmode)                     lun-pathname       filename                                       adapter protocol size mode
+-----------------------------------------------------------------------------------------------------------------------------------
+data_vserver                     /vol/vol1/lun1     /dev/rdsk/c0t600A098038304437522B4E694E49792Dd0s2 qlc3   FCP       10g cDOT
+data_vserver                     /vol/vol0/lun2     /dev/rdsk/c0t600A098038304437522B4E694E497938d0s2 qlc3   FCP       10g cDOT
+data_vserver                     /vol/vol2/lun3     /dev/rdsk/c0t600A098038304437522B4E694E497939d0s2 qlc3   FCP       10g cDOT
+data_vserver                     /vol/vol3/lun4     /dev/rdsk/c0t600A098038304437522B4E694E497941d0s2 qlc3   FCP       10g cDOT
+
+
+----
+
+NOTE: Ce kit d'outils est commun à toutes les configurations et tous les protocoles des utilitaires hôtes. Par conséquent, le contenu de la boîte à outils peut s'appliquer à une configuration, mais pas à une autre. Le fait d'utiliser des composants non utilisés n'affecte pas les performances de votre système.
