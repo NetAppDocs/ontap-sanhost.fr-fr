@@ -40,5 +40,5 @@ La liaison du pilote FC est modifiée de `ssd(4D)` à `sd(4D)`. Déplacez la con
 link:https://mysupport.netapp.com/site/["NetApp bogues en ligne"^] fournit des informations complètes pour la plupart des problèmes connus, y compris des solutions de contournement suggérées si possible. Voici quelques combinaisons de mots-clés et types de bogue que vous pouvez utiliser :
 
 * FCP General : affiche les bogues FC et HBA (Host bus adapter) qui ne sont pas associés à un hôte spécifique.
-* FCP Solaris
+* FCP - Solaris
 

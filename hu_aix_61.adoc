@@ -21,14 +21,14 @@ summary: Décrit comment utiliser IBM AIX 7.2 et/ou PowerVM VIOS 3.1 avec ONTAP
 [role="lead"]
 Les utilitaires d'hôtes unifiés AIX vous aident à gérer le stockage NetApp ONTAP connecté à un hôte AIX.
 
-Les protocoles suivants sont pris en charge :
+Les utilitaires hôtes AIX prennent en charge les protocoles suivants :
 
 * FC
 * FCoE
 * ISCSI
 
 
-Les environnements pris en charge sont les suivants :
+Les utilitaires hôtes AIX prennent en charge les environnements suivants :
 
 * MPIO AIX (SYSTÈME D'EXPLOITATION NATIF)
 * PowerVM
@@ -38,7 +38,7 @@ Pour plus d'informations sur PowerVM, consultez le livre rouge IBM PowerVM Live 
 
 
 .Ce dont vous avez besoin
-* Pour un fonctionnement fiable, vous devez vérifier que l'ensemble de votre configuration iSCSI, FC ou FCoE est prise en charge.
+* Pour un fonctionnement fiable, vérifiez que l'ensemble de votre configuration iSCSI, FC ou FCoE est pris en charge.
 +
 Vous pouvez utiliser le https://mysupport.netapp.com/matrix/imt.jsp?components=65623%3B64703%3B&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^] pour vérifier votre configuration.
 
@@ -85,7 +85,7 @@ Le répertoire suivant est créé lors de la décompression du fichier : `ntap_a
 
 == Kit D'outils SAN
 
-Utilitaires hôtes AIX est un logiciel hôte NetApp qui fournit un kit d'outils de ligne de commande sur votre hôte IBM AIX. Le kit d'outils est installé lorsque vous installez le pack NetApp Host Utilities. Ce kit contient le `sanlun` Utilitaire, qui vous aide à gérer les LUN et les HBA. Le `sanlun` La commande renvoie les informations relatives aux LUN mappées sur votre hôte, aux chemins d'accès multiples et aux informations nécessaires à la création des groupes initiateurs.
+Utilitaires hôtes AIX est un logiciel hôte NetApp qui fournit un kit d'outils de ligne de commande sur votre hôte IBM AIX. Le kit d'outils est installé lorsque vous installez le pack NetApp Host Utilities. Ce kit contient le `sanlun` Utilitaire, qui vous aide à gérer les LUN et les adaptateurs de bus hôte (HBA). Le `sanlun` La commande renvoie les informations relatives aux LUN mappées sur votre hôte, aux chemins d'accès multiples et aux informations nécessaires à la création des groupes initiateurs.
 
 *Exemple*
 
@@ -109,4 +109,4 @@ data_vserver   /vol/vol3/lun3 hdisk11 fcs0   FCP      20g C
 data_vserver   /vol/vol4/lun4 hdisk14 fcs0   FCP      20g C
 ----
 
-NOTE: Ce kit est commun à toutes les configurations et tous les protocoles des utilitaires hôtes. En conséquence, une partie de son contenu s'applique à une configuration, mais pas à une autre. Le fait d'utiliser des composants non utilisés n'affecte pas les performances de votre système. Le kit SAN est pris en charge sur les versions AIX et PowerVM/VIOS.
+NOTE: Ce kit d'outils est commun à toutes les configurations et tous les protocoles des utilitaires hôtes. En conséquence, une partie de son contenu s'applique à une configuration, mais pas à une autre. Le fait d'utiliser des composants non utilisés n'affecte pas les performances de votre système. Le kit SAN est pris en charge sur les versions AIX et PowerVM/VIOS.

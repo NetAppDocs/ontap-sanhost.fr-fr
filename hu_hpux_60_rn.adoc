@@ -18,45 +18,12 @@ summary: Notes de version pour HPUX Host Utilities 6.0
 :toc-position: content
 
 
-Le document Notes de version contient les dernières informations sur la version 6.0 des utilitaires d'hôtes HP-UX, y compris les mises à jour concernant les problèmes connus, les limitations et la configuration et la gestion de votre système de stockage ONTAP. Le document Notes de mise à jour est mis à jour lorsque de nouvelles informations sur l'utilisation des utilitaires hôtes HP-UX deviennent disponibles.
+Les notes de version décrivent les nouvelles fonctionnalités et améliorations, les problèmes résolus dans la version actuelle, les problèmes connus et les limites, ainsi que les précautions importantes relatives à la configuration et à la gestion de votre hôte HP-UX spécifique avec votre système de stockage ONTAP.
 
-
-
-== À propos de la version 6.0 de HP-UX Host Utilities
-
-Les utilitaires hôtes HP-UX prennent en charge plusieurs environnements HP-UX et plusieurs protocoles. Les utilitaires hôtes HP-UX prennent en charge les environnements suivants :
-
-* MPIO natif
-* Veritas Dynamic Multipathing (DMP)
-
-
-
-NOTE: Pour effacer immédiatement l'environnement utilisé, ce document indique parfois "DMP" pour l'environnement Veritas DMP et "MPIO" pour l'environnement HP-UX natif. Dans certains cas, les commandes que vous utilisez peuvent varier en fonction des pilotes que vous utilisez. Dans ce cas, les types d'environnement et de pilote sont spécifiés.
-
-
-
-== Améliorations de HP-UX Host Utilities 6.0
-
-Les notes de mise à jour sont mises à jour entre les versions de produit dès que de nouvelles informations sont disponibles. Les utilitaires hôtes HP-UX 6.0 continuent de prendre en charge les versions suivantes :
+Les utilitaires hôtes HP-UX 6.0 continuent de prendre en charge les versions suivantes :
 
 * HP-UX 11iv2
 * HP-UX 11iv3
 
 
-
-
-== Problèmes et limites connus
-
-Il n'y a aucun problème connu pour la version 6.0 de HP-UX.
-
-.Informations associées
-*Configuration et gestion de votre système de stockage ONTAP*
-
-* Le link:https://docs.netapp.com/us-en/ontap/setup-upgrade/index.html["Guide de configuration du logiciel ONTAP pour votre version de ONTAP"^]
-* Le link:https://docs.netapp.com/us-en/ontap/san-management/index.html["Guide d'administration SAN de ONTAP pour votre version de ONTAP"^]
-* Le link:https://library.netapp.com/ecm/ecm_download_file/ECMLP2492508["Notes de mise à jour ONTAP pour votre version de ONTAP"^]
-* link:https://imt.netapp.com/matrix/#welcome["Matrice d'interopérabilité NetApp"^]
-* link:https://hwu.netapp.com/["Hardware Universe"^] (Anciennement le Guide de configuration du système)
-* link:https://docs.netapp.com/us-en/ontap-sanhost/index.html["Topologies SAN Fibre Channel prises en charge"]
-* link:https://mysupport.netapp.com/documentation/productlibrary/index.html?productID=61343["Configuration de l'hôte pour les utilitaires hôtes"^]
-
+Il n'y a pas de nouvelles fonctionnalités, améliorations, limitations connues ou mises en garde pour la version 6.0 des utilitaires hôtes HP-UX.

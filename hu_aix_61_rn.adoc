@@ -27,9 +27,9 @@ Pour des informations spécifiques sur les versions et mises à jour du système
 
 == Quoi de neuf
 
-La version 6.1 des utilitaires hôtes AIX contient les nouvelles fonctionnalités et améliorations suivantes :
+La version 6.1 d'AIX Host Utilities contient les nouvelles fonctionnalités et améliorations suivantes :
 
-* AIX Host Utilities 6.1 a ajouté la prise en charge du problème de défaillance de mémoire qui s'est produit dans les versions précédentes du système d'exploitation hôte AIX. Avec AIX Host Utilities 6.1, seul le binaire sanlun a changé. MPIO et ODM associés restent inchangés.
+* AIX Host Utilities 6.1 a ajouté la prise en charge du problème de défaillance de mémoire survenu dans les versions précédentes du système d'exploitation hôte AIX. Avec AIX Host Utilities 6.1, seul le binaire sanlun a changé. MPIO et ODM associés restent inchangés.
 
 
 
@@ -59,5 +59,5 @@ Vous devez connaître les problèmes et limitations connus suivants susceptibles
 link:https://mysupport.netapp.com/site/["NetApp bogues en ligne"^] fournit des informations complètes pour la plupart des problèmes connus, y compris des solutions de contournement suggérées si possible. Voici quelques combinaisons de mots-clés et types de bogue que vous pouvez utiliser :
 
 * FCP General : affiche les bogues FC et HBA qui ne sont pas associés à un hôte spécifique.
-* FCP AIX
+* FCP - AIX
 
