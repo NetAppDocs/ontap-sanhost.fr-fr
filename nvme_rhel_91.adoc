@@ -37,7 +37,7 @@ Reportez-vous à la link:https://mysupport.netapp.com/matrix/["Matrice d'interop
 
 == Limites connues
 
-Il n'y a pas de limites connues.
+Le démarrage SAN à l'aide du protocole NVMe-of n'est pas pris en charge pour le moment.
 
 
 

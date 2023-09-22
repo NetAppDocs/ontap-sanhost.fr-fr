@@ -18,10 +18,7 @@ summary: Décrit la configuration de NVMe/FC pour RHEL 8.1 avec ONTAP
 :toc-position: content
 
 
-
-
-== Prise en charge
-
+[role="lead"]
 NVMe/FC est pris en charge sur ONTAP 9.6 ou version ultérieure dans les versions suivantes de RHEL :
 
 * RHEL 8.1
@@ -38,7 +35,9 @@ NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans ce docu
 
 * Les scripts natifs de connexion automatique NVMe/FC ne sont pas disponibles dans le pack nvme-cli. Vous pouvez utiliser le script de connexion automatique externe fourni par le fournisseur de l'adaptateur HBA.
 * Le chemin d'accès multiples NVMe est désactivé par défaut. Elle doit être activée manuellement. Les étapes sont décrites dans la section relative à l'activation de NVMe/FC sur RHEL 8.1.
-* Par défaut, l'équilibrage de la charge Round-Robin n'est pas activé. Vous devez écrire une règle udev pour activer cette fonctionnalité. Les étapes sont décrites dans la section relative à l'activation de NVMe/FC sur RHEL 8.1.
+* Par défaut, l'équilibrage de la charge Round-Robin n'est pas activé.
+Vous devez écrire une règle udev pour activer cette fonctionnalité.
+* Le démarrage SAN à l'aide du protocole NVMe-of n'est pas pris en charge pour le moment.
 
 
 

@@ -41,7 +41,7 @@ Pour plus d'informations sur les configurations prises en charge, reportez-vous 
 
 == Limites connues
 
-Il n'y a pas de limites connues.
+Le démarrage SAN à l'aide du protocole NVMe-of n'est pas pris en charge pour le moment.
 
 
 

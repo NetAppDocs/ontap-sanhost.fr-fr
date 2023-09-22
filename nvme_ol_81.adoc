@@ -34,6 +34,7 @@ NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans ce docu
 * Les scripts natifs de connexion automatique NVMe/FC ne sont pas disponibles dans le pack nvme-cli. Utilisez les scripts de connexion automatique externes fournis par le fournisseur de HBA.
 * Par défaut, l'équilibrage de la charge round-Robin n'est pas activé dans NVMe Multipath. Vous devez écrire une règle udev pour activer cette fonctionnalité. Des étapes sont décrites dans la section relative à l'activation de NVMe/FC sur Oracle Linux 8.1.
 * Sanlest pris en charge pour NVMe/FC et, par conséquent, pas de prise en charge de Linux Unified Host Utilities (LUHU) pour NVMe/FC sur Oracle Linux 8.1. Utilisez la sortie de la commande ONTAP disponible dans le cadre du plug-in NetApp inclus dans l'interface de ligne de commande native nvme.
+* Le démarrage SAN à l'aide du protocole NVMe-of n'est pas pris en charge pour le moment.
 
 
 

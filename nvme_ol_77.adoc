@@ -42,6 +42,7 @@ NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans ce docu
 
 * Les scripts natifs de connexion automatique NVMe/FC ne sont pas disponibles dans le pack nvme-cli. Vous pouvez utiliser les scripts de connexion automatique externes fournis par le fournisseur de l'adaptateur HBA.
 * Par défaut, l'équilibrage de la charge Round-Robin n'est pas activé. Vous devez écrire une règle udev pour activer cette fonctionnalité. Des étapes sont décrites dans la section relative à l'activation de NVMe/FC sur OL 7.7.
+* Le démarrage SAN à l'aide du protocole NVMe-of n'est pas pris en charge pour le moment.
 
 
 

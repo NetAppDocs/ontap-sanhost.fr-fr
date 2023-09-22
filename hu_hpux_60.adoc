@@ -21,7 +21,7 @@ summary: 'Décrit comment utiliser les utilitaires d"hôtes unifiés HP-UX 6.0 a
 [role="lead"]
 Les utilitaires hôtes HP-UX vous permettent de connecter un hôte HP-UX au stockage NetApp.
 
-Les utilitaires hôtes HP-UX prennent en charge plusieurs environnements HP-UX et plusieurs protocoles. Les environnements pris en charge sont les suivants :
+Les utilitaires hôtes HP-UX prennent en charge plusieurs protocoles et les environnements suivants :
 
 * MPIO natif
 * Veritas Dynamic Multipathing (DMP)
@@ -37,7 +37,7 @@ NOTE: Pour indiquer quel environnement est utilisé, ce document indique parfois
 Vous pouvez utiliser le link:https://mysupport.netapp.com/matrix/imt.jsp?components=71102;&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^] pour vérifier votre configuration.
 
 .Description de la tâche
-Le pack logiciel NetApp HP-UX Host Utilities est disponible sur le link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/6.0/downloads["Site de support NetApp"^] dans un fichier compressé. Après avoir téléchargé le fichier, vous devez le décompresser avant son installation.
+Le pack logiciel NetApp HP-UX Host Utilities est disponible sur le link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/6.0/downloads["Site de support NetApp"^] dans un fichier compressé. Après avoir téléchargé le fichier, vous devez le décompresser avant l'installation.
 
 .Étapes
 . Connectez-vous à votre hôte.
@@ -69,7 +69,7 @@ Le `swinstall` Commande exécute un script d'installation qui vérifie l'état d
 
 == Kit D'outils SAN
 
-HP-UX Host Utilities est un logiciel hôte NetApp qui fournit un kit d'outils de ligne de commande sur votre hôte HP-UX. Le kit d'outils est installé lorsque vous installez le pack NetApp Host Utilities. Ce kit contient le `sanlun` Utilitaire qui vous aide à gérer les LUN et les HBA. Le `sanlun` La commande renvoie les informations relatives aux LUN mappées sur votre hôte, aux chemins d'accès multiples et aux informations nécessaires à la création des groupes initiateurs.
+HP-UX Host Utilities est un logiciel hôte NetApp qui fournit un kit d'outils de ligne de commande sur votre hôte HP-UX. Le kit d'outils est installé lorsque vous installez le pack NetApp Host Utilities. Ce kit contient le `sanlun` Utilitaire qui vous aide à gérer les LUN et les adaptateurs de bus hôte. (HBA). Le `sanlun` La commande renvoie les informations relatives aux LUN mappées sur votre hôte, aux chemins d'accès multiples et aux informations nécessaires à la création des groupes initiateurs.
 
 .Exemple
 Dans l'exemple suivant, le `sanlun lun show` La commande renvoie les informations relatives à la LUN.
@@ -88,4 +88,4 @@ sanboot_unix         /vol/hpux_boot/boot_hpux_lun      /dev/rdsk/c81t0d0  fclp0 
 
 ----
 
-NOTE: Ce kit est commun à toutes les configurations et tous les protocoles des utilitaires hôtes. En conséquence, une partie de son contenu s'applique à une configuration, mais pas à une autre. Le fait d'utiliser des composants non utilisés n'affecte pas les performances de votre système.
+NOTE: Ce kit d'outils est commun à toutes les configurations et tous les protocoles des utilitaires hôtes. En conséquence, une partie de son contenu s'applique à une configuration, mais pas à une autre. Le fait d'utiliser des composants non utilisés n'affecte pas les performances de votre système.

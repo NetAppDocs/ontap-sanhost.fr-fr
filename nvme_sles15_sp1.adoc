@@ -37,7 +37,7 @@ Pour obtenir la liste la plus récente des configurations et versions prises en 
 
 == Limites connues
 
-Il n'y a pas de limites connues.
+Le démarrage SAN à l'aide du protocole NVMe-of n'est pas pris en charge pour le moment.
 
 
 
