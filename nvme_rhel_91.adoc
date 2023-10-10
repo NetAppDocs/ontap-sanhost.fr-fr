@@ -91,11 +91,12 @@ NOTE: Si les chaînes NQN hôte ne correspondent pas, vous devez utiliser le `vs
 
 == Configurez NVMe/FC
 
+[role="tabbed-block"]
+====
+.Broadcom/Emulex
+--
 
-
-=== Broadcom/Emulex
-
-.Étapes
+--
 . Vérifiez que vous utilisez la carte prise en charge. Pour consulter la liste la plus récente des cartes prises en charge, reportez-vous à la section link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^].
 +
 [listing]
@@ -180,38 +181,10 @@ FCP CMPL: xb 00000000 Err 00000004
 ----
 
 
+--
 
-
-==== Activation d'une taille d'E/S de 1 Mo (en option)
-
-ONTAP signale un DTO (MAX Data Transfer Size) de 8 dans les données Identify Controller, ce qui signifie que la taille maximale de la demande d'E/S doit être de 1 Mo. Cependant, pour émettre des demandes d'E/S de 1 Mo pour l'hôte Broadcom NVMe/FC, le paramètre lpfc lpfc_sg_seg_cnt doit également être supplanté jusqu'à 256 par rapport à la valeur par défaut de 64. Pour ce faire, suivez les instructions suivantes :
-
-.Étapes
-. Ajoutez la valeur `256` dans l'un de ces termes `modprobe lpfc.conf` fichier :
-+
-[listing]
-----
-# cat /etc/modprobe.d/lpfc.conf
-options lpfc lpfc_sg_seg_cnt=256
-----
-. Exécutez un `dracut -f` et redémarrez l'hôte.
-. Après le redémarrage, vérifiez que le paramètre ci-dessus a été appliqué en vérifiant le paramètre correspondant `sysfs` valeur :
-+
-[listing]
-----
-# cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
-256
-----
-+
-L'hôte Broadcom FC-NVMe doit désormais pouvoir envoyer jusqu'à 1 Mo de demandes d'E/S sur les périphériques de l'espace de noms ONTAP.
-
-
-
-
-
-=== Marvell/QLogic
-
-Boîte de réception native `qla2xxx` Le pilote inclus dans le noyau RHEL 9.1 dispose des derniers correctifs en amont qui sont essentiels pour la prise en charge de ONTAP.
+--
+Boîte de réception native `qla2xxx` Le pilote inclus dans le noyau RHEL 9.1 dispose des derniers correctifs essentiels à la prise en charge de ONTAP.
 
 .Étapes
 . Vérifiez que vous exécutez les versions du pilote de carte et du micrologiciel prises en charge à l'aide de la commande suivante :
@@ -231,17 +204,42 @@ QLE2772 FW:v9.08.02 DVR:v10.02.07.400-k-debug
 ----
 
 
+--
+
+--
+====
+
+
+=== Activer les E/S de 1 Mo (en option)
+
+ONTAP signale une taille DE transfert MAX Data de 8 DANS les données Identify Controller, ce qui signifie que la taille maximale des demandes d'E/S peut atteindre 1 Mo. Toutefois, pour émettre des demandes d'E/S d'une taille de 1 Mo pour un hôte Broadcom NVMe/FC, vous devez augmenter le `lpfc` valeur du `lpfc_sg_seg_cnt` à 256 à partir de la valeur par défaut de 64.
+
+.Étapes
+. Réglez le `lpfc_sg_seg_cnt` paramètre à 256.
++
+[listing]
+----
+# cat /etc/modprobe.d/lpfc.conf
+options lpfc lpfc_sg_seg_cnt=256
+----
+. Exécutez un `dracut -f` et redémarrez l'hôte.
+. Vérifiez-le `lpfc_sg_seg_cnt` est 256.
++
+[listing]
+----
+# cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
+256
+----
+
+
+
+NOTE: Cela ne s'applique pas aux hôtes NVMe/FC Qlogic.
+
 
 
 == Configurez NVMe/TCP
 
-Contrairement à NVMe/FC, NVMe/TCP ne propose pas de fonctionnalité de connexion automatique. Cela a mis en place deux limitations majeures sur l'hôte Linux NVMe/TCP :
-
-* *Pas de reconnexion automatique après rétablissement des chemins* NVMe/TCP ne peut pas se reconnecter automatiquement à un chemin qui est rétabli au-delà de la valeur par défaut `ctrl-loss-tmo` minuterie de 10 minutes après un chemin descendant.
-* *Pas de connexion automatique pendant le démarrage de l'hôte* le protocole NVMe/TCP ne peut pas se connecter automatiquement au démarrage de l'hôte.
-
-
-Vous devez définir la période de nouvelle tentative pour les événements de basculement sur au moins 30 minutes afin d'éviter les délais. Vous pouvez augmenter la période de relance en augmentant la valeur de l' `ctrl_loss_tmo timer` à l'aide de la procédure suivante :
+NVMe/TCP ne dispose pas de la fonctionnalité de connexion automatique. Par conséquent, si un chemin tombe en panne et n'est pas rétabli dans le délai par défaut de 10 minutes, NVMe/TCP ne peut pas se reconnecter automatiquement. Pour éviter une temporisation, vous devez définir la période de nouvelle tentative pour les événements de basculement sur incident à au moins 30 minutes.
 
 .Étapes
 . Vérifiez si le port initiateur peut récupérer les données de la page du journal de découverte sur les LIF NVMe/TCP prises en charge :
@@ -306,6 +304,8 @@ sectype: none
 
 
 == Validez la spécification NVMe-of
+
+La procédure suivante permet de valider NVMe-of.
 
 .Étapes
 . Vérifier que le chemin d'accès multiples NVMe dans le noyau est activé en cochant la case :

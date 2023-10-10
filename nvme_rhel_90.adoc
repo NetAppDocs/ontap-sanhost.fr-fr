@@ -42,8 +42,10 @@ Le démarrage SAN à l'aide du protocole NVMe-of n'est pas pris en charge pour l
 
 == Activez NVMe Multipath dans le noyau
 
+Vous pouvez utiliser la procédure suivante pour activer les chemins d'accès multiples NVMe in-kernel.
+
 .Étapes
-. Installez RHEL 9.0 sur le serveur. Une fois l'installation terminée, vérifiez que vous exécutez le noyau RHEL 9.0 spécifié. Voir link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^] pour obtenir la liste la plus récente des versions prises en charge.
+. Installez RHEL 9.0 sur le serveur.
 . Une fois l'installation terminée, vérifiez que vous exécutez le noyau RHEL 9.0 spécifié. Voir link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^] pour obtenir la liste la plus récente des versions prises en charge.
 +
 [listing]
@@ -84,10 +86,13 @@ NOTE: Si les chaînes NQN hôte ne correspondent pas, vous devez utiliser le `vs
 
 == Configurez NVMe/FC
 
+Vous pouvez configurer NVMe/FC pour les cartes Broadcom/Emulex ou Marvell/Qlogic.
 
-
-=== Broadcom/Emulex
-
+[role="tabbed-block"]
+====
+.Broadcom/Emulex
+--
+.Étapes
 . Vérifiez que vous utilisez la carte prise en charge. Pour consulter la liste la plus récente des cartes prises en charge, reportez-vous à la section link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^].
 +
 [listing]
@@ -170,19 +175,49 @@ Total FCP Cmpl 000000002e14f170 Issue 000000002e14f17a OutIO 000000000000000a
 abort 000016bb noxri 00000000 nondlp 00000000 qdepth 00000000 wqerr 00000000 err 00000000
 FCP CMPL: xb 00001f50 Err 0000d9f8
 ----
-. Activer la taille d'E/S de 1 Mo.
-+
-Le `lpfc_sg_seg_cnt` le paramètre doit être défini sur `256` pour le `lpfc` Pilote pour émettre des demandes d'E/S d'une taille maximale de 1 Mo.
 
+
+--
+.Marvell/QLogic
+--
+Le pilote natif qla2xxx inclus dans le noyau RHEL 9.0 dispose des derniers correctifs, essentiels pour la prise en charge de ONTAP.
+
+.Étapes
+. Vérifiez que vous exécutez les versions du pilote de carte et du micrologiciel prises en charge :
+
+
+[listing]
+----
+# cat /sys/class/fc_host/host*/symbolic_name
+QLE2742 FW:v9.06.02 DVR:v10.02.00.200-k
+QLE2742 FW:v9.06.02 DVR:v10.02.00.200-k
+----
+. La vérification `ql2xnvmeenable` Est défini pour que l'adaptateur Marvell puisse fonctionner comme un initiateur NVMe/FC :
+
+
+[listing]
+----
+# cat /sys/module/qla2xxx/parameters/ql2xnvmeenable
+1
+----
+--
+====
+
+
+=== Activer les E/S de 1 Mo (en option)
+
+ONTAP signale une taille DE transfert MAX Data de 8 DANS les données Identify Controller, ce qui signifie que la taille maximale des demandes d'E/S peut atteindre 1 Mo. Toutefois, pour émettre des demandes d'E/S d'une taille de 1 Mo pour un hôte Broadcom NVMe/FC, vous devez augmenter le `lpfc` valeur du `lpfc_sg_seg_cnt` à 256 à partir de la valeur par défaut de 64.
+
+.Étapes
+. Réglez le `lpfc_sg_seg_cnt` paramètre à 256.
 +
 [listing]
 ----
 # cat /etc/modprobe.d/lpfc.conf
 options lpfc lpfc_sg_seg_cnt=256
 ----
-+
-.. Exécutez un `dracut -f` puis redémarrez l'hôte.
-.. Une fois l'hôte démarré, vérifiez que `lpfc_sg_seg_cnt` est défini sur `256`.
+. Exécutez un `dracut -f` et redémarrez l'hôte.
+. Vérifiez-le `lpfc_sg_seg_cnt` est 256.
 +
 [listing]
 ----
@@ -192,37 +227,13 @@ options lpfc lpfc_sg_seg_cnt=256
 
 
 
+NOTE: Cela ne s'applique pas aux hôtes NVMe/FC Qlogic.
 
-
-
-=== Marvell/QLogic
-
-Le pilote natif qla2xxx inclus dans le noyau RHEL 9.0 dispose des derniers correctifs en amont, essentiels pour la prise en charge de ONTAP. Vérifiez que vous exécutez les versions du pilote de carte et du micrologiciel prises en charge :
-
-[listing]
-----
-# cat /sys/class/fc_host/host*/symbolic_name
-QLE2742 FW:v9.06.02 DVR:v10.02.00.200-k
-QLE2742 FW:v9.06.02 DVR:v10.02.00.200-k
-----
-La vérification `ql2xnvmeenable` Est défini pour que l'adaptateur Marvell puisse fonctionner comme un initiateur NVMe/FC :
-
-[listing]
-----
-# cat /sys/module/qla2xxx/parameters/ql2xnvmeenable
-1
-----
 
 
 == Configurez NVMe/TCP
 
-Contrairement à NVMe/FC, NVMe/TCP ne propose pas de fonctionnalité de connexion automatique. Cela a mis en place deux limitations majeures sur l'hôte Linux NVMe/TCP :
-
-* *Pas de reconnexion automatique après rétablissement des chemins* NVMe/TCP ne peut pas se reconnecter automatiquement à un chemin qui est rétabli au-delà de la valeur par défaut `ctrl-loss-tmo` minuterie de 10 minutes après un chemin descendant.
-* *Pas de connexion automatique pendant le démarrage de l'hôte* NVMe/TCP ne peut pas se connecter automatiquement lors du démarrage de l'hôte.
-
-
-Vous devez définir la période de nouvelle tentative pour les événements de basculement sur au moins 30 minutes afin d'éviter les délais. Vous pouvez augmenter la période de relance en augmentant la valeur du temporisateur ctrl_Loss_tmo. Voici les détails :
+NVMe/TCP ne dispose pas de la fonctionnalité de connexion automatique. Par conséquent, si un chemin tombe en panne et n'est pas rétabli dans le délai par défaut de 10 minutes, NVMe/TCP ne peut pas se reconnecter automatiquement. Pour éviter une temporisation, vous devez définir la période de nouvelle tentative pour les événements de basculement sur incident à au moins 30 minutes.
 
 .Étapes
 . Vérifiez si le port initiateur est en mesure de récupérer les données de la page du journal de découverte via les LIF NVMe/TCP prises en charge :
@@ -286,7 +297,9 @@ sectype: none
 
 
 
-== Validez NVMf
+== Validez la spécification NVMe-of
+
+La procédure suivante permet de valider NVMe-of.
 
 .Étapes
 . Vérifier que le chemin d'accès multiples NVMe dans le noyau est activé en cochant la case :
