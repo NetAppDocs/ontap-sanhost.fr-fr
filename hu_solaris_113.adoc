@@ -18,6 +18,9 @@ summary: 'Décrit l"installation des utilitaires hôtes solaris'
 :toc-position: content
 
 
+[role="lead"]
+Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour configurer Solaris 11.3 avec ONTAP comme cible.
+
 
 
 == Installez les utilitaires d'hôte Solaris
@@ -249,7 +252,9 @@ NOTE: Après `scsi-vhci-failover-override` a été appliqué, `conf` est ajouté
 
 
 
-== Problèmes et limites connus
+== Problèmes connus
+
+La version Solaris 11.3 avec ONTAP présente les problèmes connus suivants :
 
 [cols="4*"]
 |===

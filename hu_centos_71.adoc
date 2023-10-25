@@ -18,6 +18,9 @@ summary: 'Décrit l"utilisation de CentOS 7.1 avec ONTAP'
 :toc-position: content
 
 
+[role="lead"]
+Vous pouvez utiliser les paramètres de configuration des hôtes SAN ONTAP pour configurer CentOS 7.1 avec ONTAP comme cible.
+
 
 
 == Installez Linux Unified Host Utilities
@@ -291,6 +294,6 @@ Vous pouvez également utiliser les paramètres recommandés pour configurer la 
 
 
 
-== Problèmes connus et limites
+== Problèmes connus
 
-Il n'y a aucun problème connu pour CentOS 7.1.
+Il n'y a aucun problème connu pour la version CentOS 7.1 avec ONTAP.

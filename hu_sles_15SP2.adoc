@@ -18,6 +18,9 @@ summary: Décrit comment utiliser SUSE Linux Enterprise Server 15 SP2 avec ONTAP
 :toc-position: content
 
 
+[role="lead"]
+Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour configurer SUSE Linux Enterprise Server 15 SP2 avec ONTAP comme cible.
+
 
 
 == Installez Linux Unified Host Utilities
@@ -255,7 +258,9 @@ devices {
 ----
 
 
-== Problèmes connus et limites
+== Problèmes connus
+
+SLES 15 SP2 avec ONTAP présente les problèmes connus suivants :
 
 [cols="1,1,3,1"]
 |===

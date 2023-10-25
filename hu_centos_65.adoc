@@ -18,6 +18,9 @@ summary: 'Décrit l"utilisation de CentOS 6.5 avec ONTAP'
 :toc-position: content
 
 
+[role="lead"]
+Vous pouvez utiliser les paramètres de configuration des hôtes SAN ONTAP pour configurer CentOS 6.5 avec ONTAP comme cible.
+
 
 
 == Installez Linux Unified Host Utilities
@@ -307,6 +310,6 @@ Vous pouvez également utiliser les paramètres recommandés pour configurer la 
 
 
 
-== Problèmes connus et limites
+== Problèmes connus
 
 Pour les problèmes connus liés à CentOS (noyau compatible Red Hat), consultez le link:hu_rhel_65.html#known-problems-and-limitations["problèmes connus"] Pour Red Hat Enterprise Linux (RHEL) 6.5.

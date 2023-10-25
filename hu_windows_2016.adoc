@@ -18,6 +18,9 @@ summary: Utilisation de Windows Server 2016 avec ONTAP
 :toc-position: content
 
 
+[role="lead"]
+Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour configurer Windows Server 2016 avec ONTAP comme cible.
+
 
 
 == Démarrage du système d'exploitation
@@ -145,6 +148,6 @@ NOTE: Windows Unified Host Utility définit ces valeurs. Pour obtenir des inform
 
 
 
-== Limites connues
+== Problèmes connus
 
-Aucun problème connu pour Windows Server 2016.
+Il n'y a aucun problème connu pour Windows Server 2016 avec la version ONTAP.

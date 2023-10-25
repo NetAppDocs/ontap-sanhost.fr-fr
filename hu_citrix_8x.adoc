@@ -235,7 +235,9 @@ NOTE: L'hyperviseur Citrix recommande d'utiliser les outils de machine virtuelle
 
 
 
-== Problèmes connus et limites
+== Problèmes connus
+
+La version de l'hyperviseur Citrix avec ONTAP présente les problèmes connus suivants :
 
 [cols="4*"]
 |===

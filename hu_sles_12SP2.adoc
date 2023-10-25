@@ -18,6 +18,9 @@ summary: Décrit comment utiliser SUSE Linux Enterprise Server 12 SP2 avec ONTAP
 :toc-position: content
 
 
+[role="lead"]
+Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour configurer SUSE Linux Enterprise Server 12 SP2 avec ONTAP comme cible.
+
 
 
 == Installez Linux Unified Host Utilities
@@ -282,6 +285,6 @@ devices {
 ----
 
 
-== Problèmes connus et limites
+== Problèmes connus
 
-Il n'y a aucun problème connu pour SUSE Linux Enterprise Server 12 SP2.
+Il n'y a aucun problème connu pour SUSE Linux Enterprise Server 12 SP2 avec la version ONTAP.

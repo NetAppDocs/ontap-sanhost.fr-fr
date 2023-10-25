@@ -18,6 +18,9 @@ summary: Décrit comment utiliser IBM AIX 7.1 avec ONTAP
 :toc-position: content
 
 
+[role="lead"]
+Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour configurer IBM AIX 7.1 avec ONTAP comme cible.
+
 
 
 == Installez les utilitaires hôtes AIX
@@ -224,6 +227,6 @@ Pour configurer AIX pour SM-BC, reportez-vous à l'article de la base de connais
 
 
 
-== Problèmes connus et limites
+== Problèmes connus
 
-Il n'y a pas de problèmes et de limites connus.
+Il n'y a pas de problème connu.

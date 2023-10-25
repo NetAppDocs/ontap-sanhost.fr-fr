@@ -18,9 +18,9 @@ summary: Utilisation de Windows Server 2022 avec ONTAP
 :toc-position: content
 
 
-
-
-== Démarrage du système d'exploitation
+[role="lead"]
+Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour configurer Windows Server 2022 avec ONTAP comme cible.
+== démarrage du système d'exploitation
 
 Il existe deux options pour démarrer le système d'exploitation : par démarrage local ou par démarrage SAN. Pour le démarrage local, vous installez le système d'exploitation sur le disque dur local (SSD, SATA, RAID, etc.). Pour le démarrage SAN, reportez-vous aux instructions ci-dessous.
 
@@ -142,6 +142,6 @@ NOTE: Windows Unified Host Utility définit ces valeurs. Pour obtenir des inform
 
 
 
-== Limites connues
+== Problèmes connus
 
-Aucun problème connu pour Windows Server 2022.
+Il n'y a aucun problème connu pour Windows Server 2022 avec la version ONTAP.

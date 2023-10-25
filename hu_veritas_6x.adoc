@@ -267,6 +267,6 @@ Si vous disposez d'un environnement multichemin hétérogène comprenant Veritas
 
 
 
-== Problèmes connus et limites
+== Problèmes connus
 
-Il n'y a pas de problèmes et de limites connus.
+Il n'existe aucun problème connu pour Veritas Storage Foundation 6 pour Linux avec la version ONTAP.

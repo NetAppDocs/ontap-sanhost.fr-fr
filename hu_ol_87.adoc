@@ -18,6 +18,9 @@ summary: Décrit comment utiliser Oracle Linux 8.7 avec ONTAP
 :toc-position: content
 
 
+[role="lead"]
+Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour configurer Oracle Linux 8.7 avec ONTAP comme cible.
+
 
 
 == Installez Linux Unified Host Utilities
@@ -296,4 +299,4 @@ Vous pouvez également utiliser les paramètres recommandés pour configurer la 
 
 == Problèmes connus
 
-Il n'y a aucun problème connu pour Oracle Linux 8.7.
+Il n'y a aucun problème connu pour Oracle Linux 8.7 avec la version ONTAP.

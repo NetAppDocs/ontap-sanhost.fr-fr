@@ -65,7 +65,7 @@ Reportez-vous à la link:hu_wuhu_72.html["Documentation relative aux utilitaires
 
 
 
-== Problèmes connus
+== Problèmes et limites connus
 
 Certains comportements inattendus et potentiellement indésirables, ainsi que, dans certains cas, des solutions de contournement pour éviter ces comportements, ont été identifiés dans la version 7.1.
 

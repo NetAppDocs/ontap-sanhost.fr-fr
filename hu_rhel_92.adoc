@@ -18,6 +18,9 @@ summary: Décrit comment utiliser Red Hat Enterprise Linux 9.2 avec ONTAP
 :toc-position: content
 
 
+[role="lead"]
+Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour configurer Red Hat Enterprise Linux 9.2 avec ONTAP comme cible.
+
 
 
 == Installez Linux Unified Host Utilities
@@ -294,7 +297,7 @@ Vous pouvez également utiliser les paramètres recommandés pour configurer la 
 
 == Problèmes connus
 
-La configuration hôte NVMe-of pour RHEL 9.2 avec ONTAP version présente les problèmes connus suivants :
+La version RHEL 9.2 avec ONTAP présente les problèmes connus suivants :
 
 [cols="20, 20, 50,20"]
 |===

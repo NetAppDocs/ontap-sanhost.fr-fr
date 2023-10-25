@@ -282,4 +282,4 @@ Si vous disposez d'un environnement multichemin hétérogène comprenant Veritas
 
 == Problèmes connus
 
-Il n'y a pas de problème connu.
+Il n'y a aucun problème connu pour Veritas Infocale 8 pour Linux avec la version ONTAP.

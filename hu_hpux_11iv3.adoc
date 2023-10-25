@@ -18,6 +18,9 @@ summary: Décrit comment utiliser IBM AIX 7.2 et/ou PowerVM VIOS 3.1 avec ONTAP
 :toc-position: content
 
 
+[role="lead"]
+Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour configurer HP-UX 11i v3 avec ONTAP comme cible.
+
 
 
 == Installez les utilitaires hôtes HP-UX
@@ -168,7 +171,9 @@ Voici certains paramètres recommandés pour les LUN HPUX 11i v3 et NetApp ONTAP
 |===
 
 
-== Problèmes connus et limites
+== Problèmes connus
+
+La version HP-UX 11i v3 avec ONTAP présente les problèmes connus suivants :
 
 [cols="4*"]
 |===

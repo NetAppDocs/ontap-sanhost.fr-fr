@@ -18,6 +18,9 @@ summary: 'Décrit l"utilisation d"Oracle Linux 7.3 avec ONTAP'
 :toc-position: content
 
 
+[role="lead"]
+Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour configurer Oracle Linux 7.3 avec ONTAP comme cible.
+
 
 
 == Installez Linux Unified Host Utilities
@@ -255,6 +258,6 @@ NOTE: Pour configurer Oracle Linux 7.3 RedHat Enterprise Kernel (RHCK), utilisez
 
 
 
-== Problèmes connus et limites
+== Problèmes connus
 
-Il n'y a aucun problème connu pour Oracle Linux 7.3.
+Il n'y a aucun problème connu pour Oracle Linux 7.3 avec la version ONTAP.

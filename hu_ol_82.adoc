@@ -18,6 +18,9 @@ summary: 'Décrit l"utilisation d"Oracle Linux 8.2 avec ONTAP'
 :toc-position: content
 
 
+[role="lead"]
+Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour configurer Oracle Linux 8.2 avec ONTAP comme cible.
+
 
 
 == Installez Linux Unified Host Utilities
@@ -291,7 +294,7 @@ NOTE: Pour configurer Oracle Linux 8.2 RedHat Enterprise Kernel (RHCK), utilisez
 
 == Problèmes connus
 
-Il n'y a aucun problème connu pour Oracle Linux 8.2.
+Il n'y a aucun problème connu pour Oracle Linux 8.2 avec la version ONTAP.
 
 
 NOTE: Pour les problèmes connus liés à Oracle Linux (noyau compatible Red Hat), consultez le link:hu_rhel_82.html#known-problems-and-limitations["problèmes connus"] Pour Red Hat Enterprise Linux (RHEL) 8.2.
