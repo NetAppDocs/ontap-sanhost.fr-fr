@@ -10,7 +10,7 @@ Les erreurs affichées par `nvme-cli` pendant `nvme discover`, `nvme connect`, o
 
 [cols="20, 20, 50"]
 |===
-| Erreurs affichées par `nvme-cli` | Cause probable | Solution de contournement 
+| Message d'erreur | Cause probable | Solution de contournement 
 
 
 | `Failed to write to /dev/nvme-fabrics: Invalid argument` | Syntaxe incorrecte | Vérifiez que vous utilisez la syntaxe correcte pour le `nvme discover`, `nvme connect`, et `nvme connect-all` commandes. 

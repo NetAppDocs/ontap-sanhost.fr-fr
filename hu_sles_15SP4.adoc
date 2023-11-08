@@ -69,7 +69,7 @@ data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDO
 ----
 
 
-== SAN Booting
+== Démarrage SAN
 
 .Ce dont vous avez besoin
 Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser le link:https://mysupport.netapp.com/matrix/imt.jsp?components=84067;&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^] Pour vérifier que votre système d'exploitation, votre adaptateur de bus hôte, votre micrologiciel HBA, votre BIOS de démarrage HBA et votre version de ONTAP sont pris en charge.
@@ -149,16 +149,16 @@ NOTE: N'utilisez pas un nombre excessif de chemins pour une seule LUN. Il ne fau
 
 SUSE Linux Enterprise Server 15 SP4 OS est compilé pour reconnaître les LUN ONTAP et définir automatiquement tous les paramètres de configuration pour la configuration ASA et non ASA.
 
-Le `multipath.conf` le fichier doit exister pour que le démon multivoie démarre, mais vous pouvez créer un fichier vide de zéro octet à l'aide de la commande :
-`touch /etc/multipath.conf`
+Le `multipath.conf` le fichier doit exister pour que le démon multivoie démarre, mais vous pouvez créer un fichier vide à zéro octet en utilisant la commande :
+`touch /etc/multipath.conf`.
 
 Lors de la première création de ce fichier, vous devrez peut-être activer et démarrer les services multipathing.
 
-Il n'est pas nécessaire d'ajouter directement quoi que ce soit `multipath.conf` fichier, sauf si vous disposez de périphériques que vous ne voulez pas être gérés par multipath ou si vous avez des paramètres existants qui remplacent les paramètres par défaut.
+Il n'y a aucune exigence d'ajouter directement quoi que ce soit au `multipath.conf` fichier, sauf si vous disposez de périphériques que vous ne voulez pas être gérés par multipath ou si vous avez des paramètres existants qui remplacent les paramètres par défaut.
 
 Vous pouvez ajouter la syntaxe suivante à la `multipath.conf` fichier pour exclure les périphériques indésirables.
 
-Remplacer l' `<DevId>` avec le `WWID` chaîne du périphérique à exclure. Utiliser la commande suivante pour déterminer le `WWID`:
+Remplacement `<DevId>` avec le `WWID` chaîne du périphérique à exclure. Utiliser la commande suivante pour déterminer le `WWID`:
 
 .Exemple
 Dans cet exemple, `sda` Est le disque SCSI local que nous devons ajouter à la liste noire.
@@ -171,7 +171,7 @@ Dans cet exemple, `sda` Est le disque SCSI local que nous devons ajouter à la l
 # /usr/lib/udev/scsi_id -gud /dev/sda
 360030057024d0730239134810c0cb833
 ----
-. Ajoutez-le `WWID` à la strophe de la liste noire de la `/etc/multipath.conf`:
+. Ajoutez le `WWID` valeur de la strophe de liste noire dans le `/etc/multipath.conf` fichier :
 +
 [listing]
 ----
@@ -183,9 +183,9 @@ devnode "^cciss.*"
 ----
 
 
-Vous devez toujours vérifier votre `/etc/multipath.conf` fichier pour les paramètres hérités, notamment dans la section par défaut, qui peut remplacer les paramètres par défaut.
+Vous devez toujours vérifier votre `/etc/multipath.conf` fichier pour les paramètres hérités, en particulier dans la section valeurs par défaut, qui peut remplacer les paramètres par défaut.
 
-Le tableau ci-dessous présente les paramètres multipathd stratégiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il doit être corrigé par des strophes ultérieurs dans `multipath.conf` Qui s'appliquent spécifiquement aux LUN ONTAP. Si ce n'est pas le cas, les LUN de ONTAP peuvent ne pas fonctionner comme prévu. Ces valeurs par défaut ne doivent être remplacées qu'en consultation avec les fournisseurs de NetApp et/ou du système d'exploitation, et uniquement lorsque l'impact est totalement compris.
+Le tableau ci-dessous présente les paramètres multipathd stratégiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il doit être corrigé par des strophes ultérieurs dans `multipath.conf` Qui s'appliquent spécifiquement aux LUN ONTAP. Si ce n'est pas le cas, les LUN de ONTAP risquent de ne pas fonctionner comme prévu. Ces valeurs par défaut ne doivent être remplacées qu'en consultation avec les fournisseurs de NetApp et/ou du système d'exploitation, et uniquement lorsque l'impact est totalement compris.
 
 [cols="2"]
 |===
@@ -246,7 +246,7 @@ Le tableau ci-dessous présente les paramètres multipathd stratégiques pour le
 | fournisseur | NETAPP 
 |===
 .Exemple
-L'exemple suivant montre comment corriger une valeur par défaut remplacée. Dans ce cas, le `multipath.conf` fichier définit les valeurs pour `path_checker` et `no_path_retry` Non compatible avec les LUN ONTAP. S'ils ne peuvent pas être supprimés en raison d'autres baies SAN toujours connectées à l'hôte, ces paramètres peuvent être corrigés spécifiquement pour les LUN ONTAP avec une strophe de périphérique.
+L'exemple suivant montre comment corriger une valeur par défaut remplacée. Dans ce cas, le `multipath.conf` fichier définit les valeurs pour `path_checker` et `no_path_retry` Non compatible avec les LUN ONTAP. Si ces paramètres ne peuvent pas être supprimés car d'autres baies SAN sont toujours connectées à l'hôte, elles peuvent être corrigées spécifiquement pour les LUN ONTAP avec une strophe de périphériques.
 
 [listing]
 ----

@@ -6,12 +6,19 @@ Il n'existe pas de journalisation qla2xxx spécifique pour NVMe/FC similaire à 
 
 .Étapes
 . Ajoutez le `ql2xextended_error_logging=0x1e400000` valeur au correspondant `modprobe qla2xxx conf` fichier.
-. Recréez le `initramfs` en cours d'exécution `dracut -f` puis redémarrez l'hôte.
-. Après le redémarrage, vérifiez que la journalisation détaillée est appliquée comme suit :
+. Exécutez le `dracut -f` puis redémarrez l'hôte.
+. Après le redémarrage, vérifiez que la journalisation détaillée a été activée :
 +
 [listing]
 ----
 # cat /etc/modprobe.d/qla2xxx.conf
+----
++
+Exemple de résultat :
+
++
+[listing]
+----
 options qla2xxx ql2xnvmeenable=1 ql2xextended_error_logging=0x1e400000
 # cat /sys/module/qla2xxx/parameters/ql2xextended_error_logging
 507510784
