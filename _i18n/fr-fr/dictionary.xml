@@ -692,7 +692,6 @@
   <block id="7fbd0449d14b878cf9b9ba9434075a41" category="paragraph">Si vous choisissez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser la matrice d'interopérabilité NetApp pour vérifier que votre se, votre HBA, votre micrologiciel HBA, votre BIOS de démarrage HBA et votre version de ONTAP sont pris en charge.</block>
   <block id="e6b99fad9f3e47e4b52f44d0b0dac069" category="list-text">Vérifiez que plusieurs chemins sont disponibles. N'oubliez pas que plusieurs chemins ne seront disponibles qu'après la mise en service et l'exécution du système d'exploitation hôte sur les chemins.</block>
   <block id="03ed98061513afaf0a716e8d7756931a" category="list-text">Activez le démarrage SAN dans le BIOS du serveur pour les ports auxquels la LUN de démarrage SAN est mappée. Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la documentation spécifique au fournisseur.</block>
-  <block id="34fbc6aa2d83f69c8f3d03faf01392c7" category="section-title">Installation des correctifs Windows</block>
   <block id="c812232f894e468682a433753368a4f5" category="paragraph">Nous vous suggérons d'utiliser la dernière mise à jour cumulative* à installer sur le serveur.</block>
   <block id="8d1d5b8defd8dab28a7e51c7b4ff5d33" category="inline-link-macro">Catalogue de mises à jour Microsoft 2022</block>
   <block id="6ea674183040bb4a5f8bcd1659c019d0" category="admonition">Accédez au <block ref="47dfbc363030c19b6fccb995dd42bb8c" category="inline-link-macro-rx"></block> Site Web pour obtenir et installer les correctifs Windows requis pour votre version de Windows.</block>
@@ -700,9 +699,6 @@
   <block id="623e88bd2085eeb3f49a2784ec97654e" category="admonition">Certains correctifs ne sont pas disponibles pour le téléchargement direct. Dans ce cas, vous devrez demander un correctif au personnel de support Microsoft.</block>
   <block id="5a3b43f9090be87b411af7ac82adcb38" category="list-text">Suivez les instructions fournies par Microsoft pour installer les correctifs.</block>
   <block id="56dd1899b4280d897ff6670fb0968e02" category="admonition">De nombreux correctifs nécessitent un redémarrage de votre hôte Windows, mais vous pouvez choisir d'attendre le redémarrage de l'hôte jusqu'à _after_ que vous installiez ou mettez à niveau les utilitaires hôtes.</block>
-  <block id="36b258cf83367d27741cf0be3d246eca" category="section-title">Installation des utilitaires d'hôtes unifiés Windows</block>
-  <block id="ba490f365e20da97a23546cfe0da8569" category="inline-link-macro">DOCUMENTATION WUHU 7.1</block>
-  <block id="47e2092f9d666fc24b67c7da02de84c7" category="paragraph">LES utilitaires d'hôtes unifiés Windows (WUHU) sont des programmes logiciels dont la documentation permet de connecter des ordinateurs hôtes aux disques virtuels (LUN) sur un SAN NetApp. Nous vous recommandons de télécharger et d'installer la dernière version du kit d'utilitaires. Pour plus d'informations sur la configuration DE WUHU, reportez-vous à la section <block ref="f7fe1c204ed60a7e9dd594c09fd7b1a5" category="inline-link-macro-rx"></block>.</block>
   <block id="d25621141f24193488d8ea2276c47e01" category="paragraph">Vous devez installer le logiciel MPIO et configurer des chemins d'accès multiples si votre hôte Windows possède plusieurs chemins d'accès au système de stockage. Sans le logiciel MPIO, le système d'exploitation peut voir chaque chemin en tant que disque distinct, ce qui peut entraîner une corruption des données. Le logiciel MPIO présente un seul disque au système d'exploitation pour tous les chemins, et un module DSM (Device-Specific module) gère le basculement de chemin.</block>
   <block id="a0e497cbff11ff2d61625663418c3fc8" category="paragraph">Sur un système Windows, les deux principaux composants d'une solution MPIO sont un DSM et Windows MPIO. MPIO n'est pas pris en charge pour Windows XP ou Windows Vista fonctionnant sur une machine virtuelle Hyper- V.</block>
   <block id="a0ca832c7bbe60482ff7b23217787e1b" category="admonition">Lorsque vous sélectionnez la prise en charge MPIO, Windows Unified Host Utilities active la fonctionnalité MPIO incluse de Windows Server 2022.</block>
@@ -729,8 +725,6 @@
   <block id="74802e20676d4776b1eea0dca80bcb9a" category="paragraph">Pour les HBA Fibre Channel QLogic :</block>
   <block id="08a7801aadb2d395506d0735d17dcf62" category="cell">LinkDownTimeOut</block>
   <block id="f9c8e6ceed8ad8db75740e78e48a6236" category="cell">PortDownloyCount</block>
-  <block id="881b9c4cb273bade29a78089e1cf6ee9" category="inline-link-macro">Guide d'installation des utilitaires hôtes Windows 7.1</block>
-  <block id="c5fac7adc428bbd803e2710cafe09003" category="admonition">Windows Unified Host Utility définit ces valeurs. Pour obtenir des informations détaillées sur les réglages recommandés, reportez-vous au <block ref="53418a54750628f8c611b4cd8982473c" category="inline-link-macro-rx"></block>.</block>
   <block id="d6a549e2961efba4f33c4deb10965085" category="summary">Décrit l'utilisation d'Oracle Linux 6.6 avec ONTAP</block>
   <block id="f25e7d0c2e23e28b5e2fcc826eab9d89" category="paragraph">Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser le<block ref="20a6fac93934f3cd0fc46716c10ade14" category="inline-link-rx"></block> Pour vérifier que votre système d'exploitation, votre adaptateur de bus hôte, votre micrologiciel HBA, votre BIOS de démarrage HBA et votre version de ONTAP sont pris en charge.</block>
   <block id="b17be161e93154b1a8e4c9e17fc3b190" category="paragraph">Pour Oracle Linux 6.6, le fichier /etc/multipath.conf doit exister, mais vous n'avez pas besoin d'apporter de modifications spécifiques au fichier. Oracle Linux 6.6 est compilé avec tous les paramètres requis pour reconnaître et gérer correctement les LUN ONTAP. Pour activer le gestionnaire ALUA, effectuez les opérations suivantes :</block>
@@ -1952,7 +1946,6 @@
   <block id="0732474ba551155a9a0983a068b65a4e" category="admonition">Accédez au <block ref="c91fa8395bb99838be8ab4e7b48666cc" category="inline-link-macro-rx"></block> Site Web pour obtenir et installer les correctifs Windows requis pour votre version de Windows.</block>
   <block id="60bdc643bd0e4fed0f4a29dbcd77bc2b" category="admonition">Lorsque vous sélectionnez la prise en charge de MPIO, Windows Unified Host Utilities active la fonctionnalité MPIO incluse de Windows Server 2012 R2.</block>
   <block id="c9bbd6792eac761da84ef7d035e5b41c" category="section-title">La VHD Hyper-V requiert un alignement pour optimiser les performances</block>
-  <block id="f4f9ad21012cf66e650af6b1058ce16b" category="section-title">Réinstallation des invités GRUB pour Linux après correction de l'alignement MBR avec PowerShell Toolkit</block>
   <block id="70b7cc349994a5289908b02781aee538" category="paragraph"><block ref="79bbfb7643748dda7c783c39bf720165" prefix="" category="inline-code"></block></block>
   <block id="90fbed0fe328b6c16dbe12568b1cb193" category="paragraph">Pour vérifier le correctif, procédez comme suit :</block>
   <block id="025006946b1c53786cbb29eef3d30229" category="paragraph">Suivez les instructions pour configurer le paramètre de neutralisation :</block>
@@ -3488,8 +3481,6 @@ La liaison du pilote FC est modifiée de<block ref="b9ca0a083600812be33f42f91f00
   <block id="0b3c2391c446a11bbd0c66a38ea6904b" category="paragraph">La version CentOS 7.6 avec ONTAP présente les problèmes connus suivants :</block>
   <block id="cdf4bf81cf3ee1a54f731160152019cf" category="paragraph">Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour configurer Oracle Linux 7.2 avec ONTAP comme cible.</block>
   <block id="12816f6cc6e072d421258f60c7368dd0" category="paragraph">Il n'y a aucun problème connu pour Oracle Linux 7.2 avec la version ONTAP.</block>
-  <block id="1fed0d1f2feda6954357b22995ac7bd0" category="paragraph">Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour configurer Windows Server 2022 avec ONTAP comme cible.
-== démarrage du système d'exploitation</block>
   <block id="7145b773c01d1ea2262969c3644747a0" category="paragraph">Il n'y a aucun problème connu pour Windows Server 2022 avec la version ONTAP.</block>
   <block id="57175c72c9ec2223e90f7a6f933b0c1b" category="paragraph">Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour configurer Oracle Linux 7.6 avec ONTAP comme cible.</block>
   <block id="a2ad6d83a8574c572c9a8b9c0652127e" category="paragraph">La version Oracle Linux 7.6 avec ONTAP présente les problèmes connus suivants :</block>
@@ -3585,7 +3576,15 @@ Dans l'exemple suivant, une clé dhchap aléatoire avec HMAC définie sur 3 (SHA
   <block id="e20cbb947afcf84cf58de1358ee1068d" category="cell">Message d'erreur</block>
   <block id="8cfe2b11255c36622bc84e4bd2dfb53c" category="list-text">Exécutez le<block ref="eb2bf21d337d5754274973a21f351bbd" prefix=" " category="inline-code"></block> puis redémarrez l'hôte.</block>
   <block id="9688ec84efd5b1cb7c885e598b6ebf4a" category="list-text">Après le redémarrage, vérifiez que la journalisation détaillée a été activée :</block>
-  <block id="684c45496e08c180fd6b056747c6d7e6" category="cell">Les connexions multiples par seconde (MCS) ne sont pas prises en charge avec le démarrage du logiciel iSCSI</block>
   <block id="a22d253913fa8deba78982e6393df807" category="cell">Lors de l'utilisation du démarrage du logiciel iSCSI avec iSCSI MCS, la connexion de démarrage iSCSI ne peut pas être protégée. Cela peut entraîner une déconnexion du LUN de démarrage et provoquer une interruption du système hôte.</block>
   <block id="86891fa05c8b78ad9621085c8abc1fb4" category="paragraph">Vous pouvez générer le fichier JSON à l'aide de<block ref="b2ed43620b7fff2689035f1e99c24ded" prefix=" " category="inline-code"></block> option. Pour plus d'options de syntaxe, consultez les pages de manuel NVMe Connect-all.</block>
+  <block id="0ecfee1e5b63a34e0c870ad349ab2d79" category="section-title">Installez les correctifs Windows</block>
+  <block id="fa5be5c2e2b86b59c46b48b7021f967f" category="section-title">Installez les utilitaires d'hôtes unifiés Windows</block>
+  <block id="7f0107becb6328e412aa5e8712724378" category="inline-link-macro">Documentation Windows Unified Host Utilities</block>
+  <block id="b4c9abb2b32b490ded389f27627f9510" category="paragraph">LES utilitaires d'hôtes unifiés Windows (WUHU) sont des programmes logiciels dont la documentation permet de connecter des ordinateurs hôtes aux disques virtuels (LUN) sur un SAN NetApp. NetApp recommande de télécharger et d'installer le dernier kit d'utilitaire. Pour obtenir des informations et des instructions sur la configuration du WUHU, reportez-vous à la section <block ref="b25c56f0835abca42f2574922a5bff40" category="inline-link-macro-rx"></block> Et sélectionnez la procédure d'installation pour votre version de Windows Unified Host Utilities.</block>
+  <block id="f00aa3de5284bd6ffc1c6eb440a68428" category="inline-link-macro">Documentation relative aux utilitaires d'hôtes Windows</block>
+  <block id="fc51d3fbe5dd41d133c1f25388a68493" category="admonition">Windows Unified Host Utility définit ces valeurs. Pour obtenir des informations détaillées sur les réglages recommandés, reportez-vous au <block ref="1035103116c48a69520d80b6269bd2d8" category="inline-link-macro-rx"></block> Et sélectionnez la procédure d'installation pour votre version de Windows Unified Host Utilities.</block>
+  <block id="cffc00678708e63d08b03d05ada52624" category="paragraph">Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour configurer Windows Server 2022 avec ONTAP comme cible.</block>
+  <block id="6f49a4f8a77775eb655aad7d40795d50" category="section-title">Réinstallez GRUB pour les invités Linux après avoir corrigé l'alignement MBR avec PowerShell Toolkit</block>
+  <block id="29bdde7506503e06e915420031c09cbf" category="cell">Les connexions multiples par session (MCS) ne sont pas prises en charge avec le démarrage du logiciel iSCSI</block>
 </blocks>

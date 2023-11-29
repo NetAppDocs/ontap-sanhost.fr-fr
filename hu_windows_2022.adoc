@@ -20,7 +20,10 @@ summary: Utilisation de Windows Server 2022 avec ONTAP
 
 [role="lead"]
 Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour configurer Windows Server 2022 avec ONTAP comme cible.
-== démarrage du système d'exploitation
+
+
+
+== Démarrage du système d'exploitation
 
 Il existe deux options pour démarrer le système d'exploitation : par démarrage local ou par démarrage SAN. Pour le démarrage local, vous installez le système d'exploitation sur le disque dur local (SSD, SATA, RAID, etc.). Pour le démarrage SAN, reportez-vous aux instructions ci-dessous.
 
@@ -38,7 +41,7 @@ Si vous choisissez d'utiliser le démarrage SAN, celui-ci doit être pris en cha
 
 
 
-== Installation des correctifs Windows
+== Installez les correctifs Windows
 
 Nous vous suggérons d'utiliser la dernière mise à jour cumulative* à installer sur le serveur.
 
@@ -59,9 +62,9 @@ TIP: De nombreux correctifs nécessitent un redémarrage de votre hôte Windows,
 
 
 
-== Installation des utilitaires d'hôtes unifiés Windows
+== Installez les utilitaires d'hôtes unifiés Windows
 
-LES utilitaires d'hôtes unifiés Windows (WUHU) sont des programmes logiciels dont la documentation permet de connecter des ordinateurs hôtes aux disques virtuels (LUN) sur un SAN NetApp. Nous vous recommandons de télécharger et d'installer la dernière version du kit d'utilitaires. Pour plus d'informations sur la configuration DE WUHU, reportez-vous à la section link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71.html["DOCUMENTATION WUHU 7.1"].
+LES utilitaires d'hôtes unifiés Windows (WUHU) sont des programmes logiciels dont la documentation permet de connecter des ordinateurs hôtes aux disques virtuels (LUN) sur un SAN NetApp. NetApp recommande de télécharger et d'installer le dernier kit d'utilitaire. Pour obtenir des informations et des instructions sur la configuration du WUHU, reportez-vous à la section link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71_rn.html["Documentation Windows Unified Host Utilities"] Et sélectionnez la procédure d'installation pour votre version de Windows Unified Host Utilities.
 
 
 
@@ -138,7 +141,7 @@ Pour les HBA Fibre Channel QLogic :
 | PortDownloyCount | 10 
 |===
 
-NOTE: Windows Unified Host Utility définit ces valeurs. Pour obtenir des informations détaillées sur les réglages recommandés, reportez-vous au link:https://library.netapp.com/ecmdocs/ECMLP2789202/html/index.html["Guide d'installation des utilitaires hôtes Windows 7.1"^].
+NOTE: Windows Unified Host Utility définit ces valeurs. Pour obtenir des informations détaillées sur les réglages recommandés, reportez-vous au link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71_rn.html["Documentation relative aux utilitaires d'hôtes Windows"] Et sélectionnez la procédure d'installation pour votre version de Windows Unified Host Utilities.
 
 
 
