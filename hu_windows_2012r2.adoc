@@ -46,7 +46,7 @@ NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans ce docu
 
 == Installez les correctifs Windows
 
-Nous vous suggérons d'utiliser la dernière mise à jour cumulative* à installer sur le serveur.
+NetApp recommande que la *dernière mise à jour cumulative* soit installée sur le serveur.
 
 
 NOTE: Accédez au link:https://www.catalog.update.microsoft.com/Search.aspx?q=Update+Windows+Server+2012_R2["Catalogue de mises à jour Microsoft 2012 R2"^] Site Web pour obtenir et installer les correctifs Windows requis pour votre version de Windows.
@@ -67,7 +67,7 @@ TIP: De nombreux correctifs nécessitent un redémarrage de votre hôte Windows,
 
 == Installez les utilitaires d'hôtes unifiés Windows
 
-LES utilitaires d'hôtes unifiés Windows (WUHU) sont des programmes logiciels dont la documentation permet de connecter des ordinateurs hôtes aux disques virtuels (LUN) sur un SAN NetApp. NetApp recommande de télécharger et d'installer le dernier kit d'utilitaire. Pour obtenir des informations et des instructions sur la configuration du WUHU, reportez-vous à la section link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71_rn.html["Documentation Windows Unified Host Utilities"] Et sélectionnez la procédure d'installation pour votre version de Windows Unified Host Utilities.
+LES utilitaires d'hôtes unifiés Windows (WUHU) sont des programmes logiciels dont la documentation permet de connecter des ordinateurs hôtes aux disques virtuels (LUN) sur un SAN NetApp. NetApp recommande de télécharger et d'installer le dernier kit d'utilitaire. Pour obtenir des informations et des instructions sur la configuration de WUHU, reportez-vous au link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71_rn.html["Documentation Windows Unified Host Utilities"] Et sélectionnez la procédure d'installation pour votre version de Windows Unified Host Utilities.
 
 
 
