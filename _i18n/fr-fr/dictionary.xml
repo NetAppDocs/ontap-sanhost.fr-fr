@@ -3611,4 +3611,11 @@ Dans l'exemple suivant, une clé dhchap aléatoire avec HMAC définie sur 3 (SHA
   <block id="af1363e13388a6153d5ee5e31361b059" category="list-text">Vérifier que les autres combinaisons de LIF cible-initiateur NVMe/TCP peuvent récupérer correctement les données de la page de journal de découverte :</block>
   <block id="4d2ccda8ed0dd9cdf2d1d56f266ef18c" category="paragraph">Il n'existe aucun problème connu pour la configuration hôte NVMe-of pour RHEL 9.3 avec la version ONTAP.</block>
   <block id="7391a7cd9aaad0e97cd0084d95a4c0fd" category="sidebar">9.3</block>
+  <block id="9bc6d3e09829b4f5254ca05574123571" category="summary">Décrit comment utiliser Red Hat Enterprise Linux 8.9 avec ONTAP</block>
+  <block id="07401b9dd6cd70fd46911f32946adf00" category="doc">Utilisez Red Hat Enterprise Linux 8.9 avec ONTAP</block>
+  <block id="e501d2dbdb42de58f02c1f3abfe2b8a1" category="paragraph">Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour configurer Red Hat Enterprise Linux 8.9 avec ONTAP comme cible.</block>
+  <block id="ae6778e372ba1bd8a8b15c0befa78706" category="paragraph">Pour Red Hat Enterprise Linux (RHEL) 8.9, le<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> le fichier doit exister, mais il n'est pas nécessaire d'apporter des modifications spécifiques au fichier. RHEL 8.9 est compilé avec tous les paramètres requis pour reconnaître et gérer correctement les LUN ONTAP.</block>
+  <block id="b0ba321d68fcbee6d08cb969c6dee835" category="paragraph">Le système d'exploitation RHEL 8.9 est compilé pour reconnaître les LUN ONTAP et définir automatiquement tous les paramètres de configuration correctement pour les configurations ASA et non ASA. Les paramètres recommandés suivants vous permettent d'optimiser davantage les performances de votre configuration hôte.</block>
+  <block id="51856bc21ee60e0edd3d375bda86c100" category="paragraph">Il n'y a aucun problème connu pour RHEL 8.9.</block>
+  <block id="4407c95e5daa7102b34d0879e4eb12ed" category="sidebar">8.9</block>
 </blocks>
