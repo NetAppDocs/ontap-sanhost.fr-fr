@@ -5,18 +5,15 @@ keywords: nvme, linux, suse, sles, 15, sp4, server, enterprise
 summary: Décrit comment configurer NVMe/FC pour SUSE Linux Enterprise Server 15 SP4 avec ONTAP 
 ---
 = Configuration hôte NVMe-of pour SUSE Linux Enterprise Server 15 SP4 avec ONTAP
-:toc: macro
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
-:toc: 
 :toclevels: 1
 :nofooter: 
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
 :source-highlighter: highlighter.js
-:toc-position: content
 
 
 [role="lead"]

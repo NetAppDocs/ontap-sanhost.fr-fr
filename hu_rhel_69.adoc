@@ -5,17 +5,14 @@ keywords: host utilities, red hat, rhel, linux, 6.9, netapp, ontap
 summary: Décrit comment utiliser Red Hat Enterprise Linux 6.9 avec ONTAP 
 ---
 = Utilisez Red Hat Enterprise Linux 6.9 avec ONTAP
-:toc: macro
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
-:toc: 
 :toclevels: 1
 :nofooter: 
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
-:toc-position: content
 
 
 [role="lead"]

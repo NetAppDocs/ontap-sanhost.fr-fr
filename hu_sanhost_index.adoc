@@ -5,17 +5,14 @@ keywords:
 summary:  
 ---
 = Présentation
-:toc: macro
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
-:toc: 
 :toclevels: 1
 :nofooter: 
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
-:toc-position: content
 
 
 Découvrez les dernières informations sur les versions de l'utilitaire hôte SAN et accédez à la procédure d'installation de votre configuration hôte.

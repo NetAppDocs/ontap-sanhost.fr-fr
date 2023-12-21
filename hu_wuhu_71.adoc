@@ -5,17 +5,14 @@ keywords: windows, host, utilities, 7.1, hba, fibre, channel, SANtricity, netapp
 summary: 'Windows Unified Host Utilities comprend un programme d"installation qui définit les paramètres d"enregistrement et d"adaptateur HBA Windows requis. L"hôte Windows gère ainsi correctement les comportements du système de stockage pour les plateformes NetApp ONTAP et E-Series.' 
 ---
 = Utilitaires d'hôtes unifiés Windows 7.1
-:toc: macro
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
-:toc: 
 :toclevels: 1
 :nofooter: 
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
-:toc-position: content
 
 
 

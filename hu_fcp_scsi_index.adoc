@@ -5,17 +5,14 @@ keywords:
 summary:  
 ---
 = Présentation
-:toc: macro
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
-:toc: 
 :toclevels: 1
 :nofooter: 
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
-:toc-position: content
 
 
 Vous pouvez configurer certains hôtes SAN pour FCP ou iSCSI avec ONTAP comme cible. Installez d'abord le pack de l'utilitaire hôte du système d'exploitation approprié, qui inclut le kit d'outils SAN, puis vérifiez les paramètres des chemins d'accès multiples pour les LUN NetApp ONTAP.

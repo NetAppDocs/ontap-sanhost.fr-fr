@@ -5,17 +5,14 @@ keywords: host utilities, aix, netapp, ontap, configure, discover, configuring, 
 summary: Décrit la découverte et la configuration DES LUN sous AIX 
 ---
 = (AIX MPIO sans PowerVM) découverte et configuration des LUN avec AIX
-:toc: macro
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
-:toc: 
 :toclevels: 1
 :nofooter: 
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
-:toc-position: content
 
 
 [role="lead"]

@@ -5,18 +5,15 @@ keywords: nvme, linux, rhel, red hat, enterprise
 summary: Comment configurer NVMe-of Host pour RHEL 8.4 avec ONTAP 
 ---
 = Configuration hôte NVMe-of pour RHEL 8.4 avec ONTAP
-:toc: macro
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
-:toc: 
 :toclevels: 1
 :nofooter: 
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
 :source-highlighter: highlighter.js
-:toc-position: content
 
 
 [role="lead"]

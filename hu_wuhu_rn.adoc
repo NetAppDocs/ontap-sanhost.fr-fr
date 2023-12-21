@@ -5,17 +5,14 @@ keywords: host utilities, linux, 7.1, 7.2, netapp, ontap, release, notes
 summary: Notes de version pour Windows Unified Host Utilities 
 ---
 = Notes de version des utilitaires d'hôtes unifiés Windows
-:toc: macro
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
-:toc: 
 :toclevels: 1
 :nofooter: 
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
-:toc-position: content
 
 
 [role="lead"]

@@ -5,17 +5,14 @@ keywords: nvme, windows, enterprise
 summary: 'Configuration d"hôte NVMe/FC pour Windows Server 2019 avec ONTAP' 
 ---
 = Configuration d'hôte NVMe/FC pour Windows Server 2019 avec ONTAP
-:toc: macro
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
-:toc: 
 :toclevels: 1
 :nofooter: 
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
-:toc-position: content
 
 
 [role="lead"]

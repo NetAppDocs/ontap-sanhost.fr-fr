@@ -5,17 +5,14 @@ keywords: nvme, san, host, aix, linux, vsphere, windows
 summary: 'Vous pouvez configurer certains hôtes SAN pour le protocole NVMe over Fabrics (NVMe-of).' 
 ---
 = Présentation
-:toc: macro
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
-:toc: 
 :toclevels: 1
 :nofooter: 
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
-:toc-position: content
 
 
 Vous pouvez configurer certains hôtes SAN pour le protocole NVMe over Fabrics (NVMe-of), qui inclut NVMe over Fibre Channel (NVMe/FC) et NVMe over TCP (NVMe/TCP), avec ONTAP comme cible. En fonction de votre système d'exploitation hôte et de la version de ONTAP, vous configurez et validez le protocole NVMe/FC ou NVMe/TCP, ou les deux sur l'hôte.

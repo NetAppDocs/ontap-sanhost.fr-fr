@@ -5,17 +5,14 @@ keywords: nvme, NVMe-oF, Host, SUSE Linux Enterprise Server 15 SP5, ONTAP
 summary: 'Configuration d"hôte NVMe-of pour SUSE Linux Enterprise Server 15 SP5 avec ONTAP' 
 ---
 = Configuration d'hôte NVMe-of pour SUSE Linux Enterprise Server 15 SP5 avec ONTAP
-:toc: macro
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
-:toc: 
 :toclevels: 1
 :nofooter: 
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
-:toc-position: content
 
 
 [role="lead"]

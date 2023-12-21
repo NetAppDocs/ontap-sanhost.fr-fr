@@ -5,17 +5,14 @@ keywords: nvme, linux, rhel, red hat, enterprise
 summary: 'Comment configurer l"hôte NVMe/FC pour RHEL 8.2 avec ONTAP' 
 ---
 = Configuration hôte NVMe/FC pour RHEL 8.2 avec ONTAP
-:toc: macro
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
-:toc: 
 :toclevels: 1
 :nofooter: 
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
-:toc-position: content
 
 
 [role="lead"]

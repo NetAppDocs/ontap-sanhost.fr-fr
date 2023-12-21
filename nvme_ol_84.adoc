@@ -5,17 +5,14 @@ keywords: nvme, linux, oracle, 8.4
 summary: Configuration de la configuration hôte VME/FC pour Oracle Linux 8.4 avec ONTAP, avec des exemples 
 ---
 = Configuration d'hôte NVMe/FC pour Oracle Linux 8.4 avec ONTAP
-:toc: macro
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
-:toc: 
 :toclevels: 1
 :nofooter: 
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
-:toc-position: content
 
 
 

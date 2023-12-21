@@ -5,17 +5,14 @@ keywords: host utilities, veritas, infoscale, 6.x, netapp, ontap, san, lun, mult
 summary: Fournit des conseils sur les paramètres de configuration hôte SAN de ONTAP pour la version Veritas Infoscale 6 
 ---
 = Utilisez Veritas Storage Foundation 6 pour Linux avec ONTAP
-:toc: macro
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
-:toc: 
 :toclevels: 1
 :nofooter: 
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
-:toc-position: content
 
 
 [role="lead"]

@@ -5,17 +5,14 @@ keywords: host utilities, solaris, 113, netapp, ontap
 summary: 'Décrit l"installation des utilitaires hôtes solaris' 
 ---
 = Utilisez Solaris 11.3 avec ONTAP
-:toc: macro
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
-:toc: 
 :toclevels: 1
 :nofooter: 
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
-:toc-position: content
 
 
 [role="lead"]
