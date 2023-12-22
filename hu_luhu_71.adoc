@@ -16,7 +16,7 @@ summary: 'Décrit l"utilisation de Linux Unified Host Utilities 7.1 avec ONTAP'
 
 
 [role="lead"]
-Les utilitaires d'hôtes unifiés Linux vous aident à gérer le stockage NetApp ONTAP connecté à un hôte Linux. NetApp recommande vivement d'installer les utilitaires d'hôtes unifiés Linux, mais ce n'est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
+Les utilitaires d'hôtes unifiés Linux (LUHU) vous aident à gérer le stockage NetApp ONTAP connecté à un hôte Linux. NetApp recommande vivement d'installer les utilitaires d'hôtes unifiés Linux, mais ce n'est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
 
 Les distributions Linux suivantes sont prises en charge :
 

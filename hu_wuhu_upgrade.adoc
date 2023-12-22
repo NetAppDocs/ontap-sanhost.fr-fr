@@ -1,0 +1,66 @@
+---
+sidebar: sidebar 
+permalink: hu_wuhu_upgrade.html 
+keywords: windows, host, utilities, 7.1, hba, fibre, channel, SANtricity, netapp, san, host, e-series, platform 
+summary: 'Windows Unified Host Utilities comprend un programme d"installation qui définit les paramètres d"enregistrement et d"adaptateur HBA Windows requis. L"hôte Windows gère ainsi correctement les comportements du système de stockage pour les plateformes NetApp ONTAP et E-Series.' 
+---
+= Mettez à niveau les utilitaires d'hôtes unifiés Windows
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toc: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:toc-position: content
+
+
+[role="lead"]
+Le nouveau package d'installation Host Utilities doit se trouver dans un chemin accessible par l'hôte Windows. Suivez les instructions d'installation interactive des utilitaires hôtes ou à partir de la ligne de commande Windows pour mettre à niveau le package d'installation.
+
+[role="tabbed-block"]
+====
+.Mise à niveau interactive
+--
+Pour mettre à niveau le progiciel Host Utilities de manière interactive, vous devez exécuter le programme d'installation Host Utilities et suivre les invites.
+
+.Étapes
+. Accédez au répertoire dans lequel vous avez téléchargé le fichier exécutable.
+. Exécutez le fichier exécutable et suivez les instructions à l'écran.
+. Redémarrez l'hôte Windows lorsque vous y êtes invité.
+. Une fois le redémarrage terminé, vérifiez la version de l'utilitaire hôte :
++
+.. Ouvrez *panneau de configuration*.
+.. Accédez à *Programme et fonctionnalités* et vérifiez la version de l'utilitaire hôte.
+
+
+
+
+--
+.Mise à niveau à partir d'une ligne de commande
+--
+Vous pouvez effectuer une mise à niveau silencieuse (sans surveillance) des nouveaux utilitaires hôtes en entrant les commandes appropriées à l'invite de commande Windows.
+
+.Étapes
+. Entrez la commande suivante à l'invite de commande Windows :
++
+`msiexec /i installer.msi /quiet MULTIPATHING= {0 | 1} [INSTALLDIR=inst_path]`
+
++
+** `installer` est le nom du `.msi` Fichier pour votre architecture CPU.
+** MULTIPATHING indique si la prise en charge de MPIO est installée. Les valeurs autorisées sont « 0 » pour non et « 1 » pour oui.
+** `inst_path` Est le chemin d'installation des fichiers Host Utilities. Le chemin par défaut est `C:\Program Files\NetApp\Windows Host Utilities\`.
+
+
+
+
+
+NOTE: Pour voir les options Microsoft installer (MSI) standard pour la journalisation et d'autres fonctions, entrez `msiexec /help` À l'invite de commande Windows. Par exemple, le `msiexec /i install.msi /quiet /l*v <install.log> LOGVERBOSE=1` commande affiche les informations de journalisation.
+
+Le système redémarre automatiquement lorsque l'installation est terminée.
+
+--
+====

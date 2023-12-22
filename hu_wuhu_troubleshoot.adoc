@@ -1,0 +1,43 @@
+---
+sidebar: sidebar 
+permalink: hu_wuhu_troubleshoot.html 
+keywords: windows, host, utilities, 7.1, hba, fibre, channel, SANtricity, netapp, san, host, e-series, platform 
+summary: 'Windows Unified Host Utilities comprend un programme d"installation qui définit les paramètres d"enregistrement et d"adaptateur HBA Windows requis. L"hôte Windows gère ainsi correctement les comportements du système de stockage pour les plateformes NetApp ONTAP et E-Series.' 
+---
+= Résoudre les problèmes
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toc: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:toc-position: content
+
+
+[role="lead"]
+Vous pouvez utiliser les techniques de dépannage générales pour les utilitaires d'hôtes Windows. Assurez-vous de consulter les dernières notes de mise à jour pour connaître les problèmes connus et les solutions.
+
+Vous trouverez ci-dessous une liste des différents domaines que vous pouvez examiner pour les problèmes d'interopérabilité potentiels :
+
+* Pour identifier les problèmes d'interopérabilité potentiels, vérifiez que les utilitaires hôtes prennent en charge votre combinaison de logiciel de système d'exploitation hôte, de matériel hôte, de logiciel ONTAP et de matériel de système de stockage. Voir la http://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"^] pour en savoir plus.
+* Vérifiez que vous disposez de la configuration iSCSI correcte.
+* Si les LUN iSCSI ne sont pas disponibles après un redémarrage, vérifiez que la cible est répertoriée comme étant persistante dans l'onglet *cibles persistantes* de l'interface utilisateur de l'initiateur Microsoft iSCSI.
+* Si les applications utilisant les LUN affichent des erreurs au démarrage, vérifiez que les applications sont configurées pour dépendre du service iSCSI.
+* Pour les chemins FC vers les contrôleurs de stockage exécutant ONTAP, vérifiez que les commutateurs FC sont zonés en utilisant les WWPN des LIF cibles, pas les WWPN des ports physiques sur le nœud.
+* Vérifiez le link:hu_wuhu_71_rn.html["Notes de version"] Pour que les utilitaires hôtes Windows vérifient les problèmes connus. Les notes de mise à jour incluent une liste des problèmes connus et des limites.
+* Consultez les informations de dépannage dans le Guide d'administration SAN de votre version de ONTAP.
+* Recherche https://mysupport.netapp.com/site/bugs-online/product["NetApp bogues en ligne"^] pour les problèmes récemment découverts.
++
+** Dans le champ Type de bogue sous recherche avancée, sélectionnez *iSCSI - Windows*, puis sélectionnez *Go*. Vous devez répéter la recherche pour Bug Type *FCP -Windows*.
+
+
+* Collectez des informations sur votre système.
+* Enregistrez tous les messages d'erreur affichés sur l'hôte ou la console du système de stockage.
+* Collectez les fichiers journaux de l'hôte et du système de stockage.
+* Notez les symptômes du problème et toutes les modifications apportées à l'hôte ou au système de stockage juste avant l'apparition du problème.
+* Si vous ne parvenez pas à résoudre le problème, contactez le support technique NetApp pour obtenir de l'aide.
+
