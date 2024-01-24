@@ -3548,4 +3548,14 @@ Utilitaires hôtes<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " categ
   <block id="6a96fe80380b5c7c7a686cbebfad76d9" category="list-text">Générez la clé dhchap pour l'hôte SLES15 SP5 :</block>
   <block id="d3e220182499e43aeadc8bda16bcb3db" category="paragraph">Dans l'exemple suivant, une clé dhchap aléatoire avec HMAC définie sur 3 (SHA-512) est générée.</block>
   <block id="bd8e8f9aa877bbf46ba78e30655f8fcb" category="paragraph">Il n'y a aucun problème connu pour SLES 15 SP5 avec la version ONTAP.</block>
+  <block id="4ac1d0cb33ca920ad318b5108ad35c83" category="summary">Décrit comment utiliser Ubuntu 20.04 avec ONTAP</block>
+  <block id="884709522224b2e2f9861c09fe418c9f" category="doc">Utilisez Ubuntu 20.04 avec ONTAP</block>
+  <block id="c47bdeb8aa6e7dfdadec0c481e4a21ce" category="paragraph">Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour configurer Ubuntu 20.04 avec ONTAP comme cible.</block>
+  <block id="b93c5ef5e73d23bb7f86e491eeee988e" category="admonition">Le progiciel Utilitaires hôtes unifiés NetApp Linux n'est pas disponible pour Ubuntu 20.04 OS.</block>
+  <block id="17ce72ad1f5e6eaa8a603ac974a06f2d" category="paragraph">Pour Ubuntu 20.04, le<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> le fichier doit exister, mais il n'est pas nécessaire d'apporter des modifications spécifiques au fichier. Ubuntu 20.04 est compilé avec tous les paramètres requis pour reconnaître et gérer correctement les LUN ONTAP.</block>
+  <block id="cb22bc47f0f8e662ab604bbcbf236866" category="paragraph">Le système d'exploitation Ubuntu 20.04 est compilé pour reconnaître les LUN ONTAP et définir automatiquement tous les paramètres de configuration correctement pour les configurations ASA et non ASA. Les paramètres recommandés suivants vous permettent d'optimiser davantage les performances de votre configuration hôte.</block>
+  <block id="47310b4ac9536318d7bb35ce155bbc39" category="paragraph">Il n'y a pas de problèmes connus pour Ubuntu 20.04 avec la version ONTAP.</block>
+  <block id="3d945423f8e9496c429a5d8c65b4604f" category="sidebar">Ubuntu</block>
+  <block id="4ecf3c9493d36f3a582a25b68e645741" category="sidebar">Ubuntu-FCP</block>
+  <block id="7cd95c816f8a04ff858a857e3e5a484d" category="sidebar">20.04</block>
 </blocks>
