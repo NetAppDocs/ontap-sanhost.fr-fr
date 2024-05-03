@@ -15,16 +15,21 @@ summary: Ce contenu fournit des recommandations spécifiques à une distribution
 :imagesdir: ./media/
 
 
-Ce contenu fournit des meilleures pratiques propres à l'hôte et à la version pour configurer rapidement les hôtes SAN connectés au stockage ONTAP.
+[role="lead"]
+Les hôtes SAN doivent être configurés pour les chemins d'accès multiples, avec des paramètres et paramètres spécifiques critiques pour un bon fonctionnement avec les LUN ONTAP.  La configuration de l'hôte varie en fonction du système d'exploitation de l'hôte et du protocole.  Une configuration correcte est importante pour de meilleures performances et un basculement réussi.
+
+Vous devez configurer vos hôtes SAN pour qu'ils utilisent les utilitaires hôtes SAN NetApp. Les utilitaires hôtes SAN vous aident à gérer et à contrôler vos LUN et vos adaptateurs de bus hôte (HBA). Par exemple, vous pouvez utiliser les utilitaires d'hôte SAN pour récupérer une liste de toutes les LUN mappées sur un hôte ou pour afficher la liste de tous les attributs d'une LUN spécifique mappée sur un hôte. Le support client NetApp peut également utiliser les utilitaires d'hôte SAN pour recueillir des informations sur votre configuration si vous rencontrez un problème nécessitant une assistance.
+
+NetApp recommande d'utiliser le logiciel des utilitaires hôtes SAN s'il est disponible pour votre hôte SAN.
+
+Si votre configuration SAN le prend en charge, vous pouvez également configurer votre hôte pour qu'il utilise le démarrage SAN afin de simplifier le déploiement et d'améliorer l'évolutivité. À l'aide du démarrage SAN, vous pouvez déployer plusieurs nouveaux serveurs en les connectant à SAN et en configurant les paramètres de démarrage appropriés. Cela permet de gagner du temps en éliminant la nécessité d'installer le système d'exploitation sur chaque serveur individuellement.
 
 Vos hôtes SAN et votre stockage ONTAP peuvent résider sur votre site, dans le cloud, ou les deux.
 
 
 NOTE: Dans un environnement cloud, les hôtes sont généralement appelés clients. Toutes les informations spécifiques à l'hôte de ce contenu s'appliquent également aux clients cloud.
 
-Par exemple, vous pouvez configurer le stockage ONTAP sur site pour la connexion à des hôtes SAN sur site ou pour la connexion à des clients cloud SAN. Vous pouvez également configurer link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] ou link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["Amazon FSX pour ONTAP"^] Pour se connecter à des hôtes SAN sur site ou pour se connecter aux clients cloud SAN.
-
-Une configuration correcte est importante pour de meilleures performances et un basculement réussi.
+Par exemple, vous pouvez configurer le stockage ONTAP sur site pour vous connecter aux hôtes SAN sur site ou aux clients cloud SAN. Vous pouvez également configurer les services de stockage s'exécutant sur un environnement cloud tel que link:https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] ou link:https://docs.netapp.com/us-en/bluexp-fsx-ontap/index.html["Amazon FSX pour NetApp ONTAP"^] Pour se connecter à des hôtes SAN sur site ou à des clients cloud SAN.
 
 .Informations associées
 * Le link:https://docs.netapp.com/us-en/ontap/san-config/index.html["Configuration SAN ONTAP"^] Pour votre version de ONTAP
