@@ -280,4 +280,4 @@ La configuration hôte NVMe-of pour ESXi 7.x avec ONTAP présente les problèmes
 .Informations associées
 link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsphere_ontap_ontap_for_vsphere.html["Tr-4597-VMware vSphere avec ONTAP"^]
 link:https://kb.vmware.com/s/article/2031038["Prise en charge de VMware vSphere 5.x, 6.x et 7.x avec NetApp MetroCluster (2031038)"^]
-link:https://kb.vmware.com/s/article/83370["Prise en charge de VMware vSphere 6.x et 7.x avec NetApp® SnapMirror® Business Continuity (SM-BC)"^]
+link:https://kb.vmware.com/s/article/83370["Prise en charge de VMware vSphere 6.x et 7.x avec la synchronisation active NetApp® SnapMirror"^]

@@ -66,9 +66,13 @@ nvme-cli-1.16-5.el8.x86_64
 ----
 . Activer le multichemin NVMe dans le noyau :
 +
+*Exemple*
+
++
 [listing]
 ----
-# grubby --args=nvme_core.multipath=Y --update-kernel /boot/vmlinuz-4.18.0-425.3.1.el8.x86_64
+# grubby --args=nvme_core.multipath=Y --update-kernel
+/boot/vmlinuz-4.18.0-425.3.1.el8.x86_64
 ----
 . Sur l'hôte, vérifiez la chaîne NQN hôte à `/etc/nvme/hostnqn` Et vérifiez qu'il correspond à la chaîne NQN hôte pour le sous-système correspondant de la matrice ONTAP. Exemple :
 +

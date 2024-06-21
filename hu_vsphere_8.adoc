@@ -355,12 +355,12 @@ La version VMware vSphere 8.x avec ONTAP présente les problèmes connus suivant
 | ID de bug NetApp | Titre | Description 
 
 
-| 1543660 | Une erreur d'E/S se produit lorsque les machines virtuelles Linux utilisant des adaptateurs vNVMe rencontrent une fenêtre long All paths Down (APD)  a| 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1543660["1543660"^] | Une erreur d'E/S se produit lorsque les machines virtuelles Linux utilisant des adaptateurs vNVMe rencontrent une fenêtre long All paths Down (APD)  a| 
 Les machines virtuelles Linux exécutant vSphere 8.x et versions ultérieures et utilisant des adaptateurs virtuels NVMe (vNVME) rencontrent une erreur d'E/S, car l'opération de nouvelle tentative vNVMe est désactivée par défaut. Pour éviter une interruption sur les machines virtuelles Linux exécutant des noyaux plus anciens lors d'une panne de tous les chemins (APD) ou d'une charge d'E/S importante, VMware a introduit un « VSCSIDisableNvmeRetry » ajustable pour désactiver l'opération de nouvelle tentative vNVMe.
 
 |===
 .Informations associées
 * link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsphere_ontap_ontap_for_vsphere.html["Tr-4597-VMware vSphere avec ONTAP"^]
 * link:https://kb.vmware.com/s/article/2031038["Prise en charge de VMware vSphere 5.x, 6.x et 7.x avec NetApp MetroCluster (2031038)"^]
-* link:https://kb.vmware.com/s/article/83370["NetApp ONTAP avec NetApp SnapMirror, continuité de l'activité (SM-BC) et VMware vSphere Metro Storage Cluster (vMSC)"^]
+* link:https://kb.vmware.com/s/article/83370["NetApp ONTAP avec synchronisation active NetApp SnapMirror avec VMware vSphere Metro Storage Cluster (vMSC)"^]
 

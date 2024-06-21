@@ -217,13 +217,13 @@ Par défaut, le système d'exploitation AIX applique un délai d'expiration d'E/
 
 
 
-== Prise en charge AIX avec SM-BC
+== Prise en charge d'AIX avec SnapMirror Active Sync
 
-Depuis ONTAP 9.11.1, AIX est pris en charge par SM-BC. Dans le cas d'une configuration AIX, le cluster principal est le cluster « actif ».
+À partir de ONTAP 9.11.1, AIX est pris en charge avec la synchronisation active SnapMirror. Dans le cas d'une configuration AIX, le cluster principal est le cluster « actif ».
 
 Dans une configuration AIX, les basculements sont disruptifs. Chaque basculement nécessite une nouvelle analyse de l'hôte pour que les opérations d'E/S reprennent.
 
-Pour configurer AIX pour SM-BC, reportez-vous à l'article de la base de connaissances link:https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapMirror/How_to_configure_an_AIX_host_for_SnapMirror_Business_Continuity_(SM-BC)["Comment configurer un hôte AIX pour SnapMirror Business Continuity (SM-BC)"^].
+Pour configurer AIX pour la synchronisation active SnapMirror, reportez-vous à l'article de la base de connaissances link:https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapMirror/How_to_configure_an_AIX_host_for_SnapMirror_Business_Continuity_(SM-BC)["Comment configurer un hôte AIX pour la synchronisation active SnapMirror"^].
 
 
 
@@ -236,11 +236,11 @@ IBM AIX 7.2 et/ou PowerVM (VIOS 3.1) avec la version ONTAP présente les problè
 | ID de bug NetApp | Titre | Description | ID de partenaire 
 
 
-| 1416221 | AIX 7200-05-01 a rencontré une interruption des E/S sur les disques iSCSI virtuels (VIOS 3.1.1.x) lors du basculement du stockage | Des perturbations d'E/S peuvent survenir pendant les opérations de basculement de stockage sur les hôtes AIX 7.2 TL5 sur les disques iSCSI virtuels mappés via le système VIOS 3.1.1.x. Par défaut, le `rw_timeout` La valeur des disques iSCSI virtuels (hdisk) sur VIOC sera de 45 secondes. Un retard d'E/S supérieur à 45 secondes peut se produire lors du basculement du système de stockage. Pour éviter ce problème, reportez-vous à la solution de contournement mentionnée dans BURT. Comme pour IBM, après avoir appliqué APAR - IJ34739 (prochaine version), nous pouvons modifier dynamiquement la valeur rw_timeout à l'aide de l' `chdev` commande. | NA 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1416221["1416221"^] | AIX 7200-05-01 a rencontré une interruption des E/S sur les disques iSCSI virtuels (VIOS 3.1.1.x) lors du basculement du stockage | Des perturbations d'E/S peuvent survenir pendant les opérations de basculement de stockage sur les hôtes AIX 7.2 TL5 sur les disques iSCSI virtuels mappés via le système VIOS 3.1.1.x. Par défaut, le `rw_timeout` La valeur des disques iSCSI virtuels (hdisk) sur VIOC sera de 45 secondes. Un retard d'E/S supérieur à 45 secondes peut se produire lors du basculement du système de stockage. Pour éviter ce problème, reportez-vous à la solution de contournement mentionnée dans BURT. Comme pour IBM, après avoir appliqué APAR - IJ34739 (prochaine version), nous pouvons modifier dynamiquement la valeur rw_timeout à l'aide de l' `chdev` commande. | NA 
 
 
-| 1414700 | AIX 7.2 TL04 a rencontré une interruption des E/S sur les disques iSCSI virtuels (VIOS 3.1.1.x) lors du basculement du stockage | Des perturbations d'E/S peuvent survenir pendant les opérations de basculement de stockage sur les hôtes AIX 7.2 TL4 sur les disques iSCSI virtuels mappés via le système VIOS 3.1.1.x. Par défaut, le `rw_timeout` La valeur de la carte vSCSI sur VIOC est de 45 secondes. Un retard d'E/S de plus de 45 secondes peut se produire lors d'un basculement de stockage, une défaillance d'E/S. Pour éviter ce problème, reportez-vous à la solution de contournement mentionnée dans BURT. | NA 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1414700["1414700"^] | AIX 7.2 TL04 a rencontré une interruption des E/S sur les disques iSCSI virtuels (VIOS 3.1.1.x) lors du basculement du stockage | Des perturbations d'E/S peuvent survenir pendant les opérations de basculement de stockage sur les hôtes AIX 7.2 TL4 sur les disques iSCSI virtuels mappés via le système VIOS 3.1.1.x. Par défaut, le `rw_timeout` La valeur de la carte vSCSI sur VIOC est de 45 secondes. Un retard d'E/S de plus de 45 secondes peut se produire lors d'un basculement de stockage, une défaillance d'E/S. Pour éviter ce problème, reportez-vous à la solution de contournement mentionnée dans BURT. | NA 
 
 
-| 1307653 | Voir les problèmes d'E/S sur le système VIOS 3.1.1.10 pendant les pannes SFO et les E/S droites | Les défaillances d'E/S du système VIOS 3.1.1 peuvent être vues sur le disque client NPIV qui est pris en charge par les adaptateurs FC 16 Gb. Aussi, a `vfchost` Le pilote peut atteindre un état dans lequel il arrête le traitement des demandes d'E/S du client. L'application d'IBM APAR IJ22290 IBM APAR IJ23222 corrigera le problème. | NA 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1307653["1307653"^] | Voir les problèmes d'E/S sur le système VIOS 3.1.1.10 pendant les pannes SFO et les E/S droites | Les défaillances d'E/S du système VIOS 3.1.1 peuvent être vues sur le disque client NPIV qui est pris en charge par les adaptateurs FC 16 Gb. Aussi, a `vfchost` Le pilote peut atteindre un état dans lequel il arrête le traitement des demandes d'E/S du client. L'application d'IBM APAR IJ22290 IBM APAR IJ23222 corrigera le problème. | NA 
 |===

@@ -214,12 +214,12 @@ NOTE: Des correctifs sont disponibles pour Oracle bug 15824910 sur différentes 
 
 
 
-== Paramètres recommandés pour la continuité de l'activité SnapMirror
+== Paramètres recommandés pour la synchronisation active SnapMirror
 
-Afin de vérifier que les applications client Solaris sont sans perturbation lorsqu'un basculement de site non planifié se produit dans un environnement SnapMirror Business Continuity (SM-BC), vous devez configurer le paramètre suivant sur l'hôte Solaris 11.3. Ce paramètre remplace le module de basculement `f_tpgs` empêcher l'exécution du chemin du code qui détecte la contradiction.
+Pour vérifier que les applications client Solaris ne sont pas perturbatrices lorsqu'un basculement de site non planifié se produit dans un environnement de synchronisation active SnapMirror, vous devez configurer le paramètre suivant sur l'hôte Solaris 11.3. Ce paramètre remplace le module de basculement `f_tpgs` empêcher l'exécution du chemin du code qui détecte la contradiction.
 
 
-NOTE: Depuis ONTAP 9.9.1, les configurations de paramétrage SM-BC sont prises en charge par l'hôte Solaris 11.3.
+NOTE: À partir de ONTAP 9.9.1, les configurations des paramètres de synchronisation active SnapMirror sont prises en charge par l'hôte Solaris 11.3.
 
 Suivez les instructions pour configurer le paramètre de neutralisation :
 
@@ -245,7 +245,8 @@ svl_fops_name = 0xa00298d69e0 "conf f_tpgs"
 
 
 
-NOTE: Après `scsi-vhci-failover-override` a été appliqué, `conf` est ajouté à `svl_fops_name`. Pour plus d'informations et pour connaître les modifications recommandées par défaut, consultez l'article de la base de connaissances NetApp https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapMirror/Solaris_Host_support_recommended_settings_in_SnapMirror_Business_Continuity_(SM-BC)_configuration["Prise en charge de Solaris Host Paramètres recommandés dans la configuration de SnapMirror Business Continuity (SM-BC)"^].
+NOTE: Après `scsi-vhci-failover-override` a été appliqué, `conf` est ajouté à `svl_fops_name`.
+Pour plus d'informations et pour connaître les modifications recommandées par défaut, consultez l'article de la base de connaissances NetApp https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapMirror/Solaris_Host_support_recommended_settings_in_SnapMirror_Business_Continuity_(SM-BC)_configuration["Prise en charge de l'hôte Solaris Paramètres recommandés dans la configuration de synchronisation active SnapMirror"^].
 
 
 
@@ -258,8 +259,8 @@ La version Solaris 11.3 avec ONTAP présente les problèmes connus suivants :
 | ID de bug NetApp | Titre | Description | ID Oracle 
 
 
-| 1366780 | Problème de LIF Solaris au niveau de GB avec une carte HBA Emulex 32G sur un Arch x86 | Vu avec le micrologiciel Emulex version 12.6.x et ultérieure sur la plateforme x86_64 | SR 3-24746803021 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1366780["1366780"^] | Problème de LIF Solaris au niveau de GB avec une carte HBA Emulex 32G sur un Arch x86 | Vu avec le micrologiciel Emulex version 12.6.x et ultérieure sur la plateforme x86_64 | SR 3-24746803021 
 
 
-| 1368957 | Solaris 11.x 'cfgadm -c configure' entraînant une erreur d'E/S avec la configuration Emulex de bout en bout | Exécution `cfgadm -c configure` Sur les configurations Emulex de bout en bout, les erreurs d'E/S sont à l'origine. Ceci est fixé dans ONTAP 9.5P17, 9.6P14, 9.7P13 et 9.8P2 | Sans objet 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1368957["1368957"^] | Solaris 11.x 'cfgadm -c configure' entraînant une erreur d'E/S avec la configuration Emulex de bout en bout | Exécution `cfgadm -c configure` Sur les configurations Emulex de bout en bout, les erreurs d'E/S sont à l'origine. Ceci est fixé dans ONTAP 9.5P17, 9.6P14, 9.7P13 et 9.8P2 | Sans objet 
 |===

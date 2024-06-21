@@ -28,7 +28,7 @@ La prise en charge suivante est disponible pour la configuration hôte NVMe/FC p
 
 .Ce dont vous avez besoin
 * Vérifiez que vous disposez d'adaptateurs Emulex FC 32 Gb (EN1A, EN1B, EN1L, EN1M) ou d'adaptateurs FC 64 Go (EN1N, EN1P) avec micrologiciel d'adaptateur 12.4.257.30 et versions ultérieures.
-* Si vous disposez d'une configuration MetroCluster, NetApp vous recommande de modifier le temps d'interruption par défaut (All Path Down) pour AIX NVMe/FC afin de prendre en charge les événements de basculement non planifiés MetroCluster, afin d'éviter que le système d'exploitation AIX n'applique un délai d'attente d'E/S plus court. Pour plus d'informations et pour les modifications recommandées des paramètres par défaut, reportez-vous au rapport public 1553249.
+* Si vous disposez d'une configuration MetroCluster, NetApp recommande de modifier le délai d'interruption par défaut (All Path Down) pour la prise en charge des événements de basculement non planifiés MetroCluster afin d'éviter que le système d'exploitation AIX n'applique un délai d'expiration d'E/S plus court. Pour plus d'informations et pour connaître les modifications recommandées des paramètres par défaut, reportez-vous à la section Bugs NetApp en ligne - link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1553249["1553249"^].
 * Par défaut, la valeur Asymmetric Namespace Access transition Timeout (ANATT) du système d'exploitation hôte AIX est de 30 secondes. IBM fournit un correctif provisoire (ifix) qui limite la valeur de l'ANATT à 60 secondes ; vous devez installer un ifix à partir du site Web d'IBM pour vous assurer que tous les flux de travail ONTAP sont sans interruption.
 +
 
@@ -323,16 +323,16 @@ La configuration hôte NVMe/FC pour AIX avec ONTAP présente les problèmes conn
 | ID de Burt | Titre | Description 
 
 
-| 1553249 | Temps APD par défaut AIX NVMe/FC à modifier pour la prise en charge des événements de basculement MCC non planifiés | Par défaut, les systèmes d'exploitation AIX utilisent une valeur de délai d'expiration All path down (APD) de 20 secondes pour NVMe/FC.  Cependant, ONTAP MetroCluster les flux de travail de basculement automatique non planifié (AUSO) et initié par Tiebreaker peuvent prendre un peu plus de temps que la fenêtre APD timeout, ce qui provoque des erreurs d'E/S. 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/BURT/1553249["1553249"^] | Temps APD par défaut AIX NVMe/FC à modifier pour la prise en charge des événements de basculement MCC non planifiés | Par défaut, les systèmes d'exploitation AIX utilisent une valeur de délai d'expiration All path down (APD) de 20 secondes pour NVMe/FC.  Cependant, ONTAP MetroCluster les flux de travail de basculement automatique non planifié (AUSO) et initié par Tiebreaker peuvent prendre un peu plus de temps que la fenêtre APD timeout, ce qui provoque des erreurs d'E/S. 
 
 
-| 1546017 | La connectivité NVMe/FC AIX plafonne à 60 s, au lieu de 120 s comme annoncé par ONTAP | ONTAP annonce le délai d'expiration de la transition ANA (Asymmetric Namespace Access) dans l'identification du contrôleur à 120 s. Actuellement, avec ifix, AIX lit le délai d'expiration de la transition ANA à partir du contrôleur Identify, mais le fixe à 60 s s'il dépasse cette limite. 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/BURT/1546017["1546017"^] | La connectivité NVMe/FC AIX plafonne à 60 s, au lieu de 120 s comme annoncé par ONTAP | ONTAP annonce le délai d'expiration de la transition ANA (Asymmetric Namespace Access) dans l'identification du contrôleur à 120 s. Actuellement, avec ifix, AIX lit le délai d'expiration de la transition ANA à partir du contrôleur Identify, mais le fixe à 60 s s'il dépasse cette limite. 
 
 
-| 1541386 | AIX NVMe/FC frappe EIO après expiration ANATT | Pour tout événement de basculement du stockage (SFO), si la transition ANA (Asymmetric Namespace Access) dépasse le délai maximal de transition ANA sur un chemin donné, l'hôte NVMe/FC AIX échoue et affiche une erreur d'E/S alors que d'autres chemins sains sont disponibles pour le namespace. 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/BURT/1541386["1541386"^] | AIX NVMe/FC frappe EIO après expiration ANATT | Pour tout événement de basculement du stockage (SFO), si la transition ANA (Asymmetric Namespace Access) dépasse le délai maximal de transition ANA sur un chemin donné, l'hôte NVMe/FC AIX échoue et affiche une erreur d'E/S alors que d'autres chemins sains sont disponibles pour le namespace. 
 
 
-| 1541380 | AIX NVMe/FC attend l'expiration de l'ANATT demi-complet avant de reprendre les E/S après ANA AEN | IBM AIX NVMe/FC ne prend pas en charge certaines notifications asynchrones (AENs) publiées par ONTAP. Cette manipulation non optimale de l'ANA se traduira par des performances sous-optimales pendant les opérations SFO. 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/BURT/1541380["1541380"^] | AIX NVMe/FC attend l'expiration de l'ANATT demi-complet avant de reprendre les E/S après ANA AEN | IBM AIX NVMe/FC ne prend pas en charge certaines notifications asynchrones (AENs) publiées par ONTAP. Cette manipulation non optimale de l'ANA se traduira par des performances sous-optimales pendant les opérations SFO. 
 |===
 
 

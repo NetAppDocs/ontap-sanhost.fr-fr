@@ -214,13 +214,13 @@ Par défaut, le système d'exploitation AIX applique un délai d'expiration d'E/
 
 
 
-== Prise en charge AIX avec SM-BC
+== Prise en charge d'AIX avec SnapMirror Active Sync
 
-Depuis ONTAP 9.11.1, AIX est pris en charge par SM-BC. Dans le cas d'une configuration AIX, le cluster principal est le cluster « actif ».
+À partir de ONTAP 9.11.1, AIX est pris en charge avec la synchronisation active SnapMirror. Dans le cas d'une configuration AIX, le cluster principal est le cluster « actif ».
 
 Dans une configuration AIX, les basculements sont disruptifs. Chaque basculement nécessite une nouvelle analyse de l'hôte pour que les opérations d'E/S reprennent.
 
-Pour configurer AIX pour SM-BC, reportez-vous à l'article de la base de connaissances link:https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapMirror/How_to_configure_an_AIX_host_for_SnapMirror_Business_Continuity_(SM-BC)["Comment configurer un hôte AIX pour SnapMirror Business Continuity (SM-BC)"^].
+Pour configurer AIX pour SM-BC, reportez-vous à l'article de la base de connaissances link:https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapMirror/How_to_configure_an_AIX_host_for_SnapMirror_Business_Continuity_(SM-BC)["Comment configurer un hôte AIX pour la synchronisation active SnapMirror"^].
 
 
 
