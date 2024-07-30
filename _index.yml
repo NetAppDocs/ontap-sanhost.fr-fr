@@ -1,5 +1,12 @@
 ---
 indexpage:
+  title: HÔTES SAN et clients cloud
+  summary: Ce contenu fournit des conseils propres à chaque distribution sur la façon
+    de configurer des clients SAN connectés au stockage ONTAP.
+  keywords: ontap, san, host, rhel, red, hat, linux, sles, suse, esxi, nvme, oracle,
+    linux, windows, enterprise, fc, fcp, isci, aix, powervm, vios, centos, citrix,
+    hp-ux, solaris, veritas, cvo, cloud, volume, ontap, clients, configuration, FSx,
+    instance, netapp
   lead: Ce contenu fournit des conseils propres à chaque distribution sur la façon
     de configurer des clients SAN connectés au stockage ONTAP. Les clients SAN et
     le stockage ONTAP peuvent résider sur le site ou dans le cloud.

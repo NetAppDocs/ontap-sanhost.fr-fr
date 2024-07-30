@@ -15,4 +15,5 @@ summary:
 :imagesdir: ./media/
 
 
-Vous pouvez configurer certains hôtes SAN pour FCP ou iSCSI avec ONTAP comme cible. Installez d'abord le pack de l'utilitaire hôte du système d'exploitation approprié, qui inclut le kit d'outils SAN, puis vérifiez les paramètres des chemins d'accès multiples pour les LUN NetApp ONTAP.
+[role="lead"]
+Vous pouvez configurer certains hôtes SAN pour FCP ou iSCSI avec ONTAP comme cible. Vous devez d'abord installer le package d'utilitaires hôtes de système d'exploitation approprié, qui inclut le kit d'outils SAN. Vérifiez ensuite les paramètres des chemins d'accès multiples pour les LUN NetApp ONTAP.

@@ -15,6 +15,9 @@ summary: Configuration de la configuration hôte VME/FC pour Oracle Linux 8.4 av
 :imagesdir: ./media/
 
 
+[role="lead"]
+Vous pouvez configurer NVMe over Fibre Channel (NVMe/FC) sur des hôtes initiateurs exécutant Oracle Linux 8.4 et ONTAP comme cible.
+
 
 
 == Prise en charge

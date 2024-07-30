@@ -14,4 +14,4 @@ NOTE: Les chemins non optimisés sont utilisés uniquement lorsqu'aucun chemin o
 .Exemple
 L'exemple suivant montre la sortie correcte d'une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés.
 
-image::nonasa.png[pas de asa]
+image::nonasa.png[Capture d'écran d'une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés]

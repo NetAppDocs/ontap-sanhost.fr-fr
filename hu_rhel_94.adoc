@@ -293,6 +293,3 @@ Vous pouvez également utiliser les paramètres recommandés pour configurer la 
 == Problèmes connus
 
 Il n'y a aucun problème connu pour la configuration de l'hôte FC pour RHEL 9.4 avec la version ONTAP.
-
-|===
-|===

@@ -13,7 +13,6 @@ summary: Comment configurer NVMe-of Host pour RHEL 8.7 avec ONTAP
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
-:source-highlighter: highlighter.js
 
 
 [role="lead"]

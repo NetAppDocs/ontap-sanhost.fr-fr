@@ -13,7 +13,6 @@ summary: 'Comment configurer l"hôte NVMe-of pour RHEL 9.2 avec ONTAP'
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
-:source-highlighter: highlighter.js
 
 
 [role="lead"]

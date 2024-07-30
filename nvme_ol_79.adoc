@@ -15,6 +15,9 @@ summary: 'Configuration d"hôte VME/FC pour Oracle Linux 7.9 avec ONTAP, par exe
 :imagesdir: ./media/
 
 
+[role="lead"]
+Vous pouvez configurer NVMe over Fibre Channel (NVMe/FC) sur des hôtes initiateurs exécutant Oracle Linux 7.9 et ONTAP comme cible.
+
 
 
 == Prise en charge

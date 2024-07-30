@@ -15,6 +15,7 @@ summary: Notes de version pour HPUX Host Utilities 6.0
 :imagesdir: ./media/
 
 
+[role="lead"]
 Les notes de version décrivent les nouvelles fonctionnalités et améliorations, les problèmes résolus dans la version actuelle, les problèmes connus et les limites, ainsi que les précautions importantes relatives à la configuration et à la gestion de votre hôte HP-UX spécifique avec votre système de stockage ONTAP.
 
 HP-UX Host Utilities 6.0 continue à prendre en charge les versions suivantes :

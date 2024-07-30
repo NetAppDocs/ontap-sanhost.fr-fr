@@ -15,6 +15,7 @@ summary:
 :imagesdir: ./media/
 
 
+[role="lead"]
 Découvrez les dernières informations sur les versions de l'utilitaire hôte SAN et accédez à la procédure d'installation de votre configuration hôte.
 
 

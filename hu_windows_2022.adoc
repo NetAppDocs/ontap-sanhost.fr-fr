@@ -94,7 +94,7 @@ NOTE: Les chemins non optimisés sont utilisés uniquement lorsqu'aucun chemin o
 .Exemple
 L'exemple suivant montre la sortie correcte d'une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés.
 
-image::nonasa.png[pas de asa]
+image::nonasa.png[Capture d'écran d'une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés]
 
 
 
@@ -102,7 +102,7 @@ image::nonasa.png[pas de asa]
 
 Pour la configuration des baies SAN (ASA), il doit y avoir un groupe de chemins avec des priorités uniques. Tous les chemins sont optimisés/actifs, c'est-à-dire qu'ils sont gérés par le contrôleur et que les E/S sont envoyées sur tous les chemins actifs.
 
-image::asa.png[ASA]
+image::asa.png[Capture d'écran d'une LUN ONTAP avec chemins actifs/optimisés]
 
 
 NOTE: N'utilisez pas un nombre excessif de chemins pour une seule LUN. Il ne faut pas plus de quatre chemins. Plus de huit chemins peuvent entraîner des problèmes de chemin lors des défaillances du stockage.

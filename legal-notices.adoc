@@ -1,5 +1,5 @@
 ---
-permalink: legal_notice.html 
+permalink: legal-notices.html 
 sidebar: sidebar 
 keywords: legal, notices, copyright, trademarks, patents 
 summary: Les mentions légales donnent accès aux déclarations de copyright, aux marques, aux brevets, etc. 
@@ -8,6 +8,7 @@ summary: Les mentions légales donnent accès aux déclarations de copyright, au
 :allow-uri-read: 
 
 
+[role="lead"]
 Les mentions légales donnent accès aux déclarations de copyright, aux marques, aux brevets, etc.
 
 
