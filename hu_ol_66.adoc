@@ -262,7 +262,7 @@ devices {
 }
 ----
 
-NOTE: Pour configurer Oracle Linux 6.6 RedHat Enterprise Kernel (RHCK), utilisez le link:hu_rhel_66.html#recommended-settings["paramètres recommandés"] Pour Red Hat Enterprise Linux (RHEL) 6.6.
+NOTE: Pour configurer Oracle Linux 6.6 Red Hat Enterprise Kernel (RHCK), utilisez link:hu_rhel_66.html#recommended-settings["paramètres recommandés"]pour Red Hat Enterprise Linux (RHEL) 6.6.
 
 
 

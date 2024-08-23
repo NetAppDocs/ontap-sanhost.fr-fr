@@ -256,7 +256,7 @@ devices {
 }
 ----
 
-NOTE: Pour configurer Oracle Linux 8.0 RedHat Enterprise Kernel (RHCK), utilisez le link:hu_rhel_80.html#recommended-settings["paramètres recommandés"] Pour Red Hat Enterprise Linux (RHEL) 8.0.
+NOTE: Pour configurer Oracle Linux 8.0 Red Hat Enterprise Kernel (RHCK), utilisez link:hu_rhel_80.html#recommended-settings["paramètres recommandés"]pour Red Hat Enterprise Linux (RHEL) 8.0.
 
 
 
