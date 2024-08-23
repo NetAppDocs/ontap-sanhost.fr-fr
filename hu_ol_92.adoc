@@ -283,7 +283,7 @@ devices {
 }
 ----
 
-NOTE: Pour configurer Oracle Linux 9.2 Red Hat Enterprise Kernel (RHCK), utilisez link:hu_rhel_91.html#recommended-settings["paramètres recommandés"]pour Red Hat Enterprise Linux (RHEL) 9.2.
+NOTE: Pour configurer Oracle Linux 9.2 Red Hat Enterprise Kernel (RHCK), utilisez link:hu_rhel_92.html#recommended-settings["paramètres recommandés"]pour Red Hat Enterprise Linux (RHEL) 9.2.
 
 
 
