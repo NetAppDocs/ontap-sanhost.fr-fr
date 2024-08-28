@@ -264,18 +264,18 @@ QLE2742 FW:v9.12.00 DVR:v10.02.08.100-k
 
 === Activation d'une taille d'E/S de 1 Mo (en option)
 
-ONTAP signale une taille DE transfert MAX Data de 8 DANS les données Identify Controller, ce qui signifie que la taille maximale des demandes d'E/S peut atteindre 1 Mo. Toutefois, pour émettre des demandes d'E/S d'une taille de 1 Mo pour un hôte Broadcom NVMe/FC, vous devez augmenter le `lpfc` valeur du `lpfc_sg_seg_cnt` à 256 à partir de la valeur par défaut de 64.
+ONTAP signale une taille de transfert MAX Data (MDT) de 8 dans les données Identify Controller. La taille maximale des demandes d'E/S peut donc atteindre 1 Mo. Pour émettre des demandes d'E/S d'une taille de 1 Mo pour un hôte Broadcom NVMe/FC, vous devez augmenter la `lpfc` valeur du `lpfc_sg_seg_cnt` paramètre à 256 par rapport à la valeur par défaut 64.
 
 .Étapes
-. Réglez le `lpfc_sg_seg_cnt` paramètre à 256.
+. Réglez le `lpfc_sg_seg_cnt` paramètre sur 256 :
 +
 [listing]
 ----
 # cat /etc/modprobe.d/lpfc.conf
 options lpfc lpfc_sg_seg_cnt=256
 ----
-. Exécutez un `dracut -f` et redémarrez l'hôte.
-. Vérifiez-le `lpfc_sg_seg_cnt` est 256.
+. Lancer une `dracut -f` commande et redémarrer l'hôte :
+. Vérifiez que `lpfc_sg_seg_cnt` est 256 :
 +
 [listing]
 ----
@@ -584,5 +584,5 @@ La configuration hôte NVMe-of pour OL 8.8 avec ONTAP version présente les prob
 | ID de bug NetApp | Titre | Description | ID Bugzilla 
 
 
-| 1517321 | Les hôtes Oracle Linux 8.8 NVMe-of créent des CDP dupliqués | Sur les hôtes OL 8.8 NVMe-of, les contrôleurs de découverte permanente (CDP) sont créés en transmettant le `-p` à la `nvme discover` commande. Pour une combinaison initiateur-cible donnée, un seul PDC doit être créé avec chaque appel du `nvme discover` commande. Toutefois, à partir de OL 8.x, les hôtes NVMe-of finissent par créer des CDP dupliqués avec chaque invocation du `nvme discover` commande avec `-p` option. Cela gaspille des ressources sur l'hôte et sur la cible. | https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=18118["18118"^] 
+| 1517321 | Les hôtes Oracle Linux 8.8 NVMe-of créent des CDP dupliqués | Sur les hôtes OL 8.8 NVMe-of, les contrôleurs de découverte permanente (CDP) sont créés en transmettant l' `-p`option à la `nvme discover` commande. Pour une combinaison initiateur-cible donnée, chaque exécution de la `nvme discover` commande doit créer un PDC. Toutefois, à partir de OL 8.x, les hôtes NVMe-of créent des CDP dupliqués. Cela gaspille des ressources sur l'hôte et sur la cible. | https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=18118["18118"^] 
 |===

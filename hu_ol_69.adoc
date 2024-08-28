@@ -101,7 +101,7 @@ kernel /vmlinuz-3.8.13-68.1.2.el6uek.x86_64 ro root=/dev/mapper/vg_ibmx3550m4210
 ....
 . Utilisez le `mkinitrd` commande pour recréer l'image-initrd. Oracle 6x et les versions ultérieures utilisent l'une ou l'autre : la commande : `mkinitrd -f /boot/ initrd-"uname -r".img uname -r`Ou la commande : `dracut -f`
 . Redémarrez l'hôte.
-. Vérifiez la sortie du `cat /proc/cmdline` pour vérifier que le paramètre est terminé. Vous pouvez utiliser le `multipath -ll` Commande pour vérifier les paramètres des LUN ONTAP. Il devrait y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant les priorités les plus élevées sont actifs/optimisés, ce qui signifie qu'ils sont gérés par le contrôleur où se trouve l'agrégat. Les chemins avec les priorités les plus basses sont actifs, mais ne sont pas optimisés car ils sont servis à partir d'un autre contrôleur. Les chemins non optimisés sont utilisés uniquement lorsqu'aucun chemin optimisé n'est disponible.
+. Vérifiez la sortie de la `cat /proc/cmdline` commande pour vous assurer que le paramètre est terminé. Vous pouvez utiliser `multipath -ll` la commande pour vérifier les paramètres de vos LUN ONTAP. Il devrait y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant les priorités les plus élevées sont actifs/optimisés, ce qui signifie qu'ils sont gérés par le contrôleur où se trouve l'agrégat. Les chemins avec les priorités les plus basses sont actifs, mais ne sont pas optimisés car ils sont servis à partir d'un autre contrôleur. Les chemins non optimisés ne sont utilisés que lorsque les chemins optimisés ne sont pas disponibles.
 
 
 .Exemple
@@ -183,7 +183,7 @@ blacklist {
 
 Vous devez toujours vérifier votre `/etc/multipath.conf` fichier pour les paramètres hérités, en particulier dans la section valeurs par défaut, qui peut remplacer les paramètres par défaut.
 
-Le tableau suivant illustre la critique `multipathd` Paramètres des LUN ONTAP et des valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, ils doivent être corrigés par les strophes suivantes dans le `multipath.conf` Fichier qui s'applique spécifiquement aux LUN ONTAP. Si ce n'est pas le cas, les LUN de ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut que si vous en avez connaissance avec NetApp et/ou le fournisseur du système d'exploitation, et ce uniquement lorsque vous en avez pleinement conscience.
+Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faut les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Si ce n'est pas le cas, les LUN de ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
 
 [cols="2*"]
 |===

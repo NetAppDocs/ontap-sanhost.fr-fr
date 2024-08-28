@@ -51,7 +51,7 @@ En raison des incompatibilités avec l'architecture intégrée de gestion des ch
 
 === Configurations non ASA
 
-Pour les configurations non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant les priorités les plus élevées sont actifs/optimisés, ce qui signifie qu'ils sont gérés par le contrôleur où se trouve l'agrégat. Les chemins avec les priorités les plus basses sont actifs, mais ne sont pas optimisés car ils sont servis à partir d'un autre contrôleur. Les chemins non optimisés sont utilisés uniquement lorsqu'aucun chemin optimisé n'est disponible.
+Pour les configurations non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant les priorités les plus élevées sont actifs/optimisés, ce qui signifie qu'ils sont gérés par le contrôleur où se trouve l'agrégat. Les chemins avec les priorités les plus basses sont actifs, mais ne sont pas optimisés car ils sont servis à partir d'un autre contrôleur. Les chemins non optimisés ne sont utilisés que lorsque les chemins optimisés ne sont pas disponibles.
 
 .Exemple
 L'exemple suivant montre la sortie correcte pour une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés :
@@ -122,7 +122,7 @@ Main PID:  3789 (multipathd)
   CGroup:  /control.slice/multipathd.service
             3789  /sbin/multipathd
 ----
-Il n'est pas obligatoire d'ajouter du contenu à `/etc/multipath.conf` fichier, sauf si vous disposez de périphériques que vous ne voulez pas être gérés par multipath ou si vous avez des paramètres existants qui remplacent les paramètres par défaut. Vous pouvez ajouter la syntaxe suivante à la `multipath.conf` fichier pour exclure les périphériques indésirables.
+Il n'est pas nécessaire d'ajouter du contenu au `/etc/multipath.conf` fichier, sauf si vous disposez de périphériques que vous ne souhaitez pas gérer les chemins d'accès multiples ou si vous disposez de paramètres existants qui remplacent les paramètres par défaut. Vous pouvez ajouter la syntaxe suivante au `multipath.conf` fichier pour exclure les périphériques indésirables.
 
 [listing]
 ----

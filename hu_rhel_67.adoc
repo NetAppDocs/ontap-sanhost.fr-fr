@@ -133,7 +133,7 @@ NOTE: N'utilisez pas un nombre excessif de chemins pour une seule LUN. Il ne fau
 
 === Configurations non ASA
 
-Pour les configurations non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant les priorités les plus élevées sont actifs/optimisés, ce qui signifie qu'ils sont gérés par le contrôleur où se trouve l'agrégat. Les chemins avec les priorités les plus basses sont actifs, mais ne sont pas optimisés car ils sont servis à partir d'un autre contrôleur. Les chemins non optimisés sont utilisés uniquement lorsqu'aucun chemin optimisé n'est disponible.
+Pour les configurations non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant les priorités les plus élevées sont actifs/optimisés, ce qui signifie qu'ils sont gérés par le contrôleur où se trouve l'agrégat. Les chemins avec les priorités les plus basses sont actifs, mais ne sont pas optimisés car ils sont servis à partir d'un autre contrôleur. Les chemins non optimisés ne sont utilisés que lorsque les chemins optimisés ne sont pas disponibles.
 
 .Exemple
 L'exemple suivant montre la sortie correcte pour une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés :
@@ -159,20 +159,19 @@ NOTE: N'utilisez pas un nombre excessif de chemins pour une seule LUN. Il ne fau
 
 Le système d'exploitation RHEL 6.7 est compilé pour reconnaître les LUN ONTAP et définir automatiquement tous les paramètres de configuration pour la configuration ASA et non ASA.
 
-Le `multipath.conf` le fichier doit exister pour que le démon multivoie démarre, mais vous pouvez créer un fichier vide à zéro octet en utilisant la commande suivante :
+Le `multipath.conf` fichier doit exister pour que le démon multichemin puisse démarrer. Si ce fichier n'existe pas, vous pouvez créer un fichier vide à zéro octet en utilisant la commande suivante :
 
 `touch /etc/multipath.conf`
 
-La première fois que vous créez ce fichier, vous devrez peut-être activer et démarrer les services multivoies :
+Lors de la première création du `multipath.conf` fichier, vous devrez peut-être activer et démarrer les services multivoies en utilisant les commandes suivantes :
 
 [listing]
 ----
-# systemctl enable multipathd
-# systemctl start multipathd
+# chkconfig multipathd on
+# /etc/init.d/multipathd start
 ----
-* Il n'y a aucune exigence d'ajouter directement quoi que ce soit au `multipath.conf` fichier, sauf si vous disposez de périphériques que vous ne voulez pas être gérés par multipath ou si vous avez des paramètres existants qui remplacent les paramètres par défaut.
-* Pour exclure les périphériques indésirables, ajoutez la syntaxe suivante au `multipath.conf` fichier .
-+
+Il n'est pas nécessaire d'ajouter quelque chose directement au `multipath.conf` fichier, sauf si vous disposez de périphériques que vous ne souhaitez pas gérer le multipathing ou si vous avez des paramètres existants qui remplacent les paramètres par défaut. Pour exclure les périphériques indésirables, ajoutez la syntaxe suivante au `multipath.conf` fichier, en remplaçant <DevId> par la chaîne WWID du périphérique à exclure :
+
 [listing]
 ----
 blacklist {
@@ -182,16 +181,11 @@ blacklist {
         devnode "^cciss.*"
 }
 ----
-+
-Remplacer l' `<DevId>` avec le `WWID` chaîne du périphérique à exclure.
-
-+
 .Exemple
 Dans cet exemple, nous allons déterminer le WWID d'un périphérique et l'ajouter au `multipath.conf` fichier.
 
-+
 .Étapes
-.. Exécutez la commande suivante pour déterminer l'identifiant WWID :
+. Exécutez la commande suivante pour déterminer l'identifiant WWID :
 +
 [listing]
 ----
@@ -201,7 +195,7 @@ Dans cet exemple, nous allons déterminer le WWID d'un périphérique et l'ajout
 +
 `sda` Est le disque SCSI local que nous devons ajouter à la liste noire.
 
-.. Ajoutez le `WWID` à la strophe de liste noire dans `/etc/multipath.conf`:
+. Ajoutez le `WWID` à la strophe de liste noire dans `/etc/multipath.conf`:
 +
 [listing]
 ----
@@ -214,11 +208,9 @@ blacklist {
 ----
 
 
-
-
 Vous devez toujours vérifier votre `/etc/multipath.conf` fichier pour les paramètres hérités, en particulier dans la section valeurs par défaut, qui peut remplacer les paramètres par défaut.
 
-Le tableau suivant illustre la critique `multipathd` Paramètres des LUN ONTAP et des valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il doit être corrigé par des strophes ultérieurs dans le `multipath.conf` Fichier qui s'applique spécifiquement aux LUN ONTAP. Si ce n'est pas le cas, les LUN de ONTAP risquent de ne pas fonctionner comme prévu. Ces valeurs par défaut doivent être remplacées uniquement en consultation avec NetApp et/ou un fournisseur de système d'exploitation, et uniquement lorsque l'impact est pleinement compris.
+Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faudra les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Si ce n'est pas le cas, les LUN de ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
 
 [cols="2*"]
 |===

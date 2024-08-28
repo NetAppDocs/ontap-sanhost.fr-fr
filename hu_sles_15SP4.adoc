@@ -120,7 +120,7 @@ NOTE: N'utilisez pas un nombre excessif de chemins pour une seule LUN. Il ne fau
 
 === Configurations non ASA
 
-Pour les configurations non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant les priorités les plus élevées sont actifs/optimisés, ce qui signifie qu'ils sont gérés par le contrôleur où se trouve l'agrégat. Les chemins avec les priorités les plus basses sont actifs, mais ne sont pas optimisés car ils sont servis à partir d'un autre contrôleur. Les chemins non optimisés sont utilisés uniquement lorsqu'aucun chemin optimisé n'est disponible.
+Pour les configurations non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant les priorités les plus élevées sont actifs/optimisés, ce qui signifie qu'ils sont gérés par le contrôleur où se trouve l'agrégat. Les chemins avec les priorités les plus basses sont actifs, mais ne sont pas optimisés car ils sont servis à partir d'un autre contrôleur. Les chemins non optimisés ne sont utilisés que lorsque les chemins optimisés ne sont pas disponibles.
 
 .Exemple
 L'exemple suivant montre la sortie correcte pour une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés :
@@ -151,7 +151,7 @@ Le `multipath.conf` le fichier doit exister pour que le démon multivoie démarr
 
 Lors de la première création de ce fichier, vous devrez peut-être activer et démarrer les services multipathing.
 
-Il n'y a aucune exigence d'ajouter directement quoi que ce soit au `multipath.conf` fichier, sauf si vous disposez de périphériques que vous ne voulez pas être gérés par multipath ou si vous avez des paramètres existants qui remplacent les paramètres par défaut.
+Il n'est pas nécessaire d'ajouter quoi que ce soit directement au `multipath.conf` fichier, sauf si vous disposez de périphériques que vous ne souhaitez pas gérer le multipathing ou si vous avez des paramètres existants qui remplacent les paramètres par défaut.
 
 Vous pouvez ajouter la syntaxe suivante à la `multipath.conf` fichier pour exclure les périphériques indésirables.
 
@@ -182,7 +182,7 @@ devnode "^cciss.*"
 
 Vous devez toujours vérifier votre `/etc/multipath.conf` fichier pour les paramètres hérités, en particulier dans la section valeurs par défaut, qui peut remplacer les paramètres par défaut.
 
-Le tableau ci-dessous présente les paramètres multipathd stratégiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il doit être corrigé par des strophes ultérieurs dans `multipath.conf` Qui s'appliquent spécifiquement aux LUN ONTAP. Si ce n'est pas le cas, les LUN de ONTAP risquent de ne pas fonctionner comme prévu. Ces valeurs par défaut ne doivent être remplacées qu'en consultation avec les fournisseurs de NetApp et/ou du système d'exploitation, et uniquement lorsque l'impact est totalement compris.
+Le tableau ci-dessous présente les paramètres multipathd stratégiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faudra les corriger par les strophes ultérieures dans `multipath.conf` lesquelles s'appliquent spécifiquement aux LUN ONTAP. Si ce n'est pas le cas, les LUN de ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
 
 [cols="2"]
 |===

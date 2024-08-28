@@ -263,18 +263,18 @@ QLE2742 FW:v9.08.02 DVR:v10.02.00.106-k
 
 === Activer les E/S de 1 Mo (en option)
 
-ONTAP signale une taille DE transfert MAX Data de 8 DANS les données Identify Controller, ce qui signifie que la taille maximale des demandes d'E/S peut atteindre 1 Mo. Toutefois, pour émettre des demandes d'E/S d'une taille de 1 Mo pour un hôte Broadcom NVMe/FC, vous devez augmenter le `lpfc` valeur du `lpfc_sg_seg_cnt` à 256 à partir de la valeur par défaut de 64.
+ONTAP signale une taille de transfert MAX Data (MDT) de 8 dans les données Identify Controller. La taille maximale des demandes d'E/S peut donc atteindre 1 Mo. Pour émettre des demandes d'E/S d'une taille de 1 Mo pour un hôte Broadcom NVMe/FC, vous devez augmenter la `lpfc` valeur du `lpfc_sg_seg_cnt` paramètre à 256 par rapport à la valeur par défaut 64.
 
 .Étapes
-. Réglez le `lpfc_sg_seg_cnt` paramètre à 256.
+. Réglez le `lpfc_sg_seg_cnt` paramètre sur 256 :
 +
 [listing]
 ----
 # cat /etc/modprobe.d/lpfc.conf
 options lpfc lpfc_sg_seg_cnt=256
 ----
-. Exécutez un `dracut -f` et redémarrez l'hôte.
-. Vérifiez-le `lpfc_sg_seg_cnt` est 256.
+. Lancer une `dracut -f` commande et redémarrer l'hôte :
+. Vérifiez que `lpfc_sg_seg_cnt` est 256 :
 +
 [listing]
 ----
