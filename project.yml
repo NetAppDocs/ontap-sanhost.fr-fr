@@ -20,7 +20,9 @@ sidebar:
     - title: Utilitaires d'hôte AIX
       entries:
       - title: Notes de mise à jour
-        url: "/hu_aix_61_rn.html"
+        url: "/hu_aix_rn.html"
+      - title: Installez AIX HU 7.0
+        url: "/hu-aix-70.html"
       - title: Installez AIX HU 6.1
         url: "/hu_aix_61.html"
       - title: Exemple de référence de commande
