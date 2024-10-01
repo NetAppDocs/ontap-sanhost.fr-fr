@@ -169,7 +169,7 @@ blacklist {
 }
 ----
 .Exemple
-Dans cet exemple, nous allons déterminer le WWID d'un périphérique et l'ajouter au `multipath.conf` fichier.
+L'exemple suivant détermine le WWID d'un périphérique et l'ajoute au `multipath.conf` fichier.
 
 .Étapes
 . Exécutez la commande suivante pour déterminer l'identifiant WWID :
@@ -197,7 +197,7 @@ blacklist {
 
 Vous devez toujours vérifier votre `/etc/multipath.conf` fichier pour les paramètres hérités, en particulier dans la section valeurs par défaut, qui peut remplacer les paramètres par défaut.
 
-Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faudra les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Si ce n'est pas le cas, les LUN de ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
+Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faut les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Sans cette correction, les LUN ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
 
 [cols="2*"]
 |===
@@ -288,25 +288,25 @@ Vous pouvez également utiliser les paramètres recommandés pour configurer la 
 
 La version RHEL 8.0 avec ONTAP présente les problèmes connus suivants :
 
-[cols="4*"]
+[cols="3*"]
 |===
-| ID de bug NetApp | Titre | Description | ID Bugzilla 
+| ID de bug NetApp | Titre | Description 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1238719["1238719"^] | Perturbation du noyau sur RHEL8 avec QLogic QLE2672 16 Go FC pendant les opérations de basculement du stockage | Une interruption du noyau peut se produire lors des opérations de basculement du stockage sur un noyau Red Hat Enterprise Linux (RHEL) 8 avec un adaptateur de bus hôte QLE2672 QLogic. L'interruption du noyau entraîne le redémarrage du système d'exploitation. Le redémarrage entraîne une interruption de l'application et génère le fichier vmcore sous /var/crash/Directory si kdump est configuré. Utilisez le fichier vmcore pour identifier la cause de l'échec. Dans ce cas, l’interruption se situe dans le module “kmem_cache_alloc+160”. Il est connecté dans le fichier vmcore avec la chaîne suivante : « [exception RIP: Kmem_cache_alloc+160] ». Redémarrez le système d'exploitation hôte pour restaurer le système d'exploitation, puis redémarrez l'application. | link:https://bugzilla.redhat.com/show_bug.cgi?id=1710009["1710009"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1238719["1238719"^] | Perturbation du noyau sur RHEL8 avec QLogic QLE2672 16 Go FC pendant les opérations de basculement du stockage | Une interruption du noyau peut se produire lors des opérations de basculement du stockage sur un noyau Red Hat Enterprise Linux (RHEL) 8 avec un adaptateur de bus hôte QLE2672 QLogic. L'interruption du noyau entraîne le redémarrage du système d'exploitation. Le redémarrage entraîne une interruption de l'application et génère le fichier vmcore sous /var/crash/Directory si kdump est configuré. Utilisez le fichier vmcore pour identifier la cause de l'échec. Dans ce cas, l’interruption se situe dans le module “kmem_cache_alloc+160”. Il est connecté dans le fichier vmcore avec la chaîne suivante : « [exception RIP: Kmem_cache_alloc+160] ». Redémarrez le système d'exploitation hôte pour restaurer le système d'exploitation, puis redémarrez l'application. 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1226783["1226783"^] | RHEL8 OS démarre jusqu'au « mode d'urgence » lorsque plus de 204 périphériques SCSI sont mappés sur tous les adaptateurs de bus hôte (HBA) Fibre Channel (FC) | Si un hôte est mappé avec plus de 204 périphériques SCSI lors d'un processus de redémarrage du système d'exploitation, le système d'exploitation RHEL8 ne parvient pas à démarrer jusqu'au « mode normal » et passe en « mode d'urgence ». La plupart des services hôtes deviennent alors indisponibles. | link:https://bugzilla.redhat.com/show_bug.cgi?id=1690356["1690356"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1226783["1226783"^] | RHEL8 OS démarre jusqu'au « mode d'urgence » lorsque plus de 204 périphériques SCSI sont mappés sur tous les adaptateurs de bus hôte (HBA) Fibre Channel (FC) | Si un hôte est mappé avec plus de 204 périphériques SCSI lors d'un processus de redémarrage du système d'exploitation, le système d'exploitation RHEL8 ne parvient pas à démarrer jusqu'au « mode normal » et passe en « mode d'urgence ». La plupart des services hôtes deviennent alors indisponibles. 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1230882["1230882"^] | Il est impossible de créer une partition sur un périphérique iSCSI à chemins d'accès multiples lors de l'installation de RHEL8. | Les périphériques iSCSI SAN LUN multichemin ne sont pas répertoriés dans la sélection de disque lors de l'installation de RHEL 8. Par conséquent, le service multichemin n'est pas activé sur le périphérique de démarrage SAN. | link:https://bugzilla.redhat.com/show_bug.cgi?id=1709995["1709995"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1230882["1230882"^] | Il est impossible de créer une partition sur un périphérique iSCSI à chemins d'accès multiples lors de l'installation de RHEL8. | Les périphériques iSCSI SAN LUN multichemin ne sont pas répertoriés dans la sélection de disque lors de l'installation de RHEL 8. Par conséquent, le service multichemin n'est pas activé sur le périphérique de démarrage SAN. 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1235998["1235998"^] | La commande « rescan-scsi-bus.sh -a » ne numérise pas plus de 328 périphériques | Si un hôte Red Hat Enterprise Linux 8 est mappé avec plus de 328 périphériques SCSI, la commande rescan-scsi-bus.sh -a du système d'exploitation hôte ne recherche que 328 périphériques. L'hôte ne détecte aucun périphérique mappé restant. | link:https://bugzilla.redhat.com/show_bug.cgi?id=1709995["1709995"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1235998["1235998"^] | La commande « rescan-scsi-bus.sh -a » ne numérise pas plus de 328 périphériques | Si un hôte Red Hat Enterprise Linux 8 est mappé avec plus de 328 périphériques SCSI, la commande rescan-scsi-bus.sh -a du système d'exploitation hôte ne recherche que 328 périphériques. L'hôte ne détecte aucun périphérique mappé restant. 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1231087["1231087"^] | Les ports distants sont en transit vers un état bloqué sur RHEL8 avec Emulex LPe16002 16 Go FC pendant les opérations de basculement du stockage | Les ports distants sont en transit vers un état bloqué sur RHEL8 avec Emulex LPe16002 16 Go Fibre Channel (FC) pendant les opérations de basculement du stockage. Lorsque le nœud de stockage revient à un état optimal, les LIF sont également active et l'état du port distant doit lire « en ligne ». Il arrive que l'état du port distant continue à être « bloqué » ou « absent ». Cet état peut entraîner un chemin « défectueux » vers les LUN au niveau de la couche multivoie | link:https://bugzilla.redhat.com/show_bug.cgi?id=1702005["1702005"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1231087["1231087"^] | Les ports distants sont en transit vers un état bloqué sur RHEL8 avec Emulex LPe16002 16 Go FC pendant les opérations de basculement du stockage | Les ports distants sont en transit vers un état bloqué sur RHEL8 avec Emulex LPe16002 16 Go Fibre Channel (FC) pendant les opérations de basculement du stockage. Lorsque le nœud de stockage revient à un état optimal, les LIF sont également active et l'état du port distant doit lire « en ligne ». Il arrive que l'état du port distant continue à être « bloqué » ou « absent ». Cet état peut entraîner un chemin « défectueux » vers les LUN au niveau de la couche multivoie 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1231098["1231098"^] | Les ports distants sont en transit vers l'état bloqué sur RHEL8 avec Emulex LPe32002 32 Go FC pendant les opérations de basculement du stockage | Les ports distants sont en transit vers un état bloqué sur RHEL8 avec Emulex LPe32002 32GBFibre Channel (FC) pendant les opérations de basculement de stockage. Lorsque le nœud de stockage revient à un état optimal, les LIF sont également active et l'état du port distant doit lire « en ligne ». Il arrive que l'état du port distant continue à être « bloqué » ou « absent ». Cet état peut entraîner un chemin « défectueux » vers les LUN au niveau de la couche multivoie. | link:https://bugzilla.redhat.com/show_bug.cgi?id=1705573["1705573"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1231098["1231098"^] | Les ports distants sont en transit vers l'état bloqué sur RHEL8 avec Emulex LPe32002 32 Go FC pendant les opérations de basculement du stockage | Les ports distants sont en transit vers un état bloqué sur RHEL8 avec Emulex LPe32002 32GBFibre Channel (FC) pendant les opérations de basculement de stockage. Lorsque le nœud de stockage revient à un état optimal, les LIF sont également active et l'état du port distant doit lire « en ligne ». Il arrive que l'état du port distant continue à être « bloqué » ou « absent ». Cet état peut entraîner un chemin « défectueux » vers les LUN au niveau de la couche multivoie. 
 |===

@@ -152,7 +152,7 @@ blacklist {
 }
 ----
 .Exemple
-Dans cet exemple, nous allons déterminer le WWID d'un périphérique et l'ajouter au `multipath.conf` fichier.
+L'exemple suivant détermine le WWID d'un périphérique et l'ajoute au `multipath.conf` fichier.
 
 .Étapes
 . Exécutez la commande suivante pour déterminer l'identifiant WWID :
@@ -180,7 +180,7 @@ blacklist {
 
 Vous devez toujours vérifier votre `/etc/multipath.conf` fichier pour les paramètres hérités, en particulier dans la section valeurs par défaut, qui peut remplacer les paramètres par défaut.
 
-Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faudra les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Si ce n'est pas le cas, les LUN de ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
+Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faut les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Sans cette correction, les LUN ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
 
 [cols="2*"]
 |===
@@ -264,25 +264,25 @@ NOTE: Pour configurer Oracle Linux 7.0 Red Hat Enterprise Kernel (RHCK), utilise
 
 La version Oracle Linux 7.0 avec ONTAP présente les problèmes connus suivants :
 
-[cols="4*"]
+[cols="3*"]
 |===
-| ID de bug NetApp | Titre | Description | ID Bugzilla 
+| ID de bug NetApp | Titre | Description 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=901558["901558"^] | OL7.0 : l'hôte perd tous les chemins vers la lun et bloque en raison de l'erreur "RSCN timeout" sur OL 7.0 UEK r3U5 Beta sur l'hôte Emulex 8G(LPe12002) | Il est possible que l'hôte Emulex 8G (LPe12002) soit suspendu et que les E/S soient très élevées lors des opérations de basculement de stockage avec des E/S. Il est possible que vous obseriez des chemins qui ne sont pas rétablis, ce qui est le résultat du délai d'attente RSCN, dû à la perte de tous les chemins et blocages par l'hôte. La probabilité de toucher ce problème est élevée. | link:https://bugzilla.redhat.com/show_bug.cgi?id=14898["14898"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=901558["901558"^] | OL7.0 : l'hôte perd tous les chemins vers la lun et bloque en raison de l'erreur "RSCN timeout" sur OL 7.0 UEK r3U5 Beta sur l'hôte Emulex 8G(LPe12002) | Il est possible que l'hôte Emulex 8G (LPe12002) soit suspendu et que les E/S soient très élevées lors des opérations de basculement de stockage avec des E/S. Il est possible que vous obseriez des chemins qui ne sont pas rétablis, ce qui est le résultat du délai d'attente RSCN, dû à la perte de tous les chemins et blocages par l'hôte. La probabilité de toucher ce problème est élevée. 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=901557["901557"^] | OL 7.0 : panne élevée au niveau des E/S observée sur l'hôte SAN QLogic FC 8 Gbit/s (QLE2562) lors des opérations de basculement du stockage avec E/S | On peut observer une forte panne d'E/S sur l'hôte QLogic 8GB FC (QLE2562) pendant les opérations de basculement de stockage avec des E/S. L'abandon et la réinitialisation du périphérique se traduisent en tant qu'interruption d'E/S sur l'hôte. La probabilité de toucher cette panne d'E/S est élevée. | link:https://bugzilla.redhat.com/show_bug.cgi?id=14894["14894"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=901557["901557"^] | OL 7.0 : panne élevée au niveau des E/S observée sur l'hôte SAN QLogic FC 8 Gbit/s (QLE2562) lors des opérations de basculement du stockage avec E/S | On peut observer une forte panne d'E/S sur l'hôte QLogic 8GB FC (QLE2562) pendant les opérations de basculement de stockage avec des E/S. L'abandon et la réinitialisation du périphérique se traduisent en tant qu'interruption d'E/S sur l'hôte. La probabilité de toucher cette panne d'E/S est élevée. 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=894766["894766"^] | OL7.0: Dracut ne parvient pas à inclure le module scsi_dh_alua.ko dans initramfs sur UEKR3U5 alpha | Il se peut que le module scsi_dh_alua ne se charge pas même après avoir ajouté le paramètre « rdloaddriver=scsi_dh_alua » dans la ligne de commande du noyau et créé Dracut. Par conséquent, le protocole ALUA n'est pas activé pour les LUN NetApp comme recommandé. | link:https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=14860["14860"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=894766["894766"^] | OL7.0: Dracut ne parvient pas à inclure le module scsi_dh_alua.ko dans initramfs sur UEKR3U5 alpha | Il se peut que le module scsi_dh_alua ne se charge pas même après avoir ajouté le paramètre « rdloaddriver=scsi_dh_alua » dans la ligne de commande du noyau et créé Dracut. Par conséquent, le protocole ALUA n'est pas activé pour les LUN NetApp comme recommandé. 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=894796["894796"^] | Anaconda affiche un message d'échec de connexion iSCSI bien que les connexions aient réussi lors de l'installation du système d'exploitation OL 7.0 | Lorsque vous installez OL 7.0, l'écran d'installation d'anaconda affiche que la connexion iSCSI à plusieurs adresses IP cibles a échoué bien que les connexions iSCSI aient réussi. Anaconda affiche le message d'erreur suivant: "Echec de la connexion au nœud" vous remarquerez cette erreur uniquement lorsque vous sélectionnez plusieurs adresses IP cibles pour la connexion iSCSI. Vous pouvez poursuivre l'installation du système d'exploitation en cliquant sur le bouton « ok ». Ce bug n'entrave pas l'installation de l'iSCSI ou de l'OS OL 7.0. | link:https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=14870["14870"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=894796["894796"^] | Anaconda affiche un message d'échec de connexion iSCSI bien que les connexions aient réussi lors de l'installation du système d'exploitation OL 7.0 | Lorsque vous installez OL 7.0, l'écran d'installation d'anaconda affiche que la connexion iSCSI à plusieurs adresses IP cibles a échoué bien que les connexions iSCSI aient réussi. Anaconda affiche le message d'erreur suivant: "Echec de la connexion au nœud" vous remarquerez cette erreur uniquement lorsque vous sélectionnez plusieurs adresses IP cibles pour la connexion iSCSI. Vous pouvez poursuivre l'installation du système d'exploitation en cliquant sur le bouton « ok ». Ce bug n'entrave pas l'installation de l'iSCSI ou de l'OS OL 7.0. 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=894771["894771"^] | OL7.0 : Anaconda n'ajoute pas d'argument bootdev dans la ligne cmd du noyau pour définir l'adresse IP de l'installation iSCSI SANboot OS | Anaconda n'ajoute pas d'argument bootdev dans la ligne de commande du noyau où vous définissez l'adresse IPv4 pendant l'installation du système d'exploitation OL 7.0 sur une LUN iSCSI multipath. Par conséquent, vous ne pouvez pas attribuer d'adresses IP à l'une des interfaces Ethernet configurées pour établir des sessions iSCSI avec le sous-système de stockage au cours du démarrage OL 7.0. Les sessions iSCSI ne étant pas établies, la LUN racine n'est pas détectée au démarrage du système d'exploitation, ce qui provoque l'échec du démarrage du système d'exploitation. | link:https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=14871["14871"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=894771["894771"^] | OL7.0 : Anaconda n'ajoute pas d'argument bootdev dans la ligne cmd du noyau pour définir l'adresse IP de l'installation iSCSI SANboot OS | Anaconda n'ajoute pas d'argument bootdev dans la ligne de commande du noyau où vous définissez l'adresse IPv4 pendant l'installation du système d'exploitation OL 7.0 sur une LUN iSCSI multipath. Par conséquent, vous ne pouvez pas attribuer d'adresses IP à l'une des interfaces Ethernet configurées pour établir des sessions iSCSI avec le sous-système de stockage au cours du démarrage OL 7.0. Les sessions iSCSI ne étant pas établies, la LUN racine n'est pas détectée au démarrage du système d'exploitation, ce qui provoque l'échec du démarrage du système d'exploitation. 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=916501["916501"^] | Défaillance du noyau hôte QLogic 10G FCoE (QLE8152) observée lors des opérations de basculement du stockage avec des E/S | Vous pouvez observer une panne du noyau dans le module du pilote Qlogic sur l'hôte 10G FCoE Qlogic (QLE8152). La panne se produit pendant les opérations de basculement du stockage avec des E/S. La probabilité de frapper ce type de panne est élevée, ce qui entraîne une panne d'E/S plus longue sur l'hôte. | link:https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=15019["15019"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=916501["916501"^] | Défaillance du noyau hôte QLogic 10G FCoE (QLE8152) observée lors des opérations de basculement du stockage avec des E/S | Vous pouvez observer une panne du noyau dans le module du pilote Qlogic sur l'hôte 10G FCoE Qlogic (QLE8152). La panne se produit pendant les opérations de basculement du stockage avec des E/S. La probabilité de frapper ce type de panne est élevée, ce qui entraîne une panne d'E/S plus longue sur l'hôte. 
 |===

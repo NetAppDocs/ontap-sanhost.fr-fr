@@ -168,7 +168,7 @@ blacklist {
 }
 ----
 .Exemple
-Dans cet exemple, nous allons déterminer le WWID d'un périphérique et l'ajouter au `multipath.conf` fichier.
+L'exemple suivant détermine le WWID d'un périphérique et l'ajoute au `multipath.conf` fichier.
 
 .Étapes
 . Exécutez la commande suivante pour déterminer l'identifiant WWID :
@@ -196,7 +196,7 @@ blacklist {
 
 Vous devez toujours vérifier votre `/etc/multipath.conf` fichier pour les paramètres hérités, en particulier dans la section valeurs par défaut, qui peut remplacer les paramètres par défaut.
 
-Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faudra les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Si ce n'est pas le cas, les LUN de ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
+Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faut les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Sans cette correction, les LUN ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
 
 [cols="2*"]
 |===
@@ -280,10 +280,10 @@ devices {
 
 La version SLES 12 SP5 avec ONTAP présente les problèmes connus suivants :
 
-[cols="4*"]
+[cols="3*"]
 |===
-| ID de bug NetApp | Titre | Description | ID Bugzilla 
+| ID de bug NetApp | Titre | Description 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1284293["1284293"^] | L'interruption du noyau a lieu sur SLES12 SP5 avec l'adaptateur HBA FC 8 Go QLogic QLE2562 lors des opérations de basculement du stockage | Une perturbation du noyau se produit pendant les opérations de basculement du stockage sur le noyau SLES12 SP5 avec un adaptateur de bus hôte (HBA) Fibre Channel QLE2562 QLogic. La perturbation du noyau entraîne le redémarrage de SLES12 SP5, entraînant une interruption des applications. Si le mécanisme kdump est activé, l'interruption du noyau génère un fichier vmcore situé dans le répertoire /var/crash/. Vérifiez le fichier vmcore pour déterminer la cause de l'interruption. Un basculement de stockage avec un événement HBA QLE2562 de QLogic affecte le module « THREAD_INFO: Ffff8aedf723c2c0 ». Recherchez cet événement dans le fichier vmcore en recherchant la chaîne suivante : « [THREAD_INFO: Ffff8aedf723c2c0] ». Après une interruption du noyau, redémarrez l'OS hôte afin qu'il puisse restaurer. Redémarrez ensuite les applications. | link:http://bugzilla.suse.com/show_bug.cgi?id=1157966["1157966"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1284293["1284293"^] | L'interruption du noyau a lieu sur SLES12 SP5 avec l'adaptateur HBA FC 8 Go QLogic QLE2562 lors des opérations de basculement du stockage | Une perturbation du noyau se produit pendant les opérations de basculement du stockage sur le noyau SLES12 SP5 avec un adaptateur de bus hôte (HBA) Fibre Channel QLE2562 QLogic. La perturbation du noyau entraîne le redémarrage de SLES12 SP5, entraînant une interruption des applications. Si le mécanisme kdump est activé, l'interruption du noyau génère un fichier vmcore situé dans le répertoire /var/crash/. Vérifiez le fichier vmcore pour déterminer la cause de l'interruption. Un basculement de stockage avec un événement HBA QLE2562 de QLogic affecte le module « THREAD_INFO: Ffff8aedf723c2c0 ». Recherchez cet événement dans le fichier vmcore en recherchant la chaîne suivante : « [THREAD_INFO: Ffff8aedf723c2c0] ». Après une interruption du noyau, redémarrez l'OS hôte afin qu'il puisse restaurer. Redémarrez ensuite les applications. 
 |===

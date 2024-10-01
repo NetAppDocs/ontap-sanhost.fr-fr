@@ -183,7 +183,7 @@ blacklist {
 
 Vous devez toujours vérifier votre `/etc/multipath.conf` fichier pour les paramètres hérités, en particulier dans la section valeurs par défaut, qui peut remplacer les paramètres par défaut.
 
-Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faut les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Si ce n'est pas le cas, les LUN de ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
+Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faut les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Sans cette correction, les LUN ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
 
 [cols="2*"]
 |===
@@ -270,12 +270,12 @@ NOTE: Pour configurer Oracle Linux 6.9 Red Hat Enterprise Kernel (RHCK), utilise
 
 La version Oracle Linux 6.9 avec ONTAP présente les problèmes connus suivants :
 
-[cols="4*"]
+[cols="3*"]
 |===
-| ID de bug NetApp | Titre | Description | ID Bugzilla 
+| ID de bug NetApp | Titre | Description 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1082780["1082780"^] | Les vidages du micrologiciel sont observés occasionnellement sur l'hyperviseur OL6.9 avec la carte QLE8362 | Lors des opérations de basculement de stockage sur l'hyperviseur OL6.9 avec la carte QLE8362, les vidages de micrologiciel sont occasionnellement observés. Le vidage du firmware peut entraîner une panne d'E/S sur l'hôte, ce qui peut atteindre mille secondes. Une fois que l'adaptateur a terminé le vidage du firmware, le fonctionnement des E/S reprend normalement. Aucune autre procédure de récupération n'est requise sur l'hôte. Pour indiquer le vidage du micrologiciel, le message suivant s'affiche dans le fichier /var/log/message : qla2xxx [0000:0C:00.3]-d001:3 : vidage du micrologiciel enregistré dans le tampon temporaire (3/ffffc90008901000), indicateurs d'état de vidage (0x3f). | link:https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=16039["16039"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1082780["1082780"^] | Les vidages du micrologiciel sont observés occasionnellement sur l'hyperviseur OL6.9 avec la carte QLE8362 | Lors des opérations de basculement de stockage sur l'hyperviseur OL6.9 avec la carte QLE8362, les vidages de micrologiciel sont occasionnellement observés. Le vidage du firmware peut entraîner une panne d'E/S sur l'hôte, ce qui peut atteindre mille secondes. Une fois que l'adaptateur a terminé le vidage du firmware, le fonctionnement des E/S reprend normalement. Aucune autre procédure de récupération n'est requise sur l'hôte. Pour indiquer le vidage du micrologiciel, le message suivant s'affiche dans le fichier /var/log/message : qla2xxx [0000:0C:00.3]-d001:3 : vidage du micrologiciel enregistré dans le tampon temporaire (3/ffffc90008901000), indicateurs d'état de vidage (0x3f). 
 |===
 
 NOTE: Pour les problèmes connus liés à Oracle Linux (noyau compatible Red Hat), consultez le link:hu_rhel_69.html#known-problems-and-limitations["problèmes connus"] Pour Red Hat Enterprise Linux (RHEL) 6.9.

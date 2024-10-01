@@ -169,7 +169,7 @@ blacklist {
 }
 ----
 .Exemple
-Dans cet exemple, nous allons déterminer le WWID d'un périphérique et l'ajouter au `multipath.conf` fichier.
+L'exemple suivant détermine le WWID d'un périphérique et l'ajoute au `multipath.conf` fichier.
 
 .Étapes
 . Exécutez la commande suivante pour déterminer l'identifiant WWID :
@@ -197,7 +197,7 @@ blacklist {
 
 Vous devez toujours vérifier votre `/etc/multipath.conf` fichier pour les paramètres hérités, en particulier dans la section valeurs par défaut, qui peut remplacer les paramètres par défaut.
 
-Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faudra les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Si ce n'est pas le cas, les LUN de ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
+Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faut les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Sans cette correction, les LUN ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
 
 [cols="2*"]
 |===

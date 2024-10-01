@@ -168,7 +168,7 @@ blacklist {
 }
 ----
 .Exemple
-Dans cet exemple, nous allons déterminer le WWID d'un périphérique et l'ajouter au `multipath.conf` fichier.
+L'exemple suivant détermine le WWID d'un périphérique et l'ajoute au `multipath.conf` fichier.
 
 .Étapes
 . Exécutez la commande suivante pour déterminer l'identifiant WWID :
@@ -196,7 +196,7 @@ blacklist {
 
 Vous devez toujours vérifier votre `/etc/multipath.conf` fichier pour les paramètres hérités, en particulier dans la section valeurs par défaut, qui peut remplacer les paramètres par défaut.
 
-Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faudra les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Si ce n'est pas le cas, les LUN de ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
+Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faut les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Sans cette correction, les LUN ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
 
 [cols="2*"]
 |===
@@ -277,16 +277,16 @@ devices {
 
 La version SLES 12 avec ONTAP présente les problèmes connus suivants :
 
-[cols="4*"]
+[cols="3*"]
 |===
-| ID de bug NetApp | Titre | Description | ID Bugzilla 
+| ID de bug NetApp | Titre | Description 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=873555["873555"^] | le module scsi_dh_alua n'est pas chargé au démarrage multipathd au démarrage local | scsi_dh_alua est un module de gestionnaire de périphériques ALUA Linux. Ce n'est pas chargé pendant le démarrage multipathd au démarrage local. En raison de ce gestionnaire de périphériques, le système ne sera pas chargé si le protocole ALUA est activé du côté cible. | link:https://bugzilla.suse.com/show_bug.cgi?id=908529["908529"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=873555["873555"^] | le module scsi_dh_alua n'est pas chargé au démarrage multipathd au démarrage local | scsi_dh_alua est un module de gestionnaire de périphériques ALUA Linux. Ce n'est pas chargé pendant le démarrage multipathd au démarrage local. En raison de ce gestionnaire de périphériques, le système ne sera pas chargé si le protocole ALUA est activé du côté cible. 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=863584["863584"^] | Le message « conflit de nœud de périphérique »/dev/mapper/360xx trouvé » s'affiche à l'écran lorsque vous créez un périphérique DM sur SLES12 | Vous pouvez observer un échec lors de la création d'un lien vers des périphériques DM sous /dev/mapper dir dans SLES 12 et voir les messages "nœud périphérique en conflit '/dev/mapper/360xx' trouvé". | link:https://bugzilla.suse.com/show_bug.cgi?id=903001["903001"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=863584["863584"^] | Le message « conflit de nœud de périphérique »/dev/mapper/360xx trouvé » s'affiche à l'écran lorsque vous créez un périphérique DM sur SLES12 | Vous pouvez observer un échec lors de la création d'un lien vers des périphériques DM sous /dev/mapper dir dans SLES 12 et voir les messages "nœud périphérique en conflit '/dev/mapper/360xx' trouvé". 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=847490["847490"^] | Le démon multipathing affiche les défaillances de chemin sur SLES 12 | Il est possible que vous observez les défaillances sur les chemins d'accès multiples au démon SLES12 Multipath lors des E/S avec les défaillances du stockage ou de la structure. | link:https://bugzilla.novell.com/show_bug.cgi?id=890854["890854"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=847490["847490"^] | Le démon multipathing affiche les défaillances de chemin sur SLES 12 | Il est possible que vous observez les défaillances sur les chemins d'accès multiples au démon SLES12 Multipath lors des E/S avec les défaillances du stockage ou de la structure. 
 |===

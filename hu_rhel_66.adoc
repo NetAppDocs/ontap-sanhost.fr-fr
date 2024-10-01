@@ -182,7 +182,7 @@ blacklist {
 }
 ----
 .Exemple
-Dans cet exemple, nous allons déterminer le WWID d'un périphérique et l'ajouter au `multipath.conf` fichier.
+L'exemple suivant détermine le WWID d'un périphérique et l'ajoute au `multipath.conf` fichier.
 
 .Étapes
 . Exécutez la commande suivante pour déterminer l'identifiant WWID :
@@ -210,7 +210,7 @@ blacklist {
 
 Vous devez toujours vérifier votre `/etc/multipath.conf` fichier pour les paramètres hérités, en particulier dans la section valeurs par défaut, qui peut remplacer les paramètres par défaut.
 
-Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faudra les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Si ce n'est pas le cas, les LUN de ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
+Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faut les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Sans cette correction, les LUN ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
 
 [cols="2*"]
 |===
@@ -301,16 +301,16 @@ Vous pouvez également utiliser les paramètres recommandés pour configurer la 
 
 La version RHEL 6.6 avec ONTAP présente les problèmes connus suivants :
 
-[cols="4*"]
+[cols="3*"]
 |===
-| ID de bug NetApp | Titre | Description | ID Bugzilla 
+| ID de bug NetApp | Titre | Description 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=863878["863878"^] | Le blocage du noyau se produit avec l'hôte RHEL 6U6 pendant les pannes de stockage | Il est possible que le noyau soit en panne sur l'hôte RHEL 6U6 pendant le stockage/la structure. | link:https://bugzilla.redhat.com/show_bug.cgi?id=1158363["1158363"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=863878["863878"^] | Le blocage du noyau se produit avec l'hôte RHEL 6U6 pendant les pannes de stockage | Il est possible que le noyau soit en panne sur l'hôte RHEL 6U6 pendant le stockage/la structure. 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=852674["1076584"^] | Les E/S restent bloquées jusqu'à 300 secondes avec l'hôte QLogic Fibre Channel 16 Gbit/s (QLE2672) pendant les défaillances du stockage dans RHEL 6U4 | On peut observer une perte d'E/S allant jusqu'à 300 secondes sur l'hôte QLogic 16GB FC (QLE2672) en cas de défaillances du stockage/de la structure. | link:https://bugzilla.redhat.com/show_bug.cgi?id=1135962["1135962"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=852674["1076584"^] | Les E/S restent bloquées jusqu'à 300 secondes avec l'hôte QLogic Fibre Channel 16 Gbit/s (QLE2672) pendant les défaillances du stockage dans RHEL 6U4 | On peut observer une perte d'E/S allant jusqu'à 300 secondes sur l'hôte QLogic 16GB FC (QLE2672) en cas de défaillances du stockage/de la structure. 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=795684["795684"^] | RHEL6 U5 multi-pathd regroupe de manière incorrecte des cartes multipaths pendant les opérations de reprise sur incident MOD et de stockage | Vous pouvez observer un groupe de chemins incorrect sur les LUN lors de l'opération déplacement à la demande de la LUN et des défaillances de stockage. Lors de cette opération, les priorités des chemins d'accès multiples sont modifiées et le chemin d'accès multiples ne peut pas charger à nouveau la table des périphériques en raison d'une défaillance du périphérique provoquée par une défaillance du stockage. Ceci entraîne un regroupement de chemins incorrect. | link:https://bugzilla.redhat.com/show_bug.cgi?id=1151020["1151020"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=795684["795684"^] | RHEL6 U5 multi-pathd regroupe de manière incorrecte des cartes multipaths pendant les opérations de reprise sur incident MOD et de stockage | Vous pouvez observer un groupe de chemins incorrect sur les LUN lors de l'opération déplacement à la demande de la LUN et des défaillances de stockage. Lors de cette opération, les priorités des chemins d'accès multiples sont modifiées et le chemin d'accès multiples ne peut pas charger à nouveau la table des périphériques en raison d'une défaillance du périphérique provoquée par une défaillance du stockage. Ceci entraîne un regroupement de chemins incorrect. 
 |===

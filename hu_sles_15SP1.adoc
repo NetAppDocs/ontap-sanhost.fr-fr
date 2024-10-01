@@ -168,7 +168,7 @@ blacklist {
 }
 ----
 .Exemple
-Dans cet exemple, nous allons déterminer le WWID d'un périphérique et l'ajouter au `multipath.conf` fichier.
+L'exemple suivant détermine le WWID d'un périphérique et l'ajoute au `multipath.conf` fichier.
 
 .Étapes
 . Exécutez la commande suivante pour déterminer l'identifiant WWID :
@@ -196,7 +196,7 @@ blacklist {
 
 Vous devez toujours vérifier votre `/etc/multipath.conf` fichier pour les paramètres hérités, en particulier dans la section valeurs par défaut, qui peut remplacer les paramètres par défaut.
 
-Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faudra les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Si ce n'est pas le cas, les LUN de ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
+Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faut les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Sans cette correction, les LUN ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
 
 [cols="2*"]
 |===
@@ -281,10 +281,10 @@ devices {
 
 La version SLES 15 SP1 avec ONTAP présente les problèmes connus suivants :
 
-[cols="4"]
+[cols="3"]
 |===
-| ID de bug NetApp | Titre | Description | ID Bugzilla 
+| ID de bug NetApp | Titre | Description 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1246622["1246622"^] | Les ports distants sont en transit vers un état bloqué sur SLES15SP1 avec Emulex LPe12002 8 Go FC pendant les opérations de basculement de stockage. | Les ports distants sont en transit vers un état bloqué sur SLES15SP1 avec Emulex LPe12002 Fibre Channel 8 Go (FC) pendant les opérations de basculement du stockage. Lorsque le nœud de stockage revient à un état optimal, les LIF sont également active et l'état du port distant doit lire « en ligne ». Il arrive que l'état du port distant continue à être « bloqué » ou « absent ». Cet état peut entraîner un chemin « en panne » vers les LUN au niveau de la couche multivoie, ainsi qu'une interruption des E/S pour ces LUN. Vous pouvez vérifier les détails du port distant par rapport aux commandes d'échantillon suivantes : --- Cat/sys/class/fc_host/host*/device/rport*/fc_remote_ports/rport*/port_name Cat/sys/class/fc_host/host*/device/rport*/fc_remote_ports/rport- port- | link:https://bugzilla.suse.com/show_bug.cgi?id=1139137["1139137"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1246622["1246622"^] | Les ports distants sont en transit vers un état bloqué sur SLES15SP1 avec Emulex LPe12002 8 Go FC pendant les opérations de basculement de stockage. | Les ports distants sont en transit vers un état bloqué sur SLES15SP1 avec Emulex LPe12002 Fibre Channel 8 Go (FC) pendant les opérations de basculement du stockage. Lorsque le nœud de stockage revient à un état optimal, les LIF sont également active et l'état du port distant doit lire « en ligne ». Il arrive que l'état du port distant continue à être « bloqué » ou « absent ». Cet état peut entraîner un chemin « en panne » vers les LUN au niveau de la couche multivoie, ainsi qu'une interruption des E/S pour ces LUN. Vous pouvez vérifier les détails du port distant par rapport aux commandes d'échantillon suivantes : --- Cat/sys/class/fc_host/host*/device/rport*/fc_remote_ports/rport*/port_name Cat/sys/class/fc_host/host*/device/rport*/fc_remote_ports/rport- port- 
 |===

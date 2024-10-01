@@ -579,7 +579,7 @@ NSID     UUID                                   Size
 
 La configuration hôte NVMe-of pour Oracle Linux 8.9 avec ONTAP version présente les problèmes connus suivants :
 
-[cols="1a, 2a, 6a, 1a, options="]
+[cols="1a,4a,4a, options="]
 |===
 
 
@@ -589,8 +589,6 @@ ID de bug NetApp
 Titre
  a| 
 Description
- a| 
-ID Bugzilla
 
 
 
@@ -600,7 +598,5 @@ link:https://mysupport.netapp.com/site/bugs-online/product/ONTAP/BURT/1517321["1
 Les hôtes Oracle Linux 8.9 NVMe-of créent des CDP dupliqués
  a| 
 Sur les hôtes Oracle Linux 8.9 NVMe-of, les contrôleurs de découverte permanente (CDP) sont créés en transmettant l' `-p`option à la `nvme discover` commande. Pour une combinaison initiateur-cible donnée, chaque exécution de la `nvme discover` commande doit créer un PDC. Toutefois, à partir d'Oracle Linux 8.x, les hôtes NVMe-of créent des doublons. Cela gaspille des ressources sur l'hôte et sur la cible.
- a| 
-https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=18118["18118"^]
 
 |===

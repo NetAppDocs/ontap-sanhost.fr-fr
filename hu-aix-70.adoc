@@ -43,7 +43,7 @@ Vous pouvez utiliser le https://mysupport.netapp.com/matrix/imt.jsp?components=6
 
 
 
-NOTE: Le progiciel Utilitaires hôtes AIX NetApp est disponible sur le link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab["Site de support NetApp"^] dans un fichier tar.gz compressé. Vous devez installer le kit d'utilitaires hôtes AIX lors de l'utilisation de MPIO AIX avec le stockage NetApp ONTAP.
+NOTE: Le progiciel Utilitaires hôtes AIX NetApp est disponible sur le link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.0["Site de support NetApp"^] dans un fichier tar.gz compressé. Vous devez installer le kit d'utilitaires hôtes AIX lors de l'utilisation de MPIO AIX avec le stockage NetApp ONTAP.
 
 .Étapes
 . Connectez-vous à votre hôte.
@@ -52,7 +52,7 @@ NOTE: Le progiciel Utilitaires hôtes AIX NetApp est disponible sur le link:http
 ** Sur un hôte PowerVM, connectez-vous en tant que *padmin*, puis entrez la `oem_setup_env` commande pour devenir un utilisateur root.
 
 
-. Accédez au https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab["Site de support NetApp"^] et téléchargez le fichier compressé contenant les utilitaires hôtes dans un répertoire de votre hôte.
+. Accédez au https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.0["Site de support NetApp"^] et téléchargez le fichier compressé contenant les utilitaires hôtes dans un répertoire de votre hôte.
 . Accédez au répertoire contenant le téléchargement.
 . Décompresser le fichier et extraire le progiciel SAN Toolkit :
 +

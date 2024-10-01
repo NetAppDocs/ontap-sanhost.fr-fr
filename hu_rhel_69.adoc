@@ -182,7 +182,7 @@ blacklist {
 }
 ----
 .Exemple
-Dans cet exemple, nous allons déterminer le WWID d'un périphérique et l'ajouter au `multipath.conf` fichier.
+L'exemple suivant détermine le WWID d'un périphérique et l'ajoute au `multipath.conf` fichier.
 
 .Étapes
 . Exécutez la commande suivante pour déterminer l'identifiant WWID :
@@ -210,7 +210,7 @@ blacklist {
 
 Vous devez toujours vérifier votre `/etc/multipath.conf` fichier pour les paramètres hérités, en particulier dans la section valeurs par défaut, qui peut remplacer les paramètres par défaut.
 
-Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faudra les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Si ce n'est pas le cas, les LUN de ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
+Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faut les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Sans cette correction, les LUN ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
 
 [cols="2*"]
 |===
@@ -301,13 +301,13 @@ Vous pouvez également utiliser les paramètres recommandés pour configurer la 
 
 La version RHEL 6.9 avec ONTAP présente les problèmes connus suivants :
 
-[cols="4*"]
+[cols="3*"]
 |===
-| ID de bug NetApp | Titre | Description | ID Bugzilla 
+| ID de bug NetApp | Titre | Description 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1067272["1067272"^] | L'état du port distant sur l'hôte EMULEX LPe32002 est peut-être « bloqué » lors des opérations de basculement du stockage | Lors des opérations de basculement de stockage, certains États de port distant sur l'hôte RHEL 6.9 avec l'adaptateur LPe32002 peuvent passer à l'état « bloqué ». Étant donné que les interfaces logiques sont arrêtées lorsqu'un nœud de stockage est en panne, le port distant définit l'état du nœud de stockage sur « bloqué ». Cependant, lorsque le nœud de stockage revient à un état optimal, les interfaces logiques sont également active et l'état du port distant est censé être « en ligne ». Mais, à certaines occasions, le port distant continue d'être « bloqué ». Cet état se traduit par un « échec » des LUN au niveau de la couche multivoie. | link:https://bugzilla.redhat.com/show_bug.cgi?id=1427496["427496"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1067272["1067272"^] | L'état du port distant sur l'hôte EMULEX LPe32002 est peut-être « bloqué » lors des opérations de basculement du stockage | Lors des opérations de basculement de stockage, certains États de port distant sur l'hôte RHEL 6.9 avec l'adaptateur LPe32002 peuvent passer à l'état « bloqué ». Étant donné que les interfaces logiques sont arrêtées lorsqu'un nœud de stockage est en panne, le port distant définit l'état du nœud de stockage sur « bloqué ». Cependant, lorsque le nœud de stockage revient à un état optimal, les interfaces logiques sont également active et l'état du port distant est censé être « en ligne ». Mais, à certaines occasions, le port distant continue d'être « bloqué ». Cet état se traduit par un « échec » des LUN au niveau de la couche multivoie. 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1076584["1076584"^] | Les vidages de micrologiciel se produisent sur la carte HBA QE8362 de Red Hat Enterprise Linux 6.9 lors des opérations de basculement du stockage | Des vidages de micrologiciel peuvent se produire pendant les opérations de basculement de stockage sur les hôtes Red Hat Enterprise Linux (RHEL) 6.9 équipés d'adaptateurs de bus hôte QLE8362 QLogic, et des vidages de firmware sont occasionnellement observés. Les « core dumps » peuvent se manifester sous la forme d'une panne d'E/S sur l'hôte pouvant durer 1200 secondes. Une fois que l'adaptateur a terminé de décharger les cœurs du micrologiciel, l'opération d'E/S reprend normalement. Aucune autre procédure de récupération n'est requise sur l'hôte. Pour indiquer le vidage du micrologiciel, le message suivant s'affiche dans le fichier /var/log/ message : kernel : qla2xxx [0000:0C:00.3]-d001:3 : vidage du micrologiciel enregistré dans le tampon temporaire (3/ffffc90018b01000), indicateurs d'état de vidage (0x3f) | link:https://bugzilla.redhat.com/show_bug.cgi?id=1438711["1438711"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1076584["1076584"^] | Les vidages de micrologiciel se produisent sur la carte HBA QE8362 de Red Hat Enterprise Linux 6.9 lors des opérations de basculement du stockage | Des vidages de micrologiciel peuvent se produire pendant les opérations de basculement de stockage sur les hôtes Red Hat Enterprise Linux (RHEL) 6.9 équipés d'adaptateurs de bus hôte QLE8362 QLogic, et des vidages de firmware sont occasionnellement observés. Les « core dumps » peuvent se manifester sous la forme d'une panne d'E/S sur l'hôte pouvant durer 1200 secondes. Une fois que l'adaptateur a terminé de décharger les cœurs du micrologiciel, l'opération d'E/S reprend normalement. Aucune autre procédure de récupération n'est requise sur l'hôte. Pour indiquer le vidage du micrologiciel, le message suivant s'affiche dans le fichier /var/log/ message : kernel : qla2xxx [0000:0C:00.3]-d001:3 : vidage du micrologiciel enregistré dans le tampon temporaire (3/ffffc90018b01000), indicateurs d'état de vidage (0x3f) 
 |===

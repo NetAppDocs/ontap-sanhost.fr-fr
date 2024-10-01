@@ -401,8 +401,8 @@ La configuration hôte NVMe-of pour OL 8.6 avec ONTAP présente les problèmes c
 
 [cols=""20"]
 |===
-| ID de bug NetApp | Titre | Description | ID Bugzilla 
+| ID de bug NetApp | Titre | Description 
 
 
-| 1517321 | Les hôtes Oracle Linux 8.6 NVMe-of créent des contrôleurs de détection persistante en double | Sur les hôtes Oracle Linux 8.6 NVMe over Fabrics (NVMe-of), vous pouvez utiliser le `nvme discover -p` Commande permettant de créer des contrôleurs de découverte permanente (CDP). Lorsque cette commande est utilisée, un seul PDC doit être créé par combinaison initiateur-cible. Toutefois, si vous exécutez ONTAP 9.10.1 et Oracle Linux 8.6 avec un hôte NVMe-of, un PDC en double est créé à chaque fois `nvme discover -p` est exécuté. Cela entraîne une utilisation inutile des ressources sur l'hôte et la cible. | https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=18118["18118"^] 
+| 1517321 | Les hôtes Oracle Linux 8.6 NVMe-of créent des contrôleurs de détection persistante en double | Sur les hôtes Oracle Linux 8.6 NVMe over Fabrics (NVMe-of), vous pouvez utiliser le `nvme discover -p` Commande permettant de créer des contrôleurs de découverte permanente (CDP). Lorsque cette commande est utilisée, un seul PDC doit être créé par combinaison initiateur-cible. Toutefois, si vous exécutez ONTAP 9.10.1 et Oracle Linux 8.6 avec un hôte NVMe-of, un PDC en double est créé à chaque fois `nvme discover -p` est exécuté. Cela entraîne une utilisation inutile des ressources sur l'hôte et la cible. 
 |===

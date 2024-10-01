@@ -170,7 +170,7 @@ blacklist {
 }
 ----
 .Exemple
-Dans cet exemple, nous allons déterminer le WWID d'un périphérique et l'ajouter au `multipath.conf` fichier.
+L'exemple suivant détermine le WWID d'un périphérique et l'ajoute au `multipath.conf` fichier.
 
 .Étapes
 . Exécutez la commande suivante pour déterminer l'identifiant WWID :
@@ -198,7 +198,7 @@ blacklist {
 
 Vous devez toujours vérifier votre `/etc/multipath.conf` fichier pour les paramètres hérités, en particulier dans la section valeurs par défaut, qui peut remplacer les paramètres par défaut.
 
-Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faudra les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Si ce n'est pas le cas, les LUN de ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
+Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faut les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Sans cette correction, les LUN ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
 
 [cols="2*"]
 |===
@@ -289,10 +289,10 @@ Vous pouvez également utiliser les paramètres recommandés pour configurer la 
 
 La version RHEL 9.1 avec ONTAP présente les problèmes connus suivants :
 
-[cols="20, 20, 50,20"]
+[cols="20,40,40"]
 |===
-| ID de bug NetApp | Titre | Description | ID Bugzilla 
+| ID de bug NetApp | Titre | Description 
 
 
-| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1508554["1508554"^] | L'interface de ligne de commande de NetApp Linux Host Utilities requiert d'autres dépendances au niveau des packages de bibliothèque pour prendre en charge la découverte d'adaptateurs HBA Emulex | Dans RHEL 9.1, la CLI des utilitaires hôtes SAN NetApp Linux `sanlun fcp show adapter -v` Échoue car les dépendances du package de bibliothèque pour prendre en charge la détection HBA sont introuvables. | S/O 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1508554["1508554"^] | L'interface de ligne de commande de NetApp Linux Host Utilities requiert d'autres dépendances au niveau des packages de bibliothèque pour prendre en charge la découverte d'adaptateurs HBA Emulex | Dans RHEL 9.1, la CLI des utilitaires hôtes SAN NetApp Linux `sanlun fcp show adapter -v` Échoue car les dépendances du package de bibliothèque pour prendre en charge la détection HBA sont introuvables. 
 |===

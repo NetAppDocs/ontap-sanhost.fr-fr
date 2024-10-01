@@ -451,10 +451,10 @@ NSID UUID                                   Size
 
 La configuration hôte NVMe-of pour RHEL 9.1 avec ONTAP présente les problèmes connus suivants :
 
-[cols="10,30,30,10"]
+[cols="20,40,40"]
 |===
-| ID de bug NetApp | Titre | Description | ID Bugzilla 
+| ID de bug NetApp | Titre | Description 
 
 
-| 1503468 | `nvme list-subsys` la commande renvoie la liste de contrôleurs nvme répétée pour un sous-système donné | Le `nvme list-subsys` cette commande doit renvoyer une liste unique de contrôleurs nvme associés à un sous-système donné. Dans RHEL 9.1, le `nvme list-subsys` La commande renvoie les contrôleurs nvme avec leur état ANA respectif pour tous les espaces de noms appartenant à un sous-système donné. Cependant, l'état ANA est un attribut par espace de nom. Il serait donc idéal d'afficher des entrées uniques de contrôleur nvme avec l'état de chemin si vous listez la syntaxe de commande de sous-système pour un espace de noms donné. | 2130106 
+| 1503468 | `nvme list-subsys` la commande renvoie la liste de contrôleurs nvme répétée pour un sous-système donné | Le `nvme list-subsys` cette commande doit renvoyer une liste unique de contrôleurs nvme associés à un sous-système donné. Dans RHEL 9.1, le `nvme list-subsys` La commande renvoie les contrôleurs nvme avec leur état ANA respectif pour tous les espaces de noms appartenant à un sous-système donné. Cependant, l'état ANA est un attribut par espace de nom. Il serait donc idéal d'afficher des entrées uniques de contrôleur nvme avec l'état de chemin si vous listez la syntaxe de commande de sous-système pour un espace de noms donné. 
 |===

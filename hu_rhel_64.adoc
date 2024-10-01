@@ -182,7 +182,7 @@ blacklist {
 }
 ----
 .Exemple
-Dans cet exemple, nous allons déterminer le WWID d'un périphérique et l'ajouter au `multipath.conf` fichier.
+L'exemple suivant détermine le WWID d'un périphérique et l'ajoute au `multipath.conf` fichier.
 
 .Étapes
 . Exécutez la commande suivante pour déterminer l'identifiant WWID :
@@ -210,7 +210,7 @@ blacklist {
 
 Vous devez toujours vérifier votre `/etc/multipath.conf` fichier pour les paramètres hérités, en particulier dans la section valeurs par défaut, qui peut remplacer les paramètres par défaut.
 
-Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faudra les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Si ce n'est pas le cas, les LUN de ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
+Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faut les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Sans cette correction, les LUN ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
 
 [cols="2*"]
 |===
@@ -301,10 +301,10 @@ Vous pouvez également utiliser les paramètres recommandés pour configurer la 
 
 La version RHEL 6.4 avec ONTAP présente les problèmes connus suivants :
 
-[cols="4*"]
+[cols="3*"]
 |===
-| ID de bug NetApp | Titre | Description | ID Bugzilla 
+| ID de bug NetApp | Titre | Description 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=673009["673009"^] | La création d'un système de fichiers ext4 sur LV réparti sur 15 périphériques multichemins à provisionnement fin et activés pour la suppression déclenche des erreurs de noyau « request boched » | Des erreurs de noyau « requêtes blotchées » ont été détectées lorsque les utilisateurs tentent de créer un système de fichiers ext4 sur des périphériques multichemins à provisionnement fin et activés pour la suppression. Par conséquent, la création du système de fichiers ext4 peut prendre plus de temps et des perturbations occasionnelles se produisent. Ce problème s'est produit uniquement lorsque les utilisateurs tentent de créer le système de fichiers ext4 sur un LV réparti sur 15 périphériques multipathing ou plus, sur des systèmes exécutant Red Hat Enterprise Linux 6.x et Data ONTAP 8.1.3 et versions ultérieures fonctionnant en 7-mode. Le problème se produit parce que le noyau tente à tort de fusionner des requêtes de suppression, qui n'est pas pris en charge sur Red Hat Enterprise Linux 6.x à ce moment-là. Lorsque ce problème se produit, plusieurs instances du message suivant sont écrites dans syslog (/var/log/messages) : kernel : blk : requête bâclée. La création du système de fichiers peut donc prendre plus de temps que prévu. | link:https://bugzilla.redhat.com/show_bug.cgi?id=907844["907844"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=673009["673009"^] | La création d'un système de fichiers ext4 sur LV réparti sur 15 périphériques multichemins à provisionnement fin et activés pour la suppression déclenche des erreurs de noyau « request boched » | Des erreurs de noyau « requêtes blotchées » ont été détectées lorsque les utilisateurs tentent de créer un système de fichiers ext4 sur des périphériques multichemins à provisionnement fin et activés pour la suppression. Par conséquent, la création du système de fichiers ext4 peut prendre plus de temps et des perturbations occasionnelles se produisent. Ce problème s'est produit uniquement lorsque les utilisateurs tentent de créer le système de fichiers ext4 sur un LV réparti sur 15 périphériques multipathing ou plus, sur des systèmes exécutant Red Hat Enterprise Linux 6.x et Data ONTAP 8.1.3 et versions ultérieures fonctionnant en 7-mode. Le problème se produit parce que le noyau tente à tort de fusionner des requêtes de suppression, qui n'est pas pris en charge sur Red Hat Enterprise Linux 6.x à ce moment-là. Lorsque ce problème se produit, plusieurs instances du message suivant sont écrites dans syslog (/var/log/messages) : kernel : blk : requête bâclée. La création du système de fichiers peut donc prendre plus de temps que prévu. 
 |===

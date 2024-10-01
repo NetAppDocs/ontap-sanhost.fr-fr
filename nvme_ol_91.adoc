@@ -554,11 +554,11 @@ La configuration hôte NVMe-of pour OL 9.1 avec ONTAP version présente les prob
 
 [cols=""20"]
 |===
-| ID de bug NetApp | Titre | Description | ID Bugzilla 
+| ID de bug NetApp | Titre | Description 
 
 
-| 1536937 | `nvme list-subsys` Commande imprime des contrôleurs NVMe répétés pour un sous-système | Le `nvme list-subsys` La commande doit renvoyer une liste unique de contrôleurs NVMe associés à un sous-système donné. Dans Oracle Linux 9.1, le `nvme list-subsys` La commande renvoie les contrôleurs NVMe avec l'état ANA (Asymmetric Namespace Access) correspondant à tous les namespaces appartenant à un sous-système donné. Cependant, il serait utile d'afficher des entrées de contrôleur NVMe uniques avec l'état PATH si vous listez la syntaxe de commande du sous-système pour un espace de noms donné, car l'état ANA est un attribut par espace de noms. | link:https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=17998["17998"^] 
+| 1536937 | `nvme list-subsys` Commande imprime des contrôleurs NVMe répétés pour un sous-système | Le `nvme list-subsys` La commande doit renvoyer une liste unique de contrôleurs NVMe associés à un sous-système donné. Dans Oracle Linux 9.1, le `nvme list-subsys` La commande renvoie les contrôleurs NVMe avec l'état ANA (Asymmetric Namespace Access) correspondant à tous les namespaces appartenant à un sous-système donné. Cependant, il serait utile d'afficher des entrées de contrôleur NVMe uniques avec l'état PATH si vous listez la syntaxe de commande du sous-système pour un espace de noms donné, car l'état ANA est un attribut par espace de noms. 
 
 
-| 1539101 | Les hôtes Oracle Linux 9.1 NVMe-of ne parviennent pas à créer de contrôleur de découverte persistant | Sur les hôtes Oracle Linux 9.1 NVMe-of, vous pouvez utiliser `nvme discover -p` Commande permettant de créer des contrôleurs de découverte permanente (CDP). Lorsque cette commande est utilisée, un PDC doit être créé par combinaison initiateur-cible. Toutefois, si vous exécutez Oracle Linux 9.1 sur un hôte NVMe-of, la création de PDC échoue lorsque l' `nvme discover -p` la commande est exécutée. | link:https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=18196["18196"^] 
+| 1539101 | Les hôtes Oracle Linux 9.1 NVMe-of ne parviennent pas à créer de contrôleur de découverte persistant | Sur les hôtes Oracle Linux 9.1 NVMe-of, vous pouvez utiliser `nvme discover -p` Commande permettant de créer des contrôleurs de découverte permanente (CDP). Lorsque cette commande est utilisée, un PDC doit être créé par combinaison initiateur-cible. Toutefois, si vous exécutez Oracle Linux 9.1 sur un hôte NVMe-of, la création de PDC échoue lorsque l' `nvme discover -p` la commande est exécutée. 
 |===

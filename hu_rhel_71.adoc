@@ -169,7 +169,7 @@ blacklist {
 }
 ----
 .Exemple
-Dans cet exemple, nous allons déterminer le WWID d'un périphérique et l'ajouter au `multipath.conf` fichier.
+L'exemple suivant détermine le WWID d'un périphérique et l'ajoute au `multipath.conf` fichier.
 
 .Étapes
 . Exécutez la commande suivante pour déterminer l'identifiant WWID :
@@ -197,7 +197,7 @@ blacklist {
 
 Vous devez toujours vérifier votre `/etc/multipath.conf` fichier pour les paramètres hérités, en particulier dans la section valeurs par défaut, qui peut remplacer les paramètres par défaut.
 
-Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faudra les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Si ce n'est pas le cas, les LUN de ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
+Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faut les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Sans cette correction, les LUN ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
 
 [cols="2*"]
 |===
@@ -288,13 +288,13 @@ Vous pouvez également utiliser les paramètres recommandés pour configurer la 
 
 La version RHEL 7.1 avec ONTAP présente les problèmes connus suivants :
 
-[cols="4*"]
+[cols="3*"]
 |===
-| ID de bug NetApp | Titre | Description | ID Bugzilla 
+| ID de bug NetApp | Titre | Description 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=799323["799323"^] | Pannes de chemin ou de blocage de l'hôte FCoE d'Emulex (OCe10102-FX-D) observées lors des E/S avec les opérations de basculement de stockage | Lors des opérations d'E/S associées au basculement de stockage, il peut être possible que des pannes de chemin ou de blocage de l'hôte sur l'hôte Emulex 10G FCoE (OCe10102-FX-D) Dans de tels scénarios, le message suivant peut s'afficher : « le pool de mémoire tampon du pilote est vide, le bus d'E/S est occupé et l'état de la demande d'abandon de couche SCSI » | link:https://bugzilla.redhat.com/show_bug.cgi?id=1061755["1061755"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=799323["799323"^] | Pannes de chemin ou de blocage de l'hôte FCoE d'Emulex (OCe10102-FX-D) observées lors des E/S avec les opérations de basculement de stockage | Lors des opérations d'E/S associées au basculement de stockage, il peut être possible que des pannes de chemin ou de blocage de l'hôte sur l'hôte Emulex 10G FCoE (OCe10102-FX-D) Dans de tels scénarios, le message suivant peut s'afficher : « le pool de mémoire tampon du pilote est vide, le bus d'E/S est occupé et l'état de la demande d'abandon de couche SCSI » 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=836875["836875"^] | Les adresses IP ne sont pas toujours attribuées lors du démarrage d'un système d'exploitation RHEL 7.0 installé sur une LUN iSCSI à chemins d'accès multiples | Lorsque vous installez la racine(/) sur une LUN iSCSI multipath, l’adresse IP des interfaces Ethernet est spécifiée dans la ligne de commande du noyau afin que les adresses IP soient attribuées avant le démarrage du service iSCSI. Cependant, la fonction dracut ne peut pas attribuer d'adresses IP à tous les ports Ethernet pendant le démarrage, avant le démarrage du service iSCSI. La connexion iSCSI échoue alors sur les interfaces sans adresses IP. Vous verrez que le service iSCSI tente de se connecter plusieurs fois, ce qui entraînera un retard dans le délai de démarrage du système d'exploitation. | link:https://bugzilla.redhat.com/show_bug.cgi?id=1114966["1114966"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=836875["836875"^] | Les adresses IP ne sont pas toujours attribuées lors du démarrage d'un système d'exploitation RHEL 7.0 installé sur une LUN iSCSI à chemins d'accès multiples | Lorsque vous installez la racine(/) sur une LUN iSCSI multipath, l’adresse IP des interfaces Ethernet est spécifiée dans la ligne de commande du noyau afin que les adresses IP soient attribuées avant le démarrage du service iSCSI. Cependant, la fonction dracut ne peut pas attribuer d'adresses IP à tous les ports Ethernet pendant le démarrage, avant le démarrage du service iSCSI. La connexion iSCSI échoue alors sur les interfaces sans adresses IP. Vous verrez que le service iSCSI tente de se connecter plusieurs fois, ce qui entraînera un retard dans le délai de démarrage du système d'exploitation. 
 |===

@@ -581,8 +581,8 @@ La configuration hôte NVMe-of pour OL 8.8 avec ONTAP version présente les prob
 
 [cols=""20"]
 |===
-| ID de bug NetApp | Titre | Description | ID Bugzilla 
+| ID de bug NetApp | Titre | Description 
 
 
-| 1517321 | Les hôtes Oracle Linux 8.8 NVMe-of créent des CDP dupliqués | Sur les hôtes OL 8.8 NVMe-of, les contrôleurs de découverte permanente (CDP) sont créés en transmettant l' `-p`option à la `nvme discover` commande. Pour une combinaison initiateur-cible donnée, chaque exécution de la `nvme discover` commande doit créer un PDC. Toutefois, à partir de OL 8.x, les hôtes NVMe-of créent des CDP dupliqués. Cela gaspille des ressources sur l'hôte et sur la cible. | https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=18118["18118"^] 
+| 1517321 | Les hôtes Oracle Linux 8.8 NVMe-of créent des CDP dupliqués | Sur les hôtes OL 8.8 NVMe-of, les contrôleurs de découverte permanente (CDP) sont créés en transmettant l' `-p`option à la `nvme discover` commande. Pour une combinaison initiateur-cible donnée, chaque exécution de la `nvme discover` commande doit créer un PDC. Toutefois, à partir de OL 8.x, les hôtes NVMe-of créent des CDP dupliqués. Cela gaspille des ressources sur l'hôte et sur la cible. 
 |===

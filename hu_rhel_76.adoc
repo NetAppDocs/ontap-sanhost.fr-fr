@@ -149,7 +149,7 @@ blacklist {
 }
 ----
 .Exemple
-Dans cet exemple, nous allons déterminer le WWID d'un périphérique et l'ajouter au `multipath.conf` fichier.
+L'exemple suivant détermine le WWID d'un périphérique et l'ajoute au `multipath.conf` fichier.
 
 .Étapes
 . Exécutez la commande suivante pour déterminer l'identifiant WWID :
@@ -177,7 +177,7 @@ blacklist {
 
 Vous devez toujours vérifier votre `/etc/multipath.conf` fichier pour les paramètres hérités, en particulier dans la section valeurs par défaut, qui peut remplacer les paramètres par défaut.
 
-Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faudra les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Si ce n'est pas le cas, les LUN de ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
+Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faut les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Sans cette correction, les LUN ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
 
 [cols="2*"]
 |===
@@ -268,16 +268,16 @@ Vous pouvez également utiliser les paramètres recommandés pour configurer la 
 
 La version RHEL 7.6 avec ONTAP présente les problèmes connus suivants :
 
-[cols="4*"]
+[cols="3*"]
 |===
-| ID de bug NetApp | Titre | Description | ID Bugzilla 
+| ID de bug NetApp | Titre | Description 
 
 
-| 1440718 | Si vous annulez le mappage d'une LUN ou si vous la mappez sans effectuer de nouvelle analyse SCSI, elle risque de corrompre les données de l'hôte. | Lorsque vous définissez le paramètre de configuration multivoie 'disable_changed_wwid' sur YES, il désactive l'accès au périphérique chemin d'accès en cas de modification de l'identifiant WWID. Les chemins d'accès multiples désactivent l'accès au périphérique de chemin d'accès jusqu'à ce que le WWID du chemin soit restauré vers le WWID du périphérique multichemin. Pour en savoir plus, voir link:https://kb.netapp.com/Advice_and_Troubleshooting/Flash_Storage/AFF_Series/The_filesystem_corruption_on_iSCSI_LUN_on_the_Oracle_Linux_7["Base de connaissances NetApp : corruption du système de fichiers sur le LUN iSCSI sur Oracle Linux 7"^]. | S/O 
+| 1440718 | Si vous annulez le mappage d'une LUN ou si vous la mappez sans effectuer de nouvelle analyse SCSI, elle risque de corrompre les données de l'hôte. | Lorsque vous définissez le paramètre de configuration multivoie 'disable_changed_wwid' sur YES, il désactive l'accès au périphérique chemin d'accès en cas de modification de l'identifiant WWID. Les chemins d'accès multiples désactivent l'accès au périphérique de chemin d'accès jusqu'à ce que le WWID du chemin soit restauré vers le WWID du périphérique multichemin. Pour en savoir plus, voir link:https://kb.netapp.com/Advice_and_Troubleshooting/Flash_Storage/AFF_Series/The_filesystem_corruption_on_iSCSI_LUN_on_the_Oracle_Linux_7["Base de connaissances NetApp : corruption du système de fichiers sur le LUN iSCSI sur Oracle Linux 7"^]. 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1186754["1186754"^] | L'état des ports distants sur RHEL7U6 avec l'hôte QLogic QLE2742 peut être bloqué lors de la découverte de l'hôte | Lors de la découverte d'hôtes, l'état du port à distance FC sur un hôte RHEL7U6 équipé d'un adaptateur QLogic QLE2742 peut être bloqué. Ces ports distants bloqués peuvent entraîner une indisponibilité des chemins vers les LUN. Lors du basculement du stockage, la redondance des chemins peut être réduite et provoquer une panne d'E/S. Vous pouvez vérifier l'état du port distant en saisissant la commande suivante :# Cat /sys/class/fc_remote_ports/rport-*/port_state | link:https://bugzilla.redhat.com/show_bug.cgi?id=1628039["1628039"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1186754["1186754"^] | L'état des ports distants sur RHEL7U6 avec l'hôte QLogic QLE2742 peut être bloqué lors de la découverte de l'hôte | Lors de la découverte d'hôtes, l'état du port à distance FC sur un hôte RHEL7U6 équipé d'un adaptateur QLogic QLE2742 peut être bloqué. Ces ports distants bloqués peuvent entraîner une indisponibilité des chemins vers les LUN. Lors du basculement du stockage, la redondance des chemins peut être réduite et provoquer une panne d'E/S. Vous pouvez vérifier l'état du port distant en saisissant la commande suivante :# Cat /sys/class/fc_remote_ports/rport-*/port_state 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1190698["1190698"^] | L'état du port distant sur RHEL7U6 avec un hôte QLogic QLE2672 peut être bloqué pendant les opérations de basculement du stockage | Il est possible que les ports distants FC soient bloqués sur Red Hat Enterprise Linux (RHEL) 7U6 avec l'hôte QLogic QLE2672 lors des opérations de basculement du stockage. Étant donné que les interfaces logiques sont arrêtées lorsqu'un nœud de stockage est en panne, les ports distants définissent l'état du nœud de stockage sur bloqués. Lorsque le nœud de stockage revient à son état optimal, les interfaces logiques s'allument également et les ports distants doivent être en ligne. Cependant, le port distant est toujours bloqué. Cet état bloqué s'enregistre comme étant défectueux pour LES LUN au niveau de la couche multivoie. Vous pouvez vérifier l'état des ports distants à l'aide de la commande suivante :# Cat /sys/class/fc_remote_ports/rport-*/port_state | link:https://bugzilla.redhat.com/show_bug.cgi?id=1643459["1643459"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1190698["1190698"^] | L'état du port distant sur RHEL7U6 avec un hôte QLogic QLE2672 peut être bloqué pendant les opérations de basculement du stockage | Il est possible que les ports distants FC soient bloqués sur Red Hat Enterprise Linux (RHEL) 7U6 avec l'hôte QLogic QLE2672 lors des opérations de basculement du stockage. Étant donné que les interfaces logiques sont arrêtées lorsqu'un nœud de stockage est en panne, les ports distants définissent l'état du nœud de stockage sur bloqués. Lorsque le nœud de stockage revient à son état optimal, les interfaces logiques s'allument également et les ports distants doivent être en ligne. Cependant, le port distant est toujours bloqué. Cet état bloqué s'enregistre comme étant défectueux pour LES LUN au niveau de la couche multivoie. Vous pouvez vérifier l'état des ports distants à l'aide de la commande suivante :# Cat /sys/class/fc_remote_ports/rport-*/port_state 
 |===
