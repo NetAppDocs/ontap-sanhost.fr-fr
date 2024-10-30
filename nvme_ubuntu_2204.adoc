@@ -219,8 +219,10 @@ FCP CMPL: xb 00000000 Err 00000000
 --
 .Adaptateur FC Marvell/QLogic pour NVMe/FC
 --
+Le pilote natif de boîte de réception qla2xxx inclus dans le noyau Ubuntu 22.04 GA a les derniers correctifs en amont. Ces correctifs sont essentiels à la prise en charge de ONTAP.
+
 .Étapes
-. Le pilote natif de boîte de réception qla2xxx inclus dans le noyau Ubuntu 22.04 GA a les derniers correctifs en amont essentiels pour le support ONTAP. Vérifiez que vous exécutez les versions du pilote de carte et du micrologiciel prises en charge :
+. Vérifiez que vous exécutez les versions du pilote de carte et du micrologiciel prises en charge :
 +
 [listing]
 ----

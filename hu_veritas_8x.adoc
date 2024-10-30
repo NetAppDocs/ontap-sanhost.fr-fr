@@ -26,8 +26,7 @@ Le pack logiciel NetApp Linux Unified Host Utilities est disponible sur le link:
 
 NetApp recommande vivement d'installer les utilitaires d'hôtes unifiés Linux, mais ce n'est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
 
-.Ce dont vous avez besoin
-Si une version de Linux Unified Host Utilities est actuellement installée, vous devez la mettre à niveau ou la supprimer, puis procéder comme suit pour installer la dernière version.
+Si une version de Linux Unified Host Utilities est actuellement installée, vous devez la mettre à niveau ou la supprimer et suivre ces étapes pour installer la dernière version.
 
 .Étapes
 . Téléchargez le pack logiciel Linux Unified Host Utilities 64 bits à partir du https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^] à votre hôte.
@@ -96,7 +95,7 @@ Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la docum
 Vous devez vérifier que votre configuration répond à la configuration système requise. Pour plus d'informations, consultez la matrice d'interopérabilité NetApp et la matrice Veritas HCL.
 
 .Exemple
-Dans cet exemple, le `vxdmpadm` La commande est utilisée pour vérifier que VxDMP Multipath est connecté à la baie cible ONTAP.
+Dans l'exemple suivant, la `vxdmpadm` commande est utilisée pour vérifier que le chemin d'accès multiple VxDMP est associé à la baie cible ONTAP.
 
 [listing]
 ----
@@ -157,7 +156,7 @@ NOTE: N'utilisez pas un nombre excessif de chemins pour une seule LUN. Pas plus 
 
 == Configuration non ASA
 
-Pour la configuration non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant les priorités les plus élevées sont actifs/optimisés, ce qui signifie qu'ils sont gérés par le contrôleur où se trouve l'agrégat. Les chemins avec les priorités les plus basses sont actifs, mais ne sont pas optimisés car ils sont servis à partir d'un autre contrôleur. Les chemins non optimisés ne sont utilisés que lorsque les chemins optimisés ne sont pas disponibles.
+Pour la configuration non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant des priorités plus élevées sont Active/Optimized (actif/optimisé), ce qui signifie que les services sont gérés par le contrôleur où se trouve l'agrégat. Les chemins aux priorités inférieures sont actifs, mais ne sont pas optimisés, car ils sont desservis par un autre contrôleur. Les chemins non optimisés ne sont utilisés que lorsque les chemins optimisés ne sont pas disponibles.
 
 .Exemple
 L'exemple suivant montre la sortie correcte pour une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés :

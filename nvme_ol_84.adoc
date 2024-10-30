@@ -32,7 +32,7 @@ NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans ce docu
 == Caractéristiques
 
 * Pour Oracle Linux 8.4, le protocole NVMe multipath intégré est activé par défaut pour les noms de mémoire NVMe.
-* Avec Oracle Linux 8.4, `nvme-fc auto-connect` des scripts sont inclus dans le stockage natif `nvme-cli` création de package. Vous pouvez vous appuyer sur ces scripts de connexion automatique natifs au lieu d'installer les scripts de connexion automatique fournis par le fournisseur externe.
+* Avec Oracle Linux 8.4, `nvme-fc auto-connect` des scripts sont inclus dans le package natif `nvme-cli`. Vous pouvez utiliser ces scripts de connexion automatique natifs au lieu d'installer les scripts de connexion automatique fournis par le fournisseur externe.
 * Avec Oracle Linux 8.4, une solution native `udev` la règle est fournie dans le cadre du `nvme-cli` Une solution qui permet l'équilibrage de la charge Round-Robin pour les chemins d'accès multiples NVMe. Par conséquent, vous n'avez plus besoin de créer cette règle manuellement.
 * Avec Oracle Linux 8.4, le trafic NVMe et SCSI peut être exécuté sur le même hôte existant. En fait, ce devrait être la configuration hôte couramment déployée. Par conséquent, vous pouvez configurer dm-multipath comme d'habitude pour les LUN SCSI entraînant la création de périphériques mpath, tandis que le protocole NVMe multipath peut être utilisé pour configurer les périphériques multipathing NVMe-of (par exemple, `/dev/nvmeXnY`) sur l'hôte.
 * Avec Oracle Linux 8.4, le plug-in NetApp en natif `nvme-cli` Le package peut afficher les détails ONTAP ainsi que les espaces de noms ONTAP.
@@ -217,8 +217,10 @@ NOTE: Cela ne s'applique pas aux hôtes NVMe/FC Qlogic.
 
 == Configurez l'adaptateur FC Marvell/QLogic pour NVMe/FC
 
+Le pilote natif de la boîte de réception qla2xxx inclus dans le noyau OL 8.4 GA possède les derniers correctifs en amont. Ces correctifs sont essentiels à la prise en charge de ONTAP.
+
 .Étapes
-. Vérifiez que vous exécutez les versions de pilote et de micrologiciel de carte prises en charge. Le pilote natif de la boîte de réception qla2xxx inclus dans le noyau OL 8.4 GA dispose des derniers correctifs en amont essentiels pour la prise en charge de ONTAP.
+. Vérifiez que vous exécutez les versions du pilote de carte et du micrologiciel prises en charge :
 +
 [listing]
 ----

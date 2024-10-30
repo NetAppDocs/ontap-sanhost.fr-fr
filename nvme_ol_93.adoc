@@ -243,8 +243,10 @@ FCP CMPL: xb 000010a5 Err 000147e4
 --
 .Adaptateur FC Marvell/QLogic pour NVMe/FC
 --
+Le pilote natif de la boîte de réception qla2xxx inclus dans le noyau OL 9.3 GA possède les derniers correctifs en amont. Ces correctifs sont essentiels à la prise en charge de ONTAP.
+
 .Étapes
-. Le pilote natif qla2xxx inclus dans le noyau OL 9.3 GA dispose des derniers correctifs en amont essentiels à la prise en charge de ONTAP. Vérifiez que vous exécutez les versions du pilote de carte et du micrologiciel prises en charge :
+. Vérifiez que vous exécutez les versions du pilote de carte et du micrologiciel prises en charge :
 +
 [listing]
 ----

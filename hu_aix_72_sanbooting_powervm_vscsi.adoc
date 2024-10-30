@@ -44,7 +44,7 @@ Les LUN apparaissent sur l'hôte sous forme de disques. Vous pouvez utiliser ces
 Notez les numéros d'instance hdisk. Vous les utilisez lorsque vous effectuez la configuration du chemin.
 
 +
-Le `lsdev -type disk` commande génère le type de sortie suivant. La sortie dans cet exemple a été tronquée.
+La `lsdev -type disk` commande produit le type de sortie suivant. La sortie dans l'exemple suivant est tronquée.
 
 +
 [listing]

@@ -16,7 +16,7 @@ summary: 'Vous pouvez configurer les paramètres d"hôte SAN ONTAP pour la versi
 
 
 [role="lead"]
-Avant de dépanner les défaillances NVMe-of pour les hôtes RHEL, OL et SLES, vérifiez que vous exécutez une configuration conforme aux spécifications de l'outil Interoperability Matrix Tool (IMT), puis passez aux étapes suivantes pour déboguer les problèmes côté hôte.
+Avant de dépanner les défaillances NVMe-of pour les hôtes RHEL, OL et SUSE Linux Enterprise Server, vérifiez que vous exécutez une configuration conforme aux spécifications de l'outil Interoperability Matrix Tool (IMT), puis passez aux étapes suivantes pour déboguer les problèmes côté hôte.
 
 
 NOTE: Les instructions de dépannage ne s'appliquent pas aux hôtes AIX, Windows et ESXi.

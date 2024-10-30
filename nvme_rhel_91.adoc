@@ -16,7 +16,7 @@ summary: 'Comment configurer l"hôte NVMe-of pour RHEL 9.1 avec ONTAP'
 
 
 [role="lead"]
-Les protocoles NVMe over Fabrics ou NVMe-of (y compris NVMe/FC et NVMe/TCP) sont pris en charge avec RHEL 9.1 avec un accès à l'espace de noms asymétrique (ANA) requis pour les autres basculements de stockage (SFO) sur la baie ONTAP. ANA est l'équivalent ALUA (Asymmetric Logical Unit Access) dans l'environnement NVMe-of, et actuellement implémenté avec NVMe Multipath dans le noyau. Ce document contient les détails de l'activation de NVMe-of avec NVMe Multipath intégré au noyau en utilisant ANA sur RHEL 9.1 et ONTAP comme cible.
+Les protocoles NVMe over Fabrics ou NVMe-of (y compris NVMe/FC et NVMe/TCP) sont pris en charge avec RHEL 9.1 avec un accès à l'espace de noms asymétrique (ANA) requis pour les autres basculements de stockage (SFO) sur la baie ONTAP. ANA est l'équivalent ALUA (Asymmetric Logical Unit Access) dans l'environnement NVMe-of, et actuellement implémenté avec NVMe Multipath dans le noyau. À l'aide de cette procédure, vous pouvez activer NVMe-of avec le multichemin NVMe intégré au noyau en utilisant ANA sur RHEL 9.1 et ONTAP comme cible.
 
 La prise en charge suivante est disponible pour la configuration hôte NVMe-of pour RHEL 9.1 avec ONTAP :
 
@@ -186,7 +186,7 @@ FCP CMPL: xb 00000000 Err 00000004
 --
 .Adaptateur FC Marvell/QLogic pour NVMe/FC
 --
-Boîte de réception native `qla2xxx` Le pilote inclus dans le noyau RHEL 9.1 dispose des derniers correctifs essentiels à la prise en charge de ONTAP.
+Le pilote intégré natif `qla2xxx` inclus dans le noyau RHEL 9.1 dispose des derniers correctifs. Ces correctifs sont essentiels à la prise en charge de ONTAP.
 
 .Étapes
 . Vérifiez que vous exécutez les versions du pilote de carte et du micrologiciel prises en charge à l'aide de la commande suivante :

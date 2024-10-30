@@ -26,9 +26,9 @@ Le pack logiciel NetApp Linux Unified Host Utilities est disponible sur le link:
 
 NetApp recommande vivement d'installer les utilitaires d'hôtes unifiés Linux, mais ce n'est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
 
-.Ce dont vous avez besoin
-Si une version de Linux Unified Host Utilities est actuellement installée, vous devez la mettre à niveau ou la supprimer et utiliser les étapes suivantes pour installer la dernière version.
+Si une version de Linux Unified Host Utilities est actuellement installée, vous devez la mettre à niveau ou la supprimer et suivre ces étapes pour installer la dernière version.
 
+.Étapes
 . Téléchargez le pack logiciel Linux Unified Host Utilities 32 bits ou 64 bits à partir du link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^] Sur votre hôte.
 . Utilisez la commande suivante pour installer le pack logiciel :
 +
@@ -58,7 +58,7 @@ Exemple de résultat :
 ----
 controller(7mode/E-Series)/            device     host               lun
 vserver(cDOT/FlashRay)   lun-pathname  filename   adapter  protocol  size    Product
--------------------------------------------------------------------------
+------------------------------------------------------------------------------------
 data_vserver          /vol/vol1/lun1   /dev/sdb   host16   FCP       120.0g  cDOT
 data_vserver          /vol/vol1/lun1   /dev/sdc   host15   FCP       120.0g  cDOT
 data_vserver          /vol/vol2/lun2   /dev/sdd   host16   FCP       120.0g  cDOT
@@ -91,7 +91,9 @@ Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la docum
 
 Pour SUSE Linux Enterprise Server 15 SP4 `/etc/multipath.conf` le fichier doit exister, mais il n'est pas nécessaire d'apporter des modifications spécifiques au fichier. SUSE Linux Enterprise Server 15 SP4 est compilé avec tous les paramètres requis pour reconnaître et gérer correctement les LUN ONTAP.
 
-Vous pouvez utiliser le `multipath -ll` Commande pour vérifier les paramètres des LUN ONTAP. Les sections suivantes fournissent un exemple de résultat de chemins d'accès multiples pour une LUN mappée aux rôles ASA et non ASA.
+Vous pouvez utiliser le `multipath -ll` Commande pour vérifier les paramètres des LUN ONTAP.
+
+Les sections suivantes fournissent des exemples de sorties multivoies pour une LUN mappée sur des rôles ASA et non ASA.
 
 
 
@@ -114,13 +116,13 @@ size=80G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=
   `- 14:0:7:9   sdiw 8:256   active ready running
 ----
 
-NOTE: N'utilisez pas un nombre excessif de chemins pour une seule LUN. Il ne faut pas plus de quatre chemins. Plus de huit chemins peuvent entraîner des problèmes de chemin lors des défaillances du stockage.
+NOTE: Une seule LUN ne doit pas nécessiter plus de quatre chemins. Plus de huit chemins peuvent entraîner des problèmes de chemin lors des défaillances du stockage.
 
 
 
 === Configurations non ASA
 
-Pour les configurations non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant les priorités les plus élevées sont actifs/optimisés, ce qui signifie qu'ils sont gérés par le contrôleur où se trouve l'agrégat. Les chemins avec les priorités les plus basses sont actifs, mais ne sont pas optimisés car ils sont servis à partir d'un autre contrôleur. Les chemins non optimisés ne sont utilisés que lorsque les chemins optimisés ne sont pas disponibles.
+Pour les configurations non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant des priorités plus élevées sont Active/Optimized (actif/optimisé), ce qui signifie que les services sont gérés par le contrôleur où se trouve l'agrégat. Les chemins aux priorités inférieures sont actifs, mais ne sont pas optimisés, car ils sont desservis par un autre contrôleur. Les chemins non optimisés ne sont utilisés que lorsque les chemins optimisés ne sont pas disponibles.
 
 .Exemple
 L'exemple suivant montre la sortie correcte pour une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés :
@@ -138,51 +140,66 @@ size=80G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=
   `- 14:0:5:0   sdgz 132:240 active ready running
 ----
 
-NOTE: N'utilisez pas un nombre excessif de chemins pour une seule LUN. Il ne faut pas plus de quatre chemins. Plus de huit chemins peuvent entraîner des problèmes de chemin lors des défaillances du stockage.
+NOTE: Une seule LUN ne doit pas nécessiter plus de quatre chemins. Plus de huit chemins peuvent entraîner des problèmes de chemin lors des défaillances du stockage.
 
 
 
 == Paramètres recommandés
 
-SUSE Linux Enterprise Server 15 SP4 OS est compilé pour reconnaître les LUN ONTAP et définir automatiquement tous les paramètres de configuration pour la configuration ASA et non ASA.
+SUSE Linux Enterprise Server 15 SP4 OS est compilé pour reconnaître les LUN ONTAP et définir automatiquement tous les paramètres de configuration pour la configuration ASA et non ASA. Les paramètres recommandés suivants vous permettent d'optimiser davantage les performances de votre configuration hôte.
 
-Le `multipath.conf` le fichier doit exister pour que le démon multivoie démarre, mais vous pouvez créer un fichier vide à zéro octet en utilisant la commande :
-`touch /etc/multipath.conf`.
+Le `multipath.conf` fichier doit exister pour que le démon multichemin puisse démarrer. Si ce fichier n'existe pas, vous pouvez créer un fichier vide à zéro octet en utilisant la commande suivante :
 
-Lors de la première création de ce fichier, vous devrez peut-être activer et démarrer les services multipathing.
+`touch /etc/multipath.conf`
 
-Il n'est pas nécessaire d'ajouter quoi que ce soit directement au `multipath.conf` fichier, sauf si vous disposez de périphériques que vous ne souhaitez pas gérer le multipathing ou si vous avez des paramètres existants qui remplacent les paramètres par défaut.
+Lors de la première création du `multipath.conf` fichier, vous devrez peut-être activer et démarrer les services multivoies en utilisant les commandes suivantes :
 
-Vous pouvez ajouter la syntaxe suivante à la `multipath.conf` fichier pour exclure les périphériques indésirables.
+[listing]
+----
+# chkconfig multipathd on
+# /etc/init.d/multipathd start
+----
+Il n'est pas nécessaire d'ajouter quelque chose directement au `multipath.conf` fichier, sauf si vous disposez de périphériques que vous ne souhaitez pas gérer le multipathing ou si vous avez des paramètres existants qui remplacent les paramètres par défaut. Pour exclure les périphériques indésirables, ajoutez la syntaxe suivante au `multipath.conf` fichier, en remplaçant <DevId> par la chaîne WWID du périphérique à exclure :
 
-Remplacement `<DevId>` avec le `WWID` chaîne du périphérique à exclure. Utiliser la commande suivante pour déterminer le `WWID`:
-
+[listing]
+----
+blacklist {
+        wwid <DevId>
+        devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
+        devnode "^hd[a-z]"
+        devnode "^cciss.*"
+}
+----
 .Exemple
-Dans cet exemple, `sda` Est le disque SCSI local que nous devons ajouter à la liste noire.
+L'exemple suivant détermine le WWID d'un périphérique et l'ajoute au `multipath.conf` fichier.
 
 .Étapes
-. Exécutez la commande suivante pour déterminer le `WWID`:
+. Déterminez le WWID :
 +
 [listing]
 ----
-# /usr/lib/udev/scsi_id -gud /dev/sda
+# /lib/udev/scsi_id -gud /dev/sda
 360030057024d0730239134810c0cb833
 ----
-. Ajoutez le `WWID` valeur de la strophe de liste noire dans le `/etc/multipath.conf` fichier :
++
+`sda` Est le disque SCSI local que vous souhaitez ajouter à la liste noire.
+
+. Ajoutez le `WWID` à la strophe de liste noire dans `/etc/multipath.conf`:
 +
 [listing]
 ----
 blacklist {
-wwid	360030057024d0730239134810c0cb833
-devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*" devnode "^hd[a-z]"
-devnode "^cciss.*"
+     wwid   360030057024d0730239134810c0cb833
+     devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
+     devnode "^hd[a-z]"
+     devnode "^cciss.*"
 }
 ----
 
 
 Vous devez toujours vérifier votre `/etc/multipath.conf` fichier pour les paramètres hérités, en particulier dans la section valeurs par défaut, qui peut remplacer les paramètres par défaut.
 
-Le tableau ci-dessous présente les paramètres multipathd stratégiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faudra les corriger par les strophes ultérieures dans `multipath.conf` lesquelles s'appliquent spécifiquement aux LUN ONTAP. Si ce n'est pas le cas, les LUN de ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
+Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faut les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Sans cette correction, les LUN ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
 
 [cols="2"]
 |===

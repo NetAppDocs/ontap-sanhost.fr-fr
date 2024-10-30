@@ -180,7 +180,7 @@ FCP CMPL: xb 00001f50 Err 0000d9f8
 --
 .Adaptateur FC Marvell/QLogic pour NVMe/FC
 --
-Boîte de réception native `qla2xxx` Le pilote inclus dans le noyau RHEL 8.4 GA dispose des derniers correctifs essentiels à la prise en charge de ONTAP.
+Le pilote intégré natif `qla2xxx` inclus dans le noyau RHEL 8.4 GA dispose des derniers correctifs. Ces correctifs sont essentiels à la prise en charge de ONTAP.
 
 .Étapes
 . Vérifiez que vous exécutez les versions du pilote de carte et du micrologiciel prises en charge à l'aide de la commande suivante :

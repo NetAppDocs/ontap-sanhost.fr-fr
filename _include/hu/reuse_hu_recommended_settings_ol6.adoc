@@ -2,22 +2,19 @@
 :allow-uri-read: 
 
 
-Le `multipath.conf` le fichier doit exister pour que le démon multivoie démarre, mais vous pouvez créer un fichier vide à zéro octet en utilisant la commande suivante :
+Le `multipath.conf` fichier doit exister pour que le démon multichemin puisse démarrer. Si ce fichier n'existe pas, vous pouvez créer un fichier vide à zéro octet en utilisant la commande suivante :
 
-`touch /etc/multipath.conf`.
+`touch /etc/multipath.conf`
 
-Lors de la première création de ce fichier, vous devrez peut-être activer et démarrer les services multipathing.
+Lors de la première création du `multipath.conf` fichier, vous devrez peut-être activer et démarrer les services multivoies en utilisant les commandes suivantes :
 
 [listing]
 ----
 # chkconfig multipathd on
 # /etc/init.d/multipathd start
 ----
-* Il n'y a aucune exigence d'ajouter directement quoi que ce soit au `multipath.conf` fichier sauf si vous avez des périphériques que vous ne souhaitez pas gérer multipath ou si vous avez des paramètres existants qui remplacent les paramètres par défaut.
-* Vous pouvez ajouter la syntaxe suivante à la `multipath.conf` fichier pour exclure les périphériques indésirables :
-+
-** Remplacez le <DevId> par la chaîne WWID du périphérique que vous souhaitez exclure :
-+
+Il n'est pas nécessaire d'ajouter des périphériques directement au `multipath.conf` fichier, sauf si vous disposez de périphériques que vous ne souhaitez pas gérer les chemins d'accès multiples ou si vous avez des paramètres existants qui remplacent les paramètres par défaut. Pour exclure les périphériques indésirables, vous ajoutez la syntaxe suivante au `multipath.conf` fichier, en remplaçant <DevId> par la chaîne WWID du périphérique que vous souhaitez exclure :
+
 [listing]
 ----
 blacklist {
@@ -27,12 +24,8 @@ blacklist {
         devnode "^cciss.*"
 }
 ----
-
-
-
-
 .Exemple
-Dans cet exemple, `sda` Est le disque SCSI local que nous devons ajouter à la liste noire.
+Dans l'exemple suivant, `sda` est le disque SCSI local que vous souhaitez ajouter à la liste noire.
 
 .Étapes
 . Exécutez la commande suivante pour déterminer l'identifiant WWID :

@@ -28,7 +28,7 @@ blacklist {
 L'exemple suivant détermine le WWID d'un périphérique et l'ajoute au `multipath.conf` fichier.
 
 .Étapes
-. Exécutez la commande suivante pour déterminer l'identifiant WWID :
+. Déterminez le WWID :
 +
 [listing]
 ----
@@ -36,7 +36,7 @@ L'exemple suivant détermine le WWID d'un périphérique et l'ajoute au `multipa
 360030057024d0730239134810c0cb833
 ----
 +
-`sda` Est le disque SCSI local que nous devons ajouter à la liste noire.
+`sda` Est le disque SCSI local que vous souhaitez ajouter à la liste noire.
 
 . Ajoutez le `WWID` à la strophe de liste noire dans `/etc/multipath.conf`:
 +

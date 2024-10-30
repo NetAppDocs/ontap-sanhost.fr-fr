@@ -53,7 +53,7 @@ NOTE: NetApp continue de fonctionner avec les utilitaires hôtes afin d'ajouter 
 
 == Corrigé dans cette version
 
-Problème intermittent de défaillance du système d'exploitation de l'hôte qui se produit lors de l'exécution du `sanlun lun show -p` La commande dans SLES12SP1, OL7.2, RHEL7.2 et RHEL 6.8 est corrigée dans cette version.
+Le problème de défaillance intermittente du système d'exploitation de l'hôte qui se produit lors de l'exécution de la `sanlun lun show -p` commande dans SUSE Linux Enterprise Server 12 SP1, OL 7.2, RHEL 7.2 et RHEL 6.8 est corrigé dans cette version.
 
 
 

@@ -31,7 +31,11 @@ Il existe deux options pour démarrer le système d'exploitation : par démarrag
 Si vous choisissez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser la matrice d'interopérabilité NetApp pour vérifier que votre se, votre HBA, votre micrologiciel HBA, votre BIOS de démarrage HBA et votre version de ONTAP sont pris en charge.
 
 . Mappez la LUN de démarrage SAN sur l'hôte.
-. Vérifiez que plusieurs chemins sont disponibles. N'oubliez pas que plusieurs chemins ne seront disponibles qu'après la mise en service et l'exécution du système d'exploitation hôte sur les chemins.
+. Vérifiez que plusieurs chemins sont disponibles.
++
+
+NOTE: Plusieurs chemins deviennent disponibles uniquement après l'exécution du système d'exploitation hôte sur les chemins.
+
 . Activez le démarrage SAN dans le BIOS du serveur pour les ports auxquels la LUN de démarrage SAN est mappée. Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la documentation spécifique au fournisseur.
 . Redémarrez l'hôte pour vérifier que le démarrage est réussi.
 
@@ -84,9 +88,9 @@ NOTE: Lorsque vous sélectionnez la prise en charge MPIO, Windows Unified Host U
 
 Pour la configuration non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes.
 
-Les chemins ayant les priorités les plus élevées sont actifs/optimisés, ce qui signifie qu'ils sont gérés par le contrôleur où se trouve l'agrégat.
+Les chemins ayant des priorités plus élevées sont Active/Optimized (actif/optimisé), ce qui signifie que les services sont gérés par le contrôleur où se trouve l'agrégat.
 
-Les chemins avec les priorités les plus basses sont actifs, mais ne sont pas optimisés car ils sont servis à partir d'un autre contrôleur.
+Les chemins aux priorités inférieures sont actifs, mais ne sont pas optimisés, car ils sont desservis par un autre contrôleur.
 
 
 NOTE: Les chemins non optimisés ne sont utilisés que lorsque les chemins optimisés ne sont pas disponibles.

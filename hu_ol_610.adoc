@@ -26,9 +26,9 @@ Le pack logiciel NetApp Linux Unified Host Utilities est disponible sur le link:
 
 NetApp recommande vivement d'installer les utilitaires d'hôtes unifiés Linux, mais ce n'est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
 
-.Ce dont vous avez besoin
-Si une version de Linux Unified Host Utilities est actuellement installée, vous devez la mettre à niveau ou la supprimer et utiliser les étapes suivantes pour installer la dernière version.
+Si une version de Linux Unified Host Utilities est actuellement installée, vous devez la mettre à niveau ou la supprimer et suivre ces étapes pour installer la dernière version.
 
+.Étapes
 . Téléchargez le pack logiciel Linux Unified Host Utilities 32 bits ou 64 bits à partir du link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^] Sur votre hôte.
 . Utilisez la commande suivante pour installer le pack logiciel :
 +
@@ -58,7 +58,7 @@ Exemple de résultat :
 ----
 controller(7mode/E-Series)/            device     host               lun
 vserver(cDOT/FlashRay)   lun-pathname  filename   adapter  protocol  size    Product
--------------------------------------------------------------------------
+------------------------------------------------------------------------------------
 data_vserver          /vol/vol1/lun1   /dev/sdb   host16   FCP       120.0g  cDOT
 data_vserver          /vol/vol1/lun1   /dev/sdc   host15   FCP       120.0g  cDOT
 data_vserver          /vol/vol2/lun2   /dev/sdd   host16   FCP       120.0g  cDOT
@@ -101,7 +101,7 @@ kernel /vmlinuz-3.8.13-68.1.2.el6uek.x86_64 ro root=/dev/mapper/vg_ibmx3550m4210
 ....
 . Utilisez le `mkinitrd` commande pour recréer l'image-initrd. Oracle 6x et les versions ultérieures utilisent l'une ou l'autre : la commande : `mkinitrd -f /boot/ initrd-"uname -r".img uname -r`Ou la commande : `dracut -f`
 . Redémarrez l'hôte.
-. Vérifiez la sortie de la `cat /proc/cmdline` commande pour vous assurer que le paramètre est terminé. Vous pouvez utiliser `multipath -ll` la commande pour vérifier les paramètres de vos LUN ONTAP. Il devrait y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant les priorités les plus élevées sont actifs/optimisés, ce qui signifie qu'ils sont gérés par le contrôleur où se trouve l'agrégat. Les chemins avec les priorités les plus basses sont actifs, mais ne sont pas optimisés car ils sont servis à partir d'un autre contrôleur. Les chemins non optimisés ne sont utilisés que lorsque les chemins optimisés ne sont pas disponibles.
+. Vérifiez la sortie de la `cat /proc/cmdline` commande pour vous assurer que le paramètre est terminé. Vous pouvez utiliser `multipath -ll` la commande pour vérifier les paramètres de vos LUN ONTAP. Il devrait y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant des priorités plus élevées sont Active/Optimized (actif/optimisé), ce qui signifie qu'ils sont gérés par le contrôleur où se trouve l'agrégat. Les chemins aux priorités inférieures sont actifs, mais ne sont pas optimisés, car ils sont desservis par un autre contrôleur. Les chemins non optimisés ne sont utilisés que lorsque les chemins optimisés ne sont pas disponibles.
 
 
 .Exemple
@@ -120,7 +120,7 @@ size=80G features='4 queue_if_no_path pg_init_retries 50 retain_attached_hw_hand
   |- 0:0:19:37 sddu 71:192  active ready running
 ----
 
-NOTE: N'utilisez pas un nombre excessif de chemins pour une seule LUN. Il ne faut pas plus de quatre chemins. Plus de huit chemins peuvent entraîner des problèmes de chemin lors des défaillances du stockage.
+NOTE: Une seule LUN ne doit pas nécessiter plus de quatre chemins. Plus de huit chemins peuvent entraîner des problèmes de chemin lors des défaillances du stockage.
 
 
 
@@ -128,22 +128,19 @@ NOTE: N'utilisez pas un nombre excessif de chemins pour une seule LUN. Il ne fau
 
 Oracle Linux 6.10 OS est compilé pour reconnaître les LUN ONTAP et définir automatiquement tous les paramètres de configuration correctement.
 
-Le `multipath.conf` le fichier doit exister pour que le démon multivoie démarre, mais vous pouvez créer un fichier vide à zéro octet en utilisant la commande suivante :
+Le `multipath.conf` fichier doit exister pour que le démon multichemin puisse démarrer. Si ce fichier n'existe pas, vous pouvez créer un fichier vide à zéro octet en utilisant la commande suivante :
 
-`touch /etc/multipath.conf`.
+`touch /etc/multipath.conf`
 
-Lors de la première création de ce fichier, vous devrez peut-être activer et démarrer les services multipathing.
+Lors de la première création du `multipath.conf` fichier, vous devrez peut-être activer et démarrer les services multivoies en utilisant les commandes suivantes :
 
 [listing]
 ----
 # chkconfig multipathd on
 # /etc/init.d/multipathd start
 ----
-* Il n'y a aucune exigence d'ajouter directement quoi que ce soit au `multipath.conf` fichier sauf si vous avez des périphériques que vous ne souhaitez pas gérer multipath ou si vous avez des paramètres existants qui remplacent les paramètres par défaut.
-* Vous pouvez ajouter la syntaxe suivante à la `multipath.conf` fichier pour exclure les périphériques indésirables :
-+
-** Remplacez le <DevId> par la chaîne WWID du périphérique que vous souhaitez exclure :
-+
+Il n'est pas nécessaire d'ajouter des périphériques directement au `multipath.conf` fichier, sauf si vous disposez de périphériques que vous ne souhaitez pas gérer les chemins d'accès multiples ou si vous avez des paramètres existants qui remplacent les paramètres par défaut. Pour exclure les périphériques indésirables, vous ajoutez la syntaxe suivante au `multipath.conf` fichier, en remplaçant <DevId> par la chaîne WWID du périphérique que vous souhaitez exclure :
+
 [listing]
 ----
 blacklist {
@@ -153,12 +150,8 @@ blacklist {
         devnode "^cciss.*"
 }
 ----
-
-
-
-
 .Exemple
-Dans cet exemple, `sda` Est le disque SCSI local que nous devons ajouter à la liste noire.
+Dans l'exemple suivant, `sda` est le disque SCSI local que vous souhaitez ajouter à la liste noire.
 
 .Étapes
 . Exécutez la commande suivante pour déterminer l'identifiant WWID :

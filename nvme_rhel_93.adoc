@@ -233,8 +233,10 @@ FCP CMPL: xb 00000629 Err 0001bd3d
 --
 .Adaptateur FC Marvell/QLogic pour NVMe/FC
 --
+Le pilote natif qla2xxx inclus dans le noyau RHEL 9.3 GA possède les derniers correctifs. Ces correctifs sont essentiels à la prise en charge de ONTAP.
+
 .Étapes
-. Le pilote natif qla2xxx inclus dans le noyau RHEL 9.3 GA dispose des derniers correctifs essentiels à la prise en charge de ONTAP. Vérifiez que vous exécutez les versions du pilote de carte et du micrologiciel prises en charge :
+. Vérifiez que vous exécutez les versions du pilote de carte et du micrologiciel prises en charge :
 +
 [listing]
 ----

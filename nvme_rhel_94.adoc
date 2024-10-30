@@ -237,8 +237,10 @@ FCP CMPL: xb 00000629 Err 0001bd3d
 --
 .Adaptateur FC Marvell/QLogic pour NVMe/FC
 --
+Le pilote natif qla2xxx inclus dans le noyau RHEL 9.4 GA possède les derniers correctifs. Ces correctifs sont essentiels à la prise en charge de ONTAP.
+
 .Étapes
-. Le pilote natif qla2xxx inclus dans le noyau RHEL 9.4 GA dispose des derniers correctifs essentiels à la prise en charge de ONTAP. Vérifiez que vous exécutez les versions du pilote de carte et du micrologiciel prises en charge :
+. Vérifiez que vous exécutez les versions du pilote de carte et du micrologiciel prises en charge :
 +
 [listing]
 ----
@@ -295,9 +297,7 @@ NOTE: Cela ne s'applique pas aux hôtes NVMe/FC Qlogic.
 
 == Configurez NVMe/TCP
 
-NVMe/TCP ne dispose pas de la fonctionnalité de connexion automatique. Par conséquent, vous devez exécuter manuellement les fonctionnalités de connexion NVMe/TCP ou de connexion pour découvrir les sous-systèmes et les espaces de noms NVMe/TCP.
-
-Vous pouvez utiliser la procédure suivante pour configurer NVMe/TCP.
+NVMe/TCP ne dispose pas de la fonctionnalité de connexion automatique. Par conséquent, vous devez utiliser la procédure suivante pour découvrir les sous-systèmes et les espaces de noms NVMe/TCP en exécutant manuellement la fonctionnalité de connexion NVMe/TCP ou de connexion.
 
 .Étapes
 . Vérifiez que le port initiateur peut récupérer les données de la page de journal de découverte sur les LIF NVMe/TCP prises en charge :
@@ -445,7 +445,7 @@ nvme connect-all -t tcp -w host-traddr -a traddr
 
 
 
-NOTE: À partir de RHEL 9.4, le paramètre par défaut pour NVMe/TCP `ctrl_loss_tmo` le délai d'attente est désactivé, ce qui signifie qu'il n'y a pas de limite au nombre de tentatives (tentatives indéterminées). Par conséquent, vous n'avez pas besoin de configurer manuellement un spécifique `ctrl_loss_tmo` durée de temporisation lors de l'utilisation du `nvme connect` ou `nvme connect-all` commandes (option -l ). Avec ce comportement par défaut, les contrôleurs NVMe/TCP ne connaissent pas de délais d'expiration en cas de défaillance de chemin et restent connectés indéfiniment.
+NOTE: À partir de RHEL 9.4, le paramètre par défaut du délai d'expiration NVMe/TCP `ctrl_loss_tmo` est désactivé. Cela signifie qu'il n'y a pas de limite au nombre de tentatives (tentatives indéterminées). Par conséquent, vous n'avez pas besoin de configurer manuellement une durée de temporisation spécifique `ctrl_loss_tmo` lorsque vous utilisez les `nvme connect` commandes ou `nvme connect-all` (option -l ). Avec ce comportement par défaut, les contrôleurs NVMe/TCP ne connaissent pas de délais d'expiration en cas de défaillance de chemin et restent connectés indéfiniment.
 
 
 

@@ -22,7 +22,7 @@ La prise en charge suivante est disponible pour la configuration hôte NVMe-of p
 
 * Prise en charge de NVMe over TCP (NVMe/TCP) en plus de NVMe/FC. Le plug-in NetApp dans le plug-in natif `nvme-cli` Le package affiche les détails des ONTAP pour les namespaces NVMe/FC et NVMe/TCP.
 * Le trafic NVMe et SCSI peut être exécuté sur le même hôte existant. Par conséquent, pour les LUN SCSI, vous pouvez configurer dm-multipath pour les périphériques SCSI mpath, tandis que vous pouvez utiliser le protocole NVMe multipath pour configurer les périphériques d'espace de noms NVMe-of sur l'hôte.
-* Nous ne prenons pas en charge Sanlunn pour NVMe-of. Par conséquent, il n'existe pas de support d'utilitaire hôte pour NVMe-of sur un hôte OL 8.8. Vous pouvez compter sur le plug-in NetApp inclus dans la `nvme-cli` Pour tous les transports NVMe-of.
+* Nous ne prenons pas en charge Sanlunn pour NVMe-of. Par conséquent, il n'existe pas de support d'utilitaire hôte pour NVMe-of sur un hôte OL 8.8. Vous pouvez utiliser le plug-in NetApp inclus dans le pack natif `nvme-cli` pour tous les transports NVMe-of.
 
 
 Pour plus d'informations sur les configurations prises en charge, reportez-vous au link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^].
@@ -240,8 +240,10 @@ FCP CMPL: xb 00001f50 Err 0000d9f8
 --
 .Adaptateur FC Marvell/QLogic pour NVMe/FC
 --
+Le pilote natif de la boîte de réception qla2xxx inclus dans le noyau OL 8.8 GA a les derniers correctifs. Ces correctifs sont essentiels à la prise en charge de ONTAP.
+
 .Étapes
-. Le pilote natif de la boîte de réception qla2xxx inclus dans le noyau OL 8.8 GA dispose des derniers correctifs essentiels pour la prise en charge de ONTAP. Vérifiez que vous exécutez les versions du pilote de carte et du micrologiciel prises en charge :
+. Vérifiez que vous exécutez les versions du pilote de carte et du micrologiciel prises en charge :
 +
 [listing]
 ----

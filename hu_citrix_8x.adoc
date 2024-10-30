@@ -43,7 +43,7 @@ Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la docum
 
 == Chemins d'accès multiples
 
-Pour Citrix Hypervisor (CH) 8.x `/etc/multipath.conf` le fichier doit exister, mais il n'est pas nécessaire d'apporter des modifications spécifiques au fichier. CH 8.x est compilé avec tous les paramètres requis pour reconnaître et gérer correctement les LUN ONTAP. Vous pouvez utiliser le `/sbin/mpathutil` Commande status pour vérifier les paramètres de vos LUN ONTAP. Les sections suivantes fournissent un exemple de résultat de chemins d'accès multiples pour une LUN mappée aux rôles ASA.
+Pour Citrix Hypervisor (CH) 8.x, le `/etc/multipath.conf` fichier doit exister, mais vous n'avez pas besoin d'apporter de modifications spécifiques au fichier. CH 8.x est compilé avec tous les paramètres requis pour reconnaître et gérer correctement les LUN ONTAP. Vous pouvez utiliser `/sbin/mpathutil` la commande status pour vérifier les paramètres de vos LUN ONTAP. Les sections suivantes fournissent des exemples de sorties multivoies pour une LUN mappée aux rôles ASA.
 
 
 
@@ -69,9 +69,9 @@ NOTE: N'utilisez pas un nombre excessif de chemins pour une seule LUN. Pas plus 
 
 
 
-=== Configuration non ASA
+=== Configurations non ASA
 
-Pour la configuration non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant les priorités les plus élevées sont actifs/optimisés, ce qui signifie qu'ils sont gérés par le contrôleur où se trouve l'agrégat. Les chemins avec les priorités les plus basses sont actifs, mais ne sont pas optimisés car ils sont servis à partir d'un autre contrôleur. Les chemins non optimisés ne sont utilisés que lorsque les chemins optimisés ne sont pas disponibles.
+Pour les configurations non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant des priorités plus élevées sont Active/Optimized (actif/optimisé), ce qui signifie que les services sont gérés par le contrôleur où se trouve l'agrégat. Les chemins aux priorités inférieures sont actifs, mais ne sont pas optimisés, car ils sont desservis par un autre contrôleur. Les chemins non optimisés ne sont utilisés que lorsque les chemins optimisés ne sont pas disponibles.
 
 .Exemple
 L'exemple suivant montre la sortie correcte pour une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés :
@@ -88,7 +88,7 @@ size=30G features='4 queue_if_no_path pg_init_retries 50 retain_attached_hw_hand
    `- 12:0:26:11 sdyt  129:720 active ready running
 ....
 
-NOTE: N'utilisez pas un nombre excessif de chemins pour une seule LUN. Il ne faut pas plus de quatre chemins. Plus de huit chemins peuvent entraîner des problèmes de chemin lors des défaillances du stockage.
+NOTE: Une seule LUN ne doit pas nécessiter plus de quatre chemins. Plus de huit chemins peuvent entraîner des problèmes de chemin lors des défaillances du stockage.
 
 
 
@@ -126,7 +126,7 @@ blacklist {
 NOTE: Remplacez le *<DevID>* par la chaîne WWID du périphérique que vous souhaitez exclure.
 
 .Exemple
-Dans cet exemple pour Citrix Hypervisor 8.x, `sda` Est le disque SCSI local que nous devons ajouter à la liste noire.
+Dans l'exemple suivant pour Citrix Hypervisor 8.x, `sda` est le disque SCSI local que vous souhaitez ajouter à la liste noire.
 
 . Exécutez la commande suivante pour déterminer l'identifiant WWID :
 +

@@ -18,16 +18,16 @@ summary: Décrit comment configurer NVMe/FC pour SUSE Linux Enterprise Server 15
 [role="lead"]
 Vous pouvez configurer NVMe over Fibre Channel (NVMe/FC) sur des hôtes exécutant SUSE Linux Enterprise Server 15 SP1 et ONTAP comme cible.
 
-Le protocole NVMe/FC est pris en charge sur ONTAP 9.6 ou version ultérieure pour les versions suivantes de SLES :
+NVMe/FC est pris en charge sur ONTAP 9.6 ou version ultérieure pour les versions suivantes de SUSE Linux Enterprise Server :
 
-* SLES15 SP1
+* SUSE Linux Enterprise Server 15 SP1
 +
-L'hôte SLES15 SP1 peut exécuter le trafic NVMe/FC et FCP via les mêmes ports d'adaptateur Fibre Channel initiator. Voir la link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] Pour obtenir la liste des contrôleurs et adaptateurs FC pris en charge,
+L'hôte SUSE Linux Enterprise Server 15 SP1 peut exécuter le trafic NVMe/FC et FCP via les mêmes ports d'adaptateur d'initiateur Fibre Channel. Consultez la link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] pour obtenir la liste des adaptateurs et contrôleurs FC pris en charge.
 
 +
 Pour obtenir la liste la plus récente des configurations et versions prises en charge, consultez le link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^].
 
-* Les scripts natifs de connexion automatique NVMe/FC sont inclus dans le pack nvme-cli. Vous pouvez utiliser le pilote lpfc natif de la boîte de réception sur SLES15 SP1.
+* Les scripts natifs de connexion automatique NVMe/FC sont inclus dans le pack nvme-cli. Vous pouvez utiliser le pilote natif inbox lpfc sur SUSE Linux Enterprise Server 15 SP1.
 
 
 
@@ -38,12 +38,12 @@ Le démarrage SAN à l'aide du protocole NVMe-of n'est pas pris en charge pour l
 
 
 
-== Activez NVMe/FC sur SLES15 SP1
+== Activez NVMe/FC sur SUSE Linux Enterprise Server 15 SP1
 
-. Mise à niveau vers le noyau MU SLES15 SP2 recommandé
+. Effectuez la mise à niveau vers le noyau MU recommandé de SUSE Linux Enterprise Server 15 SP2
 . Effectuez une mise à niveau vers la version d'UM nvme-cli recommandée.
 +
-Ce pack nvme-cli contient les scripts natifs de connexion automatique NVMe/FC. Vous n'avez donc pas besoin d'installer les scripts externes de connexion automatique NVMe/FC fournis par Broadcom sur l'hôte SLES15 SP1. Ce pack inclut également la règle ONTAP udev qui permet d'équilibrer la charge Round-Robin pour les chemins d'accès multiples NVMe, ainsi que le plug-in NetApp pour les terminaux ONTAP.
+Ce package nvme-cli contient les scripts natifs de connexion automatique NVMe/FC. Vous n'avez donc pas besoin d'installer les scripts externes de connexion automatique NVMe/FC fournis par Broadcom sur l'hôte SUSE Linux Enterprise Server 15 SP1. Ce pack inclut également la règle ONTAP udev qui permet d'équilibrer la charge Round-Robin pour les chemins d'accès multiples NVMe, ainsi que le plug-in NetApp pour les terminaux ONTAP.
 
 +
 [listing]
@@ -51,7 +51,7 @@ Ce pack nvme-cli contient les scripts natifs de connexion automatique NVMe/FC. V
 # rpm -qa | grep nvme-cli
 nvme-cli-1.8.1-6.9.1.x86_64
 ----
-. Sur l'hôte SLES15 SP1, vérifiez la chaîne NQN hôte à l'adresse `/etc/nvme/hostnqn` Et vérifiez qu'il correspond à la chaîne NQN hôte pour le sous-système correspondant de la matrice ONTAP. Par exemple :
+. Sur l'hôte SUSE Linux Enterprise Server 15 SP1, vérifiez la chaîne NQN de l'hôte à `/etc/nvme/hostnqn` et vérifiez qu'elle correspond à la chaîne NQN de l'hôte pour le sous-système correspondant sur la baie ONTAP. Par exemple :
 +
 [listing]
 ----

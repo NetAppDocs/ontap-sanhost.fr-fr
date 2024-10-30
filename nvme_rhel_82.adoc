@@ -24,7 +24,7 @@ Voir la link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité 
 
 == Caractéristiques
 
-* À partir de RHEL 8.2, `nvme-fc auto-connect` des scripts sont inclus dans le stockage natif `nvme-cli` création de package. Vous pouvez vous appuyer sur ces scripts natifs de connexion automatique au lieu d'installer les scripts de connexion automatique fournis par le fournisseur externe.
+* À partir de RHEL 8.2, `nvme-fc auto-connect` les scripts sont inclus dans le package natif `nvme-cli`. Vous pouvez utiliser ces scripts de connexion automatique natifs au lieu d'installer les scripts de connexion automatique fournis par le fournisseur externe.
 * À partir de RHEL 8.2, une version native `udev` la règle est déjà fournie dans le cadre du `nvme-cli` Une solution qui permet l'équilibrage de la charge Round-Robin pour les chemins d'accès multiples NVMe. Vous n'avez plus besoin de créer cette règle manuellement (comme cela a été fait dans RHEL 8.1).
 * À partir de RHEL 8.2, le trafic NVMe et SCSI peut être exécuté sur le même hôte existant. En fait, il s'agit de la configuration d'hôte déployée prévue. Par conséquent, pour SCSI, vous pouvez configurer `dm-multipath` Comme d'habitude pour les LUN SCSI, la source de résultats dans `mpath` De l'hôte, alors que les chemins d'accès multiples NVMe peuvent être utilisés pour configurer des périphériques multivoies NVMe-of sur l'hôte.
 * À partir de RHEL 8.2, le plug-in NetApp dans le natif `nvme-cli` Le package peut afficher les détails ONTAP pour les espaces de noms ONTAP.
