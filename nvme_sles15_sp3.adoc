@@ -16,7 +16,7 @@ summary: Décrit comment configurer NVMe/FC pour SUSE Linux Enterprise Server 15
 
 
 [role="lead"]
-NVMe over Fabrics ou NVMe-of (y compris NVMe/FC et autres transports) est pris en charge avec SUSE Linux Enterprise Server 15 SP3 avec ANA (Asymmetric Namespace Access). ANA est l'équivalent ALUA de l'environnement NVMe-of et est actuellement implémentée avec NVMe Multipath dans le noyau. Cette procédure vous permet d'activer NVMe-of avec le multichemin NVMe intégré au noyau en utilisant ANA sur SUSE Linux Enterprise Server 15 SP3 et ONTAP comme cible.
+NVMe over Fabrics ou NVMe-of (y compris NVMe/FC et autres transports) est pris en charge pour SUSE Linux Enterprise Server 15 SP3 avec ANA (Asymmetric Namespace Access). ANA est l'équivalent ALUA dans les environnements NVMe-of et est actuellement implémentée avec NVMe Multipath intégré dans le noyau. Cette procédure vous permet d'activer NVMe-of avec le multichemin NVMe intégré au noyau en utilisant ANA sur SUSE Linux Enterprise Server 15 SP3 et ONTAP comme cible.
 
 Reportez-vous à la link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^] pour des informations précises sur les configurations prises en charge.
 
@@ -25,7 +25,7 @@ Reportez-vous à la link:https://mysupport.netapp.com/matrix/["Matrice d'interop
 == Caractéristiques
 
 * SUSE Linux Enterprise Server 15 SP3 prend en charge NVMe/FC et d'autres systèmes de transport.
-* Nous ne prenons pas en charge Sanlunn pour NVMe-of. Par conséquent, LUHU ne prend pas en charge NVMe-of sur SUSE Linux Enterprise Server 15 SP3. Vous pouvez utiliser le plug-in NetApp inclus dans le package nvme-cli natif pour NVMe-of. Ces données doivent prendre en charge tous les transports NVMe-of.
+* Nous ne prenons pas en charge Sanlunn pour NVMe-of. Par conséquent, LUHU ne prend pas en charge NVMe-of sur SUSE Linux Enterprise Server 15 SP3. Vous pouvez vous appuyer sur le plug-in NetApp inclus dans le package nvme-cli natif pour NVMe-of. Ces données doivent prendre en charge tous les transports NVMe-of.
 * Le trafic NVMe et SCSI peut être exécuté sur le même hôte existant. En fait, ce chiffre devrait correspondre à la configuration hôte couramment déployée pour les clients. Par conséquent, pour SCSI, vous pouvez configurer `dm-multipath` Comme d'habitude pour les LUN SCSI, ce qui entraîne des périphériques mpath, tandis que le protocole NVMe multipath peut être utilisé pour configurer les périphériques NVMe-of multipathing sur l'hôte.
 
 

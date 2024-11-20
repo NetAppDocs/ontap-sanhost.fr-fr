@@ -22,8 +22,9 @@ Vous pouvez configurer NVMe over Fabrics (NVMe-of) sur les hôtes initiateurs ex
 
 == Prise en charge
 
-* Depuis la version ONTAP 9.10.1, le protocole NVMe/TCP est pris en charge pour ONTAP.
+* Depuis ONTAP 9.16.1, l'allocation d'espace est activée par défaut pour tous les nouveaux espaces de noms NVMe.
 * À partir de la version ONTAP 9.9.1 P3, le protocole NVMe/FC est pris en charge pour ESXi 8 et les versions ultérieures.
+* Depuis la version ONTAP 9.10.1, le protocole NVMe/TCP est pris en charge pour ONTAP.
 
 
 
@@ -266,6 +267,38 @@ tcp.vmnic2:34:80:0d:30:ca:e0-tcp.192.168.100.167:4420-uuid.f4f14337c3ad4a639edf0
    Path State: active
    Path Config: {ANA_GRP_id=6,*ANA_GRP_state=AO*,health=UP}
 ----
+
+
+
+
+== Activez l'allocation d'espace
+
+L'allocation d'espace est prise en charge pour ESXi 8.x et les versions ultérieures.
+
+Lorsque l'allocation d'espace est activée, si un espace de nom manque d'espace, ONTAP communique à l'hôte qu'aucun espace libre n'est disponible pour les opérations d'écriture ; l'espace de nom reste en ligne et les opérations de lecture continuent d'être traitées. Les opérations d'écriture reprennent lorsque de l'espace libre supplémentaire est disponible. L'allocation d'espace permet également à l'hôte d'effectuer `UNMAP` des opérations (parfois appelées `TRIM`). Les opérations UNMAP permettent à un hôte d'identifier les blocs de données qui ne sont plus nécessaires, car ils ne contiennent plus de données valides. Le système de stockage peut ensuite désallouer ces blocs de données afin que l'espace puisse être consommé ailleurs.
+
+.Avant de commencer
+link:https://docs.netapp.com/us-en/ontap/san-admin/enable-space-allocation.html["Activez l'allocation d'espace sur votre système de stockage ONTAP"^]. Vous devez ensuite effectuer les étapes suivantes sur votre hôte ESXi.
+
+.Étapes
+. Sur votre hôte ESXi, vérifiez que le DSM est désactivé :
++
+`esxcfg-advcfg -g /SCSi/NVmeUseDsmTp4040`
+
++
+La valeur attendue est 0.
+
+. Activez le DSM NVMe :
++
+`esxcfg-advcfg -s 1 /Scsi/NvmeUseDsmTp4040`
+
+. Vérifiez que le DSM est activé :
++
+`esxcfg-advcfg -g /SCSi/NVmeUseDsmTp4040`
+
++
+La valeur attendue est 1.
+
 
 
 

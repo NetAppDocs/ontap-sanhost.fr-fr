@@ -19,7 +19,7 @@ summary: Décrit comment configurer NVMe/FC pour SUSE Linux Enterprise Server 15
 
 
 [role="lead"]
-NVMe over Fabrics (NVMe-of), y compris NVMe over Fibre Channel (NVMe/FC) et d'autres moyens de transport, est pris en charge par SUSE Linux Enterprise Server 15 SP5 avec ANA (Asymmetric Namespace Access). Dans les environnements NVMe-of, ANA est l'équivalent des chemins d'accès multiples ALUA dans les environnements iSCSI et FCP. Il est implémenté avec les chemins d'accès multiples NVMe intégrés au noyau.
+NVMe over Fabrics (NVMe-of), y compris NVMe over Fibre Channel (NVMe/FC) et d'autres moyens de transport, est pris en charge pour SUSE Linux Enterprise Server 15 SP5 avec ANA (Asymmetric Namespace Access). Dans les environnements NVMe-of, ANA est l'équivalent des chemins d'accès multiples ALUA dans les environnements iSCSI et FCP. Il est implémenté avec les chemins d'accès multiples NVMe intégrés au noyau.
 
 La prise en charge suivante est disponible pour la configuration hôte NVMe-of pour SUSE Linux Enterprise Server 15 SP5 avec ONTAP :
 
@@ -236,26 +236,33 @@ cat /sys/module/qla2xxx/parameters/ql2xnvmeenable
 
 ONTAP signale une taille de transfert MAX Data (MDT) de 8 dans les données Identify Controller. La taille maximale des demandes d'E/S peut donc atteindre 1 Mo. Pour émettre des demandes d'E/S d'une taille de 1 Mo pour un hôte Broadcom NVMe/FC, vous devez augmenter la `lpfc` valeur du `lpfc_sg_seg_cnt` paramètre à 256 par rapport à la valeur par défaut 64.
 
+
+NOTE: Les étapes suivantes ne s'appliquent pas aux hôtes NVMe/FC Qlogic.
+
 .Étapes
 . Réglez le `lpfc_sg_seg_cnt` paramètre sur 256 :
 +
 [listing]
 ----
-# cat /etc/modprobe.d/lpfc.conf
+cat /etc/modprobe.d/lpfc.conf
+----
++
+.Exemple de sortie
+[listing]
+----
 options lpfc lpfc_sg_seg_cnt=256
 ----
-. Lancer une `dracut -f` commande et redémarrer l'hôte :
+. Lancer `dracut -f` la commande et redémarrer l'hôte :
 . Vérifiez que `lpfc_sg_seg_cnt` est 256 :
 +
 [listing]
 ----
-# cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
-256
+cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
 ----
++
+La valeur attendue est 256.
 
 
-
-NOTE: Cela ne s'applique pas aux hôtes NVMe/FC Qlogic.
 
 
 
@@ -273,7 +280,7 @@ Created symlink /etc/systemd/system/default.target.wants/nvmf- autoconnect.servi
 
 ----
 . Redémarrez l'hôte.
-. Vérifiez-le `nvmf-autoconnect.service` et `nvmefc-boot-connections.service` sont en cours d'exécution après le démarrage du système :
+. Vérifiez que `nvmf-autoconnect.service` et `nvmefc-boot-connections.service` sont en cours d'exécution après le démarrage du système :
 +
 *Exemple de sortie :*
 
