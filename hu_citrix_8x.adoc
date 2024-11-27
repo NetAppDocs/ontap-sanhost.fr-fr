@@ -88,7 +88,7 @@ size=30G features='4 queue_if_no_path pg_init_retries 50 retain_attached_hw_hand
    `- 12:0:26:11 sdyt  129:720 active ready running
 ....
 
-NOTE: Une seule LUN ne doit pas nécessiter plus de quatre chemins. Plus de huit chemins peuvent entraîner des problèmes de chemin lors des défaillances du stockage.
+NOTE: Une seule LUN ne doit pas nécessiter plus de quatre chemins. La présence de plus de quatre chemins peut entraîner des problèmes de chemin pendant les pannes de stockage.
 
 
 

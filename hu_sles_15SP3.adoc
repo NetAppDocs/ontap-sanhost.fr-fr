@@ -116,7 +116,7 @@ size=80G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=
   `- 14:0:7:9   sdiw 8:256   active ready running
 ----
 
-NOTE: Une seule LUN ne doit pas nécessiter plus de quatre chemins. Plus de huit chemins peuvent entraîner des problèmes de chemin lors des défaillances du stockage.
+NOTE: Une seule LUN ne doit pas nécessiter plus de quatre chemins. La présence de plus de quatre chemins peut entraîner des problèmes de chemin pendant les pannes de stockage.
 
 
 
@@ -140,7 +140,7 @@ size=80G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=
   `- 14:0:5:0   sdgz 132:240 active ready running
 ----
 
-NOTE: Une seule LUN ne doit pas nécessiter plus de quatre chemins. Plus de huit chemins peuvent entraîner des problèmes de chemin lors des défaillances du stockage.
+NOTE: Une seule LUN ne doit pas nécessiter plus de quatre chemins. La présence de plus de quatre chemins peut entraîner des problèmes de chemin pendant les pannes de stockage.
 
 
 
@@ -148,18 +148,14 @@ NOTE: Une seule LUN ne doit pas nécessiter plus de quatre chemins. Plus de huit
 
 Le système d'exploitation SUSE Linux Enterprise Server 15 SP3 est compilé pour reconnaître les LUN ONTAP et définir automatiquement tous les paramètres de configuration pour les configurations ASA et non ASA.
 
-Le `multipath.conf` fichier doit exister pour que le démon multichemin puisse démarrer. Si ce fichier n'existe pas, vous pouvez créer un fichier vide à zéro octet en utilisant la commande suivante :
-
-`touch /etc/multipath.conf`
+Le `multipath.conf` fichier doit exister pour que le démon multichemin puisse démarrer. Si ce fichier n'existe pas, vous pouvez créer un fichier vide de zéro octet à l'aide de la `touch /etc/multipath.conf` commande
 
 Lors de la première création du `multipath.conf` fichier, vous devrez peut-être activer et démarrer les services multivoies en utilisant les commandes suivantes :
 
-[listing]
-----
-# chkconfig multipathd on
-# /etc/init.d/multipathd start
-----
-Il n'est pas nécessaire d'ajouter quelque chose directement au `multipath.conf` fichier, sauf si vous disposez de périphériques que vous ne souhaitez pas gérer le multipathing ou si vous avez des paramètres existants qui remplacent les paramètres par défaut. Pour exclure les périphériques indésirables, ajoutez la syntaxe suivante au `multipath.conf` fichier, en remplaçant <DevId> par la chaîne WWID du périphérique à exclure :
+`# chkconfig multipathd on`
+`# /etc/init.d/multipathd start`
+
+Vous n'avez pas besoin d'ajouter des éléments directement au `multipath.conf` fichier, sauf si vous avez des périphériques que vous ne souhaitez pas gérer le multipathing ou si vous avez des paramètres existants qui remplacent les paramètres par défaut. Pour exclure les périphériques indésirables, ajoutez la syntaxe suivante au `multipath.conf` fichier, en remplaçant <DevId> par la chaîne WWID du périphérique à exclure :
 
 [listing]
 ----
@@ -170,7 +166,6 @@ blacklist {
         devnode "^cciss.*"
 }
 ----
-.Exemple
 L'exemple suivant détermine le WWID d'un périphérique et l'ajoute au `multipath.conf` fichier.
 
 .Étapes
@@ -197,9 +192,9 @@ blacklist {
 ----
 
 
-Vous devez toujours vérifier votre `/etc/multipath.conf` fichier pour les paramètres hérités, en particulier dans la section valeurs par défaut, qui peut remplacer les paramètres par défaut.
+Vous devez toujours vérifier votre `/etc/multipath.conf` fichier, en particulier dans la section valeurs par défaut, pour les paramètres hérités qui peuvent remplacer les paramètres par défaut.
 
-Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faut les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Sans cette correction, les LUN ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
+Le tableau suivant présente les paramètres critiques `multipathd` pour les LUN ONTAP et le paramètre requis. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faut les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Sans cette correction, les LUN ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
 
 [cols="2"]
 |===

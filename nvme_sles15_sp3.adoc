@@ -217,7 +217,7 @@ ONTAP signale un DTO (MAX Data Transfer Size) de 8 dans les données Identify Co
 # cat /etc/modprobe.d/lpfc.conf
 options lpfc lpfc_sg_seg_cnt=256
 ----
-. Exécutez un `dracut -f` et redémarrez l'hôte.
+. Exécutez `dracut -f` la commande et redémarrez l'hôte.
 . Après le redémarrage, vérifiez que le paramètre ci-dessus a été appliqué en vérifiant la valeur sysfs correspondante :
 +
 [listing]

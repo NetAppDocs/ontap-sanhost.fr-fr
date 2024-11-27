@@ -109,7 +109,7 @@ Pour la configuration des baies SAN (ASA), il doit y avoir un groupe de chemins 
 image::asa.png[Capture d'écran d'une LUN ONTAP avec chemins actifs/optimisés]
 
 
-NOTE: N'utilisez pas un nombre excessif de chemins pour une seule LUN. Il ne faut pas plus de quatre chemins. Plus de huit chemins peuvent entraîner des problèmes de chemin lors des défaillances du stockage.
+NOTE: Une seule LUN ne doit pas nécessiter plus de quatre chemins. La présence de plus de quatre chemins peut entraîner des problèmes de chemin pendant les pannes de stockage.
 
 
 
