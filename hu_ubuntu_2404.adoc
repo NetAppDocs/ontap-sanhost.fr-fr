@@ -56,7 +56,7 @@ Pour Ubuntu 24.04, le `/etc/multipath.conf` fichier doit exister, mais vous n'av
 Pour toutes les configurations de baies SAN (ASA) et non-ASA, vous pouvez utiliser la `multipath -ll` commande pour vérifier les paramètres d'une LUN ONTAP, comme indiqué dans les exemples suivants.
 
 
-NOTE: Une seule LUN ne doit pas nécessiter plus de quatre chemins. Plus de huit chemins peuvent entraîner des problèmes de chemin lors des défaillances du stockage.
+NOTE: Une seule LUN ne doit pas nécessiter plus de quatre chemins. Plus de quatre chemins peuvent entraîner des problèmes de chemin pendant des pannes de stockage.
 
 
 
