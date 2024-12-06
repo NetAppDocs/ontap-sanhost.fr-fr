@@ -222,7 +222,7 @@ Il n'y a pas de problème connu.
 
 == Activez la taille d'E/S 1 Mo pour Broadcom NVMe/FC
 
-ONTAP signale une taille de transfert MAX Data (MDT) de 8 dans les données Identify Controller. La taille maximale des demandes d'E/S peut donc atteindre 1 Mo. Pour émettre des demandes d'E/S d'une taille de 1 Mo pour un hôte Broadcom NVMe/FC, vous devez augmenter la `lpfc` valeur du `lpfc_sg_seg_cnt` paramètre à 256 par rapport à la valeur par défaut 64.
+ONTAP signale une taille de transfert MAX Data (MDT) de 8 dans les données Identify Controller. La taille maximale des demandes d'E/S peut donc atteindre 1 Mo. Pour émettre des demandes d'E/S d'une taille de 1 Mo pour un hôte Broadcom NVMe/FC, augmentez la `lpfc` valeur du `lpfc_sg_seg_cnt` paramètre à 256 par rapport à la valeur par défaut 64.
 
 
 NOTE: Les étapes suivantes ne s'appliquent pas aux hôtes NVMe/FC Qlogic.

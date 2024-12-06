@@ -22,15 +22,15 @@ Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour 
 
 == Installez Linux Unified Host Utilities
 
-Le pack logiciel NetApp Linux Unified Host Utilities est disponible sur le link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^] dans un fichier .rpm 32 bits et 64 bits. Si vous ne savez pas quel fichier est adapté à votre configuration, utilisez le link:https://mysupport.netapp.com/matrix/#welcome["Matrice d'interopérabilité NetApp"^] pour vérifier celui dont vous avez besoin.
+Le progiciel Utilitaires hôtes unifiés NetApp Linux est disponible sur le link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^]dans un fichier .rpm 32 bits et 64 bits. Si vous ne savez pas quel fichier est adapté à votre configuration, utilisez le link:https://mysupport.netapp.com/matrix/#welcome["Matrice d'interopérabilité NetApp"^] pour vérifier lequel vous avez besoin.
 
-NetApp recommande vivement d'installer les utilitaires d'hôtes unifiés Linux, mais ce n'est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
+NetApp recommande fortement d'installer les utilitaires d'hôtes unifiés Linux, mais ce n'est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
 
-Si une version de Linux Unified Host Utilities est actuellement installée, vous devez la mettre à niveau ou la supprimer et suivre ces étapes pour installer la dernière version.
+Si Linux Unified Host Utilities est actuellement installé, vous devez soit le mettre à niveau vers la dernière version, soit le supprimer et suivre ces étapes pour installer la dernière version.
 
 .Étapes
-. Téléchargez le pack logiciel Linux Unified Host Utilities 32 bits ou 64 bits à partir du link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^] Sur votre hôte.
-. Utilisez la commande suivante pour installer le pack logiciel :
+. Téléchargez le pack logiciel Linux Unified Host Utilities 32 bits ou 64 bits à partir du link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^] à votre hôte.
+. Installez le pack logiciel :
 +
 `rpm -ivh netapp_linux_unified_host_utilities-7-1.x86_64`
 
@@ -76,7 +76,7 @@ Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charg
 . Vérifiez que plusieurs chemins sont disponibles.
 +
 
-NOTE: Plusieurs chemins deviennent disponibles une fois que le système d'exploitation hôte est en cours d'exécution sur les chemins.
+NOTE: Plusieurs chemins deviennent disponibles une fois que le système d'exploitation hôte est opérationnel sur les chemins.
 
 . Activez le démarrage SAN dans le BIOS du serveur pour les ports auxquels la LUN de démarrage SAN est mappée.
 +
@@ -161,7 +161,7 @@ NOTE: Une seule LUN ne doit pas nécessiter plus de quatre chemins. La présence
 
 Le système d'exploitation RHEL 6.7 est compilé pour reconnaître les LUN ONTAP et définir automatiquement tous les paramètres de configuration pour la configuration ASA et non ASA.
 
-Le `multipath.conf` fichier doit exister pour que le démon multichemin puisse démarrer. Si ce fichier n'existe pas, vous pouvez créer un fichier vide de zéro octet à l'aide de la `touch /etc/multipath.conf` commande
+Le `multipath.conf` fichier doit exister pour que le démon multichemin puisse démarrer. Si ce fichier n'existe pas, vous pouvez créer un fichier vide de zéro octet à l'aide de la `touch /etc/multipath.conf` commande.
 
 Lors de la première création du `multipath.conf` fichier, vous devrez peut-être activer et démarrer les services multivoies en utilisant les commandes suivantes :
 
@@ -207,7 +207,7 @@ blacklist {
 
 Vous devez toujours vérifier votre `/etc/multipath.conf` fichier, en particulier dans la section valeurs par défaut, pour les paramètres hérités qui peuvent remplacer les paramètres par défaut.
 
-Le tableau suivant présente les paramètres critiques `multipathd` pour les LUN ONTAP et le paramètre requis. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faut les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Sans cette correction, les LUN ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
+Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faut les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Sans cette correction, les LUN ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
 
 [cols="2*"]
 |===

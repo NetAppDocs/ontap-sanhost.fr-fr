@@ -76,7 +76,7 @@ Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charg
 . Vérifiez que plusieurs chemins sont disponibles.
 +
 
-NOTE: Plusieurs chemins deviennent disponibles une fois que le système d'exploitation hôte est en cours d'exécution sur les chemins.
+NOTE: Plusieurs chemins deviennent disponibles une fois que le système d'exploitation hôte est opérationnel sur les chemins.
 
 . Activez le démarrage SAN dans le BIOS du serveur pour les ports auxquels la LUN de démarrage SAN est mappée.
 +
@@ -148,7 +148,7 @@ NOTE: Une seule LUN ne doit pas nécessiter plus de quatre chemins. La présence
 
 Le système d'exploitation RHEL 8.6 est compilé pour reconnaître les LUN ONTAP et définir automatiquement tous les paramètres de configuration pour les configurations ASA et non ASA.
 
-Le `multipath.conf` fichier doit exister pour que le démon multichemin puisse démarrer. Si ce fichier n'existe pas, vous pouvez créer un fichier vide de zéro octet à l'aide de la `touch /etc/multipath.conf` commande
+Le `multipath.conf` fichier doit exister pour que le démon multichemin puisse démarrer. Si ce fichier n'existe pas, vous pouvez créer un fichier vide de zéro octet à l'aide de la `touch /etc/multipath.conf` commande.
 
 Lors de la première création du `multipath.conf` fichier, vous devrez peut-être activer et démarrer les services multivoies en utilisant les commandes suivantes :
 
@@ -194,7 +194,7 @@ blacklist {
 
 Vous devez toujours vérifier votre `/etc/multipath.conf` fichier, en particulier dans la section valeurs par défaut, pour les paramètres hérités qui peuvent remplacer les paramètres par défaut.
 
-Le tableau suivant présente les paramètres critiques `multipathd` pour les LUN ONTAP et le paramètre requis. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faut les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Sans cette correction, les LUN ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
+Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faut les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Sans cette correction, les LUN ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
 
 [cols="2*"]
 |===

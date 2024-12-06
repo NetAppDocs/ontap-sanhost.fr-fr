@@ -1,0 +1,16 @@
+= Configurations ASA
+:allow-uri-read: 
+
+
+Pour toutes les configurations de baies SAN (ASA) et non-ASA, vous pouvez utiliser la `multipath -ll` commande pour vérifier les paramètres d'une LUN ONTAP, comme indiqué dans les exemples suivants.
+
+
+NOTE: Une seule LUN ne doit pas nécessiter plus de quatre chemins. Plus de huit chemins peuvent entraîner des problèmes de chemin lors des défaillances du stockage.
+
+
+
+=== Configurations ASA
+
+Dans les configurations ASA, tous les chemins vers une LUN donnée sont actifs et optimisés. Ce qui améliore les performances en assurant le service des opérations d'E/S sur tous les chemins en même temps.
+
+L'exemple suivant montre la sortie correcte pour une LUN ONTAP mappée à un rôle ASA :

@@ -1,0 +1,5 @@
+= 
+:allow-uri-read: 
+
+
+Pour prendre en charge le bon fonctionnement des LUN ONTAP, vérifiez que l'état des chemins d'accès multiples NVMe dans le noyau, l'état ANA et les namespaces ONTAP sont corrects pour la configuration NVMe-of.
