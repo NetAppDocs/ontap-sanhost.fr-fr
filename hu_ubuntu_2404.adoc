@@ -107,10 +107,12 @@ Le `multipath.conf` fichier doit exister pour que le démon multichemin puisse d
 
 Lors de la première création du `multipath.conf` fichier, vous devrez peut-être activer et démarrer les services multivoies en utilisant les commandes suivantes :
 
-`# chkconfig multipathd on`
-`# /etc/init.d/multipathd start`
-
-Vous n'avez pas besoin d'ajouter des éléments directement au `multipath.conf` fichier, sauf si vous avez des périphériques que vous ne souhaitez pas gérer le multipathing ou si vous avez des paramètres existants qui remplacent les paramètres par défaut. Pour exclure les périphériques indésirables, ajoutez la syntaxe suivante au `multipath.conf` fichier, en remplaçant <DevId> par la chaîne WWID du périphérique à exclure :
+[listing]
+----
+# systemctl enable multipathd
+# systemctl start multipathd
+----
+Il n'est pas nécessaire d'ajouter des périphériques directement au `multipath.conf` fichier, sauf si vous disposez de périphériques que vous ne souhaitez pas gérer les chemins d'accès multiples ou si vous avez des paramètres existants qui remplacent les paramètres par défaut. Vous pouvez exclure les périphériques indésirables en ajoutant la syntaxe suivante au `multipath.conf` fichier, en remplaçant <DevId> par la chaîne WWID du périphérique que vous souhaitez exclure :
 
 [listing]
 ----
@@ -121,14 +123,18 @@ blacklist {
         devnode "^cciss.*"
 }
 ----
-L'exemple suivant détermine le WWID d'un périphérique et l'ajoute au `multipath.conf` fichier.
+Dans l'exemple suivant, vous déterminez le WWID d'un périphérique et ajoutez-le au `multipath.conf` fichier.
 
 .Étapes
 . Déterminez le WWID :
 +
 [listing]
 ----
-# /lib/udev/scsi_id -gud /dev/sda
+/lib/udev/scsi_id -gud /dev/sda
+----
++
+[listing]
+----
 360030057024d0730239134810c0cb833
 ----
 +
@@ -149,7 +155,7 @@ blacklist {
 
 Vous devez toujours vérifier votre `/etc/multipath.conf` fichier, en particulier dans la section valeurs par défaut, pour les paramètres hérités qui peuvent remplacer les paramètres par défaut.
 
-Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faut les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Sans cette correction, les LUN ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
+Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faudra les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Si ce n'est pas le cas, les LUN de ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut que si vous en avez connaissance avec NetApp et/ou un fournisseur de système d'exploitation, et ce uniquement lorsque vous en avez pleinement conscience.
 
 [cols="2*"]
 |===

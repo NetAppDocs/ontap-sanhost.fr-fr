@@ -99,10 +99,10 @@ Les sections suivantes fournissent des exemples de sorties multivoies pour une L
 
 === Configurations All SAN Array
 
-Dans les configurations ASA (All SAN Array), tous les chemins d'accès à une LUN donnée sont actifs et optimisés. Ce qui améliore les performances en assurant le service des opérations d'E/S sur tous les chemins en même temps.
+Toutes les configurations de baie SAN (ASA) optimisent tous les chemins d'accès à une LUN donnée en les gardant actives. Ce qui améliore les performances en assurant le service des opérations d'E/S sur tous les chemins en même temps.
 
 .Exemple
-L'exemple suivant montre la sortie correcte pour une LUN ONTAP :
+L'exemple suivant illustre la sortie correcte d'une LUN ONTAP.
 
 [listing]
 ----
@@ -125,7 +125,7 @@ NOTE: Une seule LUN ne doit pas nécessiter plus de quatre chemins. La présence
 Pour les configurations non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant des priorités plus élevées sont Active/Optimized (actif/optimisé), ce qui signifie que les services sont gérés par le contrôleur où se trouve l'agrégat. Les chemins aux priorités inférieures sont actifs, mais ne sont pas optimisés, car ils sont desservis par un autre contrôleur. Les chemins non optimisés ne sont utilisés que lorsque les chemins optimisés ne sont pas disponibles.
 
 .Exemple
-L'exemple suivant montre la sortie correcte pour une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés :
+L'exemple suivant montre la sortie correcte pour une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés.
 
 [listing]
 ----
@@ -168,15 +168,18 @@ blacklist {
         devnode "^cciss.*"
 }
 ----
-.Exemple
-Dans l'exemple suivant, vous déterminez le WWID d'un périphérique et vous ajoutez-le au `multipath.conf` fichier.
+Dans l'exemple suivant, vous déterminez le WWID d'un périphérique et ajoutez-le au `multipath.conf` fichier.
 
 .Étapes
 . Déterminez le WWID :
 +
 [listing]
 ----
-# /lib/udev/scsi_id -gud /dev/sda
+/lib/udev/scsi_id -gud /dev/sda
+----
++
+[listing]
+----
 360030057024d0730239134810c0cb833
 ----
 +

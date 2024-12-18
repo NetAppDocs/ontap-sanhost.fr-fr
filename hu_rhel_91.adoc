@@ -97,10 +97,10 @@ Les sections suivantes fournissent des exemples de sorties multivoies pour une L
 
 === Configurations All SAN Array
 
-Dans les configurations ASA (All SAN Array), tous les chemins d'accès à une LUN donnée sont actifs et optimisés. Ce qui améliore les performances en assurant le service des opérations d'E/S sur tous les chemins en même temps.
+Toutes les configurations de baie SAN (ASA) optimisent tous les chemins d'accès à une LUN donnée en les gardant actives. Ce qui améliore les performances en assurant le service des opérations d'E/S sur tous les chemins en même temps.
 
 .Exemple
-L'exemple suivant montre la sortie correcte pour une LUN ONTAP :
+L'exemple suivant illustre la sortie correcte d'une LUN ONTAP.
 
 [listing]
 ----
@@ -124,7 +124,7 @@ NOTE: Une seule LUN ne doit pas nécessiter plus de quatre chemins. La présence
 Pour les configurations non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant des priorités plus élevées sont Active/Optimized (actif/optimisé), ce qui signifie que les services sont gérés par le contrôleur où se trouve l'agrégat. Les chemins aux priorités inférieures sont actifs, mais ne sont pas optimisés, car ils sont desservis par un autre contrôleur. Les chemins non optimisés ne sont utilisés que lorsque les chemins optimisés ne sont pas disponibles.
 
 .Exemple
-L'exemple suivant montre la sortie correcte pour une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés :
+L'exemple suivant montre la sortie correcte pour une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés.
 
 [listing]
 ----
@@ -152,10 +152,12 @@ Le `multipath.conf` fichier doit exister pour que le démon multichemin puisse d
 
 Lors de la première création du `multipath.conf` fichier, vous devrez peut-être activer et démarrer les services multivoies en utilisant les commandes suivantes :
 
-`# chkconfig multipathd on`
-`# /etc/init.d/multipathd start`
-
-Vous n'avez pas besoin d'ajouter des éléments directement au `multipath.conf` fichier, sauf si vous avez des périphériques que vous ne souhaitez pas gérer le multipathing ou si vous avez des paramètres existants qui remplacent les paramètres par défaut. Pour exclure les périphériques indésirables, ajoutez la syntaxe suivante au `multipath.conf` fichier, en remplaçant <DevId> par la chaîne WWID du périphérique à exclure :
+[listing]
+----
+# systemctl enable multipathd
+# systemctl start multipathd
+----
+Il n'est pas nécessaire d'ajouter des périphériques directement au `multipath.conf` fichier, sauf si vous disposez de périphériques que vous ne souhaitez pas gérer les chemins d'accès multiples ou si vous avez des paramètres existants qui remplacent les paramètres par défaut. Vous pouvez exclure les périphériques indésirables en ajoutant la syntaxe suivante au `multipath.conf` fichier, en remplaçant <DevId> par la chaîne WWID du périphérique que vous souhaitez exclure :
 
 [listing]
 ----
@@ -166,14 +168,18 @@ blacklist {
         devnode "^cciss.*"
 }
 ----
-L'exemple suivant détermine le WWID d'un périphérique et l'ajoute au `multipath.conf` fichier.
+Dans l'exemple suivant, vous déterminez le WWID d'un périphérique et ajoutez-le au `multipath.conf` fichier.
 
 .Étapes
 . Déterminez le WWID :
 +
 [listing]
 ----
-# /lib/udev/scsi_id -gud /dev/sda
+/lib/udev/scsi_id -gud /dev/sda
+----
++
+[listing]
+----
 360030057024d0730239134810c0cb833
 ----
 +
@@ -194,7 +200,7 @@ blacklist {
 
 Vous devez toujours vérifier votre `/etc/multipath.conf` fichier, en particulier dans la section valeurs par défaut, pour les paramètres hérités qui peuvent remplacer les paramètres par défaut.
 
-Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faut les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Sans cette correction, les LUN ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
+Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faudra les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Si ce n'est pas le cas, les LUN de ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut que si vous en avez connaissance avec NetApp et/ou un fournisseur de système d'exploitation, et ce uniquement lorsque vous en avez pleinement conscience.
 
 [cols="2*"]
 |===
@@ -275,9 +281,9 @@ devices {
 ----
 
 
-=== Paramètres KVM
+=== Configurer les paramètres KVM
 
-Vous pouvez également utiliser les paramètres recommandés pour configurer la machine virtuelle basée sur le noyau (KVM). Aucune modification n'est nécessaire pour configurer KVM car le LUN est mappé à l'hyperviseur.
+Vous pouvez également utiliser les paramètres recommandés pour configurer la machine virtuelle basée sur le noyau (KVM). Aucune modification n'est requise pour configurer KVM car le LUN est mappé sur l'hyperviseur.
 
 
 

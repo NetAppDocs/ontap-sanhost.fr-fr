@@ -6,10 +6,12 @@ Le `multipath.conf` fichier doit exister pour que le démon multichemin puisse d
 
 Lors de la première création du `multipath.conf` fichier, vous devrez peut-être activer et démarrer les services multivoies en utilisant les commandes suivantes :
 
-`# chkconfig multipathd on`
-`# /etc/init.d/multipathd start`
-
-Vous n'avez pas besoin d'ajouter des éléments directement au `multipath.conf` fichier, sauf si vous avez des périphériques que vous ne souhaitez pas gérer le multipathing ou si vous avez des paramètres existants qui remplacent les paramètres par défaut. Pour exclure les périphériques indésirables, ajoutez la syntaxe suivante au `multipath.conf` fichier, en remplaçant <DevId> par la chaîne WWID du périphérique à exclure :
+[listing]
+----
+chkconfig multipathd on
+/etc/init.d/multipathd start
+----
+Vous n'avez pas besoin d'ajouter des éléments directement au `multipath.conf` fichier, sauf si vous avez des périphériques que vous ne souhaitez pas gérer le multipathing ou si vous avez des paramètres existants qui remplacent les paramètres par défaut. Pour exclure les périphériques indésirables, ajoutez la syntaxe suivante au `multipath.conf` fichier, en remplaçant <DevId> par la chaîne d'identifiant universel (WWID) du périphérique à exclure :
 
 [listing]
 ----
@@ -27,25 +29,37 @@ L'exemple suivant détermine le WWID d'un périphérique et l'ajoute au `multipa
 +
 [listing]
 ----
-# /lib/udev/scsi_id -gud /dev/sda
-360030057024d0730239134810c0cb833
+/lib/udev/scsi_id -gud /dev/sda
 ----
-+
-`sda` Est le disque SCSI local que vous souhaitez ajouter à la liste noire.
-
-. Ajoutez le `WWID` à la strophe de liste noire dans `/etc/multipath.conf`:
 +
 [listing]
 ----
-blacklist {
-     wwid   360030057024d0730239134810c0cb833
-     devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
-     devnode "^hd[a-z]"
-     devnode "^cciss.*"
-}
+3600a098038314c4a433f5774717a3046
+/lib/udev/scsi_id -gud /dev/sda
+----
++
+360030057024d0730239134810c0cb833
+
+
+
+[listing]
+----
++
+`sda` is the local SCSI disk that you want to add to the blacklist.
+
+. Add the `WWID` to the blacklist stanza in `/etc/multipath.conf`:
+[source,cli]
++
+----
+liste noire { wwid 3600a098038314c4a433f5774717a3046 devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*" devnode "^hd[a-z]" devnode "^cciss. }
+
+[listing]
 ----
 
+Always check your `/etc/multipath.conf` file, especially in the defaults section, for legacy settings that might be overriding default settings.
 
-Vous devez toujours vérifier votre `/etc/multipath.conf` fichier, en particulier dans la section valeurs par défaut, pour les paramètres hérités qui peuvent remplacer les paramètres par défaut.
+The following table demonstrates the critical `multipathd` parameters for ONTAP LUNs and the required values. If a host is connected to LUNs from other vendors and any of these parameters are overridden, they must be corrected by later stanzas in the `multipath.conf` file that apply specifically to ONTAP LUNs. Without this correction, the ONTAP LUNs might not work as expected. You should only override these defaults in consultation with NetApp, the OS vendor, or both, and only when the impact is fully understood.
 
-Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faut les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Sans cette correction, les LUN ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
+//ONTAPDOC-2578 9-Dec-2024
+//ONTAPDOC-2561 25-Nov-202
+----

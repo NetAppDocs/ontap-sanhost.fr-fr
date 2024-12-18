@@ -102,7 +102,7 @@ Les sections suivantes fournissent des exemples de sorties multivoies pour une L
 Pour les configurations non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant des priorités plus élevées sont Active/Optimized (actif/optimisé), ce qui signifie que les services sont gérés par le contrôleur où se trouve l'agrégat. Les chemins aux priorités inférieures sont actifs, mais ne sont pas optimisés, car ils sont desservis par un autre contrôleur. Les chemins non optimisés ne sont utilisés que lorsque les chemins optimisés ne sont pas disponibles.
 
 .Exemple
-L'exemple suivant montre la sortie correcte pour une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés :
+L'exemple suivant montre la sortie correcte pour une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés.
 
 [listing]
 ----
@@ -128,10 +128,12 @@ Le système d'exploitation Oracle Linux 7.8 est compilé pour reconnaître les L
 
 Lors de la première création du `multipath.conf` fichier, vous devrez peut-être activer et démarrer les services multivoies en utilisant les commandes suivantes :
 
-`# chkconfig multipathd on`
-`# /etc/init.d/multipathd start`
-
-Vous n'avez pas besoin d'ajouter des éléments directement au `multipath.conf` fichier, sauf si vous avez des périphériques que vous ne souhaitez pas gérer le multipathing ou si vous avez des paramètres existants qui remplacent les paramètres par défaut. Pour exclure les périphériques indésirables, ajoutez la syntaxe suivante au `multipath.conf` fichier, en remplaçant <DevId> par la chaîne WWID du périphérique à exclure :
+[listing]
+----
+chkconfig multipathd on
+/etc/init.d/multipathd start
+----
+Vous n'avez pas besoin d'ajouter des éléments directement au `multipath.conf` fichier, sauf si vous avez des périphériques que vous ne souhaitez pas gérer le multipathing ou si vous avez des paramètres existants qui remplacent les paramètres par défaut. Pour exclure les périphériques indésirables, ajoutez la syntaxe suivante au `multipath.conf` fichier, en remplaçant <DevId> par la chaîne d'identifiant universel (WWID) du périphérique à exclure :
 
 [listing]
 ----
@@ -149,127 +151,101 @@ L'exemple suivant détermine le WWID d'un périphérique et l'ajoute au `multipa
 +
 [listing]
 ----
-# /lib/udev/scsi_id -gud /dev/sda
+/lib/udev/scsi_id -gud /dev/sda
+----
++
+[listing]
+----
+3600a098038314c4a433f5774717a3046
+/lib/udev/scsi_id -gud /dev/sda
+----
++
 360030057024d0730239134810c0cb833
-----
-+
-`sda` Est le disque SCSI local que vous souhaitez ajouter à la liste noire.
-
-. Ajoutez le `WWID` à la strophe de liste noire dans `/etc/multipath.conf`:
-+
-[listing]
-----
-blacklist {
-     wwid   360030057024d0730239134810c0cb833
-     devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
-     devnode "^hd[a-z]"
-     devnode "^cciss.*"
-}
-----
 
 
-Vous devez toujours vérifier votre `/etc/multipath.conf` fichier, en particulier dans la section valeurs par défaut, pour les paramètres hérités qui peuvent remplacer les paramètres par défaut.
-
-Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faut les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Sans cette correction, les LUN ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
-
-[cols="2*"]
-|===
-| Paramètre | Réglage 
-
-
-| détecter_prio | oui 
-
-
-| dev_loss_tmo | « infini » 
-
-
-| du rétablissement | immédiate 
-
-
-| fast_io_fail_tmo | 5 
-
-
-| caractéristiques | "3 queue_if_no_path pg_init_retries 50" 
-
-
-| flush_on_last_del | « oui » 
-
-
-| gestionnaire_matériel | « 0 » 
-
-
-| path_checker | « tur » 
-
-
-| path_groupage_policy | « group_by_prio » 
-
-
-| sélecteur de chemin | « temps-service 0 » 
-
-
-| intervalle_interrogation | 5 
-
-
-| prio | « ONTAP » 
-
-
-| solution netapp | LUN.* 
-
-
-| conservez_attaed_hw_handler | oui 
-
-
-| rr_weight | « uniforme » 
-
-
-| noms_conviviaux_conviviaux | non 
-
-
-| fournisseur | NETAPP 
-|===
-.Exemple
-L'exemple suivant montre comment corriger une valeur par défaut remplacée. Dans ce cas, le `multipath.conf` fichier définit les valeurs pour `path_checker` et `detect_prio` Non compatible avec les LUN ONTAP. S'ils ne peuvent pas être supprimés en raison d'autres baies SAN toujours connectées à l'hôte, ces paramètres peuvent être corrigés spécifiquement pour les LUN ONTAP avec une strophe de périphérique.
 
 [listing]
 ----
-defaults {
- path_checker readsector0
- detect_prio no
- }
-devices {
- device {
- vendor "NETAPP "
- product "LUN.*"
- path_checker tur
- detect_prio yes
- }
-}
++
+`sda` is the local SCSI disk that you want to add to the blacklist.
+
+. Add the `WWID` to the blacklist stanza in `/etc/multipath.conf`:
+[source,cli]
++
+----
+liste noire { wwid 3600a098038314c4a433f5774717a3046 devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*" devnode "^hd[a-z]" devnode "^cciss. }
+
+[listing]
 ----
 
-NOTE: Pour configurer Oracle Linux 7.8 Red Hat Enterprise Kernel (RHCK), utilisez link:hu_rhel_78.html#recommended-settings["paramètres recommandés"]pour Red Hat Enterprise Linux (RHEL) 7.8.
+Always check your `/etc/multipath.conf` file, especially in the defaults section, for legacy settings that might be overriding default settings.
+
+The following table demonstrates the critical `multipathd` parameters for ONTAP LUNs and the required values. If a host is connected to LUNs from other vendors and any of these parameters are overridden, they must be corrected by later stanzas in the `multipath.conf` file that apply specifically to ONTAP LUNs. Without this correction, the ONTAP LUNs might not work as expected. You should only override these defaults in consultation with NetApp, the OS vendor, or both, and only when the impact is fully understood.
+
+//ONTAPDOC-2578 9-Dec-2024
+//ONTAPDOC-2561 25-Nov-202
 
 
-
-== Problèmes connus
-
-La version Oracle Linux 7.8 avec ONTAP présente les problèmes connus suivants :
-
-[cols="3*"]
+[cols=2*,options="header"]
 |===
-| ID de bug NetApp | Titre | Description 
-
-
-| 1440718 | Si vous annulez le mappage d'une LUN ou si vous la mappez sans effectuer de nouvelle analyse SCSI, elle risque de corrompre les données de l'hôte. | Lorsque vous définissez le paramètre de configuration multivoie 'disable_changed_wwid' sur YES, il désactive l'accès au périphérique chemin d'accès en cas de modification de l'identifiant WWID. Les chemins d'accès multiples désactivent l'accès au périphérique de chemin d'accès jusqu'à ce que le WWID du chemin soit restauré vers le WWID du périphérique multichemin. Pour en savoir plus, voir link:https://kb.netapp.com/Advice_and_Troubleshooting/Flash_Storage/AFF_Series/The_filesystem_corruption_on_iSCSI_LUN_on_the_Oracle_Linux_7["Base de connaissances NetApp : corruption du système de fichiers sur le LUN iSCSI sur Oracle Linux 7"^]. 
-
-
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1311575["1311575"^] | Retards d'E/S observés en raison des opérations de lecture/écriture qui ne sont pas parvenus à basculer sur des chemins secondaires lors du basculement du stockage avec Qlogic QLE2672 (16 Gbit/s) | Les opérations d'E/S peuvent ne pas reprendre les chemins secondaires pendant les opérations de basculement de stockage sur le noyau Oracle Linux 7.7 (5.4.17-2011.0.7.el7uek.x86_6) avec l'adaptateur de bus hôte QLogic QLE2672 16 Gbit/s. Si la progression des E/S est interrompue en raison de chemins primaires bloqués pendant le basculement de stockage, l'opération d'E/S peut ne pas reprendre via les chemins secondaires, entraînant ainsi un retard d'E/S. L'opération d'E/S est reprise uniquement après la mise en ligne des chemins primaires après l'exécution de l'opération de rétablissement du basculement du stockage. 
-
-
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1311576["1311576"^] | Retards d'E/S constatés suite à l'échec des opérations de lecture/écriture sur les chemins secondaires pendant le basculement du stockage avec Emulex LPe16002 (16 Gbit/s) | Les opérations d'E/S peuvent ne pas reprendre les chemins secondaires pendant les opérations de basculement de stockage sur le noyau Oracle Linux 7.7 (5.4.17-2011.0.7.el7uek.x86_6) avec l'adaptateur de bus hôte Emulex LPe16002 16G. Si la progression des E/S est interrompue en raison de chemins primaires bloqués pendant le basculement de stockage, l'opération d'E/S peut ne pas reprendre via les chemins secondaires, entraînant ainsi un retard d'E/S. L'opération d'E/S est reprise uniquement après la mise en ligne des chemins primaires après l'exécution de l'opération de rétablissement du basculement du stockage. 
-
-
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1246134["1246134"^] | Retards d'E/S observés et déplacement des rapports vers un état bloqué et NON PRÉSENT lors du basculement de stockage avec Emulex LPe16002(16 Gbit/s) | Lors des opérations de basculement de stockage sur Oracle Linux 7.6 avec le noyau UEK5U2 s'exécutant avec un adaptateur de bus hôte (HBA) Fibre Channel (FC) Emulex LPe16002B-M6 16 Gbit/s, la progression des E/S peut s'arrêter en raison du blocage des rapports. Le basculement du stockage passe de l'état « en ligne » à l'état « bloqué », entraînant un retard dans les opérations de lecture et d'écriture. Une fois l'opération terminée avec succès, les rapports ne parviennent pas à revenir à l'état « en ligne » et continuent de rester à l'état « bloqué ». 
-
-
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1246327["1246327"^] | Retards d'E/S observés et déplacement des ports Rés vers un état bloqué ET NON PRÉSENT lors du basculement du stockage avec Qlogic QLE2672(16G) et QLE2742(32G) | Les ports distants Fibre Channel (FC) peuvent être bloqués sur Red Hat Enterprise Linux (RHEL) 7.6 avec un hôte QLogic QLE2672 16 Gbit/s lors des opérations de basculement de stockage. Étant donné que les interfaces logiques sont arrêtées lorsqu'un nœud de stockage est en panne, les ports distants définissent l'état du nœud de stockage sur bloqués. L'avancement des E/S peut s'arrêter en raison des ports bloqués si vous exécutez à la fois un hôte QLogic QLE2672 16 Gbit/s et un adaptateur de bus hôte (FC) Fibre Channel 32 Gbit/s QLE2742. Lorsque le nœud de stockage revient à son état optimal, les interfaces logiques s'allument également et les ports distants doivent être en ligne. Cependant, il se peut que les ports distants soient toujours bloqués. Cet état bloqué s'enregistre comme étant défectueux pour LES LUN au niveau de la couche multivoie. Vous pouvez vérifier l'état des ports distants à l'aide de la commande suivante : # Cat /sys/class/fc_remote_ports/rport-*/port_stat vous devriez voir la sortie suivante : bloqué en ligne bloqué 
+| Parameter
+| Setting
+| detect_prio | yes
+| dev_loss_tmo | "infinity"
+| failback | immediate
+| fast_io_fail_tmo | 5
+| features | "3 queue_if_no_path pg_init_retries 50"
+| flush_on_last_del | "yes"
+| hardware_handler | "0"
+| path_checker | "tur"
+| path_grouping_policy | "group_by_prio"
+| path_selector | "service-time 0"
+| polling_interval | 5
+| prio | "ontap"
+| product | LUN.*
+| retain_attached_hw_handler | yes
+| rr_weight | "uniform"
+| user_friendly_names | no
+| vendor | NETAPP
 |===
+
+.Example
+
+The following example shows how to correct an overridden default. In this case, the `multipath.conf` file defines values for `path_checker` and `detect_prio` that are not compatible with ONTAP LUNs. If they cannot be removed because of other SAN arrays still attached to the host, these parameters can be corrected specifically for ONTAP LUNs with a device stanza.
+
+----
+Valeurs par défaut { path_Checker readsector0 Detect_prio no } périphériques { device { vendor "NetApp" produit "LUN.*" path_Checker tur Detect_prio yes }
+
+[listing]
+----
+
+NOTE: To configure Oracle Linux 7.8 Red Hat Enterprise Kernel (RHCK), use the link:hu_rhel_78.html#recommended-settings[recommended settings] for Red Hat Enterprise Linux (RHEL) 7.8.
+
+== Known issues
+
+The Oracle Linux 7.8 with ONTAP release has the following known issues:
+
+[cols=3*,options="header"]
+|===
+| NetApp Bug ID
+| Title
+| Description
+| 1440718 | If you unmap or map a LUN without performing a SCSI rescan, it might lead to data corruption on the host. | When you set the 'disable_changed_wwids' multipath configuration parameter to YES, it disables access to the path device in the event of a WWID change. Multipath will disable access to the path device until the WWID of the path is restored to the WWID of the multipath device. To learn more, see  link:https://kb.netapp.com/Advice_and_Troubleshooting/Flash_Storage/AFF_Series/The_filesystem_corruption_on_iSCSI_LUN_on_the_Oracle_Linux_7[NetApp Knowledge Base: The filesystem corruption on iSCSI LUN on the Oracle Linux 7^].
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1311575[1311575^] | IO delays observed due to Read/Write operations failed to switch through secondary paths during storage failover with Qlogic QLE2672(16G) | I/O operations might fail to resume through secondary paths during storage failover operations on Oracle Linux 7.7 kernel (5.4.17-2011.0.7.el7uek.x86_6) with QLogic QLE2672 16G HBA. If I/O progress stops due to blocked primary paths during storage failover, the I/O operation might not resume through secondary paths causing an I/O delay. The I/O operation resumes only after primary paths come online after the completion of the storage failover giveback operation.
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1311576[1311576^] | IO delays observed due to Read/Write operation failing to switch through secondary paths during storage failover with Emulex LPe16002(16G) | I/O operations might fail to resume through secondary paths during storage failover operations on Oracle Linux 7.7 kernel (5.4.17-2011.0.7.el7uek.x86_6) with Emulex LPe16002 16G HBA. If I/O progress stops due to blocked primary paths during storage failover, the I/O operation might not resume through secondary paths causing an I/O delay. The I/O operation resumes only after primary paths come online after the completion of the storage failover giveback operation.
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1246134[1246134^] | IO delays observed and reports are moving to blocked, NOT PRESENT state during storage failover with Emulex LPe16002(16G) | During storage failover operations on the Oracle Linux 7.6 with the UEK5U2 kernel running with an Emulex LPe16002B-M6 16G Fibre Channel (FC) host bus adapter (HBA), I/O progress might stop due to reports getting blocked. The storage failover operation reports change from "online" state to "blocked" state, causing a delay in read and write operations. After the operation is completed successfully, the reports fail to move back to "online" state and continue to remain in "blocked" state.
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1246327[1246327^] | IO delays observed and Rports are moving to blocked, NOT PRESENT state during storage failover with Qlogic QLE2672(16G) and QLE2742(32G) | Fibre Channel (FC) remote ports might be blocked on Red Hat Enterprise Linux (RHEL) 7.6 with the QLogic QLE2672 16G host during storage failover operations. Because the logical interfaces go down when a storage node is down, the remote ports set the storage node status to blocked. IO progress might stop due to the blocked ports if you are running both a QLogic QLE2672 16G host and a QLE2742 32GB Fibre Channel (FC) host bus adapter (HBA).
+When the storage node returns to its optimal state, the logical interfaces also come up and the remote ports should be online. However, the remote ports might still be blocked. This blocked state registers as failed faulty to LUNS at the multipath layer. You can verify the state of the remote ports with the following command:
+# cat /sys/class/fc_remote_ports/rport-*/port_stat
+You should see the following output:
+Blocked
+Blocked
+Blocked
+Blocked
+Online
+Online
+|===
+
+// 2024 SEP 2, ONTAPDOC-2345
+// BURT 1440718, 2022-05-20
+----

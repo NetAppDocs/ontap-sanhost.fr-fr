@@ -22,11 +22,9 @@ Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour 
 
 == Installez Linux Unified Host Utilities
 
-Le pack logiciel NetApp Linux Unified Host Utilities est disponible sur le link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^] dans un fichier .rpm 64 bits.
+Vous pouvez télécharger le progiciel Utilitaires hôtes unifiés NetApp Linux sous la forme d'un fichier 64-bit.rpm à partir du link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^].
 
 NetApp recommande vivement d'installer les utilitaires d'hôtes unifiés Linux, mais ce n'est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
-
-Si une version de Linux Unified Host Utilities est actuellement installée, vous devez la mettre à niveau ou la supprimer et suivre ces étapes pour installer la dernière version.
 
 .Étapes
 . Téléchargez le pack logiciel Linux Unified Host Utilities 64 bits à partir du https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^] à votre hôte.
@@ -121,10 +119,12 @@ Le `multipath.conf` fichier doit exister pour que le démon multichemin puisse d
 
 Lors de la première création du `multipath.conf` fichier, vous devrez peut-être activer et démarrer les services multivoies en utilisant les commandes suivantes :
 
-`# chkconfig multipathd on`
-`# /etc/init.d/multipathd start`
-
-Vous n'avez pas besoin d'ajouter des éléments directement au `multipath.conf` fichier, sauf si vous avez des périphériques que vous ne souhaitez pas gérer le multipathing ou si vous avez des paramètres existants qui remplacent les paramètres par défaut. Pour exclure les périphériques indésirables, ajoutez la syntaxe suivante au `multipath.conf` fichier, en remplaçant <DevId> par la chaîne WWID du périphérique à exclure :
+[listing]
+----
+chkconfig multipathd on
+/etc/init.d/multipathd start
+----
+Vous n'avez pas besoin d'ajouter des éléments directement au `multipath.conf` fichier, sauf si vous avez des périphériques que vous ne souhaitez pas gérer le multipathing ou si vous avez des paramètres existants qui remplacent les paramètres par défaut. Pour exclure les périphériques indésirables, ajoutez la syntaxe suivante au `multipath.conf` fichier, en remplaçant <DevId> par la chaîne d'identifiant universel (WWID) du périphérique à exclure :
 
 [listing]
 ----
@@ -142,113 +142,80 @@ L'exemple suivant détermine le WWID d'un périphérique et l'ajoute au `multipa
 +
 [listing]
 ----
-# /lib/udev/scsi_id -gud /dev/sda
+/lib/udev/scsi_id -gud /dev/sda
+----
++
+[listing]
+----
+3600a098038314c4a433f5774717a3046
+/lib/udev/scsi_id -gud /dev/sda
+----
++
 360030057024d0730239134810c0cb833
-----
-+
-`sda` Est le disque SCSI local que vous souhaitez ajouter à la liste noire.
-
-. Ajoutez le `WWID` à la strophe de liste noire dans `/etc/multipath.conf`:
-+
-[listing]
-----
-blacklist {
-     wwid   360030057024d0730239134810c0cb833
-     devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
-     devnode "^hd[a-z]"
-     devnode "^cciss.*"
-}
-----
 
 
-Vous devez toujours vérifier votre `/etc/multipath.conf` fichier, en particulier dans la section valeurs par défaut, pour les paramètres hérités qui peuvent remplacer les paramètres par défaut.
-
-Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faut les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Sans cette correction, les LUN ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
-
-[cols="2*"]
-|===
-| Paramètre | Réglage 
-
-
-| détecter_prio | oui 
-
-
-| dev_loss_tmo | « infini » 
-
-
-| du rétablissement | immédiate 
-
-
-| fast_io_fail_tmo | 5 
-
-
-| caractéristiques | « 2 pg_init_retries 50 » 
-
-
-| flush_on_last_del | « oui » 
-
-
-| gestionnaire_matériel | « 0 » 
-
-
-| no_path_réessayer | file d'attente 
-
-
-| path_checker | « tur » 
-
-
-| path_groupage_policy | « group_by_prio » 
-
-
-| sélecteur de chemin | « temps-service 0 » 
-
-
-| intervalle_interrogation | 5 
-
-
-| prio | « ONTAP » 
-
-
-| solution netapp | LUN.* 
-
-
-| conservez_attaed_hw_handler | oui 
-
-
-| rr_weight | « uniforme » 
-
-
-| noms_conviviaux_conviviaux | non 
-
-
-| fournisseur | NETAPP 
-|===
-.Exemple
-L'exemple suivant montre comment corriger une valeur par défaut remplacée. Dans ce cas, le `multipath.conf` fichier définit les valeurs pour `path_checker` et `no_path_retry` Non compatible avec les LUN ONTAP. S'ils ne peuvent pas être supprimés en raison d'autres baies SAN toujours connectées à l'hôte, ces paramètres peuvent être corrigés spécifiquement pour les LUN ONTAP avec une strophe de périphérique.
 
 [listing]
 ----
-defaults {
- path_checker readsector0
- no_path_retry fail
- }
-devices {
- device {
- vendor "NETAPP "
- product "LUN.*"
- no_path_retry queue
- path_checker tur
- }
-}
++
+`sda` is the local SCSI disk that you want to add to the blacklist.
+
+. Add the `WWID` to the blacklist stanza in `/etc/multipath.conf`:
+[source,cli]
++
+----
+liste noire { wwid 3600a098038314c4a433f5774717a3046 devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*" devnode "^hd[a-z]" devnode "^cciss. }
+
+[listing]
 ----
 
-NOTE: Pour configurer Oracle Linux 8.0 Red Hat Enterprise Kernel (RHCK), utilisez link:hu_rhel_80.html#recommended-settings["paramètres recommandés"]pour Red Hat Enterprise Linux (RHEL) 8.0.
+Always check your `/etc/multipath.conf` file, especially in the defaults section, for legacy settings that might be overriding default settings.
+
+The following table demonstrates the critical `multipathd` parameters for ONTAP LUNs and the required values. If a host is connected to LUNs from other vendors and any of these parameters are overridden, they must be corrected by later stanzas in the `multipath.conf` file that apply specifically to ONTAP LUNs. Without this correction, the ONTAP LUNs might not work as expected. You should only override these defaults in consultation with NetApp, the OS vendor, or both, and only when the impact is fully understood.
+
+//ONTAPDOC-2578 9-Dec-2024
+//ONTAPDOC-2561 25-Nov-202
 
 
+[cols=2*,options="header"]
+|===
+| Parameter
+| Setting
+| detect_prio | yes
+| dev_loss_tmo | "infinity"
+| failback | immediate
+| fast_io_fail_tmo | 5
+| features | "2 pg_init_retries 50"
+| flush_on_last_del | "yes"
+| hardware_handler | "0"
+| no_path_retry | queue
+| path_checker | "tur"
+| path_grouping_policy | "group_by_prio"
+| path_selector | "service-time 0"
+| polling_interval | 5
+| prio | "ontap"
+| product | LUN.*
+| retain_attached_hw_handler | yes
+| rr_weight | "uniform"
+| user_friendly_names | no
+| vendor | NETAPP
+|===
 
-== Problèmes connus
+.Example
 
-Il n'y a aucun problème connu pour Oracle Linux 8.0 avec la version ONTAP.
+The following example shows how to correct an overridden default. In this case, the `multipath.conf` file defines values for `path_checker` and `no_path_retry` that are not compatible with ONTAP LUNs. If they cannot be removed because of other SAN arrays still attached to the host, these parameters can be corrected specifically for ONTAP LUNs with a device stanza.
 
+----
+Valeurs par défaut { path_Checker readsector0 no_path_retry fail } périphériques { device { vendor "NetApp" produit "LUN.*" no_path_retry file path_Checker tur }
 
-NOTE: Pour les problèmes connus liés à Oracle Linux (noyau compatible Red Hat), consultez le link:hu_rhel_80.html#known-problems-and-limitations["problèmes connus"] Pour Red Hat Enterprise Linux (RHEL) 8.0.
+[listing]
+----
+
+NOTE: To configure Oracle Linux 8.0 Red Hat Enterprise Kernel (RHCK), use the link:hu_rhel_80.html#recommended-settings[recommended settings] for Red Hat Enterprise Linux (RHEL) 8.0.
+
+== Known issues
+
+There are no known issues for the Oracle Linux 8.0 with ONTAP release.
+
+NOTE: For Oracle Linux (Red Hat compatible kernel) known issues, see the link:hu_rhel_80.html#known-problems-and-limitations[known issues] for Red Hat Enterprise Linux (RHEL) 8.0.
+----

@@ -193,7 +193,7 @@ FCP CMPL: xb 00000002 Err 00000004
 ONTAP signale une taille de transfert MAX Data (MDT) de 8 dans les données Identify Controller. La taille maximale des demandes d'E/S peut donc atteindre 1 Mo. Pour émettre des demandes d'E/S d'une taille de 1 Mo pour un hôte Broadcom NVMe/FC, augmentez la `lpfc` valeur du `lpfc_sg_seg_cnt` paramètre à 256 par rapport à la valeur par défaut 64.
 
 
-NOTE: Les étapes suivantes ne s'appliquent pas aux hôtes NVMe/FC Qlogic.
+NOTE: Ces étapes ne s'appliquent pas aux hôtes NVMe/FC Qlogic.
 
 .Étapes
 . Réglez le `lpfc_sg_seg_cnt` paramètre sur 256 :
@@ -207,16 +207,13 @@ cat /etc/modprobe.d/lpfc.conf
 ----
 options lpfc lpfc_sg_seg_cnt=256
 ----
-. Lancer `dracut -f` la commande et redémarrer l'hôte :
-. Vérifiez que `lpfc_sg_seg_cnt` est 256 :
+. Exécutez `dracut -f` la commande et redémarrez l'hôte.
+. Vérifier que la valeur attendue de `lpfc_sg_seg_cnt` est 256 :
 +
 [listing]
 ----
 cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
 ----
-+
-La valeur attendue est 256.
-
 
 
 

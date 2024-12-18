@@ -79,10 +79,10 @@ Les sections suivantes fournissent des exemples de sorties multivoies pour une L
 
 === Configurations All SAN Array
 
-Dans les configurations ASA (All SAN Array), tous les chemins d'accès à une LUN donnée sont actifs et optimisés. Ce qui améliore les performances en assurant le service des opérations d'E/S sur tous les chemins en même temps.
+Toutes les configurations de baie SAN (ASA) optimisent tous les chemins d'accès à une LUN donnée en les gardant actives. Ce qui améliore les performances en assurant le service des opérations d'E/S sur tous les chemins en même temps.
 
 .Exemple
-L'exemple suivant montre la sortie correcte pour une LUN ONTAP :
+L'exemple suivant illustre la sortie correcte d'une LUN ONTAP.
 
 [listing]
 ----
@@ -105,7 +105,7 @@ NOTE: Une seule LUN ne doit pas nécessiter plus de quatre chemins. La présence
 Pour les configurations non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant des priorités plus élevées sont Active/Optimized (actif/optimisé), ce qui signifie que les services sont gérés par le contrôleur où se trouve l'agrégat. Les chemins aux priorités inférieures sont actifs, mais ne sont pas optimisés, car ils sont desservis par un autre contrôleur. Les chemins non optimisés ne sont utilisés que lorsque les chemins optimisés ne sont pas disponibles.
 
 .Exemple
-L'exemple suivant montre la sortie correcte pour une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés :
+L'exemple suivant montre la sortie correcte pour une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés.
 
 [listing]
 ----
@@ -130,10 +130,12 @@ Le système d'exploitation CentOS 7.6 est compilé pour reconnaître les LUN ONT
 
 Lors de la première création du `multipath.conf` fichier, vous devrez peut-être activer et démarrer les services multivoies en utilisant les commandes suivantes :
 
-`# chkconfig multipathd on`
-`# /etc/init.d/multipathd start`
-
-Vous n'avez pas besoin d'ajouter des éléments directement au `multipath.conf` fichier, sauf si vous avez des périphériques que vous ne souhaitez pas gérer le multipathing ou si vous avez des paramètres existants qui remplacent les paramètres par défaut. Pour exclure les périphériques indésirables, ajoutez la syntaxe suivante au `multipath.conf` fichier, en remplaçant <DevId> par la chaîne WWID du périphérique à exclure :
+[listing]
+----
+chkconfig multipathd on
+/etc/init.d/multipathd start
+----
+Vous n'avez pas besoin d'ajouter des éléments directement au `multipath.conf` fichier, sauf si vous avez des périphériques que vous ne souhaitez pas gérer le multipathing ou si vous avez des paramètres existants qui remplacent les paramètres par défaut. Pour exclure les périphériques indésirables, ajoutez la syntaxe suivante au `multipath.conf` fichier, en remplaçant <DevId> par la chaîne d'identifiant universel (WWID) du périphérique à exclure :
 
 [listing]
 ----
@@ -151,122 +153,95 @@ L'exemple suivant détermine le WWID d'un périphérique et l'ajoute au `multipa
 +
 [listing]
 ----
-# /lib/udev/scsi_id -gud /dev/sda
+/lib/udev/scsi_id -gud /dev/sda
+----
++
+[listing]
+----
+3600a098038314c4a433f5774717a3046
+/lib/udev/scsi_id -gud /dev/sda
+----
++
 360030057024d0730239134810c0cb833
-----
-+
-`sda` Est le disque SCSI local que vous souhaitez ajouter à la liste noire.
-
-. Ajoutez le `WWID` à la strophe de liste noire dans `/etc/multipath.conf`:
-+
-[listing]
-----
-blacklist {
-     wwid   360030057024d0730239134810c0cb833
-     devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
-     devnode "^hd[a-z]"
-     devnode "^cciss.*"
-}
-----
 
 
-Vous devez toujours vérifier votre `/etc/multipath.conf` fichier, en particulier dans la section valeurs par défaut, pour les paramètres hérités qui peuvent remplacer les paramètres par défaut.
-
-Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faut les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Sans cette correction, les LUN ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
-
-[cols="2*"]
-|===
-| Paramètre | Réglage 
-
-
-| détecter_prio | oui 
-
-
-| dev_loss_tmo | « infini » 
-
-
-| du rétablissement | immédiate 
-
-
-| fast_io_fail_tmo | 5 
-
-
-| caractéristiques | "3 queue_if_no_path pg_init_retries 50" 
-
-
-| flush_on_last_del | « oui » 
-
-
-| gestionnaire_matériel | « 0 » 
-
-
-| no_path_réessayer | file d'attente 
-
-
-| path_checker | « tur » 
-
-
-| path_groupage_policy | « group_by_prio » 
-
-
-| sélecteur de chemin | « temps-service 0 » 
-
-
-| intervalle_interrogation | 5 
-
-
-| prio | « ONTAP » 
-
-
-| solution netapp | LUN.* 
-
-
-| conservez_attaed_hw_handler | oui 
-
-
-| rr_weight | « uniforme » 
-
-
-| noms_conviviaux_conviviaux | non 
-
-
-| fournisseur | NETAPP 
-|===
-.Exemple
-L'exemple suivant montre comment corriger une valeur par défaut remplacée. Dans ce cas, le `multipath.conf` fichier définit les valeurs pour `path_checker` et `no_path_retry` Non compatible avec les LUN ONTAP. S'ils ne peuvent pas être supprimés en raison d'autres baies SAN toujours connectées à l'hôte, ces paramètres peuvent être corrigés spécifiquement pour les LUN ONTAP avec une strophe de périphérique.
 
 [listing]
 ----
-defaults {
-   path_checker      readsector0
-   no_path_retry      fail
-}
++
+`sda` is the local SCSI disk that you want to add to the blacklist.
 
-devices {
-   device {
-      vendor         "NETAPP  "
-      product         "LUN.*"
-      no_path_retry     queue
-      path_checker      tur
-   }
-}
+. Add the `WWID` to the blacklist stanza in `/etc/multipath.conf`:
+[source,cli]
++
+----
+liste noire { wwid 3600a098038314c4a433f5774717a3046 devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*" devnode "^hd[a-z]" devnode "^cciss. }
+
+[listing]
 ----
 
+Always check your `/etc/multipath.conf` file, especially in the defaults section, for legacy settings that might be overriding default settings.
 
-=== Paramètres KVM
+The following table demonstrates the critical `multipathd` parameters for ONTAP LUNs and the required values. If a host is connected to LUNs from other vendors and any of these parameters are overridden, they must be corrected by later stanzas in the `multipath.conf` file that apply specifically to ONTAP LUNs. Without this correction, the ONTAP LUNs might not work as expected. You should only override these defaults in consultation with NetApp, the OS vendor, or both, and only when the impact is fully understood.
 
-Vous pouvez également utiliser les paramètres recommandés pour configurer la machine virtuelle basée sur le noyau (KVM). Aucune modification n'est nécessaire pour configurer KVM car le LUN est mappé à l'hyperviseur.
+//ONTAPDOC-2578 9-Dec-2024
+//ONTAPDOC-2561 25-Nov-202
 
 
-
-== Problèmes connus
-
-La version CentOS 7.6 avec ONTAP présente les problèmes connus suivants :
-
-[cols="3*"]
+[cols=2*,options="header"]
 |===
-| ID de bug NetApp | Titre | Description 
-
-
-| 1440718 | Si vous annulez le mappage d'une LUN ou si vous la mappez sans effectuer de nouvelle analyse SCSI, elle risque de corrompre les données de l'hôte. | Lorsque vous définissez le paramètre de configuration multivoie 'disable_changed_wwid' sur YES, il désactive l'accès au périphérique chemin d'accès en cas de modification de l'identifiant WWID. Les chemins d'accès multiples désactivent l'accès au périphérique de chemin d'accès jusqu'à ce que le WWID du chemin soit restauré vers le WWID du périphérique multichemin. Pour en savoir plus, voir link:https://kb.netapp.com/Advice_and_Troubleshooting/Flash_Storage/AFF_Series/The_filesystem_corruption_on_iSCSI_LUN_on_the_Oracle_Linux_7["Base de connaissances NetApp : corruption du système de fichiers sur le LUN iSCSI sur Oracle Linux 7"^]. 
+| Parameter
+| Setting
+| detect_prio | yes
+| dev_loss_tmo | "infinity"
+| failback | immediate
+| fast_io_fail_tmo | 5
+| features | "3 queue_if_no_path pg_init_retries 50"
+| flush_on_last_del | "yes"
+| hardware_handler | "0"
+| no_path_retry | queue
+| path_checker | "tur"
+| path_grouping_policy | "group_by_prio"
+| path_selector | "service-time 0"
+| polling_interval | 5
+| prio | "ontap"
+| product | LUN.*
+| retain_attached_hw_handler | yes
+| rr_weight | "uniform"
+| user_friendly_names | no
+| vendor | NETAPP
 |===
+
+.Example
+
+The following example shows how to correct an overridden default. In this case, the `multipath.conf` file defines values for `path_checker` and `no_path_retry` that are not compatible with ONTAP LUNs. If they cannot be removed because of other SAN arrays still attached to the host, these parameters can be corrected specifically for ONTAP LUNs with a device stanza.
+
+----
+valeurs par défaut { path_checker readsector0 no_path_retry fail }
+
+Périphériques { device { vendor "NetApp" product "LUN.*" no_path_retry file path_Checker tur }
+
+[listing]
+----
+
+=== Configure KVM settings
+
+You can use the recommended settings to configure Kernel-based Virtual Machine (KVM) as well. There are no changes required to configure KVM because the LUN is mapped to the hypervisor.
+
+//ONTAPDOC-2561 5-Dec-2024
+
+== Known issues
+
+The CentOS 7.6 with ONTAP release has the following known issues:
+
+[cols=3*,options="header"]
+|===
+| NetApp Bug ID
+| Title
+| Description
+| 1440718 | If you unmap or map a LUN without performing a SCSI rescan, it might lead to data corruption on the host. | When you set the 'disable_changed_wwids' multipath configuration parameter to YES, it disables access to the path device in the event of a WWID change. Multipath will disable access to the path device until the WWID of the path is restored to the WWID of the multipath device. To learn more, see  link:https://kb.netapp.com/Advice_and_Troubleshooting/Flash_Storage/AFF_Series/The_filesystem_corruption_on_iSCSI_LUN_on_the_Oracle_Linux_7[NetApp Knowledge Base: The filesystem corruption on iSCSI LUN on the Oracle Linux 7^].
+|===
+
+
+// BURT 1440718, 2022-05-20
+----

@@ -1,9 +1,9 @@
-= Paramètres KVM
+= Configurer les paramètres KVM
 :allow-uri-read: 
 
 
 
 
-=== Paramètres KVM
+=== Configurer les paramètres KVM
 
-Vous pouvez également utiliser les paramètres recommandés pour configurer la machine virtuelle basée sur le noyau (KVM). Aucune modification n'est nécessaire pour configurer KVM car le LUN est mappé à l'hyperviseur.
+Vous pouvez également utiliser les paramètres recommandés pour configurer la machine virtuelle basée sur le noyau (KVM). Aucune modification n'est requise pour configurer KVM car le LUN est mappé sur l'hyperviseur.

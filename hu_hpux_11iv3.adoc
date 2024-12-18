@@ -42,7 +42,7 @@ Vous pouvez télécharger le fichier compressé contenant les packs logiciels Ho
 
 == Kit D'outils SAN
 
-Le kit d'outils est installé automatiquement lorsque vous installez le progiciel Utilitaires hôtes NetApp. Ce kit contient le `sanlun` Utilitaire, qui vous aide à gérer les LUN et les HBA. Le `sanlun` La commande renvoie les informations relatives aux LUN mappées sur votre hôte, aux chemins d'accès multiples et aux informations nécessaires à la création des groupes initiateurs.
+L'installation du package des utilitaires hôtes NetApp installe automatiquement le kit d'outils. Ce kit fournit l' `sanlun`utilitaire qui vous aide à gérer les LUN et les adaptateurs de bus hôte (HBA).  `sanlun`La commande renvoie des informations sur les LUN mappées sur votre hôte, les chemins d'accès multiples et les informations nécessaires à la création des groupes initiateurs.
 
 .Exemple
 Dans l'exemple suivant, le `sanlun lun show` La commande renvoie les informations relatives à la LUN.
@@ -81,7 +81,7 @@ Les chemins d'accès multiples vous permettent de configurer plusieurs chemins r
 Pour les configurations non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant des priorités plus élevées sont Active/Optimized (actif/optimisé), ce qui signifie que les services sont gérés par le contrôleur où se trouve l'agrégat. Les chemins aux priorités inférieures sont actifs, mais ne sont pas optimisés, car ils sont desservis par un autre contrôleur. Les chemins non optimisés ne sont utilisés que lorsque les chemins optimisés ne sont pas disponibles.
 
 .Exemple
-L'exemple suivant montre la sortie correcte pour une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés :
+L'exemple suivant montre la sortie correcte pour une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés.
 
 [listing]
 ----
@@ -107,10 +107,10 @@ up       secondary  /dev/dsk/c42t4d5   fcd1    hpux_4     1
 
 === Configurations All SAN Array
 
-Dans les configurations ASA (All SAN Array), tous les chemins d'accès à une LUN donnée sont actifs et optimisés. Ce qui améliore les performances en assurant le service des opérations d'E/S sur tous les chemins en même temps.
+Toutes les configurations de baie SAN (ASA) optimisent tous les chemins d'accès à une LUN donnée en les gardant actives. Ce qui améliore les performances en assurant le service des opérations d'E/S sur tous les chemins en même temps.
 
 .Exemple
-L'exemple suivant montre la sortie correcte pour une LUN ONTAP :
+L'exemple suivant illustre la sortie correcte d'une LUN ONTAP.
 
 
 NOTE: Toutes les configurations de matrice SAN (ASA) sont prises en charge à partir de ONTAP 9.8 pour HP-UX 11iv3
