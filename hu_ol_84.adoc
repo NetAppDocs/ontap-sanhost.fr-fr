@@ -179,78 +179,117 @@ L'exemple suivant détermine le WWID d'un périphérique et l'ajoute au `multipa
 [listing]
 ----
 3600a098038314c4a433f5774717a3046
-/lib/udev/scsi_id -gud /dev/sda
 ----
 +
-360030057024d0730239134810c0cb833
+`sda` Est le disque SCSI local que vous souhaitez ajouter à la liste noire.
 
-
-
-[listing]
-----
+. Ajoutez le `WWID` à la strophe de liste noire dans `/etc/multipath.conf`:
 +
-`sda` is the local SCSI disk that you want to add to the blacklist.
-
-. Add the `WWID` to the blacklist stanza in `/etc/multipath.conf`:
-[source,cli]
-+
+[source, cli]
 ----
-liste noire { wwid 3600a098038314c4a433f5774717a3046 devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*" devnode "^hd[a-z]" devnode "^cciss. }
-
-[listing]
+blacklist {
+     wwid   3600a098038314c4a433f5774717a3046
+     devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
+     devnode "^hd[a-z]"
+     devnode "^cciss.*"
+}
 ----
 
-Always check your `/etc/multipath.conf` file, especially in the defaults section, for legacy settings that might be overriding default settings.
 
-The following table demonstrates the critical `multipathd` parameters for ONTAP LUNs and the required values. If a host is connected to LUNs from other vendors and any of these parameters are overridden, they must be corrected by later stanzas in the `multipath.conf` file that apply specifically to ONTAP LUNs. Without this correction, the ONTAP LUNs might not work as expected. You should only override these defaults in consultation with NetApp, the OS vendor, or both, and only when the impact is fully understood.
+Vérifiez toujours votre `/etc/multipath.conf` fichier, en particulier dans la section valeurs par défaut, pour les paramètres hérités qui peuvent remplacer les paramètres par défaut.
 
-//ONTAPDOC-2578 9-Dec-2024
-//ONTAPDOC-2561 25-Nov-202
+Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faut les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Sans cette correction, les LUN ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut qu'en concertation avec NetApp, le fournisseur du système d'exploitation ou les deux, et uniquement lorsque l'impact est pleinement compris.
 
-
-[cols=2*,options="header"]
+[cols="2*"]
 |===
-| Parameter
-| Setting
-| detect_prio | yes
-| dev_loss_tmo | infinity
-| failback | immediate
-| fast_io_fail_tmo | 5
-| features | 2 pg_init_retries 50
-| flush_on_last_del | yes
-| hardware_handler | 0
-| no_path_retry | queue
-| path_checker | tur
-| path_grouping_policy | group_by_prio
-| path_selector | service-time 0
-| polling_interval | 5
-| prio | ontap
-| product | LUN.*
-| retain_attached_hw_handler | yes
-| rr_weight | uniform
-| user_friendly_names | no
-| vendor | NETAPP
+| Paramètre | Réglage 
+
+
+| détecter_prio | oui 
+
+
+| dev_loss_tmo | infini 
+
+
+| du rétablissement | immédiate 
+
+
+| fast_io_fail_tmo | 5 
+
+
+| caractéristiques | 2 pg_init_retries 50 
+
+
+| flush_on_last_del | oui 
+
+
+| gestionnaire_matériel | 0 
+
+
+| no_path_réessayer | file d'attente 
+
+
+| path_checker | tur 
+
+
+| path_groupage_policy | group_by_prio 
+
+
+| sélecteur de chemin | temps de service 0 
+
+
+| intervalle_interrogation | 5 
+
+
+| prio | ONTAP 
+
+
+| solution netapp | LUN.* 
+
+
+| conservez_attaed_hw_handler | oui 
+
+
+| rr_weight | uniforme 
+
+
+| noms_conviviaux_conviviaux | non 
+
+
+| fournisseur | NETAPP 
 |===
-
-.Example
-
-The following example shows how to correct an overridden default. In this case, the `multipath.conf` file defines values for `path_checker` and `no_path_retry` that are not compatible with ONTAP LUNs. If they cannot be removed because of other SAN arrays still attached to the host, these parameters can be corrected specifically for ONTAP LUNs with a device stanza.
-
-----
-Valeurs par défaut { path_Checker readsector0 no_path_retry fail } périphériques { device { vendor "NetApp" produit "LUN.*" no_path_retry file path_Checker tur }
+.Exemple
+L'exemple suivant montre comment corriger une valeur par défaut remplacée. Dans ce cas, le `multipath.conf` fichier définit les valeurs pour `path_checker` et `no_path_retry` Non compatible avec les LUN ONTAP. S'ils ne peuvent pas être supprimés en raison d'autres baies SAN toujours connectées à l'hôte, ces paramètres peuvent être corrigés spécifiquement pour les LUN ONTAP avec une strophe de périphérique.
 
 [listing]
 ----
-
-NOTE: To configure Oracle Linux 8.4 Red Hat Enterprise Kernel (RHCK), use the link:hu_rhel_84.html#recommended-settings[recommended settings] for Red Hat Enterprise Linux (RHEL) 8.4.
-
-== KVM Settings
-
-You can use the recommended settings to configure Kernel-based Virtual Machine (KVM) as well. There are no changes required to configure KVM as the LUN is mapped to the hypervisor.
-
-== Known issues
-
-There are no known issues for the Oracle Linux 8.4 with ONTAP release.
-
-NOTE: For Oracle Linux (Red Hat compatible kernel) known issues, see the link:hu_rhel_84.html#known-problems-and-limitations[known issues] section in the corresponding Red Hat Enterprise Linux release documentation.
+defaults {
+ path_checker readsector0
+ no_path_retry fail
+ }
+devices {
+ device {
+ vendor "NETAPP "
+ product "LUN.*"
+ no_path_retry queue
+ path_checker tur
+ }
+}
 ----
+
+NOTE: Pour configurer Oracle Linux 8.4 Red Hat Enterprise Kernel (RHCK), utilisez link:hu_rhel_84.html#recommended-settings["paramètres recommandés"]pour Red Hat Enterprise Linux (RHEL) 8.4.
+
+
+
+== Paramètres KVM
+
+Vous pouvez également utiliser les paramètres recommandés pour configurer la machine virtuelle basée sur le noyau (KVM). Aucune modification n'est nécessaire pour configurer KVM car le LUN est mappé à l'hyperviseur.
+
+
+
+== Problèmes connus
+
+Il n'y a aucun problème connu pour Oracle Linux 8.4 avec la version ONTAP.
+
+
+NOTE: Pour connaître les problèmes connus liés à Oracle Linux (noyau compatible Red Hat), consultez la link:hu_rhel_84.html#known-problems-and-limitations["problèmes connus"] section de la documentation de la version Red Hat Enterprise Linux correspondante.
