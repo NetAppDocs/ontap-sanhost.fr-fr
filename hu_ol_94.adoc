@@ -283,13 +283,13 @@ devices {
 ----
 ====
 
-NOTE: Pour configurer Oracle Linux 9.4 Red Hat Enterprise Kernel (RHEK), utilisez link:hu_rhel_94.html#recommended-settings["paramètres recommandés"]pour Red Hat Enterprise Linux (RHEL) 9.4.
+NOTE: Pour configurer Oracle Linux 9.4 Red Hat compatible Kernel (RHCK), utilisez link:hu_rhel_94.html#recommended-settings["paramètres recommandés"]pour Red Hat Enterprise Linux (RHEL) 9.4.
 
 
 
-=== Configurer les paramètres KVM
+== Configurer les paramètres KVM
 
-Vous pouvez également utiliser les paramètres recommandés pour configurer KVM (Kernel-based Virtual machine). Aucune modification n'est nécessaire pour configurer KVM car le LUN est mappé à l'hyperviseur.
+Il n'est pas nécessaire de configurer les paramètres d'une machine virtuelle basée sur kernel, car la LUN est mappée sur l'hyperviseur.
 
 
 

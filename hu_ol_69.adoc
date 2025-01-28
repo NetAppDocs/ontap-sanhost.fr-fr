@@ -253,7 +253,7 @@ devices {
 }
 ----
 
-NOTE: Pour configurer Oracle Linux 6.9 Red Hat Enterprise Kernel (RHCK), utilisez link:hu_rhel_69.html#recommended-settings["paramètres recommandés"]pour Red Hat Enterprise Linux (RHEL) 6.9.
+NOTE: Pour configurer Oracle Linux 6.9 Red Hat compatible Kernel (RHCK), utilisez link:hu_rhel_69.html#recommended-settings["paramètres recommandés"]pour Red Hat Enterprise Linux (RHEL) 6.9.
 
 
 
@@ -269,4 +269,4 @@ La version Oracle Linux 6.9 avec ONTAP présente les problèmes connus suivants 
 | link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1082780["1082780"^] | Les vidages du micrologiciel sont observés occasionnellement sur l'hyperviseur OL6.9 avec la carte QLE8362 | Lors des opérations de basculement de stockage sur l'hyperviseur OL6.9 avec la carte QLE8362, les vidages de micrologiciel sont occasionnellement observés. Le vidage du firmware peut entraîner une panne d'E/S sur l'hôte, ce qui peut atteindre mille secondes. Une fois que l'adaptateur a terminé le vidage du firmware, le fonctionnement des E/S reprend normalement. Aucune autre procédure de récupération n'est requise sur l'hôte. Pour indiquer le vidage du micrologiciel, le message suivant s'affiche dans le fichier /var/log/message : qla2xxx [0000:0C:00.3]-d001:3 : vidage du micrologiciel enregistré dans le tampon temporaire (3/ffffc90008901000), indicateurs d'état de vidage (0x3f). 
 |===
 
-NOTE: Pour les problèmes connus liés à Oracle Linux (noyau compatible Red Hat), consultez le link:hu_rhel_69.html#known-problems-and-limitations["problèmes connus"] Pour Red Hat Enterprise Linux (RHEL) 6.9.
+NOTE: Pour connaître les problèmes connus liés à Oracle Linux RHCK, consultez le link:hu_rhel_69.html#known-problems-and-limitations["problèmes connus"] pour RHEL 6.9.

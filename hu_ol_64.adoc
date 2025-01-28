@@ -253,7 +253,7 @@ devices {
 }
 ----
 
-NOTE: Pour configurer Oracle Linux 6.4 Red Hat Enterprise Kernel (RHCK), utilisez link:hu_rhel_64.html#recommended-settings["paramètres recommandés"]pour Red Hat Enterprise Linux (RHEL) 6.4.
+NOTE: Pour configurer Oracle Linux 6.4 Red Hat compatible Kernel (RHCK), utilisez link:hu_rhel_64.html#recommended-settings["paramètres recommandés"]pour Red Hat Enterprise Linux (RHEL) 6.4.
 
 
 
@@ -278,4 +278,4 @@ La version Oracle Linux 6.4 avec ONTAP présente les problèmes connus suivants 
 | link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=739909["739909"^] | L'appel système SG_IO ioctl échoue sur les périphériques dm-multipath après une panne FC sur les hôtes OL6.x et OL5.x avec UEK2 | Un problème est détecté sur les hôtes Oracle Linux 6.x avec le noyau UEK2 et les hôtes Oracle Linux 5.x avec le noyau UEK2. Les commandes sg_* sur un périphérique multichemin échouent avec le code d'erreur EAGAIN (erreur) après une erreur de structure qui fait descendre tous les chemins du groupe de chemins actif. Ce problème s'affiche uniquement lorsqu'aucune E/S n'est présente aux périphériques à chemins d'accès multiples. Voici un exemple : # sg_inq -v /dev/mapper/3600a098041764937303f436c75324370 demande cdb : 12 00 00 00 24 00 ioctl(SG_IO v3) a échoué avec os_err (errno) = 11 requête : transmettre via l'erreur os : ressource HDI_ioctl_GET temporairement indisponible : Ressource temporairement indisponible [11] la REQUÊTE SCSI et la récupération des informations ATA ont échoué sur /dev/mapper/3600a098041764937303f436c75324370 # ce problème se produit car le basculement du groupe de chemins vers d'autres groupes actifs n'est pas activé pendant les appels ioctl() lorsqu'aucune E/S n'est en cours sur le périphérique DM-Multipath. Le problème a été observé sur les versions suivantes des packages kernel-uek et device-mapper-multipath : OL6.4 versions: Kernel-uek-2.6.39-400.17.1.el6uek device-mapper-multipath-0.4.9-64.0.el6 OL5.9 versions: Kernel-uek-2.6.39-400.17.1.64.0.melek-0.4.9.1.mel5..mel5.1.1.melek..1.1.1.mel6 
 |===
 
-NOTE: Pour les problèmes connus liés à Oracle Linux (noyau compatible Red Hat), consultez le link:hu_rhel_64.html#known-problems-and-limitations["problèmes connus"] Pour Red Hat Enterprise Linux (RHEL) 6.4.
+NOTE: Pour connaître les problèmes connus liés à Oracle Linux RHCK, consultez le link:hu_rhel_64.html#known-problems-and-limitations["problèmes connus"] pour RHEL 6.4.

@@ -264,13 +264,13 @@ devices {
 }
 ----
 
-NOTE: Pour configurer Oracle Linux 8.10 RedHat Enterprise Kernel, utilisez link:hu_rhel_810.html#recommended-settings["paramètres recommandés"]pour Red Hat Enterprise Linux (RHEL) 8.10.
+NOTE: Pour configurer Oracle Linux 8.10 Red Hat compatible Kernel (RHCK), utilisez link:hu_rhel_810.html#recommended-settings["paramètres recommandés"]pour Red Hat Enterprise Linux (RHEL) 8.10.
 
 
 
-== Paramètres KVM
+== Configurer les paramètres KVM
 
-Il n'est pas nécessaire de configurer les paramètres d'une machine virtuelle basée sur kernel sous Oracle Linux 8.10 car la LUN est mappée sur l'hyperviseur.
+Il n'est pas nécessaire de configurer les paramètres d'une machine virtuelle basée sur kernel, car la LUN est mappée sur l'hyperviseur.
 
 
 

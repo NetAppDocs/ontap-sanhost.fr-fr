@@ -277,13 +277,13 @@ devices {
 }
 ----
 
-NOTE: Pour configurer Oracle Linux 8.6 Red Hat Enterprise Kernel (RHCK), utilisez link:hu_rhel_86.html#recommended-settings["paramètres recommandés"]pour Red Hat Enterprise Linux (RHEL) 8.6.
+NOTE: Pour configurer Oracle Linux 8.6 Red Hat compatible Kernel (RHCK), utilisez link:hu_rhel_86.html#recommended-settings["paramètres recommandés"]pour Red Hat Enterprise Linux (RHEL) 8.6.
 
 
 
-== Paramètres KVM
+== Configurer les paramètres KVM
 
-Vous pouvez également utiliser les paramètres recommandés pour configurer la machine virtuelle basée sur le noyau (KVM). Aucune modification n'est nécessaire pour configurer KVM car le LUN est mappé à l'hyperviseur.
+Il n'est pas nécessaire de configurer les paramètres d'une machine virtuelle basée sur kernel, car la LUN est mappée sur l'hyperviseur.
 
 
 
@@ -292,4 +292,4 @@ Vous pouvez également utiliser les paramètres recommandés pour configurer la 
 Il n'y a aucun problème connu pour Oracle Linux 8.6 avec la version ONTAP.
 
 
-NOTE: Pour connaître les problèmes connus liés à Oracle Linux (noyau compatible Red Hat), consultez la link:hu_rhel_86.html#known-problems-and-limitations["problèmes connus"] section de la documentation de la version Red Hat Enterprise Linux correspondante.
+NOTE: Pour connaître les problèmes connus liés à Oracle Linux RHCK, consultez la link:hu_rhel_86.html#known-problems-and-limitations["problèmes connus"] section de la documentation correspondante sur la version de Red Hat Enterprise Linux.

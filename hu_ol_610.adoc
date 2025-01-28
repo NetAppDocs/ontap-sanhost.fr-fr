@@ -253,7 +253,7 @@ devices {
 }
 ----
 
-NOTE: Pour configurer Oracle Linux 6.10 Red Hat Enterprise Kernel (RHCK), utilisez link:hu_rhel_610.html#recommended-settings["paramètres recommandés"]pour Red Hat Enterprise Linux (RHEL) 6.10.
+NOTE: Pour configurer Oracle Linux 6.10 Red Hat compatible Kernel (RHCK), utilisez link:hu_rhel_610.html#recommended-settings["paramètres recommandés"]pour Red Hat Enterprise Linux (RHEL) 6.10.
 
 
 
@@ -262,4 +262,4 @@ NOTE: Pour configurer Oracle Linux 6.10 Red Hat Enterprise Kernel (RHCK), utilis
 Il n'y a aucun problème connu pour Oracle Linux 6.10 avec la version ONTAP.
 
 
-NOTE: Pour les problèmes connus liés à Oracle Linux (noyau compatible Red Hat), consultez le link:hu_rhel_610.html#known-problems-and-limitations["problèmes connus"] Pour Red Hat Enterprise Linux (RHEL) 6.10.
+NOTE: Pour connaître les problèmes connus liés à Oracle Linux RHCK, consultez le link:hu_rhel_610.html#known-problems-and-limitations["problèmes connus"] pour RHEL 6.10.

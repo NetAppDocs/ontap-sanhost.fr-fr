@@ -274,13 +274,13 @@ devices {
 }
 ----
 
-NOTE: Pour configurer Oracle Linux 8.7 Red Hat Enterprise Kernel (RHCK), utilisez link:hu_rhel_87.html#recommended-settings["paramètres recommandés"]pour Red Hat Enterprise Linux (RHEL) 8.7.
+NOTE: Pour configurer Oracle Linux 8.7 Red Hat compatible Kernel (RHCK), utilisez link:hu_rhel_87.html#recommended-settings["paramètres recommandés"]pour Red Hat Enterprise Linux (RHEL) 8.7.
 
 
 
-== Paramètres KVM
+== Configurer les paramètres KVM
 
-Vous pouvez également utiliser les paramètres recommandés pour configurer la machine virtuelle basée sur le noyau (KVM). Aucune modification n'est nécessaire pour configurer le KVM lorsque le LUN est mappé sur l'hyperviseur.
+Il n'est pas nécessaire de configurer les paramètres d'une machine virtuelle basée sur kernel, car la LUN est mappée sur l'hyperviseur.
 
 
 
