@@ -81,7 +81,7 @@ Si les chaînes NQN hôte ne correspondent pas, vous devez utiliser le `vserver 
 
 Le `lpfc` le conducteur et le `qlnativefc` La fonctionnalité NVMe/FC est activée par défaut dans vSphere 8.x du pilote.
 
-Voir link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^] pour vérifier si la configuration est prise en charge avec le pilote ou le micrologiciel.
+Reportez-vous  à la section link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^] pour vérifier si la configuration est prise en charge par le pilote ou le micrologiciel.
 
 
 

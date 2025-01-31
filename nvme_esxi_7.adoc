@@ -31,7 +31,7 @@ Vous pouvez configurer NVMe over Fabrics (NVMe-of) sur les hôtes initiateurs ex
 
 == Caractéristiques
 
-* L'hôte initiateur ESXi peut exécuter à la fois le trafic NVMe/FC et FCP via les mêmes ports d'adaptateur. Voir la link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] Pour obtenir la liste des contrôleurs et adaptateurs FC pris en charge, Voir la link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^] pour obtenir la liste la plus récente des configurations et versions prises en charge.
+* L'hôte initiateur ESXi peut exécuter à la fois le trafic NVMe/FC et FCP via les mêmes ports d'adaptateur. Consultez la link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] pour obtenir la liste des adaptateurs et contrôleurs FC pris en charge. Pour obtenir la liste actuelle des configurations et versions prises en charge, reportez-vous aulink:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^].
 * La fonctionnalité NVMe/FC est prise en charge depuis ONTAP 9.9.1 P3 pour ESXi 7.0, la mise à jour 3.
 * Pour ESXi 7.0 et versions ultérieures, HPP (plug-in haute performance) est le plug-in par défaut pour les périphériques NVMe.
 
@@ -68,7 +68,7 @@ Host NQN: nqn.2014-08.com.vmware:nvme:nvme-esx
 
 === Configurer Broadcom/Emulex
 
-. Vérifiez si la configuration est prise en charge avec le pilote/micrologiciel requis en vous reportant à la section link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^].
+. Vérifiez si la configuration est prise en charge avec le pilote/micrologiciel requis en link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^]vous reportant à la section .
 . Définissez le paramètre du pilote lpfc `lpfc_enable_fc4_type=3` Pour l'activation de la prise en charge NVMe/FC dans le `lpfc` et redémarrez l'hôte.
 
 
@@ -98,7 +98,7 @@ vmhba65   lpfc     link-up     fc.200000109b954570:100000109b954570             
 === Configurez Marvell/QLogic
 
 .Étapes
-. Vérifiez si la configuration est prise en charge avec le pilote/micrologiciel requis en vous reportant à la section link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^].
+. Vérifiez si la configuration est prise en charge avec le pilote/micrologiciel requis en link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^]vous reportant à la section .
 . Réglez le `qlnativefc` paramètre conducteur `ql2xnvmesupport=1` Pour l'activation de la prise en charge NVMe/FC dans le `qlnativefc` et redémarrez l'hôte.
 +
 `# esxcfg-module -s 'ql2xnvmesupport=1' qlnativefc`

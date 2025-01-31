@@ -30,7 +30,7 @@ La commande cfgdev cause :
 +
 ** Les initiateurs pour se connecter à la structure.
 ** Le système pour rechercher de nouveaux dispositifs.
-** Le système doit créer de nouvelles entrées de périphérique dans lesquelles les nouveaux LUN sont mappés en tant que périphériques MPIO à l'aide du PCM par défaut.
+** Le système pour créer de nouvelles entrées de périphérique dans lesquelles les nouvelles LUN sont mappées en tant que périphériques MPIO (Microsoft Multipath I/O) à l'aide du PCM par défaut.
 
 
 . Pour vérifier que les périphériques hdisk MPIO ont été créés, entrez la commande suivante :
@@ -59,7 +59,7 @@ hdisk4   Available   MPIO NetApp FCP Default PCM Disk
 hdisk5   Available   MPIO NetApp FCP Default PCM Disk
 hdisk6   Available   MPIO NetApp FCP Default PCM Disk
 ----
-. Pour obtenir des informations concernant la configuration, entrez la commande suivante :
+. Récupérer des informations sur votre configuration :
 +
 `lsdev -dev hdisk_name -attr`
 
@@ -97,7 +97,7 @@ scsi_id         0xd10001                         SCSI ID                        
 start_timeout   60                               START unit time out value               True
 ww_name         0x500a0984994ae0e0               FC World Wide Name                      False
 ----
-. Si votre configuration ne prend pas en charge ALUA, vous devez exécuter l'utilitaire dotpaths pour définir les priorités du chemin. L'utilitaire dotpaths est installé lors de l'installation des utilitaires hôtes. N'utilisez pas l'utilitaire dotpaths si ALUA est activé. Passez à l' `oem_setup_env` mode pour exécuter les dotpaths en entrant la commande suivante :
+. Si votre configuration ne prend pas en charge ALUA, vous devez utiliser l'utilitaire dotpaths pour définir les priorités de chemin. L'utilitaire dotpaths est installé lors de l'installation des utilitaires hôtes. N'utilisez pas l'utilitaire dotpaths si ALUA est activé. Passez en `oem_setup_env` mode pour exécuter les dotpaths en entrant la commande suivante :
 +
 `oem_setup_env`
 
@@ -119,9 +119,9 @@ Lorsque vous saisissez le `oem_setup_env` mode, l'invite de ligne de commande pa
 
 
 
-. Si votre configuration ne prend pas en charge ALUA, vous devez exécuter l'utilitaire dotpaths pour définir les priorités du chemin. L'utilitaire dotpaths est installé lors de l'installation des utilitaires hôtes. N'utilisez pas l'utilitaire dotpaths si ALUA est activé.
+. Si votre configuration ne prend pas en charge ALUA, vous devez utiliser l'utilitaire dotpaths pour définir les priorités de chemin. L'utilitaire dotpaths est installé lors de l'installation des utilitaires hôtes. N'utilisez pas l'utilitaire dotpaths si ALUA est activé.
 +
-.. Pour définir la priorité de toutes les LUN Data ONTAP, entrez :
+.. Pour définir la priorité de toutes les LUN ONTAP, entrez :
 +
 `dotpaths`
 

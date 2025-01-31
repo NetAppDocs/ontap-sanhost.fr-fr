@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: hu_aix_61_cmd.html 
 keywords: host utilities, aix, powervm, vios, 3.1, 7.2, 7.0, netapp, ontap 
-summary: 'Vous pouvez utiliser l"exemple de référence de commande Utilitaires hôtes AIX pour valider de bout en bout la configuration de stockage NetApp à l"aide de l"outil utilitaires hôtes.' 
+summary: 'Vous pouvez utiliser l"exemple de référence de commande Utilitaires hôtes AIX pour valider de bout en bout la configuration de stockage NetApp à l"aide de l"outil Utilitaires hôtes.' 
 ---
 = Exemple de référence de commande des utilitaires hôtes AIX
 :hardbreaks:
@@ -16,7 +16,7 @@ summary: 'Vous pouvez utiliser l"exemple de référence de commande Utilitaires 
 
 
 [role="lead"]
-Vous pouvez utiliser l'exemple de référence de commande Utilitaires hôtes AIX pour valider de bout en bout la configuration de stockage NetApp à l'aide de l'outil utilitaires hôtes.
+Vous pouvez utiliser l'exemple de référence de commande Utilitaires hôtes AIX pour valider de bout en bout la configuration de stockage NetApp à l'aide de l'outil Utilitaires hôtes.
 
 
 

@@ -16,9 +16,9 @@ summary: Décrit comment configurer NVMe/FC pour SUSE Linux Enterprise Server 15
 
 
 [role="lead"]
-NVMe/FC est pris en charge sur ONTAP 9.6 et versions ultérieures avec SUSE Linux Enterprise Server 15 SP2. L'hôte SUSE Linux Enterprise Server 15 SP2 peut exécuter le trafic NVMe/FC et FCP via les mêmes ports d'adaptateur d'initiateur Fibre Channel. Consultez la link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] pour obtenir la liste des adaptateurs et contrôleurs FC pris en charge.
+NVMe/FC est pris en charge sur ONTAP 9.6 et versions ultérieures avec SUSE Linux Enterprise Server 15 SP2. L'hôte SUSE Linux Enterprise Server 15 SP2 peut exécuter à la fois le trafic NVMe/FC et FCP via les mêmes ports d'adaptateur d'initiateur Fibre Channel. Consultez la link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] pour obtenir la liste des adaptateurs et contrôleurs FC pris en charge.
 
-Pour obtenir la liste la plus récente des configurations et versions prises en charge, consultez le link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^].
+Pour obtenir la liste actuelle des configurations et versions prises en charge, reportez-vous au link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^].
 
 
 NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans ce document pour configurer les clients Cloud connectés à link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] et link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["Amazon FSX pour ONTAP"^].
@@ -77,7 +77,7 @@ nqn.2014-08.org.nvmexpress:uuid:c7b07b16-a22e-41a6-a1fd-cf8262c8713f
 
 == Configurez la carte Broadcom FC pour NVMe/FC
 
-. Vérifiez que vous utilisez la carte prise en charge. Pour consulter la liste la plus récente des cartes prises en charge, reportez-vous à la section link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^].
+. Vérifiez que vous utilisez la carte prise en charge. Pour obtenir la liste actuelle des cartes prises en charge, reportez-vous au link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^].
 +
 [listing]
 ----
@@ -257,7 +257,7 @@ cat /etc/modprobe.d/lpfc.conf
 options lpfc lpfc_sg_seg_cnt=256
 ----
 . Exécutez `dracut -f` la commande et redémarrez l'hôte.
-. Vérifier que la valeur attendue de `lpfc_sg_seg_cnt` est 256 :
+. Vérifier que la valeur de `lpfc_sg_seg_cnt` est 256 :
 +
 [listing]
 ----

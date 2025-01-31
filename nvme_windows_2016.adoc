@@ -22,7 +22,7 @@ NVMe/FC est pris en charge sur ONTAP 9.7 ou version ultérieure pour Windows Ser
 
 Notez que l'initiateur Broadcom peut prendre en charge le trafic NVMe/FC et FCP via les mêmes ports d'adaptateur FC 32G. Pour FCP et FC/NVMe, utilisez MSDSM comme option MPIO (Microsoft Multipath I/O).
 
-Voir la link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] Pour obtenir la liste des contrôleurs et adaptateurs FC pris en charge, Pour obtenir la liste la plus récente des configurations et versions prises en charge, consultez le link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^].
+Consultez la link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] pour obtenir la liste des adaptateurs et contrôleurs FC pris en charge. Pour obtenir la liste actuelle des configurations et versions prises en charge, reportez-vous au link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^].
 
 
 NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans ce document pour configurer les clients Cloud connectés à link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] et link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["Amazon FSX pour ONTAP"^].

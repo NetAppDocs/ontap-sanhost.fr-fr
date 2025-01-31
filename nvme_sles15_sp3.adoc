@@ -18,15 +18,15 @@ summary: Décrit comment configurer NVMe/FC pour SUSE Linux Enterprise Server 15
 [role="lead"]
 NVMe over Fabrics ou NVMe-of (y compris NVMe/FC et autres transports) est pris en charge pour SUSE Linux Enterprise Server 15 SP3 avec ANA (Asymmetric Namespace Access). ANA est l'équivalent ALUA dans les environnements NVMe-of et est actuellement implémentée avec NVMe Multipath intégré dans le noyau. Cette procédure vous permet d'activer NVMe-of avec le multichemin NVMe intégré au noyau en utilisant ANA sur SUSE Linux Enterprise Server 15 SP3 et ONTAP comme cible.
 
-Reportez-vous à la link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^] pour des informations précises sur les configurations prises en charge.
+Pour plus d'informations sur les configurations prises en charge, reportez-vous aulink:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^].
 
 
 
 == Caractéristiques
 
 * SUSE Linux Enterprise Server 15 SP3 prend en charge NVMe/FC et d'autres systèmes de transport.
-* Nous ne prenons pas en charge Sanlunn pour NVMe-of. Par conséquent, LUHU ne prend pas en charge NVMe-of sur SUSE Linux Enterprise Server 15 SP3. Vous pouvez vous appuyer sur le plug-in NetApp inclus dans le package nvme-cli natif pour NVMe-of. Ces données doivent prendre en charge tous les transports NVMe-of.
-* Le trafic NVMe et SCSI peut être exécuté sur le même hôte existant. En fait, ce chiffre devrait correspondre à la configuration hôte couramment déployée pour les clients. Par conséquent, pour SCSI, vous pouvez configurer `dm-multipath` Comme d'habitude pour les LUN SCSI, ce qui entraîne des périphériques mpath, tandis que le protocole NVMe multipath peut être utilisé pour configurer les périphériques NVMe-of multipathing sur l'hôte.
+* Nous ne prenons pas en charge Sanlunn pour NVMe-of. Par conséquent, il n'existe pas de prise en charge des utilitaires d'hôtes Linux pour NVMe-of sur SUSE Linux Enterprise Server 15 SP3. Vous pouvez vous appuyer sur le plug-in NetApp inclus dans le package nvme-cli natif pour NVMe-of. Ces données doivent prendre en charge tous les transports NVMe-of.
+* Le trafic NVMe et SCSI peut être exécuté sur le même hôte. En fait, ce chiffre devrait correspondre à la configuration hôte couramment déployée pour les clients. Par conséquent, pour SCSI, vous pouvez configurer `dm-multipath` comme d'habitude pour les LUN SCSI produisant des périphériques mpath, tandis que les chemins d'accès multiples NVMe peuvent être utilisés pour configurer des périphériques multivoies NVMe-of sur l'hôte.
 
 
 
@@ -39,15 +39,15 @@ Le démarrage SAN à l'aide du protocole NVMe-of n'est pas pris en charge pour l
 
 == Activez NVMe Multipath dans le noyau
 
-Le multipath NVMe intégré au noyau est déjà activé par défaut sur les hôtes SUSE Linux Enterprise Server, tels que SUSE Linux Enterprise Server 15 SP3. Par conséquent, aucun paramètre supplémentaire n'est requis ici. Pour plus d'informations sur les configurations prises en charge, reportez-vous aulink:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^].
+Le multipath NVMe intégré au noyau est déjà activé par défaut sur les hôtes SUSE Linux Enterprise Server, tels que SUSE Linux Enterprise Server 15 SP3. Par conséquent, aucun paramètre supplémentaire n'est requis ici. Pour plus d'informations sur les configurations prises en charge, reportez-vous aulink:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^].
 
 
 
 == Packs d'initiateurs NVMe-of
 
-Reportez-vous à la link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^] pour des informations précises sur les configurations prises en charge.
+Pour plus d'informations sur les configurations prises en charge, reportez-vous aulink:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^].
 
-. Vérifiez que vous disposez des packages MU kernel et nvme-cli requis installés sur l'hôte MU SUSE Linux Enterprise Server 15 SP3.
+. Vérifiez que les packages MU du noyau et de la nvme-cli requis sont installés sur l'hôte MU SUSE Linux Enterprise Server 15 SP3.
 +
 Exemple :
 
@@ -208,7 +208,7 @@ FCP CMPL: xb 0000159d Err 000135c3
 
 ==== Activation d'une taille d'E/S de 1 Mo (facultatif)
 
-ONTAP signale un DTO (MAX Data Transfer Size) de 8 dans les données Identify Controller, ce qui signifie que la taille maximale de la demande d'E/S doit être de 1 Mo. Toutefois, pour émettre des demandes d'E/S de 1 Mo pour l'hôte NVMe/FC Broadcom, le paramètre lpfc `lpfc_sg_seg_cnt` doit également être incrémenté jusqu'à 256 à partir de la valeur par défaut 64. Pour ce faire, suivez les instructions suivantes :
+ONTAP signale un DTO (MAX Data Transfer Size) de 8 dans les données Identify Controller, ce qui signifie que la taille maximale de la demande d'E/S doit être de 1 Mo. Toutefois, pour émettre des demandes d'E/S de taille 1 Mo pour l'hôte Broadcom NVMe/FC, le paramètre lpfc `lpfc_sg_seg_cnt` doit également être incrémenté jusqu'à 256 par rapport à la valeur par défaut 64. Pour ce faire, suivez les instructions suivantes :
 
 . Ajoutez la valeur 256 dans le champ correspondant `modprobe lpfc.conf` fichier :
 +

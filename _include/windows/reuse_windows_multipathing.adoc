@@ -2,6 +2,6 @@
 :allow-uri-read: 
 
 
-Vous devez installer le logiciel MPIO et configurer des chemins d'accès multiples si votre hôte Windows possède plusieurs chemins d'accès au système de stockage. Sans le logiciel MPIO, le système d'exploitation peut voir chaque chemin en tant que disque distinct, ce qui peut entraîner une corruption des données. Le logiciel MPIO présente un seul disque au système d'exploitation pour tous les chemins, et un module DSM (Device-Specific module) gère le basculement de chemin.
+Vous devez installer le logiciel Microsoft Multipath I/O (MPIO) et configurer les chemins d'accès multiples si votre hôte Windows dispose de plusieurs chemins d'accès au système de stockage. Sans le logiciel MPIO, le système d'exploitation peut voir chaque chemin en tant que disque distinct, ce qui peut entraîner une corruption des données. Le logiciel MPIO présente un seul disque au système d'exploitation pour tous les chemins, et un module DSM (Device-Specific module) gère le basculement de chemin.
 
 Sur un système Windows, les deux principaux composants d'une solution MPIO sont un DSM et Windows MPIO. MPIO n'est pas pris en charge pour Windows XP ou Windows Vista fonctionnant sur une machine virtuelle Hyper- V.

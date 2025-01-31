@@ -24,4 +24,4 @@ HP-UX Host Utilities 6.0 continue à prendre en charge les versions suivantes :
 * HP-UX 11iv3
 
 
-Il n'y a pas de nouvelles fonctionnalités, améliorations, limitations connues ou mises en garde pour la version 6.0 des utilitaires hôtes HP-UX.
+Il n'y a pas de nouvelles fonctionnalités, améliorations, limitations connues ou mises en garde pour la version 6.0 de HP-UX Host Utilities.

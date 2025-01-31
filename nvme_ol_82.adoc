@@ -22,7 +22,7 @@ Vous pouvez configurer NVMe over Fibre Channel (NVMe/FC) sur des hôtes initiate
 
 == Prise en charge
 
-NVMe/FC est pris en charge sur ONTAP 9.6 ou version ultérieure pour Oracle Linux 8.2. L'hôte Oracle Linux 8.2 peut exécuter le trafic NVMe/FC et FCP via les mêmes ports d'adaptateur initiateur Fibre Channel (FC). Consultez la link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] pour obtenir la liste des adaptateurs et contrôleurs FC pris en charge. Pour obtenir la liste la plus récente des configurations prises en charge, reportez-vous au link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^].
+Depuis la version ONTAP 9.6, NVMe/FC est pris en charge pour Oracle Linux 8.2. L'hôte Oracle Linux 8.2 peut exécuter le trafic NVMe/FC et FCP via les mêmes ports d'adaptateur initiateur Fibre Channel (FC). Consultez la link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] pour obtenir la liste des adaptateurs et contrôleurs FC pris en charge. Pour obtenir la liste actuelle des configurations prises en charge, reportez-vous au link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^].
 
 
 NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans ce document pour configurer les clients Cloud connectés à link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] et link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["Amazon FSX pour ONTAP"^].
@@ -38,7 +38,7 @@ Le démarrage SAN à l'aide du protocole NVMe-of n'est pas pris en charge pour l
 == Activation de NVMe/FC
 
 . Installez Oracle Linux 8.2 sur le serveur.
-. Une fois l'installation terminée, vérifiez que vous exécutez le noyau Unbreakable Enterprise pris en charge. Voir la link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^].
+. Une fois l'installation terminée, vérifiez que vous exécutez le noyau Unbreakable Enterprise pris en charge. Voir la link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^].
 +
 [listing]
 ----
@@ -78,7 +78,7 @@ Si les chaînes +hostnqn+ ne correspondent pas, vous devez utiliser la commande 
 
 == Configurez la carte Broadcom FC pour NVMe/FC
 
-. Vérifiez que vous utilisez la carte prise en charge. Pour consulter la liste la plus récente des cartes prises en charge, reportez-vous à la section link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^].
+. Vérifiez que vous utilisez la carte prise en charge. Pour obtenir la liste actuelle des cartes prises en charge, reportez-vous au link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^].
 +
 [listing]
 ----
@@ -262,7 +262,7 @@ cat /etc/modprobe.d/lpfc.conf
 options lpfc lpfc_sg_seg_cnt=256
 ----
 . Exécutez `dracut -f` la commande et redémarrez l'hôte.
-. Vérifier que la valeur attendue de `lpfc_sg_seg_cnt` est 256 :
+. Vérifier que la valeur de `lpfc_sg_seg_cnt` est 256 :
 +
 [listing]
 ----

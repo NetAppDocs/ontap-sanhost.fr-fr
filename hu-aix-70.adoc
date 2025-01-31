@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: hu-aix-70.html 
 keywords: host utilities, aix, powervm, vios, 3.1, 7.0, netapp, ontap 
-summary: 'Les utilitaires d"hôtes unifiés AIX vous aident à gérer le stockage NetApp ONTAP connecté à un hôte AIX.' 
+summary: Les utilitaires hôtes AIX vous aident à gérer le stockage ONTAP connecté à un hôte AIX. 
 ---
 = Installez AIX Host Utilities 7.0
 :hardbreaks:
@@ -16,7 +16,7 @@ summary: 'Les utilitaires d"hôtes unifiés AIX vous aident à gérer le stockag
 
 
 [role="lead"]
-Les utilitaires d'hôtes unifiés AIX vous aident à gérer le stockage NetApp ONTAP connecté à un hôte AIX.
+Les utilitaires hôtes AIX vous aident à gérer le stockage ONTAP connecté à un hôte AIX.
 
 Les utilitaires hôtes AIX prennent en charge les protocoles suivants :
 
@@ -27,7 +27,7 @@ Les utilitaires hôtes AIX prennent en charge les protocoles suivants :
 
 Les utilitaires hôtes AIX prennent en charge les environnements suivants :
 
-* MPIO AIX (SYSTÈME D'EXPLOITATION NATIF)
+* AIX Microsoft Multipath I/O (MPIO) (système d'exploitation natif)
 * PowerVM
 +
 Pour plus d'informations sur PowerVM, consultez le livre rouge IBM PowerVM Live partition Mobility.
@@ -37,13 +37,13 @@ Pour plus d'informations sur PowerVM, consultez le livre rouge IBM PowerVM Live 
 .Avant de commencer
 * Pour un fonctionnement fiable, vérifiez que l'ensemble de votre configuration iSCSI, FC ou FCoE est pris en charge.
 +
-Vous pouvez utiliser le https://mysupport.netapp.com/matrix/imt.jsp?components=65623%3B64703%3B&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^] pour vérifier votre configuration.
+Vous pouvez utiliser https://imt.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^] pour vérifier votre configuration.
 
 * Le suivi dynamique doit être activé pour tous les initiateurs FC et FCoE.
 
 
 
-NOTE: Le progiciel Utilitaires hôtes AIX NetApp est disponible sur le link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.0["Site de support NetApp"^] dans un fichier tar.gz compressé. Vous devez installer le kit d'utilitaires hôtes AIX lors de l'utilisation de MPIO AIX avec le stockage NetApp ONTAP.
+NOTE: Le progiciel Utilitaires hôtes AIX NetApp est disponible sur le link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.0["Site de support NetApp"^]dans un fichier compressé `tar.gz file`. Vous devez installer le kit d'utilitaires hôtes AIX lors de l'utilisation de MPIO AIX avec le stockage ONTAP.
 
 .Étapes
 . Connectez-vous à votre hôte.
@@ -152,4 +152,4 @@ data_vserver   /vol/vol3/lun3 hdisk11 fcs0   FCP      20g C
 data_vserver   /vol/vol4/lun4 hdisk14 fcs0   FCP      20g C
 ----
 
-NOTE: Ce kit d'outils est commun à toutes les configurations et tous les protocoles des utilitaires hôtes. En conséquence, une partie de son contenu s'applique à une configuration, mais pas à une autre. Le fait d'utiliser des composants non utilisés n'affecte pas les performances de votre système. Le kit SAN est pris en charge sur les versions AIX et PowerVM/VIOS.
+NOTE: Ce kit d'outils est commun à toutes les configurations et tous les protocoles des utilitaires hôtes. Par conséquent, tous les composants ne s'appliquent pas à chaque configuration. Les composants inutilisés n'affectent pas les performances de votre système. Le kit d'outils SAN est pris en charge sur les versions AIX et PowerVM/VIOS

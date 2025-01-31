@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: hu_luhu_71_rn.html 
 keywords: host utilities, linux, 7.1, netapp, ontap, release, notes, linux 
-summary: Notes de version pour Linux Unified Host Utilities 7.1 
+summary: Notes de version pour Linux Host Utilities 7.1 
 ---
-= Notes de version de Linux Unified Host Utilities 7.1
+= Linux Host Utilities 7.1 - Notes de version
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -18,7 +18,7 @@ summary: Notes de version pour Linux Unified Host Utilities 7.1
 [role="lead"]
 Les notes de version décrivent les nouvelles fonctionnalités et améliorations, les problèmes connus et les limites, ainsi que les mises en garde importantes pour la configuration et la gestion de votre hôte spécifique avec votre système de stockage ONTAP.
 
-Pour des informations spécifiques sur les versions et mises à jour du système d'exploitation prises en charge par les utilitaires hôtes, consultez le link:https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^].
+Pour obtenir des informations spécifiques sur les versions et les mises à jour du système d'exploitation prises en charge par les utilitaires hôtes, reportez-vous au link:https://imt.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^].
 
 
 
@@ -47,7 +47,7 @@ NOTE: Toute mention d'Host Utilities ou d'Host Utilities Linux dans ce document 
 
 
 
-NOTE: NetApp continue de fonctionner avec les utilitaires hôtes afin d'ajouter la prise en charge des fonctionnalités après la version initiale. Pour obtenir les dernières informations sur les fonctionnalités prises en charge et les nouvelles fonctionnalités ajoutées, reportez-vous au link:https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^].
+NOTE: NetApp continue de fonctionner avec les utilitaires hôtes afin d'ajouter la prise en charge des fonctionnalités après la version initiale. Pour obtenir les dernières informations sur les fonctions prises en charge et les nouvelles fonctionnalités ajoutées, reportez-vous à la section link:https://imt.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^].
 
 
 
@@ -66,12 +66,9 @@ La version 7.1 de Linux Host Utilities présente les problèmes et limitations c
 | ID de bug NetApp | Titre | Description 
 
 
-| 1457017 |  `sanlun` problèmes d'installation messages d'avertissement relatifs à `libdevmapper.so` et `libnl.so` bibliothèques. Ces avertissements n'affectent pas la fonctionnalité de `sanlun` kit. | Lorsque vous exécutez la commande CLI Linux Unified Host Utilities - « sanlun fcp show adapter -v » sur un hôte SAN, la commande échoue et un message d'erreur indique que les dépendances de bibliothèque requises pour la découverte d'un adaptateur de bus hôte (HBA) ne peuvent pas être
-emplacement :
-
-[root@hostname ~]# sanlun fcp show adapter -v
-Impossible de localiser la bibliothèque /usr/lib64/libHBAAPI.so
-Assurez-vous que le package d'installation de la bibliothèque est installé et chargé
-Reportez-vous à la section Bugs NetApp en ligne - link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1508554["1508554"^]. 
+| 1457017 |  `sanlun` problèmes d'installation messages d'avertissement relatifs à `libdevmapper.so` et `libnl.so` bibliothèques. Ces avertissements n'affectent pas la fonctionnalité de `sanlun` kit. | Lorsque vous exécutez la commande CLI des utilitaires d'hôtes Linux - « sanlun fcp show adapter -v » sur un hôte SAN, la commande échoue et un message d'erreur s'affiche indiquant que les dépendances de bibliothèque requises pour la découverte d'un adaptateur de bus hôte (HBA) ne peuvent pas être localisées : 
+`[root@hostname ~]# sanlun fcp show adapter -v
+Unable to locate /usr/lib64/libHBAAPI.so library
+Make sure the package installing the library is installed & loaded` reportez-vous à NetApp Bugs Online - link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1508554["1508554"^]. 
 |===
 link:https://mysupport.netapp.com/site/bugs-online/product["NetApp bogues en ligne"^] fournit des informations complètes pour la plupart des problèmes connus, y compris des solutions de contournement suggérées si possible.

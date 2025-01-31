@@ -18,14 +18,14 @@ summary: Décrit comment configurer NVMe/FC pour SUSE Linux Enterprise Server 15
 [role="lead"]
 Vous pouvez configurer NVMe over Fibre Channel (NVMe/FC) sur des hôtes exécutant SUSE Linux Enterprise Server 15 SP1 et ONTAP comme cible.
 
-NVMe/FC est pris en charge sur ONTAP 9.6 ou version ultérieure pour les versions suivantes de SUSE Linux Enterprise Server :
+À partir de ONTAP 9.6, NVMe/FC est pris en charge pour les versions suivantes de SUSE Linux Enterprise Server :
 
 * SUSE Linux Enterprise Server 15 SP1
 +
 L'hôte SUSE Linux Enterprise Server 15 SP1 peut exécuter le trafic NVMe/FC et FCP via les mêmes ports d'adaptateur d'initiateur Fibre Channel. Consultez la link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] pour obtenir la liste des adaptateurs et contrôleurs FC pris en charge.
 
 +
-Pour obtenir la liste la plus récente des configurations et versions prises en charge, consultez le link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^].
+Pour obtenir la liste actuelle des configurations et versions prises en charge, reportez-vous au link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^].
 
 * Les scripts natifs de connexion automatique NVMe/FC sont inclus dans le pack nvme-cli. Vous pouvez utiliser le pilote natif inbox lpfc sur SUSE Linux Enterprise Server 15 SP1.
 
@@ -74,7 +74,7 @@ nqn.2014-08.org.nvmexpress:uuid:75953f3b-77fe-4e03-bf3c-09d5a156fbcd
 
 == Configurez la carte Broadcom FC pour NVMe/FC
 
-. Vérifiez que vous utilisez la carte prise en charge. Pour consulter la liste la plus récente des cartes prises en charge, reportez-vous à la section link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^].
+. Vérifiez que vous utilisez la carte prise en charge. Pour obtenir la liste actuelle des cartes prises en charge, reportez-vous au link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^].
 +
 [listing]
 ----
@@ -240,7 +240,7 @@ cat /etc/modprobe.d/lpfc.conf
 options lpfc lpfc_sg_seg_cnt=256
 ----
 . Exécutez `dracut -f` la commande et redémarrez l'hôte.
-. Vérifier que la valeur attendue de `lpfc_sg_seg_cnt` est 256 :
+. Vérifier que la valeur de `lpfc_sg_seg_cnt` est 256 :
 +
 [listing]
 ----

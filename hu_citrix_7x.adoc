@@ -22,8 +22,8 @@ Vous pouvez configurer les paramètres de configuration d'hôte SAN ONTAP pour l
 
 == SAN Booting
 
-.Ce dont vous avez besoin
-Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser le link:https://mysupport.netapp.com/matrix/imt.jsp?components=91241;&solution=236&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^] Pour vérifier que votre système d'exploitation, votre adaptateur de bus hôte, votre micrologiciel HBA, votre BIOS de démarrage HBA et votre version de ONTAP sont pris en charge.
+.Avant de commencer
+Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser link:https://imt.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^]pour vérifier que votre se, votre HBA, le micrologiciel HBA, le BIOS de démarrage HBA et la version ONTAP sont pris en charge.
 
 .Étapes
 . Mappez la LUN de démarrage SAN sur l'hôte.
@@ -45,7 +45,7 @@ Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la docum
 
 La prise en charge des chemins d'accès multiples dans Citrix XenServer repose sur les composants Device Mapper Multipathd. Les nœuds de mappage de périphériques ne sont pas automatiquement créés pour toutes les LUN présentées à XenServer et sont uniquement provisionnés lorsque les LUN sont activement utilisées par la couche de gestion du stockage (API). Le plug-in API Citrix XenServer Storage Manager gère automatiquement l'activation et la désactivation des nœuds multichemins.
 
-En raison des incompatibilités avec l'architecture intégrée de gestion des chemins d'accès multiples, Citrix vous recommande d'utiliser l'application Citrix XenCenter pour gérer la configuration du stockage. S'il est nécessaire d'interroger manuellement l'état des tables Device Mapper ou de répertorier les nœuds multipathing actifs du mappeur de périphériques sur le système, vous pouvez utiliser le `/sbin/mpathutil status` Commande pour vérifier les paramètres des LUN ONTAP. Pour en savoir plus, consultez la documentation standard fournie par les fournisseurs pour Citrix XenServer.
+En raison des incompatibilités avec l'architecture intégrée de gestion des chemins d'accès multiples, Citrix vous recommande d'utiliser l'application Citrix XenCenter pour gérer la configuration du stockage. S'il est nécessaire d'interroger manuellement l'état des tables du mappeur de périphériques ou de répertorier les nœuds multivoies des mappeurs de périphériques actifs sur le système, vous pouvez utiliser `/sbin/mpathutil status` la commande pour vérifier les paramètres de vos LUN ONTAP. Pour en savoir plus, consultez la documentation standard fournie par les fournisseurs pour Citrix XenServer.
 
 
 

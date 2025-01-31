@@ -4,7 +4,7 @@ permalink: hu_aix_61.html
 keywords: host utilities, aix, powervm, vios, 3.1, 7.2 netapp, ontap 
 summary: Décrit comment utiliser IBM AIX 7.2 et/ou PowerVM VIOS 3.1 avec ONTAP 
 ---
-= Installez AIX Host Utilities 6.1
+= Installez les utilitaires hôtes AIX 6.1 pour le stockage ONTAP
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,7 +16,7 @@ summary: Décrit comment utiliser IBM AIX 7.2 et/ou PowerVM VIOS 3.1 avec ONTAP
 
 
 [role="lead"]
-Les utilitaires d'hôtes unifiés AIX vous aident à gérer le stockage NetApp ONTAP connecté à un hôte AIX.
+Les utilitaires hôtes AIX vous aident à gérer le stockage ONTAP connecté à un hôte AIX.
 
 Les utilitaires hôtes AIX prennent en charge les protocoles suivants :
 
@@ -27,23 +27,23 @@ Les utilitaires hôtes AIX prennent en charge les protocoles suivants :
 
 Les utilitaires hôtes AIX prennent en charge les environnements suivants :
 
-* MPIO AIX (SYSTÈME D'EXPLOITATION NATIF)
+* AIX Microsoft Multipath I/O (MPIO) (système d'exploitation natif)
 * PowerVM
 +
 Pour plus d'informations sur PowerVM, consultez le livre rouge IBM PowerVM Live partition Mobility.
 
 
 
-.Ce dont vous avez besoin
+.Avant de commencer
 * Pour un fonctionnement fiable, vérifiez que l'ensemble de votre configuration iSCSI, FC ou FCoE est pris en charge.
 +
-Vous pouvez utiliser le https://mysupport.netapp.com/matrix/imt.jsp?components=65623%3B64703%3B&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^] pour vérifier votre configuration.
+Vous pouvez utiliser link:https://imt.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^]pour vérifier votre configuration.
 
-* Le suivi dynamique doit être activé pour tous les initiateurs FC et FCoE.
+* Activez le suivi dynamique pour tous les initiateurs FC et FCoE.
 
 
 
-NOTE: Le pack logiciel NetApp AIX Host Utilities est disponible sur le link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/6.1/downloads["Site de support NetApp"^] dans un fichier compressé tar.gz. Vous devez installer le kit d'utilitaires hôtes AIX lors de l'utilisation de MPIO AIX avec le stockage NetApp ONTAP.
+NOTE: Le progiciel Utilitaires hôtes AIX NetApp est disponible sur le link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/6.1/downloads["Site de support NetApp"^]dans un fichier compressé `tar.gz file`. Vous devez installer le kit d'utilitaires hôtes AIX lors de l'utilisation de MPIO AIX avec le stockage ONTAP.
 
 .Étapes
 . Connectez-vous à votre hôte.
@@ -54,7 +54,7 @@ NOTE: Le pack logiciel NetApp AIX Host Utilities est disponible sur le link:http
 
 . Accédez au https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/6.1/downloads["Site de support NetApp"^] Et téléchargez le fichier compressé contenant les utilitaires hôtes dans un répertoire de votre hôte.
 . Accédez au répertoire contenant le téléchargement.
-. Décompressez le fichier et extrayez le package logiciel SAN Toolkit.
+. Décompresser le fichier et extraire le progiciel SAN Toolkit.
 +
 `# tar -xvf ntap_aix_host_utilities_6.1.tar.gz`
 
@@ -82,7 +82,7 @@ Le répertoire suivant est créé lors de la décompression du fichier : `ntap_a
 
 == Kit D'outils SAN
 
-Utilitaires hôtes AIX est un logiciel hôte NetApp qui fournit un kit d'outils de ligne de commande sur votre hôte IBM AIX. Le kit d'outils est installé lorsque vous installez le pack NetApp Host Utilities. Ce kit contient le `sanlun` Utilitaire, qui vous aide à gérer les LUN et les adaptateurs de bus hôte (HBA). Le `sanlun` La commande renvoie les informations relatives aux LUN mappées sur votre hôte, aux chemins d'accès multiples et aux informations nécessaires à la création des groupes initiateurs.
+Utilitaires hôtes AIX est un logiciel hôte NetApp qui fournit un kit d'outils de ligne de commande sur votre hôte IBM AIX. La boîte à outils est installée lorsque vous installez le package Host Utilities. Ce kit fournit l' `sanlun`utilitaire qui vous aide à gérer les LUN et les adaptateurs de bus hôte (HBA).  `sanlun`La commande renvoie des informations sur les LUN mappées sur votre hôte, les chemins d'accès multiples et les informations nécessaires à la création des groupes initiateurs.
 
 *Exemple*
 
@@ -106,4 +106,4 @@ data_vserver   /vol/vol3/lun3 hdisk11 fcs0   FCP      20g C
 data_vserver   /vol/vol4/lun4 hdisk14 fcs0   FCP      20g C
 ----
 
-NOTE: Ce kit d'outils est commun à toutes les configurations et tous les protocoles des utilitaires hôtes. En conséquence, une partie de son contenu s'applique à une configuration, mais pas à une autre. Le fait d'utiliser des composants non utilisés n'affecte pas les performances de votre système. Le kit SAN est pris en charge sur les versions AIX et PowerVM/VIOS.
+NOTE: Ce kit d'outils est commun à toutes les configurations et tous les protocoles des utilitaires hôtes. Par conséquent, tous les composants ne s'appliquent pas à chaque configuration. Les composants inutilisés n'affectent pas les performances de votre système. Le kit d'outils SAN est pris en charge sur les versions AIX et PowerVM/VIOS

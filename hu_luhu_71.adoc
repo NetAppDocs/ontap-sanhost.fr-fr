@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: hu_luhu_71.html 
 keywords: host utilities, unified, oracle, linux, 7.1, netapp, ontap 
-summary: 'Décrit l"utilisation de Linux Unified Host Utilities 7.1 avec ONTAP' 
+summary: 'Décrit comment utiliser les utilitaires d"hôtes Linux 7.1 avec ONTAP' 
 ---
-= Installez Linux Unified Host Utilities 7.1
+= Installez Linux Host Utilities 7.1
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,7 +16,7 @@ summary: 'Décrit l"utilisation de Linux Unified Host Utilities 7.1 avec ONTAP'
 
 
 [role="lead"]
-Les utilitaires d'hôtes unifiés Linux (LUHU) vous aident à gérer le stockage NetApp ONTAP connecté à un hôte Linux. NetApp recommande vivement d'installer les utilitaires d'hôtes unifiés Linux, mais ce n'est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
+Les utilitaires hôtes Linux vous aident à gérer le stockage ONTAP connecté à un hôte Linux. NetApp recommande fortement d'installer les utilitaires hôtes Linux, mais ce n'est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
 
 Les distributions Linux suivantes sont prises en charge :
 
@@ -27,16 +27,16 @@ Les distributions Linux suivantes sont prises en charge :
 * Citrix XenServer
 
 
-.Ce dont vous avez besoin
-Le pack logiciel NetApp Linux Unified Host Utilities est disponible sur le link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^] dans un fichier .rpm 32 bits ou 64 bits.
+.Avant de commencer
+Le progiciel Utilitaires hôtes NetApp Linux est disponible sur le link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^] dans un fichier .rpm 32 bits ou 64 bits.
 
 * Pour un fonctionnement fiable, vous devez vérifier que l'ensemble de votre configuration iSCSI, FC ou FCoE est prise en charge.
 +
-Vous pouvez utiliser le https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^] pour vérifier votre configuration.
+Vous pouvez utiliser link:https://imt.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^]pour vérifier votre configuration.
 
 * Vous devez installer les packages de gestion HBA (Host bus adapter) disponibles sur le site de support du fournisseur.
 +
-Le logiciel de gestion permet aux commandes du kit SAN de collecter des informations sur les HBA FC, telles que leurs WWPN. Pour le `sanlun fcp show adapter` pour fonctionner, vérifiez que les packages suivants sont correctement installés :
+Le logiciel de gestion permet aux commandes SAN Toolkit de collecter des informations sur les HBA FC, telles que leurs WWPN. Pour que la `sanlun fcp show adapter` commande fonctionne, vérifiez que les packages suivants sont correctement installés :
 
 +
 ** HBA QLogic Marvell – CLI QConvergeConsole
@@ -48,28 +48,25 @@ Le logiciel de gestion permet aux commandes du kit SAN de collecter des informat
 
 
 
-NOTE: Les utilitaires d'hôtes unifiés Linux ne prennent pas en charge les protocoles hôtes NVMe over Fibre Channel (NVMe/FC) et NVMe over TCP (NVMe/TCP).
+NOTE: Le logiciel Linux Host Utilities ne prend pas en charge les protocoles hôtes NVMe over Fibre Channel (NVMe/FC) et NVMe over TCP (NVMe/TCP).
 
 .Étapes
-. Si une version de Linux Unified Host Utilities est déjà installée, utilisez la commande suivante pour la supprimer :
+. Si une version de Linux Host Utilities est actuellement installée, utilisez la commande suivante pour la supprimer :
 +
 [source, cli]
 ----
 rpm -e netapp_linux_unified_host_utilities-7-1
 ----
 +
-Pour les anciennes versions des utilitaires hôtes Linux, accédez au répertoire dans lequel le logiciel de l'utilitaire hôte est installé et entrez la commande de désinstallation pour supprimer le package installé.
+Pour les versions antérieures de Linux Host Utilities, accédez au répertoire dans lequel le logiciel de l'utilitaire hôte est installé et entrez la commande de désinstallation pour supprimer le package installé.
 
-. Téléchargez le pack logiciel Linux Unified Host Utilities 32 bits ou 64 bits à partir du link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^] à votre hôte.
+. Téléchargez le progiciel Linux Host Utilities 32 bits ou 64 bits du link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^] sur votre hôte.
 . Accédez au répertoire dans lequel vous avez téléchargé le pack logiciel et utilisez la commande suivante pour l'installer :
 +
 [source, cli]
 ----
 rpm -ivh netapp_linux_unified_host_utilities-7-1.x86_xx.rpm
 ----
-+
-*Exemple de sortie*
-
 +
 [listing]
 ----
@@ -84,9 +81,6 @@ Updating / installing...
 ----
 sanlun version
 ----
-+
-*Exemple de sortie*
-
 +
 [listing]
 ----
@@ -104,7 +98,7 @@ Lorsque vous configurez un environnement FC qui utilise des pilotes de boîte de
 
 == Kit D'outils SAN
 
-Linux Unified Host Utilities est un logiciel hôte NetApp qui fournit un kit d'outils de ligne de commandes sur votre hôte Linux.
+Linux Host Utilities est un logiciel hôte NetApp qui fournit un kit d'outils de ligne de commande sur votre hôte Linux.
 
 Le kit d'outils est installé automatiquement lorsque vous installez le pack NetApp Host Utilities. Ce kit contient le `sanlun` Utilitaire, qui vous aide à gérer les LUN et les HBA. Le `sanlun` La commande renvoie les informations relatives aux LUN mappées sur votre hôte, aux chemins d'accès multiples et aux informations nécessaires à la création des groupes initiateurs.
 
@@ -130,7 +124,7 @@ data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDO
 [NOTE]
 ====
 * Ce kit est commun à toutes les configurations et tous les protocoles des utilitaires hôtes. En conséquence, une partie de son contenu s'applique à une configuration, mais pas à une autre. Le fait d'utiliser des composants non utilisés n'affecte pas les performances de votre système.
-* Le kit SAN n'est pas pris en charge sur Citrix XenServer, Oracle VM et l'hyperviseur Red Hat Enterprise Virtualization.
+* Le kit d'outils SAN n'est pas pris en charge sur Citrix XenServer, Oracle VM et Red Hat Enterprise Virtualization Hypervisor.
 
 
 ====

@@ -41,7 +41,7 @@ Vous pouvez utiliser la procédure suivante pour activer les chemins d'accès mu
 
 .Étapes
 . Installez RHEL 8.4 GA sur le serveur.
-. Une fois l'installation terminée, vérifiez que vous exécutez le noyau RHEL 8.4 spécifié. Voir la link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^] pour obtenir la liste la plus récente des versions prises en charge.
+. Une fois l'installation terminée, vérifiez que vous exécutez le noyau RHEL 8.4 spécifié. Voir link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^]pour la liste actuelle des versions prises en charge.
 +
 Exemple :
 
@@ -88,7 +88,7 @@ NOTE: Si les chaînes NQN hôte ne correspondent pas, vous devez utiliser le `vs
 +
 [NOTE]
 ====
-Si vous prévoyez d'exécuter à la fois le trafic NVMe et SCSI sur le même hôte, il est recommandé d'utiliser respectivement les chemins d'accès multiples NVMe in-kernel pour les espaces de noms ONTAP et les chemins d'accès multiples dm-multipathing pour les LUN ONTAP. Cela signifie que les espaces de noms ONTAP doivent être exclus de dm-multipath afin d'empêcher dm-multipath de demander ces dispositifs d'espace de noms. Pour ce faire, ajoutez le paramètre enable_étrangère à la `/etc/multipath.conf` fichier :
+Si vous prévoyez d'exécuter à la fois le trafic NVMe et SCSI sur un même hôte, il est recommandé d'utiliser respectivement les chemins d'accès multiples NVMe in-kernel pour les espaces de noms ONTAP et les chemins d'accès multiples dm-multipath pour les LUN ONTAP. Cela signifie que les espaces de noms ONTAP doivent être exclus de dm-multipath afin d'empêcher dm-multipath de demander ces dispositifs d'espace de noms. Pour ce faire, ajoutez le paramètre enable_Foreign au `/etc/multipath.conf` fichier :
 
 [listing]
 ----
@@ -113,7 +113,7 @@ Vous pouvez configurer NVMe/FC pour les cartes Broadcom/Emulex ou Marvell/Qlogic
 .Broadcom/Emulex
 --
 .Étapes
-. Vérifiez que vous utilisez la carte prise en charge. Voir la link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^] pour consulter la liste la plus récente des cartes prises en charge.
+. Vérifiez que vous utilisez la carte prise en charge. Reportez-vous link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^]à la pour obtenir la liste actuelle des cartes prises en charge.
 +
 [listing]
 ----
@@ -124,7 +124,7 @@ LPe32002-M2
 Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
 Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
 ----
-. Vérifiez que vous utilisez le micrologiciel et le pilote recommandés pour la boîte de réception Broadcom lpfc. Voir la link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^] pour obtenir la liste la plus récente des versions de pilote de carte et de micrologiciel prises en charge.
+. Vérifiez que vous utilisez le micrologiciel et le pilote recommandés pour la boîte de réception Broadcom lpfc. Consultez le link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^] pour obtenir la liste actuelle des versions de pilotes et de micrologiciels pris en charge.
 +
 [listing]
 ----
@@ -224,7 +224,7 @@ cat /etc/modprobe.d/lpfc.conf
 options lpfc lpfc_sg_seg_cnt=256
 ----
 . Exécutez `dracut -f` la commande et redémarrez l'hôte.
-. Vérifier que la valeur attendue de `lpfc_sg_seg_cnt` est 256 :
+. Vérifier que la valeur de `lpfc_sg_seg_cnt` est 256 :
 +
 [listing]
 ----

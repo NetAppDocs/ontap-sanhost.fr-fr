@@ -20,14 +20,14 @@ Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour 
 
 
 
-== Installez Linux Unified Host Utilities
+== Installez les utilitaires hôtes Linux
 
-Vous pouvez télécharger le progiciel Utilitaires hôtes unifiés NetApp Linux sous la forme d'un fichier 64-bit.rpm à partir du link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^].
+Vous pouvez télécharger le progiciel Utilitaires hôtes NetApp Linux sous la forme d'un fichier 64-bit.rpm à partir du link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^].
 
-NetApp recommande vivement d'installer les utilitaires d'hôtes unifiés Linux, mais ce n'est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
+NetApp recommande fortement d'installer les utilitaires hôtes Linux, mais ce n'est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
 
 .Étapes
-. Téléchargez le pack logiciel Linux Unified Host Utilities 64 bits à partir du https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^] à votre hôte.
+. Téléchargez le progiciel Linux Host Utilities 64 bits du https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^] sur votre hôte.
 . Installez le pack logiciel :
 +
 `rpm -ivh netapp_linux_unified_host_utilities-7-1.x86_64`
@@ -36,9 +36,9 @@ NetApp recommande vivement d'installer les utilitaires d'hôtes unifiés Linux, 
 
 
 
-== Kit d'outils SAN
+== Kit D'outils SAN
 
-Le kit d'outils est installé automatiquement lorsque vous installez le progiciel Utilitaires hôtes NetApp. Ce kit contient le `sanlun` Utilitaire, qui vous aide à gérer les LUN et les adaptateurs de bus hôte (HBA). Le `sanlun` La commande renvoie les informations relatives aux LUN mappées sur votre hôte, aux chemins d'accès multiples et aux informations nécessaires à la création des groupes initiateurs.
+Le kit d'outils est installé automatiquement lorsque vous installez le pack NetApp Host Utilities. Ce kit contient le `sanlun` Utilitaire, qui vous aide à gérer les LUN et les adaptateurs de bus hôte (HBA). Le `sanlun` La commande renvoie les informations relatives aux LUN mappées sur votre hôte, aux chemins d'accès multiples et aux informations nécessaires à la création des groupes initiateurs.
 
 Dans l'exemple suivant, le `sanlun lun show` La commande renvoie les informations relatives à la LUN.
 
@@ -61,8 +61,8 @@ vs_163_32gQlc          /vol/vol2/lun2   /dev/sde   host15   FCP       10.0g  cDO
 
 == Démarrage SAN
 
-.Ce dont vous avez besoin
-Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser le link:https://mysupport.netapp.com/matrix/imt.jsp?components=91241;&solution=236&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^] Pour vérifier que votre système d'exploitation, votre adaptateur de bus hôte, votre micrologiciel HBA, votre BIOS de démarrage HBA et votre version de ONTAP sont pris en charge.
+.Avant de commencer
+Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser link:https://imt.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^]pour vérifier que votre se, votre HBA, le micrologiciel HBA, le BIOS de démarrage HBA et la version ONTAP sont pris en charge.
 
 .Étapes
 . Mappez la LUN de démarrage SAN sur l'hôte.

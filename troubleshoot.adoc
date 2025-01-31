@@ -121,7 +121,7 @@ LS: Xmt 0000000000000006 Cmpl 0000000000000006
 FCP: Rd 0000000000000073 Wr 0000000000000005 IO 0000000000000031
 Cmpl 00000000000000a8 Outstanding 0000000000000001
 ----
-* Si les LIFs cibles ne sont pas affichées comme ci-dessus dans `nvme_info` sortie de la commande, vérifiez le `/var/log/messages` et `dmesg` Les sorties de commande permettent de détecter toute défaillance NVMe/FC suspecte, puis de signaler ou corriger en conséquence.
+* Si le résultat de la `nvme_info` commande n'affiche pas les LIFs cibles comme indiqué dans l'exemple ci-dessus, vérifiez les sorties de la `/var/log/messages` commande et `dmesg` en s'il y a des défaillances NVMe/FC suspectes, et signalez-le ou corrigez-le en conséquence.
 
 
 

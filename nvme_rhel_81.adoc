@@ -16,9 +16,9 @@ summary: Décrit la configuration de NVMe/FC pour RHEL 8.1 avec ONTAP
 
 
 [role="lead"]
-NVMe/FC est pris en charge sur ONTAP 9.6 ou version ultérieure pour Red Hat Enterprise Linux (RHEL) 8.1. Un hôte RHEL 8.1 peut exécuter le trafic NVMe et SCSI via les mêmes ports d'adaptateur FC initiator. Voir la link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] Pour obtenir la liste des contrôleurs et adaptateurs FC pris en charge,
+Depuis la version ONTAP 9.6, NVMe/FC est pris en charge pour Red Hat Enterprise Linux (RHEL) 8.1. Un hôte RHEL 8.1 peut exécuter le trafic NVMe et SCSI via les mêmes ports d'adaptateur FC initiator. Consultez la link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] pour obtenir la liste des adaptateurs et contrôleurs FC pris en charge.
 
-Voir la link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^] pour obtenir la liste la plus récente des configurations prises en charge.
+Pour obtenir la liste actuelle des configurations prises en charge, reportez-vous aulink:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^].
 
 
 
@@ -46,7 +46,7 @@ Vous pouvez utiliser la procédure suivante pour activer NVMe/FC.
 4.18.0-147.el8.x86_64
 ----
 +
-Voir la link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^] pour obtenir la liste la plus récente des versions prises en charge.
+Voir link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^]pour la liste actuelle des versions prises en charge.
 
 . Installer le `nvme-cli-1.8.1-3.el8` groupe :
 +
@@ -98,7 +98,7 @@ NOTE: Si les chaînes NQN hôte ne correspondent pas, utilisez le `vserver modif
 Vous pouvez utiliser la procédure suivante pour configurer une carte FC Broadcom.
 
 .Étapes
-. Vérifiez que vous utilisez la carte prise en charge. Voir la link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^] pour consulter la liste la plus récente des cartes prises en charge.
+. Vérifiez que vous utilisez la carte prise en charge. Reportez-vous link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^]à la pour obtenir la liste actuelle des cartes prises en charge.
 +
 [listing]
 ----
@@ -205,7 +205,7 @@ cat /etc/modprobe.d/lpfc.conf
 options lpfc lpfc_sg_seg_cnt=256
 ----
 . Exécutez `dracut -f` la commande et redémarrez l'hôte.
-. Vérifier que la valeur attendue de `lpfc_sg_seg_cnt` est 256 :
+. Vérifier que la valeur de `lpfc_sg_seg_cnt` est 256 :
 +
 [listing]
 ----

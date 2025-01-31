@@ -4,7 +4,7 @@ permalink: hu_aix_72_sanbooting_aix.html
 keywords: host utilities, aix, netapp, ontap, configure, discover, configuring, discovering 
 summary: Décrit la découverte et la configuration DES LUN sous AIX 
 ---
-= (AIX MPIO sans PowerVM) découverte et configuration des LUN avec AIX
+= (AIX MPIO sans PowerVM) Découvrez et configurez les LUN avec AIX
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,7 +16,7 @@ summary: Décrit la découverte et la configuration DES LUN sous AIX
 
 
 [role="lead"]
-Lorsque vous utilisez AIX sans PowerVM, vous utilisez la commande cfgmgr pour que l'hôte détecte les LUN. Il n'est pas nécessaire de redémarrer l'hôte pour détecter les LUN. Pour confirmer que l'hôte a découvert les LUN, vous pouvez utiliser l'utilitaire sanlun.
+Lorsque vous utilisez AIX sans PowerVM, vous pouvez exécuter `cfgmgr` la commande pour permettre à l'hôte de détecter les LUN. Il n'est pas nécessaire de redémarrer l'hôte pour détecter les LUN. Pour confirmer que l'hôte a découvert les LUN, vous pouvez utiliser l'utilitaire sanlun.
 
 
 NOTE: Les étapes suivantes ne s'appliquent pas à un hôte qui exécute un environnement PowerVM.
@@ -36,7 +36,7 @@ Le `cfgmgr` la commande permet de :
 ** Le système pour créer de nouvelles entrées de périphérique.
 
 
-. Pour afficher tous les disques AIX, y compris les LUN NetApp, entrez la commande suivante :
+. Afficher tous les disques AIX, y compris les LUN NetApp :
 +
 `lsdev -Cc disk`
 
@@ -47,9 +47,12 @@ Les LUN apparaissent sur l'hôte sous forme de disques. Vous pouvez utiliser ces
 Notez les numéros d'instance hdisk. Vous les utilisez lorsque vous effectuez la configuration du chemin.
 
 +
-Voici le type de sortie produit par la commande lsdev -cc disk dans un environnement utilisant FC.
+L'exemple suivant montre la `lsdev -Cc disk` sortie de la commande dans un environnement FC.
 
 +
+.Affiche un exemple de résultat
+[%collapsible]
+====
 [listing]
 ----
 # lsdev -Cc disk
@@ -60,14 +63,15 @@ hdisk3 Available 04-08-02  MPIO NetApp FCP Default PCM Disk
 hdisk4 Available 04-08-02  MPIO NetApp FCP Default PCM Disk
 hdisk5 Available 04-08-02  MPIO NetApp FCP Default PCM Disk
 ----
-. Entrez la commande suivante pour obtenir des informations sur votre configuration :
+====
+. Récupérer des informations sur votre configuration :
 +
 `lsattr -El hdisk_name`
 
 +
-Cette commande produit la sortie suivante.
-
-+
+.Affiche un exemple de résultat
+[%collapsible]
+====
 [listing]
 ----
 # lsattr -El hdisk65
@@ -97,7 +101,8 @@ scsi_id         0xd10001                         SCSI ID                        
 start_timeout   60                               START unit time out value               True
 ww_name         0x500a0984994ae0e0               FC World Wide Name                      False
 ----
-. Si votre configuration prend en charge ALUA, vous pouvez l'utiliser pour définir la priorité des chemins d'accès. Vérifiez que le protocole ALUA est activé :
+====
+. Si votre configuration prend en charge ALUA, vous pouvez l'utiliser pour définir la priorité des chemins d'accès. Vérifiez que ALUA est activé :
 +
 `lun igroup show -instance igroup_name`
 
@@ -108,30 +113,32 @@ ww_name         0x500a0984994ae0e0               FC World Wide Name             
 
 
 
-. Si votre configuration ne prend pas en charge ALUA, vous devez exécuter l'utilitaire dotpaths pour définir les priorités du chemin. L'utilitaire dotpaths est installé lors de l'installation des utilitaires hôtes. N'utilisez pas l'utilitaire dotpaths si ALUA est activé.
+. Si votre configuration ne prend pas en charge ALUA, vous devez utiliser l'utilitaire dotpaths pour définir les priorités de chemin. L'utilitaire dotpaths est installé lors de l'installation des utilitaires hôtes. N'utilisez pas l'utilitaire dotpaths si le protocole ALUA est activé.
 +
-.. Pour définir la priorité de toutes les LUN Data ONTAP, entrez :
+.. Définissez la priorité de toutes les LUN ONTAP :
 +
 `dotpaths`
 
-.. Pour définir la priorité d'un ensemble spécifique d'entrée de disque :
+.. Définir la priorité d'un jeu spécifique de disques :
 +
 `dotpaths [-hqv] [hdiskN ...]`
 
 +
-Utilisez le `-v` option pour activer le mode détaillé et afficher toutes les priorités. Utilisez le `-q` option permettant de rechercher toutes les priorités ou les priorités individuelles des disques.
+Utilisez `-v` l'option pour activer le mode détaillé et afficher toutes les priorités. Utilisez `-q` l'option pour interroger toutes les priorités de disque ou les priorités individuelles.
 
 
 
-. Pour vérifier que l'hôte a détecté les LUN, entrez la commande suivante :
+. Vérifiez que l'hôte a détecté les LUN :
 +
 `# sanlun lun show`
 
 +
-.Exemple
-Cet exemple montre la sortie type de l' `sanlun lun show` Dans un environnement de chemins d'accès multiples MPIO.
+L'exemple suivant montre la sortie type de la `sanlun lun show` commande dans un environnement multi-chemins d'accès E/S (MPIO) Microsoft :
 
 +
+.Affiche un exemple de résultat
+[%collapsible]
+====
 [listing]
 ----
 sanlun lun show -p
@@ -167,4 +174,5 @@ up        secondary   path13 fcs1    4a                                         
 up        primary     path14 fcs1    4b                                             1
 up        primary     path15 fcs1    4a                                             1
 ----
+====
 

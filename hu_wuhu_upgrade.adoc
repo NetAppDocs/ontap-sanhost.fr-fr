@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: hu_wuhu_upgrade.html 
 keywords: windows, host, utilities, 7.1, hba, fibre, channel, SANtricity, netapp, san, host, e-series, platform 
-summary: 'Windows Unified Host Utilities comprend un programme d"installation qui définit les paramètres d"enregistrement et d"adaptateur HBA Windows requis. L"hôte Windows gère ainsi correctement les comportements du système de stockage pour les plateformes NetApp ONTAP et E-Series.' 
+summary: 'Windows Host Utilities inclut un programme d"installation qui définit les paramètres de registre et de HBA Windows requis afin que l"hôte Windows gère correctement le comportement du système de stockage pour les plateformes ONTAP et E-Series.' 
 ---
-= Mettez à niveau les utilitaires d'hôtes unifiés Windows
+= Mettez à niveau les utilitaires d'hôtes Windows
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -51,7 +51,7 @@ Vous pouvez effectuer une mise à niveau silencieuse (sans surveillance) des nou
 
 +
 ** `installer` est le nom du `.msi` Fichier pour votre architecture CPU.
-** MULTIPATHING indique si la prise en charge de MPIO est installée. Les valeurs autorisées sont « 0 » pour non et « 1 » pour oui.
+** MULTIPATHING indique si la prise en charge MPIO (Microsoft Multipath I/O) est installée. Les valeurs autorisées sont « 0 » pour non et « 1 » pour oui.
 ** `inst_path` Est le chemin d'installation des fichiers Host Utilities. Le chemin par défaut est `C:\Program Files\NetApp\Windows Host Utilities\`.
 
 

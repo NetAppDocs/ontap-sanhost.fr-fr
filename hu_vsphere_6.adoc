@@ -22,8 +22,8 @@ Vous pouvez utiliser les paramètres de configuration des hôtes SAN ONTAP pour 
 
 == Démarrage SAN de l'hyperviseur
 
-.Ce dont vous avez besoin
-Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser le https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^] Pour vérifier que votre système d'exploitation, votre adaptateur de bus hôte, votre micrologiciel HBA, votre BIOS de démarrage HBA et votre version de ONTAP sont pris en charge.
+.Avant de commencer
+Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser link:https://imt.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^]pour vérifier que votre se, votre HBA, le micrologiciel HBA, le BIOS de démarrage HBA et la version ONTAP sont pris en charge.
 
 .Étapes
 . Mappez la LUN de démarrage SAN sur l'hôte.
@@ -43,9 +43,9 @@ Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la docum
 
 == Chemins d'accès multiples
 
-ESXi propose un module de chemins d'accès multiples extensible appelé NMP (Native Multipathing Plug-in) qui gère les sous-plug-ins Storage Array Type Plugins (SATP) et les modules de connecteurs de sélection de chemin (PSP). Ces règles SATP sont disponibles par défaut dans ESXi.
+ESXi fournit un module de chemins d'accès multiples extensible appelé Native Multipathing Plug-in (NMP) qui gère les sous-plug-ins, les Storage Array Type Plugins (SATPS) et les Path Selection Plugins (PSP). Ces règles SATP sont disponibles par défaut dans ESXi.
 
-Pour le stockage NetApp ONTAP, le plug-in VMW_SATP_ALUA est utilisé par défaut avec `VMW_PSP_RR` En tant que stratégie de sélection de chemin (PSP). Cela peut être confirmé via la commande ci-dessous :
+Pour le stockage ONTAP, le plug-in « VMW_SATP_ALUA » est utilisé par défaut avec « VMW_PSP_RR » comme règle de sélection de chemin (PSP). Vous pouvez exécuter la commande suivante pour confirmer la PSP :
 
 *`esxcli storage nmp satp rule list -s VMW_SATP_ALUA`*
 
@@ -172,7 +172,7 @@ Les volumes virtuels (vvols) sont des types d'objets VMware correspondant à un 
 
 Les outils ONTAP pour VMware vSphere incluent VASA Provider pour ONTAP, qui fournit le point d'intégration à VMware vCenter pour exploiter le stockage basé sur vvols. Lorsque vous déployez le fichier ONTAP Tools OVA, il est automatiquement enregistré avec le serveur vCenter et active le fournisseur VASA.
 
-Lorsque vous créez un datastore vvols à l'aide de l'interface utilisateur vCenter, il vous guide à créer des volumes FlexVol en tant que stockage de sauvegarde pour le datastore. Les volumes vvols dans les datastores vvols sont accessibles par les hôtes ESXi à l'aide d'un point de terminaison de protocole (PE). Dans les environnements SAN, une LUN de 4 Mo est créée sur chaque FlexVol du datastore pour une utilisation en tant que PE. Un SAN PE est une unité logique administrative (ALU); vVols sont des unités logiques subsidiaires (SLUs).
+Lorsque vous créez un datastore vVols à l'aide de l'interface utilisateur vCenter, il vous guide à créer des volumes FlexVol en tant que stockage de sauvegarde pour le datastore. Les hôtes ESXi accèdent aux vVols d'un datastore vVols à l'aide d'un terminal de protocole (PE). Dans les environnements SAN, une LUN de 4 Mo est créée sur chaque volume de volume FlexVol volume du datastore pour une utilisation en tant que PE. Un SAN PE est une unité logique administrative (ALU); vVols sont des unités logiques subsidiaires (SLUs).
 
 Les exigences standard et les meilleures pratiques pour les environnements SAN s'appliquent lors de l'utilisation de vVvols, y compris (mais non limité à) les éléments suivants :
 
@@ -185,11 +185,11 @@ Les exigences standard et les meilleures pratiques pour les environnements SAN s
 
 NOTE: Vous devez déployer des outils ONTAP pour VMware vSphere afin d'activer VASA Provider. Le fournisseur VASA gère tous les paramètres de votre groupe initiateur. Il n'est donc pas nécessaire de créer ou de gérer les iGroups dans un environnement vVols.
 
-NetApp ne recommande pas pour le moment de modifier les paramètres vVvols des valeurs par défaut.
+NetApp ne recommande pas actuellement de modifier les paramètres vVols par défaut.
 
-Reportez-vous à la https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^] Pour les versions spécifiques des outils ONTAP ou de VASA Provider pour vos versions spécifiques de vSphere et ONTAP.
+Reportez-vous au https://imt.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^] pour connaître les versions spécifiques des outils ONTAP ou du fournisseur VASA hérité pour vos versions spécifiques de vSphere et ONTAP.
 
-Pour plus d'informations sur le provisionnement et la gestion de vvols, reportez-vous également aux outils ONTAP pour la documentation VMware vSphere https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsphere_ontap_ontap_for_vsphere.html["TR-4597"^] et link:https://www.netapp.com/pdf.html?item=/media/13555-tr4400pdf.pdf["TR-4400."^]
+Pour plus d'informations sur le provisionnement et la gestion des vVols, reportez-vous à la documentation relative aux outils ONTAP pour VMware vSphere ainsi qu' https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsphere_ontap_ontap_for_vsphere.html["TR-4597"^]à link:https://www.netapp.com/pdf.html?item=/media/13555-tr4400pdf.pdf["TR-4400."^]
 
 
 
@@ -240,7 +240,7 @@ Vous pouvez configurer manuellement les machines virtuelles à l'aide des régla
 |===
 
 
-=== Validation du système vSphere ajustable
+=== Validez le réglage vSphere
 
 Utiliser la commande suivante pour vérifier le `HardwareAcceleratedLocking` réglage :
 
@@ -261,7 +261,7 @@ Utiliser la commande suivante pour vérifier le `HardwareAcceleratedLocking` ré
 ----
 
 
-=== Validation du paramètre IOPS du disque
+=== Validez le paramètre IOPS du disque
 
 Utilisez la commande suivante pour vérifier le paramètre IOPS :
 
@@ -281,7 +281,7 @@ naa.600a098038304731783f506670553355
 ----
 
 
-=== Validation de QFullSampleSize
+=== Valider la QFullSampleSize
 
 Utilisez la commande suivante pour vérifier QFullSampleSize :
 

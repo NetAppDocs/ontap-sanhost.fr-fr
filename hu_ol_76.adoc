@@ -20,16 +20,16 @@ Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour 
 
 
 
-== Installez Linux Unified Host Utilities
+== Installez les utilitaires hôtes Linux
 
-Le progiciel Utilitaires hôtes unifiés NetApp Linux est disponible sur le link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^]dans un fichier .rpm 32 bits et 64 bits. Si vous ne savez pas quel fichier est adapté à votre configuration, utilisez le link:https://mysupport.netapp.com/matrix/#welcome["Matrice d'interopérabilité NetApp"^] pour vérifier lequel vous avez besoin.
+Le progiciel Utilitaires hôtes NetApp Linux est disponible sur le link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^] dans un fichier .rpm 32 bits et 64 bits. Si vous ne savez pas quel fichier est adapté à votre configuration, utilisez le link:https://mysupport.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^] pour vérifier lequel vous avez besoin.
 
-NetApp recommande fortement d'installer les utilitaires d'hôtes unifiés Linux, mais ce n'est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
+NetApp recommande fortement d'installer les utilitaires hôtes Linux, mais ce n'est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
 
-Si Linux Unified Host Utilities est actuellement installé, vous devez soit le mettre à niveau vers la dernière version, soit le supprimer et suivre ces étapes pour installer la dernière version.
+Si Linux Host Utilities est actuellement installé, vous devez soit le mettre à niveau vers la dernière version, soit le supprimer et suivre ces étapes pour installer la dernière version.
 
 .Étapes
-. Téléchargez le pack logiciel Linux Unified Host Utilities 32 bits ou 64 bits à partir du link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^] à votre hôte.
+. Téléchargez le progiciel Linux Host Utilities 32 bits ou 64 bits du link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^] sur votre hôte.
 . Installez le pack logiciel :
 +
 `rpm -ivh netapp_linux_unified_host_utilities-7-1.x86_64`
@@ -68,8 +68,8 @@ data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDO
 
 == SAN Booting
 
-.Ce dont vous avez besoin
-Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser le link:https://mysupport.netapp.com/matrix/imt.jsp?components=86309;&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^] Pour vérifier que votre système d'exploitation, votre adaptateur de bus hôte, votre micrologiciel HBA, votre BIOS de démarrage HBA et votre version de ONTAP sont pris en charge.
+.Avant de commencer
+Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser link:https://imt.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^]pour vérifier que votre se, votre HBA, le micrologiciel HBA, le BIOS de démarrage HBA et la version ONTAP sont pris en charge.
 
 .Étapes
 . Mappez la LUN de démarrage SAN sur l'hôte.
@@ -274,5 +274,5 @@ La version Oracle Linux 7.6 avec ONTAP présente les problèmes connus suivants 
 | link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1246134["11246134"^] | Pas de progression d'E/S sur Oracle Linux 7.6 avec le noyau UEK5U2, qui fonctionne avec un HBA Emulex LPe16002B-M6 Fibre Channel 16 Gbit/s lors des opérations de basculement du stockage | Lors des opérations de basculement de stockage sur Oracle Linux 7.6 avec le noyau UEK5U2 s'exécutant avec un adaptateur de bus hôte (HBA) Fibre Channel (FC) Emulex LPe16002B-M6 16 Gbit/s, la progression des E/S peut s'arrêter en raison du blocage des rapports. Le basculement de stockage signale un passage d'un état « en ligne » à un état « bloqué », entraînant un retard dans les opérations de lecture et d'écriture. Une fois l'opération terminée avec succès, les rapports ne parviennent pas à revenir à l'état « en ligne » et continuent de rester dans un état « bloqué ». 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1246327["1246327"^] | État du port distant sur l'hôte QLogic QLE2672 16 Gbit/s bloqué lors des opérations de basculement de stockage | Les ports distants Fibre Channel (FC) peuvent être bloqués sur Red Hat Enterprise Linux (RHEL) 7.6 avec un hôte QLogic QLE2672 16 Gbit/s lors des opérations de basculement de stockage. Étant donné que les interfaces logiques sont arrêtées lorsqu'un nœud de stockage est en panne, les ports distants définissent l'état du nœud de stockage sur bloqués. L'avancement des E/S peut s'arrêter en raison des ports bloqués si vous exécutez à la fois un hôte QLogic QLE2672 16 Gbit/s et un adaptateur de bus hôte (FC) Fibre Channel 32 Gbit/s QLE2742. Lorsque le nœud de stockage revient à son état optimal, les interfaces logiques s'allument également et les ports distants doivent être en ligne. Cependant, il se peut que les ports distants soient toujours bloqués. Cet état bloqué s'enregistre comme étant défectueux pour LES LUN au niveau de la couche multivoie. Vous pouvez vérifier l'état des ports distants à l'aide de la commande suivante : # Cat /sys/class/fc_remote_ports/rport-*/port_stat vous devriez voir la sortie suivante : bloqué en ligne bloqué 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1246327["1246327"^] | État du port distant sur l'hôte QLogic QLE2672 16 Gbit/s bloqué lors des opérations de basculement de stockage | Les ports distants Fibre Channel (FC) peuvent être bloqués sur Red Hat Enterprise Linux (RHEL) 7.6 avec un hôte QLogic QLE2672 16 Gbit/s lors des opérations de basculement de stockage. Étant donné que les interfaces logiques sont arrêtées lorsqu'un nœud de stockage est en panne, les ports distants définissent l'état du nœud de stockage sur bloqués. La progression des E/S peut s'arrêter en raison de ports bloqués si vous utilisez à la fois un hôte QLogic QLE2672 16G et un adaptateur de bus hôte (HBA) QLE2742 32 Gb Fibre Channel (FC). Lorsque le nœud de stockage revient à son état optimal, les interfaces logiques s'allument également et les ports distants doivent être en ligne. Cependant, il se peut que les ports distants soient toujours bloqués. Cet état bloqué s'enregistre comme étant défectueux pour LES LUN au niveau de la couche multivoie. Vous pouvez vérifier l'état des ports distants à l'aide de la commande suivante : # Cat /sys/class/fc_remote_ports/rport-*/port_stat vous devriez voir la sortie suivante : bloqué en ligne bloqué 
 |===

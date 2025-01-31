@@ -8,10 +8,7 @@ summary: Les mentions légales donnent accès aux déclarations de copyright, au
 :allow-uri-read: 
 
 
-[role="lead"]
-Les mentions légales donnent accès aux déclarations de copyright, aux marques, aux brevets, etc.
-
-[role="lead"]
+[role="lead lead"]
 Les mentions légales donnent accès aux déclarations de copyright, aux marques, aux brevets, etc.
 
 
@@ -41,14 +38,6 @@ link:https://www.netapp.com/pdf.html?item=/media/11887-patentspage.pdf["https://
 == Politique de confidentialité
 
 link:https://www.netapp.com/company/legal/privacy-policy/["https://www.netapp.com/company/legal/privacy-policy/"^]
-
-
-
-== Source ouverte
-
-Les fichiers de notification fournissent des informations sur les droits d'auteur et les licences de tiers utilisés dans le logiciel NetApp.
-
-Fournit des informations sur les droits d'auteur tiers et les licences utilisées dans ce produit.
 
 * link:./media/Notices-AIX61-2023.pdf["Avis pour AIX"^]
 * link:./media/Linux_Unified_Host_Utilities.pdf["Avis pour Linux"^]

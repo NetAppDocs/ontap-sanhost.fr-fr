@@ -53,7 +53,7 @@ FCP CMPL: xb 00001f50 Err 0000d9f8
 ----
 . Activez la taille d'E/S de 1 Mo _ (facultatif)_.
 +
-Le `lpfc_sg_seg_cnt` Il est nécessaire de définir le paramètre sur 256 pour que le pilote lpfc puisse émettre des demandes d'E/S d'une taille maximale de 1 Mo.
+Le `lpfc_sg_seg_cnt` paramètre doit être défini sur 256 pour que le pilote lpfc puisse émettre des demandes d'E/S d'une taille maximale de 1 Mo.
 
 +
 [listing]

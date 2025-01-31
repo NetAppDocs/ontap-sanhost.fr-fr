@@ -22,7 +22,7 @@ summary: Décrit comment utiliser Ubuntu 24.04 avec ONTAP
 Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour configurer Ubuntu 24.04 avec ONTAP comme cible.
 
 
-NOTE: Le progiciel Utilitaires hôtes unifiés NetApp Linux n'est pas disponible pour le système d'exploitation Ubuntu 24.04.
+NOTE: Le progiciel des utilitaires hôtes Linux de NetApp n'est pas disponible pour le système d'exploitation Ubuntu 24.04.
 
 
 
@@ -31,7 +31,7 @@ NOTE: Le progiciel Utilitaires hôtes unifiés NetApp Linux n'est pas disponible
 Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration.
 
 .Avant de commencer
-Utilisez le link:https://mysupport.netapp.com/matrix/imt.jsp?components=91241;&solution=236&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^] pour vérifier que votre système d'exploitation, votre adaptateur HBA, le micrologiciel de l'adaptateur HBA, le BIOS de démarrage de l'adaptateur HBA et la version de ONTAP sont pris en charge.
+Utilisez le link:https://imt.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^] pour vérifier que votre système d'exploitation, votre adaptateur HBA, le micrologiciel de l'adaptateur HBA, le BIOS de démarrage de l'adaptateur HBA et la version de ONTAP sont pris en charge.
 
 .Étapes
 . Mappez la LUN de démarrage SAN sur l'hôte.

@@ -20,18 +20,18 @@ Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour 
 
 
 
-== Installez Linux Unified Host Utilities
+== Installez les utilitaires hôtes Linux
 
-Le pack logiciel NetApp Linux Unified Host Utilities est disponible sur le link:https://mysupport.netapp.com/site/downloads["Site de support NetApp"^] dans un fichier .rpm 64 bits.
+Vous pouvez télécharger le progiciel Utilitaires hôtes NetApp Linux sous la forme d'un fichier 64-bit.rpm à partir du link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^].
 
-L'installation des utilitaires d'hôtes unifiés Linux est fortement recommandée par NetApp, mais pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
-
-Si une version de Linux Unified Host Utilities est actuellement installée, vous devez la mettre à niveau ou la supprimer et procéder comme suit pour installer la dernière version.
+NetApp recommande fortement d'installer les utilitaires hôtes Linux, mais ce n'est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
 
 .Étapes
-. Téléchargez le pack logiciel Linux Unified Host Utilities 64 bits à partir du link:https://mysupport.netapp.com/site/downloads["Site de support NetApp"] à votre hôte.
+. Téléchargez le progiciel Linux Host Utilities 64 bits du https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^] sur votre hôte.
 . Installez le pack logiciel :
++
 `rpm -ivh netapp_linux_unified_host_utilities-7-1.x86_64`
+
 
 
 
@@ -66,8 +66,8 @@ data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDO
 
 == Démarrage SAN
 
-.Ce dont vous avez besoin
-Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser le link:https://mysupport.netapp.com/matrix/imt.jsp?components=91241;&solution=236&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^] Pour vérifier que votre système d'exploitation, votre adaptateur de bus hôte, votre micrologiciel HBA, votre BIOS de démarrage HBA et votre version de ONTAP sont pris en charge.
+.Avant de commencer
+Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser link:https://imt.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^]pour vérifier que votre se, votre HBA, le micrologiciel HBA, le BIOS de démarrage HBA et la version ONTAP sont pris en charge.
 
 .Étapes
 . Mappez la LUN de démarrage SAN sur l'hôte.
@@ -296,5 +296,5 @@ La version RHEL 9.1 avec ONTAP présente les problèmes connus suivants :
 | ID de bug NetApp | Titre | Description 
 
 
-| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1508554["1508554"^] | L'interface de ligne de commande de NetApp Linux Host Utilities requiert d'autres dépendances au niveau des packages de bibliothèque pour prendre en charge la découverte d'adaptateurs HBA Emulex | Dans RHEL 9.1, la CLI des utilitaires hôtes SAN NetApp Linux `sanlun fcp show adapter -v` Échoue car les dépendances du package de bibliothèque pour prendre en charge la détection HBA sont introuvables. 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1508554["1508554"^] | L'interface de ligne de commande de NetApp Linux Host Utilities requiert d'autres dépendances au niveau des packages de bibliothèque pour prendre en charge la découverte d'adaptateurs HBA Emulex | Dans RHEL 9.1, l'interface de ligne de commande des utilitaires d'hôtes SAN NetApp Linux `sanlun fcp show adapter -v` échoue car les dépendances du package de bibliothèque permettant de prendre en charge la détection des HBA sont introuvables. 
 |===

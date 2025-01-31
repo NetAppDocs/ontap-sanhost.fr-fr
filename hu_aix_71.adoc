@@ -22,9 +22,9 @@ Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour 
 
 == Installez les utilitaires hôtes AIX
 
-Vous devez installer le kit d'utilitaires hôtes AIX lors de l'utilisation d'AIX MPIO avec un système de stockage NetApp ONTAP.
+Vous devez installer le kit d'utilitaires hôtes AIX lors de l'utilisation de MPIO (Microsoft Multipath I/O) AIX avec un stockage ONTAP.
 
-Vous pouvez télécharger le fichier compressé contenant les packs logiciels Host Utilities à partir du link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/6.1/downloads["Site de support NetApp"^]. Une fois le fichier installé, vous devez l'extraire pour obtenir les deux packs logiciels dont vous avez besoin pour installer les utilitaires hôtes.
+Vous pouvez télécharger le fichier compressé contenant les progiciels Host Utilities à partir du link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/6.1/downloads["Site de support NetApp"^]. Après avoir téléchargé le fichier, vous devez l'extraire pour obtenir les deux progiciels nécessaires à l'installation des utilitaires hôtes.
 
 .Étapes
 . Connectez-vous à votre hôte.
@@ -76,8 +76,8 @@ data_vserver      /vol/vol4/lun4    hdisk14     fcs0       FCP       20g    C
 
 == SAN Booting
 
-.Ce dont vous avez besoin
-Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser le link:https://mysupport.netapp.com/matrix/imt.jsp?components=71102;&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^] Pour vérifier que votre système d'exploitation, votre adaptateur de bus hôte, votre micrologiciel HBA, votre BIOS de démarrage HBA et votre version de ONTAP sont pris en charge.
+.Avant de commencer
+Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser link:https://imt.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^]pour vérifier que votre se, votre HBA, le micrologiciel HBA, le BIOS de démarrage HBA et la version ONTAP sont pris en charge.
 
 LE démarrage SAN est le processus de configuration d'un disque connecté à un SAN (LUN) en tant que périphérique d'amorçage pour un hôte AIX. Vous pouvez configurer une LUN de démarrage SAN pour qu'elle fonctionne dans un environnement AIX MPIO qui exécute les utilitaires hôtes AIX avec le protocole FC ou FCoE. La méthode que vous utilisez pour créer une LUN de démarrage SAN et installer une nouvelle image OS sur celle-ci dans un environnement MPIO AIX peut varier en fonction du protocole utilisé.
 
@@ -155,7 +155,7 @@ up     primary  path3  fcs1    fc_aix_4     1
 
 == Paramètres recommandés
 
-Voici quelques paramètres recommandés pour les LUN ONTAP.  Les paramètres critiques des LUN ONTAP sont définis automatiquement après l'installation du kit d'utilitaires d'hôtes NetApp.
+NetApp recommande les paramètres suivants pour les LUN ONTAP. Les paramètres critiques des LUN ONTAP sont définis automatiquement après l'installation du kit d'utilitaires d'hôtes NetApp.
 
 [cols="4*"]
 |===

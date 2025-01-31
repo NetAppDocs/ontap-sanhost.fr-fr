@@ -20,16 +20,16 @@ Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour 
 
 
 
-== Installez Linux Unified Host Utilities
+== Installez les utilitaires hôtes Linux
 
-Le progiciel Utilitaires hôtes unifiés NetApp Linux est disponible sur le link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^]dans un fichier .rpm 32 bits et 64 bits. Si vous ne savez pas quel fichier est adapté à votre configuration, utilisez le link:https://mysupport.netapp.com/matrix/#welcome["Matrice d'interopérabilité NetApp"^] pour vérifier lequel vous avez besoin.
+Le progiciel Utilitaires hôtes NetApp Linux est disponible sur le link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^] dans un fichier .rpm 32 bits et 64 bits. Si vous ne savez pas quel fichier est adapté à votre configuration, utilisez le link:https://mysupport.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^] pour vérifier lequel vous avez besoin.
 
-NetApp recommande fortement d'installer les utilitaires d'hôtes unifiés Linux, mais ce n'est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
+NetApp recommande fortement d'installer les utilitaires hôtes Linux, mais ce n'est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
 
-Si Linux Unified Host Utilities est actuellement installé, vous devez soit le mettre à niveau vers la dernière version, soit le supprimer et suivre ces étapes pour installer la dernière version.
+Si Linux Host Utilities est actuellement installé, vous devez soit le mettre à niveau vers la dernière version, soit le supprimer et suivre ces étapes pour installer la dernière version.
 
 .Étapes
-. Téléchargez le pack logiciel Linux Unified Host Utilities 32 bits ou 64 bits à partir du link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^] à votre hôte.
+. Téléchargez le progiciel Linux Host Utilities 32 bits ou 64 bits du link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^] sur votre hôte.
 . Installez le pack logiciel :
 +
 `rpm -ivh netapp_linux_unified_host_utilities-7-1.x86_64`
@@ -68,8 +68,8 @@ data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDO
 
 == SAN Booting
 
-.Ce dont vous avez besoin
-Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser le https://mysupport.netapp.com/matrix/imt.jsp?components=68625;&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^] Pour vérifier que votre système d'exploitation, votre adaptateur de bus hôte, votre micrologiciel HBA, votre BIOS de démarrage HBA et votre version de ONTAP sont pris en charge.
+.Avant de commencer
+Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser link:https://imt.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^]pour vérifier que votre se, votre HBA, le micrologiciel HBA, le BIOS de démarrage HBA et la version ONTAP sont pris en charge.
 
 .Étapes
 . Mappez la LUN de démarrage SAN sur l'hôte.
@@ -273,7 +273,7 @@ La version Oracle Linux 7.0 avec ONTAP présente les problèmes connus suivants 
 | link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=901558["901558"^] | OL7.0 : l'hôte perd tous les chemins vers la lun et bloque en raison de l'erreur "RSCN timeout" sur OL 7.0 UEK r3U5 Beta sur l'hôte Emulex 8G(LPe12002) | Il est possible que l'hôte Emulex 8G (LPe12002) soit suspendu et que les E/S soient très élevées lors des opérations de basculement de stockage avec des E/S. Il est possible que vous obseriez des chemins qui ne sont pas rétablis, ce qui est le résultat du délai d'attente RSCN, dû à la perte de tous les chemins et blocages par l'hôte. La probabilité de toucher ce problème est élevée. 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=901557["901557"^] | OL 7.0 : panne élevée au niveau des E/S observée sur l'hôte SAN QLogic FC 8 Gbit/s (QLE2562) lors des opérations de basculement du stockage avec E/S | On peut observer une forte panne d'E/S sur l'hôte QLogic 8GB FC (QLE2562) pendant les opérations de basculement de stockage avec des E/S. L'abandon et la réinitialisation du périphérique se traduisent en tant qu'interruption d'E/S sur l'hôte. La probabilité de toucher cette panne d'E/S est élevée. 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=901557["901557"^] | OL 7.0 : interruption importante des E/S observée sur l'hôte SAN QLogic 8G FC (QLE2562) lors des opérations de basculement du stockage avec E/S. | Vous pouvez observer une panne d'E/S élevée sur l'hôte QLogic 8G FC (QLE2562) pendant les opérations de basculement du stockage avec E/S. Les annulations et les réinitialisations de périphérique se manifestent sous la forme d'une interruption d'E/S sur l'hôte. La probabilité d'atteindre cette panne en E/S est élevée. 
 
 
 | link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=894766["894766"^] | OL7.0: Dracut ne parvient pas à inclure le module scsi_dh_alua.ko dans initramfs sur UEKR3U5 alpha | Il se peut que le module scsi_dh_alua ne se charge pas même après avoir ajouté le paramètre « rdloaddriver=scsi_dh_alua » dans la ligne de commande du noyau et créé Dracut. Par conséquent, le protocole ALUA n'est pas activé pour les LUN NetApp comme recommandé. 
@@ -285,5 +285,5 @@ La version Oracle Linux 7.0 avec ONTAP présente les problèmes connus suivants 
 | link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=894771["894771"^] | OL7.0 : Anaconda n'ajoute pas d'argument bootdev dans la ligne cmd du noyau pour définir l'adresse IP de l'installation iSCSI SANboot OS | Anaconda n'ajoute pas d'argument bootdev dans la ligne de commande du noyau où vous définissez l'adresse IPv4 pendant l'installation de OL 7.0 OS sur une LUN iSCSI multipath. Par conséquent, vous ne pouvez pas attribuer d'adresses IP à l'une des interfaces Ethernet configurées pour établir des sessions iSCSI avec le sous-système de stockage au cours du démarrage OL 7.0. Les sessions iSCSI ne étant pas établies, la LUN racine n'est pas détectée au démarrage du système d'exploitation, ce qui provoque l'échec du démarrage du système d'exploitation. 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=916501["916501"^] | Défaillance du noyau hôte QLogic 10G FCoE (QLE8152) observée lors des opérations de basculement du stockage avec des E/S | Vous pouvez observer une panne du noyau dans le module du pilote Qlogic sur l'hôte 10G FCoE Qlogic (QLE8152). La panne se produit pendant les opérations de basculement du stockage avec des E/S. La probabilité de frapper ce type de panne est élevée, ce qui entraîne une panne d'E/S plus longue sur l'hôte. 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=916501["916501"^] | Défaillance du noyau hôte QLogic 10G FCoE (QLE8152) observée lors des opérations de basculement du stockage avec E/S. | Vous pouvez observer un blocage du noyau dans le module de pilote Qlogic sur un hôte 10G FCoE Qlogic (QLE8152). La panne se produit pendant les opérations de basculement du stockage avec des E/S. La probabilité de frapper ce crash est élevée, ce qui entraîne une panne d'E/S plus longue sur l'hôte. 
 |===

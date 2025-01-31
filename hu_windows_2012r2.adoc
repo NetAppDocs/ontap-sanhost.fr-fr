@@ -28,7 +28,7 @@ Il existe deux options pour démarrer le système d'exploitation : par démarrag
 
 === Démarrage SAN
 
-Si vous choisissez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser la matrice d'interopérabilité NetApp pour vérifier que votre se, votre HBA, votre micrologiciel HBA, votre BIOS de démarrage HBA et votre version de ONTAP sont pris en charge.
+Si vous choisissez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser la matrice d'interopérabilité pour vérifier que votre système d'exploitation, votre adaptateur de bus hôte, le micrologiciel de l'adaptateur de bus hôte, ainsi que le BIOS de démarrage de l'adaptateur de bus hôte et la version de ONTAP sont pris en charge.
 
 . Mappez la LUN de démarrage SAN sur l'hôte.
 . Vérifiez que plusieurs chemins sont disponibles.
@@ -66,20 +66,20 @@ TIP: De nombreux correctifs nécessitent un redémarrage de votre hôte Windows,
 
 
 
-== Installez les utilitaires d'hôtes unifiés Windows
+== Installez les utilitaires d'hôtes Windows
 
-LES utilitaires d'hôtes unifiés Windows (WUHU) sont des programmes logiciels dont la documentation permet de connecter des ordinateurs hôtes aux disques virtuels (LUN) sur un SAN NetApp. NetApp recommande de télécharger et d'installer le dernier kit d'utilitaire. Pour obtenir des informations et des instructions sur la configuration de WUHU, reportez-vous au link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71_rn.html["Documentation Windows Unified Host Utilities"] Et sélectionnez la procédure d'installation pour votre version de Windows Unified Host Utilities.
+Les utilitaires d'hôtes Windows sont un ensemble de programmes logiciels contenant de la documentation qui vous permet de connecter des ordinateurs hôtes à des disques virtuels (LUN) sur un SAN NetApp. NetApp recommande de télécharger et d'installer le dernier kit d'utilitaires. Pour obtenir des informations et des instructions sur la configuration de WUHU, reportez-vous au link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71_rn.html["Documentation relative aux utilitaires d'hôtes Windows"]et sélectionnez la procédure d'installation de votre version d'utilitaires hôtes Windows.
 
 
 
 == Chemins d'accès multiples
 
-Vous devez installer le logiciel MPIO et configurer des chemins d'accès multiples si votre hôte Windows possède plusieurs chemins d'accès au système de stockage. Sans le logiciel MPIO, le système d'exploitation peut voir chaque chemin en tant que disque distinct, ce qui peut entraîner une corruption des données. Le logiciel MPIO présente un seul disque au système d'exploitation pour tous les chemins, et un module DSM (Device-Specific module) gère le basculement de chemin.
+Vous devez installer le logiciel Microsoft Multipath I/O (MPIO) et configurer les chemins d'accès multiples si votre hôte Windows dispose de plusieurs chemins d'accès au système de stockage. Sans le logiciel MPIO, le système d'exploitation peut voir chaque chemin en tant que disque distinct, ce qui peut entraîner une corruption des données. Le logiciel MPIO présente un seul disque au système d'exploitation pour tous les chemins, et un module DSM (Device-Specific module) gère le basculement de chemin.
 
 Sur un système Windows, les deux principaux composants d'une solution MPIO sont un DSM et Windows MPIO. MPIO n'est pas pris en charge pour Windows XP ou Windows Vista fonctionnant sur une machine virtuelle Hyper- V.
 
 
-NOTE: Lorsque vous sélectionnez la prise en charge de MPIO, Windows Unified Host Utilities active la fonctionnalité MPIO incluse de Windows Server 2012 R2.
+NOTE: Lorsque vous sélectionnez la prise en charge MPIO, les utilitaires d'hôtes Windows active la fonctionnalité MPIO incluse de Windows Server 2012 R2.
 
 
 
@@ -212,7 +212,7 @@ Pour les HBA Fibre Channel QLogic :
 | PortDownloyCount | 10 
 |===
 
-NOTE: Windows Unified Host Utility définit ces valeurs. Pour obtenir des informations détaillées sur les réglages recommandés, reportez-vous au link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71_rn.html["Documentation relative aux utilitaires d'hôtes Windows"] Et sélectionnez la procédure d'installation pour votre version de Windows Unified Host Utilities.
+NOTE: L'utilitaire hôte Windows définit ces valeurs. Pour obtenir des paramètres recommandés détaillés, reportez-vous au link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71_rn.html["Documentation relative aux utilitaires d'hôtes Windows"]et sélectionnez la procédure d'installation de votre version des utilitaires d'hôtes Windows.
 
 
 

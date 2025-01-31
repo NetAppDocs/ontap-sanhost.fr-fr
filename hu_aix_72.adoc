@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: hu_aix_72.html 
-keywords: host utilities, aix, powervm, vios, 3.1, 7.2 netapp, ontap 
+keywords: Host Utilities, aix, powervm, vios, 3.1, 7.2 netapp, ontap 
 summary: Décrit comment utiliser IBM AIX 7.2 et/ou PowerVM VIOS 3.1 avec ONTAP 
 ---
 = Utilisez IBM AIX 7.2 et/ou PowerVM (VIOS 3.1) avec ONTAP
@@ -22,11 +22,11 @@ Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour 
 
 == Installez les utilitaires hôtes AIX/VIOS
 
-Vous devez installer le kit d'utilitaires hôtes AIX lors de l'utilisation d'AIX MPIO avec un système de stockage NetApp ONTAP.
+Vous devez installer le kit d'utilitaires hôtes AIX lors de l'utilisation de MPIO (Microsoft Multipath I/O) AIX avec un stockage ONTAP.
 
-Vous pouvez télécharger le fichier compressé contenant les packs logiciels Host Utilities à partir du link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/6.1/downloads["Site de support NetApp"^]. Une fois le fichier créé, vous devez le décompresser pour obtenir les deux logiciels dont vous avez besoin pour installer les utilitaires hôtes.
+Vous pouvez télécharger le fichier compressé contenant les progiciels Host Utilities à partir du link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/6.1/downloads["Site de support NetApp"^]. Une fois le fichier créé, vous devez le décompresser pour obtenir les deux packages logiciels dont vous avez besoin pour installer les utilitaires hôtes.
 
-NetApp AIX Host Utilities 6.1 est la dernière version. Cette version résout le problème de fuite de mémoire signalé dans les versions précédentes. Reportez-vous à la section des notes de version pour plus d'informations.
+La version 6.1 d'AIX Host Utilities résout le problème de fuite de mémoire signalé dans les versions précédentes. Pour plus d'informations, reportez-vous aulink:hu_aix_rn.html["notes de version"].
 
 .Étapes
 . Connectez-vous à votre hôte.
@@ -55,7 +55,7 @@ Le répertoire suivant est créé lors de la décompression du fichier : `ntap_a
 
 
 
-== Kit SAN
+== Kit D'outils SAN
 
 L'installation du package des utilitaires hôtes NetApp installe automatiquement le kit d'outils. Ce kit fournit l' `sanlun`utilitaire qui vous aide à gérer les LUN et les adaptateurs de bus hôte (HBA).  `sanlun`La commande renvoie des informations sur les LUN mappées sur votre hôte, les chemins d'accès multiples et les informations nécessaires à la création des groupes initiateurs.
 
@@ -79,8 +79,8 @@ data_vserver      /vol/vol4/lun4    hdisk14     fcs0       FCP       20g    C
 
 == Démarrage SAN
 
-.Ce dont vous avez besoin
-Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser le link:https://mysupport.netapp.com/matrix/imt.jsp?components=71102;&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^] Pour vérifier que votre système d'exploitation, votre adaptateur de bus hôte, votre micrologiciel HBA, votre BIOS de démarrage HBA et votre version de ONTAP sont pris en charge.
+.Avant de commencer
+Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser link:https://imt.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^]pour vérifier que votre se, votre HBA, le micrologiciel HBA, le BIOS de démarrage HBA et la version ONTAP sont pris en charge.
 
 LE démarrage SAN est le processus de configuration d'un disque connecté au SAN (un LUN) en tant que périphérique d'amorçage pour un hôte AIX/PowerVM. Vous pouvez configurer une LUN de démarrage SAN pour qu'elle fonctionne dans un environnement AIX MPIO qui exécute les utilitaires hôtes AIX avec le protocole FC ou FCoE. La méthode que vous utilisez pour créer une LUN de démarrage SAN et installer une nouvelle image OS sur celle-ci dans un environnement MPIO AIX peut varier en fonction du protocole utilisé.
 
@@ -158,7 +158,7 @@ up     primary  path3  fcs1    fc_aix_4     1
 
 == Paramètres recommandés
 
-Voici quelques paramètres recommandés pour les LUN ONTAP.  Les paramètres critiques des LUN ONTAP sont définis automatiquement après l'installation du kit d'utilitaires d'hôtes NetApp.
+Voici quelques paramètres recommandés pour les LUN ONTAP. Les paramètres critiques des LUN ONTAP sont définis automatiquement après l'installation du kit d'utilitaires d'hôtes NetApp.
 
 [cols="4*"]
 |===
@@ -242,5 +242,5 @@ IBM AIX 7.2 et/ou PowerVM (VIOS 3.1) avec la version ONTAP présente les problè
 | link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1414700["1414700"^] | AIX 7.2 TL04 a rencontré une interruption des E/S sur les disques iSCSI virtuels (VIOS 3.1.1.x) lors du basculement du stockage | Des perturbations d'E/S peuvent survenir pendant les opérations de basculement de stockage sur les hôtes AIX 7.2 TL4 sur les disques iSCSI virtuels mappés via le système VIOS 3.1.1.x. Par défaut, le `rw_timeout` La valeur de la carte vSCSI sur VIOC est de 45 secondes. Un retard d'E/S de plus de 45 secondes peut se produire lors d'un basculement de stockage, une défaillance d'E/S. Pour éviter ce problème, reportez-vous à la solution de contournement mentionnée dans BURT. | NA 
 
 
-| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1307653["1307653"^] | Voir les problèmes d'E/S sur le système VIOS 3.1.1.10 pendant les pannes SFO et les E/S droites | Les défaillances d'E/S du système VIOS 3.1.1 peuvent être vues sur le disque client NPIV qui est pris en charge par les adaptateurs FC 16 Gb. Aussi, a `vfchost` Le pilote peut atteindre un état dans lequel il arrête le traitement des demandes d'E/S du client. L'application d'IBM APAR IJ22290 IBM APAR IJ23222 corrigera le problème. | NA 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1307653["1307653"^] | Des problèmes d'E/S se produisent sur VIOS 3.1.1.10 pendant les pannes SFO et les E/S directes | Sur VIOS 3.1.1, des défaillances d'E/S peuvent se produire sur les disques client NPIV qui sont soutenus par des adaptateurs FC de 16 Go ou 32 Go. En outre, le `vfchost` pilote peut arrêter le traitement des demandes d'E/S du client. L'application d'IBM APAR IJ22290 IBM APAR IJ23222 résout le problème. | NA 
 |===

@@ -24,7 +24,7 @@ La prise en charge suivante est disponible pour la configuration hôte NVMe-of p
 * Utilisation du trafic existant NVMe et SCSI sur le même hôte sur un adaptateur de bus hôte (HBA) donné, sans les paramètres dm-multipathing explicites pour empêcher la demande d'espaces de noms NVMe.
 
 
-Reportez-vous à la link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^] pour des informations précises sur les configurations prises en charge.
+Pour plus d'informations sur les configurations prises en charge, reportez-vous aulink:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^].
 
 
 
@@ -46,7 +46,7 @@ Vous pouvez utiliser la procédure suivante pour activer les chemins d'accès mu
 
 .Étapes
 . Installez RHEL 9.1 sur le serveur.
-. Une fois l'installation terminée, vérifiez que vous exécutez le noyau RHEL 9.1 spécifié. Voir la link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^] pour obtenir la liste la plus récente des versions prises en charge.
+. Une fois l'installation terminée, vérifiez que vous exécutez le noyau RHEL 9.1 spécifié. Voir link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^]pour la liste actuelle des versions prises en charge.
 +
 Exemple :
 
@@ -99,7 +99,7 @@ Vous pouvez configurer NVMe/FC pour les cartes Broadcom/Emulex ou Marvell/Qlogic
 .Broadcom/Emulex
 --
 .Étapes
-. Vérifiez que vous utilisez la carte prise en charge. Voir la link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^] pour consulter la liste la plus récente des cartes prises en charge.
+. Vérifiez que vous utilisez la carte prise en charge. Reportez-vous link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^]à la pour obtenir la liste actuelle des cartes prises en charge.
 +
 [listing]
 ----
@@ -113,7 +113,7 @@ Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
 Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
 
 ----
-. Vérifiez que vous utilisez le micrologiciel et le pilote recommandés pour la boîte de réception Broadcom lpfc. Voir la link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^] pour obtenir la liste la plus récente des versions de pilote de carte et de micrologiciel prises en charge.
+. Vérifiez que vous utilisez le micrologiciel et le pilote recommandés pour la boîte de réception Broadcom lpfc. Consultez le link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^] pour obtenir la liste actuelle des versions de pilotes et de micrologiciels pris en charge.
 +
 [listing]
 ----
@@ -230,7 +230,7 @@ cat /etc/modprobe.d/lpfc.conf
 options lpfc lpfc_sg_seg_cnt=256
 ----
 . Exécutez `dracut -f` la commande et redémarrez l'hôte.
-. Vérifier que la valeur attendue de `lpfc_sg_seg_cnt` est 256 :
+. Vérifier que la valeur de `lpfc_sg_seg_cnt` est 256 :
 +
 [listing]
 ----

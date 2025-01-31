@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: hu_wuhu_71.html 
 keywords: windows, host, utilities, 7.1, hba, fibre, channel, SANtricity, netapp, san, host, e-series, platform 
-summary: 'Windows Unified Host Utilities comprend un programme d"installation qui définit les paramètres d"enregistrement et d"adaptateur HBA Windows requis. L"hôte Windows gère ainsi correctement les comportements du système de stockage pour les plateformes NetApp ONTAP et E-Series.' 
+summary: 'Windows Host Utilities inclut un programme d"installation qui définit les paramètres de registre et de HBA Windows requis afin que l"hôte Windows gère correctement le comportement du système de stockage pour les plateformes ONTAP et E-Series.' 
 ---
-= Installez Windows Unified Host Utilities 7.1
+= Installez Windows Host Utilities 7.1
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -19,9 +19,9 @@ summary: 'Windows Unified Host Utilities comprend un programme d"installation qu
 
 
 [role="lead"]
-Les utilitaires d'hôtes unifiés Windows (WUHU) vous permettent de connecter un ordinateur hôte Windows à des systèmes de stockage NetApp.
+Les utilitaires hôtes Windows vous permettent de connecter un ordinateur hôte Windows à des systèmes de stockage NetApp.
 
-Windows Unified Host Utilities prend en charge les versions suivantes de Windows :
+Windows Host Utilities prend en charge les versions suivantes de Windows :
 
 * Windows 2022
 * Windows 2019
@@ -30,7 +30,7 @@ Windows Unified Host Utilities prend en charge les versions suivantes de Windows
 * Windows 2012
 
 
-Windows Unified Host Utilities inclut un programme d'installation qui définit les paramètres de registre Windows et d'adaptateur de bus hôte (HBA) requis afin qu'un hôte Windows puisse gérer correctement les comportements du système de stockage pour les plateformes NetApp ONTAP et E-Series.
+Windows Host Utilities inclut un programme d'installation qui définit les paramètres de registre Windows et d'adaptateur de bus hôte (HBA) requis afin qu'un hôte Windows puisse gérer correctement les comportements du système de stockage pour les plateformes ONTAP et E-Series.
 
 Lorsque vous installez le logiciel Host Utilities, le programme d'installation définit les paramètres requis du registre Windows et de l'adaptateur de bus hôte (HBA).
 
@@ -54,7 +54,7 @@ Les programmes et fichiers suivants sont installés sur l'ordinateur hôte Windo
 
 | `san_version.exe` | Affiche la version des utilitaires hôtes et des HBA FC. 
 |===
-Les utilitaires hôtes prennent en charge différentes configurations d'hôtes Windows, différents protocoles et différentes options de chemins d'accès multiples. Voir la https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^] pour obtenir la liste la plus récente des configurations prises en charge.
+Les utilitaires hôtes prennent en charge différentes configurations d'hôtes Windows, différents protocoles et différentes options de chemins d'accès multiples. Pour obtenir la liste actuelle des configurations prises en charge, reportez-vous au https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^].
 
 
 
@@ -63,7 +63,7 @@ Les utilitaires hôtes prennent en charge différentes configurations d'hôtes W
 Avant d'installer les utilitaires hôtes, vérifiez que la version des utilitaires hôtes prend en charge la configuration de l'hôte et du système de stockage afin que le logiciel s'installe correctement.
 
 .Étapes
-. Vérifiez la configuration prise en charge dans le http://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"^].
+. Vérifiez la configuration prise en charge dans le http://mysupport.netapp.com/matrix["Matrice d'interopérabilité"^].
 . Vérifier les correctifs requis pour l'hôte respectif sur le link:https://docs.netapp.com/us-en/ontap-sanhost/index.html["Documentation Windows de l'hôte SAN"].
 +
 
@@ -105,14 +105,14 @@ NOTE: Ne modifiez pas les paramètres HBA manuellement.
 
 Le programme d'installation installe le package Host Utilities et définit les paramètres du registre Windows et HBA.
 
-Vous devez indiquer si vous souhaitez inclure la prise en charge des chemins d'accès multiples lors de l'installation du pack logiciel Windows Unified Host Utilities. Le programme d'installation vous demande le choix suivant. Vous pouvez également exécuter une installation silencieuse (sans surveillance) à partir d'une invite de commande Windows.
+Vous devez indiquer si vous souhaitez inclure la prise en charge des chemins d'accès multiples lorsque vous installez le progiciel Utilitaires d'hôte Windows. Le programme d'installation vous demande le choix suivant. Vous pouvez également exécuter une installation silencieuse (sans surveillance) à partir d'une invite de commande Windows.
 
 .Prise en charge des chemins d'accès
 * Choisissez `MPIO` Si vous disposez de plusieurs chemins entre l'hôte Windows ou la machine virtuelle et le système de stockage.
 * Choisissez `no MPIO` uniquement si vous utilisez un chemin unique vers le système de stockage.
 
 
-La sélection MPIO n'est pas disponible sur les systèmes Windows XP et Windows Vista ; les E/S multivoies ne sont pas prises en charge sur ces systèmes d'exploitation invités. Pour les invités Hyper-V, les disques bruts (pass-through) n'apparaissent pas dans le système d'exploitation invité si vous choisissez la prise en charge des chemins d'accès multiples. Vous pouvez utiliser des disques bruts ou MPIO, mais vous ne pouvez pas les utiliser les deux dans le système d'exploitation invité.
+La sélection MPIO (Multipath I/O) de Microsoft n'est pas disponible pour les systèmes Windows XP et Windows Vista ; les E/S multivoies ne sont pas prises en charge sur ces systèmes d'exploitation invités. Pour les invités Hyper-V, les disques bruts (pass-through) n'apparaissent pas dans le système d'exploitation invité si vous choisissez la prise en charge des chemins d'accès multiples. Vous pouvez utiliser des disques bruts ou MPIO, mais vous ne pouvez pas les utiliser les deux dans le système d'exploitation invité.
 
 Vous pouvez installer les utilitaires hôtes de manière interactive ou à l'aide de la ligne de commande. Le nouveau package d'installation Host Utilities doit se trouver dans un chemin accessible par l'hôte Windows. Suivez les instructions d'installation interactive des utilitaires hôtes ou à partir de la ligne de commande Windows.
 

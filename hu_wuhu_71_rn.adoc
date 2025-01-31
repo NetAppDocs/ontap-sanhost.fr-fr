@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: hu_wuhu_71_rn.html 
 keywords: host utilities, linux, 7.1, 7.2, netapp, ontap, release, notes 
-summary: Notes de version pour Windows Unified Host Utilities 
+summary: Notes de version pour les utilitaires hôtes Windows 
 ---
-= Notes de version des utilitaires d'hôtes unifiés Windows
+= Notes de version de Windows Host Utilities
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -18,31 +18,31 @@ summary: Notes de version pour Windows Unified Host Utilities
 [role="lead"]
 Les notes de version décrivent les nouvelles fonctionnalités et améliorations, les problèmes corrigés dans la version actuelle, les problèmes et limitations connus, ainsi que les mises en garde importantes relatives à la configuration et à la gestion de votre hôte Windows spécifique avec votre système de stockage ONTAP.
 
-Pour des informations spécifiques sur les versions et mises à jour du système d'exploitation prises en charge par les utilitaires hôtes, consultez le link:https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["Matrice d'interopérabilité NetApp"^].
+Pour obtenir des informations spécifiques sur les versions et les mises à jour du système d'exploitation prises en charge par les utilitaires hôtes, reportez-vous au link:https://imt.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^].
 
 
 
 == Quoi de neuf
 
-* Windows Unified Host Utilities 7.2 inclut la prise en charge des paramètres du pilote NVMe/FC et des correctifs pour les cartes des nouveaux fournisseurs.
-* Les utilitaires d'hôtes unifiés Windows 7.1 comprennent la prise en charge des systèmes de stockage E-Series, la prise en charge de ONTAP 9 et versions ultérieures, ainsi que des délais iSCSI améliorés pour un basculement plus rapide.
+* Windows Host Utilities 7.2 inclut la prise en charge des paramètres du pilote NVMe/FC et des correctifs pour les cartes des nouveaux fournisseurs.
+* Windows Host Utilities 7.1 inclut la prise en charge des systèmes de stockage E-Series, la prise en charge de ONTAP 9 et versions ultérieures, ainsi que des expirations de délai iSCSI améliorées pour un basculement plus rapide.
 
 
 
 
 == Problèmes et limites connus
 
-Vous devez connaître les problèmes et limitations connus suivants susceptibles d'affecter les performances de votre hôte spécifique. Quelques comportements inattendus et potentiellement indésirables, ainsi que des solutions de contournement pour éviter ces comportements, ont été identifiés dans la version 7.1 de Windows Unified Host Utilities.
+Vous devez connaître les problèmes et limitations connus suivants susceptibles d'affecter les performances de votre hôte spécifique. Quelques comportements inattendus et potentiellement indésirables, ainsi que des solutions de contournement pour éviter ces comportements, ont été identifiés dans la version 7.1 de Windows Host Utilities.
 
 [cols="30, 30, 20"]
 |===
 | Titre | Description | Solution de contournement 
 
 
-| Exécution du `linux_gos_timeout-install.sh` Le script n'est plus nécessaire sur les invités Hyper-V exécutant Red Hat Enterprise Linux ou SUSE Linux Enterprise Server | Vous n'avez plus besoin d'exécuter le `linux_gos_timeout-install.sh` Script permettant de modifier les délais d'expiration des disques sur les invités Red Hat Enterprise Linux 5, Red Hat Enterprise Linux 6 ou SUSE Linux Enterprise Server 11 Hyper-V en raison de l'utilisation des paramètres de délai par défaut. Le `linux_gos_timeout-install.sh` Le script inclus dans les versions précédentes des utilitaires hôtes n'est plus inclus dans la version 7.1 de Windows Unified Host Utilities. Windows Unified Host Utilities 7.1 utilise les paramètres par défaut d'expiration des disques. | Sans objet 
+| Exécution du `linux_gos_timeout-install.sh` Le script n'est plus nécessaire sur les invités Hyper-V exécutant Red Hat Enterprise Linux ou SUSE Linux Enterprise Server | Vous n'avez plus besoin d'exécuter le `linux_gos_timeout-install.sh` script pour modifier les délais d'expiration des disques sur les invités Red Hat Enterprise Linux 5, Red Hat Enterprise Linux 6 ou SUSE Linux Enterprise Server 11 Hyper-V car les paramètres de délai d'expiration par défaut sont utilisés. Le `linux_gos_timeout-install.sh` script inclus dans les versions précédentes des utilitaires hôtes n'est plus inclus dans la version 7.1 de Windows Host Utilities. Windows Host Utilities 7.1 utilise les paramètres de délai d'expiration du disque par défaut. | Sans objet 
 
 
-| Les sessions iSCSI ne se connectent pas après le redémarrage avec des IPv4 mixtes et IPv6 | Dans une configuration MPIO (Multipath I/O) ou dans une configuration MCS (multiple Connections per session) comportant à la fois des noeuds finaux IPv4 et IPv6, certaines sessions iSCSI risquent de ne pas se reconnecter après le redémarrage de l'hôte Windows. | Utilisez tous les points de terminaison IPv4 ou IPv6. Ne pas combiner IPv4 et IPv6. 
+| Les sessions iSCSI ne se connectent pas après le redémarrage avec des IPv4 mixtes et IPv6 | Dans une configuration MPIO (Microsoft Multipath I/O) ou dans une configuration MCS (multiple Connections per session) qui possède à la fois des points finaux IPv4 et IPv6, certaines sessions iSCSI peuvent ne pas se reconnecter après le redémarrage de l'hôte Windows. | Utilisez tous les points de terminaison IPv4 ou IPv6. Ne pas combiner IPv4 et IPv6. 
 
 
 | Les connexions multiples par session (MCS) ne sont pas prises en charge avec le démarrage du logiciel iSCSI | Lors de l'utilisation du démarrage du logiciel iSCSI avec iSCSI MCS, la connexion de démarrage iSCSI ne peut pas être protégée. Cela peut entraîner une déconnexion du LUN de démarrage et provoquer une interruption du système hôte. | Microsoft ne prend pas en charge MCS pour les hôtes démarrés par le logiciel iSCSI. Utilisez MPIO comme solution haute disponibilité. Notez que le mélange de MPIO et MCS n'est pas pris en charge. 

@@ -16,9 +16,9 @@ summary: 'Comment configurer l"hôte NVMe/FC pour RHEL 8.2 avec ONTAP'
 
 
 [role="lead"]
-NVMe/FC est pris en charge sur ONTAP 9.6 ou version ultérieure pour Red Hat Enterprise Linux (RHEL) 8.2. L'hôte RHEL 8.2 exécute le trafic NVMe et SCSI via les mêmes ports d'adaptateur Fibre Channel (FC). Voir la link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] Pour obtenir la liste des contrôleurs et adaptateurs FC pris en charge,
+Depuis la version ONTAP 9.6, NVMe/FC est pris en charge pour Red Hat Enterprise Linux (RHEL) 8.2. L'hôte RHEL 8.2 exécute le trafic NVMe et SCSI via les mêmes ports d'adaptateur Fibre Channel (FC). Consultez la link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] pour obtenir la liste des adaptateurs et contrôleurs FC pris en charge.
 
-Voir la link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^] pour obtenir la liste la plus récente des configurations prises en charge.
+Pour obtenir la liste actuelle des configurations prises en charge, reportez-vous aulink:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^].
 
 
 
@@ -26,7 +26,7 @@ Voir la link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité 
 
 * À partir de RHEL 8.2, `nvme-fc auto-connect` les scripts sont inclus dans le package natif `nvme-cli`. Vous pouvez utiliser ces scripts de connexion automatique natifs au lieu d'installer les scripts de connexion automatique fournis par le fournisseur externe.
 * À partir de RHEL 8.2, une version native `udev` la règle est déjà fournie dans le cadre du `nvme-cli` Une solution qui permet l'équilibrage de la charge Round-Robin pour les chemins d'accès multiples NVMe. Vous n'avez plus besoin de créer cette règle manuellement (comme cela a été fait dans RHEL 8.1).
-* À partir de RHEL 8.2, le trafic NVMe et SCSI peut être exécuté sur le même hôte existant. En fait, il s'agit de la configuration d'hôte déployée prévue. Par conséquent, pour SCSI, vous pouvez configurer `dm-multipath` Comme d'habitude pour les LUN SCSI, la source de résultats dans `mpath` De l'hôte, alors que les chemins d'accès multiples NVMe peuvent être utilisés pour configurer des périphériques multivoies NVMe-of sur l'hôte.
+* À partir de RHEL 8.2, le trafic NVMe et SCSI peut être exécuté sur le même hôte. En fait, il s'agit de la configuration d'hôte déployée prévue. Par conséquent, pour SCSI, vous pouvez configurer `dm-multipath` comme d'habitude pour les LUN SCSI aboutissant à `mpath` des périphériques, tandis que les chemins d'accès multiples NVMe permettent de configurer des périphériques multivoies NVMe-of sur l'hôte.
 * À partir de RHEL 8.2, le plug-in NetApp dans le natif `nvme-cli` Le package peut afficher les détails ONTAP pour les espaces de noms ONTAP.
 
 
@@ -79,7 +79,7 @@ yum install nvmecli
 4.18.0-193.el8.x86_64
 ----
 +
-Voir la link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^] pour obtenir la liste la plus récente des versions prises en charge.
+Voir link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^]pour la liste actuelle des versions prises en charge.
 
 . Installez le pack nvme-cli.
 +
@@ -115,7 +115,7 @@ Si les chaînes NQN hôte ne correspondent pas, utilisez le `vserver modify` Com
 . Redémarrez l'hôte.
 . Mettez à jour le `enable_foreign` réglage _ (facultatif)_.
 +
-Si vous avez l'intention d'exécuter à la fois le trafic NVMe et SCSI sur le même hôte existant RHEL 8.2, NetApp vous recommande d'utiliser respectivement les chemins d'accès multiples NVMe in-kernel pour les namespaces ONTAP et dm-multipath pour les LUN ONTAP. Vous devez également répertorier les espaces de noms ONTAP dans dm-multipath pour empêcher dm-multipath de réclamer ces périphériques d'espace de noms. Pour ce faire, ajoutez la `enable_foreign` réglage sur `/etc/multipath.conf`, comme illustré ci-dessous.
+Si vous avez l'intention d'exécuter à la fois le trafic NVMe et SCSI sur le même hôte RHEL 8.2, NetApp vous recommande d'utiliser respectivement le protocole NVMe multipath in-kernel pour les namespaces ONTAP et dm-multipath pour les LUN ONTAP. Vous devez également répertorier les espaces de noms ONTAP dans dm-multipath pour empêcher dm-multipath de réclamer ces périphériques d'espace de noms. Pour ce faire, vous pouvez ajouter le `enable_foreign` paramètre au `/etc/multipath.conf`, comme indiqué ci-dessous.
 
 +
 [listing]
@@ -134,7 +134,7 @@ defaults {
 
 Vous pouvez utiliser la procédure suivante pour configurer une carte FC Broadcom.
 
-Pour consulter la liste la plus récente des cartes prises en charge, reportez-vous à la section link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^].
+Pour obtenir la liste actuelle des cartes prises en charge, reportez-vous au link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^].
 
 .Étapes
 . Vérifiez que vous utilisez la carte prise en charge.
@@ -203,7 +203,7 @@ FCP CMPL: xb 00001f50 Err 0000d9f8
 ----
 . Activez la taille d'E/S de 1 Mo _ (facultatif)_.
 +
-Le `lpfc_sg_seg_cnt` Il est nécessaire de définir le paramètre sur 256 pour que le pilote lpfc puisse émettre des demandes d'E/S d'une taille maximale de 1 Mo.
+Le `lpfc_sg_seg_cnt` paramètre doit être défini sur 256 pour que le pilote lpfc puisse émettre des demandes d'E/S d'une taille maximale de 1 Mo.
 
 +
 [listing]
@@ -284,7 +284,7 @@ FCP CMPL: xb 00001f50 Err 0000d9f8
 ----
 . Activez la taille d'E/S de 1 Mo _ (facultatif)_.
 +
-Le `lpfc_sg_seg_cnt` Il est nécessaire de définir le paramètre sur 256 pour que le pilote lpfc puisse émettre des demandes d'E/S d'une taille maximale de 1 Mo.
+Le `lpfc_sg_seg_cnt` paramètre doit être défini sur 256 pour que le pilote lpfc puisse émettre des demandes d'E/S d'une taille maximale de 1 Mo.
 
 +
 [listing]
