@@ -1,10 +1,15 @@
-= 
+= Toute la configuration de la baie SAN
 :allow-uri-read: 
 
 
-Pour la configuration des baies SAN (ASA), il doit y avoir un groupe de chemins avec des priorités uniques. Tous les chemins sont optimisés/actifs, c'est-à-dire qu'ils sont gérés par le contrôleur et que les E/S sont envoyées sur tous les chemins actifs.
+Selon la configuration de votre réseau SAN, l'hôte utilise des configurations ASA (All SAN Array) ou non ASA pour accéder aux LUN ONTAP. Dans les configurations ASA et non-ASA, il est inutile de disposer de plus de quatre chemins pour accéder à une seule LUN ONTAP. Si vous disposez de plus de quatre chemins, cela peut provoquer des problèmes au niveau des chemins en cas de panne de stockage.
+
+
+
+=== Toute la configuration de la baie SAN
+
+Une configuration ASA doit comporter un groupe de chemins actifs/optimisés avec des priorités uniques. Cela signifie que les chemins sont gérés par le contrôleur et que les E/S sont envoyées sur tous les chemins actifs.
+
+L'exemple suivant montre la sortie correcte pour une LUN ONTAP avec des chemins Active/Optimized.
 
 image::asa.png[Capture d'écran d'une LUN ONTAP avec chemins actifs/optimisés]
-
-
-NOTE: Une seule LUN ne doit pas nécessiter plus de quatre chemins. La présence de plus de quatre chemins peut entraîner des problèmes de chemin pendant les pannes de stockage.

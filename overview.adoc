@@ -4,7 +4,7 @@ permalink: overview.html
 keywords: ontap, san, host, rhel, red, hat, linux, sles, suse, esxi, nvme, oracle, linux, windows, enterprise, fc, fcp, isci, aix, powervm, vios, centos, citrix, hp-ux, solaris, veritas, cvo, cloud, volume, ontap, clients, configuration, FSx, instance, netapp 
 summary: Ce contenu fournit des recommandations spécifiques à une distribution sur la façon de configurer les clients cloud connectés à Cloud Volumes ONTAP et Amazon FSX pour les hôtes ONTAP et SAN connectés au stockage ONTAP sur site. 
 ---
-= Présentation de la configuration hôte SAN
+= En savoir plus sur les configurations d'hôte SAN
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 

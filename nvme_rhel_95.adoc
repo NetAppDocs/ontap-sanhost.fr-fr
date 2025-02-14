@@ -597,7 +597,7 @@ NOTE: À partir de RHEL 9.5, le paramètre par défaut du délai d'expiration NV
 
 == Validez la spécification NVMe-of
 
-Pour prendre en charge le bon fonctionnement des LUN ONTAP, vérifiez que l'état des chemins d'accès multiples NVMe dans le noyau, l'état ANA et les namespaces ONTAP sont corrects pour la configuration NVMe-of.
+Vérifiez que l'état des chemins d'accès multiples NVMe in-kernel, l'état ANA et les namespaces ONTAP sont corrects pour la configuration NVMe-of.
 
 .Étapes
 . Vérifiez que le chemin d'accès multiples NVMe intégré au noyau est activé :

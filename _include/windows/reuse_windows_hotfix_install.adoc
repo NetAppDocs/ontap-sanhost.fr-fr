@@ -2,14 +2,11 @@
 :allow-uri-read: 
 
 
-. Téléchargez les correctifs à partir du site de support Microsoft.
 
-
-
-NOTE: Certains correctifs ne sont pas disponibles pour le téléchargement direct. Dans ce cas, vous devrez demander un correctif au personnel de support Microsoft.
+NOTE: Vous devez contacter le support Microsoft pour obtenir les correctifs qui ne sont pas disponibles au téléchargement à partir du catalogue de mises à jour Microsoft.
 
 . Suivez les instructions fournies par Microsoft pour installer les correctifs.
 
 
 
-TIP: De nombreux correctifs nécessitent un redémarrage de votre hôte Windows, mais vous pouvez choisir d'attendre le redémarrage de l'hôte jusqu'à _after_ que vous installiez ou mettez à niveau les utilitaires hôtes.
+TIP: De nombreux correctifs nécessitent un redémarrage de votre hôte Windows. Vous pouvez choisir d'attendre le redémarrage de l'hôte jusqu'à ce que _after_ vous installiez ou mettiez à niveau les utilitaires hôtes.

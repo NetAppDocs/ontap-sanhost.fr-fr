@@ -1,0 +1,42 @@
+= 
+:allow-uri-read: 
+
+
+Vous pouvez démarrer le système d'exploitation Windows à l'aide d'un démarrage local ou d'un démarrage SAN. NetApp recommande d'utiliser un démarrage SAN si celui-ci est pris en charge par votre configuration.
+
+[role="tabbed-block"]
+====
+.Démarrage local
+--
+Effectuez un démarrage local en installant le système d'exploitation Windows sur le disque dur local (SSD, SATA, RAID, etc.).
+
+--
+.Démarrage SAN
+--
+Si vous choisissez d'utiliser le démarrage SAN, il doit être pris en charge par votre configuration.
+
+
+NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans cette procédure pour configurer les clients cloud connectés à link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] et link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["Amazon FSX pour ONTAP"^].
+
+.Avant de commencer
+Utilisez le https://mysupport.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^] pour vérifier que votre système d'exploitation Windows, votre adaptateur de bus hôte (HBA), le micrologiciel HBA, le BIOS de démarrage HBA et la version ONTAP prennent en charge le démarrage SAN.
+
+.Étapes
+. Mappez la LUN de démarrage SAN sur l'hôte.
++
+Voir link:https://docs.netapp.com/us-en/ontap/san-management/index.html["Gestion du stockage SAN"^].
+
+. Vérifiez que plusieurs chemins sont disponibles.
++
+
+NOTE: Plusieurs chemins deviennent disponibles uniquement après l'exécution du système d'exploitation hôte sur les chemins.
+
+. Activez le démarrage SAN dans le BIOS du serveur pour les ports auxquels la LUN de démarrage SAN est mappée.
++
+Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la documentation spécifique au fournisseur.
+
+. Redémarrez l'hôte pour vérifier que le démarrage a réussi
+
+
+--
+====

@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: hu_windows_2019.html 
+permalink: hu-windows-2025.html 
 keywords: windows, enterprise 
-summary: Utilisation de Windows Server 2019 avec ONTAP 
+summary: 'Vous pouvez utiliser les paramètres de configuration de l"hôte SAN ONTAP pour configurer Windows Server 2025 en vue d"une utilisation avec le stockage ONTAP.' 
 ---
-= Utilisez Windows Server 2019 avec ONTAP
+= Configurez Windows Server 2025 pour le stockage ONTAP
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,7 +16,7 @@ summary: Utilisation de Windows Server 2019 avec ONTAP
 
 
 [role="lead"]
-Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour configurer Windows Server 2019 avec ONTAP pour une utilisation avec le stockage ONTAP.
+Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour configurer Windows Server 2025 en vue d'une utilisation avec le stockage ONTAP.
 
 
 
@@ -34,9 +34,6 @@ Effectuez un démarrage local en installant le système d'exploitation Windows s
 .Démarrage SAN
 --
 Si vous choisissez d'utiliser le démarrage SAN, il doit être pris en charge par votre configuration.
-
-
-NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans cette procédure pour configurer les clients cloud connectés à link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] et link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["Amazon FSX pour ONTAP"^].
 
 .Avant de commencer
 Utilisez le https://mysupport.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^] pour vérifier que votre système d'exploitation Windows, votre adaptateur de bus hôte (HBA), le micrologiciel HBA, le BIOS de démarrage HBA et la version ONTAP prennent en charge le démarrage SAN.
@@ -67,7 +64,7 @@ Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la docum
 NetApp recommande d'installer la *dernière mise à jour cumulative* disponible dans le catalogue de mises à jour Microsoft sur le serveur hôte.
 
 .Étapes
-. Téléchargez les correctifs à partir du link:https://www.catalog.update.microsoft.com/Search.aspx?q=Update+Windows+Server+2019["Catalogue de mises à jour Microsoft 2019"^].
+. Téléchargez les correctifs à partir du link:https://www.catalog.update.microsoft.com/Search.aspx?q=update%20%22windows%20server%202025%22["Catalogue de mises à jour Microsoft 2025"^].
 
 
 
@@ -89,7 +86,7 @@ Les utilitaires d'hôtes Windows sont un ensemble de programmes logiciels conten
 
 == Chemins d'accès multiples
 
-Vous devez installer le logiciel Microsoft Multipath I/O (MPIO) et activer les chemins d'accès multiples si votre hôte Windows dispose de plusieurs chemins d'accès au système de stockage. Lorsque vous sélectionnez la prise en charge MPIO, les utilitaires d'hôtes Windows active la fonctionnalité MPIO incluse dans Windows Server 2019. Si vous n'utilisez pas les utilitaires d'hôtes Windows, vous devez activer les chemins d'accès multiples manuellement.
+Vous devez installer le logiciel Microsoft Multipath I/O (MPIO) et activer les chemins d'accès multiples si votre hôte Windows dispose de plusieurs chemins d'accès au système de stockage.
 
 Le logiciel MPIO présente un seul disque au système d'exploitation Windows pour tous les chemins, et un module DSM (Device-Specific module) gère le basculement de chemin. Sur un système Windows, les deux principaux composants de n'importe quelle solution MPIO sont le DSM et le MPIO Windows.
 
@@ -171,4 +168,4 @@ NOTE: Pour plus d'informations sur les paramètres recommandés, reportez-vous �
 
 == Problèmes connus
 
-Il n'y a aucun problème connu pour Windows Server 2019 avec la version ONTAP.
+Il n'y a aucun problème connu pour Windows Server 2025 avec la version ONTAP.

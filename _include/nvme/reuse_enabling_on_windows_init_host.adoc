@@ -2,7 +2,7 @@
 :allow-uri-read: 
 
 
-Effectuez la procédure suivante pour activer FC/NVMe sur l'hôte de l'initiateur Windows :
+Activez FC/NVMe sur l'hôte initiateur Windows.
 
 .Étapes
 . Installez l'utilitaire OneCommand Manager sur l'hôte Windows.
@@ -10,7 +10,6 @@ Effectuez la procédure suivante pour activer FC/NVMe sur l'hôte de l'initiateu
 +
 ** EnableNVMe = 1
 ** NVMEMode = 0
-** LimTransferSize=1
 
 
 . Redémarrez l'hôte.

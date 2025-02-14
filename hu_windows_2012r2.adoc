@@ -4,7 +4,7 @@ permalink: hu_windows_2012r2.html
 keywords: windows, enterprise 
 summary: Utilisation de Windows Server 2012 R2 avec ONTAP 
 ---
-= Utilisation de Windows Server 2012 R2 avec ONTAP
+= Utilisez Windows Server 2012 R2 avec ONTAP
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,118 +16,129 @@ summary: Utilisation de Windows Server 2012 R2 avec ONTAP
 
 
 [role="lead"]
-Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour configurer Windows Server 2012 R2 avec ONTAP comme cible.
+Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour configurer Windows Server 2012 R2 en vue d'une utilisation avec le stockage ONTAP.
 
 
 
-== Démarrage du système d'exploitation
+== Démarrez le système d'exploitation Windows
 
-Il existe deux options pour démarrer le système d'exploitation : par démarrage local ou par démarrage SAN. Pour le démarrage local, vous installez le système d'exploitation sur le disque dur local (SSD, SATA, RAID, etc.). Pour le démarrage SAN, reportez-vous aux instructions ci-dessous.
+Vous pouvez démarrer le système d'exploitation Windows à l'aide d'un démarrage local ou d'un démarrage SAN. NetApp recommande d'utiliser un démarrage SAN si celui-ci est pris en charge par votre configuration.
+
+[role="tabbed-block"]
+====
+.Démarrage local
+--
+Effectuez un démarrage local en installant le système d'exploitation Windows sur le disque dur local (SSD, SATA, RAID, etc.).
+
+--
+.Démarrage SAN
+--
+Si vous choisissez d'utiliser le démarrage SAN, il doit être pris en charge par votre configuration.
 
 
+NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans cette procédure pour configurer les clients cloud connectés à link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] et link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["Amazon FSX pour ONTAP"^].
 
-=== Démarrage SAN
+.Avant de commencer
+Utilisez le https://mysupport.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^] pour vérifier que votre système d'exploitation Windows, votre adaptateur de bus hôte (HBA), le micrologiciel HBA, le BIOS de démarrage HBA et la version ONTAP prennent en charge le démarrage SAN.
 
-Si vous choisissez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser la matrice d'interopérabilité pour vérifier que votre système d'exploitation, votre adaptateur de bus hôte, le micrologiciel de l'adaptateur de bus hôte, ainsi que le BIOS de démarrage de l'adaptateur de bus hôte et la version de ONTAP sont pris en charge.
-
+.Étapes
 . Mappez la LUN de démarrage SAN sur l'hôte.
++
+Voir link:https://docs.netapp.com/us-en/ontap/san-management/index.html["Gestion du stockage SAN"^].
+
 . Vérifiez que plusieurs chemins sont disponibles.
 +
 
 NOTE: Plusieurs chemins deviennent disponibles uniquement après l'exécution du système d'exploitation hôte sur les chemins.
 
-. Activez le démarrage SAN dans le BIOS du serveur pour les ports auxquels la LUN de démarrage SAN est mappée. Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la documentation spécifique au fournisseur.
-. Redémarrez l'hôte pour vérifier que le démarrage est réussi.
+. Activez le démarrage SAN dans le BIOS du serveur pour les ports auxquels la LUN de démarrage SAN est mappée.
++
+Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la documentation spécifique au fournisseur.
+
+. Redémarrez l'hôte pour vérifier que le démarrage a réussi
 
 
-
-NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans ce document pour configurer les clients Cloud connectés à link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] et link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["Amazon FSX pour ONTAP"^].
-
+--
+====
 
 
 == Installez les correctifs Windows
 
-NetApp recommande que la *dernière mise à jour cumulative* soit installée sur le serveur.
+NetApp recommande d'installer la *dernière mise à jour cumulative* disponible dans le catalogue de mises à jour Microsoft sur le serveur hôte.
 
-
-NOTE: Accédez au link:https://www.catalog.update.microsoft.com/Search.aspx?q=Update+Windows+Server+2012_R2["Catalogue de mises à jour Microsoft 2012 R2"^] Site Web pour obtenir et installer les correctifs Windows requis pour votre version de Windows.
-
-. Téléchargez les correctifs à partir du site de support Microsoft.
+.Étapes
+. Téléchargez les correctifs à partir du link:https://www.catalog.update.microsoft.com/Search.aspx?q=Update+Windows+Server+2012_R2["Catalogue de mises à jour Microsoft 2012 R2"^].
 
 
 
-NOTE: Certains correctifs ne sont pas disponibles pour le téléchargement direct. Dans ce cas, vous devrez demander un correctif au personnel de support Microsoft.
+NOTE: Vous devez contacter le support Microsoft pour obtenir les correctifs qui ne sont pas disponibles au téléchargement à partir du catalogue de mises à jour Microsoft.
 
 . Suivez les instructions fournies par Microsoft pour installer les correctifs.
 
 
 
-TIP: De nombreux correctifs nécessitent un redémarrage de votre hôte Windows, mais vous pouvez choisir d'attendre le redémarrage de l'hôte jusqu'à _after_ que vous installiez ou mettez à niveau les utilitaires hôtes.
+TIP: De nombreux correctifs nécessitent un redémarrage de votre hôte Windows. Vous pouvez choisir d'attendre le redémarrage de l'hôte jusqu'à ce que _after_ vous installiez ou mettiez à niveau les utilitaires hôtes.
 
 
 
 == Installez les utilitaires d'hôtes Windows
 
-Les utilitaires d'hôtes Windows sont un ensemble de programmes logiciels contenant de la documentation qui vous permet de connecter des ordinateurs hôtes à des disques virtuels (LUN) sur un SAN NetApp. NetApp recommande de télécharger et d'installer le dernier kit d'utilitaires. Pour obtenir des informations et des instructions sur la configuration de WUHU, reportez-vous au link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71_rn.html["Documentation relative aux utilitaires d'hôtes Windows"]et sélectionnez la procédure d'installation de votre version d'utilitaires hôtes Windows.
+Les utilitaires d'hôtes Windows sont un ensemble de programmes logiciels contenant de la documentation qui vous permet de connecter des ordinateurs hôtes à des disques virtuels (LUN) sur un SAN NetApp. NetApp recommande de télécharger et d'installer le dernier kit d'utilitaires. Pour obtenir des informations et des instructions sur la configuration des utilitaires d'hôtes Windows, reportez-vous au link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71_rn.html["Documentation relative aux utilitaires d'hôtes Windows"]et sélectionnez la procédure d'installation de votre version des utilitaires d'hôtes Windows.
 
 
 
 == Chemins d'accès multiples
 
-Vous devez installer le logiciel Microsoft Multipath I/O (MPIO) et configurer les chemins d'accès multiples si votre hôte Windows dispose de plusieurs chemins d'accès au système de stockage. Sans le logiciel MPIO, le système d'exploitation peut voir chaque chemin en tant que disque distinct, ce qui peut entraîner une corruption des données. Le logiciel MPIO présente un seul disque au système d'exploitation pour tous les chemins, et un module DSM (Device-Specific module) gère le basculement de chemin.
+Vous devez installer le logiciel Microsoft Multipath I/O (MPIO) et activer les chemins d'accès multiples si votre hôte Windows dispose de plusieurs chemins d'accès au système de stockage. Lorsque vous sélectionnez la prise en charge MPIO, les utilitaires d'hôtes Windows active la fonctionnalité MPIO incluse dans Windows Server 2012 R2. Si vous n'utilisez pas les utilitaires d'hôtes Windows, vous devez activer les chemins d'accès multiples manuellement.
 
-Sur un système Windows, les deux principaux composants d'une solution MPIO sont un DSM et Windows MPIO. MPIO n'est pas pris en charge pour Windows XP ou Windows Vista fonctionnant sur une machine virtuelle Hyper- V.
+Le logiciel MPIO présente un seul disque au système d'exploitation Windows pour tous les chemins, et un module DSM (Device-Specific module) gère le basculement de chemin. Sur un système Windows, les deux principaux composants de n'importe quelle solution MPIO sont le DSM et le MPIO Windows.
 
 
-NOTE: Lorsque vous sélectionnez la prise en charge MPIO, les utilitaires d'hôtes Windows active la fonctionnalité MPIO incluse de Windows Server 2012 R2.
+CAUTION: Si vous n'installez pas le logiciel MPIO, le système d'exploitation Windows peut voir chaque chemin comme un disque distinct. Cela peut entraîner une corruption des données.
+
+
+NOTE: Windows XP ou Windows Vista exécuté sur une machine virtuelle Hyper-V ne prend pas en charge MPIO.
 
 
 
 == Configuration SAN
 
-
-
-=== Configuration non ASA
-
-Pour la configuration non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes.
-
-Les chemins ayant des priorités plus élevées sont Active/Optimized (actif/optimisé), ce qui signifie que les services sont gérés par le contrôleur où se trouve l'agrégat.
-
-Les chemins aux priorités inférieures sont actifs, mais ne sont pas optimisés, car ils sont desservis par un autre contrôleur.
-
-
-NOTE: Les chemins non optimisés ne sont utilisés que lorsque les chemins optimisés ne sont pas disponibles.
-
-.Exemple
-L'exemple suivant montre la sortie correcte d'une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés.
-
-image::nonasa.png[Capture d'écran d'une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés]
+Selon la configuration de votre réseau SAN, l'hôte utilise des configurations ASA (All SAN Array) ou non ASA pour accéder aux LUN ONTAP. Dans les configurations ASA et non-ASA, il est inutile de disposer de plus de quatre chemins pour accéder à une seule LUN ONTAP. Si vous disposez de plus de quatre chemins, cela peut provoquer des problèmes au niveau des chemins en cas de panne de stockage.
 
 
 
 === Toute la configuration de la baie SAN
 
-Pour la configuration des baies SAN (ASA), il doit y avoir un groupe de chemins avec des priorités uniques. Tous les chemins sont optimisés/actifs, c'est-à-dire qu'ils sont gérés par le contrôleur et que les E/S sont envoyées sur tous les chemins actifs.
+Une configuration ASA doit comporter un groupe de chemins actifs/optimisés avec des priorités uniques. Cela signifie que les chemins sont gérés par le contrôleur et que les E/S sont envoyées sur tous les chemins actifs.
+
+L'exemple suivant montre la sortie correcte pour une LUN ONTAP avec des chemins Active/Optimized.
 
 image::asa.png[Capture d'écran d'une LUN ONTAP avec chemins actifs/optimisés]
 
 
-NOTE: Une seule LUN ne doit pas nécessiter plus de quatre chemins. La présence de plus de quatre chemins peut entraîner des problèmes de chemin pendant les pannes de stockage.
+
+=== Configuration non ASA
+
+Une configuration non ASA doit comporter deux groupes de chemins ayant des priorités différentes. Les chemins ayant des priorités plus élevées sont actifs/optimisés. Cela signifie que les chemins Active/Optimized sont gérés par le contrôleur où se trouve l'agrégat. Les chemins avec des priorités inférieures sont actifs mais non optimisés, car ils sont desservis par un autre contrôleur. Les chemins non optimisés ne sont utilisés que lorsque les chemins optimisés ne sont pas disponibles.
+
+L'exemple suivant montre la sortie correcte pour une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés.
+
+image::nonasa.png[Capture d'écran d'une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés]
 
 
 
 == La VHD Hyper-V requiert un alignement pour optimiser les performances
 
-Si les limites des blocs de données d'une partition de disque ne sont pas alignées avec les limites des blocs de la LUN sous-jacente, le système de stockage doit souvent effectuer deux opérations de lecture ou d'écriture de blocs pour chaque bloc du système d'exploitation, lecture ou écriture. Les lectures et écritures de blocs supplémentaires dues à l'alignement incorrect peuvent entraîner de sérieux problèmes de performances.
+Si les limites des blocs de données d'une partition de disque ne s'alignent pas sur les limites des blocs de la LUN sous-jacente, le système de stockage doit souvent effectuer deux lectures ou écritures de blocs pour chaque lecture ou écriture de bloc du système d'exploitation. Les lectures et écritures de blocs supplémentaires dues à l'alignement incorrect peuvent entraîner de sérieux problèmes de performances.
 
-Le mauvais alignement est causé par l'emplacement du secteur de départ pour chaque partition définie par l'enregistrement d'amorçage maître.
+L'emplacement du secteur de départ pour chaque partition définie par l'enregistrement d'amorçage principal provoque un mauvais alignement.
 
 
 NOTE: Les partitions créées par Windows Server 2016 doivent être alignées par défaut.
 
-Utilisez le `Get-NaVirtualDiskAlignment` Cmdlet dans le kit ONTAP PowerShell pour vérifier si les partitions sont alignées avec les LUN sous-jacentes. Si les partitions ne sont pas alignées correctement, utilisez le `Repair-NaVirtualDiskAlignment` Cmdlet pour créer un nouveau fichier VHD avec l’alignement correct. Cette applet de commande copie toutes les partitions dans le nouveau fichier. Le fichier VHD d'origine n'est ni modifié ni supprimé. L'ordinateur virtuel doit être arrêté pendant que les données sont copiées.
+Utilisez `Get-NaVirtualDiskAlignment` l'applet de commande du kit ONTAP PowerShell pour vérifier si les partitions sont alignées sur les LUN sous-jacentes. Si les partitions ne sont pas correctement alignées, utilisez `Repair-NaVirtualDiskAlignment` l'applet de commande pour créer un nouveau fichier VHD avec l'alignement correct. Cette applet de commande copie toutes les partitions dans le nouveau fichier. Le fichier VHD d'origine n'est ni modifié ni supprimé. L'ordinateur virtuel doit être arrêté pendant que les données sont copiées.
 
-Vous pouvez télécharger le kit ONTAP PowerShell sur la page des communautés NetApp. Vous devez décompresser le `DataONTAP.zip` fichier dans l'emplacement spécifié par la variable d'environnement `%PSModulePath%` (ou utilisez le `Install.ps1` script à faire pour vous). Une fois l'installation terminée, utilisez le `Show-NaHelp` cmdlet pour obtenir de l'aide pour les applets de commande.
+Vous pouvez télécharger le kit ONTAP PowerShell sur la page des communautés NetApp. Vous devez décompresser le `DataONTAP.zip` fichier à l'emplacement spécifié par la variable d'environnement `%PSModulePath%` (ou utiliser le `Install.ps1` script pour le faire pour vous). Une fois l'installation terminée, utilisez l' `Show-NaHelp`applet de commande pour obtenir de l'aide sur les applets de commande.
 
 Le kit PowerShell ne prend en charge que les fichiers VHD de taille fixe avec des partitions de type MBR. Les disques durs virtuels utilisant des disques dynamiques Windows ou des partitions GPT ne sont pas pris en charge. De plus, le kit PowerShell requiert une taille de partition minimale de 4 Go. Les partitions plus petites ne peuvent pas être correctement alignées.
 
@@ -140,54 +151,67 @@ NOTE: Pour les machines virtuelles Linux utilisant le chargeur de démarrage GRU
 
 Après exécution `mbralign` Sur les disques pour corriger l'alignement MBR avec PowerShell Toolkit sur les systèmes d'exploitation invités Linux à l'aide du chargeur de démarrage GRUB, vous devez réinstaller GRUB pour vous assurer que le système d'exploitation invité démarre correctement.
 
-L'applet de commande PowerShell Toolkit est terminée sur le fichier VHD de la machine virtuelle. Cette rubrique s'applique uniquement aux systèmes d'exploitation invités Linux utilisant le chargeur de démarrage GRUB et `SystemRescueCd`.
+.Description de la tâche
+L'applet de commande PowerShell Toolkit est terminée sur le fichier VHD de la machine virtuelle. Cette procédure s'applique uniquement aux systèmes d'exploitation invités Linux utilisant les Loader de démarrage GRUB et `SystemRescueCd`.
 
+.Étapes
 . Montez l'image ISO du disque 1 des CD d'installation pour la version correcte de Linux pour la machine virtuelle.
 . Ouvrez la console de la machine virtuelle dans Hyper-V Manager.
-. Si la machine virtuelle est en cours d'exécution et affichée sur l'écran GRUB, cliquez dans la zone d'affichage pour vous assurer qu'elle est active, puis cliquez sur l'icône de la barre d'outils *Ctrl-Alt-Suppr* pour redémarrer la machine virtuelle. Si la machine virtuelle n'est pas en cours d'exécution, démarrez-la, puis cliquez immédiatement dans la zone d'affichage pour vous assurer qu'elle est active.
+. Si la machine virtuelle est en cours d'exécution et figée sur l'écran GRUB, cliquez dans la zone d'affichage pour vous assurer qu'elle est active, puis sélectionnez l'icône de la barre d'outils *Ctrl-Alt-Suppr* pour redémarrer la machine virtuelle. Si la machine virtuelle n'est pas en cours d'exécution, démarrez-la, puis cliquez immédiatement dans la zone d'affichage pour vous assurer qu'elle est active.
 . Dès que l'écran de démarrage du BIOS VMware s'affiche, appuyez une fois sur la touche *Esc*. Le menu de démarrage s'affiche.
 . Dans le menu de démarrage, sélectionnez *CD-ROM*.
 . Sur l'écran de démarrage Linux, entrez : `linux rescue`
 . Prenez les valeurs par défaut pour Anaconda (les écrans de configuration bleu/rouge). La mise en réseau est facultative.
 . Lancer GRUB en entrant : `grub`
-. S'il n'y a qu'un seul disque virtuel dans cette machine virtuelle, ou s'il y a plusieurs disques, mais que le premier est le disque d'amorçage, exécutez les commandes GRUB suivantes :
-
-
+. S'il n'y a qu'un seul disque virtuel dans cette machine virtuelle, ou s'il y a plusieurs disques et que le premier est le disque de démarrage, exécutez les commandes GRUB suivantes :
++
 [listing]
 ----
 root (hd0,0)
 setup (hd0)
 quit
 ----
-Si vous avez plusieurs disques virtuels dans la machine virtuelle, et que le disque de démarrage n'est pas le premier disque, ou que vous corrigez GRUB en démarrant à partir du VHD de sauvegarde mal aligné, entrez la commande suivante pour identifier le disque de démarrage :
++
+Si la machine virtuelle comporte plusieurs disques virtuels et que le disque de démarrage n'est pas le premier disque, ou si vous procédez à la correction de GRUB en démarrant à partir du VHD de sauvegarde mal aligné, entrez la commande suivante pour identifier le disque de démarrage :
 
++
 [listing]
 ----
 find /boot/grub/stage1
 ----
++
 Exécutez ensuite les commandes suivantes :
 
++
 [listing]
 ----
 root (boot_disk,0)
 setup (boot_disk)
 quit
 ----
++
 
-NOTE: Notez bien que `boot_disk`, ci-dessus, est un espace réservé pour l'identificateur de disque réel du disque d'amorçage.
+NOTE: Dans `setup (boot_disk)`, `boot_disk` est un espace réservé pour l'identificateur de disque réel du disque d'amorçage.
+
+
 
 . Appuyez sur *Ctrl-D* pour vous déconnecter.
-
-
++
 Le sauvetage Linux s'arrête, puis redémarre.
+
+
 
 
 
 == Paramètres recommandés
 
-Sur les systèmes utilisant FC, les valeurs de délai suivantes pour les HBA FC Emulex et QLogic sont requises lorsque MPIO est sélectionné.
+Lorsque vous sélectionnez MPIO sur des systèmes utilisant FC, le programme d'installation des utilitaires hôtes définit les valeurs de délai requises pour les HBA Emulex et QLogic FC.
 
-Pour les HBA Fibre Channel d'Emulex :
+[role="tabbed-block"]
+====
+.Emulex FC
+--
+Les valeurs de délai pour les HBA FC Emulex :
 
 [cols="2*"]
 |===
@@ -199,7 +223,10 @@ Pour les HBA Fibre Channel d'Emulex :
 
 | NodeTimeOut | 10 
 |===
-Pour les HBA Fibre Channel QLogic :
+--
+.FC QLogic
+--
+Les valeurs de temporisation pour les HBA FC QLogic :
 
 [cols="2*"]
 |===
@@ -211,8 +238,10 @@ Pour les HBA Fibre Channel QLogic :
 
 | PortDownloyCount | 10 
 |===
+--
+====
 
-NOTE: L'utilitaire hôte Windows définit ces valeurs. Pour obtenir des paramètres recommandés détaillés, reportez-vous au link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71_rn.html["Documentation relative aux utilitaires d'hôtes Windows"]et sélectionnez la procédure d'installation de votre version des utilitaires d'hôtes Windows.
+NOTE: Pour plus d'informations sur les paramètres recommandés, reportez-vous à link:hu_wuhu_hba_settings.html["Configurez les paramètres de registre pour les utilitaires d'hôtes Windows"]la section .
 
 
 

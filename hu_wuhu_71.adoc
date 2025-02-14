@@ -67,7 +67,7 @@ Avant d'installer les utilitaires hôtes, vérifiez que la version des utilitair
 . Vérifier les correctifs requis pour l'hôte respectif sur le link:https://docs.netapp.com/us-en/ontap-sanhost/index.html["Documentation Windows de l'hôte SAN"].
 +
 
-NOTE: Le link:https://docs.netapp.com/us-en/ontap-sanhost/hu_windows_2022.html["Utilisation de Windows Server 2022 avec ONTAP"] le document fournit des instructions sur link:https://docs.netapp.com/us-en/ontap-sanhost/hu_windows_2022.html#installing-windows-hotfixes["Installation des correctifs Windows"] Pour Windows Server 2022. Reportez-vous aux documents Windows de la catégorie configurations hôte pour trouver les informations de correctif appropriées pour les versions antérieures de Windows Server.
+NOTE: Ce link:https://docs.netapp.com/us-en/ontap-sanhost/hu_windows_2022.html["Utilisez Windows Server 2022 avec ONTAP"] document fournit des instructions sur link:https://docs.netapp.com/us-en/ontap-sanhost/hu_windows_2022.html#installing-windows-hotfixes["Installation des correctifs Windows"] pour Windows Server 2022. Reportez-vous aux documents Windows de la catégorie configurations hôte pour trouver les informations de correctif appropriées pour les versions antérieures de Windows Server.
 
 . Ajoutez la licence iSCSI ou FCP et démarrez le service cible.
 +

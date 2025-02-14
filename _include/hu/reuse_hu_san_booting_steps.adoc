@@ -7,7 +7,7 @@
 . Vérifiez que plusieurs chemins sont disponibles.
 +
 
-NOTE: Plusieurs chemins deviennent disponibles une fois que le système d'exploitation hôte est opérationnel sur les chemins.
+NOTE: Plusieurs chemins deviennent disponibles une fois que le système d'exploitation hôte est en cours d'exécution sur les chemins.
 
 . Activez le démarrage SAN dans le BIOS du serveur pour les ports auxquels la LUN de démarrage SAN est mappée.
 +

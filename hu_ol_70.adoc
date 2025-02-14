@@ -37,7 +37,7 @@ Si Linux Host Utilities est actuellement installé, vous devez soit le mettre à
 
 
 
-NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans ce document pour configurer les clients Cloud connectés à link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] et link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["Amazon FSX pour ONTAP"^].
+NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans cette procédure pour configurer les clients cloud connectés à link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] et link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["Amazon FSX pour ONTAP"^].
 
 
 
@@ -76,7 +76,7 @@ Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charg
 . Vérifiez que plusieurs chemins sont disponibles.
 +
 
-NOTE: Plusieurs chemins deviennent disponibles une fois que le système d'exploitation hôte est opérationnel sur les chemins.
+NOTE: Plusieurs chemins deviennent disponibles une fois que le système d'exploitation hôte est en cours d'exécution sur les chemins.
 
 . Activez le démarrage SAN dans le BIOS du serveur pour les ports auxquels la LUN de démarrage SAN est mappée.
 +
@@ -103,7 +103,7 @@ kernel /vmlinuz-3.8.13-68.1.2.el6uek.x86_64 ro root=/dev/mapper/vg_ibmx3550m4210
 . Vérifiez la sortie du `cat /proc/cmdline` pour vérifier que le paramètre est terminé.
 
 
-Vous pouvez utiliser `multipath -ll` la commande pour vérifier les paramètres de vos LUN ONTAP. Il devrait y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant des priorités plus élevées sont Active/Optimized (actif/optimisé), ce qui signifie qu'ils sont gérés par le contrôleur où se trouve l'agrégat. Les chemins aux priorités inférieures sont actifs, mais ne sont pas optimisés, car ils sont desservis par un autre contrôleur. Les chemins non optimisés ne sont utilisés que lorsque les chemins optimisés ne sont pas disponibles.
+Vous pouvez utiliser `multipath -ll` la commande pour vérifier les paramètres de vos LUN ONTAP. Il devrait y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant des priorités plus élevées sont actifs/optimisés. Cela signifie qu'ils sont gérés par le contrôleur où se trouve l'agrégat. Les chemins avec des priorités inférieures sont actifs mais non optimisés, car ils sont desservis par un autre contrôleur. Les chemins non optimisés ne sont utilisés que lorsque les chemins optimisés ne sont pas disponibles.
 
 .Exemple
 L'exemple suivant montre la sortie correcte pour une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés :

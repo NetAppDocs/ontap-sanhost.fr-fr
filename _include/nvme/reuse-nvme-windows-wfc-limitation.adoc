@@ -1,0 +1,7 @@
+= 
+:allow-uri-read: 
+
+
+Le cluster de basculement Windows n'est pas pris en charge avec le protocole NVMe/FC, car ONTAP ne prend pas actuellement en charge les réservations persistantes avec le protocole NVMe/FC.
+
++ REMARQUE : Broadcom expédie un pilote externe pour Windows NVMe/FC qui est un pilote SCSI ⇄ NVMe en translation et non un véritable pilote NVMe/FC. La surcharge en translation n'a pas forcément d'impact sur les performances, mais elle annule les avantages de la technologie NVMe/FC en matière de performance. Par conséquent, les performances de NVMe/FC et FCP sont identiques sur les serveurs Windows, contrairement aux autres systèmes d'exploitation tels que Linux, où les performances de NVMe/FC sont nettement supérieures à celles de FCP.

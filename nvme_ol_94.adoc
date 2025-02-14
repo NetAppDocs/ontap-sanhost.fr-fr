@@ -403,7 +403,7 @@ NOTE: À partir d'Oracle Linux 9.4, le paramètre par défaut de NVMe/TCP `ctrl_
 
 == Validez la spécification NVMe-of
 
-Pour prendre en charge le bon fonctionnement des LUN ONTAP, vérifiez que l'état des chemins d'accès multiples NVMe dans le noyau, l'état ANA et les namespaces ONTAP sont corrects pour la configuration NVMe-of.
+Vérifiez que l'état des chemins d'accès multiples NVMe in-kernel, l'état ANA et les namespaces ONTAP sont corrects pour la configuration NVMe-of.
 
 .Étapes
 . Vérifiez les paramètres NVMe/FC suivants sur l'hôte Oracle Liniux 9.4 :

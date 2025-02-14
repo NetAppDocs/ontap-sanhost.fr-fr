@@ -1,5 +1,0 @@
-= 
-:allow-uri-read: 
-
-
-Il existe deux options pour démarrer le système d'exploitation : par démarrage local ou par démarrage SAN. Pour le démarrage local, vous installez le système d'exploitation sur le disque dur local (SSD, SATA, RAID, etc.). Pour le démarrage SAN, reportez-vous aux instructions ci-dessous.

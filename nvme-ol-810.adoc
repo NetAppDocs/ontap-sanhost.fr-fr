@@ -425,7 +425,7 @@ NOTE: NetApp recommande de définir `ctrl-loss-tmo` l'option sur « -1 » afin q
 
 == Validez la spécification NVMe-of
 
-Pour prendre en charge le bon fonctionnement des LUN ONTAP, vérifiez que l'état des chemins d'accès multiples NVMe dans le noyau, l'état ANA et les namespaces ONTAP sont corrects pour la configuration NVMe-of.
+Vérifiez que l'état des chemins d'accès multiples NVMe in-kernel, l'état ANA et les namespaces ONTAP sont corrects pour la configuration NVMe-of.
 
 .Étapes
 . Vérifiez que le protocole NVMe multipath intégré au noyau est activé :

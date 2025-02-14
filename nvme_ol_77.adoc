@@ -25,7 +25,7 @@ Vous pouvez configurer NVMe over Fibre Channel (NVMe/FC) sur des hôtes initiate
 Depuis la version ONTAP 9.6, NVMe/FC est pris en charge pour Oracle Linux 7.7. L'hôte Oracle Linux 7.7 peut exécuter le trafic NVMe et SCSI via les mêmes ports d'adaptateur d'initiateur Fibre Channel. Consultez la link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] pour obtenir la liste des adaptateurs et contrôleurs FC pris en charge. Pour obtenir la liste actuelle des configurations prises en charge, reportez-vous au link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^].
 
 
-NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans ce document pour configurer les clients Cloud connectés à link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] et link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["Amazon FSX pour ONTAP"^].
+NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans cette procédure pour configurer les clients cloud connectés à link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] et link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["Amazon FSX pour ONTAP"^].
 
 
 

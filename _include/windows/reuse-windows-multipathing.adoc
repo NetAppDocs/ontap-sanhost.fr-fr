@@ -1,0 +1,11 @@
+= 
+:allow-uri-read: 
+
+
+Le logiciel MPIO présente un seul disque au système d'exploitation Windows pour tous les chemins, et un module DSM (Device-Specific module) gère le basculement de chemin. Sur un système Windows, les deux principaux composants de n'importe quelle solution MPIO sont le DSM et le MPIO Windows.
+
+
+CAUTION: Si vous n'installez pas le logiciel MPIO, le système d'exploitation Windows peut voir chaque chemin comme un disque distinct. Cela peut entraîner une corruption des données.
+
+
+NOTE: Windows XP ou Windows Vista exécuté sur une machine virtuelle Hyper-V ne prend pas en charge MPIO.
