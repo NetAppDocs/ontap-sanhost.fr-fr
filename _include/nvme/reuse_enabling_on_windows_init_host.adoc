@@ -5,7 +5,7 @@
 Activez FC/NVMe sur l'hôte initiateur Windows.
 
 .Étapes
-. Installez l'utilitaire OneCommand Manager sur l'hôte Windows.
+. Installez l'utilitaire Emulex HBA Manager sur l'hôte Windows.
 . Sur chacun des ports d'initiateur HBA, définissez les paramètres suivants du pilote HBA :
 +
 ** EnableNVMe = 1
