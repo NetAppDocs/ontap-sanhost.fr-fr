@@ -233,7 +233,7 @@ NetApp ne recommande pas pour le moment de modifier les paramètres vVvols des v
 
 Reportez-vous au https://imt.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^] pour connaître les versions spécifiques des outils ONTAP ou du fournisseur VASA hérité pour vos versions spécifiques de vSphere et ONTAP.
 
-Pour plus d'informations sur le provisionnement et la gestion des vVols, reportez-vous à la documentation relative aux outils ONTAP pour VMware vSphere. link:https://docs.netapp.com/us-en/netapp-solutions/hybrid-cloud/vsphere_ontap_ontap_for_vsphere.html["TR-4597"^], et link:https://www.netapp.com/pdf.html?item=/media/13555-tr4400pdf.pdf["TR-4400"^].
+Pour plus d'informations sur le provisionnement et la gestion des vVols, reportez-vous à la documentation relative aux outils ONTAP pour VMware vSphere link:https://docs.netapp.com/us-en/ontap-apps-dbs/vmware/vmware-vsphere-overview.html["VMware vSphere avec ONTAP"^], et link:https://docs.netapp.com/us-en/ontap-apps-dbs/vmware/vmware-vvols-overview.html["Volumes virtuels (vVols) avec les outils ONTAP 10"^].
 
 
 
@@ -360,7 +360,7 @@ Les machines virtuelles Linux exécutant vSphere 8.x et versions ultérieures et
 
 |===
 .Informations associées
-* link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsphere_ontap_ontap_for_vsphere.html["Tr-4597-VMware vSphere avec ONTAP"^]
+* link:https://docs.netapp.com/us-en/ontap-apps-dbs/vmware/vmware-vsphere-overview.html["VMware vSphere avec ONTAP"^]
 * link:https://kb.vmware.com/s/article/2031038["Prise en charge de VMware vSphere 5.x, 6.x et 7.x avec NetApp MetroCluster (2031038)"^]
 * link:https://kb.vmware.com/s/article/83370["NetApp ONTAP avec synchronisation active NetApp SnapMirror avec VMware vSphere Metro Storage Cluster (vMSC)"^]
 

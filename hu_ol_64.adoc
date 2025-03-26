@@ -257,6 +257,12 @@ NOTE: Pour configurer Oracle Linux 6.4 Red Hat compatible Kernel (RHCK), utilise
 
 
 
+== Mise en miroir ASM
+
+La mise en miroir de gestion automatique du stockage (ASM) peut nécessiter des modifications des paramètres de chemins d'accès multiples Linux pour permettre à ASM de reconnaître un problème et de basculer vers un autre groupe de pannes. La plupart des configurations ASM sur ONTAP utilisent une redondance externe, ce qui signifie que la protection des données est assurée par la baie externe et qu'ASM ne met pas en miroir les données. Certains sites utilisent ASM avec redondance normale pour fournir une mise en miroir bidirectionnelle, généralement entre différents sites. Voir link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/oracle-overview.html["Bases de données Oracle sur ONTAP"^] pour plus d'informations.
+
+
+
 == Problèmes connus
 
 La version Oracle Linux 6.4 avec ONTAP présente les problèmes connus suivants :
