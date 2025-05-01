@@ -1,0 +1,6 @@
+= 
+:allow-uri-read: 
+
+
+
+NOTE: Vous n'avez pas besoin de configurer les paramètres KVM (Kernel-based Virtual machine) car les LUN ONTAP sont automatiquement mappées sur l'hyperviseur KVM.

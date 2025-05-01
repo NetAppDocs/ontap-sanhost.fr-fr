@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
 permalink: hu_rhel_90.html 
-keywords: host utilities, red hat, rhel, linux, 8.6, netapp, ontap 
-summary: Décrit comment utiliser Red Hat Enterprise Linux 8.6 avec ONTAP 
+keywords: host utilities, red hat, rhel, linux, 9.0, netapp, ontap 
+summary: 'Installez les utilitaires d"hôtes Linux sur un hôte RHEL 9.0 pour gérer les opérations de protocole FCP et iSCSI avec des LUN ONTAP.' 
 ---
-= Utilisez Red Hat Enterprise Linux 9.0 avec ONTAP
+= Configurez RHEL 9.0 pour FCP et iSCSI avec stockage ONTAP
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,191 +16,78 @@ summary: Décrit comment utiliser Red Hat Enterprise Linux 8.6 avec ONTAP
 
 
 [role="lead"]
-Vous pouvez utiliser les paramètres de configuration de l'hôte SAN ONTAP pour configurer Red Hat Enterprise Linux 9.0 avec ONTAP comme cible.
+Le logiciel Linux Host Utilities fournit des outils de gestion et de diagnostic pour les hôtes Linux connectés au stockage ONTAP. Lorsque vous installez les utilitaires d'hôtes Linux sur un hôte Red Hat Enterprise Linux (RHEL) 9.0, vous pouvez utiliser les utilitaires d'hôtes pour vous aider à gérer les opérations de protocole FCP et iSCSI avec les LUN ONTAP.
+
+
+NOTE: Vous n'avez pas besoin de configurer les paramètres KVM (Kernel-based Virtual machine) car les LUN ONTAP sont automatiquement mappées sur l'hyperviseur KVM.
 
 
 
-== Installez les utilitaires hôtes Linux
+== Étape 1 : activez éventuellement le démarrage SAN
 
-Vous pouvez télécharger le progiciel Utilitaires hôtes NetApp Linux sous la forme d'un fichier 64-bit.rpm à partir du link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^].
-
-NetApp recommande fortement d'installer les utilitaires hôtes Linux, mais ce n'est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
-
-.Étapes
-. Téléchargez le progiciel Linux Host Utilities 64 bits du https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^] sur votre hôte.
-. Installez le pack logiciel :
-+
-`rpm -ivh netapp_linux_unified_host_utilities-7-1.x86_64`
-
-
-
-
-NOTE: Vous pouvez utiliser les paramètres de configuration fournis dans cette procédure pour configurer les clients cloud connectés à link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] et link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["Amazon FSX pour ONTAP"^].
-
-
-
-== Kit D'outils SAN
-
-Le kit d'outils est installé automatiquement lorsque vous installez le pack NetApp Host Utilities. Ce kit contient le `sanlun` Utilitaire, qui vous aide à gérer les LUN et les HBA. Le `sanlun` La commande renvoie les informations relatives aux LUN mappées sur votre hôte, aux chemins d'accès multiples et aux informations nécessaires à la création des groupes initiateurs.
-
-.Exemple
-Dans l'exemple suivant, le `sanlun lun show` La commande renvoie les informations relatives à la LUN.
-
-[source, cli]
-----
-# sanlun lun show all
-----
-Exemple de résultat :
-
-[listing]
-----
-controller(7mode/E-Series)/            device     host               lun
-vserver(cDOT/FlashRay)   lun-pathname  filename   adapter  protocol  size    Product
-------------------------------------------------------------------------------------
-data_vserver          /vol/vol1/lun1   /dev/sdb   host16   FCP       120.0g  cDOT
-data_vserver          /vol/vol1/lun1   /dev/sdc   host15   FCP       120.0g  cDOT
-data_vserver          /vol/vol2/lun2   /dev/sdd   host16   FCP       120.0g  cDOT
-data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDOT
-----
-
-
-== SAN Booting
+Vous pouvez configurer votre hôte pour qu'il utilise le démarrage SAN afin de simplifier le déploiement et d'améliorer l'évolutivité.
 
 .Avant de commencer
-Si vous décidez d'utiliser le démarrage SAN, celui-ci doit être pris en charge par votre configuration. Vous pouvez utiliser link:https://imt.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^]pour vérifier que votre se, votre HBA, le micrologiciel HBA, le BIOS de démarrage HBA et la version ONTAP sont pris en charge.
+Utilisez le link:https://mysupport.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^] pour vérifier que votre système d'exploitation Linux, votre adaptateur de bus hôte (HBA), le micrologiciel HBA, le BIOS de démarrage HBA et la version ONTAP prennent en charge le démarrage SAN.
 
 .Étapes
-. Mappez la LUN de démarrage SAN sur l'hôte.
-. Vérifiez que plusieurs chemins sont disponibles.
+. Créez une LUN de démarrage SAN et mappez-la sur l'hôte.
 +
-
-NOTE: Plusieurs chemins deviennent disponibles une fois que le système d'exploitation hôte est en cours d'exécution sur les chemins.
+Voir https://docs.netapp.com/us-en/ontap/san-admin/provision-storage.html["Provisionnez le stockage SAN"^].
 
 . Activez le démarrage SAN dans le BIOS du serveur pour les ports auxquels la LUN de démarrage SAN est mappée.
 +
 Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la documentation spécifique au fournisseur.
 
-. Redémarrez l'hôte pour vérifier que le démarrage a réussi.
+. Vérifiez que la configuration a réussi en redémarrant l'hôte et en vérifiant que le système d'exploitation est opérationnel.
 
 
 
 
-== Chemins d'accès multiples
+== Étape 2 : installez les utilitaires hôtes Linux
 
-Pour Red Hat Enterprise Linux (RHEL) 9.0 `/etc/multipath.conf` le fichier doit exister, mais il n'est pas nécessaire d'apporter des modifications spécifiques au fichier. RHEL 9.0 est compilé avec tous les paramètres requis pour reconnaître et gérer correctement les LUN ONTAP.
+NetApp recommande vivement d'installer les utilitaires hôtes Linux pour prendre en charge la gestion des LUN ONTAP et aider le support technique à collecter les données de configuration.
 
-Vous pouvez utiliser le `multipath -ll` Commande pour vérifier les paramètres des LUN ONTAP.
-
-Les sections suivantes fournissent des exemples de sorties multivoies pour une LUN mappée sur des rôles ASA et non ASA.
+link:hu_luhu_71.html["Installez Linux Host Utilities 7.1"].
 
 
-
-=== Configurations All SAN Array
-
-Toutes les configurations de baie SAN (ASA) optimisent tous les chemins d'accès à une LUN donnée en les gardant actives. Ce qui améliore les performances en assurant le service des opérations d'E/S sur tous les chemins en même temps.
-
-.Exemple
-L'exemple suivant illustre la sortie correcte d'une LUN ONTAP.
-
-[listing]
-----
-# multipath -ll
-3600a098038303634722b4d59646c4436 dm-28 NETAPP,LUN C-Mode
-size=80G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
-`-+- policy='service-time 0' prio=50 status=active
-  |- 11:0:7:1    sdfi   130:64   active ready running
-  |- 11:0:9:1    sdiy  8:288     active ready running
-  |- 11:0:10:1  sdml 69:464   active ready running
-  |- 11:0:11:1  sdpt  131:304  active ready running
-----
-
-NOTE: Une seule LUN ne doit pas nécessiter plus de quatre chemins. La présence de plus de quatre chemins peut entraîner des problèmes de chemin pendant les pannes de stockage.
+NOTE: L'installation des utilitaires d'hôtes Linux ne modifie aucun paramètre de délai d'expiration de l'hôte sur votre hôte Linux.
 
 
 
-=== Configurations non ASA
+== Étape 3 : confirmez la configuration des chemins d'accès multiples pour votre hôte
 
-Pour les configurations non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant des priorités plus élevées sont actifs/optimisés. Cela signifie qu'ils sont gérés par le contrôleur où se trouve l'agrégat. Les chemins avec des priorités inférieures sont actifs mais non optimisés, car ils sont desservis par un autre contrôleur. Les chemins non optimisés ne sont utilisés que lorsque les chemins optimisés ne sont pas disponibles.
+Vous pouvez utiliser les chemins d'accès multiples avec RHEL 9.0 pour gérer les LUN ONTAP.
 
-.Exemple
-L'exemple suivant montre la sortie correcte pour une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés.
-
-[listing]
-----
-# multipath -ll
-3600a098038303634722b4d59646c4436 dm-28 NETAPP,LUN C-Mode
-size=80G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
-|-+- policy='service-time 0' prio=50 status=active
-| |- 16:0:6:35 sdwb  69:624  active ready running
-| |- 16:0:5:35 sdun  66:752  active ready running
-`-+- policy='service-time 0' prio=10 status=enabled
-  |- 15:0:0:35 sdaj  66:48   active ready running
-  |- 15:0:1:35 sdbx  68:176  active ready running
-----
-
-NOTE: Une seule LUN ne doit pas nécessiter plus de quatre chemins. La présence de plus de quatre chemins peut entraîner des problèmes de chemin pendant les pannes de stockage.
-
-
-
-== Paramètres recommandés
-
-Le système d'exploitation RHEL 9.0 est compilé pour reconnaître les LUN ONTAP et définir automatiquement tous les paramètres de configuration pour les configurations ASA et non ASA.
-
-Le `multipath.conf` fichier doit exister pour que le démon multichemin puisse démarrer. Si ce fichier n'existe pas, vous pouvez créer un fichier vide de zéro octet à l'aide de la `touch /etc/multipath.conf` commande.
-
-Lors de la première création du `multipath.conf` fichier, vous devrez peut-être activer et démarrer les services multivoies en utilisant les commandes suivantes :
-
-[listing]
-----
-# systemctl enable multipathd
-# systemctl start multipathd
-----
-Il n'est pas nécessaire d'ajouter des périphériques directement au `multipath.conf` fichier, sauf si vous disposez de périphériques que vous ne souhaitez pas gérer les chemins d'accès multiples ou si vous avez des paramètres existants qui remplacent les paramètres par défaut. Vous pouvez exclure les périphériques indésirables en ajoutant la syntaxe suivante au `multipath.conf` fichier, en remplaçant <DevId> par la chaîne WWID du périphérique que vous souhaitez exclure :
-
-[listing]
-----
-blacklist {
-        wwid <DevId>
-        devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
-        devnode "^hd[a-z]"
-        devnode "^cciss.*"
-}
-----
-Dans l'exemple suivant, vous déterminez le WWID d'un périphérique et ajoutez-le au `multipath.conf` fichier.
+Pour vous assurer que les chemins d'accès multiples sont correctement configurés pour votre hôte, vérifiez que le `/etc/multipath.conf` fichier est défini et que vous disposez des paramètres recommandés par NetApp pour vos LUN ONTAP.
 
 .Étapes
-. Déterminez le WWID :
+. Vérifiez que le `/etc/multipath.conf` fichier se ferme. Si le fichier n'existe pas, créez un fichier vide à zéro octet :
 +
-[listing]
+[source, cli]
 ----
-/lib/udev/scsi_id -gud /dev/sda
+touch /etc/multipath.conf
+----
+. Lors de la première `multipath.conf` création du fichier, vous devrez peut-être activer et démarrer les services multivoies pour charger les paramètres recommandés :
++
+[source, cli]
+----
+systemctl enable multipathd
 ----
 +
-[listing]
+[source, cli]
 ----
-360030057024d0730239134810c0cb833
+systemctl start multipathd
 ----
+. Chaque fois que vous démarrez l'hôte, le fichier vide `/etc/multipath.conf` à zéro octet charge automatiquement les paramètres de chemins d'accès multiples recommandés par NetApp comme paramètres par défaut. Vous ne devriez pas avoir besoin d'apporter de modifications au `/etc/multipath.conf` fichier de votre hôte car le système d'exploitation est compilé avec les paramètres multivoies qui reconnaissent et gèrent correctement les LUN ONTAP.
 +
-`sda` Est le disque SCSI local que vous souhaitez ajouter à la liste noire.
+Le tableau suivant présente les paramètres de chemins d'accès multiples compilés natifs du système d'exploitation Linux pour les LUN ONTAP.
 
-. Ajoutez le `WWID` à la strophe de liste noire dans `/etc/multipath.conf`:
 +
-[listing]
-----
-blacklist {
-     wwid   360030057024d0730239134810c0cb833
-     devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
-     devnode "^hd[a-z]"
-     devnode "^cciss.*"
-}
-----
-
-
-Vous devez toujours vérifier votre `/etc/multipath.conf` fichier, en particulier dans la section valeurs par défaut, pour les paramètres hérités qui peuvent remplacer les paramètres par défaut.
-
-Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN ONTAP et les valeurs requises. Si un hôte est connecté à des LUN d'autres fournisseurs et que l'un de ces paramètres est remplacé, il faudra les corriger par les strophes ultérieures du `multipath.conf` fichier qui s'appliquent spécifiquement aux LUN ONTAP. Si ce n'est pas le cas, les LUN de ONTAP risquent de ne pas fonctionner comme prévu. Vous ne devez remplacer ces valeurs par défaut que si vous en avez connaissance avec NetApp et/ou un fournisseur de système d'exploitation, et ce uniquement lorsque vous en avez pleinement conscience.
-
-[cols="2*"]
+.Affiche les paramètres
+[%collapsible]
+====
+[cols="2"]
 |===
 | Paramètre | Réglage 
 
@@ -244,7 +131,7 @@ Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN
 | prio | « ONTAP » 
 
 
-| solution netapp | LUN.* 
+| solution netapp | LUN 
 
 
 | conservez_attaed_hw_handler | oui 
@@ -258,39 +145,134 @@ Le tableau suivant présente `multipathd` les paramètres critiques pour les LUN
 
 | fournisseur | NETAPP 
 |===
-.Exemple
-L'exemple suivant montre comment corriger une valeur par défaut remplacée. Dans ce cas, le `multipath.conf` fichier définit les valeurs pour `path_checker` et `no_path_retry` Non compatible avec les LUN ONTAP. S'ils ne peuvent pas être supprimés en raison d'autres baies SAN toujours connectées à l'hôte, ces paramètres peuvent être corrigés spécifiquement pour les LUN ONTAP avec une strophe de périphérique.
+====
+. Vérifiez les paramètres et l'état du chemin de vos LUN ONTAP :
++
+[source, cli]
+----
+multipath -ll
+----
++
+Les paramètres de chemins d'accès multiples par défaut prennent en charge les configurations ASA, AFF et FAS. Dans ces configurations, une seule LUN ONTAP ne doit pas nécessiter plus de quatre chemins. S'il y a plus de quatre chemins, cela peut causer des problèmes avec les chemins en cas de panne de stockage.
+
++
+Les résultats des exemples suivants montrent les paramètres et l'état de chemin corrects pour les LUN ONTAP dans une configuration ASA, AFF ou FAS.
+
++
+[role="tabbed-block"]
+====
+.Configuration DE L'INFRASTRUCTURE ASA
+--
+Une configuration ASA optimise tous les chemins vers une LUN donnée en les gardant actifs. Ce qui améliore les performances en assurant le service des opérations d'E/S sur tous les chemins en même temps.
 
 [listing]
 ----
+# multipath -ll
+3600a098038314c4a433f577471797958 dm-2 NETAPP,LUN C-Mode
+size=180G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+`-+- policy='service-time 0' prio=50 status=active
+  |- 14:0:0:0  sdc  8:32   active ready running
+  |- 17:0:0:0  sdas 66:192 active ready running
+  |- 14:0:3:0  sdar 66:176 active ready running
+  `- 17:0:3:0  sdch 69:80  active ready running
+----
+--
+.Configuration AFF ou FAS
+--
+Une configuration AFF ou FAS doit comporter deux groupes de chemins ayant des priorités plus élevées et moins élevées. Les chemins actifs/optimisés à priorité supérieure sont servis par le contrôleur où se trouve l'agrégat. Les chemins de priorité inférieure sont actifs mais non optimisés, car ils sont gérés par un autre contrôleur. Les chemins non optimisés ne sont utilisés que lorsque des chemins optimisés ne sont pas disponibles.
+
+L'exemple suivant présente la sortie d'une LUN ONTAP avec deux chemins Active/Optimized et deux chemins Active/non optimisés :
+
+[listing]
+----
+# multipath -ll
+3600a0980383149764b5d567257516273 dm-0 NETAPP,LUN C-Mode
+size=150G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+|-+- policy='service-time 0' prio=50 status=active
+| |- 16:0:3:0  sdcg 69:64  active ready running
+| `- 10:0:0:0  sdb  8:16   active ready running
+`-+- policy='service-time 0' prio=10 status=enabled
+  |- 10:0:1:0  sdc  8:32   active ready running
+  `- 16:0:2:0  sdcf 69:48  active ready running
+----
+--
+====
+
+
+
+
+== Étape 4 : si vous le souhaitez, excluez un périphérique du multipathing
+
+Si nécessaire, vous pouvez exclure un périphérique du multipathing en ajoutant le WWID du périphérique indésirable à la strophe « blacklist » du `multipath.conf` fichier.
+
+.Étapes
+. Déterminez le WWID :
++
+[source, cli]
+----
+# /lib/udev/scsi_id -gud /dev/sda
+----
++
+"sda" est le disque SCSI local que vous souhaitez ajouter à la liste noire.
+
++
+Un exemple de WWID est `360030057024d0730239134810c0cb833`.
+
+. Ajoutez le WWID à la strophe « blacklist » :
++
+[listing]
+----
+blacklist {
+	     wwid   360030057024d0730239134810c0cb833
+        devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
+        devnode "^hd[a-z]"
+        devnode "^cciss.*"
+}
+----
+
+
+
+
+== Étape 5 : personnalisez les paramètres des chemins d'accès multiples pour les LUN ONTAP
+
+Si votre hôte est connecté à des LUN d'autres fournisseurs et que l'un des paramètres de chemins d'accès multiples est remplacé, vous devez les corriger en ajoutant la strophe plus loin dans `multipath.conf` le fichier qui s'applique spécifiquement aux LUN ONTAP. Si vous ne le faites pas, les LUN ONTAP risquent de ne pas fonctionner comme prévu.
+
+Vérifiez votre `/etc/multipath.conf` fichier, en particulier dans la section valeurs par défaut, pour les paramètres qui peuvent remplacer <<multipath-parameter-settings,paramètres par défaut pour les paramètres multivoies>>.
+
+
+CAUTION: Vous ne devez pas remplacer les paramètres recommandés pour les LUN ONTAP. Ces paramètres sont requis pour optimiser les performances de votre configuration hôte. Pour plus d'informations, contactez le support NetApp, le fournisseur de votre système d'exploitation ou les deux.
+
+L'exemple suivant montre comment corriger une valeur par défaut remplacée. Dans cet exemple, le `multipath.conf` fichier définit des valeurs pour `path_checker` et `no_path_retry` qui ne sont pas compatibles avec les LUN ONTAP, et vous ne pouvez pas supprimer ces paramètres car les baies de stockage ONTAP sont toujours connectées à l'hôte. Vous corrigez plutôt les valeurs de `path_checker` et `no_path_retry` en ajoutant une strophe de périphérique au `multipath.conf` fichier qui s'applique spécifiquement aux LUN ONTAP.
+
+[listing, subs="+quotes"]
+----
 defaults {
-   path_checker      readsector0
-   no_path_retry      fail
+   path_checker      *readsector0*
+   no_path_retry     *fail*
 }
 
 devices {
    device {
-      vendor         "NETAPP  "
-      product         "LUN.*"
-      no_path_retry     queue
-      path_checker      tur
+      vendor          "NETAPP"
+      product         "LUN"
+      no_path_retry   *queue*
+      path_checker    *tur*
    }
 }
 ----
 
 
-== Configurer les paramètres KVM
+== Étape 6 : passez en revue les problèmes connus
 
-Il n'est pas nécessaire de configurer les paramètres d'une machine virtuelle basée sur kernel, car la LUN est mappée sur l'hyperviseur.
+Il n'y a pas de problème connu.
 
 
 
-== Mise en miroir ASM
+== Et la suite ?
 
+* link:hu_luhu_71_cmd.html["Découvrez comment utiliser l'outil Linux Host Utilities"].
+* En savoir plus sur la mise en miroir ASM.
++
 La mise en miroir de gestion automatique du stockage (ASM) peut nécessiter des modifications des paramètres de chemins d'accès multiples Linux pour permettre à ASM de reconnaître un problème et de basculer vers un autre groupe de pannes. La plupart des configurations ASM sur ONTAP utilisent une redondance externe, ce qui signifie que la protection des données est assurée par la baie externe et qu'ASM ne met pas en miroir les données. Certains sites utilisent ASM avec redondance normale pour fournir une mise en miroir bidirectionnelle, généralement entre différents sites. Voir link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/oracle-overview.html["Bases de données Oracle sur ONTAP"^] pour plus d'informations.
 
 
-
-== Problèmes connus
-
-Il n'existe aucun problème connu pour la version RHEL 9.0 avec ONTAP.
