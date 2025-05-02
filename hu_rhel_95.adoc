@@ -55,7 +55,7 @@ NOTE: L'installation des utilitaires d'hôtes Linux ne modifie aucun paramètre 
 
 
 
-== Étape 2 : confirmez la configuration des chemins d'accès multiples pour votre hôte
+== Étape 3 : confirmez la configuration des chemins d'accès multiples pour votre hôte
 
 Vous pouvez utiliser les chemins d'accès multiples avec RHEL 9.5 pour gérer les LUN ONTAP.
 
