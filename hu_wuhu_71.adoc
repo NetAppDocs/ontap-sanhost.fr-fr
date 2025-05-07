@@ -60,7 +60,7 @@ Les utilitaires hôtes prennent en charge différentes configurations d'hôtes W
 
 == Vérifiez les configurations de votre hôte et de votre système de stockage
 
-Avant d'installer les utilitaires hôtes, vérifiez que la version des utilitaires hôtes prend en charge la configuration de l'hôte et du système de stockage afin que le logiciel s'installe correctement.
+Vérifiez que la configuration de l'hôte et du système de stockage est prise en charge avant d'installer Windows Host Utilities pour le <<supported-windows-versions-71,Version de Windows prise en charge>>.
 
 .Étapes
 . Vérifiez la configuration prise en charge dans le http://mysupport.netapp.com/matrix["Matrice d'interopérabilité"^].
