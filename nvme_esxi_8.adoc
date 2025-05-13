@@ -271,28 +271,25 @@ tcp.vmnic2:34:80:0d:30:ca:e0-tcp.192.168.100.167:4420-uuid.f4f14337c3ad4a639edf0
 
 
 
-== Activez l'allocation d'espace
+== Désallocation NVMe
 
-L'allocation d'espace est prise en charge pour ESXi 8.x et les versions ultérieures.
+La commande NVMe Deallocate est prise en charge pour ESXi 8.0u2 et versions ultérieures avec ONTAP 9.16.1 et versions ultérieures.
 
-Lorsque l'allocation d'espace est activée, si un espace de nom manque d'espace, ONTAP communique à l'hôte qu'aucun espace libre n'est disponible pour les opérations d'écriture ; l'espace de nom reste en ligne et les opérations de lecture continuent d'être traitées. Les opérations d'écriture reprennent lorsque de l'espace libre supplémentaire est disponible. L'allocation d'espace permet également à l'hôte d'effectuer `UNMAP` des opérations (parfois appelées `TRIM`). Les opérations UNMAP permettent à un hôte d'identifier les blocs de données qui ne sont plus nécessaires, car ils ne contiennent plus de données valides. Le système de stockage peut ensuite désallouer ces blocs de données afin que l'espace puisse être consommé ailleurs.
-
-.Avant de commencer
-link:https://docs.netapp.com/us-en/ontap/san-admin/enable-space-allocation.html["Activez l'allocation d'espace sur votre système de stockage ONTAP"^]. Vous devez ensuite effectuer les étapes suivantes sur votre hôte ESXi.
+La prise en charge de désallocation est toujours activée pour les espaces de noms NVMe. La désallocation permet également au système d'exploitation invité d'effectuer des opérations « UNMAP » (parfois appelées « TRIM ») sur des datastores VMFS. Les opérations de désallocation permettent à un hôte d'identifier les blocs de données qui ne sont plus nécessaires parce qu'ils ne contiennent plus de données valides. Le système de stockage peut ensuite supprimer ces blocs de données afin que l'espace puisse être consommé par ailleurs.
 
 .Étapes
-. Sur votre hôte ESXi, vérifiez que le DSM est désactivé :
+. Sur votre hôte ESXi, vérifiez le paramètre de désallocation DSM avec la prise en charge TP4040 :
 +
 `esxcfg-advcfg -g /SCSi/NVmeUseDsmTp4040`
 
 +
 La valeur attendue est 0.
 
-. Activez le DSM NVMe :
+. Activez le paramètre de désallocation DSM avec la prise en charge TP4040 :
 +
 `esxcfg-advcfg -s 1 /Scsi/NvmeUseDsmTp4040`
 
-. Vérifiez que le DSM est activé :
+. Vérifiez que le paramètre de désallocation DSM avec prise en charge TP4040 est activé :
 +
 `esxcfg-advcfg -g /SCSi/NVmeUseDsmTp4040`
 
@@ -300,6 +297,8 @@ La valeur attendue est 0.
 La valeur attendue est 1.
 
 
+
+Pour plus d'informations sur le désallocation NVMe dans VMware vSphere, reportez-vous à la section https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/8-0/vsphere-storage-8-0/storage-provisioning-and-space-reclamation-in-vsphere/storage-space-reclamation-in-vsphere.html["Récupération d'espace de stockage dans vSphere"^]
 
 
 
