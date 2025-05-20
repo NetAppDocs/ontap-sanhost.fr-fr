@@ -1,6 +1,6 @@
 ---
 indexpage:
-  title: Hôtes SAN et clients cloud ONTAP
+  title: Utilitaires d'hôte SAN ONTAP
   summary: Ce contenu fournit des conseils propres à chaque distribution sur la façon
     de configurer des clients SAN connectés au stockage ONTAP.
   keywords: ontap, san, host, rhel, red, hat, linux, sles, suse, esxi, nvme, oracle,
