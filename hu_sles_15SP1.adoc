@@ -19,6 +19,9 @@ summary: Installez les utilitaires hôtes Linux sur un serveur SUSE Linux Enterp
 Le logiciel Linux Host Utilities fournit des outils de gestion et de diagnostic pour les hôtes Linux connectés au stockage ONTAP. Lorsque vous installez les utilitaires hôtes Linux sur un hôte SUSE Linux Enterprise Server 15 SP1, vous pouvez utiliser les utilitaires hôtes pour vous aider à gérer les opérations de protocole FCP et iSCSI avec les LUN ONTAP.
 
 
+NOTE: Vous n’avez pas besoin de configurer manuellement les paramètres de la machine virtuelle basée sur le noyau (KVM) car les LUN ONTAP sont automatiquement mappés à l’hyperviseur.
+
+
 
 == Étape 1 : activez éventuellement le démarrage SAN
 
