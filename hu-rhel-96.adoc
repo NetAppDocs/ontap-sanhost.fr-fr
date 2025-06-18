@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: hu_sles_12SP5.html 
-keywords: host utilities, suse linux enterprise server 12 SP5, suse, linux, 12 SP5, netapp, ontap 
-summary: Installez les utilitaires hôtes Linux sur un serveur SUSE Linux Enterprise Server 12 SP5 pour gérer les opérations de protocole FCP et iSCSI avec des LUN ONTAP. 
+permalink: hu-rhel-96.html 
+keywords: host utilities, red hat, rhel, linux, 9.6, netapp, ontap, rhel 
+summary: 'Installez les utilitaires d"hôtes Linux sur un hôte RHEL 9.6 pour gérer les opérations de protocole FCP et iSCSI avec des LUN ONTAP.' 
 ---
-= Configurez SUSE Linux Enterprise Server 12 SP5 pour FCP et iSCSI avec stockage ONTAP
+= Configurez RHEL 9.6 pour FCP et iSCSI avec stockage ONTAP
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,7 +16,7 @@ summary: Installez les utilitaires hôtes Linux sur un serveur SUSE Linux Enterp
 
 
 [role="lead"]
-Le logiciel Linux Host Utilities fournit des outils de gestion et de diagnostic pour les hôtes Linux connectés au stockage ONTAP. Lorsque vous installez les utilitaires d'hôtes Linux sur un hôte SUSE Linux Enterprise Server 12 SP5, vous pouvez utiliser les utilitaires d'hôtes pour vous aider à gérer les opérations de protocole FCP et iSCSI avec les LUN ONTAP.
+Le logiciel Linux Host Utilities fournit des outils de gestion et de diagnostic pour les hôtes Linux connectés au stockage ONTAP. Lorsque vous installez les utilitaires d'hôtes Linux sur un hôte Red Hat Enterprise Linux (RHEL) 9.6, vous pouvez utiliser les utilitaires d'hôtes pour vous aider à gérer les opérations de protocole FCP et iSCSI avec les LUN ONTAP.
 
 
 NOTE: Vous n’avez pas besoin de configurer manuellement les paramètres de la machine virtuelle basée sur le noyau (KVM) car les LUN ONTAP sont automatiquement mappés à l’hyperviseur.
@@ -57,20 +57,12 @@ NOTE: L'installation des utilitaires d'hôtes Linux ne modifie aucun paramètre 
 
 == Étape 3 : confirmez la configuration des chemins d'accès multiples pour votre hôte
 
-Vous pouvez utiliser les chemins d'accès multiples avec SUSE Linux Enterprise Server 12 SP5 pour gérer les LUN ONTAP.
+Vous pouvez utiliser les chemins d'accès multiples avec RHEL 9.6 pour gérer les LUN ONTAP.
 
 Pour vous assurer que les chemins d'accès multiples sont correctement configurés pour votre hôte, vérifiez que le `/etc/multipath.conf` fichier est défini et que vous disposez des paramètres recommandés par NetApp pour vos LUN ONTAP.
 
 .Étapes
-. Vérifiez que le `/etc/multipath.conf` fichier existe :
-+
-[source, cli]
-----
-ls /etc/multipath.conf
-----
-+
-Si le fichier n'existe pas, créez un fichier vide à zéro octet :
-
+. Vérifiez que le `/etc/multipath.conf` fichier se ferme. Si le fichier n'existe pas, créez un fichier vide à zéro octet :
 +
 [source, cli]
 ----
@@ -87,9 +79,9 @@ systemctl enable multipathd
 ----
 systemctl start multipathd
 ----
-. Chaque fois que vous démarrez l'hôte, le fichier vide `/etc/multipath.conf` à zéro octet charge automatiquement les paramètres de chemins d'accès multiples recommandés par NetApp comme paramètres par défaut. Vous ne devriez pas avoir besoin d'apporter de modifications au `/etc/multipath.conf` fichier de votre hôte car le système d'exploitation hôte est compilé avec les paramètres multivoies qui reconnaissent et gèrent correctement les LUN ONTAP.
+. Chaque fois que vous démarrez l'hôte, le fichier vide `/etc/multipath.conf` à zéro octet charge automatiquement les paramètres de chemins d'accès multiples recommandés par NetApp comme paramètres par défaut. Vous ne devriez pas avoir besoin d'apporter de modifications au `/etc/multipath.conf` fichier de votre hôte car le système d'exploitation est compilé avec les paramètres multivoies qui reconnaissent et gèrent correctement les LUN ONTAP.
 +
-Le tableau suivant présente les paramètres de chemins d'accès multiples compilés par le système d'exploitation Linux natif pour les LUN ONTAP.
+Le tableau suivant présente les paramètres de chemins d'accès multiples compilés natifs du système d'exploitation Linux pour les LUN ONTAP.
 
 +
 .Affiche les paramètres
@@ -139,7 +131,7 @@ Le tableau suivant présente les paramètres de chemins d'accès multiples compi
 | prio | « ONTAP » 
 
 
-| solution netapp | LUN.* 
+| solution netapp | LUN 
 
 
 | conservez_attaed_hw_handler | oui 
@@ -175,14 +167,14 @@ Une configuration ASA optimise tous les chemins vers une LUN donnée en les gard
 
 [listing]
 ----
-# multipath -ll
-3600a09803831347657244e527766394e dm-5 NETAPP,LUN C-Mode
-size=80G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+multipath -ll
+3600a098038314c4a433f577471797958 dm-2 NETAPP,LUN C-Mode
+size=180G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
 `-+- policy='service-time 0' prio=50 status=active
-  |- 3:0:7:9    sdco 69:192  active ready running
-  |- 3:0:8:9    sddi 71:0    active ready running
-  |- 14:0:8:9   sdjq 65:320  active ready running
-  `- 14:0:7:9   sdiw 8:256   active ready running
+  |- 14:0:0:0  sdc  8:32   active ready running
+  |- 17:0:0:0  sdas 66:192 active ready running
+  |- 14:0:3:0  sdar 66:176 active ready running
+  `- 17:0:3:0  sdch 69:80  active ready running
 ----
 --
 .Configuration AFF ou FAS
@@ -193,15 +185,15 @@ L'exemple suivant présente la sortie d'une LUN ONTAP avec deux chemins Active/O
 
 [listing]
 ----
-# multipath -ll
-3600a09803831347657244e527766394e dm-5 NETAPP,LUN C-Mode
-size=80G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+multipath -ll
+3600a0980383149764b5d567257516273 dm-0 NETAPP,LUN C-Mode
+size=150G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
 |-+- policy='service-time 0' prio=50 status=active
-| |- 3:0:3:0    sdd  8:48    active ready running
-| |- 3:0:4:0    sdx  65:112  active ready running
+| |- 16:0:3:0  sdcg 69:64  active ready running
+| `- 10:0:0:0  sdb  8:16   active ready running
 `-+- policy='service-time 0' prio=10 status=enabled
-  |- 14:0:2:0   sdfk 130:96  active ready running
-  `- 14:0:5:0   sdgz 132:240 active ready running
+  |- 10:0:1:0  sdc  8:32   active ready running
+  `- 16:0:2:0  sdcf 69:48  active ready running
 ----
 --
 ====
@@ -262,7 +254,7 @@ defaults {
 devices {
    device {
       vendor          "NETAPP"
-      product         "LUN.*"
+      product         "LUN"
       no_path_retry   *queue*
       path_checker    *tur*
    }
@@ -272,15 +264,8 @@ devices {
 
 == Étape 6 : passez en revue les problèmes connus
 
-La version SUSE Linux Enterprise Server 12 SP5 avec stockage ONTAP présente les problèmes connus suivants :
+Il n'y a pas de problème connu.
 
-[cols="3*"]
-|===
-| ID de bug NetApp | Titre | Description 
-
-
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1284293["1284293"^] | L'interruption du noyau a lieu sur SLES12 SP5 avec l'adaptateur HBA FC 8 Go QLogic QLE2562 lors des opérations de basculement du stockage | Une perturbation du noyau se produit pendant les opérations de basculement du stockage sur le noyau SLES12 SP5 avec un adaptateur de bus hôte (HBA) Fibre Channel QLE2562 QLogic. La perturbation du noyau entraîne le redémarrage de SLES12 SP5, entraînant une interruption des applications. Si le mécanisme kdump est activé, l'interruption du noyau génère un fichier vmcore situé dans le répertoire /var/crash/. Vérifiez le fichier vmcore pour déterminer la cause de l'interruption. Un basculement de stockage avec un événement HBA QLE2562 de QLogic affecte le module « THREAD_INFO: Ffff8aedf723c2c0 ». Recherchez cet événement dans le fichier vmcore en recherchant la chaîne suivante : « [THREAD_INFO: Ffff8aedf723c2c0] ». Après une interruption du noyau, redémarrez l'OS hôte afin qu'il puisse restaurer. Redémarrez ensuite les applications. 
-|===
 
 
 == Et la suite ?

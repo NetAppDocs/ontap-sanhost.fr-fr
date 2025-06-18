@@ -218,7 +218,7 @@ Si nécessaire, vous pouvez exclure un périphérique du multipathing en ajoutan
 +
 [source, cli]
 ----
-# /lib/udev/scsi_id -gud /dev/sda
+/lib/udev/scsi_id -gud /dev/sda
 ----
 +
 "sda" est le disque SCSI local que vous souhaitez ajouter à la liste noire.

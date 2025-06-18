@@ -3771,4 +3771,22 @@ Pour plus d'informations et pour connaître les modifications recommandées par 
   <block id="b4da3417a3bbac7760c5f326458d9927" category="sidebar">RHEL 10</block>
   <block id="63da114c28add40c319de84e3a92a8ed" category="sidebar">RHEL-10-FCP</block>
   <block id="43a1437f7f656cd8be7c996c58719e0a" category="sidebar">10,0</block>
+  <block id="282e82c820d3f500a969ebb9a9054584" category="summary">Installez les utilitaires d'hôtes Linux sur un hôte RHEL 9.6 pour gérer les opérations de protocole FCP et iSCSI avec des LUN ONTAP.</block>
+  <block id="f4e7617d1cef5f8ab23add41d40625fb" category="doc">Configurez RHEL 9.6 pour FCP et iSCSI avec stockage ONTAP</block>
+  <block id="5cecbf0e006813819e7ea0d92ccca8df" category="paragraph">Le logiciel Linux Host Utilities fournit des outils de gestion et de diagnostic pour les hôtes Linux connectés au stockage ONTAP. Lorsque vous installez les utilitaires d'hôtes Linux sur un hôte Red Hat Enterprise Linux (RHEL) 9.6, vous pouvez utiliser les utilitaires d'hôtes pour vous aider à gérer les opérations de protocole FCP et iSCSI avec les LUN ONTAP.</block>
+  <block id="c655b9821bde0a911428a133bb7ef67f" category="paragraph">Vous pouvez utiliser les chemins d'accès multiples avec RHEL 9.6 pour gérer les LUN ONTAP.</block>
+  <block id="6cbcd68038ece1dbafa173add2c90697" category="summary">Comment configurer l'hôte NVMe-of pour RHEL 9.6 avec ONTAP</block>
+  <block id="3dff0e4b77025c9e0739e3b02b3ff268" category="doc">Configuration hôte NVMe-of pour RHEL 9.6 avec ONTAP</block>
+  <block id="fdee72360607bede29fc52844f306e62" category="paragraph">Vous pouvez utiliser les fonctionnalités et le support suivants avec la configuration hôte NVMe-of pour Red Hat Enterprise Linux (RHEL) 9.6. Vous devez également vérifier les limites connues avant de commencer le processus de configuration.</block>
+  <block id="770bddea589c1a8e5b2541551754b4e4" category="list-text">RHEL 9.6 permet par défaut la création de chemins d'accès multiples NVMe au sein du noyau pour les espaces de noms NVMe, ce qui évite d'avoir recours à des paramètres explicites.</block>
+  <block id="e118d7e4742cf0454d407a22991c4f23" category="list-text">À partir d'ONTAP 9.12.1, l'authentification intrabande sécurisée est prise en charge pour NVMe/TCP. Vous pouvez utiliser l'authentification intrabande sécurisée pour NVMe/TCP avec RHEL 9,6.</block>
+  <block id="027d24fe581a1889d6b5752e3886e380" category="list-text">Aucune nouvelle fonctionnalité n'est disponible.</block>
+  <block id="3b6f23fb41215bfbde13af4b92268902" category="paragraph">Utilisez la procédure suivante pour valider les versions minimales du logiciel RHEL 9,6 prises en charge.</block>
+  <block id="61e91ca529ce5516397f8af4ff223ab0" category="list-text">Installez RHEL 9.6 sur le serveur. Une fois l'installation terminée, vérifiez que vous exécutez le noyau RHEL 9.6 spécifié :</block>
+  <block id="deeefe26777fb24a155fd5e2eac9f23b" category="paragraph">L'exemple suivant montre une version de package nvme-cli :</block>
+  <block id="a33245ebb2f380b62ab218a312110f3a" category="list-text">Sur l'hôte RHEL 9.6, vérifiez la chaîne hostnqn à l'adresse<block ref="7c33f184451a7567af5a5fb5f2bc7ae1" prefix=" " category="inline-code"></block>:</block>
+  <block id="844df812cde8ebcaf9f2cc35022248c6" category="paragraph">Avec RHEL 9.6, le <block ref="0578ea8f8272d56d0053a8f2cddaf7f4" prefix=" " category="inline-code"></block> et <block ref="fbbb90e94554669f250473b3b15ddd4e" prefix=" " category="inline-code"></block> services de démarrage inclus dans NVMe/FC <block ref="e1667929105bf030b9f367fc21f8d216" prefix=" " category="inline-code"></block> Les packages sont automatiquement activés pour démarrer au démarrage du système. Une fois le démarrage terminé, vérifiez que les services de démarrage sont activés.</block>
+  <block id="103bbc9741f09ef806d7d9f1ff8e4957" category="paragraph">À partir d'ONTAP 9.12.1, l'authentification sécurisée en bande est prise en charge via NVMe/TCP entre un hôte RHEL 9,6 et un contrôleur ONTAP.</block>
+  <block id="c76dae5432bc09fa983706505086692e" category="list-text">Générez la clé dhchap pour l'hôte RHEL 9.6.</block>
+  <block id="eaf2f97729e8d5e4d205672da8afc9a5" category="sidebar">9,6</block>
 </blocks>
