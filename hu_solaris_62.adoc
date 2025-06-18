@@ -108,7 +108,7 @@ drwxr-xr-x   3 root     sys            4 Jul 22  2019 ..
 
 
 
-== Kit D'outils SAN
+== Activer la boîte à outils SAN
 
 Solaris Host Utilities est un logiciel hôte NetApp qui fournit un kit d'outils de ligne de commande sur votre hôte Oracle Solaris. Le kit d'outils est installé lorsque vous installez le pack NetApp Host Utilities. Ce kit contient le `sanlun` Utilitaire qui vous aide à gérer les LUN et les adaptateurs de bus hôte (HBA). Le `sanlun` La commande renvoie les informations relatives aux LUN mappées sur votre hôte, aux chemins d'accès multiples et aux informations nécessaires à la création des groupes initiateurs.
 

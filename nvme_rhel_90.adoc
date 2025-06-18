@@ -36,6 +36,27 @@ Le démarrage SAN à l'aide du protocole NVMe-of n'est pas pris en charge pour l
 
 
 
+== Activez le démarrage SAN
+
+Vous pouvez configurer votre hôte pour qu'il utilise le démarrage SAN afin de simplifier le déploiement et d'améliorer l'évolutivité.
+
+.Avant de commencer
+Utilisez le link:https://mysupport.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^] pour vérifier que votre système d'exploitation Linux, votre adaptateur de bus hôte (HBA), le micrologiciel HBA, le BIOS de démarrage HBA et la version ONTAP prennent en charge le démarrage SAN.
+
+.Étapes
+. Créez un espace de noms de démarrage SAN et mappez-le à l'hôte.
++
+Voir https://docs.netapp.com/us-en/ontap/san-admin/create-nvme-namespace-subsystem-task.html["Provisionner le stockage NVMe"^].
+
+. Activez le démarrage SAN dans le BIOS du serveur pour les ports auxquels la LUN de démarrage SAN est mappée.
++
+Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la documentation spécifique au fournisseur.
+
+. Vérifiez que la configuration a réussi en redémarrant l'hôte et en vérifiant que le système d'exploitation est opérationnel.
+
+
+
+
 == Activez NVMe Multipath dans le noyau
 
 Vous pouvez utiliser la procédure suivante pour activer les chemins d'accès multiples NVMe in-kernel.
@@ -210,10 +231,13 @@ NOTE: Ces étapes ne s'appliquent pas aux hôtes NVMe/FC Qlogic.
 .Étapes
 . Réglez le `lpfc_sg_seg_cnt` paramètre sur 256 :
 +
-[listing]
+[source, cli]
 ----
 cat /etc/modprobe.d/lpfc.conf
 ----
++
+Vous devriez voir une sortie similaire à l’exemple suivant :
+
 +
 [listing]
 ----
@@ -222,7 +246,7 @@ options lpfc lpfc_sg_seg_cnt=256
 . Exécutez `dracut -f` la commande et redémarrez l'hôte.
 . Vérifier que la valeur de `lpfc_sg_seg_cnt` est 256 :
 +
-[listing]
+[source, cli]
 ----
 cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
 ----

@@ -3716,4 +3716,59 @@ Pour plus d'informations et pour connaître les modifications recommandées par 
   <block id="6f0abeb231f9492f647495d82e71a409" category="list-text"><block ref="784df77e179355f677ae4620639e145e" prefix="" category="inline-code"></block></block>
   <block id="cd3cfdbbdf68695695503ec99f60b54f" category="list-text"><block ref="f3d48156832e70ac41335c007fa76798" prefix="" category="inline-code"></block></block>
   <block id="c8ba574e6385bfff25580806e2cfd27d" category="paragraph"><block ref="2c3856aef23f7e774c0fec3948e0a8b5" prefix="" category="inline-code"></block></block>
+  <block id="44e9f27b29f987774dffc9a83910b3f1" category="paragraph">Vous devriez voir une sortie similaire à l’exemple suivant :</block>
+  <block id="104e6af592420ff3d441fd7ec7435c39" category="summary">Installez les utilitaires d'hôtes Linux sur un hôte RHEL 10 pour gérer les opérations de protocole FCP et iSCSI avec des LUN ONTAP.</block>
+  <block id="d7c1825e0f2407a4d10d399ac78c1f95" category="doc">Configurez RHEL 10 pour FCP et iSCSI avec stockage ONTAP</block>
+  <block id="d7b201e34bf72ed2024522784d92bd59" category="paragraph">Le logiciel Linux Host Utilities fournit des outils de gestion et de diagnostic pour les hôtes Linux connectés au stockage ONTAP. Lorsque vous installez les utilitaires d'hôtes Linux sur un hôte Red Hat Enterprise Linux (RHEL) 10, vous pouvez utiliser les utilitaires d'hôtes pour vous aider à gérer les opérations de protocole FCP et iSCSI avec les LUN ONTAP.</block>
+  <block id="0171e05f7a58a96089d554991286cd67" category="paragraph">Vous pouvez utiliser les chemins d'accès multiples avec RHEL 10 pour gérer les LUN ONTAP.</block>
+  <block id="236e1a6c16fc596f7520a28ad7a1db03" category="section-title">Activer la boîte à outils SAN</block>
+  <block id="429ffdde936d5759e07807c3b66f38d2" category="summary">Comment configurer l'hôte NVMe-of pour RHEL 10 avec ONTAP</block>
+  <block id="cd64186b2c2cedea7d5dfd05d86304c6" category="doc">Configuration hôte NVMe-of pour RHEL 10 avec ONTAP</block>
+  <block id="c0cd0678856b67d02b2dfc3c9646fac2" category="paragraph">Vous pouvez utiliser les fonctionnalités et le support suivants avec la configuration hôte NVMe-of pour Red Hat Enterprise Linux (RHEL) 10. Vous devez également vérifier les limites connues avant de commencer le processus de configuration.</block>
+  <block id="bf21bd2f7b624998085c3d69986dbe53" category="list-text">À partir d'ONTAP 9.12.1, l'authentification intrabande sécurisée est prise en charge pour NVMe/TCP. Vous pouvez utiliser l'authentification intrabande sécurisée pour NVMe/TCP avec RHEL 10.</block>
+  <block id="4baea929c29e972312029711f923ecc9" category="list-text">À partir de RHEL 10, le multipathing NVMe natif est toujours activé et la prise en charge du multipathing DM pour NVMe-oF n'est pas prise en charge.</block>
+  <block id="705049d3ff516ba95d2f556556788c5a" category="list-text">Évitez d'émettre le <block ref="de5ac85ea45047f4dbeea79d7b729b7d" prefix=" " category="inline-code"></block> commande sur les systèmes démarrant à partir du SAN sur les espaces de noms NVMe-TCP ou NVMe-FC, car elle déconnecte les systèmes de fichiers racine et de données et peut entraîner une instabilité du système.</block>
+  <block id="9ce1ac3eb326fa20a6e4cc846d38ef38" category="list-text">Créez un espace de noms de démarrage SAN et mappez-le à l'hôte.</block>
+  <block id="20cd59705d89627333024680d966bb16" category="inline-link">Provisionner le stockage NVMe</block>
+  <block id="2ae5f54ecc4375d7e4bc5d4417d72e85" category="paragraph">Voir<block ref="0cb485556fb9e40c82f55474b807ef26" category="inline-link-rx"></block>.</block>
+  <block id="80eb2a3788bc043e0e117027749a3b7a" category="list-text">Activez le démarrage SAN dans le BIOS du serveur pour les ports auxquels l'espace de noms de démarrage SAN est mappé.</block>
+  <block id="8796e28d4a4ab01704a45b84e10299f3" category="section-title">Étape 2 : Valider les versions du logiciel</block>
+  <block id="bfa758a2fd039564c81329a71d8a55b8" category="paragraph">Utilisez la procédure suivante pour valider les versions minimales du logiciel RHEL 10 prises en charge.</block>
+  <block id="8686219d94060c8bb51e3307818e48c4" category="list-text">Installez RHEL 10 sur le serveur. Une fois l'installation terminée, vérifiez que vous exécutez le noyau RHEL 10 spécifié :</block>
+  <block id="207b3f28e8aa21d614e81b31699e50bf" category="paragraph">L'exemple suivant montre une version du noyau RHEL :</block>
+  <block id="fb47e45e6131ce8573db817dc34e3ba6" category="paragraph">L'exemple suivant montre un <block ref="e1667929105bf030b9f367fc21f8d216" prefix=" " category="inline-code"></block> version du paquet :</block>
+  <block id="d14319cd9fe8bb3c15b66611ee50ab63" category="paragraph">L'exemple suivant montre un <block ref="d7deb22e6166f8cce87002f8f100fbe6" prefix=" " category="inline-code"></block> version du paquet :</block>
+  <block id="353615218a31d80048bde6c36a52f6d6" category="list-text">Sur l'hôte, vérifiez la chaîne hostnqn à <block ref="7c33f184451a7567af5a5fb5f2bc7ae1" prefix=" " category="inline-code"></block> :</block>
+  <block id="49254d029fbf5a05d560c49c65e3682d" category="paragraph">L'exemple suivant montre un <block ref="24039a6c469b55da1dae1ff1197f8079" prefix=" " category="inline-code"></block> version:</block>
+  <block id="b52c5d0392407a559b20b04250a22a2b" category="section-title">Étape 3 : Configurer NVMe/FC</block>
+  <block id="3c4d68a984cfab18b058f7614517f26b" category="list-text">Afficher les noms des modèles :</block>
+  <block id="61e9eafd114033b79115785b3c135abb" category="paragraph">Vous devriez voir le résultat suivant :</block>
+  <block id="d474b8d44546ee3743d50d33e3e43016" category="list-text">Afficher les descriptions des modèles :</block>
+  <block id="f5380639862d7f30daa3a708e324d0b8" category="list-text">Afficher la version du firmware :</block>
+  <block id="6d7cdce7ef63034f99b2d7060ae672bc" category="paragraph">L'exemple suivant montre les versions du firmware :</block>
+  <block id="2e7877df9f97bc43731073c516c35196" category="list-text">Afficher la version du pilote de la boîte de réception :</block>
+  <block id="5960cabb9dbe62e8e98f3d79f0a1c9e0" category="paragraph">L'exemple suivant montre une version de pilote :</block>
+  <block id="6b3d7041f640e56620316768e2c2bea9" category="paragraph">L'exemple suivant montre les identités de port :</block>
+  <block id="dfeb27de594c744f1f1bc3f70af7fe62" category="paragraph">L'exemple suivant montre les versions du pilote et du micrologiciel :</block>
+  <block id="c0dfb3da16b4c34ba6641ab9c5ced78a" category="section-title">Étape 4 : Activez éventuellement 1 Mo d'E/S</block>
+  <block id="bb209e859372a1cf79b17e0f3ce4b72d" category="section-title">Étape 5 : Vérifier les services de démarrage NVMe</block>
+  <block id="1e39429c019f1be4225017909bd3e504" category="paragraph">Avec RHEL 10, le <block ref="0578ea8f8272d56d0053a8f2cddaf7f4" prefix=" " category="inline-code"></block> et <block ref="fbbb90e94554669f250473b3b15ddd4e" prefix=" " category="inline-code"></block> services de démarrage inclus dans NVMe/FC <block ref="e1667929105bf030b9f367fc21f8d216" prefix=" " category="inline-code"></block> Les packages sont automatiquement activés au démarrage du système. Une fois le démarrage terminé, vérifiez que les services sont activés.</block>
+  <block id="3f6eafce29d3de48f970b9d611381841" category="section-title">Étape 6 : Configurer NVMe/TCP</block>
+  <block id="dda9e001bef1d21ede41e855ce95f071" category="section-title">Étape 7 : Valider NVMe-oF</block>
+  <block id="7ebd106b9b1cfecd3d6fb0451340153e" category="list-text">Afficher les sous-systèmes :</block>
+  <block id="924a2d9478a76ff931a7b33da760a8aa" category="list-text">Afficher la politique :</block>
+  <block id="33f7abd10cff2281a91b19ee32201623" category="section-title">Étape 8 : Configurer une authentification sécurisée en bande</block>
+  <block id="3f2aed41975c4d98d941e8a7b03bf8e5" category="paragraph">À partir d'ONTAP 9.12.1, l'authentification sécurisée en bande est prise en charge via NVMe/TCP entre un hôte RHEL 10 et un contrôleur ONTAP.</block>
+  <block id="ffc19e5b6958faf88524a792e1c1635d" category="paragraph">Chaque hôte ou contrôleur doit être associé à un <block ref="f4ec72363eeda8a3e6391c779684b2be" prefix=" " category="inline-code"></block> clé pour configurer l'authentification sécurisée. A <block ref="f4ec72363eeda8a3e6391c779684b2be" prefix=" " category="inline-code"></block> la clé est une combinaison du NQN de l'hôte ou du contrôleur NVMe et d'un secret d'authentification configuré par l'administrateur. Pour authentifier son homologue, un hôte ou un contrôleur NVMe doit reconnaître la clé associée à cet homologue.</block>
+  <block id="e50800c92fe482bd476da8e2b8778963" category="paragraph">Configurez une authentification intrabande sécurisée à l’aide de l’interface de ligne de commande ou d’un fichier de configuration JSON. Si vous devez spécifier différentes clés dhchap pour différents sous-systèmes, vous devez utiliser un fichier JSON de configuration.</block>
+  <block id="d1864d59ca252f6be1b9b7a1114e5ec4" category="list-text">Générez la clé dhchap pour l'hôte RHEL 10.</block>
+  <block id="0d99f1978c6ac8e224f5b9429539befa" category="paragraph">Utilisez le <block ref="b2ed43620b7fff2689035f1e99c24ded" prefix=" " category="inline-code"></block> option pour générer le fichier JSON. Pour plus d'options de syntaxe, reportez-vous aux pages de manuel de NVMe Connect-all.</block>
+  <block id="aeafecb6e5d6ff8d736488ca4255a495" category="list-text">Configurer le fichier JSON.</block>
+  <block id="abf3e38be1e135b4689023b375f16aed" category="admonition">Dans l'exemple suivant, <block ref="b4ccff4fcae86dd694df37690970d401" prefix=" " category="inline-code"></block> correspond à <block ref="b564e1f3e83c3835c800589da9434401" prefix=" " category="inline-code"></block> et <block ref="7c5692629f37b2fc3b73d10ecb68180e" prefix=" " category="inline-code"></block> correspond à <block ref="c74aa421e1eeec8a71897cfdbf55b4c4" prefix=" " category="inline-code"></block> .</block>
+  <block id="52fa57cb89715461d2004558d3bd3b78" category="list-text">Vérifiez que les secrets dhchap ont été activés pour les contrôleurs respectifs de chaque sous-système.</block>
+  <block id="9b5f1d99b3cc83e8839e8c1c7044f62f" category="paragraph">L'exemple suivant montre une clé dhchap :</block>
+  <block id="a8037bee31f3b32217fc0d5b84621e5e" category="section-title">Étape 9 : passez en revue les problèmes connus</block>
+  <block id="b4da3417a3bbac7760c5f326458d9927" category="sidebar">RHEL 10</block>
+  <block id="63da114c28add40c319de84e3a92a8ed" category="sidebar">RHEL-10-FCP</block>
+  <block id="43a1437f7f656cd8be7c996c58719e0a" category="sidebar">10,0</block>
 </blocks>
