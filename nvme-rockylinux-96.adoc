@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: nvme-rhel-96.html 
-keywords: nvme, linux, rhel, red hat, enterprise 
-summary: 'Comment configurer l"hôte NVMe-of pour RHEL 9.6 avec ONTAP' 
+permalink: nvme-rockylinux-96.html 
+keywords: nvme, rocky, red hat, enterprise 
+summary: 'Comment configurer l"hôte NVMe-oF pour Rocky Linux 9.6 avec ONTAP' 
 ---
-= Configurer RHEL 9.6 pour NVMe-oF avec stockage ONTAP
+= Configurer Rocky Linux 9.6 pour NVMe-oF avec stockage ONTAP
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -19,14 +19,14 @@ summary: 'Comment configurer l"hôte NVMe-of pour RHEL 9.6 avec ONTAP'
 Les configurations hôte SAN de NetApp prennent en charge le protocole NVMe over Fabrics (NVMe-of) avec ANA (Asymmetric Namespace Access). Dans les environnements NVMe-of, ANA équivaut à des chemins d'accès multiples ALUA (Asymmetric Logical Unit Access) dans les environnements iSCSI et FCP. ANA est implémentée à l'aide de la fonctionnalité de chemins d'accès multiples NVMe intégrée au noyau.
 
 .Description de la tâche
-Vous pouvez utiliser les fonctionnalités et le support suivants avec la configuration hôte NVMe-of pour Red Hat Enterprise Linux (RHEL) 9.6. Vous devez également vérifier les limites connues avant de commencer le processus de configuration.
+Vous pouvez utiliser le support et les fonctionnalités suivants avec la configuration d’hôte NVMe-oF pour Rocky Linux 9.6. Vous devez également vérifier les limites connues avant de commencer le processus de configuration.
 
 * Support disponible :
 +
 ** Prise en charge de NVMe over TCP (NVMe/TCP) et de NVMe over Fibre Channel (NVMe/FC). Le plug-in NetApp du pack natif `nvme-cli` affiche les détails des ONTAP pour les namespaces NVMe/FC et NVMe/TCP.
 ** Exécution du trafic NVMe et SCSI sur le même hôte Par exemple, vous pouvez configurer dm-multipath pour les périphériques SCSI mpath pour les LUN SCSI, et utiliser le protocole NVMe multipath pour configurer les périphériques d'espace de noms NVMe-of sur l'hôte.
-** RHEL 9.6 permet par défaut la création de chemins d'accès multiples NVMe au sein du noyau pour les espaces de noms NVMe, ce qui évite d'avoir recours à des paramètres explicites.
-** À partir d'ONTAP 9.12.1, l'authentification intrabande sécurisée est prise en charge pour NVMe/TCP. Vous pouvez utiliser l'authentification intrabande sécurisée pour NVMe/TCP avec RHEL 9,6.
+** Rocky Linux 9.6 active le multipath NVMe dans le noyau pour les espaces de noms NVMe par défaut, supprimant ainsi le besoin de paramètres explicites.
+** À partir d'ONTAP 9.12.1, l'authentification intrabande sécurisée est prise en charge pour NVMe/TCP. Vous pouvez utiliser l’authentification sécurisée en bande pour NVMe/TCP avec Rocky Linux 9.6.
 +
 Pour plus de détails sur les configurations prises en charge, consultez le link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^].
 
@@ -66,10 +66,10 @@ Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la docum
 
 == Étape 2 : Valider les versions du logiciel
 
-Utilisez la procédure suivante pour valider les versions minimales du logiciel RHEL 9,6 prises en charge.
+Utilisez la procédure suivante pour valider les versions minimales du logiciel Rocky Linux 9.6 prises en charge.
 
 .Étapes
-. Installez RHEL 9.6 sur le serveur. Une fois l'installation terminée, vérifiez que vous exécutez le noyau RHEL 9.6 spécifié :
+. Installez Rocky Linux 9.6 sur le serveur. Une fois l'installation terminée, vérifiez que vous utilisez le noyau Rocky Linux 9.6 spécifié :
 +
 [source, cli]
 ----
@@ -111,7 +111,7 @@ L'exemple suivant montre un  `libnvme` version du paquet :
 ----
 libnvme-1.11.1-1.el9.x86_64
 ----
-. Sur l'hôte RHEL, vérifiez la chaîne hostnqn à  `/etc/nvme/hostnqn` :
+. Sur l'hôte Rocky Linux, vérifiez la chaîne hostnqn à  `/etc/nvme/hostnqn` :
 +
 [source, cli]
 ----
@@ -416,7 +416,7 @@ cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
 
 == Étape 5 : Vérifier les services de démarrage NVMe
 
-Avec RHEL 9,6, le  `nvmefc-boot-connections.service` et  `nvmf-autoconnect.service` services de démarrage inclus dans NVMe/FC  `nvme-cli` Les packages sont automatiquement activés au démarrage du système. Une fois le démarrage terminé, vérifiez que les services sont activés.
+Avec Rocky Linux 9.6, le  `nvmefc-boot-connections.service` et  `nvmf-autoconnect.service` services de démarrage inclus dans NVMe/FC  `nvme-cli` les packages sont automatiquement activés au démarrage du système. Une fois le démarrage terminé, vérifiez que les services sont activés.
 
 .Étapes
 . Vérifiez que `nvmf-autoconnect.service` est activé :
@@ -469,12 +469,12 @@ Jun 10 01:08:36 localhost systemd[1]: Finished Auto-connect to subsystems on FC-
 
 == Étape 6 : Configurer NVMe/TCP
 
-Le protocole NVMe/TCP ne prend pas en charge la connexion automatique. Vous pouvez découvrir les sous-systèmes et espaces de noms NVMe/TCP en effectuant manuellement les opérations de connexion ou de connexion globale NVMe/TCP.
+Le protocole NVMe/TCP ne prend pas en charge `auto-connect` l'opération. Vous pouvez à la place détecter les sous-systèmes et les espaces de noms NVMe/TCP en exécutant manuellement les opérations NVMe/TCP `connect` ou `connect-all`.
 
 .Étapes
 . Vérifiez que le port initiateur peut récupérer les données de la page de journal de découverte sur les LIF NVMe/TCP prises en charge :
 +
-[listing]
+[source, cli]
 ----
 nvme discover -t tcp -w host-traddr -a traddr
 ----
@@ -538,7 +538,7 @@ subtype: *nvme subsystem*
 treq:    not specified
 portid:  4
 trsvcid: 4420
-subnqn:  nqn.1992-08.com.netapp:sn.0f4ba1e74eb611ef9f50d039eab6cb6d:subsystem.nvme_tcp_1
+subnqn:  nqn.1992-08.com.netapp:sn.0f4ba1e74eb611ef9f50d039eab6cb6d:subsystem. Unidirectional_DHCP_NONE_1_3
 traddr:  192.168.2.25
 eflags:  none
 sectype: none
@@ -549,7 +549,7 @@ subtype: *nvme subsystem*
 treq:    not specified
 portid:  2
 trsvcid: 4420
-subnqn:  nqn.1992-08.com.netapp:sn.0f4ba1e74eb611ef9f50d039eab6cb6d:subsystem.nvme_tcp_1
+subnqn:  nqn.1992-08.com.netapp:sn.0f4ba1e74eb611ef9f50d039eab6cb6d:subsystem. Unidirectional_DHCP_NONE_1_4
 traddr:  192.168.1.25
 eflags:  none
 sectype: none
@@ -560,7 +560,7 @@ subtype: *nvme subsystem*
 treq:    not specified
 portid:  5
 trsvcid: 4420
-subnqn:  nqn.1992-08.com.netapp:sn.0f4ba1e74eb611ef9f50d039eab6cb6d:subsystem.nvme_tcp_1
+subnqn:  nqn.1992-08.com.netapp:sn.0f4ba1e74eb611ef9f50d039eab6cb6d:subsystem. Unidirectional_DHCP_NONE_1_5
 traddr:  192.168.2.24
 eflags:  none
 sectype: none
@@ -571,7 +571,7 @@ subtype: *nvme subsystem*
 treq:    not specified
 portid:  1
 trsvcid: 4420
-subnqn:  nqn.1992-08.com.netapp:sn.0f4ba1e74eb611ef9f50d039eab6cb6d:subsystem.nvme_tcp_1
+subnqn:  nqn.1992-08.com.netapp:sn.0f4ba1e74eb611ef9f50d039eab6cb6d:subsystem. Unidirectional_DHCP_2_2
 traddr:  192.168.1.24
 eflags:  none
 sectype: none
@@ -582,7 +582,7 @@ subtype: *nvme subsystem*
 treq:    not specified
 portid:  4
 trsvcid: 4420
-subnqn:  nqn.1992-08.com.netapp:sn.0f4ba1e74eb611ef9f50d039eab6cb6d:subsystem.nvme_tcp_4
+subnqn:  nqn.1992-08.com.netapp:sn.0f4ba1e74eb611ef9f50d039eab6cb6d:subsystem. Unidirectional_DHCP_2_3
 traddr:  192.168.2.25
 eflags:  none
 sectype: none
@@ -593,7 +593,7 @@ subtype: *nvme subsystem*
 treq:    not specified
 portid:  2
 trsvcid: 4420
-subnqn:  nqn.1992-08.com.netapp:sn.0f4ba1e74eb611ef9f50d039eab6cb6d:subsystem.nvme_tcp_4
+subnqn:  nqn.1992-08.com.netapp:sn.0f4ba1e74eb611ef9f50d039eab6cb6d:subsystem. Unidirectional_DHCP_2_5
 traddr:  192.168.1.25
 eflags:  none
 sectype: none
@@ -604,7 +604,7 @@ subtype: *nvme subsystem*
 treq:    not specified
 portid:  5
 trsvcid: 4420
-subnqn:  nqn.1992-08.com.netapp:sn.0f4ba1e74eb611ef9f50d039eab6cb6d:subsystem.nvme_tcp_4
+subnqn:  nqn.1992-08.com.netapp:sn.0f4ba1e74eb611ef9f50d039eab6cb6d:subsystem. Bidirectional_DHCP_2_2
 traddr:  192.168.2.24
 eflags:  none
 sectype: none
@@ -615,7 +615,7 @@ subtype: *nvme subsystem*
 treq:    not specified
 portid:  1
 trsvcid: 4420
-subnqn:  nqn.1992-08.com.netapp:sn.0f4ba1e74eb611ef9f50d039eab6cb6d:subsystem.nvme_tcp_4
+subnqn:  nqn.1992-08.com.netapp:sn.0f4ba1e74eb611ef9f50d039eab6cb6d:subsystem. Bidirectional_DHCP_2_3
 traddr:  192.168.1.24
 eflags:  none
 sectype: none
@@ -626,7 +626,7 @@ subtype: *nvme subsystem*
 treq:    not specified
 portid:  4
 trsvcid: 4420
-subnqn:  nqn.1992-08.com.netapp:sn.0f4ba1e74eb611ef9f50d039eab6cb6d:subsystem.nvme_tcp_3
+subnqn:  nqn.1992-08.com.netapp:sn.0f4ba1e74eb611ef9f50d039eab6cb6d:subsystem. Bidirectional_DHCP_2_3
 traddr:  192.168.2.25
 eflags:  none
 sectype: none
@@ -637,7 +637,7 @@ subtype: *nvme subsystem*
 treq:    not specified
 portid:  2
 trsvcid: 4420
-subnqn:  nqn.1992-08.com.netapp:sn.0f4ba1e74eb611ef9f50d039eab6cb6d:subsystem.nvme_tcp_3
+subnqn:  nqn.1992-08.com.netapp:sn.0f4ba1e74eb611ef9f50d039eab6cb6d:subsystem. Bidirectional_DHCP_NONE_2_4
 traddr:  192.168.1.25
 eflags:  none
 sectype: none
@@ -648,7 +648,7 @@ subtype: *nvme subsystem*
 treq:    not specified
 portid:  5
 trsvcid: 4420
-subnqn:  nqn.1992-08.com.netapp:sn.0f4ba1e74eb611ef9f50d039eab6cb6d:subsystem.nvme_tcp_3
+subnqn:  nqn.1992-08.com.netapp:sn.0f4ba1e74eb611ef9f50d039eab6cb6d:subsystem. Bidirectional_DHCP_NONE_2_5
 traddr:  192.168.2.24
 eflags:  none
 sectype: none
@@ -659,7 +659,7 @@ subtype: *nvme subsystem*
 treq:    not specified
 portid:  1
 trsvcid: 4420
-subnqn:  nqn.1992-08.com.netapp:sn.0f4ba1e74eb611ef9f50d039eab6cb6d:subsystem.nvme_tcp_3
+subnqn:  nqn.1992-08.com.netapp:sn.0f4ba1e74eb611ef9f50d039eab6cb6d:subsystem. Bidirectional_DHCP_NONE_2_6
 traddr:  192.168.1.24
 eflags:  none
 sectype: none
@@ -670,7 +670,7 @@ subtype: *nvme subsystem*
 treq:    not specified
 portid:  4
 trsvcid: 4420
-subnqn:  nqn.1992-08.com.netapp:sn.0f4ba1e74eb611ef9f50d039eab6cb6d:subsystem.nvme_tcp_2
+subnqn:  nqn.1992-08.com.netapp:sn.0f4ba1e74eb611ef9f50d039eab6cb6d:subsystem. Bidirectional_DHCP_NONE_2_7
 traddr:  192.168.2.25
 eflags:  none
 sectype: none
@@ -681,7 +681,7 @@ subtype: *nvme subsystem*
 treq:    not specified
 portid:  2
 trsvcid: 4420
-subnqn:  nqn.1992-08.com.netapp:sn.0f4ba1e74eb611ef9f50d039eab6cb6d:subsystem.nvme_tcp_2
+subnqn:  nqn.1992-08.com.netapp:sn.0f4ba1e74eb611ef9f50d039eab6cb6d:subsystem. Bidirectional_DHCP_NONE_2_8
 traddr:  192.168.1.25
 eflags:  none
 sectype: none
@@ -703,15 +703,15 @@ subtype: *nvme subsystem*
 treq:    not specified
 portid:  1
 trsvcid: 4420
-subnqn:  nqn.1992-08.com.netapp:sn.0f4ba1e74eb611ef9f50d039eab6cb6d:subsystem.nvme_tcp_2
+subnqn:  nqn.1992-08.com.netapp:sn.0f4ba1e74eb611ef9f50d039eab6cb6d:subsystem. Bidirectional_DHCP_NONE_2_9
 traddr:  192.168.1.24
 eflags:  none
 sectype: none
 ----
 ====
-. Vérifier que les autres combinaisons de LIF cible-initiateur NVMe/TCP peuvent récupérer correctement les données de la page de journal de découverte :
+. Vérifier que les autres combinaisons de LIF cible-initiateur NVMe/TCP peuvent récupérer les données de la page du journal de détection :
 +
-[listing]
+[source, cli]
 ----
 nvme discover -t tcp -w host-traddr -a traddr
 ----
@@ -729,7 +729,7 @@ nvme discover -t tcp -w 192.168.2.31 -a 192.168.2.25
 ====
 . Exécutez le `nvme connect-all` Commande sur toutes les LIF cible-initiateur NVMe/TCP prises en charge sur l'ensemble des nœuds :
 +
-[listing]
+[source, cli]
 ----
 nvme connect-all -t tcp -w host-traddr -a traddr
 ----
@@ -746,6 +746,9 @@ nvme	connect-all	-t	tcp	-w	192.168.2.31	-a	192.168.2.25
 ----
 ====
 
+
+
+NOTE: À partir de Rocky Linux 9.5, le paramètre par défaut pour NVMe/TCP  `ctrl_loss_tmo` le délai d'attente est désactivé. Cela signifie qu'il n'y a pas de limite au nombre de tentatives (tentatives indéterminées). Par conséquent, vous n'avez pas besoin de configurer manuellement une durée de temporisation spécifique `ctrl_loss_tmo` lorsque vous utilisez les `nvme connect` commandes ou `nvme connect-all` (option -l ). Avec ce comportement par défaut, les contrôleurs NVMe/TCP ne connaissent pas de délais d'expiration en cas de défaillance de chemin et restent connectés indéfiniment.
 
 
 
@@ -937,7 +940,7 @@ nvme netapp ontapdevices -o json
 
 == Étape 8 : Configurer une authentification sécurisée en bande
 
-À partir d'ONTAP 9.12.1, l'authentification sécurisée en bande est prise en charge via NVMe/TCP entre un hôte RHEL 9,6 et un contrôleur ONTAP.
+À partir d'ONTAP 9.12.1, l'authentification sécurisée en bande est prise en charge via NVMe/TCP entre un hôte Rocky Linux 9.6 et un contrôleur ONTAP.
 
 Chaque hôte ou contrôleur doit être associé à un  `DH-HMAC-CHAP` clé pour configurer l'authentification sécurisée. A  `DH-HMAC-CHAP` la clé est une combinaison du NQN de l'hôte ou du contrôleur NVMe et d'un secret d'authentification configuré par l'administrateur. Pour authentifier son homologue, un hôte ou un contrôleur NVMe doit reconnaître la clé associée à cet homologue.
 
@@ -956,7 +959,7 @@ Configurez l'authentification intrabande sécurisée à l'aide de l'interface de
 ----
 cat /etc/nvme/hostnqn
 ----
-. Générez la clé dhchap pour l'hôte RHEL 9.6.
+. Générez la clé dhchap pour l'hôte Rocky Linux 9.6.
 +
 Le résultat suivant décrit les `gen-dhchap-key` paramètres de commande :
 

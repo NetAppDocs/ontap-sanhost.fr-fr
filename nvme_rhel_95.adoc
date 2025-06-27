@@ -4,7 +4,7 @@ permalink: nvme_rhel_95.html
 keywords: nvme, linux, rhel, red hat, enterprise 
 summary: 'Comment configurer l"hôte NVMe-of pour RHEL 9.5 avec ONTAP' 
 ---
-= Configuration hôte NVMe-of pour RHEL 9.5 avec ONTAP
+= Configurer RHEL 9.5 pour NVMe-oF avec stockage ONTAP
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -34,7 +34,6 @@ Pour plus de détails sur les configurations prises en charge, consultez le link
 +
 ** À partir de la version ONTAP 9.12.1, la prise en charge de l'authentification intrabande sécurisée est introduite avec la spécification NVMe-of. Vous pouvez utiliser l'authentification intrabande sécurisée pour NVMe-of avec RHEL 9.5.
 ** RHEL 9.5 permet par défaut la création de chemins d'accès multiples NVMe au sein du noyau pour les espaces de noms NVMe, ce qui évite d'avoir recours à des paramètres explicites.
-** Prise en charge du démarrage SAN à l'aide du protocole NVMe/FC.
 
 
 * Limitations connues :
@@ -54,10 +53,7 @@ Vous pouvez configurer votre hôte pour qu'il utilise le démarrage SAN afin de 
 Utilisez le link:https://mysupport.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^] pour vérifier que votre système d'exploitation Linux, votre adaptateur de bus hôte (HBA), le micrologiciel HBA, le BIOS de démarrage HBA et la version ONTAP prennent en charge le démarrage SAN.
 
 .Étapes
-. Créez un espace de noms de démarrage SAN et mappez-le à l'hôte.
-+
-Voir https://docs.netapp.com/us-en/ontap/san-admin/create-nvme-namespace-subsystem-task.html["Provisionner le stockage NVMe"^].
-
+. https://docs.netapp.com/us-en/ontap/san-admin/create-nvme-namespace-subsystem-task.html["Créez un espace de noms de démarrage SAN et mappez-le à l'hôte"^].
 . Activez le démarrage SAN dans le BIOS du serveur pour les ports auxquels la LUN de démarrage SAN est mappée.
 +
 Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la documentation spécifique au fournisseur.

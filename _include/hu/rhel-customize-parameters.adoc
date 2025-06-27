@@ -6,9 +6,9 @@
 
 == Étape 5 : personnalisez les paramètres des chemins d'accès multiples pour les LUN ONTAP
 
-Vous devez vérifier votre `/etc/multipath.conf` fichier, en particulier dans la section valeurs par défaut, pour les paramètres qui peuvent remplacer <<multipath-parameter-settings,paramètres par défaut pour les paramètres multivoies>>.
+Si votre hôte est connecté à des LUN d'autres fournisseurs et que l'un des paramètres de chemins d'accès multiples est remplacé, vous devez les corriger en ajoutant la strophe plus loin dans `multipath.conf` le fichier qui s'applique spécifiquement aux LUN ONTAP. Si vous ne le faites pas, les LUN ONTAP risquent de ne pas fonctionner comme prévu.
 
-Par exemple, si votre hôte est connecté à des LUN d'autres fournisseurs et que l'un des paramètres de chemins d'accès multiples est remplacé, vous devez les corriger en ajoutant la strophe plus loin dans `multipath.conf` le fichier qui s'applique spécifiquement aux LUN ONTAP. Si vous ne le faites pas, les LUN ONTAP risquent de ne pas fonctionner comme prévu.
+Vérifiez votre `/etc/multipath.conf` fichier, en particulier dans la section valeurs par défaut, pour les paramètres qui peuvent remplacer <<multipath-parameter-settings,paramètres par défaut pour les paramètres multivoies>>.
 
 
 CAUTION: Vous ne devez pas remplacer les paramètres recommandés pour les LUN ONTAP. Ces paramètres sont requis pour optimiser les performances de votre configuration hôte. Pour plus d'informations, contactez le support NetApp, le fournisseur de votre système d'exploitation ou les deux.

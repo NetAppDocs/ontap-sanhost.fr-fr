@@ -13,7 +13,7 @@ indexpage:
   tiles:
   - title: Commencez
     links:
-    - title: Présentation du produit
+    - title: En savoir plus sur les configurations d'hôte SAN
       url: "/overview.html"
     - title: Notes de version des utilitaires hôtes AIX
       url: "/hu_aix_rn.html"
