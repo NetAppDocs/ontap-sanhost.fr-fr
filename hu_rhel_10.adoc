@@ -31,10 +31,7 @@ Vous pouvez configurer votre hôte pour qu'il utilise le démarrage SAN afin de 
 Utilisez le link:https://mysupport.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^] pour vérifier que votre système d'exploitation Linux, votre adaptateur de bus hôte (HBA), le micrologiciel HBA, le BIOS de démarrage HBA et la version ONTAP prennent en charge le démarrage SAN.
 
 .Étapes
-. Créez une LUN de démarrage SAN et mappez-la sur l'hôte.
-+
-Voir https://docs.netapp.com/us-en/ontap/san-admin/provision-storage.html["Provisionnez le stockage SAN"^].
-
+. link:https://docs.netapp.com/us-en/ontap/san-admin/provision-storage.html["Créez un LUN de démarrage SAN et mappez-le à l'hôte"^].
 . Activez le démarrage SAN dans le BIOS du serveur pour les ports auxquels la LUN de démarrage SAN est mappée.
 +
 Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la documentation spécifique au fournisseur.
@@ -220,7 +217,7 @@ Un exemple de WWID est `360030057024d0730239134810c0cb833`.
 
 . Ajoutez le WWID à la strophe « blacklist » :
 +
-[listing]
+[source, cli]
 ----
 blacklist {
 	     wwid   360030057024d0730239134810c0cb833
