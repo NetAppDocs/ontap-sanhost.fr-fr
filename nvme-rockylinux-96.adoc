@@ -167,6 +167,8 @@ Vous pouvez configurer NVMe/FC avec les adaptateurs FC Broadcom/Emulex ou Marvel
 ====
 .Broadcom/Emulex
 --
+Configuration de NVMe/FC pour une carte Broadcom/Emulex
+
 .Étapes
 . Vérifiez que vous utilisez le modèle d'adaptateur pris en charge :
 +
@@ -881,8 +883,7 @@ src_addr=192.168.1.31 *live non-optimized*
 --
 ====
 . Vérifier que le plug-in NetApp affiche les valeurs correctes pour chaque périphérique d'espace de noms ONTAP :
-
-
++
 [role="tabbed-block"]
 ====
 .Colonne
@@ -936,6 +937,8 @@ nvme netapp ontapdevices -o json
 =====
 --
 ====
+
+
 
 
 == Étape 8 : Configurer une authentification sécurisée en bande
