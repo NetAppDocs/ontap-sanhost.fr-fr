@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: hu_rhel_90.html 
 keywords: host utilities, red hat, rhel, linux, 9.0, netapp, ontap 
-summary: 'Installez les utilitaires d"hôtes Linux sur un hôte RHEL 9.0 pour gérer les opérations de protocole FCP et iSCSI avec des LUN ONTAP.' 
+summary: Installez Linux Host Utilities sur un hôte RHEL 9.0 pour gérer les opérations de protocole FCP et iSCSI avec les LUN ONTAP. 
 ---
 = Configurez RHEL 9.0 pour FCP et iSCSI avec stockage ONTAP
 :hardbreaks:
@@ -162,6 +162,9 @@ Les résultats des exemples suivants montrent les paramètres et l'état de chem
 --
 Une configuration ASA optimise tous les chemins vers une LUN donnée en les gardant actifs. Ce qui améliore les performances en assurant le service des opérations d'E/S sur tous les chemins en même temps.
 
+.Montrer l'exemple
+[%collapsible]
+=====
 [listing]
 ----
 multipath -ll
@@ -173,6 +176,7 @@ size=180G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp
   |- 14:0:3:0  sdar 66:176 active ready running
   `- 17:0:3:0  sdch 69:80  active ready running
 ----
+=====
 --
 .Configuration AFF ou FAS
 --
@@ -180,6 +184,9 @@ Une configuration AFF ou FAS doit comporter deux groupes de chemins ayant des pr
 
 L'exemple suivant présente la sortie d'une LUN ONTAP avec deux chemins Active/Optimized et deux chemins Active/non optimisés :
 
+.Montrer l'exemple
+[%collapsible]
+=====
 [listing]
 ----
 multipath -ll
@@ -192,6 +199,7 @@ size=150G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp
   |- 10:0:1:0  sdc  8:32   active ready running
   `- 16:0:2:0  sdcf 69:48  active ready running
 ----
+=====
 --
 ====
 
