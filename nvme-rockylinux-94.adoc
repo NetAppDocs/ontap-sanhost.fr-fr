@@ -663,6 +663,16 @@ nvme	connect-all	-t	tcp	-w	192.168.2.31	-a	192.168.2.25
 ====
 
 
+[NOTE]
+====
+À partir de Rocky Linux 9.4, le paramètre NVMe/TCP  `ctrl_loss_tmo timeout` est automatiquement réglé sur « off ». Par conséquent :
+
+* Il n'y a pas de limite au nombre de tentatives (nouvelle tentative indéfinie).
+* Vous n'avez pas besoin de configurer manuellement un élément spécifique  `ctrl_loss_tmo timeout` durée lors de l'utilisation du  `nvme connect` ou  `nvme connect-all` commandes (option -l ).
+* Les contrôleurs NVMe/TCP ne subissent pas de dépassement de délai en cas de défaillance d'un chemin et restent connectés indéfiniment.
+
+
+====
 
 
 == Étape 6 : Valider NVMe-oF

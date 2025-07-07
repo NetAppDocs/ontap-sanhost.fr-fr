@@ -27,19 +27,19 @@ Vous pouvez utiliser le support et les fonctionnalités suivants avec la configu
 ** Exécution du trafic NVMe et SCSI sur le même hôte Par exemple, vous pouvez configurer dm-multipath pour les périphériques SCSI mpath pour les LUN SCSI, et utiliser le protocole NVMe multipath pour configurer les périphériques d'espace de noms NVMe-of sur l'hôte.
 ** Rocky Linux 9.6 active le multipath NVMe dans le noyau pour les espaces de noms NVMe par défaut, supprimant ainsi le besoin de paramètres explicites.
 ** À partir d'ONTAP 9.12.1, l'authentification intrabande sécurisée est prise en charge pour NVMe/TCP. Vous pouvez utiliser l’authentification sécurisée en bande pour NVMe/TCP avec Rocky Linux 9.6.
+
+
 +
 Pour plus de détails sur les configurations prises en charge, consultez le link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^].
 
-
-
 * Fonctionnalités disponibles :
 +
-** Aucune nouvelle fonctionnalité n'est disponible.
+** Cette version ne contient aucune nouvelle fonctionnalité.
 
 
 * Limitations connues :
 +
-** Évitez d'émettre le  `nvme disconnect-all` commande sur les systèmes démarrant à partir du SAN sur les espaces de noms NVMe-TCP ou NVMe-FC, car elle déconnecte les systèmes de fichiers racine et de données et peut entraîner une instabilité du système.
+** Évitez d'émettre le  `nvme disconnect-all` commande sur les systèmes démarrant à partir du SAN sur les espaces de noms NVMe-TCP ou NVMe-FC car elle déconnecte les systèmes de fichiers racine et de données et peut entraîner une instabilité du système.
 
 
 
@@ -418,7 +418,9 @@ cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
 
 == Étape 5 : Vérifier les services de démarrage NVMe
 
-Avec Rocky Linux 9.6, le  `nvmefc-boot-connections.service` et  `nvmf-autoconnect.service` services de démarrage inclus dans NVMe/FC  `nvme-cli` les packages sont automatiquement activés au démarrage du système. Une fois le démarrage terminé, vérifiez que les services sont activés.
+Avec Rocky Linux 9.6, le  `nvmefc-boot-connections.service` et  `nvmf-autoconnect.service` services de démarrage inclus dans NVMe/FC  `nvme-cli` les packages sont automatiquement activés au démarrage du système.
+
+Une fois le démarrage terminé, vérifiez que le  `nvmefc-boot-connections.service` et  `nvmf-autoconnect.service` les services de démarrage sont activés.
 
 .Étapes
 . Vérifiez que `nvmf-autoconnect.service` est activé :
@@ -749,9 +751,16 @@ nvme	connect-all	-t	tcp	-w	192.168.2.31	-a	192.168.2.25
 ====
 
 
+[NOTE]
+====
+À partir de Rocky Linux 9.4, le paramètre NVMe/TCP  `ctrl_loss_tmo timeout` est automatiquement réglé sur « off ». Par conséquent :
 
-NOTE: À partir de Rocky Linux 9.5, le paramètre par défaut pour NVMe/TCP  `ctrl_loss_tmo` le délai d'attente est désactivé. Cela signifie qu'il n'y a pas de limite au nombre de tentatives (tentatives indéterminées). Par conséquent, vous n'avez pas besoin de configurer manuellement une durée de temporisation spécifique `ctrl_loss_tmo` lorsque vous utilisez les `nvme connect` commandes ou `nvme connect-all` (option -l ). Avec ce comportement par défaut, les contrôleurs NVMe/TCP ne connaissent pas de délais d'expiration en cas de défaillance de chemin et restent connectés indéfiniment.
+* Il n'y a pas de limite au nombre de tentatives (nouvelle tentative indéfinie).
+* Vous n'avez pas besoin de configurer manuellement un élément spécifique  `ctrl_loss_tmo timeout` durée lors de l'utilisation du  `nvme connect` ou  `nvme connect-all` commandes (option -l ).
+* Les contrôleurs NVMe/TCP ne subissent pas de dépassement de délai en cas de défaillance d'un chemin et restent connectés indéfiniment.
 
+
+====
 
 
 == Étape 7 : Valider NVMe-oF

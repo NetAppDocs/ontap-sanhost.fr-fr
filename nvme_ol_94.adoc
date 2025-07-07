@@ -32,7 +32,7 @@ Pour plus de détails sur les configurations prises en charge, consultez le link
 
 * Fonctionnalités disponibles :
 +
-** À partir de la version ONTAP 9.12.1, la prise en charge de l'authentification intrabande sécurisée est introduite avec la spécification NVMe-of. Vous pouvez utiliser l'authentification intrabande sécurisée pour NVMe-of avec Oracle Linux 9.4
+** À partir d'ONTAP 9.12.1, l'authentification intrabande sécurisée est prise en charge pour NVMe/TCP. Vous pouvez utiliser l'authentification sécurisée en bande pour NVMe/TCP avec Oracle Linux 9.4
 ** La prise en charge des chemins d'accès multiples NVMe in-kernel activés par défaut pour les espaces de noms NVMe n'est donc pas nécessaire de définir des paramètres explicites.
 
 
@@ -397,9 +397,16 @@ nvme connect-all -t tcp -w 192.168.166.4 -a 192.168.166.56
 nvme connect-all -t tcp -w 192.168.165.3 -a 192.168.165.56
 ----
 +
+[NOTE]
+====
+À partir d'Oracle Linux 9.4, le paramètre NVMe/TCP  `ctrl_loss_tmo timeout` est automatiquement réglé sur « off ». Par conséquent :
 
-NOTE: À partir d'Oracle Linux 9.4, le paramètre par défaut de NVMe/TCP `ctrl_loss_tmo timeout` est désactivé et le nombre de tentatives (tentatives indéterminées) n'est pas limité. Il n'est pas nécessaire de configurer manuellement une durée spécifique `ctrl_loss_tmo timeout` lorsque vous utilisez les `nvme connect` commandes ou `nvme connect-all` (option -l ). Avec ce comportement par défaut, les contrôleurs NVMe/TCP ne connaissent pas de délais d'expiration en cas de défaillance de chemin et restent connectés indéfiniment.
+** Il n'y a pas de limite au nombre de tentatives (nouvelle tentative indéfinie).
+** Vous n'avez pas besoin de configurer manuellement un élément spécifique  `ctrl_loss_tmo timeout` durée lors de l'utilisation du  `nvme connect` ou  `nvme connect-all` commandes (option -l ).
+** Les contrôleurs NVMe/TCP ne subissent pas de dépassement de délai en cas de défaillance d'un chemin et restent connectés indéfiniment.
 
+
+====
 
 
 
@@ -594,7 +601,7 @@ nvme netapp ontapdevices -o json
 
 == Configurez l'authentification intrabande sécurisée
 
-Depuis la version ONTAP 9.12.1, l'authentification intrabande sécurisée est prise en charge sur NVMe/TCP et NVMe/FC entre un hôte Oracle Linux 9.4 et un contrôleur ONTAP.
+À partir d'ONTAP 9.12.1, l'authentification sécurisée en bande est prise en charge via NVMe/TCP entre un hôte Oracle Linux 9.4 et un contrôleur ONTAP.
 
 Pour configurer l'authentification sécurisée, chaque hôte ou contrôleur doit être associé à un `DH-HMAC-CHAP` Clé, qui combine le NQN de l'hôte ou du contrôleur NVMe et un code d'authentification configuré par l'administrateur. Pour authentifier son homologue, un hôte ou un contrôleur NVMe doit reconnaître la clé associée à cet homologue.
 

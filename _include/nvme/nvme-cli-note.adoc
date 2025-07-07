@@ -1,0 +1,6 @@
+= 
+:allow-uri-read: 
+
+
+
+NOTE: NetApp  `sanlun` L'utilitaire hôte n'est pas pris en charge par NVMe-oF. Vous pouvez utiliser le plug-in NetApp inclus dans la version native.  `nvme-cli` pour tous les transports NVMe-oF.
