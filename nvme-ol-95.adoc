@@ -24,9 +24,9 @@ La configuration hôte NVMe-of prend en charge et inclut plusieurs fonctionnalit
 * Support disponible :
 +
 ** Prise en charge de NVMe over TCP (NVMe/TCP) et de NVMe over Fibre Channel (NVMe/FC). Le plug-in NetApp du package nvme-cli natif affiche les détails des ONTAP pour les namespaces NVMe/FC et NVMe/TCP.
-** Exécution du trafic NVMe et SCSI sur le même hôte Par exemple, vous pouvez configurer dm-multipath pour les périphériques SCSI mpath pour les LUN SCSI, et utiliser le protocole NVMe multipath pour configurer les périphériques d'espace de noms NVMe-of sur l'hôte.
+** Exécution du trafic NVMe et SCSI sur le même hôte Par exemple, vous pouvez configurer dm-multipath sur des périphériques SCSI mpath pour les LUN SCSI et utiliser NVMe multipath pour configurer des périphériques d'espace de noms NVMe-oF sur l'hôte.
 ** Oracle Linux 9.5 active par défaut le multipath NVMe dans le noyau pour les espaces de noms NVMe, supprimant ainsi le besoin de paramètres explicites.
-** À partir d'ONTAP 9.12.1, l'authentification intrabande sécurisée est prise en charge pour NVMe/TCP. Vous pouvez utiliser l'authentification sécurisée en bande pour NVMe/TCP avec Oracle Linux 9.5
+** À partir d'ONTAP 9.12.1, l'authentification intrabande sécurisée est prise en charge pour NVMe/TCP. Vous pouvez utiliser l’authentification sécurisée en bande pour NVMe/TCP avec Oracle Linux 9.5.
 
 
 +
@@ -44,7 +44,7 @@ Pour plus de détails sur les configurations prises en charge, consultez le link
 
 * Limitations connues :
 +
-** Évitez d'émettre le  `nvme disconnect-all` commande sur les systèmes démarrant à partir du SAN sur les espaces de noms NVMe-TCP ou NVMe-FC, car elle déconnecte les systèmes de fichiers racine et de données et peut entraîner une instabilité du système.
+** Évitez d'émettre le  `nvme disconnect-all` commande sur les systèmes démarrant à partir du SAN sur les espaces de noms NVMe-TCP ou NVMe-FC car elle déconnecte les systèmes de fichiers racine et de données et peut entraîner une instabilité du système.
 
 
 

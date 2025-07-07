@@ -24,7 +24,7 @@ Vous pouvez utiliser le support et les fonctionnalités suivants avec la configu
 * Support disponible :
 +
 ** Prise en charge de NVMe over TCP (NVMe/TCP) et de NVMe over Fibre Channel (NVMe/FC). Le plug-in NetApp du pack natif `nvme-cli` affiche les détails des ONTAP pour les namespaces NVMe/FC et NVMe/TCP.
-** Exécution du trafic NVMe et SCSI sur le même hôte Par exemple, vous pouvez configurer dm-multipath pour les périphériques SCSI mpath pour les LUN SCSI, et utiliser le protocole NVMe multipath pour configurer les périphériques d'espace de noms NVMe-of sur l'hôte.
+** Exécution du trafic NVMe et SCSI sur le même hôte Par exemple, vous pouvez configurer dm-multipath pour les périphériques SCSI mpath sur les LUN SCSI et utiliser NVMe multipath pour configurer les périphériques d'espace de noms NVMe-oF sur l'hôte.
 ** À partir d'ONTAP 9.12.1, l'authentification intrabande sécurisée est prise en charge pour NVMe/TCP. Vous pouvez utiliser l’authentification sécurisée en bande pour NVMe/TCP avec Rocky Linux 10.
 
 
