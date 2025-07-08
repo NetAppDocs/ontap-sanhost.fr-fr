@@ -280,7 +280,7 @@ La prise en charge de désallocation est toujours activée pour les espaces de n
 .Étapes
 . Sur votre hôte ESXi, vérifiez le paramètre de désallocation DSM avec la prise en charge TP4040 :
 +
-`esxcfg-advcfg -g /SCSi/NVmeUseDsmTp4040`
+`esxcfg-advcfg -g /Scsi/NVmeUseDsmTp4040`
 
 +
 La valeur attendue est 0.
@@ -291,7 +291,7 @@ La valeur attendue est 0.
 
 . Vérifiez que le paramètre de désallocation DSM avec prise en charge TP4040 est activé :
 +
-`esxcfg-advcfg -g /SCSi/NVmeUseDsmTp4040`
+`esxcfg-advcfg -g /Scsi/NVmeUseDsmTp4040`
 
 +
 La valeur attendue est 1.
