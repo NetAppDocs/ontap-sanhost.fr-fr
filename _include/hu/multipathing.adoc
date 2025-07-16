@@ -82,7 +82,7 @@ Le tableau suivant présente les paramètres de chemins d'accès multiples compi
 | prio | « ONTAP » 
 
 
-| solution netapp | LUN.* 
+| solution netapp | LUN 
 
 
 | conservez_attaed_hw_handler | oui 

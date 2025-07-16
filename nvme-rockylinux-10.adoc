@@ -16,7 +16,7 @@ summary: 'Comment configurer l"hôte NVMe-oF pour Rocky Linux 10 avec stockage O
 
 
 [role="lead"]
-Les configurations hôte SAN de NetApp prennent en charge le protocole NVMe over Fabrics (NVMe-of) avec ANA (Asymmetric Namespace Access). Dans les environnements NVMe-of, ANA équivaut à des chemins d'accès multiples ALUA (Asymmetric Logical Unit Access) dans les environnements iSCSI et FCP. ANA est implémentée à l'aide de la fonctionnalité de chemins d'accès multiples NVMe intégrée au noyau.
+Directive non résolue dans <stdin> - include::_include/nvme/reuse-nvme-introduction.adoc[]
 
 .Description de la tâche
 Vous pouvez utiliser le support et les fonctionnalités suivants avec la configuration d’hôte NVMe-oF pour Rocky Linux 10. Vous devez également vérifier les limites connues avant de commencer le processus de configuration.
@@ -354,34 +354,7 @@ La sortie attendue est 1.
 
 == Étape 4 : Activez éventuellement 1 Mo d'E/S
 
-ONTAP signale une taille de transfert MAX Data (MDT) de 8 dans les données Identify Controller. La taille maximale des demandes d'E/S peut donc atteindre 1 Mo. Pour émettre des demandes d'E/S d'une taille de 1 Mo pour un hôte Broadcom NVMe/FC, augmentez la `lpfc` valeur du `lpfc_sg_seg_cnt` paramètre à 256 par rapport à la valeur par défaut 64.
-
-
-NOTE: Ces étapes ne s'appliquent pas aux hôtes NVMe/FC Qlogic.
-
-.Étapes
-. Réglez le `lpfc_sg_seg_cnt` paramètre sur 256 :
-+
-[source, cli]
-----
-cat /etc/modprobe.d/lpfc.conf
-----
-+
-Vous devriez voir une sortie similaire à l’exemple suivant :
-
-+
-[listing]
-----
-options lpfc lpfc_sg_seg_cnt=256
-----
-. Exécutez `dracut -f` la commande et redémarrez l'hôte.
-. Vérifier que la valeur de `lpfc_sg_seg_cnt` est 256 :
-+
-[source, cli]
-----
-cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
-----
-
+Directive non résolue dans <stdin> - include::_include/nvme/reuse_nvme_enabling_broadcom_1mb_size.adoc[]
 
 
 
@@ -442,7 +415,7 @@ Jun 10 01:08:36 localhost systemd[1]: Finished Auto-connect to subsystems on FC-
 
 == Étape 6 : Configurer NVMe/TCP
 
-Le protocole NVMe/TCP ne prend pas en charge `auto-connect` l'opération. Vous pouvez à la place détecter les sous-systèmes et les espaces de noms NVMe/TCP en exécutant manuellement les opérations NVMe/TCP `connect` ou `connect-all`.
+Directive non résolue dans <stdin> - include::_include/nvme/reuse-nvme-configure-nvme-tcp.adoc[]
 
 .Étapes
 . Vérifiez que le port initiateur peut récupérer les données de la page de journal de découverte sur les LIF NVMe/TCP prises en charge :
@@ -602,7 +575,7 @@ nvme	connect-all	-t	tcp	-w	192.168.21.1	-a	192.168.21.21
 
 == Étape 7 : Valider NVMe-oF
 
-Vérifiez que l'état des chemins d'accès multiples NVMe in-kernel, l'état ANA et les namespaces ONTAP sont corrects pour la configuration NVMe-of.
+Directive non résolue dans <stdin> - include::_include/nvme/reuse-nvme-validate-nvme-of.adoc[]
 
 .Étapes
 . Vérifiez que les paramètres NVMe-of appropriés (par exemple, modèle défini sur contrôleur NetApp ONTAP et iopole d'équilibrage de la charge sur round-Robin) pour les espaces de noms ONTAP respectifs reflètent correctement l'hôte :

@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: hu_sles_12SP3.html 
-keywords: host utilities, suse linux enterprise server 12 SP3, suse, linux, 12 SP3, netapp, ontap 
-summary: Installez Linux Host Utilities sur un SUSE Linux Enterprise Server 12 SP3 pour gérer les opérations de protocole FCP et iSCSI avec les LUN ONTAP. 
+permalink: hu_sles_15SP7.html 
+keywords: host utilities, suse linux enterprise server 15 sp7, suse, linux, 15 sp7, netapp, ontap, fcp, iscsi 
+summary: Installez les utilitaires hôtes Linux sur un serveur SUSE Linux Enterprise Server 15 SP7 pour gérer les opérations de protocole FCP et iSCSI avec des LUN ONTAP. 
 ---
-= Configurez SUSE Linux Enterprise Server 12 SP3 pour FCP et iSCSI avec stockage ONTAP
+= Configurez SUSE Linux Enterprise Server 15 SP7 pour FCP et iSCSI avec stockage ONTAP
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,7 +16,7 @@ summary: Installez Linux Host Utilities sur un SUSE Linux Enterprise Server 12 S
 
 
 [role="lead"]
-Le logiciel Linux Host Utilities fournit des outils de gestion et de diagnostic pour les hôtes Linux connectés au stockage ONTAP. Lorsque vous installez les utilitaires hôtes Linux sur un hôte SUSE Linux Enterprise Server 12 SP3, vous pouvez utiliser les utilitaires hôtes pour vous aider à gérer les opérations de protocole FCP et iSCSI avec les LUN ONTAP.
+Le logiciel Linux Host Utilities fournit des outils de gestion et de diagnostic pour les hôtes Linux connectés au stockage ONTAP. Lorsque vous installez les utilitaires d'hôtes Linux sur un hôte SUSE Linux Enterprise Server 15 SP7, vous pouvez utiliser les utilitaires d'hôtes pour vous aider à gérer les opérations de protocole FCP et iSCSI avec les LUN ONTAP.
 
 
 NOTE: Vous n’avez pas besoin de configurer manuellement les paramètres de la machine virtuelle basée sur le noyau (KVM) car les LUN ONTAP sont automatiquement mappés à l’hyperviseur.
@@ -54,7 +54,7 @@ NOTE: L'installation des utilitaires d'hôtes Linux ne modifie aucun paramètre 
 
 == Étape 3 : confirmez la configuration des chemins d'accès multiples pour votre hôte
 
-Vous pouvez utiliser les chemins d'accès multiples avec SUSE Linux Enterprise Server 12 SP3 pour gérer les LUN ONTAP.
+Vous pouvez utiliser les chemins d'accès multiples avec SUSE Linux Enterprise Server 15 SP7 pour gérer les LUN ONTAP.
 
 Pour vous assurer que les chemins d'accès multiples sont correctement configurés pour votre hôte, vérifiez que le `/etc/multipath.conf` fichier est défini et que vous disposez des paramètres recommandés par NetApp pour vos LUN ONTAP.
 
@@ -273,27 +273,8 @@ devices {
 
 == Étape 6 : passez en revue les problèmes connus
 
-La version SUSE Linux Enterprise Server 12 SP3 avec stockage ONTAP présente les problèmes connus suivants :
+Il n'y a pas de problème connu.
 
-[cols="3*"]
-|===
-| ID de bug NetApp | Titre | Description 
-
-
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1089555["1089555"^] | Perturbation du noyau observée sur la version du noyau SLES12 SP3 avec Emulex LPe16002 16 Go FC lors du basculement du stockage | Une interruption du noyau peut se produire lors des opérations de basculement du stockage sur la version du noyau SLES12 SP3 avec HBA Emulex LPe16002. L'interruption du noyau entraîne un redémarrage du système d'exploitation, qui entraîne à son tour une interruption des applications. Si le kdump est configuré, l'interruption du noyau génère un fichier vmcore sous /var/crash/Directory. Vous pouvez étudier la cause de l'échec dans le fichier vmcore. Exemple : dans le cas observé, la perturbation du noyau a été observée dans le module “lpfc_sli_ringtxcmpl_put+51” et est consigné dans le fichier vmcore – exception RIP : lpfc_sli_ringtxcmpl_put+51. Restaurez le système d'exploitation après l'interruption du noyau en redémarrant le système d'exploitation hôte et en redémarrant l'application. 
-
-
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1089561["1089561"^] | Perturbation du noyau observée sur la version du noyau SLES12 SP3 avec Emulex LPe32002 32 Go FC lors des opérations de basculement du stockage | Une interruption du noyau peut se produire lors des opérations de basculement du stockage sur la version du noyau SLES12 SP3 avec HBA Emulex LPe32002. L'interruption du noyau entraîne un redémarrage du système d'exploitation, qui entraîne à son tour une interruption des applications. Si le kdump est configuré, l'interruption du noyau génère un fichier vmcore sous /var/crash/Directory. Vous pouvez étudier la cause de l'échec dans le fichier vmcore. Exemple : dans le cas observé, la perturbation du noyau a été observée dans le module “lpfc_sli_free_hbq+76” et est consignée dans le fichier vmcore – exception RIP : lpfc_sli_free_hbq+76. Restaurez le système d'exploitation après l'interruption du noyau en redémarrant le système d'exploitation hôte et en redémarrant l'application. 
-
-
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1117248["1117248"^] | Perturbation du noyau observée sur SLES12SP3 avec QLogic QLE2562 8 Go FC lors des opérations de basculement du stockage | Lors des opérations de basculement de stockage sur le noyau Sles12sp3 (kernel-default-4.4.82-6.3.1) avec l'adaptateur HBA QLogic QLE2562, la perturbation du noyau a été observée en raison d'un incident dans le noyau. Le noyau de panique a entraîné le redémarrage du système d'exploitation, entraînant une interruption des applications. Le incident du noyau génère le fichier vmcore sous le répertoire /var/crash/ si kdump est configuré. En cas de problème du noyau, le fichier vmcore peut être utilisé pour comprendre la cause de la défaillance. Exemple : dans ce cas, la panique a été observée dans le module "blk_Finish_request+289". Il est connecté dans le fichier vmcore avec la chaîne suivante : « exception RIP: blk_Finish_request+289 » après l'interruption du noyau, vous pouvez restaurer le système d'exploitation en redémarrant le système d'exploitation hôte. Vous pouvez redémarrer l'application si nécessaire. 
-
-
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1117261["1117261"^] | Perturbation du noyau observée sur SLES12SP3 avec Qlogic QLE2662 16 Go FC lors des opérations de basculement du stockage | Lors des opérations de basculement de stockage sur le noyau Sles12sp3 (kernel-default-4.4.82-6.3.1) avec Qlogic QLE2662 HBA, vous pouvez observer les perturbations du noyau. Cette invite entraîne le redémarrage du système d'exploitation, qui entraîne une interruption des applications. L'interruption du noyau génère un fichier vmcore sous /var/crash/ Directory si kdump est configuré. Le fichier vmcore peut être utilisé pour comprendre la cause de la défaillance. Exemple : dans ce cas, l'interruption du noyau a été observée dans le module « adresse inconnue ou non valide » et est consignée dans le fichier vmcore avec la chaîne suivante - exception RIP : adresse inconnue ou non valide. Après une interruption du noyau, le système d'exploitation peut être restauré en redémarrant le système d'exploitation hôte et en redémarrant l'application selon les besoins. 
-
-
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1117274["1117274"^] | Perturbation du noyau observée sur SLES12SP3 avec Emulex LPe16002 16 Go FC lors des opérations de basculement du stockage | Lors des opérations de basculement de stockage sur noyau Sles12sp3 (kernel-default-4.4.87-3.1) avec HBA Emulex LPe16002, vous pouvez observer une interruption du noyau. Cette invite entraîne le redémarrage du système d'exploitation, qui entraîne une interruption des applications. L'interruption du noyau génère un fichier vmcore sous le répertoire /var/crash/ si kdump est configuré. Le fichier vmcore peut être utilisé pour comprendre la cause de la défaillance. Exemple : dans ce cas, une perturbation du noyau a été observée dans le module “RAW_spin_lock_irqsave+30” et est consignée dans le fichier vmcore avec la chaîne suivante : – exception RIP : _RAW_spin_lock_irqsave+30. Après une interruption du noyau, le système d'exploitation peut être restauré en redémarrant le système d'exploitation hôte et en redémarrant l'application selon les besoins. 
-|===
 
 
 == Et la suite ?
