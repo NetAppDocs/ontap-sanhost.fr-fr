@@ -16,7 +16,7 @@ summary: 'Configuration d"hôte NVMe-of pour Oracle Linux 9.5 avec ONTAP'
 
 
 [role="lead"]
-Directive non résolue dans <stdin> - include::_include/nvme/reuse-nvme-introduction.adoc[]
+Les configurations hôte SAN de NetApp prennent en charge le protocole NVMe over Fabrics (NVMe-of) avec ANA (Asymmetric Namespace Access). Dans les environnements NVMe-of, ANA équivaut à des chemins d'accès multiples ALUA (Asymmetric Logical Unit Access) dans les environnements iSCSI et FCP. ANA est implémentée à l'aide de la fonctionnalité de chemins d'accès multiples NVMe intégrée au noyau.
 
 .Description de la tâche
 La configuration hôte NVMe-of prend en charge et inclut plusieurs fonctionnalités pour Oracle Linux 9.5 avec stockage ONTAP.
@@ -359,7 +359,34 @@ La valeur  `1` vérifie que  `ql2xnvmeenable` est réglé.
 
 == Étape 4 : Activez éventuellement 1 Mo d'E/S pour NVMe/FC
 
-Directive non résolue dans <stdin> - include::_include/nvme/reuse_nvme_enabling_broadcom_1mb_size.adoc[]
+ONTAP signale une taille de transfert MAX Data (MDT) de 8 dans les données Identify Controller. La taille maximale des demandes d'E/S peut donc atteindre 1 Mo. Pour émettre des demandes d'E/S d'une taille de 1 Mo pour un hôte Broadcom NVMe/FC, augmentez la `lpfc` valeur du `lpfc_sg_seg_cnt` paramètre à 256 par rapport à la valeur par défaut 64.
+
+
+NOTE: Ces étapes ne s'appliquent pas aux hôtes NVMe/FC Qlogic.
+
+.Étapes
+. Réglez le `lpfc_sg_seg_cnt` paramètre sur 256 :
++
+[source, cli]
+----
+cat /etc/modprobe.d/lpfc.conf
+----
++
+Vous devriez voir une sortie similaire à l’exemple suivant :
+
++
+[listing]
+----
+options lpfc lpfc_sg_seg_cnt=256
+----
+. Exécutez `dracut -f` la commande et redémarrez l'hôte.
+. Vérifier que la valeur de `lpfc_sg_seg_cnt` est 256 :
++
+[source, cli]
+----
+cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
+----
+
 
 
 
@@ -429,7 +456,7 @@ Jul 02 16:45:46 interop-13-175 systemd[1]: Finished Auto-connect to subsystems o
 
 == Étape 6 : Configurer NVMe/TCP
 
-Directive non résolue dans <stdin> - include::_include/nvme/reuse-nvme-configure-nvme-tcp.adoc[]
+Le protocole NVMe/TCP ne prend pas en charge `auto-connect` l'opération. Vous pouvez à la place détecter les sous-systèmes et les espaces de noms NVMe/TCP en exécutant manuellement les opérations NVMe/TCP `connect` ou `connect-all`.
 
 .Étapes
 . Vérifiez que le port initiateur peut récupérer les données de la page de journal de découverte sur les LIF NVMe/TCP prises en charge :
@@ -588,20 +615,25 @@ nvme connect-all -t	tcp -w 192.168.166.4 -a 192.168.166.9
 
 == Étape 7 : Valider NVMe-oF
 
-Directive non résolue dans <stdin> - include::_include/nvme/reuse-nvme-validate-nvme-of.adoc[]
+Vérifiez que l'état des chemins d'accès multiples NVMe in-kernel, l'état ANA et les namespaces ONTAP sont corrects pour la configuration NVMe-of.
 
 .Étapes
-. Vérifiez les paramètres NVMe/FC suivants sur l'hôte Oracle Liniux 9.5 :
-+
-.. Vérifiez que « multipath » est défini :
+. Vérifiez que le chemin d'accès multiples NVMe intégré au noyau est activé :
 +
 [source, cli]
 ----
 cat /sys/module/nvme_core/parameters/multipath
 ----
 +
-La valeur  `Y` vérifie que le paramètre multipath est défini.
+Vous devriez voir le résultat suivant :
 
++
+[listing]
+----
+Y
+----
+. Vérifiez que les paramètres NVMe-of appropriés (par exemple, modèle défini sur contrôleur NetApp ONTAP et iopole d'équilibrage de la charge sur round-Robin) pour les espaces de noms ONTAP respectifs reflètent correctement l'hôte :
++
 .. Afficher les sous-systèmes :
 +
 [source, cli]
@@ -619,9 +651,9 @@ NetApp ONTAP Controller
 ----
 .. Afficher la politique :
 +
-[source'cli]
+[source, cli]
 ----
-cat /sys/class/nvme-subsystem/nvme-subsys*/iopolicy`
+cat /sys/class/nvme-subsystem/nvme-subsys*/iopolicy
 ----
 +
 Vous devriez voir le résultat suivant :
@@ -646,11 +678,9 @@ nvme list
 ====
 [listing]
 ----
-Node                  Generic               SN                   Model                                    Namespace  Usage                      Format           FW Rev
---------------------- --------------------- -------------------- ---------------------------------------- ---------- -------------------------- ---------------- --------
-/dev/nvme1n1          /dev/ng1n1            81Mc4FXd1tocAAAAAAAC NetApp ONTAP Controller                  0x1          0.00   B /  10.74  GB      4 KiB +  0 B   9.16.1
-
-
+Node          Generic       SN                   Model                     Namespace  Usage                   Format         FW Rev
+------------- ------------- -------------------- ------------------------- ---------- ----------------------- -------------- --------
+/dev/nvme1n1  /dev/ng1n1    81Mc4FXd1tocAAAAAAAC NetApp ONTAP Controller   0x1        0.00   B /  10.74  GB   4 KiB +  0 B   9.16.1
 ----
 ====
 . Vérifiez que l'état du contrôleur de chaque chemin est actif et que l'état ANA est correct :
