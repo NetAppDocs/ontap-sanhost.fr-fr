@@ -1,0 +1,12 @@
+= Étape 2 : installer les utilitaires de l'hôte AIX
+:allow-uri-read: 
+
+
+
+
+== Étape 2 : installer les utilitaires de l'hôte AIX
+
+NetApp recommande fortement d'installer les utilitaires hôtes AIX pour prendre en charge la gestion des LUN ONTAP et aider le support technique à collecter les données de configuration.  Le package MPIO des utilitaires hôtes fournit une prise en charge MPIO pour AIX et VIOS.
+
+
+NOTE: L'installation des utilitaires d'hôte AIX fournit des paramètres de délai d'expiration supplémentaires sur votre hôte AIX.

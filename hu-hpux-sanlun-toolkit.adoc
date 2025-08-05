@@ -1,0 +1,47 @@
+---
+sidebar: sidebar 
+permalink: hu-hpux-sanlun-toolkit.html 
+keywords: host utilities, unified, oracle, linux, 7.1, netapp, ontap 
+summary: Décrit comment utiliser les utilitaires hôtes HP-UX 6.0 avec le stockage ONTAP 
+---
+= En savoir plus sur la boîte à outils SAN pour le stockage ONTAP
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+HP-UX Host Utilities est un logiciel hôte NetApp qui fournit une boîte à outils de ligne de commande sur votre hôte HP-UX.  La boîte à outils est installée lorsque vous installez le package NetApp Host Utilities.  Ce kit fournit le `sanlun` utilitaire qui vous aide à gérer les LUN ONTAP et les adaptateurs de bus hôte.  Le `sanlun` La commande renvoie des informations sur les LUN mappés à votre hôte, le multivoie et les informations nécessaires à la création de groupes d'initiateurs.
+
+Dans l’exemple suivant, le `sanlun lun show` la commande renvoie les informations ONTAP LUN.
+
+[listing]
+----
+# sanlun lun show all
+
+controller(7mode)/ device host lun
+vserver(Cmode)           lun-pathname                   filename          adapter    protocol   size   mode
+------------------------------------------------------------------------------------------------------------
+sanboot_unix         /vol/hpux_boot/boot_hpux_lun      /dev/rdsk/c34t0d0  fclp1      FCP        150g    C
+sanboot_unix         /vol/hpux_boot/boot_hpux_lun      /dev/rdsk/c23t0d0  fclp1      FCP        150g    C
+sanboot_unix         /vol/hpux_boot/boot_hpux_lun      /dev/rdsk/c12t0d0  fclp0      FCP        150g    C
+sanboot_unix         /vol/hpux_boot/boot_hpux_lun      /dev/rdsk/c81t0d0  fclp0      FCP        150g    C
+
+----
+[NOTE]
+====
+Cette boîte à outils SAN est commune à toutes les configurations et protocoles Host Utilities.  Par conséquent, tous les composants ne s’appliquent pas à toutes les configurations.  Les composants inutilisés n’affectent pas les performances de votre système.
+
+SAN Toolkit est pris en charge sur les versions des systèmes d'exploitation AIX et PowerVM/VIOS.
+
+====
+
+
+== Et la suite ?
+
+link:hu_hpux_60_cmd.html["En savoir plus sur l'utilisation de l'outil Utilitaires hôte HP-UX"] .

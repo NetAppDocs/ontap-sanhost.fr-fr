@@ -1,0 +1,29 @@
+= Étape 2 : Configurer les HBA et les commutateurs FC
+:allow-uri-read: 
+
+
+. Démarrer le service cible.
+. Vérifiez votre câblage.
++
+Se référer à la https://docs.netapp.com/us-en/ontap/san-config/index.html["Référence de configuration SAN"^] pour des informations détaillées sur le câblage et la configuration.
+
+
+
+
+
+== Étape 2 : Configurer les HBA et les commutateurs FC
+
+Installez et configurez un ou plusieurs adaptateurs de bus hôte FC pris en charge pour les connexions FC au système de stockage.
+
+Le programme d'installation de Windows Host Utilities définit les paramètres de carte HBA FC requis.
+
+
+CAUTION: Vous devez uniquement autoriser le programme d’installation de Windows Host Utilities à définir les paramètres HBA.  Cela garantit que l'hôte Windows peut gérer correctement les comportements du système de stockage pour les plates-formes ONTAP .
+
+.Étapes
+. Installez une ou plusieurs cartes HBA FC prises en charge conformément aux instructions fournies par le fournisseur de cartes HBA.
+. Obtenez les pilotes HBA et les utilitaires de gestion pris en charge et installez-les conformément aux instructions fournies par le fournisseur de l'adaptateur HBA.
+. https://docs.netapp.com/us-en/ontap/san-management/index.html["Connectez les HBA à vos commutateurs FC ou directement au système de stockage"^] .
+. https://docs.netapp.com/us-en/ontap/san-config/fibre-channel-fcoe-zoning-concept.html["Créez des zones sur le commutateur FC conformément à la documentation de votre commutateur FC"^] .
+. Pour ONTAP, zonez le commutateur par le WWPN.  Assurez-vous d’utiliser le WWPN des interfaces logiques (LIF) et non le WWPN des ports physiques sur les contrôleurs de stockage. Se référer à la  https://docs.netapp.com/us-en/ontap/san-config/index.html["Référence de configuration SAN"^] pour plus d'informations.
+

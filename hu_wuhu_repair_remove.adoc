@@ -4,7 +4,7 @@ permalink: hu_wuhu_repair_remove.html
 keywords: windows, host, utilities, 7.1, hba, fibre, channel, SANtricity, netapp, san, host, e-series, platform 
 summary: 'Windows Host Utilities inclut un programme d"installation qui définit les paramètres de registre et de HBA Windows requis afin que l"hôte Windows gère correctement le comportement du système de stockage pour les plateformes ONTAP et E-Series.' 
 ---
-= Réparez et supprimez les utilitaires d'hôtes Windows
+= Réparer et supprimer les utilitaires hôtes Windows pour le stockage ONTAP
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -19,7 +19,7 @@ summary: 'Windows Host Utilities inclut un programme d"installation qui définit
 
 
 [role="lead"]
-Vous pouvez utiliser l'option *Repair* du programme d'installation des utilitaires hôtes pour mettre à jour les paramètres de la carte de bus hôte (HBA) et du registre Windows. Vous pouvez également supprimer entièrement les utilitaires hôtes, de manière interactive ou à partir de la ligne de commande Windows.
+Utilisez l'option *Réparer* dans le programme d'installation des utilitaires hôtes pour mettre à jour l'adaptateur de bus hôte (HBA) et les paramètres du registre Windows.  Vous pouvez également supprimer entièrement les utilitaires hôtes, soit de manière interactive, soit à partir de la ligne de commande Windows.
 
 [role="tabbed-block"]
 ====
@@ -36,15 +36,17 @@ L'option *Repair* met à jour le registre Windows et les HBA FC avec les paramè
 
 
 --
-.Réparer ou supprimer de la ligne de commande
+.Réparer ou supprimer de manière non interactive
 --
 L'option *Repair* met à jour le registre Windows et les HBA FC avec les paramètres requis. Vous pouvez également supprimer entièrement les utilitaires hôtes d'une ligne de commande Windows.
 
 .Étapes
 . Réparer les utilitaires hôtes Windows :
 +
-`msiexec /f installer.msi [/quiet]`
-
+[source, cli]
+----
+msiexec /f installer.msi [/quiet]
+----
 +
 ** `/f` répare l'installation.
 ** `installer.msi` Est le nom du programme d'installation de Windows Host Utilities sur votre système.

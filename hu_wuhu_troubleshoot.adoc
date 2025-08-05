@@ -4,7 +4,7 @@ permalink: hu_wuhu_troubleshoot.html
 keywords: windows, host, utilities, 7.1, hba, fibre, channel, SANtricity, netapp, san, host, e-series, platform 
 summary: 'Windows Host Utilities inclut un programme d"installation qui définit les paramètres de registre et de HBA Windows requis afin que l"hôte Windows gère correctement le comportement du système de stockage pour les plateformes ONTAP et E-Series.' 
 ---
-= Résoudre les problèmes
+= Résoudre les problèmes liés aux utilitaires hôtes Windows avec la configuration de stockage ONTAP
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -19,7 +19,7 @@ summary: 'Windows Host Utilities inclut un programme d"installation qui définit
 
 
 [role="lead"]
-Vous pouvez utiliser les techniques de dépannage générales pour les utilitaires d'hôtes Windows. Assurez-vous de consulter les dernières notes de mise à jour pour connaître les problèmes connus et les solutions.
+Utilisez les techniques de dépannage générales pour étudier les problèmes qui peuvent survenir pour une configuration de stockage Windows Host Utilities avec ONTAP .  Vous devriez également vérifier lelink:hu-wuhu-release-notes.html["Notes de version de Windows Host Utilities"] pour les problèmes connus et leurs solutions.
 
 Vous trouverez ci-dessous une liste des différents domaines que vous pouvez examiner pour les problèmes d'interopérabilité potentiels :
 
@@ -28,7 +28,7 @@ Vous trouverez ci-dessous une liste des différents domaines que vous pouvez exa
 * Si les LUN iSCSI ne sont pas disponibles après un redémarrage, vérifiez que la cible est répertoriée comme étant persistante dans l'onglet *cibles persistantes* de l'interface utilisateur de l'initiateur Microsoft iSCSI.
 * Si les applications utilisant les LUN affichent des erreurs au démarrage, vérifiez que les applications sont configurées pour dépendre du service iSCSI.
 * Pour les chemins FC vers les contrôleurs de stockage exécutant ONTAP, vérifiez que les commutateurs FC sont zonés en utilisant les WWPN des LIF cibles, pas les WWPN des ports physiques sur le nœud.
-* Vérifiez le link:hu_wuhu_71_rn.html["Notes de version"] Pour que les utilitaires hôtes Windows vérifient les problèmes connus. Les notes de mise à jour incluent une liste des problèmes connus et des limites.
+* Passez en revue lelink:hu-wuhu-release-notes.html["Notes de version"] pour les utilitaires hôtes Windows pour vérifier les problèmes connus.  Les notes de publication incluent une liste des problèmes connus et des limitations.
 * Consultez les informations de dépannage dans https://docs.netapp.com/us-en/ontap/san-admin/index.html["Administration des SAN ONTAP"^] la documentation.
 * Recherche https://mysupport.netapp.com/site/bugs-online/product["NetApp bogues en ligne"^] pour les problèmes récemment découverts.
 +

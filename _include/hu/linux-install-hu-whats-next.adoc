@@ -1,0 +1,14 @@
+= Quelle est la prochaine étape ?
+:allow-uri-read: 
+
+
+
+
+== Et la suite ?
+
+* Paramètres de pilote recommandés avec le noyau Linux
++
+Lorsque vous configurez un environnement FC qui utilise des pilotes de boîte de réception natifs fournis avec le noyau Linux, vous pouvez utiliser les valeurs par défaut des pilotes.
+
+* link:hu-luhu-sanlun-utility.html["En savoir plus sur l'utilitaire « sanlun »"] .
+

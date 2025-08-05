@@ -1,0 +1,179 @@
+---
+sidebar: sidebar 
+permalink: hu-solaris-80.html 
+keywords: host utilities, unified, oracle, linux, 7.1, netapp, ontap 
+summary: Décrit comment utiliser Solaris Host Utilities 8.0 avec ONTAP 
+---
+= Installer Solaris Host Utilities 8.0 pour le stockage ONTAP
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Les utilitaires d'hôte Solaris vous aident à gérer le stockage ONTAP attaché à un hôte Solaris et aident le support technique à collecter les données de configuration.
+
+Les utilitaires hôtes Solaris prennent en charge les environnements Solaris et les protocoles de transport suivants.  Voici les principaux environnements pris en charge :
+
+* Le système d'exploitation natif avec Oracle Solaris I/O Multipathing (MPxIO) et le protocole FC ou iSCSI sur un système utilisant un processeur SPARC ou x86/64.
+* Veritas Dynamic Multipathing (DMP) avec le protocole FC ou iSCSI sur un système utilisant un processeur SPARC.
+
+
+Solaris Host Utilities 8.0 prend en charge la série Solaris 11.4.
+
+.Avant de commencer
+Vérifiez que votre configuration iSCSI, FC ou FCoE est prise en charge.  Vous pouvez utiliser lelink:https://imt.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^] pour vérifier votre configuration.
+
+.Étapes
+. Connectez-vous à votre hôte en tant que root.
+. Téléchargez une copie du fichier compressé contenant les utilitaires d'hôte à partir du link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/6.2/downloads["Site de support NetApp"^] vers un répertoire de votre hôte.
++
+[role="tabbed-block"]
+====
+.Processeur SPARC
+--
+[source, cli]
+----
+netapp_solaris_host_utilities_8_0_sparc.tar.gz
+----
+--
+.processeur x86/x64
+--
+[source, cli]
+----
+netapp_solaris_host_utilities_8_0_amd.tar.gz
+----
+--
+====
+. Accédez au répertoire de votre hôte contenant le téléchargement.
+. Décompressez le fichier à l'aide du `gunzip` commande, puis extrayez le fichier à l'aide de `tar -xvf` :
++
+[source, cli]
+----
+gunzip netapp_solaris_host_utilities_8_0_sparc.tar.gz
+----
++
+[source, cli]
+----
+tar -xvf netapp_solaris_host_utilities_8_0_sparc.tar
+----
+. Ajoutez les packages que vous avez extraits du fichier tar à votre hôte :
++
+[source, cli]
+----
+pkgadd
+----
++
+Les packages sont ajoutés à `/opt/NTAP/SANToolkit/bin` répertoire.
+
++
+L'exemple suivant utilise `pkgadd` la commande pour installer le progiciel d'installation Solaris :
+
++
+[source, cli]
+----
+pkgadd -d ./NTAPSANTool.pkg
+----
+. Confirmez que la boîte à outils a été installée avec succès en utilisant la commande suivante sur le chemin d'installation :
++
+[source, cli]
+----
+pkgchk
+----
++
+.Affiche un exemple de résultat
+[%collapsible]
+====
+[listing]
+----
+# pkgchk -l -p /opt/NTAP/SANToolkit
+
+Pathname: /opt/NTAP/SANToolkit
+Type: directory
+Expected mode: 0755
+Expected owner: root
+Expected group: sys
+Referenced by the following packages: NTAPSANTool
+Current status: installed
+
+# ls -alR /opt/NTAP/SANToolkit
+/opt/NTAP/SANToolkit:
+total 1038
+drwxr-xr-x   3 root     sys            4 Mar  7 13:11 .
+drwxr-xr-x   3 root     sys            3 Mar  7 13:11 ..
+drwxr-xr-x   2 root     sys            6 Mar 17 18:32 bin
+-r-xr-xr-x   1 root     sys       432666 Dec 31 13:23 NOTICES.PDF
+
+/opt/NTAP/SANToolkit/bin:
+total 3350
+drwxr-xr-x   2 root     sys            6 Mar 17 18:32 .
+drwxr-xr-x   3 root     sys            4 Mar  7 13:11 ..
+-r-xr-xr-x   1 root     sys      1297000 Feb  7 22:22 host_config
+-r-xr-xr-x   1 root     root         996 Mar 17 18:32 san_version
+-r-xr-xr-x   1 root     sys       309700 Feb  7 22:22 sanlun
+-r-xr-xr-x   1 root     sys          677 Feb  7 22:22 vidpid.dat
+
+# cd /usr/share/man/man1; ls -al host_config.1 sanlun.1
+-r-xr-xr-x   1 root     sys        12266 Feb  7 22:22 host_config.1
+-r-xr-xr-x   1 root     sys         9044 Feb  7 22:22 sanlun.1
+----
+====
+. Configurez les paramètres de l'hôte pour votre environnement « MPxIO » ou « Veritas DMP » à l'aide de l' `/opt/NTAP/SANToolkit/bin/host_config` commande avec la pile multi-chemins de la référence de commande :
++
+`/opt/NTAP/SANToolkit/bin/host_config -setup -protocol fcp|iscsi|mixed -multipath mpxio|dmp|non [-noalua] [-mcc 60|90|120]`
+
++
+[cols="2*"]
+|===
+| Par exemple, si votre configuration est... | Utilisez la commande... 
+
+
+| FCP avec multipath comme MPxIO | `#/opt/NTAP/SANToolkit/bin/host_config -setup -protocol fcp -multipath mpxio`Pour plus d'informations sur les modifications de configuration pour la synchronisation active de SnapMirror , consultez l'article de la base de connaissanceslink:https://kb.netapp.com/on-prem/ontap/DP/SnapMirror/SnapMirror-KBs/Solaris_Host_support_recommended_settings_in_SnapMirror_active_sync_formerly_SM_BC_configuration["Paramètres recommandés pour la prise en charge de l'hôte Solaris dans la configuration de SnapMirror Active Sync (anciennement SM-BC)"^] . 
+
+
+| FCP avec multipath comme DMP | `#/opt/NTAP/SANToolkit/bin/host_config -setup -protocol fcp -multipath dmp` 
+
+
+| FCP sur MetroCluster avec multipath comme MPxIO, et la valeur All Paths Down est définie sur 120 s.  (Il s’agit du paramètre recommandé pour les configurations MetroCluster ). | `#/opt/NTAP/SANToolkit/bin/host_config -setup -protocol fcp -multipath mpxio -mcc 120`Pour plus d'informations, consultez l'article de la base de connaissanceslink:https://kb.netapp.com/on-prem/ontap/mc/MC-KBs/Solaris_host_support_considerations_in_a_MetroCluster_configuration["Considérations relatives à la prise en charge des hôtes Solaris dans une configuration MetroCluster"^] . 
+|===
+. Redémarrez l'hôte.
++
+Les utilitaires hôtes chargent les paramètres de délai d'expiration recommandés par NetApp suivants pour les LUN ONTAP .
+
++
+.Montrer l'exemple
+[%collapsible]
+====
+[listing]
+----
+#prtconf -v |grep NETAPP
+   value='NETAPP  LUN' +
+   physical-block-size:4096,
+   retries-busy:30,
+   retries-reset:30,
+   retries-notready:300,
+   retries-timeout:10,
+   throttle-max:64,
+   throttle-min:8,
+   disksort:false,
+   cache-nonvolatile:true'
+----
+====
+. Vérifiez l'installation des utilitaires hôtes :
++
+[source, cli]
+----
+sanlun version
+----
+
+
+
+
+== Et la suite ?
+
+link:hu-solaris-san-toolkit.html["En savoir plus sur la boîte à outils SAN"] .

@@ -1,0 +1,9 @@
+= 
+:allow-uri-read: 
+
+
+Le multi-accès vous permet de configurer plusieurs chemins réseau entre l'hôte et le système de stockage.  Si un chemin échoue, le trafic continue avec les chemins restants.  Les environnements AIX et PowerVM des utilitaires hôtes utilisent la solution multi-accès native d'AIX (MPIO).
+
+Le module de contrôle de chemin (PCM) est responsable du contrôle de plusieurs chemins pour un hôte AIX.  Le PCM est un code fourni par le fournisseur de stockage qui gère la gestion des chemins et est installé et activé lors de l'installation des utilitaires hôtes.
+
+Pour vous assurer que le multivoie est correctement configuré pour votre hôte, vérifiez que les paramètres recommandés par NetApp sont configurés pour vos LUN ONTAP .

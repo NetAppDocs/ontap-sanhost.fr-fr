@@ -1,0 +1,58 @@
+---
+sidebar: sidebar 
+permalink: hu-luhu-sanlun-utility.html 
+keywords: host utilities, unified, oracle, linux, 7.1, netapp, ontap 
+summary: 'Décrit comment utiliser les utilitaires d"hôtes Linux 7.1 avec ONTAP' 
+---
+= En savoir plus sur l'utilitaire « sanlun » pour le stockage ONTAP
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Linux Host Utilities est un logiciel hôte NetApp qui fournit `sanlun` commandes sur votre hôte Linux.  Le `sanlun` L'utilitaire est installé automatiquement lorsque vous installez le package NetApp Host Utilities.  Cet utilitaire fournit le `sanlun` commandes que vous pouvez utiliser pour gérer les LUN ONTAP et les adaptateurs de bus hôte (HBA).  Le `sanlun` les commandes renvoient des informations sur les LUN ONTAP mappés à votre hôte, le multivoie et les informations nécessaires à la création de groupes d'initiateurs.
+
+Dans l’exemple suivant, le `sanlun lun show all` la commande renvoie les informations ONTAP LUN :
+
+[listing]
+----
+controller(7mode/E-Series)/            device     host               lun
+vserver(cDOT/FlashRay)   lun-pathname  filename   adapter  protocol  size    Product
+------------------------------------------------------------------------------------
+data_vserver          /vol/vol1/lun1   /dev/sdb   host16   FCP       120.0g  cDOT
+data_vserver          /vol/vol1/lun1   /dev/sdc   host15   FCP       120.0g  cDOT
+data_vserver          /vol/vol2/lun2   /dev/sdd   host16   FCP       120.0g  cDOT
+data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDOT
+----
+[NOTE]
+====
+* Pour Linux Host Utilities 7.1, l'utilitaire « sanlun » est commun à toutes les configurations et tous les protocoles des Host Utilities.  Par conséquent, certains de ses contenus s’appliquent à une configuration, mais pas à une autre.  Le fait d’avoir des composants inutilisés n’affecte pas les performances de votre système.
+* L'utilitaire « sanlun » n'est pas pris en charge pour les types d'hyperviseurs suivants :
++
+[role="tabbed-block"]
+====
+.8.0
+--
+Pour Linux Host Utilities 8.0, l'utilitaire « sanlun » n'est pas pris en charge pour Citrix XenServer, Oracle VM et Red Hat Enterprise Virtualization.
+
+--
+.7.1
+--
+Pour Linux Host Utilities 7.1, l'utilitaire « sanlun » n'est pas pris en charge pour Citrix Xenserver, Red Hat Enterprise Virtualization et Proxmox.
+
+--
+====
+
+
+====
+
+
+== Et la suite ?
+
+link:hu-luhu-command-reference.html["Découvrez comment utiliser l'outil Linux Host Utilities"] .

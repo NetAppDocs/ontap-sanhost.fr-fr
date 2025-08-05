@@ -16,40 +16,35 @@ summary: Décrit comment utiliser les utilitaires hôtes HP-UX 6.0 avec le stock
 
 
 [role="lead"]
-Les utilitaires hôtes HP-UX NetApp vous permettent de connecter un hôte HP-UX au stockage ONTAP.
+Les utilitaires hôtes HP-UX vous aident à gérer le stockage ONTAP connecté à un hôte HP-UX.  NetApp recommande fortement d'installer les utilitaires hôtes HP-UX, mais ce n'est pas obligatoire.  Les utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
 
-Les utilitaires hôtes HP-UX prennent en charge plusieurs protocoles et les environnements suivants :
+Les utilitaires hôtes HP-UX prennent en charge les environnements suivants :
 
 * E/S multivoies (MPIO) Microsoft natives
 * Veritas Dynamic Multipathing (DMP)
 
 
-
-NOTE: Pour indiquer quel environnement est utilisé, ce document indique parfois « DMP » pour l'environnement Veritas DMP et « MPIO » pour l'environnement HP-UX natif. Dans certains cas, les commandes que vous utilisez peuvent varier en fonction des pilotes que vous utilisez. Dans ce cas, les types d'environnement et de pilote sont spécifiés.
-
 .Avant de commencer
-* Pour un fonctionnement fiable, vérifiez que l'ensemble de votre configuration iSCSI, FC ou FCoE est pris en charge.
-
-
-Vous pouvez utiliser link:https://imt.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^]pour vérifier votre configuration.
-
-.Description de la tâche
-Le pack logiciel NetApp HP-UX Host Utilities est disponible sur le link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/6.0/downloads["Site de support NetApp"^] dans un fichier compressé. Après avoir téléchargé le fichier, vous devez le décompresser avant l'installation.
+Pour un fonctionnement fiable, utilisez le https://imt.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^] pour vérifier que votre configuration iSCSI, FC ou FCoE est prise en charge.
 
 .Étapes
-. Connectez-vous à votre hôte.
+. Connectez-vous à votre hôte hôte HP-UX.
 . Téléchargez le fichier HP-UX Host Utilities `netapp_hpux_host_utilities_6.0_ia_pa.depot.gz` à partir du link:https://mysupport.netapp.com/site/["Site de support NetApp"^] Sur votre hôte HP-UX.
 . Décompresser le `netapp_hpux_host_utilities_6.0_ia_pa.depot.gz` fichier :
 +
-`# gunzip netapp_hpux_host_utilities_6.0_ia_pa.depot.gz`
-
+[source, cli]
+----
+gunzip netapp_hpux_host_utilities_6.0_ia_pa.depot.gz
+----
 +
 Le système place le logiciel extrait dans le répertoire dans lequel vous avez décompressé le fichier de dépôt.
 
 . Installez le logiciel :
 +
-`# swinstall -s /depot_path`
-
+[source, cli]
+----
+swinstall -s /depot_path
+----
 +
 `depot_path` fournit le chemin et le nom du fichier de dépôt.
 
@@ -58,31 +53,14 @@ Le `swinstall` Commande exécute un script d'installation qui vérifie l'état d
 
 . Vérifiez l'installation :
 +
-`sanlun version`
-
-
-
-
-
-== Kit D'outils SAN
-
-HP-UX Host Utilities est un logiciel hôte NetApp qui fournit un kit d'outils de ligne de commande sur votre hôte HP-UX. Le kit d'outils est installé lorsque vous installez le pack NetApp Host Utilities. Ce kit fournit l' `sanlun`utilitaire qui vous aide à gérer les LUN et les adaptateurs de bus hôte. (HBA).  `sanlun`La commande renvoie des informations sur les LUN mappées sur votre hôte, les chemins d'accès multiples et les informations nécessaires à la création des groupes initiateurs.
-
-.Exemple
-Dans l'exemple suivant, le `sanlun lun show` La commande renvoie les informations relatives à la LUN.
-
-[listing]
+[source, cli]
 ----
-# sanlun lun show all
-
-controller(7mode)/ device host lun
-vserver(Cmode)           lun-pathname                   filename          adapter    protocol   size   mode
-------------------------------------------------------------------------------------------------------------
-sanboot_unix         /vol/hpux_boot/boot_hpux_lun      /dev/rdsk/c34t0d0  fclp1      FCP        150g    C
-sanboot_unix         /vol/hpux_boot/boot_hpux_lun      /dev/rdsk/c23t0d0  fclp1      FCP        150g    C
-sanboot_unix         /vol/hpux_boot/boot_hpux_lun      /dev/rdsk/c12t0d0  fclp0      FCP        150g    C
-sanboot_unix         /vol/hpux_boot/boot_hpux_lun      /dev/rdsk/c81t0d0  fclp0      FCP        150g    C
-
+sanlun version
 ----
 
-NOTE: Ce kit d'outils est commun à toutes les configurations et tous les protocoles des utilitaires hôtes. Par conséquent, tous les composants ne s'appliquent pas à chaque configuration. Les composants inutilisés n'affectent pas les performances de votre système. Le kit d'outils SAN est pris en charge sur les versions AIX et PowerVM/VIOS.
+
+
+
+== Et la suite ?
+
+link:hu-hpux-sanlun-toolkit.html["En savoir plus sur la boîte à outils SAN"] .

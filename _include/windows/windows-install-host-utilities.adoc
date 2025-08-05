@@ -1,0 +1,29 @@
+= Étape 3 : installer les utilitaires hôtes Windows
+:allow-uri-read: 
+
+
+
+
+== Étape 3 : installer les utilitaires hôtes Windows
+
+Le programme d'installation installe le package Windows Host Utilities et définit les paramètres du registre Windows et du HBA.
+
+.Description de la tâche
+En option, vous pouvez inclure la prise en charge du multivoie lorsque vous installez le package logiciel Windows Host Utilities.  Le programme d’installation vous propose les options suivantes :
+
+* Choisissez `MPIO` Si vous disposez de plusieurs chemins entre l'hôte Windows ou la machine virtuelle et le système de stockage.
+* Choisir `no MPIO` uniquement si vous utilisez un chemin unique vers le système de stockage.
+
+
+Vous pouvez également choisir la prise en charge du multivoie à l’aide d’une invite de ligne de commande Windows.
+
+Pour les invités Hyper-V, les disques bruts (pass-through) n'apparaissent pas dans le système d'exploitation invité si vous choisissez la prise en charge du multivoie.  Vous pouvez utiliser des disques bruts ou MPIO, mais vous ne pouvez pas utiliser les deux dans le système d'exploitation invité.
+
+
+CAUTION: Si vous n'installez pas le logiciel MPIO, le système d'exploitation Windows peut voir chaque chemin comme un disque distinct. Cela peut entraîner une corruption des données.
+
+
+NOTE: Windows XP ou Windows Vista exécuté sur une machine virtuelle Hyper-V ne prend pas en charge MPIO.
+
+.Étapes
+Vous pouvez installer les utilitaires hôtes de manière interactive ou en utilisant la ligne de commande Windows.  Le nouveau package d’installation des utilitaires hôtes doit se trouver dans un chemin accessible à l’hôte Windows.

@@ -1,0 +1,24 @@
+= 
+:allow-uri-read: 
+
+
+. Si votre configuration de stockage inclut la synchronisation active MetroCluster ou SnapMirror , modifiez les paramètres par défaut :
++
+[role="tabbed-block"]
+====
+.MetroCluster
+--
+Par défaut, le système d'exploitation AIX applique un délai d'expiration d'E/S plus court lorsqu'il n'y a aucun chemin disponible vers un LUN.  Cela peut se produire dans les configurations qui incluent une structure SAN à commutateur unique et dans les configurations MetroCluster qui subissent des basculements imprévus.  Pour plus d'informations et les modifications recommandées aux paramètres par défaut, consultez l'article de la base de connaissanceslink:https://kb.netapp.com/on-prem/ontap/mc/MC-KBs/What_are_AIX_Host_support_considerations_in_a_MetroCluster_configuration["Quelles sont les considérations relatives à la prise en charge de l’hôte AIX dans une configuration MetroCluster ?"^] .
+
+--
+.Synchronisation active de SnapMirror
+--
+À partir d' ONTAP 9.11.1, la synchronisation active SnapMirror est prise en charge pour un hôte AIX.  Le cluster principal dans une configuration AIX est le cluster « actif ».
+
+Dans une configuration AIX, les basculements sont perturbateurs.  À chaque basculement, vous devez effectuer une nouvelle analyse sur l'hôte pour que les opérations d'E/S reprennent.
+
+Consultez l'article de la base de connaissanceslink:https://kb.netapp.com/on-prem/ontap/DP/SnapMirror/SnapMirror-KBs/How_to_configure_AIX_Host_for_SnapMirror_active_sync_in_ONTAP["Comment configurer un hôte AIX pour la synchronisation active SnapMirror"^] .
+
+--
+====
+

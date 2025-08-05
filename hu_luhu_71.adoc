@@ -4,7 +4,7 @@ permalink: hu_luhu_71.html
 keywords: host utilities, unified, oracle, linux, 7.1, netapp, ontap 
 summary: 'Décrit comment utiliser les utilitaires d"hôtes Linux 7.1 avec ONTAP' 
 ---
-= Installez Linux Host Utilities 7.1
+= Installer Linux Host Utilities 7.1 pour le stockage ONTAP
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,9 +16,9 @@ summary: 'Décrit comment utiliser les utilitaires d"hôtes Linux 7.1 avec ONTAP
 
 
 [role="lead"]
-Les utilitaires hôtes Linux vous aident à gérer le stockage ONTAP connecté à un hôte Linux. NetApp recommande fortement d'installer les utilitaires hôtes Linux, mais ce n'est pas obligatoire. Les utilitaires ne modifient aucun paramètre sur votre hôte Linux. Ces utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
+Les utilitaires d'hôte Linux vous aident à gérer le stockage ONTAP attaché à un hôte Linux.  NetApp recommande fortement d'installer les utilitaires hôtes Linux, mais ce n'est pas obligatoire.  Les utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
 
-Les distributions Linux suivantes sont prises en charge :
+Linux Host Utilities 7.1 prend en charge les types de distribution suivants :
 
 * Red Hat Enterprise Linux
 * SUSE Linux Enterprise Server
@@ -27,16 +27,17 @@ Les distributions Linux suivantes sont prises en charge :
 * Citrix XenServer
 
 
+
+NOTE: Le logiciel Linux Host Utilities ne prend pas en charge les protocoles hôtes NVMe over Fibre Channel (NVMe/FC) et NVMe over TCP (NVMe/TCP).
+
+.Description de la tâche
+Lorsque vous installez les utilitaires de l'hôte Linux, cela ne modifie aucun paramètre sur votre hôte Linux.
+
 .Avant de commencer
-Le progiciel Utilitaires hôtes NetApp Linux est disponible sur le link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^] dans un fichier .rpm 32 bits ou 64 bits.
-
-* Pour un fonctionnement fiable, vous devez vérifier que l'ensemble de votre configuration iSCSI, FC ou FCoE est prise en charge.
+* Pour un fonctionnement fiable, utilisez lelink:https://imt.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^] pour vérifier que votre configuration iSCSI, FC ou FCoE est prise en charge.
+* Installez les packages de gestion de l'adaptateur de bus hôte (HBA) disponibles sur le site de support du fournisseur.  Le logiciel de gestion permet à `sanlun` commandes pour collecter des informations sur les HBA FC, telles que leurs WWPN.
 +
-Vous pouvez utiliser link:https://imt.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^]pour vérifier votre configuration.
-
-* Vous devez installer les packages de gestion HBA (Host bus adapter) disponibles sur le site de support du fournisseur.
-+
-Le logiciel de gestion permet aux commandes SAN Toolkit de collecter des informations sur les HBA FC, telles que leurs WWPN. Pour que la `sanlun fcp show adapter` commande fonctionne, vérifiez que les packages suivants sont correctement installés :
+Reportez-vous à la documentation du fournisseur pour vérifier que les packages suivants sont correctement installés.  Ces packages sont nécessaires pour prendre en charge le `sanlun fcp show adapter` commande:
 
 +
 ** HBA QLogic Marvell – CLI QConvergeConsole
@@ -44,14 +45,11 @@ Le logiciel de gestion permet aux commandes SAN Toolkit de collecter des informa
 ** HBA Brocade Marvell – CLI de l'utilitaire de commande Brocade
 
 
-* LES paquets RPM "libhbaapi" et "libhbalinux" disponibles pour chaque distribution Linux doivent être installés sur le système d'exploitation hôte.
+* Installez les packages RPM « libhbaapi » et « libhbalinux » disponibles pour chaque distribution Linux sur le système d'exploitation hôte Linux.
 
-
-
-NOTE: Le logiciel Linux Host Utilities ne prend pas en charge les protocoles hôtes NVMe over Fibre Channel (NVMe/FC) et NVMe over TCP (NVMe/TCP).
 
 .Étapes
-. Si une version de Linux Host Utilities est actuellement installée, utilisez la commande suivante pour la supprimer :
+. Si vous avez une version de Linux Host Utilities actuellement installée, supprimez-la :
 +
 [source, cli]
 ----
@@ -61,12 +59,15 @@ rpm -e netapp_linux_unified_host_utilities-7-1
 Pour les versions antérieures de Linux Host Utilities, accédez au répertoire dans lequel le logiciel de l'utilitaire hôte est installé et entrez la commande de désinstallation pour supprimer le package installé.
 
 . Téléchargez le progiciel Linux Host Utilities 32 bits ou 64 bits du link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^] sur votre hôte.
-. Accédez au répertoire dans lequel vous avez téléchargé le pack logiciel et utilisez la commande suivante pour l'installer :
+. Accédez au répertoire dans lequel vous avez téléchargé le progiciel et installez-le :
 +
 [source, cli]
 ----
 rpm -ivh netapp_linux_unified_host_utilities-7-1.x86_xx.rpm
 ----
++
+Vous devriez voir une sortie similaire à l’exemple suivant :
+
 +
 [listing]
 ----
@@ -82,6 +83,9 @@ Updating / installing...
 sanlun version
 ----
 +
+Vous devriez voir une sortie similaire à l’exemple suivant :
+
++
 [listing]
 ----
 sanlun version 7.1.386.1644
@@ -90,41 +94,11 @@ sanlun version 7.1.386.1644
 
 
 
-== Paramètres de pilote recommandés avec le noyau Linux
+== Et la suite ?
 
+* Paramètres de pilote recommandés avec le noyau Linux
++
 Lorsque vous configurez un environnement FC qui utilise des pilotes de boîte de réception natifs fournis avec le noyau Linux, vous pouvez utiliser les valeurs par défaut des pilotes.
 
+* link:hu-luhu-sanlun-utility.html["En savoir plus sur l'utilitaire « sanlun »"] .
 
-
-== Kit D'outils SAN
-
-Linux Host Utilities est un logiciel hôte NetApp qui fournit un kit d'outils de ligne de commande sur votre hôte Linux.
-
-Le kit d'outils est installé automatiquement lorsque vous installez le pack NetApp Host Utilities. Ce kit contient le `sanlun` Utilitaire, qui vous aide à gérer les LUN et les HBA. Le `sanlun` La commande renvoie les informations relatives aux LUN mappées sur votre hôte, aux chemins d'accès multiples et aux informations nécessaires à la création des groupes initiateurs.
-
-.Exemple
-Dans l'exemple suivant, le `sanlun lun show` La commande renvoie les informations relatives à la LUN.
-
-[source, cli]
-----
-# sanlun lun show all
-----
-Exemple de résultat :
-
-[listing]
-----
-controller(7mode/E-Series)/            device     host               lun
-vserver(cDOT/FlashRay)   lun-pathname  filename   adapter  protocol  size    Product
-------------------------------------------------------------------------------------
-data_vserver          /vol/vol1/lun1   /dev/sdb   host16   FCP       120.0g  cDOT
-data_vserver          /vol/vol1/lun1   /dev/sdc   host15   FCP       120.0g  cDOT
-data_vserver          /vol/vol2/lun2   /dev/sdd   host16   FCP       120.0g  cDOT
-data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDOT
-----
-[NOTE]
-====
-* Ce kit est commun à toutes les configurations et tous les protocoles des utilitaires hôtes. En conséquence, une partie de son contenu s'applique à une configuration, mais pas à une autre. Le fait d'utiliser des composants non utilisés n'affecte pas les performances de votre système.
-* Le kit d'outils SAN n'est pas pris en charge sur Citrix XenServer, Oracle VM et Red Hat Enterprise Virtualization Hypervisor.
-
-
-====

@@ -4,7 +4,7 @@ permalink: hu_wuhu_upgrade.html
 keywords: windows, host, utilities, 7.1, hba, fibre, channel, SANtricity, netapp, san, host, e-series, platform 
 summary: 'Windows Host Utilities inclut un programme d"installation qui définit les paramètres de registre et de HBA Windows requis afin que l"hôte Windows gère correctement le comportement du système de stockage pour les plateformes ONTAP et E-Series.' 
 ---
-= Mettez à niveau les utilitaires d'hôtes Windows
+= Mettre à niveau les utilitaires hôtes Windows pour le stockage ONTAP
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -19,13 +19,13 @@ summary: 'Windows Host Utilities inclut un programme d"installation qui définit
 
 
 [role="lead"]
-Le nouveau package d'installation Host Utilities doit se trouver dans un chemin accessible par l'hôte Windows. Suivez les instructions d'installation interactive des utilitaires hôtes ou à partir de la ligne de commande Windows pour mettre à niveau le package d'installation.
+Vous pouvez mettre à niveau le logiciel Windows Host Utilities dans votre configuration de stockage ONTAP en suivant les instructions d'installation de manière interactive ou en utilisant la ligne de commande Windows.  Vous devez installer le nouveau logiciel d’installation de Windows Host Utilities sur un chemin accessible à l’hôte Windows.
 
 [role="tabbed-block"]
 ====
 .Mise à niveau interactive
 --
-Pour mettre à niveau le progiciel Host Utilities de manière interactive, vous devez exécuter le programme d'installation Host Utilities et suivre les invites.
+Mettez à niveau le logiciel Windows Host Utilities de manière interactive en exécutant le programme d’installation Host Utilities et en suivant les invites.
 
 .Étapes
 . Accédez au répertoire dans lequel vous avez téléchargé le fichier exécutable.
@@ -40,15 +40,17 @@ Pour mettre à niveau le progiciel Host Utilities de manière interactive, vous 
 
 
 --
-.Mise à niveau à partir d'une ligne de commande
+.Mise à niveau non interactive
 --
-Vous pouvez effectuer une mise à niveau silencieuse (sans surveillance) des nouveaux utilitaires hôtes en entrant les commandes appropriées à l'invite de commande Windows.
+Effectuez une mise à niveau du logiciel Windows Host Utilities non interactif à l’aide de la ligne de commande Windows.
 
 .Étapes
 . Entrez la commande suivante à l'invite de commande Windows :
 +
-`msiexec /i installer.msi /quiet MULTIPATHING= {0 | 1} [INSTALLDIR=inst_path]`
-
+[source, cli]
+----
+msiexec /i installer.msi /quiet MULTIPATHING= {0 | 1} [INSTALLDIR=inst_path]
+----
 +
 ** `installer` est le nom du `.msi` Fichier pour votre architecture CPU.
 ** MULTIPATHING indique si la prise en charge MPIO (Microsoft Multipath I/O) est installée. Les valeurs autorisées sont « 0 » pour non et « 1 » pour oui.

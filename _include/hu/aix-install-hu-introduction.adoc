@@ -1,0 +1,5 @@
+= 
+:allow-uri-read: 
+
+
+Les utilitaires d'hôte AIX vous aident à gérer le stockage ONTAP attaché à un hôte AIX.  NetApp recommande fortement d'installer les utilitaires hôtes AIX pour améliorer la gestion du stockage ONTAP et aider le support NetApp à collecter des informations sur votre configuration.

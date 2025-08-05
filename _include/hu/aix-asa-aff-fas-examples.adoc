@@ -1,0 +1,78 @@
+= 
+:allow-uri-read: 
+
+
+. Vérifiez l'état du chemin pour les LUN ONTAP :
++
+[source, cli]
+----
+sanlun lun show
+----
++
+Les exemples de sortie suivants affichent l'état de chemin correct pour les LUN ONTAP dans une configuration ASA, AFF ou FAS .
+
++
+[role="tabbed-block"]
+====
+.Configurations ASA
+--
+Une configuration ASA optimise tous les chemins vers un LUN donné, en les gardant actifs (« principaux »).  Cela améliore les performances en effectuant des opérations d'E/S via tous les chemins en même temps.
+
+.Montrer l'exemple
+[%collapsible]
+=====
+[listing]
+----
+# sanlun lun show -p |grep -p hdisk78
+                    ONTAP Path: vs_aix_clus:/vol/chataix_205p2_vol_en_1_7/jfs_205p2_lun_en
+                           LUN: 37
+                      LUN Size: 15g
+                   Host Device: hdisk78
+                          Mode: C
+            Multipath Provider: AIX Native
+        Multipathing Algorithm: round_robin
+------ ------- ------ ------- --------- ----------
+host   vserver  AIX                      AIX MPIO
+path   path     MPIO   host    vserver     path
+state  type     path   adapter LIF       priority
+------ ------- ------ ------- --------- ----------
+up     primary  path0  fcs0    fc_aix_1     1
+up     primary  path1  fcs0    fc_aix_2     1
+up     primary  path2  fcs1    fc_aix_3     1
+up     primary  path3  fcs1    fc_aix_4     1
+----
+=====
+--
+.Configuration AFF ou FAS
+--
+Une configuration AFF ou FAS doit comporter deux groupes de chemins ayant des priorités plus élevées et moins élevées. Les chemins actifs/optimisés à priorité supérieure sont servis par le contrôleur où se trouve l'agrégat. Les chemins de priorité inférieure sont actifs mais non optimisés, car ils sont gérés par un autre contrôleur. Les chemins non optimisés ne sont utilisés que lorsque des chemins optimisés ne sont pas disponibles.
+
+L'exemple suivant affiche la sortie correcte pour un LUN ONTAP avec deux chemins actifs/optimisés (« principaux ») et deux chemins actifs/non optimisés (« secondaires ») :
+
+.Montrer l'exemple
+[%collapsible]
+=====
+[listing]
+----
+# sanlun lun show -p |grep -p hdisk78
+                    ONTAP Path: vs_aix_clus:/vol/chataix_205p2_vol_en_1_7/jfs_205p2_lun_en
+                           LUN: 37
+                      LUN Size: 15g
+                   Host Device: hdisk78
+                          Mode: C
+            Multipath Provider: AIX Native
+        Multipathing Algorithm: round_robin
+------- ---------- ------ ------- ---------- ----------
+host    vserver    AIX                        AIX MPIO
+path    path       MPIO   host    vserver         path
+state   type       path   adapter LIF         priority
+------- ---------- ------ ------- ---------- ----------
+up      secondary  path0  fcs0    fc_aix_1        1
+up      primary    path1  fcs0    fc_aix_2        1
+up      primary    path2  fcs1    fc_aix_3        1
+up      secondary  path3  fcs1    fc_aix_4        1
+----
+=====
+--
+====
+

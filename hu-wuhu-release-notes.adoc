@@ -1,0 +1,54 @@
+---
+sidebar: sidebar 
+permalink: hu-wuhu-release-notes.html 
+keywords: host utilities, linux, 7.1, 7.2, netapp, ontap, release, notes 
+summary: Notes de version pour les utilitaires hôtes Windows 
+---
+= Notes de version de Windows Host Utilities
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Les notes de version décrivent les nouvelles fonctionnalités, les améliorations, les problèmes connus, les limitations et les précautions importantes liées à la configuration et à la gestion de votre hôte Windows spécifique avec votre système de stockage ONTAP .
+
+Pour obtenir des informations spécifiques sur les versions et les mises à jour du système d'exploitation prises en charge par les utilitaires hôtes, reportez-vous au link:https://imt.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^].
+
+
+
+== Nouveautés de Windows Host Utilities 8.0
+
+Windows Host Utilities 8.0 inclut des paramètres supplémentaires pour les pilotes NVMe/FC.  Ces paramètres sont automatiquement chargés lorsque vous installez Windows Host Utilities 8.0.
+
+
+
+== Nouveautés de Windows Host Utilities 7.2
+
+Windows Host Utilities 7.2 inclut la prise en charge des paramètres du pilote NVMe/FC et des correctifs pour les cartes des nouveaux fournisseurs.
+
+
+
+== Nouveautés de Windows Host Utilities 7.1
+
+Windows Host Utilities 7.1 inclut la prise en charge des systèmes de stockage de la série E, du logiciel ONTAP 9 et des délais d'expiration iSCSI améliorés pour un basculement plus rapide.
+
+
+
+== Problèmes connus et limitations
+
+Vous devez être conscient des problèmes et limitations connus suivants qui pourraient avoir un impact sur les performances de votre hôte spécifique.
+
+[cols="30, 15, 30, 30"]
+|===
+| Titre | Affecte la version | Description | Solution de contournement 
+
+
+| Exécution du `linux_gos_timeout-install.sh` Le script n'est plus nécessaire sur les invités Hyper-V exécutant Red Hat Enterprise Linux ou SUSE Linux Enterprise Server | 7.1 | Vous n'avez plus besoin d'exécuter le `linux_gos_timeout-install.sh` script pour modifier les délais d'expiration des disques sur les invités Red Hat Enterprise Linux 5, Red Hat Enterprise Linux 6 ou SUSE Linux Enterprise Server 11 Hyper-V car les paramètres de délai d'expiration par défaut sont utilisés. Le `linux_gos_timeout-install.sh` script inclus dans les versions précédentes des utilitaires hôtes n'est plus inclus dans la version 7.1 de Windows Host Utilities. Windows Host Utilities 7.1 utilise les paramètres de délai d'expiration du disque par défaut. | Sans objet 
+|===
+link:https://mysupport.netapp.com/site/bugs-online/product["NetApp bogues en ligne"^] fournit des informations complètes pour la plupart des problèmes connus, y compris des solutions de contournement suggérées si possible.

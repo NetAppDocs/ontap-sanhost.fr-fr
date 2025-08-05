@@ -1,0 +1,46 @@
+---
+sidebar: sidebar 
+permalink: hu-solaris-san-toolkit.html 
+keywords: host utilities, unified, oracle, linux, 7.1, netapp, ontap 
+summary: Décrit comment utiliser Solaris Host Utilities 8.0 avec ONTAP 
+---
+= En savoir plus sur la boîte à outils SAN pour le stockage ONTAP
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Solaris Host Utilities est un logiciel hôte NetApp qui fournit un kit d'outils de ligne de commande sur votre hôte Oracle Solaris. Le kit d'outils est installé lorsque vous installez le pack NetApp Host Utilities. Ce kit contient le `sanlun` Utilitaire qui vous aide à gérer les LUN et les adaptateurs de bus hôte (HBA). Le `sanlun` La commande renvoie les informations relatives aux LUN mappées sur votre hôte, aux chemins d'accès multiples et aux informations nécessaires à la création des groupes initiateurs.
+
+L'exemple de sortie suivant montre les informations ONTAP LUN renvoyées pour le `sanlun lun show` commande:
+
+.Affiche un exemple de résultat
+[%collapsible]
+====
+[listing]
+----
+#sanlun lun show all
+controller(7mode)/ device host lun
+vserver(Cmode)                     lun-pathname       filename                                       adapter protocol size mode
+-----------------------------------------------------------------------------------------------------------------------------------
+data_vserver                     /vol/vol1/lun1     /dev/rdsk/c0t600A098038304437522B4E694E49792Dd0s2 qlc3   FCP       10g cDOT
+data_vserver                     /vol/vol0/lun2     /dev/rdsk/c0t600A098038304437522B4E694E497938d0s2 qlc3   FCP       10g cDOT
+data_vserver                     /vol/vol2/lun3     /dev/rdsk/c0t600A098038304437522B4E694E497939d0s2 qlc3   FCP       10g cDOT
+data_vserver                     /vol/vol3/lun4     /dev/rdsk/c0t600A098038304437522B4E694E497941d0s2 qlc3   FCP       10g cDOT
+
+----
+====
+
+NOTE: Cette boîte à outils est commune à toutes les configurations et protocoles Host Utilities.  Par conséquent, tous les composants ne s’appliquent pas à toutes les configurations.  Les composants inutilisés n’affectent pas les performances de votre système.
+
+
+
+== Et la suite ?
+
+link:hu-solaris-command-reference.html["En savoir plus sur l'utilisation de l'outil Solaris Host Utilities"] .

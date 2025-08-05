@@ -4,7 +4,7 @@ permalink: hu_wuhu_72.html
 keywords: windows, 7.2, host utilities, SAN, windows 
 summary: 'Windows Host Utilities inclut un programme d"installation qui définit les paramètres de registre et de HBA Windows requis afin que l"hôte Windows gère correctement le comportement du système de stockage pour les plateformes ONTAP et E-Series.' 
 ---
-= Installez Windows Host Utilities 7.2
+= Installer Windows Host Utilities 7.2 pour le stockage ONTAP
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -54,69 +54,78 @@ Les utilitaires hôtes prennent en charge différentes configurations d'hôtes W
 
 
 
-== Vérifiez la configuration de l'hôte et du système de stockage
+== Étape 1 : Vérifiez la configuration de votre hôte et de votre système de stockage
 
 Vérifiez que la configuration de l'hôte et du système de stockage est prise en charge avant d'installer Windows Host Utilities pour le <<supported-windows-versions-72,Version de Windows prise en charge>>.
 
 .Étapes
 . Vérifiez la configuration prise en charge dans le http://mysupport.netapp.com/matrix["Matrice d'interopérabilité"^].
-. Vérifiez les correctifs requis pour l'hôte respectif dans le link:https://docs.netapp.com/us-en/ontap-sanhost/index.html["Documentation Windows de l'hôte SAN"].
+. Vérifiez les correctifs requis pour votre version d'hôte Windows Server dans lelink:https://docs.netapp.com/us-en/ontap-sanhost/index.html["Documentation Windows de l'hôte SAN"] .
++
+Par exemple, lelink:https://docs.netapp.com/us-en/ontap-sanhost/hu_windows_2022.html["Configurer Windows Server 2022 pour le stockage ONTAP"] la documentation fournit les instructions pour l'installation des correctifs Windows pour Windows Server 2022.
+
+. link:https://docs.netapp.com/us-en/ontap/san-admin/verify-license-fc-iscsi-task.html["Ajouter la licence iSCSI ou FCP"^] .
 +
 
-NOTE: Ce link:https://docs.netapp.com/us-en/ontap-sanhost/hu_windows_2022.html["Utilisez Windows Server 2022 avec ONTAP"] document fournit des instructions sur link:https://docs.netapp.com/us-en/ontap-sanhost/hu_windows_2022.html#installing-windows-hotfixes["Installation des correctifs Windows"] pour Windows Server 2022. Reportez-vous aux documents Windows de la catégorie configurations hôte pour trouver les informations de correctif appropriées pour les versions antérieures de Windows Server.
+NOTE: Les protocoles FC et iSCSI ne nécessitent pas de licences sur les systèmes de stockage de la série E utilisant SANtricity Storage Manager.
 
-. Ajoutez la licence iSCSI, FCP ou NVMe-of et démarrez le service cible.
-+
-
-NOTE: Les protocoles FC et iSCSI ne nécessitent pas de licence sur les systèmes de stockage E-Series utilisant le gestionnaire de stockage SANtricity.
-
+. Démarrer le service cible.
 . Vérifiez votre câblage.
 +
-Voir la https://docs.netapp.com/us-en/ontap/san-config/index.html["Référence de configuration SAN"^] Documentation de votre version de ONTAP ou https://docs.netapp.com/us-en/e-series/install-hw-cabling/index.html["Câblage matériel E-Series"^] pour des informations détaillées sur le câblage et la configuration.
+Se référer à la https://docs.netapp.com/us-en/ontap/san-config/index.html["Référence de configuration SAN"^] pour des informations détaillées sur le câblage et la configuration.
 
 
 
 
 
-== Configuration des HBA FC et des commutateurs
+== Étape 2 : Configurer les HBA et les commutateurs FC
 
 Installez et configurez un ou plusieurs adaptateurs de bus hôte FC pris en charge pour les connexions FC au système de stockage.
 
 Le programme d'installation de Windows Host Utilities définit les paramètres de carte HBA FC requis.
 
 
-CAUTION: Ne modifiez pas les paramètres HBA manuellement.
+CAUTION: Vous devez uniquement autoriser le programme d’installation de Windows Host Utilities à définir les paramètres HBA.  Cela garantit que l'hôte Windows peut gérer correctement les comportements du système de stockage pour les plates-formes ONTAP .
 
 .Étapes
 . Installez une ou plusieurs cartes HBA FC prises en charge conformément aux instructions fournies par le fournisseur de cartes HBA.
 . Obtenez les pilotes HBA et les utilitaires de gestion pris en charge et installez-les conformément aux instructions fournies par le fournisseur de l'adaptateur HBA.
-. Connectez les HBA à vos commutateurs FC ou directement au système de stockage.
-. Créez des zones sur le commutateur FC conformément à la documentation de votre commutateur FC.
-. Pour ONTAP, zone le commutateur par WWPN. Veillez à utiliser le WWPN des interfaces logiques (LIF) et non le WWPN des ports physiques des contrôleurs de stockage. Voir la https://docs.netapp.com/us-en/ontap/san-config/index.html["Référence de configuration SAN"^] pour plus d'informations.
+. https://docs.netapp.com/us-en/ontap/san-management/index.html["Connectez les HBA à vos commutateurs FC ou directement au système de stockage"^] .
+. https://docs.netapp.com/us-en/ontap/san-config/fibre-channel-fcoe-zoning-concept.html["Créez des zones sur le commutateur FC conformément à la documentation de votre commutateur FC"^] .
+. Pour ONTAP, zonez le commutateur par le WWPN.  Assurez-vous d’utiliser le WWPN des interfaces logiques (LIF) et non le WWPN des ports physiques sur les contrôleurs de stockage. Se référer à la  https://docs.netapp.com/us-en/ontap/san-config/index.html["Référence de configuration SAN"^] pour plus d'informations.
 
 
 
 
-== Installez les utilitaires hôtes
+== Étape 3 : installer les utilitaires hôtes Windows
 
-Le programme d'installation installe le package Host Utilities et définit les paramètres du registre Windows et HBA.
+Le programme d'installation installe le package Windows Host Utilities et définit les paramètres du registre Windows et du HBA.
 
-Vous devez indiquer si vous souhaitez inclure la prise en charge des chemins d'accès multiples lorsque vous installez le progiciel Utilitaires d'hôte Windows. Le programme d'installation vous demande les options suivantes. Vous pouvez également exécuter une installation silencieuse (sans surveillance) à partir d'une invite de commande Windows.
+.Description de la tâche
+En option, vous pouvez inclure la prise en charge du multivoie lorsque vous installez le package logiciel Windows Host Utilities.  Le programme d’installation vous propose les options suivantes :
 
-.Prise en charge des chemins d'accès
 * Choisissez `MPIO` Si vous disposez de plusieurs chemins entre l'hôte Windows ou la machine virtuelle et le système de stockage.
-* Choisissez `no MPIO` uniquement si vous utilisez un chemin unique vers le système de stockage.
+* Choisir `no MPIO` uniquement si vous utilisez un chemin unique vers le système de stockage.
 
 
-La sélection MPIO (Multipath I/O) de Microsoft n'est pas disponible pour les systèmes Windows XP et Windows Vista ; les E/S multivoies ne sont pas prises en charge sur ces systèmes d'exploitation invités. Pour les invités Hyper-V, les disques bruts (pass-through) n'apparaissent pas dans le système d'exploitation invité si vous choisissez la prise en charge des chemins d'accès multiples. Vous pouvez utiliser des disques bruts ou MPIO, mais vous ne pouvez pas les utiliser les deux dans le système d'exploitation invité.
+Vous pouvez également choisir la prise en charge du multivoie à l’aide d’une invite de ligne de commande Windows.
 
-Vous pouvez installer les utilitaires hôtes de manière interactive ou à l'aide de la ligne de commande. Le nouveau package d'installation Host Utilities doit se trouver dans un chemin accessible par l'hôte Windows. Suivez les instructions d'installation interactive des utilitaires hôtes ou à partir de la ligne de commande Windows.
+Pour les invités Hyper-V, les disques bruts (pass-through) n'apparaissent pas dans le système d'exploitation invité si vous choisissez la prise en charge du multivoie.  Vous pouvez utiliser des disques bruts ou MPIO, mais vous ne pouvez pas utiliser les deux dans le système d'exploitation invité.
+
+
+CAUTION: Si vous n'installez pas le logiciel MPIO, le système d'exploitation Windows peut voir chaque chemin comme un disque distinct. Cela peut entraîner une corruption des données.
+
+
+NOTE: Windows XP ou Windows Vista exécuté sur une machine virtuelle Hyper-V ne prend pas en charge MPIO.
+
+.Étapes
+Vous pouvez installer les utilitaires hôtes de manière interactive ou en utilisant la ligne de commande Windows.  Le nouveau package d’installation des utilitaires hôtes doit se trouver dans un chemin accessible à l’hôte Windows.
 
 [role="tabbed-block"]
 ====
 .Installer de manière interactive
 --
-Pour installer le progiciel Host Utilities de manière interactive, vous devez exécuter le programme d'installation Host Utilities et suivre les invites.
+Installez le progiciel Host Utilities de manière interactive en exécutant le programme d'installation Host Utilities et en suivant les invites.
 
 .Étapes
 . Téléchargez le fichier exécutable à partir du https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.2/downloads["Site de support NetApp"^].
@@ -126,15 +135,17 @@ Pour installer le progiciel Host Utilities de manière interactive, vous devez e
 
 
 --
-.Installer à partir d'une ligne de commande
+.Installer de manière non interactive
 --
-Vous pouvez effectuer une installation silencieuse (sans surveillance) des utilitaires hôtes en entrant les commandes appropriées à l'invite de commande Windows. Le système redémarre automatiquement lorsque l'installation est terminée.
+Effectuez une installation non interactive des utilitaires hôtes à l’aide de la ligne de commande Windows.  Le système redémarre automatiquement lorsque l'installation est terminée.
 
 .Étapes
 . Entrez la commande suivante à l'invite de commande Windows :
 +
-`msiexec /i installer.msi /quiet MULTIPATHING= {0 | 1} [INSTALLDIR=inst_path]`
-
+[source, cli]
+----
+msiexec /i installer.msi /quiet MULTIPATHING= {0 | 1} [INSTALLDIR=inst_path]
+----
 +
 ** `installer` est le nom du `.msi` Fichier pour votre architecture CPU.
 ** MULTIPATHING indique si la prise en charge de MPIO est installée. Les valeurs autorisées sont « 0 » pour non et « 1 » pour oui.
@@ -148,3 +159,8 @@ NOTE: Pour voir les options Microsoft installer (MSI) standard pour la journalis
 
 --
 ====
+
+
+== Et la suite ?
+
+link:hu_wuhu_hba_settings.html["Configurer les paramètres de registre pour Windows Host Utilities"] .

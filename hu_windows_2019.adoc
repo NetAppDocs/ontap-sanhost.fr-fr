@@ -83,7 +83,7 @@ TIP: De nombreux correctifs nécessitent un redémarrage de votre hôte Windows.
 
 == Installez les utilitaires d'hôtes Windows
 
-Les utilitaires d'hôtes Windows sont un ensemble de programmes logiciels contenant de la documentation qui vous permet de connecter des ordinateurs hôtes à des disques virtuels (LUN) sur un SAN NetApp. NetApp recommande de télécharger et d'installer le dernier kit d'utilitaires. Pour obtenir des informations et des instructions sur la configuration des utilitaires d'hôtes Windows, reportez-vous au link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71_rn.html["Documentation relative aux utilitaires d'hôtes Windows"]et sélectionnez la procédure d'installation de votre version des utilitaires d'hôtes Windows.
+Les utilitaires hôtes Windows sont un ensemble de programmes logiciels avec documentation qui vous permettent de connecter des ordinateurs hôtes à des disques virtuels (LUN) sur un SAN NetApp .  NetApp recommande de télécharger et d’installer le dernier kit utilitaire.  Pour obtenir des informations et des instructions sur la configuration des utilitaires hôtes Windows, consultez lelink:https://docs.netapp.com/us-en/ontap-sanhost/hu-wuhu-release-notes.html["Documentation relative aux utilitaires d'hôtes Windows"] et sélectionnez la procédure d'installation correspondant à votre version de Windows Host Utilities.
 
 
 
@@ -96,9 +96,13 @@ Le logiciel MPIO présente un seul disque au système d'exploitation Windows pou
 
 CAUTION: Si vous n'installez pas le logiciel MPIO, le système d'exploitation Windows peut voir chaque chemin comme un disque distinct. Cela peut entraîner une corruption des données.
 
+[NOTE]
+====
+* Pour Windows Host Utilities 8.0, la fonctionnalité MPIO est activée automatiquement lorsque vous sélectionnez la prise en charge MPIO.
+* Windows XP ou Windows Vista exécuté sur une machine virtuelle Hyper-V ne prend pas en charge MPIO.
 
-NOTE: Windows XP ou Windows Vista exécuté sur une machine virtuelle Hyper-V ne prend pas en charge MPIO.
 
+====
 
 
 == Configuration SAN

@@ -1,0 +1,41 @@
+---
+sidebar: sidebar 
+permalink: hu-aix-san-toolkit.html 
+keywords: san, toolkit, command, line, AIX, hot, utilities 
+summary: Le logiciel hôte AIX Host Utilities fournit une boîte à outils de ligne de commande sur votre hôte IBM AIX. 
+---
+= En savoir plus sur la boîte à outils AIX SAN pour le stockage ONTAP
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+AIX Host Utilities est un logiciel hôte NetApp qui fournit une boîte à outils de ligne de commande sur votre hôte IBM AIX.  La boîte à outils SAN est installée lorsque vous installez le package NetApp Host Utilities.  La boîte à outils fournit les `sanlun` utilitaire qui vous aide à gérer les LUN ONTAP et les adaptateurs de bus hôte (HBA).  Le `sanlun` La commande renvoie des informations sur les LUN ONTAP mappés à votre hôte, le multivoie et les informations nécessaires à la création de groupes d'initiateurs.
+
+L'exemple de sortie suivant montre les informations ONTAP LUN renvoyées pour le `sanlun lun show` commande:
+
+[listing]
+----
+controller(7mode)/ device host lun
+
+vserver(Cmode) lun-pathname filename adapter protocol size mode
+----------------------------------------------------------------
+data_vserver   /vol/vol1/lun1 hdisk0 fcs0    FCP      60g C
+data_vserver   /vol/vol2/lun2 hdisk0 fcs0    FCP      20g C
+data_vserver   /vol/vol3/lun3 hdisk11 fcs0   FCP      20g C
+data_vserver   /vol/vol4/lun4 hdisk14 fcs0   FCP      20g C
+----
+
+NOTE: La boîte à outils SAN est commune à toutes les configurations d’hôte et protocoles de transport AIX.  Par conséquent, tous les composants ne s’appliquent pas à toutes les configurations.  Les composants inutilisés n’affectent pas les performances de votre système.  SAN Toolkit est pris en charge sur les versions des systèmes d'exploitation AIX et PowerVM/VIOS.
+
+
+
+== Et la suite ?
+
+link:hu-aix-command-reference.html["En savoir plus sur l'utilisation de l'outil AIX Host Utilities"] .

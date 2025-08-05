@@ -1,0 +1,113 @@
+---
+sidebar: sidebar 
+permalink: hu-luhu-80.html 
+keywords: host utilities, unified, oracle, linux, 8.0, netapp, ontap 
+summary: Décrit comment utiliser Linux Host Utilities 8.0 avec ONTAP 
+---
+= Installer Linux Host Utilities 8.0 pour le stockage ONTAP
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Les utilitaires d'hôte Linux vous aident à gérer le stockage ONTAP attaché à un hôte Linux.  NetApp recommande fortement d'installer les utilitaires hôtes Linux, mais ce n'est pas obligatoire.  Les utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
+
+Linux Host Utilities 8.0 prend en charge les types de distribution suivants :
+
+* Red Hat Enterprise Linux
+* SUSE Linux Enterprise Server
+* Oracle Linux
+* VM Oracle
+
+
+
+NOTE: Le logiciel Linux Host Utilities ne prend pas en charge les protocoles hôtes NVMe over Fibre Channel (NVMe/FC) et NVMe over TCP (NVMe/TCP).
+
+.Description de la tâche
+Lorsque vous installez les utilitaires de l'hôte Linux, cela ne modifie aucun paramètre sur votre hôte Linux.
+
+.Avant de commencer
+* Pour un fonctionnement fiable, utilisez lelink:https://imt.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^] pour vérifier que votre configuration iSCSI, FC ou FCoE est prise en charge.
+* Installez les packages de gestion de l'adaptateur de bus hôte (HBA) disponibles sur le site de support du fournisseur.  Le logiciel de gestion permet à `sanlun` commandes pour collecter des informations sur les HBA FC, telles que leurs WWPN.
++
+Reportez-vous à la documentation du fournisseur pour vérifier que les packages suivants sont correctement installés.  Ces packages sont nécessaires pour prendre en charge le `sanlun fcp show adapter` commande:
+
++
+** HBA QLogic Marvell – CLI QConvergeConsole
+** Broadcom Emulex HBA - interface de ligne de commande de l'application principale OneCommand Manager
+
+
+
+
+.Étapes
+. Si vous avez une version de Linux Host Utilities actuellement installée, supprimez-la :
++
+[source, cli]
+----
+rpm -e netapp_linux_unified_host_utilities-8-0
+----
++
+Pour les versions antérieures de Linux Host Utilities, accédez au répertoire dans lequel le logiciel de l'utilitaire hôte est installé et entrez la commande de désinstallation pour supprimer le package installé.
+
+. Le package logiciel NetApp Linux Host Utilities est disponible sur le site de support NetApp dans un fichier .rpm 64 bits.  Téléchargez le fichier 64 bits à partir dulink:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Site de support NetApp"^] à votre hôte.
+. Accédez au répertoire dans lequel vous avez téléchargé le progiciel et installez-le :
++
+[source, cli]
+----
+rpm -ivh netapp_linux_unified_host_utilities-8-0.x86_xx.rpm
+----
++
+Vous devriez voir une sortie similaire à l’exemple suivant :
+
++
+[listing]
+----
+rpm -ivh netapp_linux_unified_host_utilities-8-0.x86_64.rpm
+Verifying...                          ################################# [100%]
+Preparing...                          ################################# [100%]
+Updating / installing...
+   1:netapp_linux_unified_host_utiliti################################# [100%]
+
+----
++
+[NOTE]
+====
+Si vous utilisez un système d'exploitation hôte Ubuntu, vous devez le lier manuellement à la bibliothèque HBA :
+
+[source, cli]
+----
+cp /opt/QLogic_Corporation/QConvergeConsoleCLI/lib64/libHBAAPI.so.2.0.2 /usr/lib64/libHBAAPI.so
+----
+====
+. Vérifiez l'installation :
++
+[source, cli]
+----
+sanlun version
+----
++
+Vous devriez voir une sortie similaire à l’exemple suivant :
+
++
+[listing]
+----
+sanlun version 8.0.386.1644
+----
+
+
+
+
+== Et la suite ?
+
+* Paramètres de pilote recommandés avec le noyau Linux
++
+Lorsque vous configurez un environnement FC qui utilise des pilotes de boîte de réception natifs fournis avec le noyau Linux, vous pouvez utiliser les valeurs par défaut des pilotes.
+
+* link:hu-luhu-sanlun-utility.html["En savoir plus sur l'utilitaire « sanlun »"] .
+

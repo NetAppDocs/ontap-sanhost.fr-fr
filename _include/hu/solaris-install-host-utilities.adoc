@@ -1,0 +1,12 @@
+= Étape 2 : installer les utilitaires de l'hôte Solaris
+:allow-uri-read: 
+
+
+
+
+== Étape 2 : installer les utilitaires de l'hôte Solaris
+
+NetApp recommande fortement d'installer les utilitaires hôtes Solaris pour prendre en charge la gestion des LUN ONTAP et aider le support technique à collecter les données de configuration.
+
+
+NOTE: L'installation des utilitaires de l'hôte Solaris modifie certains paramètres de délai d'expiration sur votre hôte Solaris.

@@ -19,14 +19,16 @@ summary: Décrit la découverte et la configuration DES LUN sous AIX
 Lorsque vous utilisez AIX sans PowerVM, vous pouvez exécuter `cfgmgr` la commande pour permettre à l'hôte de détecter les LUN. Il n'est pas nécessaire de redémarrer l'hôte pour détecter les LUN. Pour confirmer que l'hôte a découvert les LUN, vous pouvez utiliser l'utilitaire sanlun.
 
 
-NOTE: Les étapes suivantes ne s'appliquent pas à un hôte qui exécute un environnement PowerVM.
+NOTE: Les étapes suivantes ne s’appliquent pas à un hôte qui exécute un environnement PowerVM.
 
 .Étapes
 . Connectez-vous en tant que root sur l'hôte.
-. Sur l'hôte AIX, entrez la commande suivante pour détecter les LUN nouvellement créés :
+. Sur l’hôte AIX, découvrez les LUN nouvellement créés :
 +
-`cfgmgr`
-
+[source, cli]
+----
+cfgmgr
+----
 +
 Le `cfgmgr` la commande permet de :
 
@@ -38,8 +40,10 @@ Le `cfgmgr` la commande permet de :
 
 . Afficher tous les disques AIX, y compris les LUN NetApp :
 +
-`lsdev -Cc disk`
-
+[source, cli]
+----
+lsdev -Cc disk
+----
 +
 Les LUN apparaissent sur l'hôte sous forme de disques. Vous pouvez utiliser ces disques de la même manière que vous utilisez des disques locaux sur l'hôte. Le fichier ODM de paramètres hôte installé dans le cadre des utilitaires hôtes provoque l'affichage des LUN en tant que disques NetApp FCP.
 
@@ -66,8 +70,10 @@ hdisk5 Available 04-08-02  MPIO NetApp FCP Default PCM Disk
 ====
 . Récupérer des informations sur votre configuration :
 +
-`lsattr -El hdisk_name`
-
+[source, cli]
+----
+lsattr -El hdisk_name
+----
 +
 .Affiche un exemple de résultat
 [%collapsible]
@@ -104,25 +110,33 @@ ww_name         0x500a0984994ae0e0               FC World Wide Name             
 ====
 . Si votre configuration prend en charge ALUA, vous pouvez l'utiliser pour définir la priorité des chemins d'accès. Vérifiez que ALUA est activé :
 +
-`lun igroup show -instance igroup_name`
-
+[source, cli]
+----
+lun igroup show -instance igroup_name
+----
 +
 .. Si ALUA n'est pas activé, activez-le :
 +
-`igroup set igroup_name alua yes`
-
+[source, cli]
+----
+igroup set igroup_name alua yes
+----
 
 
 . Si votre configuration ne prend pas en charge ALUA, vous devez utiliser l'utilitaire dotpaths pour définir les priorités de chemin. L'utilitaire dotpaths est installé lors de l'installation des utilitaires hôtes. N'utilisez pas l'utilitaire dotpaths si le protocole ALUA est activé.
 +
 .. Définissez la priorité de toutes les LUN ONTAP :
 +
-`dotpaths`
-
+[source, cli]
+----
+dotpaths
+----
 .. Définir la priorité d'un jeu spécifique de disques :
 +
-`dotpaths [-hqv] [hdiskN ...]`
-
+[source, cli]
+----
+dotpaths [-hqv] [hdiskN ...]
+----
 +
 Utilisez `-v` l'option pour activer le mode détaillé et afficher toutes les priorités. Utilisez `-q` l'option pour interroger toutes les priorités de disque ou les priorités individuelles.
 
@@ -130,8 +144,10 @@ Utilisez `-v` l'option pour activer le mode détaillé et afficher toutes les pr
 
 . Vérifiez que l'hôte a détecté les LUN :
 +
-`# sanlun lun show`
-
+[source, cli]
+----
+sanlun lun show
+----
 +
 L'exemple suivant montre la sortie type de la `sanlun lun show` commande dans un environnement multi-chemins d'accès E/S (MPIO) Microsoft :
 
