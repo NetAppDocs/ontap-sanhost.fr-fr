@@ -437,4 +437,4 @@ La version Solaris 11.3 pour FCP et iSCSI avec stockage ONTAP présente les prob
 
 == Et la suite ?
 
-link:hu-solaris-62-cmd.html["En savoir plus sur l'utilisation de l'outil Solaris Host Utilities 6.2"] .
+link:hu-solaris-command-reference.html["En savoir plus sur l'utilisation de l'outil Solaris Host Utilities"] .

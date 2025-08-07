@@ -1,0 +1,35 @@
+= Étape 3 : exclure éventuellement un périphérique du multivoie
+:allow-uri-read: 
+
+
+
+
+== Étape 3 : exclure éventuellement un périphérique du multivoie
+
+Si nécessaire, vous pouvez exclure un périphérique du multipathing en ajoutant le WWID du périphérique indésirable à la strophe « blacklist » du `multipath.conf` fichier.
+
+.Étapes
+. Déterminez le WWID :
++
+[source, cli]
+----
+/lib/udev/scsi_id -gud /dev/sda
+----
++
+"sda" est le disque SCSI local que vous souhaitez ajouter à la liste noire.
+
++
+Un exemple de WWID est `360030057024d0730239134810c0cb833`.
+
+. Ajoutez le WWID à la strophe « blacklist » :
++
+[source, cli]
+----
+blacklist {
+	     wwid   360030057024d0730239134810c0cb833
+        devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
+        devnode "^hd[a-z]"
+        devnode "^cciss.*"
+}
+----
+

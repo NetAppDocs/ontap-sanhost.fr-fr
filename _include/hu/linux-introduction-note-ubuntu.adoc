@@ -1,0 +1,11 @@
+= 
+:allow-uri-read: 
+
+
+[NOTE]
+====
+Le progiciel Linux Host Utilities ne prend pas en charge les systèmes d'exploitation Ubuntu.
+
+Vous n’avez pas besoin de configurer manuellement les paramètres de la machine virtuelle basée sur le noyau (KVM) car les LUN ONTAP sont automatiquement mappés à l’hyperviseur.
+
+====

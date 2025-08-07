@@ -52,3 +52,9 @@ Vous devez être conscient des problèmes et limitations connus suivants qui pou
 | Exécution du `linux_gos_timeout-install.sh` Le script n'est plus nécessaire sur les invités Hyper-V exécutant Red Hat Enterprise Linux ou SUSE Linux Enterprise Server | 7.1 | Vous n'avez plus besoin d'exécuter le `linux_gos_timeout-install.sh` script pour modifier les délais d'expiration des disques sur les invités Red Hat Enterprise Linux 5, Red Hat Enterprise Linux 6 ou SUSE Linux Enterprise Server 11 Hyper-V car les paramètres de délai d'expiration par défaut sont utilisés. Le `linux_gos_timeout-install.sh` script inclus dans les versions précédentes des utilitaires hôtes n'est plus inclus dans la version 7.1 de Windows Host Utilities. Windows Host Utilities 7.1 utilise les paramètres de délai d'expiration du disque par défaut. | Sans objet 
 |===
 link:https://mysupport.netapp.com/site/bugs-online/product["NetApp bogues en ligne"^] fournit des informations complètes pour la plupart des problèmes connus, y compris des solutions de contournement suggérées si possible.
+
+
+
+== Quelle est la prochaine étape
+
+link:hu-wuhu-80.html["En savoir plus sur l'installation des utilitaires hôtes Windows"]

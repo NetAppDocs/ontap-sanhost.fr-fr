@@ -35,3 +35,9 @@ HP-UX Host Utilities 6.0 prend en charge les versions du système d'exploitation
 == Problèmes connus et limitations
 
 Il n’y a aucun problème ni limitation connu.
+
+
+
+== Et la suite ?
+
+link:hu_hpux_60.html["En savoir plus sur l'installation des utilitaires hôtes HP-UX"]

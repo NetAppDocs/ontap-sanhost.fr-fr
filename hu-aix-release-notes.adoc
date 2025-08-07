@@ -65,3 +65,9 @@ link:https://mysupport.netapp.com/site/["NetApp bogues en ligne"^] fournit des i
 * FCP General : affiche les bogues FC et HBA qui ne sont pas associés à un hôte spécifique.
 * FCP - AIX
 
+
+
+
+== Et la suite ?
+
+link:hu-aix-80.html["En savoir plus sur l'installation des utilitaires hôtes AIX"]

@@ -50,3 +50,9 @@ La liaison du pilote FC est modifiée de `ssd(4D)` à `sd(4D)`. Déplacez la con
 * FCP General : affiche les bogues FC et HBA (Host bus adapter) qui ne sont pas associés à un hôte spécifique.
 * FCP - Solaris
 
+
+
+
+== Quelle est la prochaine étape
+
+link:hu-solaris-80.html["En savoir plus sur l'installation des utilitaires hôtes Solaris"]
