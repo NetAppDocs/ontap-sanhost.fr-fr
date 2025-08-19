@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: hu_citrix_82.html 
 keywords: host utilities, citrix, Hypervisor, 8 series, netapp, ontap, san, boot 
-summary: Décrit comment utiliser Citrix Hypervisor 8.2 avec ONTAP 
+summary: Configurez Citrix Hypervisor 8.2 pour le multi-accès et avec des paramètres et paramètres spécifiques pour les opérations de protocole FCP et iSCSI avec le stockage ONTAP . 
 ---
 = Configurer Citrix Hypervisor 8.2 pour FCP et iSCSI avec le stockage ONTAP
 :hardbreaks:
@@ -16,8 +16,13 @@ summary: Décrit comment utiliser Citrix Hypervisor 8.2 avec ONTAP
 
 
 [role="lead"]
-Le logiciel Linux Host Utilities fournit des outils de gestion et de diagnostic pour les hôtes Linux connectés au stockage ONTAP. Lorsque vous installez les utilitaires d'hôte Linux sur un hôte Citrix Hypervisor 8.2, vous pouvez utiliser les utilitaires d'hôte pour vous aider à gérer les opérations de protocole FCP et iSCSI avec les LUN ONTAP.
+Configurez Citrix Hypervisor 8.2 pour le multi-accès et avec des paramètres et paramètres spécifiques pour les opérations de protocole FCP et iSCSI avec le stockage ONTAP .
 
+[NOTE]
+====
+Le progiciel Linux Host Utilities ne prend pas en charge les systèmes d'exploitation Citrix Hypervisor.
+
+====
 
 
 == Étape 1 : activez éventuellement le démarrage SAN
@@ -38,18 +43,7 @@ Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la docum
 
 
 
-== Étape 2 : installez les utilitaires hôtes Linux
-
-NetApp recommande vivement d'installer les utilitaires hôtes Linux pour prendre en charge la gestion des LUN ONTAP et aider le support technique à collecter les données de configuration.
-
-link:hu_luhu_71.html["Installez Linux Host Utilities 7.1"].
-
-
-NOTE: L'installation des utilitaires d'hôtes Linux ne modifie aucun paramètre de délai d'expiration de l'hôte sur votre hôte Linux.
-
-
-
-== Étape 3 : confirmez la configuration des chemins d'accès multiples pour votre hôte
+== Étape 2 : Confirmez la configuration multi-chemins pour votre hôte
 
 Vous pouvez utiliser le multipathing avec Citrix Hypervisor 8.2 pour gérer les LUN ONTAP.
 
@@ -197,7 +191,7 @@ size=9.0G features='4 queue_if_no_path pg_init_retries 50 retain_attached_hw_han
 
 
 
-== Étape 4 : si vous le souhaitez, excluez un périphérique du multipathing
+== Étape 3 : exclure éventuellement un périphérique du multivoie
 
 Si nécessaire, vous pouvez exclure un périphérique du multipathing en ajoutant le WWID du périphérique indésirable à la strophe « blacklist » du `multipath.conf` fichier.
 
@@ -229,7 +223,7 @@ blacklist {
 
 
 
-== Étape 5 : personnalisez les paramètres des chemins d'accès multiples pour les LUN ONTAP
+== Étape 4 : Personnaliser les paramètres multi-chemins pour les LUN ONTAP
 
 Si votre hôte est connecté à des LUN d'autres fournisseurs et que l'un des paramètres de chemins d'accès multiples est remplacé, vous devez les corriger en ajoutant la strophe plus loin dans `multipath.conf` le fichier qui s'applique spécifiquement aux LUN ONTAP. Si vous ne le faites pas, les LUN ONTAP risquent de ne pas fonctionner comme prévu.
 
@@ -240,6 +234,9 @@ CAUTION: Vous ne devez pas remplacer les paramètres recommandés pour les LUN O
 
 L'exemple suivant montre comment corriger une valeur par défaut remplacée. Dans cet exemple, le `multipath.conf` fichier définit des valeurs pour `path_checker` et `no_path_retry` qui ne sont pas compatibles avec les LUN ONTAP, et vous ne pouvez pas supprimer ces paramètres car les baies de stockage ONTAP sont toujours connectées à l'hôte. Vous corrigez plutôt les valeurs de `path_checker` et `no_path_retry` en ajoutant une strophe de périphérique au `multipath.conf` fichier qui s'applique spécifiquement aux LUN ONTAP.
 
+.Montrer l'exemple
+[%collapsible]
+====
 [listing, subs="+quotes"]
 ----
 defaults {
@@ -256,19 +253,9 @@ devices {
    }
 }
 ----
+====
 
 
-== Étape 6 : passez en revue les problèmes connus
+== Étape 5 : Examiner les problèmes connus
 
 Il n'y a pas de problème connu.
-
-
-
-== Et la suite ?
-
-* link:hu-luhu-command-reference.html["Découvrez comment utiliser l'outil Linux Host Utilities"] .
-* En savoir plus sur la mise en miroir ASM.
-+
-La mise en miroir de gestion automatique du stockage (ASM) peut nécessiter des modifications des paramètres de chemins d'accès multiples Linux pour permettre à ASM de reconnaître un problème et de basculer vers un autre groupe de pannes. La plupart des configurations ASM sur ONTAP utilisent une redondance externe, ce qui signifie que la protection des données est assurée par la baie externe et qu'ASM ne met pas en miroir les données. Certains sites utilisent ASM avec redondance normale pour fournir une mise en miroir bidirectionnelle, généralement entre différents sites. Voir link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/oracle-overview.html["Bases de données Oracle sur ONTAP"^] pour plus d'informations.
-
-

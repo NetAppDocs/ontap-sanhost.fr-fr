@@ -31,7 +31,7 @@ Vérifiez que votre configuration iSCSI, FC ou FCoE est prise en charge.  Vous p
 
 .Étapes
 . Connectez-vous à votre hôte en tant que root.
-. Téléchargez une copie du fichier compressé contenant les utilitaires d'hôte à partir du link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/6.2/downloads["Site de support NetApp"^] vers un répertoire de votre hôte.
+. Téléchargez une copie du fichier compressé contenant les utilitaires hôtes à partir dulink:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/8.0/downloads["Site de support NetApp"^] vers un répertoire sur votre hôte.
 +
 [role="tabbed-block"]
 ====

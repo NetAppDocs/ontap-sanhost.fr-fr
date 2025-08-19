@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: hu_ubuntu_2004.html 
 keywords: host utilities, red hat, rhel, linux, 20.04, netapp, ontap, ubuntu 
-summary: Configurez Ubuntu 20.04 pour le multi-accès et avec des paramètres et paramètres spécifiques pour le fonctionnement FCP et iSCSI avec le stockage ONTAP . 
+summary: Configurez Ubuntu 20.04 pour le multi-accès et avec des paramètres et paramètres spécifiques pour les opérations de protocole FCP et iSCSI avec le stockage ONTAP . 
 ---
 = Configurer Ubuntu 20.04 pour FCP et iSCSI avec le stockage ONTAP
 :toc: macro
@@ -19,7 +19,7 @@ summary: Configurez Ubuntu 20.04 pour le multi-accès et avec des paramètres et
 
 
 [role="lead"]
-Configurez Ubuntu 20.04 pour le multi-accès et avec des paramètres et paramètres spécifiques pour le fonctionnement FCP et iSCSI avec le stockage ONTAP .
+Configurez Ubuntu 20.04 pour le multi-accès et avec des paramètres et paramètres spécifiques pour les opérations de protocole FCP et iSCSI avec le stockage ONTAP .
 
 [NOTE]
 ====

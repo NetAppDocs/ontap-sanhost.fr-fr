@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: hu_centos_79.html 
 keywords: host utilities, centos, linux, 7.9, netapp, ontap 
-summary: 'Décrit l"utilisation de CentOS 7.9 avec ONTAP' 
+summary: Installez Linux Host Utilities sur un hôte CentOS 7.9 pour gérer les opérations de protocole FCP et iSCSI avec les LUN ONTAP . 
 ---
 = Configurer CentOS 7.9 pour FCP et iSCSI pour le stockage ONTAP
 :hardbreaks:
