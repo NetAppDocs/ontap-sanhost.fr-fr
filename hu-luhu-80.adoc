@@ -23,7 +23,7 @@ Linux Host Utilities 8.0 prend en charge les types de distribution suivants :
 * Red Hat Enterprise Linux
 * SUSE Linux Enterprise Server
 * Oracle Linux
-* VM Oracle
+* Ubuntu
 
 
 
