@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: nvme_rhel_10.html 
+permalink: nvme-rhel-10.html 
 keywords: nvme, linux, rhel, red hat, enterprise 
-summary: 'Comment configurer l"hôte NVMe-of pour RHEL 10 avec ONTAP' 
+summary: 'Comment configurer l"hôte NVMe-oF pour RHEL 10.0 avec ONTAP' 
 ---
-= Configuration hôte NVMe-of pour RHEL 10 avec ONTAP
+= Configurer RHEL 10.0 pour NVMe-oF avec stockage ONTAP
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,66 +16,46 @@ summary: 'Comment configurer l"hôte NVMe-of pour RHEL 10 avec ONTAP'
 
 
 [role="lead"]
-Les configurations hôte SAN de NetApp prennent en charge le protocole NVMe over Fabrics (NVMe-of) avec ANA (Asymmetric Namespace Access). Dans les environnements NVMe-of, ANA équivaut à des chemins d'accès multiples ALUA (Asymmetric Logical Unit Access) dans les environnements iSCSI et FCP. ANA est implémentée à l'aide de la fonctionnalité de chemins d'accès multiples NVMe intégrée au noyau.
+Les hôtes Red Hat Enterprise Linux (RHEL) prennent en charge les protocoles NVMe over Fibre Channel (NVMe/FC) et NVMe over TCP (NVMe/TCP) avec Asymmetric Namespace Access (ANA).  ANA fournit une fonctionnalité de multi-accès équivalente à l'accès aux unités logiques asymétriques (ALUA) dans les environnements iSCSI et FCP.
 
-.Description de la tâche
-Vous pouvez utiliser les fonctionnalités et le support suivants avec la configuration hôte NVMe-of pour Red Hat Enterprise Linux (RHEL) 10. Vous devez également vérifier les limites connues avant de commencer le processus de configuration.
+Découvrez comment configurer les hôtes NVMe over Fabrics (NVMe-oF) pour RHEL 10.0.  Pour plus d'informations sur l'assistance et les fonctionnalités, consultezlink:hu-nvme-index.html["Présentation de NVME-oF"^] .
 
-* Support disponible :
-+
-** Prise en charge de NVMe over TCP (NVMe/TCP) et de NVMe over Fibre Channel (NVMe/FC). Le plug-in NetApp du pack natif `nvme-cli` affiche les détails des ONTAP pour les namespaces NVMe/FC et NVMe/TCP.
-** Exécution du trafic NVMe et SCSI sur le même hôte Par exemple, vous pouvez configurer dm-multipath pour les périphériques SCSI mpath sur les LUN SCSI et utiliser NVMe multipath pour configurer les périphériques d'espace de noms NVMe-oF sur l'hôte.
-** À partir d'ONTAP 9.12.1, l'authentification intrabande sécurisée est prise en charge pour NVMe/TCP. Vous pouvez utiliser l'authentification intrabande sécurisée pour NVMe/TCP avec RHEL 10.
+*NVMe-oF avec RHEL 10.0 présente les limitations connues suivantes :*
 
-
-+
-Pour plus de détails sur les configurations prises en charge, consultez le link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^].
-
-* Fonctionnalités disponibles :
-+
-** À partir de RHEL 10, le multipathing NVMe natif est toujours activé et la prise en charge du multipathing DM pour NVMe-oF n'est pas prise en charge.
-
-
-* Limitations connues :
-+
-** Évitez d'émettre le  `nvme disconnect-all` commande sur les systèmes démarrant à partir du SAN sur les espaces de noms NVMe-TCP ou NVMe-FC car elle déconnecte les systèmes de fichiers racine et de données et peut entraîner une instabilité du système.
-
-
+* La prise en charge multichemin DM pour NVMe-oF n'est pas prise en charge.
+* Évitez d'émettre le  `nvme disconnect-all` commande sur les systèmes démarrant à partir du SAN sur les espaces de noms NVMe-TCP ou NVMe-FC car elle déconnecte les systèmes de fichiers racine et de données et peut entraîner une instabilité du système.
 
 
 
 
 == Étape 1 : activez éventuellement le démarrage SAN
 
-Vous pouvez configurer votre hôte pour qu'il utilise le démarrage SAN afin de simplifier le déploiement et d'améliorer l'évolutivité.
-
-.Avant de commencer
-Utilisez le link:https://mysupport.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^] pour vérifier que votre système d'exploitation Linux, votre adaptateur de bus hôte (HBA), le micrologiciel HBA, le BIOS de démarrage HBA et la version ONTAP prennent en charge le démarrage SAN.
+Vous pouvez configurer votre hôte pour utiliser le démarrage SAN afin de simplifier le déploiement et d’améliorer l’évolutivité. Utilisez lelink:https://mysupport.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^] pour vérifier que votre système d'exploitation Linux, votre adaptateur de bus hôte (HBA), votre micrologiciel HBA, votre BIOS de démarrage HBA et votre version ONTAP prennent en charge le démarrage SAN.
 
 .Étapes
-. https://docs.netapp.com/us-en/ontap/san-admin/create-nvme-namespace-subsystem-task.html["Créez un espace de noms de démarrage SAN et mappez-le à l'hôte"^].
+. https://docs.netapp.com/us-en/ontap/san-admin/create-nvme-namespace-subsystem-task.html["Créez un espace de noms NVMe et mappez-le à l'hôte"^] .
 . Activez le démarrage SAN dans le BIOS du serveur pour les ports auxquels l'espace de noms de démarrage SAN est mappé.
 +
 Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la documentation spécifique au fournisseur.
 
-. Vérifiez que la configuration a réussi en redémarrant l'hôte et en vérifiant que le système d'exploitation est opérationnel.
+. Redémarrez l’hôte et vérifiez que le système d’exploitation est opérationnel.
 
 
 
 
-== Étape 2 : Valider les versions du logiciel
+== Étape 2 : Vérifiez la version du logiciel et la configuration NVMe
 
-Utilisez la procédure suivante pour valider les versions minimales du logiciel RHEL 10 prises en charge.
+Vérifiez que votre système répond aux exigences logicielles et vérifiez les installations des packages NVMe et la configuration de l’hôte.
 
 .Étapes
-. Installez RHEL 10 sur le serveur. Une fois l'installation terminée, vérifiez que vous exécutez le noyau RHEL 10 spécifié :
+. Installez RHEL 10.0 sur le serveur.  Une fois l'installation terminée, vérifiez que vous exécutez le noyau RHEL 10.0 requis :
 +
 [source, cli]
 ----
 uname -r
 ----
 +
-L'exemple suivant montre une version du noyau RHEL :
+Exemple de version du noyau RHEL :
 
 +
 [listing]
@@ -150,21 +130,20 @@ vs_ nvme_194_rhel10
 4 entries were displayed.
 ----
 ====
-+
-
-NOTE: Si le `hostnqn` les chaînes ne correspondent pas, utilisez le `vserver modify` commande pour mettre à jour le `hostnqn` Chaîne sur le sous-système de matrice ONTAP correspondant à `hostnqn` chaîne de `/etc/nvme/hostnqn` sur l'hôte.
 
 
 
+NOTE: Si le `hostnqn` les chaînes ne correspondent pas, utilisez le `vserver modify` commande pour mettre à jour le `hostnqn` chaîne sur votre sous-système de stockage ONTAP correspondant pour correspondre à la `hostnqn` chaîne de `/etc/nvme/hostnqn` sur l'hôte.
 
 
-== Étape 3 : Configurer NVMe/FC
 
-Vous pouvez configurer NVMe/FC avec les adaptateurs FC Broadcom/Emulex ou Marvell/Qlogic. Pour le protocole NVMe/FC configuré avec une carte Broadcom, vous pouvez activer des demandes d'E/S d'une taille de 1 Mo.
+== Étape 3 : Configurer NVMe/FC et NVMe/TCP
+
+Configurez NVMe/FC avec des adaptateurs Broadcom/Emulex ou Marvell/QLogic, ou configurez NVMe/TCP à l'aide d'opérations de découverte et de connexion manuelles.
 
 [role="tabbed-block"]
 ====
-.Broadcom/Emulex
+.FC - Broadcom/Emulex
 --
 Configuration de NVMe/FC pour une carte Broadcom/Emulex
 
@@ -193,7 +172,7 @@ LPe36002-M64
 cat /sys/class/scsi_host/host*/modeldesc
 ----
 +
-Vous devriez voir une sortie similaire à l’exemple suivant :
+Vous devriez voir un résultat similaire à l’exemple suivant :
 
 +
 [listing]
@@ -212,7 +191,7 @@ Emulex LightPulse LPe36002-M64 2-Port 64Gb Fibre Channel Adapter
 cat /sys/class/scsi_host/host*/fwrev
 ----
 +
-L'exemple suivant montre les versions du firmware :
+La commande renvoie les versions du firmware :
 
 +
 [listing]
@@ -239,7 +218,7 @@ L'exemple suivant montre une version de pilote :
 +
 Pour obtenir la liste actuelle des versions de pilotes et de micrologiciels de carte prises en charge, consultez le link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^].
 
-. Vérifiez que la sortie attendue de `lpfc_enable_fc4_type` est définie sur `3`:
+. Vérifiez-le `lpfc_enable_fc4_type` est défini sur `3`:
 +
 [source, cli]
 ----
@@ -252,13 +231,12 @@ cat /sys/module/lpfc/parameters/lpfc_enable_fc4_type
 cat /sys/class/fc_host/host*/port_name
 ----
 +
-L'exemple suivant montre les identités de port :
+Vous devriez voir un résultat similaire à :
 
 +
 [listing]
 ----
-0x2100f4c7aa0cd7c2
-0x2100f4c7aa0cd7c3
+0x100000109b1c1205
 ----
 . Vérifiez que vos ports initiateurs sont en ligne :
 +
@@ -317,12 +295,12 @@ FCP CMPL: xb 000014a5 Err 0002149a
 
 
 --
-.Marvell/QLogic
+.FC - Marvell/QLogic
 --
 Configuration du NVMe/FC pour un adaptateur Marvell/QLogic
 
 .Étapes
-. Vérifiez que vous exécutez les versions du pilote de carte et du micrologiciel prises en charge :
+. Vérifiez que vous utilisez les versions de pilote d'adaptateur et de micrologiciel prises en charge :
 +
 [source, cli]
 ----
@@ -349,103 +327,12 @@ La sortie attendue est 1.
 
 
 --
-====
-
-
-== Étape 4 : Activez éventuellement 1 Mo d'E/S
-
-ONTAP signale une taille de transfert MAX Data (MDT) de 8 dans les données Identify Controller. La taille maximale des demandes d'E/S peut donc atteindre 1 Mo. Pour émettre des demandes d'E/S d'une taille de 1 Mo pour un hôte Broadcom NVMe/FC, augmentez la `lpfc` valeur du `lpfc_sg_seg_cnt` paramètre à 256 par rapport à la valeur par défaut 64.
-
-
-NOTE: Ces étapes ne s'appliquent pas aux hôtes NVMe/FC Qlogic.
+.TCP
+--
+Le protocole NVMe/TCP ne prend pas en charge l'opération de connexion automatique.  Au lieu de cela, vous pouvez découvrir les sous-systèmes et espaces de noms NVMe/TCP en exécutant l'opération NVMe/TCP. `connect` ou `connect-all` opérations manuellement.
 
 .Étapes
-. Réglez le `lpfc_sg_seg_cnt` paramètre sur 256 :
-+
-[source, cli]
-----
-cat /etc/modprobe.d/lpfc.conf
-----
-+
-Vous devriez voir une sortie similaire à l’exemple suivant :
-
-+
-[listing]
-----
-options lpfc lpfc_sg_seg_cnt=256
-----
-. Exécutez `dracut -f` la commande et redémarrez l'hôte.
-. Vérifier que la valeur de `lpfc_sg_seg_cnt` est 256 :
-+
-[source, cli]
-----
-cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
-----
-
-
-
-
-== Étape 5 : Vérifier les services de démarrage NVMe
-
-Avec RHEL 10, le  `nvmefc-boot-connections.service` et  `nvmf-autoconnect.service` services de démarrage inclus dans NVMe/FC  `nvme-cli` Les packages sont automatiquement activés au démarrage du système.
-
-Une fois le démarrage terminé, vérifiez que le  `nvmefc-boot-connections.service` et  `nvmf-autoconnect.service` les services de démarrage sont activés.
-
-.Étapes
-. Vérifiez que `nvmf-autoconnect.service` est activé :
-+
-[source, cli]
-----
-systemctl status nvmf-autoconnect.service
-----
-+
-.Affiche un exemple de résultat
-[%collapsible]
-====
-[listing]
-----
-nvmf-autoconnect.service - Connect NVMe-oF subsystems automatically during boot
-     Loaded: loaded (/usr/lib/systemd/system/nvmf-autoconnect.service; enabled; preset: disabled)
-     Active: inactive (dead)
-
-Jun 10 04:06:26 SR630-13-201.lab.eng.btc.netapp.in systemd[1]: Starting Connect NVMe-oF subsystems automatically during boot...
-Jun 10 04:06:26 SR630-13-201.lab.eng.btc.netapp.in systemd[1]: nvmf-autoconnect.service: Deactivated successfully.
-Jun 10 04:06:26 SR630-13-201.lab.eng.btc.netapp.in systemd[1]: Finished Connect NVMe-oF subsystems automatically during boot.
-----
-====
-. Vérifiez que `nvmefc-boot-connections.service` est activé :
-+
-[source, cli]
-----
-systemctl status nvmefc-boot-connections.service
-----
-+
-.Affiche un exemple de résultat
-[%collapsible]
-====
-[listing]
-----
-nvmefc-boot-connections.service - Auto-connect to subsystems on FC-NVME devices found during boot
-     Loaded: loaded (/usr/lib/systemd/system/nvmefc-boot-connections.service; enabled; preset: enabled)
-     Active: inactive (dead) since Tue 2025-06-10 01:08:36 EDT; 2h 59min ago
-   Main PID: 7090 (code=exited, status=0/SUCCESS)
-        CPU: 30ms
-
-Jun 10 01:08:36 localhost systemd[1]: Starting Auto-connect to subsystems on FC-NVME devices found during boot...
-Jun 10 01:08:36 localhost systemd[1]: nvmefc-boot-connections.service: Deactivated successfully.
-Jun 10 01:08:36 localhost systemd[1]: Finished Auto-connect to subsystems on FC-NVME devices found during boot.
-----
-====
-
-
-
-
-== Étape 6 : Configurer NVMe/TCP
-
-Le protocole NVMe/TCP ne prend pas en charge `auto-connect` l'opération. Vous pouvez à la place détecter les sous-systèmes et les espaces de noms NVMe/TCP en exécutant manuellement les opérations NVMe/TCP `connect` ou `connect-all`.
-
-.Étapes
-. Vérifiez que le port initiateur peut récupérer les données de la page de journal de découverte sur les LIF NVMe/TCP prises en charge :
+. Vérifiez que le port initiateur peut obtenir les données de la page du journal de découverte sur les LIF NVMe/TCP pris en charge :
 +
 [source, cli]
 ----
@@ -454,7 +341,7 @@ nvme discover -t tcp -w host-traddr -a traddr
 +
 .Montrer l'exemple
 [%collapsible]
-====
+=====
 [listing, subs="+quotes"]
 ----
 nvme discover -t tcp -w 192.168.20.1 -a 192.168.20.20
@@ -549,8 +436,8 @@ traddr:  192.168.20.20
 eflags:  none
 sectype: none
 ----
-====
-. Vérifier que les autres combinaisons de LIF cible-initiateur NVMe/TCP peuvent récupérer les données de la page du journal de détection :
+=====
+. Vérifiez que les autres combinaisons LIF initiateur-cible NVMe/TCP peuvent récupérer avec succès les données de la page du journal de découverte :
 +
 [source, cli]
 ----
@@ -559,7 +446,7 @@ nvme discover -t tcp -w host-traddr -a traddr
 +
 .Montrer l'exemple
 [%collapsible]
-====
+=====
 [listing, subs="+quotes"]
 ----
 nvme discover -t tcp -w 192.168.20.1 -a 192.168.20.20
@@ -567,7 +454,7 @@ nvme discover -t tcp -w 192.168.21.1 -a 192.168.21.20
 nvme discover -t tcp -w 192.168.20.1 -a 192.168.20.21
 nvme discover -t tcp -w 192.168.21.1 -a 192.168.21.21
 ----
-====
+=====
 . Exécutez le `nvme connect-all` Commande sur toutes les LIF cible-initiateur NVMe/TCP prises en charge sur l'ensemble des nœuds :
 +
 [source, cli]
@@ -577,7 +464,7 @@ nvme connect-all -t tcp -w host-traddr -a traddr
 +
 .Montrer l'exemple
 [%collapsible]
-====
+=====
 [listing, subs="+quotes"]
 ----
 nvme	connect-all	-t	tcp	-w	192.168.20.1	-a	192.168.20.20
@@ -585,7 +472,7 @@ nvme	connect-all	-t	tcp	-w	192.168.21.1	-a	192.168.21.20
 nvme	connect-all	-t	tcp	-w	192.168.20.1	-a	192.168.20.21
 nvme	connect-all	-t	tcp	-w	192.168.21.1	-a	192.168.21.21
 ----
-====
+=====
 
 
 [NOTE]
@@ -598,9 +485,99 @@ nvme	connect-all	-t	tcp	-w	192.168.21.1	-a	192.168.21.21
 
 
 ====
+--
+====
 
 
-== Étape 7 : Valider NVMe-oF
+== Étape 4 : Activez éventuellement 1 Mo d'E/S pour NVMe/FC
+
+ONTAP signale une taille de transfert de données maximale (MDTS) de 8 dans les données du contrôleur d'identification.  Cela signifie que la taille maximale de la demande d'E/S peut atteindre 1 Mo.  Pour émettre des requêtes d'E/S d'une taille de 1 Mo pour un hôte Broadcom NVMe/FC, vous devez augmenter la `lpfc` valeur de la `lpfc_sg_seg_cnt` paramètre à 256 à partir de la valeur par défaut de 64.
+
+
+NOTE: Ces étapes ne s'appliquent pas aux hôtes NVMe/FC Qlogic.
+
+.Étapes
+. Réglez le `lpfc_sg_seg_cnt` paramètre sur 256 :
++
+[source, cli]
+----
+cat /etc/modprobe.d/lpfc.conf
+----
++
+Vous devriez voir une sortie similaire à l’exemple suivant :
+
++
+[listing]
+----
+options lpfc lpfc_sg_seg_cnt=256
+----
+. Exécutez `dracut -f` la commande et redémarrez l'hôte.
+. Vérifier que la valeur de `lpfc_sg_seg_cnt` est 256 :
++
+[source, cli]
+----
+cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
+----
+
+
+
+
+== Étape 5 : Vérifier les services de démarrage NVMe
+
+Le `nvmefc-boot-connections.service` et `nvmf-autoconnect.service` services de démarrage inclus dans NVMe/FC `nvme-cli` les packages sont automatiquement activés au démarrage du système.
+
+Une fois le démarrage terminé, vérifiez que le  `nvmefc-boot-connections.service` et  `nvmf-autoconnect.service` les services de démarrage sont activés.
+
+.Étapes
+. Vérifiez que `nvmf-autoconnect.service` est activé :
++
+[source, cli]
+----
+systemctl status nvmf-autoconnect.service
+----
++
+.Affiche un exemple de résultat
+[%collapsible]
+====
+[listing]
+----
+nvmf-autoconnect.service - Connect NVMe-oF subsystems automatically during boot
+     Loaded: loaded (/usr/lib/systemd/system/nvmf-autoconnect.service; enabled; preset: disabled)
+     Active: inactive (dead)
+
+Jun 10 04:06:26 SR630-13-201.lab.eng.btc.netapp.in systemd[1]: Starting Connect NVMe-oF subsystems automatically during boot...
+Jun 10 04:06:26 SR630-13-201.lab.eng.btc.netapp.in systemd[1]: nvmf-autoconnect.service: Deactivated successfully.
+Jun 10 04:06:26 SR630-13-201.lab.eng.btc.netapp.in systemd[1]: Finished Connect NVMe-oF subsystems automatically during boot.
+----
+====
+. Vérifiez que `nvmefc-boot-connections.service` est activé :
++
+[source, cli]
+----
+systemctl status nvmefc-boot-connections.service
+----
++
+.Affiche un exemple de résultat
+[%collapsible]
+====
+[listing]
+----
+nvmefc-boot-connections.service - Auto-connect to subsystems on FC-NVME devices found during boot
+     Loaded: loaded (/usr/lib/systemd/system/nvmefc-boot-connections.service; enabled; preset: enabled)
+     Active: inactive (dead) since Tue 2025-06-10 01:08:36 EDT; 2h 59min ago
+   Main PID: 7090 (code=exited, status=0/SUCCESS)
+        CPU: 30ms
+
+Jun 10 01:08:36 localhost systemd[1]: Starting Auto-connect to subsystems on FC-NVME devices found during boot...
+Jun 10 01:08:36 localhost systemd[1]: nvmefc-boot-connections.service: Deactivated successfully.
+Jun 10 01:08:36 localhost systemd[1]: Finished Auto-connect to subsystems on FC-NVME devices found during boot.
+----
+====
+
+
+
+
+== Étape 6 : Vérifier la configuration multivoie
 
 Vérifiez que l'état des chemins d'accès multiples NVMe in-kernel, l'état ANA et les namespaces ONTAP sont corrects pour la configuration NVMe-of.
 
@@ -781,9 +758,9 @@ nvme netapp ontapdevices -o json
 
 
 
-== Étape 8 : Configurer une authentification sécurisée en bande
+== Étape 7 : Configurer une authentification sécurisée en bande
 
-À partir d'ONTAP 9.12.1, l'authentification sécurisée en bande est prise en charge via NVMe/TCP entre un hôte RHEL 10 et un contrôleur ONTAP.
+À partir d' ONTAP 9.12.1, l'authentification sécurisée en bande est prise en charge via NVMe/TCP entre un hôte RHEL 10.0 et un contrôleur ONTAP .
 
 Chaque hôte ou contrôleur doit être associé à un  `DH-HMAC-CHAP` clé pour configurer l'authentification sécurisée. A  `DH-HMAC-CHAP` la clé est une combinaison du NQN de l'hôte ou du contrôleur NVMe et d'un secret d'authentification configuré par l'administrateur. Pour authentifier son homologue, un hôte ou un contrôleur NVMe doit reconnaître la clé associée à cet homologue.
 
@@ -802,9 +779,9 @@ Configurez l'authentification intrabande sécurisée à l'aide de l'interface de
 ----
 cat /etc/nvme/hostnqn
 ----
-. Générez la clé dhchap pour l'hôte RHEL 10.
+. Générez la clé dhchap pour l’hôte RHEL 10.0.
 +
-Le résultat suivant décrit les `gen-dhchap-key` paramètres de commande :
+La sortie suivante décrit le `gen-dhchap-key` paramètres de commande :
 
 +
 [listing]
@@ -893,11 +870,11 @@ DHHC- 1:03:7zf8I9gaRcDWH3tCH5vLGaoyjzPIvwNWusBfKdpJa+hia
 
 
 --
-.Fichier JSON
+.JSON
 --
-Lorsque plusieurs sous-systèmes NVMe sont disponibles dans la configuration du contrôleur ONTAP, vous pouvez utiliser le `/etc/nvme/config.json` fichier avec la `nvme connect-all` commande.
+Lorsque plusieurs sous-systèmes NVMe sont disponibles sur le contrôleur ONTAP , vous pouvez utiliser le `/etc/nvme/config.json` fichier avec le `nvme connect-all` commande.
 
-Utilisez le  `-o` option pour générer le fichier JSON. Pour plus d'options de syntaxe, reportez-vous aux pages de manuel de NVMe Connect-all.
+Utilisez le `-o` option pour générer le fichier JSON.  Reportez-vous aux pages de manuel NVMe connect-all pour plus d'options de syntaxe.
 
 .Étapes
 . Configurer le fichier JSON.
@@ -1001,7 +978,7 @@ aKDKJQ2o53pX3wYM9xdv5DtKNNhJInZ7X8wU2RQpQIngc=:
 cat /sys/class/nvme-subsystem/nvme-subsys0/nvme0/dhchap_ctrl_secret
 ----
 +
-Vous devriez voir une sortie similaire à l’exemple suivant :
+Vous devriez voir un résultat similaire à l’exemple suivant :
 
 +
 [listing]
@@ -1017,6 +994,6 @@ mzEKUbcWu26I33b93bil2WR09XDho/ld3L45J+0FeCsStBEAfhYgkQU=:
 ====
 
 
-== Étape 9 : passez en revue les problèmes connus
+== Étape 8 : passez en revue les problèmes connus
 
 Il n'y a pas de problème connu.

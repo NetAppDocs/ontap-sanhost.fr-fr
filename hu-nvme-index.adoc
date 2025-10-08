@@ -1,0 +1,127 @@
+---
+sidebar: sidebar 
+permalink: hu-nvme-index.html 
+keywords: nvme, san, host, aix, linux, vsphere, windows 
+summary: 'Vous pouvez configurer certains hôtes SAN pour le protocole NVMe over Fabrics (NVMe-of).' 
+---
+= En savoir plus sur la configuration des hôtes SAN ONTAP avec NVMe-OF
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Vous pouvez configurer les hôtes SAN pris en charge pour utiliser le protocole NVMe over Fabrics (NVMe-oF) avec ONTAP comme cible de stockage.  NVMe-oF inclut NVMe sur Fibre Channel (NVMe/FC) et NVMe sur TCP (NVMe/TCP).  Selon votre système d'exploitation hôte et la version ONTAP , vous configurez et validez le protocole NVMe/FC ou NVMe/TCP, ou les deux sur l'hôte.
+
+
+
+== Prise en charge et fonctionnalités ONTAP
+
+Le tableau présente les fonctionnalités ONTAP prises en charge par les versions ONTAP et les systèmes d'exploitation hôtes SAN :
+
+[cols="40,30,30"]
+|===
+| Fonctionnalité ONTAP | Hôtes SAN pris en charge | Version ONTAP 
+
+
+| *Authentification sécurisée en bande pour NVMe/TCP*  a| 
+* RHEL 10,0
+* RHEL 9.6, 9.5
+* Rocky Linux 10,0
+* Rocky Linux 9.6, 9.5
+
+| Le support commence avec la version 9.12.1 
+
+
+| *NVMe/TCP en plus de NVMe/FC* Fournit les détails ONTAP pour les espaces de noms NVMe/FC et NVMe/TCP à l'aide du protocole natif `nvme-cli` emballer.  a| 
+* RHEL 10,0
+* RHEL 9.6, 9.5, 9.4, 9.3, 9.2, 9.1
+* RHEL 8.10, 8.9, 8.8, 8.7, 8.6, 8.5, 8.4, 8.8, 8.2
+* Rocky Linux 10,0
+* Rocky Linux 9.6, 9.5, 9.4, 9.3, 9.2, 9.1
+* Rocky Linux 8.10, 8.9, 8.8, 8.7, 8.6, 8.5, 8.4, 8.8, 8.2
+
+| Le support commence avec la version 9.10.1 
+
+
+| *NVMe/TCP est une fonctionnalité d'entreprise entièrement prise en charge*  a| 
+* RHEL 10,0
+* RHEL 9.6, 9.5, 9.4, 9.3, 9.2, 9.1, 9.0
+* Rocky Linux 10,0
+* Rocky Linux 9.6, 9.5, 9.4, 9.3, 9.2, 9.1, 9.0
+
+| Le support commence avec la version 9.10.1 
+
+
+| *Trafic NVMe et SCSI pris en charge sur le même hôte* Utilisez dm-multipath pour les LUN SCSI et NVMe multipath pour les espaces de noms NVMe-oF.  a| 
+* RHEL 10,0
+* RHEL 9.6, 9.5, 9.4, 9.3, 9.2, 9.1, 9.0
+* RHEL 8.10, 8.9, 8.8, 8.7, 8.6, 8.5, 8.4, 8.3, 8.2
+* Rocky Linux 10,0
+* Rocky Linux 9.6, 9.5, 9.4, 9.3, 9.2, 9.1, 9.0
+* Rocky Linux 8.10, 8.9, 8.8, 8.7, 8.6, 8.5, 8.4, 8.3, 8.2
+
+| Le support commence avec la version 9.4 
+|===
+ONTAP prend en charge les fonctionnalités d'hôte SAN suivantes, quelle que soit la version ONTAP exécutée sur la configuration de votre système :
+
+[cols="50,50"]
+|===
+| Fonctionnalité ONTAP | Hôtes SAN pris en charge 
+
+
+| *Le multichemin NVMe natif est toujours activé* ONTAP ne prend pas en charge le multichemin Device Mapper (DM) pour NVMe-oF.  a| 
+* RHEL 10,0
+* Rocky Linux 10,0
+
+
+
+
+| *Démarrage SAN à l'aide du protocole NVMe/FC*  a| 
+* RHEL 10,0
+* RHEL 9.6, 9.5, 9.4
+* Rocky Linux 10,0
+* Rocky Linux 9.6, 9.5, 9.4
+
+
+
+
+| *`nvme-cli`le package comprend des scripts de connexion automatique* Vous n'avez pas besoin de scripts tiers.  a| 
+* RHEL 10,0
+* RHEL 9.6, 9.5, 9.4, 9.3, 9.2, 9.1, 9.0
+* RHEL 8.10, 8.9, 8.8, 8.7, 8.6, 8.5, 8.4, 8.3, 8.2
+* Rocky Linux 10,0
+* Rocky Linux 9.6, 9.5, 9.4, 9.3, 9.2, 9.1, 9.0
+* Rocky Linux 8.10, 8.9, 8.8, 8.7, 8.6, 8.5, 8.4, 8.3, 8.2
+
+
+
+
+| *Règle udev native dans `nvme-cli` package* Fournit un équilibrage de charge à tour de rôle pour les trajets multiples NVMe.  a| 
+* RHEL 10,0
+* RHEL 9.6, 9.5, 9.4, 9.3, 9.2, 9.1, 9.0
+* RHEL 8.10, 8.9, 8.8, 8.7, 8.6, 8.5, 8.4, 8.3, 8.2
+* Rocky Linux 10,0
+* Rocky Linux 9.6, 9.5, 9.4, 9.3, 9.2, 9.1, 9.0
+* Rocky Linux 8.10, 8.9, 8.8, 8.7, 8.6, 8.5, 8.4, 8.3, 8.2
+
+
+
+
+| *Multipathing NVMe dans le noyau pour les espaces de noms NVMe* ONTAP active cette fonctionnalité par défaut ; vous n'avez pas besoin de modifier les paramètres.  a| 
+* RHEL 9.6, 9.5, 9.4, 9.3, 9.2, 9.1, 9.0
+* Rocky Linux 9.6, 9.5, 9.4, 9.3, 9.2, 9.1, 9.0
+
+
+|===
+
+NOTE: Pour plus de détails sur les configurations prises en charge, consultez lelink:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^] .
+
+.Informations associées
+* link:https://www.netapp.com/pdf.html?item=/media/10681-tr4684pdf.pdf["Base de connaissances NetApp : En savoir plus sur NVMe-oF"^] .
+

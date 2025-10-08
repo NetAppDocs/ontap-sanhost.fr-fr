@@ -2,6 +2,10 @@
 :allow-uri-read: 
 
 
+Le `nvmefc-boot-connections.service` et `nvmf-autoconnect.service` services de démarrage inclus dans NVMe/FC `nvme-cli` les packages sont automatiquement activés au démarrage du système.
+
+Une fois le démarrage terminé, vérifiez que le  `nvmefc-boot-connections.service` et  `nvmf-autoconnect.service` les services de démarrage sont activés.
+
 .Étapes
 . Vérifiez que `nvmf-autoconnect.service` est activé :
 +
