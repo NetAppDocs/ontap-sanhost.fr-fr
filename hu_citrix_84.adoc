@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
 permalink: hu_citrix_84.html 
-keywords: host utilities, citrix, XenServer, 8 series, netapp, ontap, san, boot 
-summary: Configurez Citrix Hypervisor 8.4 pour le multi-accès et avec des paramètres et paramètres spécifiques pour les opérations de protocole FCP et iSCSI avec le stockage ONTAP . 
+keywords: host utilities, citrix, Xenserver, 8 series, netapp, ontap, san, boot 
+summary: Configurez Citrix Xenserver 8.4 pour le multivoie et avec des paramètres et paramètres spécifiques pour les opérations de protocole FCP et iSCSI avec le stockage ONTAP . 
 ---
 = Configurer Citrix Xenserver 8.4 pour FCP et iSCSI avec stockage ONTAP
 :hardbreaks:
@@ -16,11 +16,11 @@ summary: Configurez Citrix Hypervisor 8.4 pour le multi-accès et avec des param
 
 
 [role="lead"]
-Configurez Citrix Hypervisor 8.4 pour le multi-accès et avec des paramètres et paramètres spécifiques pour les opérations de protocole FCP et iSCSI avec le stockage ONTAP .
+Configurez Citrix Xenserver 8.4 pour le multivoie et avec des paramètres et paramètres spécifiques pour les opérations de protocole FCP et iSCSI avec le stockage ONTAP .
 
 [NOTE]
 ====
-Le progiciel Linux Host Utilities ne prend pas en charge les systèmes d'exploitation Citrix Hypervisor.
+Le progiciel Linux Host Utilities ne prend pas en charge les systèmes d'exploitation Citrix Xenserver.
 
 ====
 
@@ -45,7 +45,7 @@ Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la docum
 
 == Étape 2 : Confirmez la configuration multi-chemins pour votre hôte
 
-Vous pouvez utiliser le multipathing avec Citrix Hypervisor 8.4 pour gérer les LUN ONTAP .
+Vous pouvez utiliser le multipathing avec Citrix Xenserver 8.4 pour gérer les LUN ONTAP .
 
 Pour vous assurer que les chemins d'accès multiples sont correctement configurés pour votre hôte, vérifiez que le `/etc/multipath.conf` fichier est défini et que vous disposez des paramètres recommandés par NetApp pour vos LUN ONTAP.
 

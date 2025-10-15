@@ -29,7 +29,7 @@ Vos hôtes SAN et votre stockage ONTAP peuvent résider sur votre site, dans le 
 
 NOTE: Dans un environnement cloud, les hôtes sont généralement appelés clients. Toutes les informations spécifiques à l'hôte de ce contenu s'appliquent également aux clients cloud.
 
-Par exemple, vous pouvez configurer le stockage ONTAP sur site pour vous connecter aux hôtes SAN sur site ou aux clients cloud SAN. Vous pouvez également configurer les services de stockage s'exécutant sur un environnement cloud tel que link:https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] ou link:https://docs.netapp.com/us-en/bluexp-fsx-ontap/index.html["Amazon FSX pour NetApp ONTAP"^] Pour se connecter à des hôtes SAN sur site ou à des clients cloud SAN.
+Par exemple, vous pouvez configurer le stockage ONTAP sur site pour vous connecter aux hôtes SAN sur site ou aux clients cloud SAN.  Vous pouvez également configurer des services de stockage exécutés sur un environnement cloud tel quelink:https://docs.netapp.com/us-en/cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] oulink:https://docs.netapp.com/us-en/storage-management-fsx-ontap/index.html["Amazon FSX pour NetApp ONTAP"^] pour se connecter aux hôtes SAN sur site ou aux clients cloud SAN.
 
 .Informations associées
 * link:https://docs.netapp.com/us-en/ontap/san-config/index.html["Référence de configuration SAN ONTAP"^]
