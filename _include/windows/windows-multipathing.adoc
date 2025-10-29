@@ -1,0 +1,81 @@
+= Étape 4 : Confirmez la configuration multi-chemins pour votre hôte
+:allow-uri-read: 
+
+
+
+
+== Étape 4 : Confirmez la configuration multi-chemins pour votre hôte
+
+Installez le logiciel Microsoft Multipath I/O (MPIO) et activez le multipathing si votre hôte Windows possède plusieurs chemins d'accès au système de stockage.
+
+Sur un système Windows, les deux principaux composants d'une solution MPIO sont le module spécifique au périphérique (DSM) et le MPIO Windows.  MPIO présente un seul disque au système d'exploitation Windows pour tous les chemins et le DSM gère les basculements de chemin.
+
+
+CAUTION: Si vous n'installez pas le logiciel MPIO, le système d'exploitation Windows peut voir chaque chemin comme un disque distinct. Cela peut entraîner une corruption des données.
+
+
+NOTE: Windows XP ou Windows Vista exécuté sur une machine virtuelle Hyper-V ne prend pas en charge MPIO.
+
+.Étapes
+. Installez le logiciel MPIO et activez le multipathing.
+. Lorsque vous sélectionnez MPIO sur des systèmes utilisant FC, le programme d'installation des utilitaires hôtes définit les valeurs de délai requises pour les HBA Emulex et QLogic FC.
++
+[role="tabbed-block"]
+====
+.Emulex FC
+--
+Les valeurs de délai pour les HBA FC Emulex :
+
+[cols="2*"]
+|===
+| Type de propriété | Valeur de propriété 
+
+
+| LinkTimeOut | 1 
+
+
+| NodeTimeOut | 10 
+|===
+--
+.FC QLogic
+--
+Les valeurs de temporisation pour les HBA FC QLogic :
+
+[cols="2*"]
+|===
+| Type de propriété | Valeur de propriété 
+
+
+| LinkDownTimeOut | 1 
+
+
+| PortDownloyCount | 10 
+|===
+--
+====
+. Vérifiez l'état du chemin d'accès pour vos LUN ONTAP :
++
+Selon la configuration de votre SAN, l'hôte utilise des configurations ASA, AFF ou FAS pour accéder aux LUN ONTAP .  Ces configurations ne devraient pas nécessiter plus de quatre chemins d'accès pour accéder à un seul LUN ONTAP .  Plus de quatre chemins d'accès peuvent engendrer des problèmes en cas de panne de stockage.
+
++
+Les exemples de résultats suivants montrent les paramètres corrects pour les LUN ONTAP pour une configuration ASA, AFF ou FAS .
+
++
+[role="tabbed-block"]
+====
+.Configuration DE L'INFRASTRUCTURE ASA
+--
+Une configuration ASA doit comporter un groupe de chemins actifs/optimisés avec des priorités uniques.  Le contrôleur gère les chemins et envoie des E/S sur tous les chemins actifs.
+
+image::asa.png[Capture d'écran d'une LUN ONTAP avec chemins actifs/optimisés]
+
+--
+.Configuration AFF ou FAS
+--
+Une configuration AFF ou FAS doit comporter deux groupes de chemins avec des priorités différentes.  Les chemins ayant une priorité plus élevée sont actifs/optimisés et sont gérés par le contrôleur où se trouve l'agrégat.  Les chemins ayant une priorité inférieure sont gérés par un contrôleur différent.  Elles sont actives mais non optimisées et ne sont utilisées que lorsque les chemins optimisés ne sont pas disponibles.
+
+image::nonasa.png[Capture d'écran d'une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés]
+
+--
+====
+

@@ -9,4 +9,4 @@ NOTE: Vous devez contacter le support Microsoft pour obtenir les correctifs qui 
 
 
 
-TIP: De nombreux correctifs nécessitent un redémarrage de votre hôte Windows. Vous pouvez choisir d'attendre le redémarrage de l'hôte jusqu'à ce que _after_ vous installiez ou mettiez à niveau les utilitaires hôtes.
+TIP: De nombreux correctifs nécessitent un redémarrage de l'hôte Windows.  Vous pouvez attendre avant de redémarrer l'hôte jusqu'à ce que vous ayez installé ou mis à niveau les utilitaires hôtes.

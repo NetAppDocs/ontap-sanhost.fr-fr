@@ -1,0 +1,11 @@
+= Étape 3 : installer les utilitaires hôtes Windows
+:allow-uri-read: 
+
+
+
+
+== Étape 3 : installer les utilitaires hôtes Windows
+
+Les utilitaires hôtes Windows sont un ensemble de programmes logiciels accompagnés d'une documentation qui vous permettent de connecter des ordinateurs hôtes à des disques virtuels (LUN) sur un SAN NetApp .  NetApp recommande de télécharger et d'installer la dernière version des utilitaires hôtes Windows pour prendre en charge la gestion des LUN ONTAP et aider le support technique à collecter les données de configuration.
+
+Pour plus d'informations sur la configuration et l'installation des utilitaires hôtes Windows, consultez la documentation.link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71_rn.html["Utilitaires d'hôtes Windows"] Consultez la documentation et sélectionnez la procédure d'installation correspondant à votre version de Windows Host Utilities.
