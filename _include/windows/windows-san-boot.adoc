@@ -18,7 +18,7 @@ Si vous choisissez d'utiliser le démarrage SAN, il doit être pris en charge pa
 Utilisez le https://mysupport.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^] pour vérifier que votre système d'exploitation Windows, votre adaptateur de bus hôte (HBA), le micrologiciel HBA, le BIOS de démarrage HBA et la version ONTAP prennent en charge le démarrage SAN.
 
 .Étapes
-. link:https://docs.netapp.com/us-en/ontap/san-management/index.html["Créez un LUN de démarrage SAN et mappez-le à l'hôte"^].
+. link:https://docs.netapp.com/us-en/ontap/san-admin/provision-storage.html["Créez un LUN de démarrage SAN et mappez-le à l'hôte"^].
 . Activez le démarrage SAN dans le BIOS du serveur pour les ports auxquels la LUN de démarrage SAN est mappée.
 +
 Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la documentation spécifique au fournisseur.

@@ -18,7 +18,7 @@ summary: 'Comment configurer l"hôte NVMe-of pour RHEL 9.6 avec ONTAP'
 [role="lead"]
 Les hôtes Red Hat Enterprise Linux (RHEL) prennent en charge les protocoles NVMe over Fibre Channel (NVMe/FC) et NVMe over TCP (NVMe/TCP) avec Asymmetric Namespace Access (ANA).  ANA fournit une fonctionnalité de multi-accès équivalente à l'accès aux unités logiques asymétriques (ALUA) dans les environnements iSCSI et FCP.
 
-Découvrez comment configurer les hôtes NVMe over Fabrics (NVMe-oF) pour Red Hat Enterprise Linux (RHEL) 9.6.  Pour plus d'informations sur l'assistance et les fonctionnalités, consultezlink:hu-nvme-index.html["Présentation de NVME-oF"^] .
+Apprenez à configurer les hôtes NVMe over Fabrics (NVMe-oF) pour RHEL 9.6. Pour plus d'assistance et d'informations sur les fonctionnalités, consultez link:hu-nvme-index.html["Présentation de NVME-oF"^].
 
 *NVMe-oF avec RHEL 9.6 présente les limitations connues suivantes :*
 
