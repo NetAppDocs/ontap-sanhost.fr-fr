@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: hu-ol-9x.html 
-keywords: host utilities, oracle, linux, 9.5, 9.4, 9.3, 9.2, 9.1, 9.0 netapp, ontap 
-summary: Installez les utilitaires hôtes Linux sur un hôte Oracle Linux 9.x pour gérer les opérations de protocole FCP et iSCSI avec les LUN ONTAP . 
+permalink: hu-rhel-10.html 
+keywords: host utilities, red hat, rhel, linux, 10, netapp, ontap, rhel 
+summary: Installez les utilitaires hôtes Linux sur un hôte RHEL 10 pour gérer les opérations de protocole FCP et iSCSI avec les LUN ONTAP . 
 ---
-= Configurer Oracle Linux 9.x pour FCP et iSCSI avec stockage ONTAP
+= Configurer RHEL 10 pour FCP et iSCSI avec le stockage ONTAP
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,10 +16,10 @@ summary: Installez les utilitaires hôtes Linux sur un hôte Oracle Linux 9.x po
 
 
 [role="lead"]
-Le logiciel Linux Host Utilities fournit des outils de gestion et de diagnostic pour les hôtes Linux connectés au stockage ONTAP . Lorsque vous installez les utilitaires hôtes Linux sur un hôte Oracle Linux 9.x, vous pouvez utiliser ces utilitaires pour vous aider à gérer les opérations de protocole FCP et iSCSI avec les LUN ONTAP .
+Le logiciel Linux Host Utilities fournit des outils de gestion et de diagnostic pour les hôtes Linux connectés au stockage ONTAP . Lorsque vous installez les utilitaires hôtes Linux sur un hôte Red Hat Enterprise Linux (RHEL) 10, vous pouvez utiliser les utilitaires hôtes pour vous aider à gérer les opérations de protocole FCP et iSCSI avec les LUN ONTAP .
 
 
-NOTE: Vous n'avez pas besoin de configurer les paramètres KVM (Kernel-based Virtual machine) car les LUN ONTAP sont automatiquement mappées sur l'hyperviseur KVM.
+NOTE: Vous n’avez pas besoin de configurer manuellement les paramètres de la machine virtuelle basée sur le noyau (KVM) car les LUN ONTAP sont automatiquement mappés à l’hyperviseur.
 
 
 
@@ -54,7 +54,7 @@ NOTE: L'installation des utilitaires d'hôtes Linux ne modifie aucun paramètre 
 
 == Étape 3 : confirmez la configuration des chemins d'accès multiples pour votre hôte
 
-Vous pouvez utiliser le multipathing avec Oracle Linux 9.x pour gérer les LUN ONTAP .
+Vous pouvez utiliser le multipathing avec RHEL 10 pour gérer les LUN ONTAP .
 
 Pour vous assurer que les chemins d'accès multiples sont correctement configurés pour votre hôte, vérifiez que le `/etc/multipath.conf` fichier est défini et que vous disposez des paramètres recommandés par NetApp pour vos LUN ONTAP.
 
@@ -162,21 +162,17 @@ Les résultats des exemples suivants montrent les paramètres et l'état de chem
 --
 Une configuration ASA optimise tous les chemins vers une LUN donnée en les gardant actifs. Ce qui améliore les performances en assurant le service des opérations d'E/S sur tous les chemins en même temps.
 
-.Montrer l'exemple
-[%collapsible]
-=====
 [listing]
 ----
-multipath -ll
-3600a098038303634722b4d59646c4436 dm-28 NETAPP,LUN C-Mode
+# multipath -ll
+3600a098038314e535a24584e4b496252 dm-32 NETAPP,LUN C-Mode
 size=10G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
-|-+- policy='service-time 0' prio=50 status=active
-  |- 11:0:7:6   sdbz 68:208  active ready running
-  |- 11:0:11:6  sddn 71:80   active ready running
-  |- 11:0:15:6  sdfb 129:208 active ready running
-  |- 12:0:1:6   sdgp 132:80  active ready running
+`-+- policy='service-time 0' prio=50 status=active
+  |- 11:0:0:41 sdan 66:112  active ready running
+  |- 11:0:1:41 sdcb 68:240  active ready running
+  |- 14:0:2:41 sdfd 129:240 active ready running
+  `- 14:0:0:41 sddp 71:112  active ready running
 ----
-=====
 --
 .Configuration AFF ou FAS
 --
@@ -184,22 +180,18 @@ Une configuration AFF ou FAS doit comporter deux groupes de chemins ayant des pr
 
 L'exemple suivant présente la sortie d'une LUN ONTAP avec deux chemins Active/Optimized et deux chemins Active/non optimisés :
 
-.Montrer l'exemple
-[%collapsible]
-=====
 [listing]
 ----
-multipath -ll
-3600a0980383036347ffb4d59646c4436 dm-28 NETAPP,LUN C-Mode
-size=10G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+# multipath -ll
+3600a0980383149764b5d567257516273 dm-0 NETAPP,LUN C-Mode
+size=150G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
 |-+- policy='service-time 0' prio=50 status=active
-| |- 16:0:6:35 sdwb  69:624  active ready running
-| |- 16:0:5:35 sdun  66:752  active ready running
+| |- 16:0:3:0  sdcg 69:64  active ready running
+| `- 10:0:0:0  sdb  8:16   active ready running
 `-+- policy='service-time 0' prio=10 status=enabled
-  |- 15:0:0:35 sdaj  66:48   active ready running
-  |- 15:0:1:35 sdbx  68:176  active ready running
+  |- 10:0:1:0  sdc  8:32   active ready running
+  `- 16:0:2:0  sdcf 69:48  active ready running
 ----
-=====
 --
 ====
 
@@ -273,15 +265,8 @@ devices {
 
 == Étape 6 : passez en revue les problèmes connus
 
-Oracle Linux 9.3, 9.2, 9.1 et 9.0 avec stockage ONTAP présente le problème connu suivant :
+Il n'y a pas de problème connu.
 
-[cols="20,40,40"]
-|===
-| ID de bug NetApp | Titre | Description 
-
-
-| https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/BURT/1508554["1508554"^] | L'utilitaire de LUN SAN avec HBA Emulex nécessite des liens symboliques à partir des modules de bibliothèque | Lorsque vous exécutez la commande CLI des utilitaires hôtes Linux « sanlun fcp show adapter -v » sur un hôte SAN, la commande échoue et affiche le message d'erreur suivant : « Les dépendances de bibliothèque requises pour la découverte d'un adaptateur de bus hôte (HBA) sont introuvables : ---- [root@hostname ~]# sanlun fcp show adapter -v Impossible de localiser la bibliothèque /usr/lib64/libHBAAPI.so. Assurez-vous que le paquet installant la bibliothèque est installé et chargé. » 
-|===
 
 
 == Et la suite ?
