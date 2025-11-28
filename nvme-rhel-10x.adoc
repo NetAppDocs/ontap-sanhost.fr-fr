@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: nvme-rhel-10.html 
+permalink: nvme-rhel-10x.html 
 keywords: nvme, linux, rhel, red hat, enterprise 
-summary: 'Comment configurer l"hôte NVMe-oF pour RHEL 10.0 avec ONTAP' 
+summary: Comment configurer un hôte NVMe-oF pour RHEL 10x avec ONTAP 
 ---
-= Configurer RHEL 10.0 pour NVMe-oF avec stockage ONTAP
+= Configurer RHEL 10x pour NVMe-oF avec stockage ONTAP
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -18,12 +18,12 @@ summary: 'Comment configurer l"hôte NVMe-oF pour RHEL 10.0 avec ONTAP'
 [role="lead"]
 Les hôtes Red Hat Enterprise Linux (RHEL) prennent en charge les protocoles NVMe over Fibre Channel (NVMe/FC) et NVMe over TCP (NVMe/TCP) avec Asymmetric Namespace Access (ANA).  ANA fournit une fonctionnalité de multi-accès équivalente à l'accès aux unités logiques asymétriques (ALUA) dans les environnements iSCSI et FCP.
 
-Découvrez comment configurer les hôtes NVMe over Fabrics (NVMe-oF) pour RHEL 10.0.  Pour plus d'informations sur l'assistance et les fonctionnalités, consultezlink:hu-nvme-index.html["Présentation de NVME-oF"^] .
+Apprenez à configurer les hôtes NVMe over Fabrics (NVMe-oF) pour RHEL 10x. Pour plus d'assistance et d'informations sur les fonctionnalités, consultez link:nvme-rhel-supported-features.html["Prise en charge et fonctionnalités de RHEL ONTAP"].
 
-*NVMe-oF avec RHEL 10.0 présente les limitations connues suivantes :*
+NVMe-oF avec RHEL 10x présente les limitations connues suivantes :
 
 * La prise en charge multichemin DM pour NVMe-oF n'est pas prise en charge.
-* Évitez d'émettre le  `nvme disconnect-all` commande sur les systèmes démarrant à partir du SAN sur les espaces de noms NVMe-TCP ou NVMe-FC car elle déconnecte les systèmes de fichiers racine et de données et peut entraîner une instabilité du système.
+* Le `nvme disconnect-all` Cette commande déconnecte les systèmes de fichiers racine et de données et peut entraîner une instabilité du système.  Ne pas utiliser cette commande sur des systèmes démarrant à partir d'un SAN via des espaces de noms NVMe-TCP ou NVMe-FC.
 
 
 
@@ -43,12 +43,12 @@ Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la docum
 
 
 
-== Étape 2 : Vérifiez la version du logiciel et la configuration NVMe
+== Étape 2 : Installez RHEL et le logiciel NVMe, puis vérifiez votre configuration.
 
-Vérifiez que votre système répond aux exigences logicielles et vérifiez les installations des packages NVMe et la configuration de l’hôte.
+Pour configurer votre hôte pour NVMe-oF, vous devez installer les packages logiciels hôte et NVMe, activer le multipathing et vérifier la configuration NQN de votre hôte.
 
 .Étapes
-. Installez RHEL 10.0 sur le serveur.  Une fois l'installation terminée, vérifiez que vous exécutez le noyau RHEL 10.0 requis :
+. Installez RHEL 10x sur le serveur.  Une fois l'installation terminée, vérifiez que vous utilisez bien le noyau RHEL 10x requis :
 +
 [source, cli]
 ----
@@ -104,7 +104,7 @@ L'exemple suivant montre un  `hostnqn` version:
 ----
 nqn.2014-08.org.nvmexpress:uuid:4c4c4544-0056-5410-8048-b9c04f425633
 ----
-. Vérifiez que le `hostnqn` la chaîne correspond au `hostnqn` Chaîne du sous-système correspondant sur la baie ONTAP :
+. Sur le système ONTAP , vérifiez que le `hostnqn` La chaîne correspond à `hostnqn` chaîne de caractères pour le sous-système correspondant sur le système de stockage ONTAP :
 +
 [source, cli]
 ----
@@ -147,7 +147,6 @@ Configurez NVMe/FC avec des adaptateurs Broadcom/Emulex ou Marvell/QLogic, ou co
 --
 Configuration de NVMe/FC pour une carte Broadcom/Emulex
 
-.Étapes
 . Vérifiez que vous utilisez le modèle d'adaptateur pris en charge :
 +
 .. Afficher les noms des modèles :
@@ -299,7 +298,6 @@ FCP CMPL: xb 000014a5 Err 0002149a
 --
 Configuration du NVMe/FC pour un adaptateur Marvell/QLogic
 
-.Étapes
 . Vérifiez que vous utilisez les versions de pilote d'adaptateur et de micrologiciel prises en charge :
 +
 [source, cli]
@@ -331,7 +329,6 @@ La sortie attendue est 1.
 --
 Le protocole NVMe/TCP ne prend pas en charge l'opération de connexion automatique.  Au lieu de cela, vous pouvez découvrir les sous-systèmes et espaces de noms NVMe/TCP en exécutant l'opération NVMe/TCP. `connect` ou `connect-all` opérations manuellement.
 
-.Étapes
 . Vérifiez que le port initiateur peut obtenir les données de la page du journal de découverte sur les LIF NVMe/TCP pris en charge :
 +
 [source, cli]
@@ -760,7 +757,7 @@ nvme netapp ontapdevices -o json
 
 == Étape 7 : Configurer une authentification sécurisée en bande
 
-À partir d' ONTAP 9.12.1, l'authentification sécurisée en bande est prise en charge via NVMe/TCP entre un hôte RHEL 10.0 et un contrôleur ONTAP .
+L'authentification sécurisée en bande est prise en charge via NVMe/TCP entre un hôte RHEL 10x et un contrôleur ONTAP .
 
 Chaque hôte ou contrôleur doit être associé à un  `DH-HMAC-CHAP` clé pour configurer l'authentification sécurisée. A  `DH-HMAC-CHAP` la clé est une combinaison du NQN de l'hôte ou du contrôleur NVMe et d'un secret d'authentification configuré par l'administrateur. Pour authentifier son homologue, un hôte ou un contrôleur NVMe doit reconnaître la clé associée à cet homologue.
 
@@ -779,7 +776,7 @@ Configurez l'authentification intrabande sécurisée à l'aide de l'interface de
 ----
 cat /etc/nvme/hostnqn
 ----
-. Générez la clé dhchap pour l’hôte RHEL 10.0.
+. Générez la clé dhchap pour l'hôte RHEL 10x.
 +
 La sortie suivante décrit le `gen-dhchap-key` paramètres de commande :
 
