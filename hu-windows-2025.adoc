@@ -156,6 +156,12 @@ image::nonasa.png[Capture d'écran d'une LUN ONTAP avec deux chemins actifs/opti
 
 
 
-== Problèmes connus
+== Étape 5 : Examiner les problèmes connus
 
-Il n'y a aucun problème connu pour Windows Server 2025 avec la version ONTAP.
+Il n'y a pas de problème connu.
+
+
+
+== Et la suite ?
+
+link:hu_wuhu_hba_settings.html["Découvrez les paramètres du registre pour Windows Host Utilities"].

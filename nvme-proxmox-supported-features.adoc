@@ -1,0 +1,71 @@
+---
+sidebar: sidebar 
+permalink: nvme-proxmox-supported-features.html 
+keywords: nvme, proxmox, enterprise 
+summary: Découvrez la prise en charge et les fonctionnalités ONTAP pour les hôtes Proxmox. 
+---
+= Découvrez la prise en charge et les fonctionnalités ONTAP pour les hôtes Proxmox.
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Les fonctionnalités prises en charge pour la configuration de l'hôte avec NVMe over Fabrics (NVMe-oF) varient en fonction de votre version d' ONTAP et de Proxmox.
+
+[cols="30,20,20"]
+|===
+| Fonctionnalité ONTAP | Version hôte Proxmox | Version ONTAP 
+
+
+| Fournit des détails ONTAP pour les espaces de noms NVMe/FC et NVMe/TCP en utilisant le protocole natif `nvme-cli` emballer.  a| 
+9.0
+| 9.10.1 ou version ultérieure 
+
+
+| NVMe/TCP est une fonctionnalité d'entreprise entièrement prise en charge  a| 
+9.0
+| 9.10.1 ou version ultérieure 
+
+
+| Le trafic NVMe et SCSI est pris en charge sur le même hôte grâce à NVMe multipath pour les espaces de noms NVMe-oF et à dm-multipath pour les LUN SCSI.  a| 
+9.0
+| 9.4 ou version ultérieure 
+|===
+ONTAP prend en charge les fonctionnalités hôtes SAN suivantes, quelle que soit la version ONTAP exécutée sur votre système.
+
+[cols="70,30"]
+|===
+| Fonctionnalité | Version hôte Proxmox 
+
+
+| Le multipathing NVMe natif est activé par défaut  a| 
+9.0
+
+
+
+| Le `nvme-cli` Ce package inclut des scripts de connexion automatique, éliminant ainsi le besoin de scripts tiers.  a| 
+9.0
+
+
+
+| La règle udev native dans `nvme-cli` Ce package assure l'équilibrage de charge round-robin pour le multipath NVMe.  a| 
+9.0
+
+|===
+
+NOTE: Pour plus de détails sur les configurations prises en charge, consultez lelink:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^] .
+
+
+
+== Quelle est la prochaine étape
+
+link:nvme-proxmox-ve-9x.html["Découvrez comment configurer Proxmox VE 9.0"]
+
+.Informations associées
+link:https://docs.netapp.com/us-en/ontap/san-admin/start-nvme-fc-service-svm-task.html["Découvrez comment gérer les protocoles NVMe"^]

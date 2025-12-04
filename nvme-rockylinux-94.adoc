@@ -18,7 +18,7 @@ summary: 'Comment configurer l"hôte NVMe-oF pour Rocky Linux 9.4 avec ONTAP'
 [role="lead"]
 Les hôtes Rocky Linux prennent en charge les protocoles NVMe over Fibre Channel (NVMe/FC) et NVMe over TCP (NVMe/TCP) avec Asymmetric Namespace Access (ANA). ANA fournit une fonctionnalité de multi-accès équivalente à l'accès aux unités logiques asymétriques (ALUA) dans les environnements iSCSI et FCP.
 
-Apprenez à configurer les hôtes NVMe over Fabrics (NVMe-oF) pour Rocky Linux 9.4. Pour plus d'assistance et d'informations sur les fonctionnalités, consultez link:nvme-rockylinux-overview.html["Prise en charge et fonctionnalités de Rocky Linux ONTAP"].
+Apprenez à configurer les hôtes NVMe over Fabrics (NVMe-oF) pour Rocky Linux 9.4. Pour plus d'assistance et d'informations sur les fonctionnalités, consultez link:nvme-rockylinux-supported-features.html["Prise en charge et fonctionnalités de Rocky Linux ONTAP"].
 
 NVMe-oF avec Rocky Linux 9.4 n'a aucune limitation connue.
 
