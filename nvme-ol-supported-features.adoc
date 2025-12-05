@@ -1,0 +1,90 @@
+---
+sidebar: sidebar 
+permalink: nvme-ol-supported-features.html 
+keywords: nvme, oracle linux, enterprise 
+summary: Découvrez la prise en charge et les fonctionnalités ONTAP pour les hôtes Oracle Linux. 
+---
+= Découvrez la prise en charge et les fonctionnalités ONTAP pour les hôtes Oracle Linux.
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Les fonctionnalités prises en charge pour la configuration hôte avec NVMe over Fabrics (NVMe-oF) varient en fonction de votre version d' ONTAP et d'Oracle Linux.
+
+[cols="50,25,25"]
+|===
+| Fonctionnalité | Version hôte Oracle Linux | Version ONTAP 
+
+
+| L'authentification sécurisée en bande est prise en charge via NVMe/TCP entre un hôte Oracle Linux et un contrôleur ONTAP.  a| 
+9.4 ou version ultérieure
+| 9.12.1 ou version ultérieure 
+
+
+| NVMe/TCP fournit des espaces de noms utilisant le natif `nvme-cli` emballer  a| 
+8.2 ou version ultérieure
+| 9.10.1 ou version ultérieure 
+
+
+| Le trafic NVMe et SCSI est pris en charge sur le même hôte grâce à NVMe multipath pour les espaces de noms NVMe-oF et à dm-multipath pour les LUN SCSI.  a| 
+7.7 ou version ultérieure
+| 9.4 ou version ultérieure 
+|===
+
+NOTE: NetApp  `sanlun` L'utilitaire hôte n'est pas pris en charge par NVMe-oF. Vous pouvez utiliser le plug-in NetApp inclus dans la version native.  `nvme-cli` pour tous les transports NVMe-oF.
+
+ONTAP prend en charge les fonctionnalités hôtes SAN suivantes, quelle que soit la version ONTAP exécutée sur votre système.
+
+[cols="75,25"]
+|===
+| Fonctionnalité | Version hôte Oracle Linux 
+
+
+| Le multipathing NVMe intégré au noyau pour les espaces de noms NVMe est activé par défaut  a| 
+8.3 ou version ultérieure
+
+
+
+| Le démarrage SAN est activé via le protocole NVMe/FC  a| 
+9.5 ou version ultérieure
+
+
+
+| Le `nvme-cli` Ce package inclut des scripts de connexion automatique, éliminant ainsi le besoin de scripts tiers.  a| 
+8.3 ou version ultérieure
+
+
+
+| La règle udev native dans `nvme-cli` Ce package assure l'équilibrage de charge round-robin pour le multipath NVMe.  a| 
+8.3 ou version ultérieure
+
+|===
+
+NOTE: Pour plus de détails sur les configurations prises en charge, consultez lelink:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^] .
+
+
+
+== Quelle est la prochaine étape
+
+[cols="50,50"]
+|===
+| Si votre version d'Oracle Linux est .. | Découvrez... 
+
+
+| Série 9 | link:nvme-ol-9x.html["Configuration de NVMe pour Oracle Linux 9x"] 
+
+
+| Série 8 | link:nvme-ol-8x.html["Configuration de NVMe pour Oracle Linux 8x"] 
+
+
+| Série 7 | link:nvme-ol-7x.html["Configuration de NVMe pour Oracle Linux 7x"] 
+|===
+.Informations associées
+link:https://docs.netapp.com/us-en/ontap/san-admin/start-nvme-fc-service-svm-task.html["Découvrez comment gérer les protocoles NVMe"^]
