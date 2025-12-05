@@ -20,8 +20,10 @@ L'hôte Proxmox VE 9.0 prend en charge les protocoles NVMe over Fibre Channel (N
 
 Apprenez à configurer les hôtes NVMe over Fabrics (NVMe-oF) pour Proxmox VE 9.0. Pour plus d'assistance et d'informations sur les fonctionnalités, consultez link:nvme-proxmox-supported-features.html["Prise en charge et fonctionnalités ONTAP"^].
 
+NVMe-oF avec Proxmox VE 9.0 présente la limitation connue suivante :
 
-NOTE: Proxmox VE 9.0 ne prend pas en charge la configuration de démarrage SAN pour NVMe-FC.
+* La configuration de démarrage SAN pour NVMe-FC n'est pas prise en charge.
+
 
 
 

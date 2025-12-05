@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
-permalink: hu-proxmox-9x.html 
-keywords: proxmox 9.0, netapp, ontap, iscsi, fcp 
+permalink: hu-proxmox-ve-9x.html 
+keywords: proxmox, VE, 9.0, netapp, ontap, iscsi, fcp 
 summary: Installez les utilitaires hôtes Linux sur un hôte Proxmox VE 9.0 pour gérer les opérations de protocole FCP et iSCSI avec les LUN ONTAP . 
 ---
 = Configurer Proxmox VE 9.0 pour FCP et iSCSI avec stockage ONTAP
@@ -18,13 +18,12 @@ summary: Installez les utilitaires hôtes Linux sur un hôte Proxmox VE 9.0 pour
 [role="lead"]
 Configurez Proxmox VE 9.0 pour le multipathing et avec des paramètres et réglages spécifiques pour les opérations de protocole FCP et iSCSI avec le stockage ONTAP .
 
-[NOTE]
-====
+FCP et iSCSI avec Proxmox VE 9.0 présentent les limitations connues suivantes :
+
 * Les utilitaires hôtes Linux ne prennent pas en charge les systèmes d'exploitation Proxmox VE 9.0.
-* Proxmox VE 9.0 ne prend pas en charge la configuration de démarrage SAN.
+* La configuration de démarrage SAN n'est pas prise en charge.
 
 
-====
 
 
 == Étape 1 : Confirmez la configuration multi-chemins pour votre hôte
