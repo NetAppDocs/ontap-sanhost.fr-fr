@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: hu_veritas_6x.html 
-keywords: host utilities, veritas, infoscale, 6.x, netapp, ontap, san, lun, multipathing, iscsi 
-summary: Fournit des conseils sur les paramètres de configuration hôte SAN de ONTAP pour la version Veritas Infoscale 6 
+permalink: hu-veritas-9x.html 
+keywords: host utilities, veritas, infoscale, 9, netapp, ontap, sanhost, iscsi, red, hat linux, oracle, linux 
+summary: Utilisez les utilitaires hôtes Linux avec Veritas Infoscale 9 pour les hôtes RHEL et Oracle Linux pour vous aider à gérer les opérations de protocole FC, FCoE et iSCSI avec les LUN ONTAP . 
 ---
-= Configurer Veritas Infoscale 6 pour FC, FCoE et iSCSI avec stockage ONTAP
+= Configurer Veritas Infoscale 9 pour FC, FCoE et iSCSI avec stockage ONTAP
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,7 +16,7 @@ summary: Fournit des conseils sur les paramètres de configuration hôte SAN de 
 
 
 [role="lead"]
-Le logiciel Linux Host Utilities fournit des outils de gestion et de diagnostic pour les hôtes Linux connectés au stockage ONTAP . Utilisez les utilitaires hôtes Linux avec Veritas Infoscale 6 pour les hôtes Oracle Linux (basé sur un noyau compatible Red Hat), Red Hat Enterprise Linux (RHEL) et SUSE Linux Enterprise Server pour prendre en charge la gestion des opérations de protocole FC, FCoE et iSCSI avec les LUN ONTAP .
+Le logiciel Linux Host Utilities fournit des outils de gestion et de diagnostic pour les hôtes Linux connectés au stockage ONTAP . Utilisez les utilitaires hôtes Linux avec Veritas Infoscale 9 pour les hôtes Oracle Linux (basé sur un noyau compatible Red Hat), Red Hat Enterprise Linux (RHEL) et SUSE Linux Enterprise Server pour prendre en charge la gestion des opérations de protocole FC, FCoE et iSCSI avec les LUN ONTAP .
 
 
 
@@ -51,7 +51,7 @@ NOTE: L'installation des utilitaires d'hôtes Linux ne modifie aucun paramètre 
 
 == Étape 3 : Vérifiez la configuration Veritas Dynamic Multipathing pour votre hôte
 
-Utilisez Veritas Dynamic Multipathing (VxDMP) avec Veritas Infoscale 6 pour gérer les LUN ONTAP .
+Utilisez Veritas Dynamic Multipathing (VxDMP) avec Veritas Infoscale 9 pour gérer les LUN ONTAP .
 
 Pour garantir que VxDMP est correctement configuré pour votre hôte, vous devez vérifier la configuration de VxDMP et contrôler la configuration de la bibliothèque de support de baie (ASL) et du module de stratégie de baie (APM). Les packages ASL et APM pour les systèmes de stockage NetApp sont installés lors de l'installation du logiciel Veritas.
 
@@ -59,7 +59,7 @@ Pour garantir que VxDMP est correctement configuré pour votre hôte, vous devez
 NOTE: Pour les environnements multipath hétérogènes, notamment Veritas Infoscale, Linux Native Device Mapper et LVM Volume Manager, reportez-vous à la documentation d'administration des produits Veritas pour connaître les paramètres de configuration.
 
 .Avant de commencer
-Assurez-vous que votre configuration répond aux exigences du système. Voir le link:https://mysupport.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^] et la matrice Veritas HCL.
+Assurez-vous que votre configuration respecte les exigences du système. Voir le link:https://mysupport.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^] et la matrice Veritas HCL.
 
 .Étapes
 . Vérifiez que la baie cible ONTAP est connectée au chemin multiple VxDMP :
@@ -74,14 +74,15 @@ vxdmpadm
 ====
 [listing]
 ----
-# vxdmpadm listenclosure
-ENCLR_NAME   ENCLR_TYPE  ENCLR_SNO     STATUS      ARRAY_TYPE    LUN_COUNT    FIRMWARE
-=====================================================================================
-sfrac0       SFRAC       804Xw$PqE52h  CONNECTED   ALUA          43           9800
+#vxdmpadm listenclosure
+ENCLR_NAME        ENCLR_TYPE     ENCLR_SNO      STATUS       ARRAY_TYPE     LUN_COUNT    FIRMWARE
+===================================================================================================
+info_asa0         Info_ASA       81KDT+YTg35P         CONNECTED    ALUA       20         9161
+infoscal1         Infoscal       81Ocq?Z7hPzC         CONNECTED    ALUA       23         9181
 # vxdmpadm getdmpnode
 NAME       STATE    ENCLR-TYPE  PATHS  ENBL  DSBL ENCLR-NAME
 ===================================================================
-sfrac0_47  ENABLED  SFRAC       4      4     0    sfrac0
+infoscal1_22         ENABLED      Infoscal     4      4     0     infoscal1
 ----
 ====
 . Vérifiez la configuration des packages ASL et APM. NetApp vous recommande d'utiliser les derniers packages pris en charge répertoriés sur le portail de support Veritas.
@@ -91,14 +92,15 @@ sfrac0_47  ENABLED  SFRAC       4      4     0    sfrac0
 ====
 [listing]
 ----
-# vxdmpadm list dmpnode dmpnodename=sfrac0_47 | grep asl
-asl        = libvxnetapp.so
+#  vxdmpadm list dmpnode dmpnodename=infoscal1_22 | grep asl
+asl             = libvxnetapp.so
+
 # vxddladm listversion |grep libvxnetapp.so
 libvxnetapp.so                  vm-8.0.0-rev-1   8.0
 
 # rpm -qa |grep VRTSaslapm
-VRTSaslapm-x.x.x.0000-RHEL8.X86_64
-vxddladm listsupport libname=libvxnetapp.so
+VRTSaslapm-9.0.3-RHEL9.x86_64
+#vxddladm listsupport libname=libvxnetapp.so
 ATTR_NAME   ATTR_VALUE
 =========================================
 LIBNAME     libvxnetapp.so
@@ -196,20 +198,6 @@ node.session.timeo.replacement_timeout = 120
 ----
 --
 ====
-. Configurez les valeurs « udev rport » de l'hôte pour les hôtes des séries RHEL 8 et 9 afin de prendre en charge l'environnement Veritas Infoscale dans les scénarios de basculement de stockage.
-+
-Configurez les valeurs « udev rport » en créant le fichier `/etc/udev/rules.d/40-rport.rules` avec le contenu de fichier suivant :
-
-+
-[listing]
-----
-# cat /etc/udev/rules.d/40-rport.rules
-KERNEL=="rport-*", SUBSYSTEM=="fc_remote_ports", ACTION=="add", RUN+=/bin/sh -c 'echo 20 > /sys/class/fc_remote_ports/%k/fast_io_fail_tmo;echo 864000 >/sys/class/fc_remote_ports/%k/dev_loss_tmo'"
-----
-+
-
-NOTE: Pour tous les autres paramètres spécifiques à Veritas, veuillez vous référer à la documentation produit standard Veritas Infoscale.
-
 . Vérifiez les paramètres et l'état du chemin de vos LUN ONTAP :
 +
 Dans les configurations AFF, FAS ou ASA , un seul LUN ONTAP ne devrait pas nécessiter plus de quatre chemins. Plus de quatre chemins d'accès peuvent engendrer des problèmes lors d'une panne de stockage.
@@ -229,13 +217,13 @@ Une configuration ASA optimise tous les chemins vers une LUN donnée en les gard
 =====
 [listing]
 ----
-# vxdmpadm getsubpaths dmpnodename-sfrac0_47
-NAME  STATE[A]   PATH-TYPE[M]   CTLR-NAME   ENCLR-TYPE  ENCLR-NAME  ATTRS  PRIORITY
+# vxdmpadm getsubpaths dmpnodename=infoscal1_21
+NAME   STATE[A]    PATH-TYPE[M] CTLR-NAME  ENCLR-TYPE  ENCLR-NAME   ATTRS  PRIORITY
 ===================================================================================
-sdas  ENABLED (A)    Active/Optimized c13   SFRAC       sfrac0     -      -
-sdb   ENABLED(A) Active/Optimized     c14   SFRAC       sfrac0     -      -
-sdcj  ENABLED(A)  Active/Optimized     c14   SFRAC       sfrac0     -      -
-sdea  ENABLED (A)    Active/Optimized c14   SFRAC       sfrac0     -
+sdby   ENABLED(A)  Active/Optimized  c1    Infoscal    infoscal1    -      -
+sddx   ENABLED(A)  Active/Optimized  c2    Infoscal    infoscal1    -      -
+sdfe   ENABLED(A)  Active/Optimized  c1    Infoscal    infoscal1    -      -
+sdfo   ENABLED(A)  Active/Optimized  c2    Infoscal    infoscal1    -      -
 ----
 =====
 --

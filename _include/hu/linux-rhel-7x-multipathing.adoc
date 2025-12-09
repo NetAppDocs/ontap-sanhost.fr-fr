@@ -104,7 +104,7 @@ Le tableau suivant présente les paramètres de chemins d'accès multiples compi
 multipath -ll
 ----
 +
-Les paramètres de chemins d'accès multiples par défaut prennent en charge les configurations ASA, AFF et FAS. Dans ces configurations, une seule LUN ONTAP ne doit pas nécessiter plus de quatre chemins. S'il y a plus de quatre chemins, cela peut causer des problèmes avec les chemins en cas de panne de stockage.
+Les paramètres multi-trajets par défaut prennent en charge les configurations ASA, AFF et FAS . Dans ces configurations, un seul LUN ONTAP ne devrait pas nécessiter plus de quatre chemins. Le fait d'avoir plus de quatre chemins d'accès peut engendrer des problèmes en cas de panne de stockage.
 
 +
 Les résultats des exemples suivants montrent les paramètres et l'état de chemin corrects pour les LUN ONTAP dans une configuration ASA, AFF ou FAS.

@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: hu_veritas_6x.html 
-keywords: host utilities, veritas, infoscale, 6.x, netapp, ontap, san, lun, multipathing, iscsi 
-summary: Fournit des conseils sur les paramètres de configuration hôte SAN de ONTAP pour la version Veritas Infoscale 6 
+permalink: hu-veritas-8x.html 
+keywords: host utilities, veritas, infoscale, 8, netapp, ontap, sanhost, iscsi, red, hat linux, oracle, linux 
+summary: Utilisez les utilitaires hôtes Linux avec Veritas Infoscale 8 pour les hôtes RHEL et Oracle Linux pour vous aider à gérer les opérations de protocole FC, FCoE et iSCSI avec les LUN ONTAP . 
 ---
-= Configurer Veritas Infoscale 6 pour FC, FCoE et iSCSI avec stockage ONTAP
+= Configurer Veritas Infoscale 8 pour FC, FCoE et iSCSI avec stockage ONTAP
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,7 +16,7 @@ summary: Fournit des conseils sur les paramètres de configuration hôte SAN de 
 
 
 [role="lead"]
-Le logiciel Linux Host Utilities fournit des outils de gestion et de diagnostic pour les hôtes Linux connectés au stockage ONTAP . Utilisez les utilitaires hôtes Linux avec Veritas Infoscale 6 pour les hôtes Oracle Linux (basé sur un noyau compatible Red Hat), Red Hat Enterprise Linux (RHEL) et SUSE Linux Enterprise Server pour prendre en charge la gestion des opérations de protocole FC, FCoE et iSCSI avec les LUN ONTAP .
+Le logiciel Linux Host Utilities fournit des outils de gestion et de diagnostic pour les hôtes Linux connectés au stockage ONTAP . Utilisez les utilitaires hôtes Linux avec Veritas Infoscale 8 pour les hôtes Oracle Linux (basé sur un noyau compatible Red Hat), Red Hat Enterprise Linux (RHEL) et SUSE Linux Enterprise Server pour prendre en charge la gestion des opérations de protocole FC, FCoE et iSCSI avec les LUN ONTAP .
 
 
 
@@ -51,7 +51,7 @@ NOTE: L'installation des utilitaires d'hôtes Linux ne modifie aucun paramètre 
 
 == Étape 3 : Vérifiez la configuration Veritas Dynamic Multipathing pour votre hôte
 
-Utilisez Veritas Dynamic Multipathing (VxDMP) avec Veritas Infoscale 6 pour gérer les LUN ONTAP .
+Utilisez Veritas Dynamic Multipathing (VxDMP) avec Veritas Infoscale 8 pour gérer les LUN ONTAP .
 
 Pour garantir que VxDMP est correctement configuré pour votre hôte, vous devez vérifier la configuration de VxDMP et contrôler la configuration de la bibliothèque de support de baie (ASL) et du module de stratégie de baie (APM). Les packages ASL et APM pour les systèmes de stockage NetApp sont installés lors de l'installation du logiciel Veritas.
 

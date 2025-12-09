@@ -184,7 +184,7 @@ chkconfig multipathd on
 multipath -ll
 ----
 +
-Les paramètres multi-trajets par défaut prennent en charge les configurations AFF et FAS. Dans ces configurations, une seule LUN ONTAP ne doit pas nécessiter plus de quatre chemins. S'il y a plus de quatre chemins, cela peut causer des problèmes avec les chemins en cas de panne de stockage.
+Les paramètres multipath par défaut prennent en charge les configurations AFF et FAS . Dans ces configurations, un seul LUN ONTAP ne devrait pas nécessiter plus de quatre chemins. Le fait d'avoir plus de quatre chemins d'accès peut engendrer des problèmes en cas de panne de stockage.
 
 +
 Une configuration AFF ou FAS doit comporter deux groupes de chemins ayant des priorités plus élevées et moins élevées. Les chemins actifs/optimisés à priorité supérieure sont servis par le contrôleur où se trouve l'agrégat. Les chemins de priorité inférieure sont actifs mais non optimisés, car ils sont gérés par un autre contrôleur. Les chemins non optimisés ne sont utilisés que lorsque des chemins optimisés ne sont pas disponibles.
