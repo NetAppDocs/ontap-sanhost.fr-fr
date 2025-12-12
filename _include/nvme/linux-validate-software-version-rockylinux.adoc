@@ -44,7 +44,7 @@ L'exemple suivant montre un  `hostnqn` version:
 ----
 nqn.2014-08.org.nvmexpress:uuid:4c4c4544-0056-5410-8048-b9c04f425633
 ----
-. Vérifiez que le `hostnqn` la chaîne correspond au `hostnqn` Chaîne du sous-système correspondant sur la baie ONTAP :
+. Sur le système ONTAP , vérifiez que le `hostnqn` La chaîne correspond à `hostnqn` chaîne de caractères pour le sous-système correspondant sur la matrice ONTAP :
 +
 [source, cli]
 ----

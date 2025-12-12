@@ -71,5 +71,22 @@ ONTAP prend en charge les fonctionnalités hôtes SAN suivantes, quelle que soit
 
 NOTE: Pour plus de détails sur les configurations prises en charge, consultez lelink:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^] .
 
+
+
+== Quelle est la prochaine étape
+
+[cols="50,50"]
+|===
+| Si votre version de Rocky Linux est .. | Découvrez... 
+
+
+| Série 10 | link:nvme-rockylinux-10x.html["Configuration de NVMe pour Rocky Linux 10.x"] 
+
+
+| Série 9 | link:nvme-rockylinux-9x.html["Configuration de NVMe pour Rocky Linux 9.x"] 
+
+
+| Série 8 | link:nvme-rockylinux-8x.html["Configuration de NVMe pour Rocky Linux 8.x"] 
+|===
 .Informations associées
 link:https://docs.netapp.com/us-en/ontap/san-admin/start-nvme-fc-service-svm-task.html["Découvrez comment gérer les protocoles NVMe"]
