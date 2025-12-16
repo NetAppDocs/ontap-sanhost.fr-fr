@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: nvme-proxmox-ve-9x.html 
 keywords: nvme, proxmox, enterprise 
-summary: Comment configurer un hôte NVMe-oF pour Proxmox VE 9.0 avec stockage ONTAP 
+summary: Comment configurer un hôte NVMe-oF pour Proxmox VE 9.x avec stockage ONTAP 
 ---
-= Configurer Proxmox VE 9.0 pour NVMe-oF avec stockage ONTAP
+= Configurer Proxmox VE 9.x pour NVMe-oF avec stockage ONTAP
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,30 +16,30 @@ summary: Comment configurer un hôte NVMe-oF pour Proxmox VE 9.0 avec stockage O
 
 
 [role="lead"]
-L'hôte Proxmox VE 9.0 prend en charge les protocoles NVMe over Fibre Channel (NVMe/FC) et NVMe over TCP (NVMe/TCP) avec Asymmetric Namespace Access (ANA). ANA fournit une fonctionnalité de multi-accès équivalente à l'accès aux unités logiques asymétriques (ALUA) dans les environnements iSCSI et FCP.
+L'hôte Proxmox VE 9.x prend en charge les protocoles NVMe over Fibre Channel (NVMe/FC) et NVMe over TCP (NVMe/TCP) avec Asymmetric Namespace Access (ANA). ANA fournit une fonctionnalité de multi-accès équivalente à l'accès aux unités logiques asymétriques (ALUA) dans les environnements iSCSI et FCP.
 
-Apprenez à configurer les hôtes NVMe over Fabrics (NVMe-oF) pour Proxmox VE 9.0. Pour plus d'assistance et d'informations sur les fonctionnalités, consultez link:nvme-proxmox-supported-features.html["Prise en charge et fonctionnalités ONTAP"^].
+Apprenez à configurer les hôtes NVMe over Fabrics (NVMe-oF) pour Proxmox VE 9.x. Pour plus d'assistance et d'informations sur les fonctionnalités, consultez link:nvme-proxmox-supported-features.html["Prise en charge et fonctionnalités ONTAP"^].
 
-NVMe-oF avec Proxmox VE 9.0 présente la limitation connue suivante :
+NVMe-oF avec Proxmox VE 9.x présente la limitation connue suivante :
 
 * La configuration de démarrage SAN pour NVMe-FC n'est pas prise en charge.
 
 
 
 
-== Étape 1 : Vérifier la version du logiciel et la configuration NVMe
+== Étape 1 : Installez Proxmox VE et le logiciel NVMe, puis vérifiez votre configuration.
 
 Pour configurer votre hôte pour NVMe-oF, vous devez installer les packages logiciels hôte et NVMe, activer le multipathing et vérifier la configuration NQN de votre hôte.
 
 .Étapes
-. Installez Proxmox VE 9.0 sur le serveur.  Une fois l'installation terminée, vérifiez que vous utilisez bien le noyau Proxmox VE 9.0 requis :
+. Installez Proxmox VE 9.x sur le serveur.  Une fois l'installation terminée, vérifiez que vous utilisez bien le noyau Proxmox VE 9.x requis :
 +
 [source, cli]
 ----
 uname -r
 ----
 +
-Exemple de version du noyau Proxmox VE 9.0 :
+Exemple de version du noyau Proxmox VE 9.x :
 
 +
 [listing]
@@ -88,7 +88,7 @@ L'exemple suivant montre un `hostnqn` valeur:
 ----
 nqn.2014-08.org.nvmexpress:uuid:39333550-3333-4753-4844-32594d4a524c
 ----
-. Vérifiez que le `hostnqn` la chaîne correspond au `hostnqn` Chaîne du sous-système correspondant sur la baie ONTAP :
+. Sur le système ONTAP , vérifiez que le `hostnqn` La chaîne correspond à `hostnqn` chaîne de caractères pour le sous-système correspondant sur la matrice ONTAP :
 +
 [source, cli]
 ----
@@ -121,7 +121,6 @@ NOTE: Si le `hostnqn` les chaînes ne correspondent pas, utilisez le `vserver mo
 
 Configurez NVMe/FC avec des adaptateurs Broadcom/Emulex ou Marvell/QLogic, ou configurez NVMe/TCP à l'aide d'opérations de découverte et de connexion manuelles.
 
-.Étapes
 [role="tabbed-block"]
 ====
 .NVMe/FC - Broadcom/Emulex
@@ -427,7 +426,7 @@ Vous devriez voir une sortie similaire à l’exemple suivant :
 ----
 options lpfc lpfc_sg_seg_cnt=256
 ----
-. Exécutez `dracut -f` la commande et redémarrez l'hôte.
+. Exécutez le `update-initramfs` commande, puis redémarrez l'hôte.
 . Vérifier que la valeur de `lpfc_sg_seg_cnt` est 256 :
 +
 [source, cli]

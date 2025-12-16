@@ -24,7 +24,7 @@ Les fonctionnalités prises en charge pour la configuration de l'hôte avec NVMe
 
 
 | Fournit des détails ONTAP pour les espaces de noms NVMe/FC et NVMe/TCP en utilisant le protocole natif `nvme-cli` emballer.  a| 
-9.0
+8.0
 | 9.10.1 ou version ultérieure 
 
 
@@ -34,7 +34,7 @@ Les fonctionnalités prises en charge pour la configuration de l'hôte avec NVMe
 
 
 | Le trafic NVMe et SCSI est pris en charge sur le même hôte grâce à NVMe multipath pour les espaces de noms NVMe-oF et à dm-multipath pour les LUN SCSI.  a| 
-9.0
+8.0
 | 9.4 ou version ultérieure 
 |===
 ONTAP prend en charge les fonctionnalités hôtes SAN suivantes, quelle que soit la version ONTAP exécutée sur votre système.
@@ -45,7 +45,7 @@ ONTAP prend en charge les fonctionnalités hôtes SAN suivantes, quelle que soit
 
 
 | Le multipathing NVMe natif est activé par défaut  a| 
-9.0
+8.0
 
 
 
@@ -65,7 +65,15 @@ NOTE: Pour plus de détails sur les configurations prises en charge, consultez l
 
 == Quelle est la prochaine étape
 
-link:nvme-proxmox-ve-9x.html["Découvrez comment configurer Proxmox VE 9.0"]
+[cols="50,50"]
+|===
+| Si votre version de Proxmox VE est .. | Découvrez... 
 
+
+| Série 9 | link:nvme-proxmox-ve-9x.html["Configuration de NVMe pour Proxmox VE 9.x"] 
+
+
+| Série 8 | link:nvme-proxmox-ve-8x.html["Configuration de NVMe pour Proxmox VE 8.x"] 
+|===
 .Informations associées
 link:https://docs.netapp.com/us-en/ontap/san-admin/start-nvme-fc-service-svm-task.html["Découvrez comment gérer les protocoles NVMe"^]

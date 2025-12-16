@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: hu-proxmox-ve-9x.html 
-keywords: proxmox, VE, 9.x, netapp, ontap, iscsi, fcp 
-summary: Installez les utilitaires hôtes Linux sur un hôte Proxmox VE 9.x pour gérer les opérations de protocole FCP et iSCSI avec les LUN ONTAP . 
+permalink: hu-proxmox-ve-8x.html 
+keywords: host utilities, proxmox, linux, 8.x, netapp, ontap 
+summary: Installez les utilitaires hôtes Linux sur un hôte Proxmox VE 8.x pour gérer les opérations de protocole FCP et iSCSI avec les LUN ONTAP . 
 ---
-= Configurer Proxmox VE 9.x pour FCP et iSCSI avec stockage ONTAP
+= Configurer Proxmox VE 8.x pour FCP et iSCSI avec stockage ONTAP
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,11 +16,11 @@ summary: Installez les utilitaires hôtes Linux sur un hôte Proxmox VE 9.x pour
 
 
 [role="lead"]
-Configurez Proxmox VE 9.x pour le multipathing et avec des paramètres et réglages spécifiques pour les opérations de protocole FCP et iSCSI avec le stockage ONTAP .
+Configurez Proxmox VE 8.x pour le multipathing et avec des paramètres et réglages spécifiques pour les opérations de protocole FCP et iSCSI avec le stockage ONTAP .
 
-FCP et iSCSI avec Proxmox VE 9.x présentent les limitations connues suivantes :
+FCP et iSCSI avec Proxmox VE 8.x présentent les limitations connues suivantes :
 
-* Les utilitaires hôtes Linux ne prennent pas en charge les systèmes d'exploitation Proxmox VE 9.x.
+* Les utilitaires hôtes Linux ne prennent pas en charge les systèmes d'exploitation Proxmox VE 8.x.
 * La configuration de démarrage SAN n'est pas prise en charge.
 
 
@@ -28,7 +28,7 @@ FCP et iSCSI avec Proxmox VE 9.x présentent les limitations connues suivantes 
 
 == Étape 1 : Confirmez la configuration multi-chemins pour votre hôte
 
-Vous pouvez utiliser le multipathing avec Proxmox VE 9.x pour gérer les LUN ONTAP .
+Vous pouvez utiliser le multipathing avec Proxmox VE 8.x pour gérer les LUN ONTAP .
 
 Pour vous assurer que les chemins d'accès multiples sont correctement configurés pour votre hôte, vérifiez que le `/etc/multipath.conf` fichier est défini et que vous disposez des paramètres recommandés par NetApp pour vos LUN ONTAP.
 

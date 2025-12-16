@@ -1,0 +1,149 @@
+= 
+:allow-uri-read: 
+
+
+Pour vous assurer que les chemins d'accès multiples sont correctement configurés pour votre hôte, vérifiez que le `/etc/multipath.conf` fichier est défini et que vous disposez des paramètres recommandés par NetApp pour vos LUN ONTAP.
+
+.Étapes
+. Vérifiez que le `/etc/multipath.conf` fichier se ferme. Si le fichier n'existe pas, créez un fichier vide à zéro octet :
++
+[source, cli]
+----
+touch /etc/multipath.conf
+----
+. Lors de la première `multipath.conf` création du fichier, vous devrez peut-être activer et démarrer les services multivoies pour charger les paramètres recommandés :
++
+[source, cli]
+----
+systemctl enable multipathd
+----
++
+[source, cli]
+----
+systemctl start multipathd
+----
+. Chaque fois que vous démarrez l'hôte, le fichier vide `/etc/multipath.conf` à zéro octet charge automatiquement les paramètres de chemins d'accès multiples recommandés par NetApp comme paramètres par défaut. Vous ne devriez pas avoir besoin d'apporter de modifications au `/etc/multipath.conf` fichier de votre hôte car le système d'exploitation est compilé avec les paramètres multivoies qui reconnaissent et gèrent correctement les LUN ONTAP.
++
+Le tableau suivant présente les paramètres de chemins d'accès multiples compilés natifs du système d'exploitation Linux pour les LUN ONTAP.
+
++
+.Affiche les paramètres
+[%collapsible]
+====
+[cols="2"]
+|===
+| Paramètre | Réglage 
+
+
+| détecter_prio | oui 
+
+
+| dev_loss_tmo | « infini » 
+
+
+| du rétablissement | immédiate 
+
+
+| fast_io_fail_tmo | 5 
+
+
+| caractéristiques | « 2 pg_init_retries 50 » 
+
+
+| flush_on_last_del | « oui » 
+
+
+| gestionnaire_matériel | « 0 » 
+
+
+| no_path_réessayer | file d'attente 
+
+
+| path_checker | « tur » 
+
+
+| path_groupage_policy | « group_by_prio » 
+
+
+| sélecteur de chemin | « temps-service 0 » 
+
+
+| intervalle_interrogation | 5 
+
+
+| prio | « ONTAP » 
+
+
+| solution netapp | LUN 
+
+
+| conservez_attaed_hw_handler | oui 
+
+
+| rr_weight | « uniforme » 
+
+
+| noms_conviviaux_conviviaux | non 
+
+
+| fournisseur | NETAPP 
+|===
+====
+. Vérifiez les paramètres et l'état du chemin de vos LUN ONTAP :
++
+[source, cli]
+----
+multipath -ll
+----
++
+Les paramètres de chemins d'accès multiples par défaut prennent en charge les configurations ASA, AFF et FAS. Dans ces configurations, une seule LUN ONTAP ne doit pas nécessiter plus de quatre chemins. S'il y a plus de quatre chemins, cela peut causer des problèmes avec les chemins en cas de panne de stockage.
+
++
+Les résultats des exemples suivants montrent les paramètres et l'état de chemin corrects pour les LUN ONTAP dans une configuration ASA, AFF ou FAS.
+
++
+[role="tabbed-block"]
+====
+.Configuration DE L'INFRASTRUCTURE ASA
+--
+Une configuration ASA optimise tous les chemins vers une LUN donnée en les gardant actifs. Ce qui améliore les performances en assurant le service des opérations d'E/S sur tous les chemins en même temps.
+
+.Montrer l'exemple
+[%collapsible]
+=====
+[listing]
+----
+multipath -ll
+3600a098038314e535a24584e4b496252 dm-32 NETAPP,LUN C-Mode size=10G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+`-+- policy='service-time 0' prio=50 status=active
+  |- 11:0:0:41 sdan 66:112  active ready running
+  |- 11:0:1:41 sdcb 68:240  active ready running
+  |- 14:0:2:41 sdfd 129:240 active ready running
+  `- 14:0:0:41 sddp 71:112  active ready running
+----
+=====
+--
+.Configuration AFF ou FAS
+--
+Une configuration AFF ou FAS doit comporter deux groupes de chemins ayant des priorités plus élevées et moins élevées. Les chemins actifs/optimisés à priorité supérieure sont servis par le contrôleur où se trouve l'agrégat. Les chemins de priorité inférieure sont actifs mais non optimisés, car ils sont gérés par un autre contrôleur. Les chemins non optimisés ne sont utilisés que lorsque des chemins optimisés ne sont pas disponibles.
+
+L'exemple suivant présente la sortie d'une LUN ONTAP avec deux chemins Active/Optimized et deux chemins Active/non optimisés :
+
+.Montrer l'exemple
+[%collapsible]
+=====
+[listing]
+----
+multipath -ll
+3600a0980383149764b5d567257516273 dm-0 NETAPP,LUN C-Mode size=150G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+|-+- policy='service-time 0' prio=50 status=active
+| |- 16:0:3:0  sdcg 69:64  active ready running
+| `- 10:0:0:0  sdb  8:16   active ready running
+`-+- policy='service-time 0' prio=10 status=enabled
+  |- 10:0:1:0  sdc  8:32   active ready running
+  `- 16:0:2:0  sdcf 69:48  active ready running
+----
+=====
+--
+====
+

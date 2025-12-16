@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: hu-rockylinux-10.html 
-keywords: host utilities, rocky, linux, 10, netapp, ontap 
-summary: Installez Linux Host Utilities sur un hôte Rocky Linux 10 pour gérer les opérations de protocole FCP et iSCSI avec les LUN ONTAP. 
+permalink: hu-rhel-10x.html 
+keywords: host utilities, red hat, rhel, linux, 10.x, netapp, ontap, rhel 
+summary: Installez les utilitaires hôtes Linux sur un hôte RHEL 10.x pour gérer les opérations de protocole FCP et iSCSI avec les LUN ONTAP . 
 ---
-= Configurer Rocky Linux 10 pour FCP et iSCSI avec le stockage ONTAP
+= Configurer RHEL 10.x pour FCP et iSCSI avec stockage ONTAP
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,7 +16,7 @@ summary: Installez Linux Host Utilities sur un hôte Rocky Linux 10 pour gérer 
 
 
 [role="lead"]
-Le logiciel Linux Host Utilities fournit des outils de gestion et de diagnostic pour les hôtes Linux connectés au stockage ONTAP. Lorsque vous installez Linux Host Utilities sur un hôte Rocky Linux 10, vous pouvez utiliser Host Utilities pour vous aider à gérer les opérations de protocole FCP et iSCSI avec les LUN ONTAP.
+Le logiciel Linux Host Utilities fournit des outils de gestion et de diagnostic pour les hôtes Linux connectés au stockage ONTAP . Lorsque vous installez les utilitaires hôtes Linux sur un hôte Red Hat Enterprise Linux (RHEL) 10.x, vous pouvez utiliser les utilitaires hôtes pour vous aider à gérer les opérations de protocole FCP et iSCSI avec les LUN ONTAP .
 
 
 NOTE: Vous n’avez pas besoin de configurer manuellement les paramètres de la machine virtuelle basée sur le noyau (KVM) car les LUN ONTAP sont automatiquement mappés à l’hyperviseur.
@@ -54,7 +54,7 @@ NOTE: L'installation des utilitaires d'hôtes Linux ne modifie aucun paramètre 
 
 == Étape 3 : confirmez la configuration des chemins d'accès multiples pour votre hôte
 
-Vous pouvez utiliser le multipathing avec Rocky Linux 10 pour gérer les LUN ONTAP.
+Vous pouvez utiliser le multipathing avec RHEL 10.x pour gérer les LUN ONTAP .
 
 Pour vous assurer que les chemins d'accès multiples sont correctement configurés pour votre hôte, vérifiez que le `/etc/multipath.conf` fichier est défini et que vous disposez des paramètres recommandés par NetApp pour vos LUN ONTAP.
 

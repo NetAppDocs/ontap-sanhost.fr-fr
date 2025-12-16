@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
 permalink: nvme-ol-7x.html 
-keywords: nvme, linux, oracle, 7x 
-summary: 'Configuration d"un hôte VMe/FC pour Oracle Linux 7x avec ONTAP, avec exemples' 
+keywords: nvme, linux, oracle, 7.x 
+summary: 'Configuration d"un hôte VMe/FC pour Oracle Linux 7.x avec ONTAP, avec exemples' 
 ---
-= Configurer Oracle Linux 7x avec NVMe-oF pour le stockage ONTAP
+= Configurer Oracle Linux 7.x avec NVMe-oF pour le stockage ONTAP
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -18,12 +18,12 @@ summary: 'Configuration d"un hôte VMe/FC pour Oracle Linux 7x avec ONTAP, avec 
 [role="lead"]
 Les hôtes Oracle Linux prennent en charge les protocoles NVMe over Fibre Channel (NVMe/FC) et NVMe over TCP (NVMe/TCP) avec Asymmetric Namespace Access (ANA). ANA fournit une fonctionnalité de multi-accès équivalente à l'accès aux unités logiques asymétriques (ALUA) dans les environnements iSCSI et FCP.
 
-Apprenez à configurer les hôtes NVMe over Fabrics (NVMe-oF) pour Oracle Linux 7x. Pour plus d'assistance et d'informations sur les fonctionnalités, consultez link:nvme-ol-supported-features.html["Prise en charge et fonctionnalités d'Oracle Linux ONTAP"].
+Apprenez à configurer les hôtes NVMe over Fabrics (NVMe-oF) pour Oracle Linux 7.x. Pour plus d'assistance et d'informations sur les fonctionnalités, consultez link:nvme-ol-supported-features.html["Prise en charge et fonctionnalités d'Oracle Linux ONTAP"].
 
-NVMe-oF avec Oracle Linux 7x présente les limitations connues suivantes :
+NVMe-oF avec Oracle Linux 7.x présente les limitations connues suivantes :
 
 * Le démarrage SAN utilisant le protocole NVMe-oF n'est pas pris en charge.
-* La prise en charge de l'utilitaire hôte sanlun de NetApp n'est pas disponible pour NVMe-oF sur un hôte Oracle Linux 7x. Au lieu de cela, vous pouvez compter sur le plug-in NetApp inclus dans la version native `nvme-cli` package pour tous les transports NVMe-oF.
+* La prise en charge de l'utilitaire hôte sanlun de NetApp n'est pas disponible pour NVMe-oF sur un hôte Oracle Linux 7.x. Au lieu de cela, vous pouvez compter sur le plug-in NetApp inclus dans la version native `nvme-cli` package pour tous les transports NVMe-oF.
 * Les scripts natifs de connexion automatique NVMe/FC ne sont pas disponibles dans le pack nvme-cli. Utilisez les scripts de connexion automatique externes fournis par le fournisseur de HBA.
 * L'équilibrage de charge Round-Robin n'est pas activé par défaut pour le multipathing NVMe.  Pour activer cette fonctionnalité, écrivez une règle udev.
 
@@ -32,10 +32,10 @@ NVMe-oF avec Oracle Linux 7x présente les limitations connues suivantes :
 
 == Étape 1 : Installez Oracle Linux et le logiciel NVMe, puis vérifiez votre configuration.
 
-Utilisez la procédure suivante pour valider les versions logicielles minimales prises en charge par Oracle Linux 7x.
+Utilisez la procédure suivante pour valider les versions logicielles minimales prises en charge par Oracle Linux 7.x.
 
 .Étapes
-. Installez Oracle Linux 7.x sur le serveur.  Une fois l'installation terminée, vérifiez que vous utilisez bien le noyau Oracle Linux 7x spécifié.
+. Installez Oracle Linux 7.x sur le serveur. Une fois l'installation terminée, vérifiez que vous utilisez bien le noyau Oracle Linux 7.x spécifié.
 +
 [source, cli]
 ----
@@ -71,7 +71,7 @@ cat /lib/udev/rules.d/71-nvme-iopolicy-netapp-ONTAP.rules
 Enable round-robin for NetApp ONTAP
 ACTION=="add", SUBSYSTEMS=="nvme-subsystem", ATTRS{model}=="NetApp ONTAP Controller", ATTR{iopolicy}="round-robin"
 ----
-. Sur l'hôte Oracle Linux 7x, vérifiez le `hostnqn` chaîne à `/etc/nvme/hostnqn` :
+. Sur l'hôte Oracle Linux 7.x, vérifiez le `hostnqn` chaîne à `/etc/nvme/hostnqn` :
 +
 [source, cli]
 ----

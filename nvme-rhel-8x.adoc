@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: nvme-rhel-8x.html 
 keywords: nvme, linux, rhel, red hat, enterprise 
-summary: Comment configurer un hôte NVMe-oF pour RHEL 8x avec ONTAP 
+summary: Comment configurer un hôte NVMe-oF pour RHEL 8.x avec ONTAP 
 ---
-= Configurer RHEL 8x pour NVMe-oF avec stockage ONTAP
+= Configurer RHEL 8.x pour NVMe-oF avec stockage ONTAP
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -18,12 +18,12 @@ summary: Comment configurer un hôte NVMe-oF pour RHEL 8x avec ONTAP
 [role="lead"]
 Les hôtes Red Hat Enterprise Linux (RHEL) prennent en charge les protocoles NVMe over Fibre Channel (NVMe/FC) et NVMe over TCP (NVMe/TCP) avec Asymmetric Namespace Access (ANA).  ANA fournit une fonctionnalité de multi-accès équivalente à l'accès aux unités logiques asymétriques (ALUA) dans les environnements iSCSI et FCP.
 
-Apprenez à configurer les hôtes NVMe over Fabrics (NVMe-oF) pour RHEL 8x. Pour plus d'assistance et d'informations sur les fonctionnalités, consultez link:nvme-rhel-supported-features.html["Prise en charge et fonctionnalités de RHEL ONTAP"].
+Apprenez à configurer les hôtes NVMe over Fabrics (NVMe-oF) pour RHEL 8.x. Pour plus d'assistance et d'informations sur les fonctionnalités, consultez link:nvme-rhel-supported-features.html["Prise en charge et fonctionnalités de RHEL ONTAP"].
 
-NVMe-oF avec RHEL 8x présente les limitations connues suivantes :
+NVMe-oF avec RHEL 8.x présente les limitations connues suivantes :
 
 * Le démarrage SAN à l'aide du protocole NVMe-oF n'est actuellement pas pris en charge.
-* La prise en charge du multipath NVMe au niveau du noyau est désactivée par défaut sur les hôtes NVMe-oF sous RHEL 8x ; vous devez l'activer manuellement.
+* La prise en charge du multipath NVMe au niveau du noyau est désactivée par défaut sur les hôtes NVMe-oF sous RHEL 8.x ; vous devez l'activer manuellement.
 * NVMe/TCP est disponible en tant qu'aperçu technologique en raison de problèmes connus.
 
 
@@ -49,7 +49,7 @@ Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la docum
 Pour configurer votre hôte pour NVMe-oF, vous devez installer les packages logiciels hôte et NVMe, activer le multipathing et vérifier la configuration NQN de votre hôte.
 
 .Étapes
-. Installez RHEL 8.x sur le serveur.  Une fois l'installation terminée, vérifiez que vous utilisez bien le noyau RHEL 8x requis :
+. Installez RHEL 8.x sur le serveur. Une fois l'installation terminée, vérifiez que vous utilisez bien le noyau RHEL 8.x requis :
 +
 [source, cli]
 ----
@@ -97,7 +97,7 @@ libnvme-1.4-3.el8.x86_64
 ----
 grubby --args=nvme_core.multipath=Y --update-kernel /boot/vmlinuz-4.18.0-553.el8_10.x86_64
 ----
-. Sur l'hôte RHEL 8x, vérifiez le `hostnqn` chaîne à `/etc/nvme/hostnqn` :
+. Sur l'hôte RHEL 8.x, vérifiez le `hostnqn` chaîne à `/etc/nvme/hostnqn` :
 +
 [source, cli]
 ----
@@ -655,5 +655,5 @@ Voici les problèmes connus :
 | ID de bug NetApp | Titre | Description 
 
 
-| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/BURT/1479047["1479047"^] | Les hôtes RHEL 8x NVMe-oF créent des contrôleurs de découverte persistants (PDC) en double. | Sur les hôtes NVMe-oF, vous pouvez utiliser la commande « nvme discover -p » pour créer des PDC.  Lorsque cette commande est utilisée, un seul PDC doit être créé par combinaison initiateur-cible.  Toutefois, si vous exécutez RHEL 8x sur un hôte NVMe-oF, un PDC dupliqué est créé à chaque exécution de « nvme discover -p ».  Cela entraîne une utilisation inutile des ressources, tant sur l'hôte que sur la cible. 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/BURT/1479047["1479047"^] | Les hôtes RHEL 8.x NVMe-oF créent des contrôleurs de découverte persistants (PDC) en double. | Sur les hôtes NVMe-oF, vous pouvez utiliser la commande « nvme discover -p » pour créer des PDC. Lorsque cette commande est utilisée, un seul PDC doit être créé par combinaison initiateur-cible. Toutefois, si vous exécutez RHEL 8.x sur un hôte NVMe-oF, un PDC dupliqué est créé à chaque exécution de « nvme discover -p ». Cela entraîne une utilisation inutile des ressources, tant sur l'hôte que sur la cible. 
 |===
