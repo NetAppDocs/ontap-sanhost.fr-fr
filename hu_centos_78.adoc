@@ -279,7 +279,7 @@ L'hôte CentOS 7.8 avec stockage ONTAP présente les problèmes connus suivants�
 == Et la suite ?
 
 * link:hu-luhu-command-reference.html["Découvrez comment utiliser l'outil Linux Host Utilities"] .
-* En savoir plus sur la mise en miroir ASM.
+* Découvrez la mise en miroir ASM
 +
 La mise en miroir de gestion automatique du stockage (ASM) peut nécessiter des modifications des paramètres de chemins d'accès multiples Linux pour permettre à ASM de reconnaître un problème et de basculer vers un autre groupe de pannes. La plupart des configurations ASM sur ONTAP utilisent une redondance externe, ce qui signifie que la protection des données est assurée par la baie externe et qu'ASM ne met pas en miroir les données. Certains sites utilisent ASM avec redondance normale pour fournir une mise en miroir bidirectionnelle, généralement entre différents sites. Voir link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/oracle-overview.html["Bases de données Oracle sur ONTAP"^] pour plus d'informations.
 

@@ -270,3 +270,13 @@ devices {
 == Étape 5 : Examiner les problèmes connus
 
 Il n'y a pas de problème connu.
+
+
+
+== Et la suite ?
+
+* Découvrez la virtualisation Ubuntu Linux (KVM)
++
+Ubuntu Linux peut servir d'hôte KVM. Cela vous permet d'exécuter plusieurs machines virtuelles sur un seul serveur physique grâce à la technologie de machine virtuelle basée sur le noyau Linux (KVM). L'hôte KVM ne nécessite pas de paramètres de configuration hôte explicites pour les LUN ONTAP .
+
+
