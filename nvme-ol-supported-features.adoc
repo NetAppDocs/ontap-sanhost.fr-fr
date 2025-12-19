@@ -28,6 +28,11 @@ Les fonctionnalités prises en charge pour la configuration hôte avec NVMe over
 | 9.12.1 ou version ultérieure 
 
 
+| NVMe/TCP est une fonctionnalité d'entreprise entièrement prise en charge  a| 
+9.0 ou version ultérieure
+| 9.10.1 ou version ultérieure 
+
+
 | NVMe/TCP fournit des espaces de noms utilisant le natif `nvme-cli` emballer  a| 
 8.2 ou version ultérieure
 | 9.10.1 ou version ultérieure 
@@ -47,13 +52,18 @@ ONTAP prend en charge les fonctionnalités hôtes SAN suivantes, quelle que soit
 | Fonctionnalité | Version hôte Oracle Linux 
 
 
-| Le multipathing NVMe intégré au noyau pour les espaces de noms NVMe est activé par défaut  a| 
-8.3 ou version ultérieure
+| La règle udev native dans `nvme-cli` Ce package assure l'équilibrage de charge en fonction de la profondeur de la file d'attente pour le multipath NVMe.  a| 
+9.6 ou version ultérieure
 
 
 
 | Le démarrage SAN est activé via le protocole NVMe/FC  a| 
 9.5 ou version ultérieure
+
+
+
+| Le multipathing NVMe intégré au noyau pour les espaces de noms NVMe est activé par défaut  a| 
+8.3 ou version ultérieure
 
 
 
