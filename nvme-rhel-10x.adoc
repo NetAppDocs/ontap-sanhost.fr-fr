@@ -644,7 +644,7 @@ Oct 12 19:40:33 localhost systemd[1]: Finished nvmefc-boot-connections.service -
 Vérifiez que l'état des chemins d'accès multiples NVMe in-kernel, l'état ANA et les namespaces ONTAP sont corrects pour la configuration NVMe-of.
 
 .Étapes
-. Vérifiez que les paramètres NVMe-oF appropriés (tels que le modèle défini sur NetApp ONTAP Controller et la stratégie d'E/S d'équilibrage de charge définie sur round-robin) pour les espaces de noms ONTAP respectifs s'affichent correctement sur l'hôte :
+. Vérifiez que les paramètres NVMe-oF appropriés (tels que le modèle défini sur NetApp ONTAP Controller et la stratégie d'E/S d'équilibrage de charge définie sur queue-depth) pour les espaces de noms ONTAP respectifs s'affichent correctement sur l'hôte :
 +
 .. Afficher les sous-systèmes :
 +

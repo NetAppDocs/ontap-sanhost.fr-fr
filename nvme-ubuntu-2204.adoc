@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar 
-permalink: nvme_ubuntu_2204.html 
+permalink: nvme-ubuntu-2204.html 
 keywords: nvme, linux, rhel, red hat, enterprise 
 summary: 'Comment configurer l"hôte NVMe-of pour Ubuntu 22.04 avec ONTAP' 
 ---
@@ -120,7 +120,6 @@ Vous pouvez configurer NVMe/FC pour les cartes Broadcom/Emulex ou Marvell/Qlogic
 ====
 .Broadcom/Emulex
 --
-.Étapes
 . Vérifiez que vous utilisez le modèle de carte pris en charge.
 +
 [listing]
@@ -221,7 +220,6 @@ FCP CMPL: xb 00000000 Err 00000000
 --
 Le pilote natif de boîte de réception qla2xxx inclus dans le noyau Ubuntu 22.04 GA a les derniers correctifs en amont. Ces correctifs sont essentiels à la prise en charge de ONTAP.
 
-.Étapes
 . Vérifiez que vous exécutez les versions du pilote de carte et du micrologiciel prises en charge :
 +
 [listing]

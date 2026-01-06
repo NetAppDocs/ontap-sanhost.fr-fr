@@ -522,6 +522,7 @@ nvme	connect-all	-t	tcp	-w	192.168.31.15	-a	192.168.31.49
 
 RHEL 9.6 définit la stratégie d'E/S par défaut pour NVMe-oF sur `round-robin` .  Si vous utilisez RHEL 9.6 et souhaitez modifier la politique d'E/S en `queue-depth` , modifiez le fichier de règles udev comme suit :
 
+.Étapes
 . Ouvrez le fichier de règles udev dans un éditeur de texte avec des privilèges root :
 +
 [source, cli]
