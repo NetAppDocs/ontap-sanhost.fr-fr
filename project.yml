@@ -83,8 +83,8 @@ sidebar:
           url: "/hu_wuhu_72.html"
         - title: Installez Windows Host Utilities 7.1
           url: "/hu_wuhu_71.html"
-      - title: Configurer les paramètres des utilitaires hôtes Windows
-        url: "/hu_wuhu_hba_settings.html"
+      - title: Vérifier la configuration des utilitaires hôtes Windows
+        url: "/hu-wuhu-configuration.html"
       - title: Mettez à niveau les utilitaires d'hôtes Windows
         url: "/hu_wuhu_upgrade.html"
       - title: Réparez et supprimez les utilitaires d'hôtes Windows

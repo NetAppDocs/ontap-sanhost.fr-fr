@@ -162,4 +162,4 @@ NOTE: Pour voir les options Microsoft installer (MSI) standard pour la journalis
 
 == Et la suite ?
 
-link:hu_wuhu_hba_settings.html["Configurer les paramètres de registre pour Windows Host Utilities"] .
+link:hu-wuhu-configuration.html["Découvrez la configuration des utilitaires hôtes Windows pour le stockage ONTAP"]
