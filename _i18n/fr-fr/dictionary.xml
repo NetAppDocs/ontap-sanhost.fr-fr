@@ -334,8 +334,6 @@
   <block id="64ede1e6f2ef30c339f9a3e100f40cfc" category="cell"><block ref="5f4b53c23fbe11fd74a5d542494c2106" prefix="" category="inline-code"></block></block>
   <block id="abbdb018748bb6cd12284ad6c1685b67" category="cell"><block ref="8a79f8d12083f6c1f5d24ebab44084c7" prefix="" category="inline-code"></block></block>
   <block id="51a4a26e6b1bdae133374d340c097526" category="paragraph">L'exemple suivant montre la sortie correcte pour une LUN ONTAP avec deux chemins actifs/optimisés et deux chemins actifs/non optimisés.</block>
-  <block id="2844e304c2e162332243113572206ac6" category="inline-link-macro">1308744</block>
-  <block id="939827454c3bb8453033ba1bd60c555e" category="cell"><block ref="c8bdc7961e7fb79cc7e51cf734b247fb" category="inline-link-macro-rx"></block></block>
   <block id="6b41fb8eea99b0d8d062e30f5b71d616" category="summary">Configuration d'hôte NVMe/FC pour Windows Server 2019 avec ONTAP</block>
   <block id="51da3f0f90428027f2a496d366e696eb" category="inline-link-macro">Catalogue de mises à jour Microsoft 2019</block>
   <block id="f5cba97c30a47867e3649fd136cca68c" category="inline-link-macro">Catalogue de mises à jour Microsoft 2016</block>
@@ -528,7 +526,6 @@
   <block id="8b6f93f33bce541c7f50f8aff637e2e1" category="sidebar">RHEL</block>
   <block id="1a0d3890b0eb9dc0c7e3f33e1b9f1865" category="sidebar">NVMeoF RHEL</block>
   <block id="cf5f238fca8b6e155078aa41c175743a" category="sidebar">9.0</block>
-  <block id="1b1e6d45b618db5397c656f0df1d4b85" category="sidebar">15 SP2</block>
   <block id="7ceb3cac51dbf44c807f7e83fabc5016" category="sidebar">15 SP1</block>
   <block id="3a824154b16ed7dab899bf000b80eeee" category="sidebar">2022</block>
   <block id="ea6b2efbdd4255a9f1b3bbc6399b58f4" category="sidebar">2019</block>
@@ -971,8 +968,6 @@ La liaison du pilote FC est modifiée de<block ref="b9ca0a083600812be33f42f91f00
   <block id="f3478c814fd82f33620059d2d7656ea9" category="list-text">Déterminez le WWID :</block>
   <block id="48a57465c9050da3e456de11a1bce0f0" category="list-text">Redémarrez l'hôte pour vérifier que le démarrage a réussi.</block>
   <block id="2ba8ced675fff51092484e241860c46e" category="paragraph">La<block ref="273d5cd3ecc9b9ccde8aa81942ced2f2" prefix=" " category="inline-code"></block> commande produit le type de sortie suivant. La sortie dans l'exemple suivant est tronquée.</block>
-  <block id="1f9090c13a627840d3e8110654671ecd" category="cell">Le démarrage iSCSI à partir du SAN ne parvient pas à démarrer avec une configuration IP statique après l'installation du système d'exploitation SUSE Linux Enterprise Server 15S P2</block>
-  <block id="74fe7cde6e68f9607ef6c16f62916dd8" category="paragraph">La LUN iSCSI sanboot n'a pas pu démarrer après avoir effectué une installation du système d'exploitation SUSE Linux Enterprise Server 15 SP2 avec une configuration IP statique. L'échec de démarrage se produit à chaque fois avec la configuration IP statique. Cela entraîne le refus du serveur de poursuivre le processus d'amorçage avec le message d'erreur suivant :</block>
   <block id="adcc6b5e38256f637746539b3d3cb7b3" category="paragraph">Le pilote natif de boîte de réception qla2xxx inclus dans le noyau Ubuntu 22.04 GA a les derniers correctifs en amont. Ces correctifs sont essentiels à la prise en charge de ONTAP.</block>
   <block id="896c6d73b474c57fd4a882830cd2a6de" category="sidebar">SUSE Linux Enterprise Server 15</block>
   <block id="587b796170a9abac4701cd8aa1bb38cb" category="listing-title">Exemple de sortie</block>
@@ -1898,7 +1893,6 @@ La liaison du pilote FC est modifiée de<block ref="b9ca0a083600812be33f42f91f00
   <block id="c66e8f141f367b0a5a1d201cc49ccc72" category="paragraph">ONTAP signale une taille de transfert de données maximale (MDTS) de 8 dans les données du contrôleur d'identification.  Cela signifie que la taille maximale de la demande d'E/S peut atteindre 1 Mo.  Pour émettre des requêtes d'E/S d'une taille de 1 Mo pour un hôte Broadcom NVMe/FC, vous devez augmenter la<block ref="0de495b1d3c13e53ae08556231d825b9" prefix=" " category="inline-code"></block> valeur de la<block ref="63a7cb7a86eb0c84641936943496afaf" prefix=" " category="inline-code"></block> paramètre à 256 à partir de la valeur par défaut de 64.</block>
   <block id="cfa5b6e557299c1ae7c635f08785f365" category="paragraph">Les hôtes Red Hat Enterprise Linux (RHEL) prennent en charge les protocoles NVMe over Fibre Channel (NVMe/FC) et NVMe over TCP (NVMe/TCP) avec Asymmetric Namespace Access (ANA).  ANA fournit une fonctionnalité de multi-accès équivalente à l'accès aux unités logiques asymétriques (ALUA) dans les environnements iSCSI et FCP.</block>
   <block id="e8584093909cb01d1e4390beaad82a5f" category="paragraph">Le<block ref="0578ea8f8272d56d0053a8f2cddaf7f4" prefix=" " category="inline-code"></block> et<block ref="fbbb90e94554669f250473b3b15ddd4e" prefix=" " category="inline-code"></block> services de démarrage inclus dans NVMe/FC<block ref="e1667929105bf030b9f367fc21f8d216" prefix=" " category="inline-code"></block> les packages sont automatiquement activés au démarrage du système.</block>
-  <block id="660bcc8bfdb485b79b7dede726eb2358" category="doc">En savoir plus sur la configuration des hôtes SAN ONTAP avec NVMe-OF</block>
   <block id="be1e5922c13f8cd92deb77a78a07375f" category="paragraph">Vous pouvez configurer les hôtes SAN pris en charge pour utiliser le protocole NVMe over Fabrics (NVMe-oF) avec ONTAP comme cible de stockage.  NVMe-oF inclut NVMe sur Fibre Channel (NVMe/FC) et NVMe sur TCP (NVMe/TCP).  Selon votre système d'exploitation hôte et la version ONTAP , vous configurez et validez le protocole NVMe/FC ou NVMe/TCP, ou les deux sur l'hôte.</block>
   <block id="b0e0bd8207ba62457f58c3e06f3f7bec" category="section-title">Prise en charge et fonctionnalités ONTAP</block>
   <block id="3b2a75ebc087c7f3c4fa9ac0e2a92ebe" category="cell">Version ONTAP</block>
@@ -2404,4 +2398,5 @@ La liaison du pilote FC est modifiée de<block ref="b9ca0a083600812be33f42f91f00
   <block id="79c482cb23c057c0d600ecd3434dbb27" category="section-title">Erreurs courantes liées à « nvme-cli » et solutions de contournement</block>
   <block id="c481530fd3180128cebd4b0d3be77c0f" category="paragraph">Si le problème persiste, veuillez rassembler les fichiers et les résultats des commandes suivants et nous contacter. <block ref="39332fc74dd50b9d9a8e9919506502c0" category="inline-link-macro-rx"></block> pour un triage plus approfondi :</block>
   <block id="0669c03dc492faf8d7b9fc2bd8512b73" category="sidebar">Versions précédentes d'Host Utilities</block>
+  <block id="2444d67396b745a440cfa96bf55da9c6" category="doc">Découvrez comment configurer les hôtes SAN ONTAP avec NVMe-oF</block>
 </blocks>
