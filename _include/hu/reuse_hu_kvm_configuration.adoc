@@ -1,9 +1,0 @@
-= Configurer les paramètres KVM
-:allow-uri-read: 
-
-
-
-
-== Configurer les paramètres KVM
-
-Il n'est pas nécessaire de configurer les paramètres d'une machine virtuelle basée sur kernel, car la LUN est mappée sur l'hyperviseur.

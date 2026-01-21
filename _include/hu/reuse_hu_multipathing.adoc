@@ -1,7 +1,0 @@
-= 
-:allow-uri-read: 
-
-
-Vous pouvez utiliser le `multipath -ll` Commande pour vérifier les paramètres des LUN ONTAP.
-
-Les sections suivantes fournissent des exemples de sorties multivoies pour une LUN mappée sur des rôles ASA et non ASA.

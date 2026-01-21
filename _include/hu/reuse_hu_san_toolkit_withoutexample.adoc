@@ -1,5 +1,0 @@
-= 
-:allow-uri-read: 
-
-
-L'installation du package des utilitaires hôtes NetApp installe automatiquement le kit d'outils. Ce kit fournit l' `sanlun`utilitaire qui vous aide à gérer les LUN et les adaptateurs de bus hôte (HBA).  `sanlun`La commande renvoie des informations sur les LUN mappées sur votre hôte, les chemins d'accès multiples et les informations nécessaires à la création des groupes initiateurs.

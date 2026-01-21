@@ -136,14 +136,7 @@ fc.20000024ff7f4a50:21000024ff7f4a50-fc.2009d039ea3ab21f:2000d039ea3ab21f-naa.60
    Storage Array Type Path Config: {TPG_id=1000,*TPG_state=ANO*,RTP_id=1,RTP_health=UP}
    Path Selection Policy Path Config: PSP VMW_PSP_RR does not support path configuration.
 ----
-
-
-=== Configurations All SAN Array
-
-Toutes les configurations de baie SAN (ASA) optimisent tous les chemins d'accès à une LUN donnée en les gardant actives. Ce qui améliore les performances en assurant le service des opérations d'E/S sur tous les chemins en même temps.
-
-.Exemple
-L'exemple suivant illustre la sortie correcte d'une LUN ONTAP.
+Directive non résolue dans <stdin> - include::_include/hu/reuse_hu_asa_configuration.adoc[]
 
 [listing]
 ----
