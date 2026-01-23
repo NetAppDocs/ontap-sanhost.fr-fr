@@ -54,6 +54,11 @@ ONTAP prend en charge les fonctionnalités hôtes SAN suivantes, quelle que soit
 
 
 
+| La règle udev native dans `nvme-cli` Ce package assure l'équilibrage de charge en fonction de la profondeur de la file d'attente pour le multipath NVMe.  a| 
+9.6 ou version ultérieure
+
+
+
 | Le démarrage SAN est activé via le protocole NVMe/FC  a| 
 9.4 ou version ultérieure
 
@@ -67,11 +72,6 @@ ONTAP prend en charge les fonctionnalités hôtes SAN suivantes, quelle que soit
 | La règle udev native dans `nvme-cli` Ce package assure l'équilibrage de charge round-robin pour le multipath NVMe.  a| 
 8.2 ou version ultérieure
 
-
-
-| La règle udev native dans `nvme-cli` Ce package assure l'équilibrage de charge en fonction de la profondeur de la file d'attente pour le multipath NVMe.  a| 
-9.6 ou version ultérieure
-
 |===
 
 NOTE: Pour plus de détails sur les configurations prises en charge, consultez lelink:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^] .
@@ -82,7 +82,7 @@ NOTE: Pour plus de détails sur les configurations prises en charge, consultez l
 
 [cols="50,50"]
 |===
-| Si votre version de RHEL est .. | Découvrez... 
+| Si votre version RHEL est ... | Découvrez ... 
 
 
 | Série 10 | link:nvme-rhel-10x.html["Configuration de NVMe pour RHEL 10.x"] 

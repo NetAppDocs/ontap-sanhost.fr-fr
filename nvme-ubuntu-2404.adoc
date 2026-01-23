@@ -217,6 +217,7 @@ Le pilote natif de boîte de réception qla2xxx inclus dans le noyau Ubuntu 24.0
 
 Configuration du NVMe/FC pour un adaptateur Marvell/QLogic
 
+.Étapes
 . Vérifiez que vous exécutez les versions du pilote de carte et du micrologiciel prises en charge :
 +
 [listing]

@@ -143,6 +143,7 @@ Configurez NVMe/FC avec des adaptateurs Broadcom/Emulex ou Marvell/QLogic, ou co
 --
 Configuration de NVMe/FC pour une carte Broadcom/Emulex
 
+.Étapes
 . Vérifiez que vous utilisez le modèle d'adaptateur pris en charge :
 +
 .. Afficher les noms des modèles :
@@ -333,6 +334,7 @@ La sortie attendue est 1.
 --
 Le protocole NVMe/TCP ne prend pas en charge l'opération de connexion automatique.  Au lieu de cela, vous pouvez découvrir les sous-systèmes et espaces de noms NVMe/TCP en exécutant l'opération NVMe/TCP. `connect` ou `connect-all` opérations manuellement.
 
+.Étapes
 . Vérifiez que le port initiateur peut récupérer les données de la page de journal de découverte sur les LIF NVMe/TCP prises en charge :
 +
 [source, cli]
@@ -828,6 +830,7 @@ Configurez une authentification sécurisée en bande à l'aide de l'interface de
 --
 Configurez l'authentification intrabande sécurisée à l'aide de l'interface de ligne de commande.
 
+.Étapes
 . Obtenir le NQN hôte :
 +
 [source, cli]
@@ -920,6 +923,7 @@ Lorsque plusieurs sous-systèmes NVMe sont disponibles dans la configuration du 
 
 Utilisez le  `-o` option pour générer le fichier JSON. Pour plus d'options de syntaxe, reportez-vous aux pages de manuel de NVMe Connect-all.
 
+.Étapes
 . Configurez le fichier JSON :
 +
 .Montrer l'exemple

@@ -23,6 +23,11 @@ Les fonctionnalités prises en charge pour la configuration hôte avec NVMe over
 | Fonctionnalité | Version hôte du serveur d'entreprise SUSE Linux | Version ONTAP 
 
 
+| NVMe/TCP signale tous les chemins optimisés pour les systèmes ASA r2  a| 
+16
+| 9.16.1 ou version ultérieure 
+
+
 | Le chiffrement TLS 1.3 (Transport Layer Security) est pris en charge pour NVMe/TCP.  a| 
 15 SP6 ou version ultérieure
 | 9.16.1 ou version ultérieure 
@@ -77,10 +82,15 @@ NOTE: Pour plus de détails sur les configurations prises en charge, consultez l
 
 [cols="50,50"]
 |===
-| Si votre version de SUSE Linux Enterprise Server est .. | Découvrez... 
+| Si votre version de SUSE Linux Enterprise Server est ... | Découvrez ... 
+
+
+| 16 | link:nvme-sles16-spx.html["Configuration de NVMe pour SUSE Linux Enterprise Server 16"] 
 
 
 | Série 15 SPx | link:nvme-sles15-spx.html["Configuration de NVMe pour SUSE Linux Enterprise Server 15 SPx"] 
 |===
 .Informations associées
-link:https://docs.netapp.com/us-en/ontap/san-admin/start-nvme-fc-service-svm-task.html["Découvrez comment gérer les protocoles NVMe"^]
+* link:https://docs.netapp.com/us-en/asa-r2/index.html["Découvrez les systèmes ASA r2"^]
+* link:https://docs.netapp.com/us-en/ontap/san-admin/start-nvme-fc-service-svm-task.html["Découvrez comment gérer les protocoles NVMe"^]
+
