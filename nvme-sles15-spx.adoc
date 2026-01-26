@@ -995,7 +995,6 @@ Configurez une authentification intrabande sécurisée à l’aide de l’interf
 --
 Configurez l'authentification intrabande sécurisée à l'aide de l'interface de ligne de commande.
 
-.Étapes
 . Obtenir le NQN hôte :
 +
 [source, cli]
@@ -1088,7 +1087,6 @@ Lorsque plusieurs sous-systèmes NVMe sont disponibles dans la configuration du 
 
 Utilisez le `-o` option pour générer le fichier JSON.  Reportez-vous aux pages de manuel NVMe connect-all pour plus d'options de syntaxe.
 
-.Étapes
 . Configurez le fichier JSON :
 +
 .Affiche un exemple de résultat

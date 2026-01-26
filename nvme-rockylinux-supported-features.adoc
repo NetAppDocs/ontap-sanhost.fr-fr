@@ -64,7 +64,7 @@ ONTAP prend en charge les fonctionnalités hôtes SAN suivantes, quelle que soit
 
 
 
-| La règle udev native dans `nvme-cli` Ce package assure l'équilibrage de charge round-robin pour le multipath NVMe.  a| 
+| La règle udev native dans le paquet  `nvme-cli` fournit l'équilibrage de charge round-robin pour le multipathing NVMe  a| 
 8.2 ou version ultérieure
 
 |===

@@ -774,7 +774,6 @@ Configurez une authentification intrabande sécurisée à l’aide de l’interf
 --
 Configurez l'authentification intrabande sécurisée à l'aide de l'interface de ligne de commande.
 
-.Étapes
 . Obtenir le NQN hôte :
 +
 [source, cli]

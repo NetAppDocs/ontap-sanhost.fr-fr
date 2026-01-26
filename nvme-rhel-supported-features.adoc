@@ -54,7 +54,7 @@ ONTAP prend en charge les fonctionnalités hôtes SAN suivantes, quelle que soit
 
 
 
-| La règle udev native dans `nvme-cli` Ce package assure l'équilibrage de charge en fonction de la profondeur de la file d'attente pour le multipath NVMe.  a| 
+| La règle udev native dans le package  `nvme-cli` fournit l'équilibrage de charge de la profondeur de file d'attente pour le multipathing NVMe  a| 
 9.6 ou version ultérieure
 
 
@@ -69,7 +69,7 @@ ONTAP prend en charge les fonctionnalités hôtes SAN suivantes, quelle que soit
 
 
 
-| La règle udev native dans `nvme-cli` Ce package assure l'équilibrage de charge round-robin pour le multipath NVMe.  a| 
+| La règle udev native dans le paquet  `nvme-cli` fournit l'équilibrage de charge round-robin pour le multipathing NVMe  a| 
 8.2 ou version ultérieure
 
 |===
