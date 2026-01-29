@@ -4,7 +4,7 @@
 
 . Vérifiez que les E/S alignées de 4 Ko avec zpools utilisant les LUN ONTAP sont prises en charge :
 +
-.. Vérifiez que votre hôte Solaris est installé avec la dernière mise à jour du référentiel de support (SRU) :
+.. Vérifiez que votre hôte Solaris est installé avec la dernière Support Repository Update (SRU) :
 +
 [source, cli]
 ----

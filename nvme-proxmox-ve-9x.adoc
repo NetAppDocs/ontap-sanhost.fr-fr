@@ -152,7 +152,7 @@ SN1700E2P
 cat /sys/class/scsi_host/host*/modeldesc
 ----
 +
-Vous devriez voir un résultat similaire à l’exemple suivant :
+Vous devriez voir une sortie similaire à l’exemple suivant :
 
 +
 [listing]
@@ -211,7 +211,7 @@ cat /sys/module/lpfc/parameters/lpfc_enable_fc4_type
 cat /sys/class/fc_host/host*/port_name
 ----
 +
-Vous devriez voir un résultat similaire à :
+Vous devriez voir une sortie similaire à :
 
 +
 [listing]

@@ -1,10 +1,6 @@
-= Étape 4 : si vous le souhaitez, excluez un périphérique du multipathing
+= 
 :allow-uri-read: 
 
-
-
-
-== Étape 4 : si vous le souhaitez, excluez un périphérique du multipathing
 
 Si nécessaire, vous pouvez exclure un périphérique du multipathing en ajoutant le WWID du périphérique indésirable à la strophe « blacklist » du `multipath.conf` fichier.
 

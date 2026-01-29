@@ -1,10 +1,6 @@
-= Étape 5 : personnalisez les paramètres des chemins d'accès multiples pour les LUN ONTAP
+= 
 :allow-uri-read: 
 
-
-
-
-== Étape 5 : personnalisez les paramètres des chemins d'accès multiples pour les LUN ONTAP
 
 Si votre hôte est connecté à des LUN d'autres fournisseurs et que l'un des paramètres de chemins d'accès multiples est remplacé, vous devez les corriger en ajoutant la strophe plus loin dans `multipath.conf` le fichier qui s'applique spécifiquement aux LUN ONTAP. Si vous ne le faites pas, les LUN ONTAP risquent de ne pas fonctionner comme prévu.
 
