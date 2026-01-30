@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: hu_ubuntu_2404.html 
+permalink: hu-hpe-vme-80x.html 
 keywords: host utilities, red hat, rhel, linux, 20.04, netapp, ontap, ubuntu 
-summary: Installez Linux Host Utilities sur un hôte Ubuntu 24.04 pour gérer les opérations de protocole FCP et iSCSI avec les LUN ONTAP . 
+summary: Installez les utilitaires hôtes Linux sur un hôte HPE VME 8.0.x pour gérer les opérations de protocole FCP et iSCSI avec les LUNs ONTAP. 
 ---
-= Configurer Ubuntu 24.04 pour FCP et iSCSI avec le stockage ONTAP
+= Configurer HPE VME 8.0.x pour FCP et iSCSI avec le stockage ONTAP
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,29 +16,11 @@ summary: Installez Linux Host Utilities sur un hôte Ubuntu 24.04 pour gérer le
 
 
 [role="lead"]
-Le logiciel Linux Host Utilities fournit des outils de gestion et de diagnostic pour les hôtes Linux connectés au stockage ONTAP .  Lorsque vous installez les utilitaires d'hôte Linux sur un hôte Ubuntu 24.04, vous pouvez utiliser les utilitaires d'hôte pour vous aider à gérer les opérations de protocole FCP et iSCSI avec les LUN ONTAP .
+Le logiciel Linux Host Utilities fournit des outils de gestion et de diagnostic pour les hôtes Linux connectés au stockage ONTAP. Lorsque vous installez Linux Host Utilities sur un hôte HPE VME 8.0.x, vous pouvez utiliser Host Utilities pour vous aider à gérer les opérations des protocoles FCP et iSCSI avec les LUN ONTAP.
 
 
 
-== Étape 1 : activez éventuellement le démarrage SAN
-
-Vous pouvez configurer votre hôte pour qu'il utilise le démarrage SAN afin de simplifier le déploiement et d'améliorer l'évolutivité.
-
-.Avant de commencer
-Utilisez le link:https://mysupport.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^] pour vérifier que votre système d'exploitation Linux, votre adaptateur de bus hôte (HBA), le micrologiciel HBA, le BIOS de démarrage HBA et la version ONTAP prennent en charge le démarrage SAN.
-
-.Étapes
-. link:https://docs.netapp.com/us-en/ontap/san-admin/provision-storage.html["Créez un LUN de démarrage SAN et mappez-le à l'hôte"^].
-. Activez le démarrage SAN dans le BIOS du serveur pour les ports auxquels la LUN de démarrage SAN est mappée.
-+
-Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la documentation spécifique au fournisseur.
-
-. Vérifiez que la configuration a réussi en redémarrant l'hôte et en vérifiant que le système d'exploitation est opérationnel.
-
-
-
-
-== Étape 2 : installez les utilitaires hôtes Linux
+== Étape 1 : Installer les utilitaires hôtes Linux
 
 NetApp recommande vivement d'installer les utilitaires hôtes Linux pour prendre en charge la gestion des LUN ONTAP et aider le support technique à collecter les données de configuration.
 
@@ -49,9 +31,9 @@ NOTE: L'installation des utilitaires d'hôtes Linux ne modifie aucun paramètre 
 
 
 
-== Étape 3 : confirmez la configuration des chemins d'accès multiples pour votre hôte
+== Étape 2 : Confirmez la configuration multi-chemins pour votre hôte
 
-Vous pouvez utiliser le multipathing avec Ubuntu 24.04 pour gérer les LUN ONTAP .
+Vous pouvez utiliser le multipathing avec HPE VME 8.0.x pour gérer les LUNs ONTAP.
 
 Pour vous assurer que les chemins d'accès multiples sont correctement configurés pour votre hôte, vérifiez que le `/etc/multipath.conf` fichier est défini et que vous disposez des paramètres recommandés par NetApp pour vos LUN ONTAP.
 
@@ -165,13 +147,12 @@ Une configuration ASA optimise tous les chemins vers une LUN donnée en les gard
 [listing]
 ----
 # multipath -ll
-3600a098038314559533f524d6c652f62 dm-24 NETAPP,LUN C-Mode
-size=10G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+3600a098038314c4a433f577471797958 dm-2 NETAPP,LUN C-Mode size=180G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
 `-+- policy='service-time 0' prio=50 status=active
-  |- 11:0:1:13 sdm  8:192  active ready running
-  |- 11:0:3:13 sdah 66:16  active ready running
-  |- 12:0:1:13 sdbc 67:96  active ready running
-  `- 12:0:3:13 sdbx 68:176 active ready running
+  |- 14:0:0:0  sdc  8:32   active ready running
+  |- 17:0:0:0  sdas 66:192 active ready running
+  |- 14:0:3:0  sdar 66:176 active ready running
+  `- 17:0:3:0  sdch 69:80  active ready running
 ----
 =====
 --
@@ -187,14 +168,13 @@ L'exemple suivant présente la sortie d'une LUN ONTAP avec deux chemins Active/O
 [listing]
 ----
 # multipath -ll
-3600a098038314837352453694b542f4a dm-0 NETAPP,LUN C-Mode
-size=160G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+3600a0980383149764b5d567257516273 dm-0 NETAPP,LUN C-Mode size=150G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
 |-+- policy='service-time 0' prio=50 status=active
-| |- 14:0:3:0 sdbk 67:224 active ready running
-| `- 15:0:2:0 sdbl 67:240 active ready running
+| |- 16:0:3:0  sdcg 69:64  active ready running
+| `- 10:0:0:0  sdb  8:16   active ready running
 `-+- policy='service-time 0' prio=10 status=enabled
-  |- 14:0:0:0 sda  8:0    active ready running
-  `- 15:0:1:0 sdv  65:80  active ready running
+  |- 10:0:1:0  sdc  8:32   active ready running
+  `- 16:0:2:0  sdcf 69:48  active ready running
 ----
 =====
 --
@@ -203,7 +183,7 @@ size=160G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp
 
 
 
-== Étape 4 : Confirmez la configuration iSCSI de votre hôte
+== Étape 3 : Confirmez la configuration iSCSI de votre hôte
 
 Assurez-vous que iSCSI est correctement configuré pour votre hôte.
 
@@ -340,7 +320,7 @@ tcp: [4] 192.168.200.199:3260,1049 iqn.1992-08.com.netapp:sn.7cd154a7d35411f0a25
 
 
 
-== Étape 5 : Facultativement, exclure un périphérique du multipathing
+== Étape 4 : si vous le souhaitez, excluez un périphérique du multipathing
 
 Si nécessaire, vous pouvez exclure un périphérique du multipathing en ajoutant le WWID du périphérique indésirable à la strophe « blacklist » du `multipath.conf` fichier.
 
@@ -372,7 +352,7 @@ blacklist {
 
 
 
-== Étape 6 : Personnaliser les paramètres multipath pour les LUNs ONTAP
+== Étape 5 : personnalisez les paramètres des chemins d'accès multiples pour les LUN ONTAP
 
 Si votre hôte est connecté à des LUN d'autres fournisseurs et que l'un des paramètres de chemins d'accès multiples est remplacé, vous devez les corriger en ajoutant la strophe plus loin dans `multipath.conf` le fichier qui s'applique spécifiquement aux LUN ONTAP. Si vous ne le faites pas, les LUN ONTAP risquent de ne pas fonctionner comme prévu.
 
@@ -405,7 +385,7 @@ devices {
 ====
 
 
-== Étape 7 : Examiner les problèmes connus
+== Étape 6 : passez en revue les problèmes connus
 
 Il n'y a pas de problème connu.
 
@@ -414,12 +394,5 @@ Il n'y a pas de problème connu.
 == Et la suite ?
 
 * link:hu-luhu-command-reference.html["Découvrez comment utiliser l'outil Linux Host Utilities"] .
-* Découvrez la mise en miroir ASM
-+
-La mise en miroir de gestion automatique du stockage (ASM) peut nécessiter des modifications des paramètres de chemins d'accès multiples Linux pour permettre à ASM de reconnaître un problème et de basculer vers un autre groupe de pannes. La plupart des configurations ASM sur ONTAP utilisent une redondance externe, ce qui signifie que la protection des données est assurée par la baie externe et qu'ASM ne met pas en miroir les données. Certains sites utilisent ASM avec redondance normale pour fournir une mise en miroir bidirectionnelle, généralement entre différents sites. Voir link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/oracle-overview.html["Bases de données Oracle sur ONTAP"^] pour plus d'informations.
-
-* Découvrez la virtualisation Ubuntu Linux (KVM)
-+
-Ubuntu Linux peut servir d'hôte KVM. Cela vous permet d'exécuter plusieurs machines virtuelles sur un seul serveur physique grâce à la technologie de machine virtuelle basée sur le noyau Linux (KVM). L'hôte KVM ne nécessite pas de paramètres de configuration hôte explicites pour les LUN ONTAP .
-
+* Configurez les banques de données HPE VME sur les LUN ONTAP, puis configurez la machine virtuelle. Consultez la documentation HPE pour plus d'informations.
 

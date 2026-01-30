@@ -2,10 +2,13 @@
 :allow-uri-read: 
 
 
-Pour vous assurer que le multipathing est correctement configuré pour votre hôte, définissez le `timeout` paramètre sur votre hôte et vérifiez que le service iSCSI est en cours d'exécution et se connecte aux cibles iSCSI.
+Assurez-vous que iSCSI est correctement configuré pour votre hôte.
+
+.Description de la tâche
+Vous effectuez les étapes suivantes sur l'hôte iSCSI.
 
 .Étapes
-. Vérifiez que le paquet initiateur iSCSI (iscsi-initiator-utils) est installé :
+. Vérifiez que le package initiateur iSCSI (open-iscsi) est installé :
 +
 [source, cli]
 ----

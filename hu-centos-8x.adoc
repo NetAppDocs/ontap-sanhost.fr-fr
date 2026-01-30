@@ -159,6 +159,9 @@ Les résultats des exemples suivants montrent les paramètres et l'état de chem
 --
 Une configuration ASA optimise tous les chemins vers une LUN donnée en les gardant actifs. Ce qui améliore les performances en assurant le service des opérations d'E/S sur tous les chemins en même temps.
 
+.Montrer l'exemple
+[%collapsible]
+=====
 [listing]
 ----
 multipath -ll
@@ -170,6 +173,7 @@ size=80G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=
   |- 11:0:10:1  sdml 69:464   active ready running
   |- 11:0:11:1  sdpt  131:304  active ready running
 ----
+=====
 --
 .Configuration AFF ou FAS
 --
@@ -177,6 +181,9 @@ Une configuration AFF ou FAS doit comporter deux groupes de chemins ayant des pr
 
 L'exemple suivant présente la sortie d'une LUN ONTAP avec deux chemins Active/Optimized et deux chemins Active/non optimisés :
 
+.Montrer l'exemple
+[%collapsible]
+=====
 [listing]
 ----
 multipath -ll
@@ -189,6 +196,7 @@ size=80G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=
   |- 15:0:0:35 sdaj  66:48   active ready running
   |- 15:0:1:35 sdbx  68:176  active ready running
 ----
+=====
 --
 ====
 
@@ -197,7 +205,10 @@ size=80G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=
 
 == Étape 4 : Confirmez la configuration iSCSI de votre hôte
 
-Pour vous assurer que le multipathing est correctement configuré pour votre hôte, définissez le `timeout` paramètre sur votre hôte et vérifiez que le service iSCSI est en cours d'exécution et se connecte aux cibles iSCSI.
+Assurez-vous que iSCSI est correctement configuré pour votre hôte.
+
+.Description de la tâche
+Vous effectuez les étapes suivantes sur l'hôte iSCSI.
 
 .Étapes
 . Vérifiez que le paquet initiateur iSCSI (iscsi-initiator-utils) est installé :
