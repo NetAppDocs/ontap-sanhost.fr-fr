@@ -23,6 +23,11 @@ Les fonctionnalités prises en charge pour la configuration hôte avec NVMe over
 | Fonctionnalité | Version hôte Oracle Linux | Version ONTAP 
 
 
+| À partir d'Oracle Linux 9.6, nvme prend en charge la politique d'E/S « queue-depth » et est activé comme option par défaut.  a| 
+9.6 ou version ultérieure
+| 9.10.1 ou version ultérieure 
+
+
 | L'authentification sécurisée en bande est prise en charge via NVMe/TCP entre un hôte Oracle Linux et un contrôleur ONTAP.  a| 
 9.4 ou version ultérieure
 | 9.12.1 ou version ultérieure 
@@ -88,6 +93,9 @@ NOTE: Pour plus de détails sur les configurations prises en charge, consultez l
 | Si votre version d'Oracle Linux est .. | Découvrez... 
 
 
+| Série 10 | link:nvme-ol-10x.html["Configuration de NVMe pour Oracle Linux 10"] 
+
+
 | Série 9 | link:nvme-ol-9x.html["Configuration de NVMe pour Oracle Linux 9.x"] 
 
 
@@ -97,4 +105,4 @@ NOTE: Pour plus de détails sur les configurations prises en charge, consultez l
 | Série 7 | link:nvme-ol-7x.html["Configuration de NVMe pour Oracle Linux 7.x"] 
 |===
 .Informations associées
-link:https://docs.netapp.com/us-en/ontap/san-admin/start-nvme-fc-service-svm-task.html["Découvrez comment gérer les protocoles NVMe"^]
+link:https://docs.netapp.com/us-en/ontap/san-admin/start-nvme-fc-service-svm-task.html["Découvrez comment gérer les protocoles NVMe"^] link:https://docs.netapp.com/us-en/asa-r2/index.html["Découvrez ASA R2"^]

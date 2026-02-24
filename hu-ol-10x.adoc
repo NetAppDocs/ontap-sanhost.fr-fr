@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: hu-centos-8x.html 
-keywords: host utilities, centos, linux, 8.5, 8.4, 8.3, 8.2, 8.1, 8.0 netapp, ontap 
-summary: Installez les utilitaires hôtes Linux sur un hôte CentOS 8.x pour gérer les opérations de protocole FCP et iSCSI avec les LUN ONTAP . 
+permalink: hu-ol-10x.html 
+keywords: host utilities, oracle, linux, 10, netapp, ontap 
+summary: Installez les utilitaires hôtes Linux sur un hôte Oracle Linux 10 pour gérer les opérations de protocole FCP et iSCSI avec les LUNs ONTAP. 
 ---
-= Configurer CentOS 8.x pour FCP et iSCSI pour le stockage ONTAP
+= Configurer Oracle Linux 10 pour FCP et iSCSI avec le stockage ONTAP
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,7 +16,7 @@ summary: Installez les utilitaires hôtes Linux sur un hôte CentOS 8.x pour gé
 
 
 [role="lead"]
-Le logiciel Linux Host Utilities fournit des outils de gestion et de diagnostic pour les hôtes Linux connectés au stockage ONTAP . Lorsque vous installez les utilitaires hôtes Linux sur un hôte CentOS 8.x, vous pouvez utiliser ces utilitaires pour vous aider à gérer les opérations des protocoles FCP et iSCSI avec les LUN ONTAP .
+Le logiciel Linux Host Utilities fournit des outils de gestion et de diagnostic pour les hôtes Linux connectés au stockage ONTAP. Lorsque vous installez Linux Host Utilities sur un hôte Oracle Linux 10, vous pouvez utiliser Host Utilities pour vous aider à gérer les opérations des protocoles FCP et iSCSI avec les LUN ONTAP.
 
 
 
@@ -51,7 +51,7 @@ NOTE: L'installation des utilitaires d'hôtes Linux ne modifie aucun paramètre 
 
 == Étape 3 : confirmez la configuration des chemins d'accès multiples pour votre hôte
 
-Vous pouvez utiliser le multipathing avec CentOS 8.x pour gérer les LUN ONTAP .
+Vous pouvez utiliser le multipathing avec Oracle Linux 10 pour gérer les LUN ONTAP.
 
 Pour vous assurer que les chemins d'accès multiples sont correctement configurés pour votre hôte, vérifiez que le `/etc/multipath.conf` fichier est défini et que vous disposez des paramètres recommandés par NetApp pour vos LUN ONTAP.
 
@@ -66,12 +66,12 @@ touch /etc/multipath.conf
 +
 [source, cli]
 ----
-chkconfig multipathd on
+systemctl enable multipathd
 ----
 +
 [source, cli]
 ----
-/etc/init.d/multipathd start
+systemctl start multipathd
 ----
 . Chaque fois que vous démarrez l'hôte, le fichier vide `/etc/multipath.conf` à zéro octet charge automatiquement les paramètres de chemins d'accès multiples recommandés par NetApp comme paramètres par défaut. Vous ne devriez pas avoir besoin d'apporter de modifications au `/etc/multipath.conf` fichier de votre hôte car le système d'exploitation est compilé avec les paramètres multivoies qui reconnaissent et gèrent correctement les LUN ONTAP.
 +
@@ -166,12 +166,12 @@ Une configuration ASA optimise tous les chemins vers une LUN donnée en les gard
 ----
 multipath -ll
 3600a098038303634722b4d59646c4436 dm-28 NETAPP,LUN C-Mode
-size=80G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
-`-+- policy='service-time 0' prio=50 status=active
-  |- 11:0:7:1    sdfi   130:64   active ready running
-  |- 11:0:9:1    sdiy  8:288     active ready running
-  |- 11:0:10:1  sdml 69:464   active ready running
-  |- 11:0:11:1  sdpt  131:304  active ready running
+size=10G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+|-+- policy='service-time 0' prio=50 status=active
+  |- 11:0:7:6   sdbz 68:208  active ready running
+  |- 11:0:11:6  sddn 71:80   active ready running
+  |- 11:0:15:6  sdfb 129:208 active ready running
+  |- 12:0:1:6   sdgp 132:80  active ready running
 ----
 =====
 --
@@ -187,8 +187,8 @@ L'exemple suivant présente la sortie d'une LUN ONTAP avec deux chemins Active/O
 [listing]
 ----
 multipath -ll
-3600a098038303634722b4d59646c4436 dm-28 NETAPP,LUN C-Mode
-size=80G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+3600a0980383036347ffb4d59646c4436 dm-28 NETAPP,LUN C-Mode
+size=10G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
 |-+- policy='service-time 0' prio=50 status=active
 | |- 16:0:6:35 sdwb  69:624  active ready running
 | |- 16:0:5:35 sdun  66:752  active ready running
@@ -411,8 +411,6 @@ devices {
 
 Il n'y a pas de problème connu.
 
-Pour les problèmes connus du noyau compatible CentOS Red Hat, consultez la link:hu-rhel-8x.html#step-7-review-the-known-issues["problèmes connus"] pour la série Red Hat Enterprise Linux (RHEL) 8.x.
-
 
 
 == Et la suite ?
@@ -422,8 +420,8 @@ Pour les problèmes connus du noyau compatible CentOS Red Hat, consultez la link
 +
 La mise en miroir de gestion automatique du stockage (ASM) peut nécessiter des modifications des paramètres de chemins d'accès multiples Linux pour permettre à ASM de reconnaître un problème et de basculer vers un autre groupe de pannes. La plupart des configurations ASM sur ONTAP utilisent une redondance externe, ce qui signifie que la protection des données est assurée par la baie externe et qu'ASM ne met pas en miroir les données. Certains sites utilisent ASM avec redondance normale pour fournir une mise en miroir bidirectionnelle, généralement entre différents sites. Voir link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/oracle-overview.html["Bases de données Oracle sur ONTAP"^] pour plus d'informations.
 
-* Découvrez la virtualisation CentOS Linux (KVM)
+* Découvrez Oracle Linux KVM et la virtualisation
 +
-CentOS Linux peut servir d'hôte KVM. Cela vous permet d'exécuter plusieurs machines virtuelles sur un seul serveur physique grâce à la technologie de machine virtuelle basée sur le noyau Linux (KVM). L'hôte KVM ne nécessite pas de paramètres de configuration hôte explicites pour les LUN ONTAP .
+Oracle Linux peut servir d'hôte KVM. Cela vous permet d'exécuter plusieurs machines virtuelles sur un seul serveur physique grâce à la technologie de machine virtuelle basée sur le noyau Linux (KVM). Vous pouvez gérer et prendre en charge plusieurs hôtes Oracle Linux KVM en utilisant Oracle Linux Virtualization Manager, qui est basé sur le projet open-source oVirt. L'hôte KVM ne nécessite pas de paramètres de configuration hôte explicites pour les LUN ONTAP .
 
 

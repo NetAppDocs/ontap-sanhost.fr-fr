@@ -38,7 +38,7 @@ Vous pouvez utiliser le multipathing avec HPE VME 8.0.x pour gérer les LUNs ONT
 Pour vous assurer que les chemins d'accès multiples sont correctement configurés pour votre hôte, vérifiez que le `/etc/multipath.conf` fichier est défini et que vous disposez des paramètres recommandés par NetApp pour vos LUN ONTAP.
 
 .Étapes
-. Vérifiez que le `/etc/multipath.conf` fichier se ferme. Si le fichier n'existe pas, créez un fichier vide à zéro octet :
+. Vérifiez que le  `/etc/multipath.conf` fichier existe. Si le fichier n'existe pas, créez un fichier vide de zéro octet :
 +
 [source, cli]
 ----

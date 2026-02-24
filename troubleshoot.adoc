@@ -144,7 +144,7 @@ Aucune. Essayez d'exécuter le `nvme discover` commande à nouveau après un cer
 
 == Quand contacter le support technique
 
-Si le problème persiste, veuillez rassembler les fichiers et les résultats des commandes suivants et nous contacter. link:mysupport.netapp.com["Support NetApp"^] pour un triage plus approfondi :
+Si le problème persiste, collectez les fichiers et les résultats des commandes suivants et contactez link:https://mysupport.netapp.com["Support NetApp"^] pour un diagnostic plus approfondi :
 
 [source, cli]
 ----
