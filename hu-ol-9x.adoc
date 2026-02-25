@@ -312,10 +312,10 @@ $iscsiadm --mode node -l all
 $iscsiadm --mode node -T <target_name> -p <ip:port> -o update -n node.startup -v automatic
 ----
 +
-Vous devriez voir une sortie similaire à l’exemple suivant :
+Remplacez  `<target_name>` par le nom de la cible à laquelle vous souhaitez vous connecter automatiquement au démarrage de l’hôte. Remplacez  `<ip:port>` par l’adresse IP et le numéro de port de la cible. Par exemple :
 
 +
-[listing]
+[source, cli]
 ----
 iscsiadm --mode node -T iqn.1992-08.com.netapp:sn.064a9b19b3ee11f09dcad039eabac370:vs.23 -p 192.168.30.87:3260 -o update -n node.startup -v automatic
 ----
