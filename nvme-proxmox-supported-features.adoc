@@ -24,17 +24,17 @@ Les fonctionnalités prises en charge pour la configuration de l'hôte avec NVMe
 
 
 | NVMe/TCP est une fonctionnalité d'entreprise entièrement prise en charge  a| 
-9.0
+9.0 ou version ultérieure
 | 9.10.1 ou version ultérieure 
 
 
 | Fournit des détails ONTAP pour les espaces de noms NVMe/FC et NVMe/TCP en utilisant le protocole natif `nvme-cli` emballer.  a| 
-8.0
+8.0 ou version ultérieure
 | 9.10.1 ou version ultérieure 
 
 
 | Le trafic NVMe et SCSI est pris en charge sur le même hôte grâce à NVMe multipath pour les espaces de noms NVMe-oF et à dm-multipath pour les LUN SCSI.  a| 
-8.0
+8.0 ou version ultérieure
 | 9.4 ou version ultérieure 
 |===
 ONTAP prend en charge les fonctionnalités hôtes SAN suivantes, quelle que soit la version ONTAP exécutée sur votre système.
@@ -45,17 +45,22 @@ ONTAP prend en charge les fonctionnalités hôtes SAN suivantes, quelle que soit
 
 
 | Le `nvme-cli` Ce package inclut des scripts de connexion automatique, éliminant ainsi le besoin de scripts tiers.  a| 
-9.0
+9.0 ou version ultérieure
+
+
+
+| La règle udev native dans le package  `nvme-cli` fournit l'équilibrage de charge de la profondeur de file d'attente pour le multipathing NVMe  a| 
+9.0 ou version ultérieure
 
 
 
 | La règle udev native dans le paquet  `nvme-cli` fournit l'équilibrage de charge round-robin pour le multipathing NVMe  a| 
-9.0
+9.0 ou version ultérieure
 
 
 
 | Le multipathing NVMe natif est activé par défaut  a| 
-8.0
+8.0 ou version ultérieure
 
 |===
 

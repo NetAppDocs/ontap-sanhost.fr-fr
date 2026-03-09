@@ -523,7 +523,6 @@
   <block id="d6422a625045167156b3c0d85ca23ebf" category="sidebar">8.1</block>
   <block id="8b6f93f33bce541c7f50f8aff637e2e1" category="sidebar">RHEL</block>
   <block id="1a0d3890b0eb9dc0c7e3f33e1b9f1865" category="sidebar">NVMeoF RHEL</block>
-  <block id="cf5f238fca8b6e155078aa41c175743a" category="sidebar">9.0</block>
   <block id="7ceb3cac51dbf44c807f7e83fabc5016" category="sidebar">15 SP1</block>
   <block id="3a824154b16ed7dab899bf000b80eeee" category="sidebar">2022</block>
   <block id="ea6b2efbdd4255a9f1b3bbc6399b58f4" category="sidebar">2019</block>
@@ -2468,4 +2467,9 @@ La liaison du pilote FC est modifiée de<block ref="b9ca0a083600812be33f42f91f00
   <block id="22429905973644b59fef5bc5f1de5cc0" category="doc">Configurer Oracle Linux 10.x pour FCP et iSCSI avec le stockage ONTAP</block>
   <block id="c095933cd33553034e8d119262dd097b" category="paragraph">Le logiciel Linux Host Utilities fournit des outils de gestion et de diagnostic pour les hôtes Linux connectés au stockage ONTAP. Lorsque vous installez Linux Host Utilities sur un hôte Oracle Linux 10.x, vous pouvez utiliser Host Utilities pour vous aider à gérer les opérations des protocoles FCP et iSCSI avec les LUN ONTAP.</block>
   <block id="53b0cb8dd1f208321bcde1fc420505d1" category="paragraph">Vous pouvez utiliser le multipathing avec Oracle Linux 10.x pour gérer les LUN ONTAP.</block>
+  <block id="6a2b4410790513f6bead3be5a1c5f033" category="paragraph">8.0 ou version ultérieure</block>
+  <block id="de99ebfc9b67fc827d4b885ffe66df51" category="section-title">Étape 3 : Facultativement, modifiez le iopolicy dans les règles udev</block>
+  <block id="6c3cb6f0244406645b054fde3485555c" category="paragraph">À partir de Proxmox VE 9.0, la stratégie d'E/S par défaut pour NVMe-oF est définie sur<block ref="f63d19812a9885e12a84d9c2748b701f" prefix=" " category="inline-code"></block>. Si vous souhaitez changer la stratégie d'E/S pour<block ref="7b6d85eaafedeee6d733437bf856da7e" prefix=" " category="inline-code"></block>, qui est également disponible en tant qu'option configurable, modifiez le fichier de règles udev comme suit :</block>
+  <block id="3261e25ecb6c10cb23753dafcc11d3f3" category="list-text">Modifiez la règle de sorte que <block ref="f63d19812a9885e12a84d9c2748b701f" prefix=" " category="inline-code"></block> soit remplacé par <block ref="7b6d85eaafedeee6d733437bf856da7e" prefix=" " category="inline-code"></block>, comme indiqué dans l'exemple suivant :</block>
+  <block id="306924ca750fad388254a44133cf90dd" category="list-text">Vérifiez la stratégie d'E/S actuelle de votre sous-système. Remplacez &lt;subsystem&gt; par le nom de votre sous-système, par exemple nvme-subsys0.</block>
 </blocks>
