@@ -223,7 +223,7 @@ Vous devriez voir une sortie similaire à l’exemple suivant :
 +
 [listing]
 ----
-iscsi-initiator-utils-6.2.1.11-0.git4b3e853.el9.x86_64
+iscsi-initiator-utils-6.2.1.11-0.git4b3e853.0.1.el10.x86_64
 ----
 . Vérifiez le nom du nœud initiateur iSCSI, qui se trouve dans le fichier  `/etc/iscsi/initiatorname.iscsi` :
 +
@@ -315,7 +315,7 @@ $iscsiadm --mode node -T <target_name> -p <ip:port> -o update -n node.startup -v
 Remplacez  `<target_name>` par le nom de la cible à laquelle vous souhaitez vous connecter automatiquement au démarrage de l’hôte. Remplacez  `<ip:port>` par l’adresse IP et le numéro de port de la cible. Par exemple :
 
 +
-[source, cli]
+[listing]
 ----
 iscsiadm --mode node -T iqn.1992-08.com.netapp:sn.064a9b19b3ee11f09dcad039eabac370:vs.23 -p 192.168.30.87:3260 -o update -n node.startup -v automatic
 ----

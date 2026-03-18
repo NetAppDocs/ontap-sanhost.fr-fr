@@ -1,0 +1,138 @@
+= 
+:allow-uri-read: 
+
+
+Assurez-vous que iSCSI est correctement configuré pour votre hôte.
+
+.Description de la tâche
+Vous effectuez les étapes suivantes sur l'hôte iSCSI.
+
+.Étapes
+. Vérifiez que le paquet initiateur iSCSI (iscsi-initiator-utils) est installé :
++
+[source, cli]
+----
+rpm -qa | grep iscsi-initiator-utils
+----
++
+Vous devriez voir une sortie similaire à l’exemple suivant :
+
++
+[listing]
+----
+iscsi-initiator-utils-6.2.1.11-0.git4b3e853.0.1.el10.x86_64
+----
+. Vérifiez le nom du nœud initiateur iSCSI, qui se trouve dans le fichier  `/etc/iscsi/initiatorname.iscsi` :
++
+[source, cli]
+----
+InitiatorName=iqn.YYYY-MM.com.<vendor>:<host_name>
+----
+. Configurez le paramètre de délai d'expiration de la session iSCSI situé dans le fichier  `/etc/iscsi/iscsid.conf` :
++
+[source, cli]
+----
+node.session.timeo.replacement_timeout = 5
+----
++
+Le paramètre iSCSI `replacement_timeout` contrôle la durée pendant laquelle la couche iSCSI doit attendre qu’un chemin ou une session ayant expiré se rétablisse avant d’échouer toute commande qui lui est adressée. Vous devez définir la valeur de `replacement_timeout` sur 5 dans le fichier de configuration iSCSI.
+
+. Activez le service iSCSI :
++
+[source, cli]
+----
+$systemctl enable iscsid
+----
+. Démarrez le service iSCSI :
++
+[source, cli]
+----
+$systemctl start iscsid
+----
+. Vérifiez que le service iSCSI est en cours d'exécution :
++
+[source, cli]
+----
+$systemctl status iscsid
+----
++
+.Montrer l'exemple
+[%collapsible]
+====
+[listing]
+----
+● iscsid.service - Open-iSCSI
+     Loaded: loaded (/usr/lib/systemd/system/iscsid.service; enabled; preset: disabled)
+     Active: active (running) since Tue 2025-12-02 11:36:21 EST; 2 weeks 1 day ago
+TriggeredBy: ● iscsid.socket
+       Docs: man:iscsid(8)
+             man:iscsiuio(8)
+             man:iscsiadm(8)
+   Main PID: 2263 (iscsid)
+     Status: "Ready to process requests"
+      Tasks: 1 (limit: 816061)
+     Memory: 18.5M
+        CPU: 14.480s
+     CGroup: /system.slice/iscsid.service
+             └─2263 /usr/sbin/iscsid -f -d2
+----
+====
+. Découvrez les cibles iSCSI :
++
+[source, cli]
+----
+$iscsiadm --mode discovery --op update --type sendtargets --portal <target_IP>
+----
++
+.afficher exemple
+[%collapsible]
+====
+[listing]
+----
+iscsiadm --mode discovery --op update --type sendtargets --portal  192.168.30.87
+192.168.30.87:3260,1139 iqn.1992-08.com.netapp:sn.064a9b19b3ee11f09dcad039eabac370:vs.23
+192.168.31.97:3260,1142 iqn.1992-08.com.netapp:sn.064a9b19b3ee11f09dcad039eabac370:vs.23
+192.168.31.87:3260,1141 iqn.1992-08.com.netapp:sn.064a9b19b3ee11f09dcad039eabac370:vs.23
+192.168.30.97:3260,1140 iqn.1992-08.com.netapp:sn.064a9b19b3ee11f09dcad039eabac370:vs.23
+----
+====
+. Connectez-vous aux cibles :
++
+[source, cli]
+----
+$iscsiadm --mode node -l all
+----
+. Configurer iSCSI pour qu'il se connecte automatiquement au démarrage de l'hôte :
++
+[source, cli]
+----
+$iscsiadm --mode node -T <target_name> -p <ip:port> -o update -n node.startup -v automatic
+----
++
+Remplacez  `<target_name>` par le nom de la cible à laquelle vous souhaitez vous connecter automatiquement au démarrage de l’hôte. Remplacez  `<ip:port>` par l’adresse IP et le numéro de port de la cible. Par exemple :
+
++
+[listing]
+----
+iscsiadm --mode node -T iqn.1992-08.com.netapp:sn.064a9b19b3ee11f09dcad039eabac370:vs.23 -p 192.168.30.87:3260 -o update -n node.startup -v automatic
+----
+. Vérifiez les sessions iSCSI :
++
+[source, cli]
+----
+$iscsiadm --mode session
+----
++
+.Montrer l'exemple
+[%collapsible]
+====
+[listing]
+----
+iscsiadm --mode session
+tcp: [1] 192.168.30.87:3260,1139 iqn.1992-08.com.netapp:sn.064a9b19b3ee11f09dcad039eabac370:vs.23 (non-flash)
+tcp: [2] 192.168.31.97:3260,1142 iqn.1992-08.com.netapp:sn.064a9b19b3ee11f09dcad039eabac370:vs.23 (non-flash)
+tcp: [3] 192.168.31.87:3260,1141 iqn.1992-08.com.netapp:sn.064a9b19b3ee11f09dcad039eabac370:vs.23 (non-flash)
+tcp: [4] 192.168.30.97:3260,1140 iqn.1992-08.com.netapp:sn.064a9b19b3ee11f09dcad039eabac370:vs.23 (non-flash)
+----
+====
+
