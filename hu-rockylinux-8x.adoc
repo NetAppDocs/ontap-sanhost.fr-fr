@@ -42,6 +42,8 @@ Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la docum
 
 NetApp recommande vivement d'installer les utilitaires hôtes Linux pour prendre en charge la gestion des LUN ONTAP et aider le support technique à collecter les données de configuration.
 
+Rocky Linux est une distribution compatible avec RHEL et ne possède pas de paquetage d'utilitaires hôtes Linux distinct. Utilisez le paquetage d'utilitaires hôtes Linux correspondant à la version de RHEL.
+
 link:hu-luhu-80.html["Installer Linux Host Utilities 8.0"] .
 
 
