@@ -348,7 +348,7 @@ La version VMware vSphere 8.x avec ONTAP présente les problèmes connus suivant
 | ID de bug NetApp | Titre | Description 
 
 
-| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1543660["1543660"^] | Une erreur d'E/S se produit lorsque les machines virtuelles Linux utilisant des adaptateurs vNVMe rencontrent une fenêtre long All paths Down (APD)  a| 
+| link:https://jira.ngage.netapp.com/browse/CONTAPEXT-1126["CONTAPEXT-1126"^] | Une erreur d'E/S se produit lorsque les machines virtuelles Linux utilisant des adaptateurs vNVMe rencontrent une fenêtre long All paths Down (APD)  a| 
 Les machines virtuelles Linux exécutant vSphere 8.x et versions ultérieures et utilisant des adaptateurs virtuels NVMe (vNVME) rencontrent une erreur d'E/S, car l'opération de nouvelle tentative vNVMe est désactivée par défaut. Pour éviter une interruption sur les machines virtuelles Linux exécutant des noyaux plus anciens lors d'une panne de tous les chemins (APD) ou d'une charge d'E/S importante, VMware a introduit un « VSCSIDisableNvmeRetry » ajustable pour désactiver l'opération de nouvelle tentative vNVMe.
 
 |===

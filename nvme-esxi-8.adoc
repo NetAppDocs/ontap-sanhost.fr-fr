@@ -311,11 +311,11 @@ La configuration hôte NVMe-of pour ESXi 8.x avec ONTAP présente les problèmes
 | ID de bug NetApp | Titre | Description 
 
 
-| link:https://mysupport.netapp.com/site/bugs-online/product/ONTAP/BURT/1420654["1420654"^] | Nœud ONTAP non opérationnel lorsque le protocole NVMe/FC est utilisé avec ONTAP version 9.9.1 | ONTAP 9.9.1 a introduit la prise en charge de la commande « abort » NVMe. Lorsque ONTAP reçoit la commande « abort » pour abandonner une commande fusionnée NVMe en attente de sa commande partenaire, une interruption du nœud ONTAP se produit. Le problème est remarqué uniquement avec les hôtes qui utilisent des commandes fusionnées NVMe (par exemple, ESX) et un transport Fibre Channel (FC). 
+| link:https://mysupport.netapp.com/site/bugs-online/product/ONTAP/BURT/1420654["1420654"^] | Le nœud ONTAP est non opérationnel lorsque le protocole NVMe/FC est utilisé avec la version 9.9.1 d'ONTAP. | ONTAP 9.9.1 a introduit la prise en charge de la commande « abort » NVMe. Lorsque ONTAP reçoit la commande « abort » pour interrompre une commande NVMe fusionnée en attente de sa commande partenaire, une interruption du nœud ONTAP se produit. Le problème est constaté uniquement avec les hôtes qui utilisent des commandes NVMe fusionnées (par exemple, ESX) et le transport Fibre Channel (FC). 
 
 
-| 1543660 | Une erreur d'E/S se produit lorsque les machines virtuelles Linux utilisant des adaptateurs vNVMe rencontrent une fenêtre long All paths Down (APD)  a| 
-Les machines virtuelles Linux exécutant vSphere 8.x et versions ultérieures et utilisant des adaptateurs virtuels NVMe (vNVME) rencontrent une erreur d'E/S, car l'opération de nouvelle tentative vNVMe est désactivée par défaut. Pour éviter une interruption sur les machines virtuelles Linux exécutant des noyaux plus anciens lors d'une panne de tous les chemins (APD) ou d'une charge d'E/S importante, VMware a introduit un « VSCSIDisableNvmeRetry » ajustable pour désactiver l'opération de nouvelle tentative vNVMe.
+| link:https://jira.ngage.netapp.com/browse/CONTAPEXT-1126["CONTAPEXT-1126"^] | Une erreur d'E/S se produit lorsque les machines virtuelles Linux utilisant des adaptateurs vNVMe rencontrent une fenêtre long All paths Down (APD)  a| 
+Les machines virtuelles Linux exécutant vSphere 8.x ou version ultérieure et utilisant des adaptateurs NVMe virtuels (vNVMe) rencontrent une erreur d'E/S car la gestion des nouvelles tentatives vNVMe est désactivée par défaut. Afin d'éviter une interruption sur les machines virtuelles Linux utilisant des noyaux plus anciens lors d'une panne de tous les chemins d'accès (APD) ou d'une forte charge d'E/S, VMware a introduit un paramètre réglable « VSCSIDisableNvmeRetry » pour désactiver la gestion des nouvelles tentatives vNVMe.
 
 |===
 .Informations associées
