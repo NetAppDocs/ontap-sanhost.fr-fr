@@ -523,7 +523,13 @@ nvme	connect-all	-t	tcp	-w	192.168.31.15	-a	192.168.31.49
 
 == Étape 4 : Vous pouvez éventuellement modifier la politique d’E/S dans les règles udev.
 
-RHEL 9.6 définit la stratégie d'E/S par défaut pour NVMe-oF sur `round-robin` .  Si vous utilisez RHEL 9.6 et souhaitez modifier la politique d'E/S en `queue-depth` , modifiez le fichier de règles udev comme suit :
+.Modifications apportées à la politique d'E/S pour les versions RHEL 9.x
+* À partir de RHEL 9.7, la iopolicy par défaut est queue-depth.
+* Dans RHEL 9.6, round-robin est la stratégie d'E/S par défaut, mais queue-depth est disponible en tant qu'option configurable.
+* Avant RHEL 9.6, round-robin est la seule stratégie d'E/S NVMe-oF prise en charge.
+
+
+Si vous utilisez RHEL 9.6 et souhaitez changer la iopolicy `queue-depth`, modifiez le fichier de règles udev comme suit :
 
 .Étapes
 . Ouvrez le fichier de règles udev dans un éditeur de texte avec des privilèges root :
@@ -742,51 +748,79 @@ Namespace Usage    Format             FW             Rev
 ====
 . Vérifiez que l'état du contrôleur de chaque chemin est actif et que l'état ANA est correct :
 +
+[source, cli]
+----
+nvme list-subsys /dev/<controller_ID>
+----
++
+
+NOTE: À partir d'ONTAP 9.16.1, NVMe/FC et NVMe/TCP signalent tous les chemins optimisés sur les systèmes ASA r2.
+
++
 [role="tabbed-block"]
 ====
 .NVMe/FC
 --
-[source, cli]
-----
-nvme list-subsys /dev/nvme100n1
-----
-.Montrer l'exemple
+L'exemple suivant montre les résultats pour un espace de noms hébergé sur un contrôleur ONTAP à deux nœuds pour les systèmes AFF, FAS et ASA ainsi que le système ASA r2 avec NVMe/FC.
+
+.Afficher un exemple de sortie AFF, FAS et ASA
 [%collapsible]
 =====
 [listing, subs="+quotes"]
 ----
-nvme-subsys4 - NQN=nqn.1992-08.com.netapp:sn.3623e199617311f09257d039eaa7dfc9:subsystem.Nvme31
-               hostnqn=nqn.2014-08.org.nvmexpress:uuid: 4c4cxxxx-0056-xxxx-8048-b9cxxxx2563
-               \
-+- nvme199 *fc*   traddr=nn-0x200fd039eaa7dfc8:pn-0x2010d039eaa7dfc8,host_traddr=nn-0x200000109bf044b1:pn-0x100000109bf044b1 *live optimized*
-+- nvme246 *fc*  traddr=nn-0x200fd039eaa7dfc8:pn-0x2011d039eaa7dfc8,host_traddr=nn-0x200000109bf044b1:pn-0x100000109bf044b1  *live non-optimized*
-+- nvme249 *fc*  traddr=nn-0x200fd039eaa7dfc8:pn-0x2013d039eaa7dfc8,host_traddr=nn-0x200000109bf044b2:pn-0x100000109bf044b2 *live optimized*
-+- nvme251 *fc*   traddr=nn-0x200fd039eaa7dfc8:pn-0x2012d039eaa7dfc8,host_traddr=nn-0x200000109bf044b2:pn-0x100000109bf044b2 *live non-optimized*
+nvme-subsys5 - NQN=nqn.1992-08.com.netapp:sn.f7565b15a66911ef9668d039ea951c46:subsystem.nvme1
+               hostnqn=nqn.2014-08.org.nvmexpress:uuid:4c4c4544-0056-5410-8048-c7c04f425633
+\
++- nvme126 fc traddr=nn-0x2036d039ea951c45:pn-0x2038d039ea951c45,host_traddr=nn-0x2000f4c7aa0cd7c3:pn-0x2100f4c7aa0cd7c3 *live optimized*
++- nvme176 fc traddr=nn-0x2036d039ea951c45:pn-0x2037d039ea951c45,host_traddr=nn-0x2000f4c7aa0cd7c2:pn-0x2100f4c7aa0cd7c2 *live optimized*
++- nvme5 fc traddr=nn-0x2036d039ea951c45:pn-0x2039d039ea951c45,host_traddr=nn-0x2000f4c7aa0cd7c2:pn-0x2100f4c7aa0cd7c2 *live non-optimized*
++- nvme71 fc traddr=nn-0x2036d039ea951c45:pn-0x203ad039ea951c45,host_traddr=nn-0x2000f4c7aa0cd7c3:pn-0x2100f4c7aa0cd7c3 *live non-optimized*
+----
+=====
+.Afficher un exemple de sortie ASA r2
+[%collapsible]
+=====
+[listing, subs="+quotes"]
+----
+nvme-subsys96 - NQN=nqn.1992-08.om.netapp:sn.b351b2b6777b11f0b3c2d039ea5cfc91:subsystem.nvme24
+                hostnqn=nqn.2014-08.org.nvmexpress:uuid:d3b581b4-c975-11e6-8425-0894ef31a074
+\
+ +- nvme203 *fc* traddr=nn-0x2011d039ea5cfc90:pn-0x2015d039ea5cfc90,host_traddr=nn-0x200000109bdacc76:pn-0x100000109bdacc76 *live optimized*
+ +- nvme25 *fc* traddr=nn-0x2011d039ea5cfc90:pn-0x2014d039ea5cfc90,host_traddr=nn-0x200000109bdacc75:pn-0x100000109bdacc75 *live optimized*
+ +- nvme30 *fc* traddr=nn-0x2011d039ea5cfc90:pn-0x2012d039ea5cfc90,host_traddr=nn-0x200000109bdacc75:pn-0x100000109bdacc75 *live optimized*
+ +- nvme32 *fc* traddr=nn-0x2011d039ea5cfc90:pn-0x2013d039ea5cfc90,host_traddr=nn-0x200000109bdacc76:pn-0x100000109bdacc76 *live optimized*
 ----
 =====
 --
 .NVMe/TCP
 --
-[source, cli]
-----
-nvme list-subsys /dev/nvme0n1
-----
-.Montrer l'exemple
+L'exemple suivant montre des sorties affichant un espace de noms hébergé sur un contrôleur ONTAP à deux nœuds pour les systèmes AFF, FAS et ASA ainsi que les systèmes ASA r2 avec NVMe/TCP.
+
+.Afficher un exemple de sortie AFF, FAS et ASA
 [%collapsible]
 =====
 [listing, subs="+quotes"]
 ----
-nvme-subsys0 - NQN=nqn.1992-08.com.netapp:sn.51a3c9846e0c11f08f5dd039eaa7dfc9:subsystem.Nvme1
-hostnqn=nqn.2014-08.org.nvmexpress:uuid:4c4cxxxx-0035-xxxx-804b-b5cxxxx44d33
+nvme-subsys4 - NQN=nqn.1992-08.com.netapp:sn.64e65e6caae711ef9668d039ea951c46:subsystem.nvme4
+               hostnqn=nqn.2014-08.org.nvmexpress:uuid:4c4c4544-0035-5910-804b-c2c04f444d33
 \
-+- nvme0 *tcp* traddr=192.168.30.48,trsvcid=4420,host_traddr=192.168.30.15,
-src_addr=192.168.30.15 *live optimized*
-+- nvme1 *tcp* traddr=192.168.30.49,trsvcid=4420,host_traddr=192.168.30.15,
-src_addr=192.168.30.15 *live non-optimized*
-+- nvme2 *tcp* traddr=192.168.31.48,trsvcid=4420,host_traddr=192.168.31.15,
-src_addr=192.168.31.15 *live optimized*
-+- nvme3 *tcp* traddr=192.168.31.49,trsvcid=4420,host_traddr=192.168.31.15,
-src_addr=192.168.31.15 *live non-optimized*
+ +- nvme102 tcp traddr=192.168.21.20,trsvcid=4420,host_traddr=192.168.21.1,src_addr=192.168.21.1 *live non-optimized*
+ +- nvme151 tcp traddr=192.168.21.21,trsvcid=4420,host_traddr=192.168.21.1,src_addr=192.168.21.1 *live optimized*
+ +- nvme4 tcp traddr=192.168.20.20,trsvcid=4420,host_traddr=192.168.20.1,src_addr=192.168.20.1 *live non-optimized*
+ +- nvme53 tcp traddr=192.168.20.21,trsvcid=4420,host_traddr=192.168.20.1,src_addr=192.168.20.1 *live optimized*
+----
+=====
+.Afficher un exemple de sortie ASA r2
+[%collapsible]
+=====
+[listing, subs="+quotes"]
+----
+nvme-subsys4 - NQN=nqn.1992-08.com.netapp:sn.17e32b6e8c7f11f09545d039eac03c33:subsystem.Bidirectional_DHCP_1_0
+               hostnqn=nqn.2014-08.org.nvmexpress:uuid:4c4c4544-0054-5110-8039-c3c04f523034
+\                                                                                                                                                                               +- nvme4 *tcp* traddr=192.168.20.28,trsvcid=4420,host_traddr=192.168.20.21,src_addr=192.168.20.21 *live optimized*
++- nvme5 *tcp* traddr=192.168.20.29,trsvcid=4420,host_traddr=192.168.20.21,src_addr=192.168.20.21 *live optimized*
++- nvme6 *tcp* traddr=192.168.21.28,trsvcid=4420,host_traddr=192.168.21.21,src_addr=192.168.21.21 *live optimized*
++- nvme7 *tcp* traddr=192.168.21.29,trsvcid=4420,host_traddr=192.168.21.21,src_addr=192.168.21.21 *live optimized*
 ----
 =====
 --
