@@ -56,10 +56,14 @@ Vous pouvez utiliser le multipathing avec Oracle Linux 8.x pour gérer les LUN O
 
 NOTE: Vous pouvez utiliser le link:hu-rhel-8x.html#rhel-rhck["Paramètres recommandés pour Red Hat Enterprise Linux (RHEL) 8.x"] Configurer le noyau compatible Red Hat pour Oracle Linux 8.x.
 
-Pour vous assurer que les chemins d'accès multiples sont correctement configurés pour votre hôte, vérifiez que le `/etc/multipath.conf` fichier est défini et que vous disposez des paramètres recommandés par NetApp pour vos LUN ONTAP.
+[role="tabbed-block"]
+====
+.Hôte Oracle Linux
+--
+Pour garantir que le multipathing est correctement configuré pour votre hôte, vérifiez que  `/etc/multipath.conf` est défini et que les paramètres recommandés par NetApp sont configurés pour vos LUNs ONTAP.
 
 .Étapes
-. Vérifiez que le `/etc/multipath.conf` fichier se ferme. Si le fichier n'existe pas, créez un fichier vide à zéro octet :
+. Vérifiez que le  `/etc/multipath.conf` fichier existe. Si le fichier n'existe pas, créez un fichier vide de zéro octet :
 +
 [source, cli]
 ----
@@ -78,12 +82,12 @@ systemctl start multipathd
 ----
 . Chaque fois que vous démarrez l'hôte, le fichier vide `/etc/multipath.conf` à zéro octet charge automatiquement les paramètres de chemins d'accès multiples recommandés par NetApp comme paramètres par défaut. Vous ne devriez pas avoir besoin d'apporter de modifications au `/etc/multipath.conf` fichier de votre hôte car le système d'exploitation est compilé avec les paramètres multivoies qui reconnaissent et gèrent correctement les LUN ONTAP.
 +
-Le tableau suivant présente les paramètres de chemins d'accès multiples compilés natifs du système d'exploitation Linux pour les LUN ONTAP.
+Le tableau suivant présente les paramètres de chemins d'accès multiples compilés par le système d'exploitation Linux natif pour les LUN ONTAP.
 
 +
 .Affiche les paramètres
-[%collapsible]
-====
+[#multipath-parameter-settings%collapsible]
+=====
 [cols="2"]
 |===
 | Paramètre | Réglage 
@@ -142,7 +146,7 @@ Le tableau suivant présente les paramètres de chemins d'accès multiples compi
 
 | fournisseur | NETAPP 
 |===
-====
+=====
 . Vérifiez les paramètres et l'état du chemin de vos LUN ONTAP :
 +
 [source, cli]
@@ -156,12 +160,12 @@ Les paramètres multi-trajets par défaut prennent en charge les configurations 
 Les résultats des exemples suivants montrent les paramètres et l'état de chemin corrects pour les LUN ONTAP dans une configuration ASA, AFF ou FAS.
 
 +
-[role="tabbed-block"]
-====
-.Configuration DE L'INFRASTRUCTURE ASA
---
+*Configuration ASA*
+
++
 Une configuration ASA optimise tous les chemins vers une LUN donnée en les gardant actifs. Ce qui améliore les performances en assurant le service des opérations d'E/S sur tous les chemins en même temps.
 
++
 .Montrer l'exemple
 [%collapsible]
 =====
@@ -177,13 +181,16 @@ size=10G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=
   |- 12:0:1:6   sdgp 132:80  active ready running
 ----
 =====
---
-.Configuration AFF ou FAS
---
++
+*Configuration AFF ou FAS*
+
++
 Une configuration AFF ou FAS doit comporter deux groupes de chemins ayant des priorités plus élevées et moins élevées. Les chemins actifs/optimisés à priorité supérieure sont servis par le contrôleur où se trouve l'agrégat. Les chemins de priorité inférieure sont actifs mais non optimisés, car ils sont gérés par un autre contrôleur. Les chemins non optimisés ne sont utilisés que lorsque des chemins optimisés ne sont pas disponibles.
 
++
 L'exemple suivant présente la sortie d'une LUN ONTAP avec deux chemins Active/Optimized et deux chemins Active/non optimisés :
 
++
 .Montrer l'exemple
 [%collapsible]
 =====
@@ -200,10 +207,59 @@ size=10G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=
   |- 15:0:1:35 sdbx  68:176  active ready running
 ----
 =====
+
+
+--
+.OLVM - ONTAP HA
+--
+Dans Oracle Linux Virtualization Manager (OLVM), le démon VDSM gère les paramètres multipath par défaut de l'hyperviseur. Ne modifiez pas  `/etc/multipath.conf`directement. Remplacez plutôt les valeurs par défaut à l'aide d'un fichier drop-in multipath.
+
+Pour les configurations haute disponibilité (HA) ONTAP, NetApp recommande le fichier de remplacement suivant pour remplacer  `dev_loss_tmo` et  `no_path_retry`. Tous les autres paramètres multipath doivent correspondre aux paramètres du tableau des paramètres hôtes Oracle Linux.
+
+.Étapes
+. Créez le fichier de remplacement :
++
+[source, cli]
+----
+cat <<'EOF' > /etc/multipath/conf.d/ontap-ha-mpath-netapp.conf
+# Finite multipath retry window aligned with sanlock io_timeout
+# default sanlock:io_timeout=10s, polling_interval=5s => no_path_retry = (8*10)/5 = 16
+
+devices {
+  device {
+    vendor "NETAPP"
+    product "LUN"
+    no_path_retry 16
+    dev_loss_tmo "infinity"
+  }
+}
+EOF
+----
+. Rechargez le démon multipath :
++
+[source, cli]
+----
+systemctl reload multipathd
+----
+. Vérifiez la configuration multipath mise à jour :
++
+[source, cli]
+----
+multipathd -k"show config"
+----
+
+
+--
+.OLVM - Synchronisation active ONTAP SnapMirror
+--
+Dans Oracle Linux Virtualization Manager (OLVM), le démon VDSM gère les paramètres multipath par défaut de l'hyperviseur. Ne modifiez pas  `/etc/multipath.conf`directement. Remplacez plutôt les valeurs par défaut à l'aide d'un fichier drop-in multipath.
+
+Lorsque les hôtes OLVM utilisent ONTAP SnapMirror active sync, vous devez ajuster les paramètres de délai d'expiration de sanlock et de multipath afin de garantir un comportement correct des hôtes et des machines virtuelles lors des événements de basculement de stockage. Les valeurs de délai d'expiration par défaut d'OLVM peuvent entraîner des basculements de machines virtuelles haute disponibilité non planifiés lors de basculements de site imprévus, car la fenêtre de renouvellement du bail peut expirer avant la fin de la récupération multipath.
+
+Suivez les étapes de configuration dans l’article de la base de connaissances NetApp https://kb.netapp.com/on-prem/ontap/DP/SnapMirror/SnapMirror-KBs/Oracle_Linux_Virtualization_Manager_-_Sanlock_Settings_for_ONTAP_SnapMirror_Active_Sync["Gestionnaire de virtualisation Oracle Linux - Paramètres Sanlock pour ONTAP SnapMirror Active Sync"] pour mettre à jour les valeurs de délai d’expiration sanlock et multipath afin que la fenêtre de renouvellement du bail reste suffisante pour que la récupération multipath puisse s’achever lors d’un basculement de stockage.
+
 --
 ====
-
-
 
 
 == Étape 4 : Confirmez la configuration iSCSI de votre hôte
