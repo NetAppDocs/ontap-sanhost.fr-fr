@@ -13,11 +13,11 @@ Par défaut, le système d'exploitation AIX applique un délai d'expiration d'E/
 --
 .Synchronisation active de SnapMirror
 --
-À partir d' ONTAP 9.11.1, la synchronisation active SnapMirror est prise en charge pour un hôte AIX.  Le cluster principal dans une configuration AIX est le cluster « actif ».
+SnapMirror active sync est prise en charge pour un hôte AIX. Le comportement de prise en charge diffère selon la version d'ONTAP :
 
-Dans une configuration AIX, les basculements sont perturbateurs.  À chaque basculement, vous devez effectuer une nouvelle analyse sur l'hôte pour que les opérations d'E/S reprennent.
+** À partir de ONTAP 9.19.1, la synchronisation active SnapMirror est prise en charge dans la configuration Active/Active, permettant des opérations de synchronisation active SnapMirror non perturbatrices. Consultez l’article de la base de connaissances link:https://kb.netapp.com/on-prem/ontap/DP/SnapMirror/SnapMirror-KBs/SnapMirror_active_sync_support_for_AIX%3A_behavior_by_ONTAP_release_and_migration_guidance["SnapMirror active sync prise en charge pour AIX : comportement selon la version d'ONTAP et guide de migration"^].
+** Pour ONTAP 9.11.1 à 9.18.1, la synchronisation active SnapMirror est prise en charge en configuration actif/passif. Consultez l'article de la base de connaissances link:https://kb.netapp.com/on-prem/ontap/DP/SnapMirror/SnapMirror-KBs/How_to_configure_AIX_Host_for_SnapMirror_active_sync_in_ONTAP["Comment configurer un hôte AIX pour la synchronisation active SnapMirror dans ONTAP 9.11.1 à 9.18.1"^].
 
-Consultez l'article de la base de connaissanceslink:https://kb.netapp.com/on-prem/ontap/DP/SnapMirror/SnapMirror-KBs/How_to_configure_AIX_Host_for_SnapMirror_active_sync_in_ONTAP["Comment configurer un hôte AIX pour la synchronisation active SnapMirror"^] .
 
 --
 ====
