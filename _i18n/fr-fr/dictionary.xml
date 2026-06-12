@@ -1199,7 +1199,6 @@ La liaison du pilote FC est modifiée de<block ref="b9ca0a083600812be33f42f91f00
   <block id="411779633a68ad8ff4bb5f0b84de0e3d" category="doc">Étape 1 : installez les utilitaires hôtes HP-UX</block>
   <block id="7a5a6ee53a3c56e370cff4e4cb600d3a" category="paragraph">NetApp recommande vivement d'installer les utilitaires hôtes Linux pour prendre en charge la gestion des LUN ONTAP et aider le support technique à collecter les données de configuration.</block>
   <block id="5d17e83279fd5189b40ec31e6e0efc6c" category="inline-link-macro">Installez les utilitaires d'hôte HP-UX 6.0</block>
-  <block id="7b3d6a6184bc8044fb4eaa2361a0c137" category="paragraph"><block ref="a1822c628e463c7a9fa61c1a4713b4ef" category="inline-link-macro-rx"></block>.</block>
   <block id="cd30444b7075100f9dce64caf41ba2b7" category="doc">Étape 2 : installez les utilitaires hôtes Linux</block>
   <block id="a9764a4b476a4ae40670f2b10ab9b4aa" category="admonition">L'installation des utilitaires d'hôtes Linux ne modifie aucun paramètre de délai d'expiration de l'hôte sur votre hôte Linux.</block>
   <block id="0f8e25d5af08d115d6410aa42fa8c1e8" category="doc">Étape 5 : personnalisez les paramètres des chemins d'accès multiples pour les LUN ONTAP</block>
@@ -2505,4 +2504,5 @@ La liaison du pilote FC est modifiée de<block ref="b9ca0a083600812be33f42f91f00
   <block id="510d8f08b1bcd3d37f5f38838ba87607" category="list-text">À partir de ONTAP 9.19.1, la synchronisation active SnapMirror est prise en charge dans la configuration Active/Active, permettant des opérations de synchronisation active SnapMirror non perturbatrices. Consultez l’article de la base de connaissances <block ref="689132335b86d0a731403daf22970080" category="inline-link-macro-rx"></block>.</block>
   <block id="58d09565b9d76aa8df134a3c88f349ef" category="inline-link-macro">Comment configurer un hôte AIX pour la synchronisation active SnapMirror dans ONTAP 9.11.1 à 9.18.1</block>
   <block id="edef79d6486b82062ad7b8f2b46174e2" category="list-text">Pour ONTAP 9.11.1 à 9.18.1, la synchronisation active SnapMirror est prise en charge en configuration actif/passif. Consultez l'article de la base de connaissances <block ref="170dab56a652357d4fe24ca37b0b9eea" category="inline-link-macro-rx"></block>.</block>
+  <block id="d260773137ad0fe3e74f84c49c4bb99c" category="paragraph"><block ref="d91927ac11d01a60b7823e550f2dd7fb" category="inline-link-macro-rx"></block>.</block>
 </blocks>

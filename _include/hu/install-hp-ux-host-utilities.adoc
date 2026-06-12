@@ -8,4 +8,4 @@
 
 NetApp recommande vivement d'installer les utilitaires hôtes Linux pour prendre en charge la gestion des LUN ONTAP et aider le support technique à collecter les données de configuration.
 
-link:hu_hpux_60.html["Installez les utilitaires d'hôte HP-UX 6.0"].
+link:./hu_hpux_60.html["Installez les utilitaires d'hôte HP-UX 6.0"].
