@@ -30,6 +30,9 @@ Vous pouvez configurer votre hôte pour utiliser le démarrage SAN afin de simpl
 --
 Le démarrage SAN est le processus de configuration d'un disque connecté au SAN (un LUN) en tant que périphérique de démarrage pour un hôte AIX/PowerVM.  Vous pouvez configurer un LUN de démarrage SAN pour qu'il fonctionne dans un environnement AIX Multipath I/O (MPIO) qui utilise le protocole FC et exécute AIX Host Utilities avec le protocole FC ou FCoE.  La méthode que vous utilisez pour créer un LUN de démarrage SAN et installer une nouvelle image de système d'exploitation dans un environnement AIX MPIO dépend du protocole que vous utilisez.
 
+
+NOTE: AIX exige qu'un seul chemin soit visible pour un disque de démarrage SAN tant que MPIO n'est pas activé. L'installation ou la migration d'un disque de démarrage AIX nécessite généralement de restreindre temporairement le zonage FC de l'hôte afin d'inclure un seul initiateur FC et une seule cible FC. Après avoir installé les Host Utilities, y compris le paquet PCM, vous pouvez redémarrer le système d'exploitation pour activer pleinement MPIO. À ce moment-là, ajoutez les initiateurs FC et les cibles FC supplémentaires à la zone. Ensuite, exécutez  `cfgmgr -v` et  `bosboot -a` pour mettre à jour la configuration de démarrage afin d'inclure tous les chemins disponibles.
+
 .Étapes
 . Utilisez lelink:https://mysupport.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^] pour vérifier que votre système d'exploitation AIX, votre protocole et votre version ONTAP prennent en charge le démarrage SAN.
 . Suivez les meilleures pratiques pour configurer un démarrage SAN dans la documentation du fournisseur.
