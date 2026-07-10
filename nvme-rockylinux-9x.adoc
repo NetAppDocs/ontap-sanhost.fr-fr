@@ -27,6 +27,7 @@ NVMe-oF avec Rocky Linux 9.x présente les limitations connues suivantes :
 
 
 
+[[step-1-optionally-enable-san-booting]]
 == Étape 1 : activez éventuellement le démarrage SAN
 
 Vous pouvez configurer votre hôte pour utiliser le démarrage SAN afin de simplifier le déploiement et d’améliorer l’évolutivité. Utilisez lelink:https://mysupport.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^] pour vérifier que votre système d'exploitation Linux, votre adaptateur de bus hôte (HBA), votre micrologiciel HBA, votre BIOS de démarrage HBA et votre version ONTAP prennent en charge le démarrage SAN.
@@ -42,6 +43,7 @@ Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la docum
 
 
 
+[[step-2-install-rocky-linux-and-nvme-software-and-verify-your-configuration]]
 == Étape 2 : Installez Rocky Linux et le logiciel NVMe, puis vérifiez votre configuration.
 
 Pour configurer votre hôte pour NVMe-oF, vous devez installer les packages logiciels hôte et NVMe, activer le multipathing et vérifier la configuration NQN de votre hôte.
@@ -137,6 +139,7 @@ NOTE: Si le `hostnqn` les chaînes ne correspondent pas, utilisez le `vserver mo
 
 
 
+[[step-3-configure-nvmefc-and-nvmetcp]]
 == Étape 3 : Configurer NVMe/FC et NVMe/TCP
 
 Configurez NVMe/FC avec des adaptateurs Broadcom/Emulex ou Marvell/QLogic, ou configurez NVMe/TCP à l'aide d'opérations de découverte et de connexion manuelles.
@@ -652,6 +655,7 @@ nvme	connect-all	-t	tcp	-w	192.168.2.31	-a	192.168.2.25
 ====
 
 
+[[step-4-optionally-enable-1mb-io-for-nvmefc]]
 == Étape 4 : Activez éventuellement 1 Mo d'E/S pour NVMe/FC
 
 ONTAP signale une taille de transfert de données maximale (MDTS) de 8 dans les données du contrôleur d'identification.  Cela signifie que la taille maximale de la demande d'E/S peut atteindre 1 Mo.  Pour émettre des requêtes d'E/S d'une taille de 1 Mo pour un hôte Broadcom NVMe/FC, vous devez augmenter la `lpfc` valeur de la `lpfc_sg_seg_cnt` paramètre à 256 à partir de la valeur par défaut de 64.
@@ -685,6 +689,7 @@ cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
 
 
 
+[[step-5-verify-nvme-boot-services]]
 == Étape 5 : Vérifier les services de démarrage NVMe
 
 Le `nvmefc-boot-connections.service` et `nvmf-autoconnect.service` services de démarrage inclus dans NVMe/FC `nvme-cli` les packages sont automatiquement activés au démarrage du système.
@@ -740,6 +745,7 @@ Jun 10 01:08:36 localhost systemd[1]: Finished Auto-connect to subsystems on FC-
 
 
 
+[[step-6-verify-the-multipathing-configuration]]
 == Étape 6 : Vérifier la configuration multivoie
 
 Vérifiez que l'état des chemins d'accès multiples NVMe in-kernel, l'état ANA et les namespaces ONTAP sont corrects pour la configuration NVMe-of.
@@ -925,6 +931,7 @@ nvme netapp ontapdevices -o json
 
 
 
+[[step-7-set-up-secure-in-band-authentication]]
 == Étape 7 : Configurer une authentification sécurisée en bande
 
 L'authentification sécurisée en bande est prise en charge via NVMe/TCP entre un hôte Rocky Linux 9x et un contrôleur ONTAP .
@@ -1161,6 +1168,7 @@ DHHC-1:03:wSpuuKbBHTzC0W9JZxMBsYd9JFV8Si9aDh22k2BR/4m852vH7KGlrJeMpzhmyjDWOo0PJJ
 ====
 
 
+[[step-8-review-the-known-issues]]
 == Étape 8 : passez en revue les problèmes connus
 
 Il n'y a pas de problème connu.

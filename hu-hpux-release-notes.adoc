@@ -20,6 +20,7 @@ Les notes de version décrivent les nouvelles fonctionnalités et améliorations
 
 
 
+[[whats-new-in-hp-ux-host-utilities-6-0]]
 == Nouveautés de HP-UX Host Utilities 6.0
 
 Il n'y a pas de nouvelles fonctionnalités ni d'améliorations.
@@ -32,12 +33,14 @@ HP-UX Host Utilities 6.0 prend en charge les versions du système d'exploitation
 
 
 
+[[known-issues-and-limitations]]
 == Problèmes connus et limitations
 
 Il n’y a aucun problème ni limitation connu.
 
 
 
+[[whats-next]]
 == Et la suite ?
 
 link:hu_hpux_60.html["En savoir plus sur l'installation des utilitaires hôtes HP-UX"]

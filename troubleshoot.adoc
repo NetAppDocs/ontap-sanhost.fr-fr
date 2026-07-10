@@ -25,6 +25,7 @@ NOTE: Les instructions de dépannage ne s'appliquent pas aux hôtes AIX, ESXi, P
 
 
 
+[[enable-verbose-logging]]
 == Activer la journalisation détaillée
 
 Si vous rencontrez un problème avec votre configuration, la journalisation détaillée peut fournir des informations essentielles pour le dépannage.
@@ -87,6 +88,7 @@ options qla2xxx ql2xnvmeenable=1 ql2xextended_error_logging=0x1e400000
 ====
 
 
+[[common-nvme-cli-errors-and-workarounds]]
 == Erreurs courantes liées à « nvme-cli » et solutions de contournement
 
 Les erreurs affichées par `nvme-cli` pendant `nvme discover`, `nvme connect`, ou `nvme connect-all` les opérations et les solutions de contournement sont indiquées dans le tableau suivant :
@@ -142,6 +144,7 @@ Aucune. Essayez d'exécuter le `nvme discover` commande à nouveau après un cer
 |===
 
 
+[[when-to-contact-technical-support]]
 == Quand contacter le support technique
 
 Si le problème persiste, collectez les fichiers et les résultats des commandes suivants et contactez link:https://mysupport.netapp.com["Support NetApp"^] pour un diagnostic plus approfondi :

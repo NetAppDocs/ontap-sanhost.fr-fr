@@ -98,6 +98,7 @@ Pour plus d'informations sur la gestion des ifexes, reportez-vous à la section 
 
 
 
+[[step-1-confirm-the-multipath-configuration-for-your-host]]
 == Étape 1 : Confirmez la configuration multi-chemins pour votre hôte
 
 Lorsque vous installez le système d'exploitation AIX, IBM MPIO utilisé pour le multiacheminement NVMe est activé par défaut.
@@ -126,6 +127,7 @@ hdisk1  11        Enabled  Sel,Non       nvme60  fcnvme0, 9
 
 
 
+[[step-2-configure-nvmefc]]
 == Étape 2 : Configurer NVMe/FC
 
 Vous devez configurer NVMe/FC pour les adaptateurs Broadcom/Emulex sur VIOS car la prise en charge du protocole NVMe/FC est désactivée dans le Virtual Fibre Channel (vFC) sur VIOS.  La prise en charge du protocole NVMe/FC est activée par défaut dans le FC physique.
@@ -284,6 +286,7 @@ vs_s922-55-lpar2 subsystem_s922-55-lpar2 nqn.2014-08.org.nvmexpress:uuid:64e0xxx
 
 
 
+[[step-3-validate-nvmefc]]
 == Étape 3 : Valider NVMe/FC
 
 Vérifiez que les espaces de noms ONTAP sont corrects pour la configuration NVMe/FC.
@@ -324,6 +327,7 @@ hdisk1  11       Enabled  Sel,Non      nvme60  fcnvme0, 9
 
 
 
+[[step-4-review-the-known-issues]]
 == Étape 4 : Examiner les problèmes connus
 
 La configuration de l'hôte NVMe/FC pour AIX avec stockage ONTAP présente les problèmes connus suivants :
@@ -346,6 +350,7 @@ La configuration de l'hôte NVMe/FC pour AIX avec stockage ONTAP présente les p
 |===
 
 
+[[step-5-troubleshoot]]
 == Étape 5 : Dépannage
 
 Avant de résoudre les problèmes de NVMe/FC, vérifiez que vous exécutez une configuration conforme auxlink:https://mysupport.netapp.com/matrix/["IMT"^] caractéristiques.  Si vous continuez à avoir des problèmes, contactezlink:https://mysupport.netapp.com["Support NetApp"^] .

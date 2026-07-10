@@ -20,6 +20,7 @@ Le logiciel Linux Host Utilities fournit des outils de gestion et de diagnostic 
 
 
 
+[[step-1-install-the-linux-host-utilities]]
 == Étape 1 : Installer les utilitaires hôtes Linux
 
 NetApp recommande vivement d'installer les utilitaires hôtes Linux pour prendre en charge la gestion des LUN ONTAP et aider le support technique à collecter les données de configuration.
@@ -31,6 +32,7 @@ NOTE: L'installation des utilitaires d'hôtes Linux ne modifie aucun paramètre 
 
 
 
+[[step-2-confirm-the-multipath-configuration-for-your-host]]
 == Étape 2 : Confirmez la configuration multi-chemins pour votre hôte
 
 Vous pouvez utiliser le multipathing avec HPE VME 8.0.x pour gérer les LUNs ONTAP.
@@ -63,6 +65,7 @@ Le tableau suivant présente les paramètres de chemins d'accès multiples compi
 .Affiche les paramètres
 [%collapsible]
 ====
+[[multipath-parameter-settings]]
 [cols="2"]
 |===
 | Paramètre | Réglage 
@@ -183,6 +186,7 @@ L'exemple suivant présente la sortie d'une LUN ONTAP avec deux chemins Active/O
 
 
 
+[[step-3-confirm-the-iscsi-configuration-for-your-host]]
 == Étape 3 : Confirmez la configuration iSCSI de votre hôte
 
 Assurez-vous que iSCSI est correctement configuré pour votre hôte.
@@ -320,6 +324,7 @@ tcp: [4] 192.168.166.70:3260,1042 iqn.1992-08.com.netapp:sn.c770be5d934811f0b624
 
 
 
+[[step-4-optionally-exclude-a-device-from-multipathing]]
 == Étape 4 : si vous le souhaitez, excluez un périphérique du multipathing
 
 Si nécessaire, vous pouvez exclure un périphérique du multipathing en ajoutant le WWID du périphérique indésirable à la strophe « blacklist » du `multipath.conf` fichier.
@@ -352,6 +357,7 @@ blacklist {
 
 
 
+[[step-5-customize-multipath-parameters-for-ontap-luns]]
 == Étape 5 : personnalisez les paramètres des chemins d'accès multiples pour les LUN ONTAP
 
 Si votre hôte est connecté à des LUN d'autres fournisseurs et que l'un des paramètres de chemins d'accès multiples est remplacé, vous devez les corriger en ajoutant la strophe plus loin dans `multipath.conf` le fichier qui s'applique spécifiquement aux LUN ONTAP. Si vous ne le faites pas, les LUN ONTAP risquent de ne pas fonctionner comme prévu.
@@ -385,12 +391,14 @@ devices {
 ====
 
 
+[[step-6-review-the-known-issues]]
 == Étape 6 : passez en revue les problèmes connus
 
 Il n'y a pas de problème connu.
 
 
 
+[[whats-next]]
 == Et la suite ?
 
 * link:hu-luhu-command-reference.html["Découvrez comment utiliser l'outil Linux Host Utilities"] .

@@ -4,6 +4,7 @@
 
 
 
+[[step-1-optionally-enable-san-booting]]
 == Étape 1 : activez éventuellement le démarrage SAN
 
 Vous pouvez démarrer le système d'exploitation Windows en utilisant un démarrage local ou un démarrage SAN.  NetApp recommande l'utilisation d'un démarrage SAN pour simplifier le déploiement et améliorer l'évolutivité.

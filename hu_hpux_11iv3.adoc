@@ -20,6 +20,7 @@ Le logiciel HP-UX Host Utilities fournit des outils de gestion et de diagnostic 
 
 
 
+[[step-1-optionally-enable-san-booting]]
 == Étape 1 : activez éventuellement le démarrage SAN
 
 Configurez votre hôte pour utiliser le démarrage SAN afin de simplifier le déploiement et d’améliorer l’évolutivité.  Le démarrage SAN est le processus de configuration d'un disque connecté au SAN (un LUN) en tant que périphérique de démarrage pour un hôte HP-UX.  Les utilitaires hôtes prennent en charge le démarrage SAN avec les protocoles FC et FCoE dans les environnements HP-UX.
@@ -31,6 +32,7 @@ Configurez votre hôte pour utiliser le démarrage SAN afin de simplifier le dé
 
 
 
+[[step-2-install-the-hp-ux-host-utilities]]
 == Étape 2 : installer les utilitaires hôtes HP-UX
 
 NetApp recommande fortement d'installer les utilitaires hôtes HP-UX pour prendre en charge la gestion des LUN ONTAP et aider le support technique à collecter les données de configuration.
@@ -39,6 +41,7 @@ link:hu_hpux_60.html["Installez les utilitaires d'hôte HP-UX 6.0"]
 
 
 
+[[step-3-confirm-the-multipath-configuration-for-your-host]]
 == Étape 3 : confirmez la configuration des chemins d'accès multiples pour votre hôte
 
 Utilisez le multipathing avec HP-UX 11i v3 pour gérer les LUN ONTAP .  Le multi-accès vous permet de configurer plusieurs chemins réseau entre l'hôte et le système de stockage.  Si un chemin échoue, le trafic continue sur les chemins restants.
@@ -157,6 +160,7 @@ up       secondary  /dev/dsk/c42t4d5   fcd1    hpux_4     1
 
 
 
+[[step-4-review-the-known-issues]]
 == Étape 4 : Examiner les problèmes connus
 
 La version HP-UX 11i v3 avec stockage ONTAP présente les problèmes connus suivants :
@@ -176,6 +180,7 @@ La version HP-UX 11i v3 avec stockage ONTAP présente les problèmes connus suiv
 |===
 
 
+[[whats-next]]
 == Quelle est la prochaine étape
 
 link:hu_hpux_60_cmd.html["En savoir plus sur l'utilisation de l'outil Utilitaires hôte HP-UX"] .

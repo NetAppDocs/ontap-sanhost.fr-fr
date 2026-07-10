@@ -29,6 +29,7 @@ NVMe-oF avec SUSE Linux Enterprise Server 15 SPx présente les limitations connu
 
 
 
+[[step-1-optionally-enable-san-booting]]
 == Étape 1 : activez éventuellement le démarrage SAN
 
 Vous pouvez configurer votre hôte pour utiliser le démarrage SAN afin de simplifier le déploiement et d’améliorer l’évolutivité. Utilisez lelink:https://mysupport.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^] pour vérifier que votre système d'exploitation Linux, votre adaptateur de bus hôte (HBA), votre micrologiciel HBA, votre BIOS de démarrage HBA et votre version ONTAP prennent en charge le démarrage SAN.
@@ -44,6 +45,7 @@ Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la docum
 
 
 
+[[step-2-install-suse-linux-enterprise-server-and-nvme-software-and-verify-your-configuration]]
 == Étape 2 : Installez SUSE Linux Enterprise Server et le logiciel NVMe, puis vérifiez votre configuration.
 
 Pour configurer votre hôte pour NVMe-oF, vous devez installer les packages logiciels hôte et NVMe, activer le multipathing et vérifier la configuration NQN de votre hôte.
@@ -56,12 +58,12 @@ Pour configurer votre hôte pour NVMe-oF, vous devez installer les packages logi
 uname -r
 ----
 +
-Exemple de version du noyau Rocky Linux :
+Exemple de version du noyau SUSE Linux Enterprise Server :
 
 +
 [listing]
 ----
-6.4.0-150700.53.3-default
+6.4.0-150700.53.34-default
 ----
 . Installer le `nvme-cli` groupe :
 +
@@ -139,6 +141,7 @@ NOTE: Si le `hostnqn` les chaînes ne correspondent pas, utilisez le `vserver mo
 
 
 
+[[step-3-configure-nvmefc-and-nvmetcp]]
 == Étape 3 : Configurer NVMe/FC et NVMe/TCP
 
 Configurez NVMe/FC avec des adaptateurs Broadcom/Emulex ou Marvell/QLogic, ou configurez NVMe/TCP à l'aide d'opérations de découverte et de connexion manuelles.
@@ -501,6 +504,7 @@ nvme	connect-all	-t	tcp	-w	192.168.211.80	-a	192.168.211.67
 ====
 
 
+[[step-4-optionally-modify-the-iopolicy-in-the-udev-rules]]
 == Étape 4 : Vous pouvez éventuellement modifier la politique d’E/S dans les règles udev.
 
 À partir de SUSE Linux Enterprise Server 15 SP6, la stratégie d'E/S par défaut pour NVMe-oF est définie sur `round-robin`. Si vous souhaitez modifier la politique d'E/S en `queue-depth`, modifiez le fichier de règles udev comme suit :
@@ -560,6 +564,7 @@ NOTE: La nouvelle politique d'E/S s'applique automatiquement aux périphériques
 
 
 
+[[step-5-optionally-enable-1mb-io-for-nvmefc]]
 == Étape 5 : Vous pouvez activer l’E/S à 1 Mo pour NVMe/FC (optionnel).
 
 ONTAP signale une taille de transfert de données maximale (MDTS) de 8 dans les données du contrôleur d'identification.  Cela signifie que la taille maximale de la demande d'E/S peut atteindre 1 Mo.  Pour émettre des requêtes d'E/S d'une taille de 1 Mo pour un hôte Broadcom NVMe/FC, vous devez augmenter la `lpfc` valeur de la `lpfc_sg_seg_cnt` paramètre à 256 à partir de la valeur par défaut de 64.
@@ -593,6 +598,7 @@ cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
 
 
 
+[[step-6-verify-nvme-boot-services]]
 == Étape 6 : Vérifier les services de démarrage NVMe
 
 Le `nvmefc-boot-connections.service` et `nvmf-autoconnect.service` services de démarrage inclus dans NVMe/FC `nvme-cli` les packages sont automatiquement activés au démarrage du système.
@@ -650,6 +656,7 @@ Jul 07 19:52:30 HP-DL360-14-168 systemd[1]: Finished Auto-connect to subsystems 
 
 
 
+[[step-7-verify-the-multipathing-configuration]]
 == Étape 7 : Vérifier la configuration du multipathing
 
 Vérifiez que l'état des chemins d'accès multiples NVMe in-kernel, l'état ANA et les namespaces ONTAP sont corrects pour la configuration NVMe-of.
@@ -824,6 +831,7 @@ nvme netapp ontapdevices -o json
 
 
 
+[[step-8-create-a-persistent-discovery-controller]]
 == Étape 8 : Créer un contrôleur de découverte persistant
 
 Vous pouvez créer un contrôleur de découverte persistant (PDC) pour un hôte SUSE Linux Enterprise Server 15 SPx. Un contrôleur de périphérique (PDC) est nécessaire pour détecter automatiquement une opération d'ajout ou de suppression d'un sous-système NVMe et les modifications apportées aux données de la page du journal de découverte.
@@ -980,6 +988,7 @@ Transport Service Identifier: 8009
 
 
 
+[[step-9-set-up-secure-in-band-authentication]]
 == Étape 9 : Configurer une authentification sécurisée en bande
 
 L'authentification sécurisée en bande est prise en charge via NVMe/TCP entre un hôte SUSE Linux Enterprise Server 15 SPx et un contrôleur ONTAP .
@@ -1207,6 +1216,7 @@ DHHC-1:03:jqgYcJSKp73+XqAf2X6twr9ngBpr2n0MGWbmZIZq4PieKZCoilKGef8lAvhYS0PNK7T+04
 ====
 
 
+[[step-10-configure-transport-layer-security]]
 == Étape 10 : Configurer la sécurité de la couche de transport
 
 Le protocole TLS (Transport Layer Security) assure un chiffrement de bout en bout sécurisé pour les connexions NVMe entre les hôtes NVMe-oF et une baie ONTAP . Vous pouvez configurer TLS 1.3 à l'aide de l'interface de ligne de commande (CLI) et d'une clé pré-partagée (PSK) configurée.
@@ -1468,6 +1478,7 @@ Authentication Diffie-Hellman Group: 3072-bit
 
 
 
+[[step-11-review-the-known-issues]]
 == Étape 11 : passez en revue les problèmes connus
 
 Il n'y a pas de problème connu.

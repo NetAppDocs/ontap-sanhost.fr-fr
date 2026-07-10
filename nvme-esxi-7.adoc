@@ -20,6 +20,7 @@ Vous pouvez configurer NVMe over Fabrics (NVMe-of) sur les hôtes initiateurs ex
 
 
 
+[[supportability]]
 == Prise en charge
 
 * Depuis ONTAP 9.7, la prise en charge de NVMe over Fibre Channel (NVMe/FC) est ajoutée pour les versions de VMware vSphere.
@@ -29,6 +30,7 @@ Vous pouvez configurer NVMe over Fabrics (NVMe-of) sur les hôtes initiateurs ex
 
 
 
+[[features]]
 == Caractéristiques
 
 * L'hôte initiateur ESXi peut exécuter à la fois le trafic NVMe/FC et FCP via les mêmes ports d'adaptateur. Consultez la link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] pour obtenir la liste des adaptateurs et contrôleurs FC pris en charge. Pour obtenir la liste actuelle des configurations et versions prises en charge, reportez-vous aulink:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^].
@@ -38,6 +40,7 @@ Vous pouvez configurer NVMe over Fabrics (NVMe-of) sur les hôtes initiateurs ex
 
 
 
+[[known-limitations]]
 == Limites connues
 
 Les configurations suivantes ne sont pas prises en charge :
@@ -48,6 +51,7 @@ Les configurations suivantes ne sont pas prises en charge :
 
 
 
+[[enable-nvmefc]]
 == Activation de NVMe/FC
 
 . Vérifiez la chaîne NQN de l'hôte ESXi et vérifiez qu'elle correspond à la chaîne NQN de l'hôte pour le sous-système correspondant de la baie ONTAP :
@@ -66,6 +70,7 @@ Host NQN: nqn.2014-08.com.vmware:nvme:nvme-esx
 
 
 
+[[configure-broadcomemulex]]
 === Configurer Broadcom/Emulex
 
 . Vérifiez si la configuration est prise en charge avec le pilote/micrologiciel requis en link:https://mysupport.netapp.com/matrix/["Matrice d'interopérabilité"^]vous reportant à la section .
@@ -95,6 +100,7 @@ vmhba65   lpfc     link-up     fc.200000109b954570:100000109b954570             
 ----
 
 
+[[configure-marvellqlogic]]
 === Configurez Marvell/QLogic
 
 .Étapes
@@ -129,6 +135,7 @@ vmhba65   qlnativefc  link-up     fc.20000024ff1817af:21000024ff1817af          
 
 
 
+[[validate-nvmefc]]
 == Validation de la spécification NVMe/FC
 
 . Vérifiez que l'adaptateur NVMe/FC est répertorié sur l'hôte ESXi :
@@ -207,12 +214,14 @@ fc.200034800d6d7268:210034800d6d7268-fc.201700a098dfe3d1:201900a098dfe3d1-uuid.5
 
 
 
+[[configure-nvmetcp]]
 == Configurez NVMe/TCP
 
 À partir de 7,0U3c, les modules NVMe/TCP requis seront chargés par défaut. Pour configurer le réseau et l'adaptateur NVMe/TCP, reportez-vous à la documentation de VMware vSphere.
 
 
 
+[[validate-nvmetcp]]
 == Validation du protocole NVMe/TCP
 
 .Étapes
@@ -269,6 +278,7 @@ tcp.vmnic3:34:80:Od:30:ca:el-tcp.unknown-uuid.400bf333abf74ab8b96dc18ffadc3f99
 
 
 
+[[known-issues]]
 == Problèmes connus
 
 La configuration hôte NVMe-of pour ESXi 7.x avec ONTAP présente les problèmes connus suivants :

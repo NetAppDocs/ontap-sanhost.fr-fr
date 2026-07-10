@@ -4,6 +4,7 @@
 
 
 
+[[step-1-install-the-hp-ux-host-utilities]]
 == Étape 1 : installez les utilitaires hôtes HP-UX
 
 NetApp recommande vivement d'installer les utilitaires hôtes Linux pour prendre en charge la gestion des LUN ONTAP et aider le support technique à collecter les données de configuration.

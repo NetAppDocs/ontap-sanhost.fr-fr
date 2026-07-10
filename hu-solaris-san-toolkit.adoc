@@ -41,6 +41,7 @@ NOTE: Cette boîte à outils est commune à toutes les configurations et protoco
 
 
 
+[[whats-next]]
 == Et la suite ?
 
 link:hu-solaris-command-reference.html["En savoir plus sur l'utilisation de l'outil Solaris Host Utilities"] .

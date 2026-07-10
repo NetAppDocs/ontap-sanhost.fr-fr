@@ -42,6 +42,7 @@ SAN Toolkit est pris en charge sur les versions des systèmes d'exploitation AIX
 ====
 
 
+[[whats-next]]
 == Et la suite ?
 
 link:hu_hpux_60_cmd.html["En savoir plus sur l'utilisation de l'outil Utilitaires hôte HP-UX"] .

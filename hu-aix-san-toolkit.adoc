@@ -36,6 +36,7 @@ NOTE: La boîte à outils SAN est commune à toutes les configurations d’hôte
 
 
 
+[[whats-next]]
 == Et la suite ?
 
 link:hu-aix-command-reference.html["En savoir plus sur l'utilisation de l'outil AIX Host Utilities"] .

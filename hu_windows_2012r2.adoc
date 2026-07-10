@@ -20,6 +20,7 @@ Les utilitaires hôtes Windows vous permettent de connecter des hôtes Windows �
 
 
 
+[[step-1-optionally-enable-san-booting]]
 == Étape 1 : activez éventuellement le démarrage SAN
 
 Vous pouvez démarrer le système d'exploitation Windows en utilisant un démarrage local ou un démarrage SAN.  NetApp recommande l'utilisation d'un démarrage SAN pour simplifier le déploiement et améliorer l'évolutivité.
@@ -51,6 +52,7 @@ Effectuez un démarrage local en installant le système d'exploitation Windows s
 ====
 
 
+[[step-2-install-windows-hotfixes]]
 == Étape 2 : Installer les correctifs Windows
 
 NetApp recommande d'installer la *dernière mise à jour cumulative* disponible dans le catalogue de mises à jour Microsoft sur le serveur hôte.
@@ -70,6 +72,7 @@ TIP: De nombreux correctifs nécessitent un redémarrage de l'hôte Windows.  Vo
 
 
 
+[[step-3-install-the-windows-host-utilities]]
 == Étape 3 : installer les utilitaires hôtes Windows
 
 Les utilitaires hôtes Windows sont un ensemble de programmes logiciels accompagnés d'une documentation qui vous permettent de connecter des ordinateurs hôtes à des disques virtuels (LUN) sur un SAN NetApp .  NetApp recommande de télécharger et d'installer la dernière version des utilitaires hôtes Windows pour prendre en charge la gestion des LUN ONTAP et aider le support technique à collecter les données de configuration.
@@ -78,6 +81,7 @@ Pour plus d'informations sur la configuration et l'installation des utilitaires 
 
 
 
+[[step-4-confirm-the-multipath-configuration-for-your-host]]
 == Étape 4 : Confirmez la configuration multi-chemins pour votre hôte
 
 Installez le logiciel Microsoft Multipath I/O (MPIO) et activez le multipathing si votre hôte Windows possède plusieurs chemins d'accès au système de stockage.
@@ -156,12 +160,14 @@ image::nonasa.png[Capture d'écran d'une LUN ONTAP avec deux chemins actifs/opti
 
 
 
+[[step-5-review-the-known-issues]]
 == Étape 5 : Examiner les problèmes connus
 
 Il n'y a pas de problème connu.
 
 
 
+[[whats-next]]
 == Et la suite ?
 
 link:hu-wuhu-configuration.html["Découvrez la configuration des utilitaires hôtes Windows pour le stockage ONTAP"]

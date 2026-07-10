@@ -4,6 +4,7 @@
 
 
 
+[[whats-next]]
 == Et la suite ?
 
 * Paramètres de pilote recommandés avec le noyau Linux

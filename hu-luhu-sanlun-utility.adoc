@@ -53,6 +53,7 @@ Pour Linux Host Utilities 7.1, l'utilitaire « sanlun » n'est pas pris en charg
 ====
 
 
+[[whats-next]]
 == Et la suite ?
 
 link:hu-luhu-command-reference.html["Découvrez comment utiliser l'outil Linux Host Utilities"] .

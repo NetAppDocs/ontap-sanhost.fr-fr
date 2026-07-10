@@ -38,6 +38,7 @@ Le tableau suivant présente les paramètres de chemins d'accès multiples compi
 .Affiche les paramètres
 [%collapsible]
 ====
+[[multipath-parameter-settings]]
 [cols="2"]
 |===
 | Paramètre | Réglage 

@@ -133,6 +133,7 @@ sanlun version 8.0.386.1644
 
 
 
+[[whats-next]]
 == Et la suite ?
 
 * Paramètres de pilote recommandés avec le noyau Linux

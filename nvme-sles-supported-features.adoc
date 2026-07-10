@@ -78,6 +78,7 @@ NOTE: Pour plus de détails sur les configurations prises en charge, consultez l
 
 
 
+[[whats-next]]
 == Quelle est la prochaine étape
 
 [cols="50,50"]

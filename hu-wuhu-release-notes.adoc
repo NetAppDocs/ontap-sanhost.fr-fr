@@ -22,24 +22,28 @@ Pour obtenir des informations spécifiques sur les versions et les mises à jour
 
 
 
+[[whats-new-in-windows-host-utilities-8-0]]
 == Nouveautés de Windows Host Utilities 8.0
 
 Windows Host Utilities 8.0 inclut des paramètres supplémentaires pour les pilotes NVMe/FC.  Ces paramètres sont automatiquement chargés lorsque vous installez Windows Host Utilities 8.0.
 
 
 
+[[whats-new-in-windows-host-utilities-7-2]]
 == Nouveautés de Windows Host Utilities 7.2
 
 Windows Host Utilities 7.2 inclut la prise en charge des paramètres du pilote NVMe/FC et des correctifs pour les cartes des nouveaux fournisseurs.
 
 
 
+[[whats-new-in-windows-host-utilities-7-1]]
 == Nouveautés de Windows Host Utilities 7.1
 
 Windows Host Utilities 7.1 inclut la prise en charge des systèmes de stockage de la série E, du logiciel ONTAP 9 et des délais d'expiration iSCSI améliorés pour un basculement plus rapide.
 
 
 
+[[known-issues-and-limitations]]
 == Problèmes connus et limitations
 
 Vous devez être conscient des problèmes et limitations connus suivants qui pourraient avoir un impact sur les performances de votre hôte spécifique.
@@ -55,6 +59,7 @@ link:https://mysupport.netapp.com/site/bugs-online/product["NetApp bogues en lig
 
 
 
+[[whats-next]]
 == Quelle est la prochaine étape
 
 link:hu-wuhu-80.html["En savoir plus sur l'installation des utilitaires hôtes Windows"]

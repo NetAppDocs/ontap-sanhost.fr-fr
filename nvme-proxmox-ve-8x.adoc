@@ -27,6 +27,7 @@ NVMe-oF avec Proxmox VE 8.x présente la limitation connue suivante :
 
 
 
+[[step-1-install-proxmox-ve-and-nvme-software-and-verify-your-configuration]]
 == Étape 1 : Installez Proxmox VE et le logiciel NVMe, puis vérifiez votre configuration.
 
 Pour configurer votre hôte pour NVMe-oF, vous devez installer les packages logiciels hôte et NVMe, activer le multipathing et vérifier la configuration NQN de votre hôte.
@@ -120,6 +121,7 @@ NOTE: Si le `hostnqn` les chaînes ne correspondent pas, utilisez le `vserver mo
 
 
 
+[[step-2-configure-nvmefc-and-nvmetcp]]
 == Étape 2 : Configurer NVMe/FC et NVMe/TCP
 
 Configurez NVMe/FC avec des adaptateurs Broadcom/Emulex ou Marvell/QLogic, ou configurez NVMe/TCP à l'aide d'opérations de découverte et de connexion manuelles.
@@ -506,6 +508,7 @@ Le paramètre pour NVMe/TCP `ctrl_loss_tmo timeout` est automatiquement réglé 
 ====
 
 
+[[step-3-optionally-enable-1mb-io-for-nvmefc]]
 == Étape 3 : Vous pouvez activer l’E/S à 1 Mo pour NVMe/FC (optionnel).
 
 ONTAP signale une taille de transfert de données maximale (MDTS) de 8 dans les données du contrôleur d'identification.  Cela signifie que la taille maximale de la demande d'E/S peut atteindre 1 Mo.  Pour émettre des requêtes d'E/S d'une taille de 1 Mo pour un hôte Broadcom NVMe/FC, vous devez augmenter la `lpfc` valeur de la `lpfc_sg_seg_cnt` paramètre à 256 à partir de la valeur par défaut de 64.
@@ -539,6 +542,7 @@ cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
 
 
 
+[[step-4-verify-nvme-boot-services]]
 == Étape 4 : Vérifier les services de démarrage NVMe
 
 Avec Proxmox 8.x, `nvmefc-boot-connections.service` et `nvmf-autoconnect.service` Services de démarrage inclus dans NVMe/FC `nvme-cli` Les paquets sont automatiquement activés au démarrage du système.
@@ -600,6 +604,7 @@ Nov 20 17:48:29 SR665-14-122.lab.eng.btc.netapp.in systemd[1]: Finished nvmefc-b
 
 
 
+[[step-5-verify-the-multipathing-configuration]]
 == Étape 5 : Vérifier la configuration multivoie
 
 Vérifiez que l'état des chemins d'accès multiples NVMe in-kernel, l'état ANA et les namespaces ONTAP sont corrects pour la configuration NVMe-of.
@@ -771,6 +776,7 @@ nvme netapp ontapdevices -o json
 
 
 
+[[step-6-review-the-known-issues]]
 == Étape 6 : passez en revue les problèmes connus
 
 Il n'y a pas de problème connu.

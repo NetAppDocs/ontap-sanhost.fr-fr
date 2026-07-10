@@ -20,6 +20,7 @@ Le logiciel AIX Host Utilities fournit des outils de gestion et de diagnostic po
 
 
 
+[[step-1-optionally-enable-san-booting]]
 == Étape 1 : activez éventuellement le démarrage SAN
 
 Vous pouvez configurer votre hôte pour utiliser le démarrage SAN afin de simplifier le déploiement et d’améliorer l’évolutivité.  Si votre configuration ne prend pas en charge le démarrage SAN, vous pouvez utiliser un démarrage local.
@@ -47,6 +48,7 @@ Effectuez un démarrage local en installant le système d'exploitation AIX sur l
 ====
 
 
+[[step-2-install-the-aix-host-utilities]]
 == Étape 2 : installer les utilitaires de l'hôte AIX
 
 NetApp recommande fortement d'installer les utilitaires hôtes AIX pour prendre en charge la gestion des LUN ONTAP et aider le support technique à collecter les données de configuration.  Le package MPIO des utilitaires hôtes fournit une prise en charge MPIO pour AIX et VIOS.
@@ -58,6 +60,7 @@ link:hu_aix_61.html["Installer AIX Host Utilities 6.1"] .
 
 
 
+[[step-3-confirm-the-multipath-configuration-for-your-host]]
 == Étape 3 : confirmez la configuration des chemins d'accès multiples pour votre hôte
 
 Vous pouvez utiliser le multipathing avec AIX 7.2 et PowerVM pour gérer les LUN ONTAP .
@@ -219,10 +222,12 @@ up      secondary  path3  fcs1    fc_aix_4        1
 
 
 
+[[step-4-review-the-known-issues]]
 == Étape 4 : Examiner les problèmes connus
 
 
 
+[[known-issues]]
 == Problèmes connus
 
 La version IBM AIX 7.2 et/ou PowerVM (VIOS 3.1) avec stockage ONTAP présente les problèmes connus suivants :
@@ -242,6 +247,7 @@ La version IBM AIX 7.2 et/ou PowerVM (VIOS 3.1) avec stockage ONTAP présente le
 |===
 
 
+[[whats-next]]
 == Et la suite ?
 
 link:hu-aix-command-reference.html["En savoir plus sur l'utilisation de l'outil AIX Host Utilities"] .

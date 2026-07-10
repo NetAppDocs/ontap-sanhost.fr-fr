@@ -20,6 +20,7 @@ Vous pouvez utiliser les paramètres de configuration des hôtes SAN ONTAP pour 
 
 
 
+[[hypervisor-san-booting]]
 == Démarrage SAN de l'hyperviseur
 
 .Avant de commencer
@@ -41,6 +42,7 @@ Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la docum
 
 
 
+[[multipathing]]
 == Chemins d'accès multiples
 
 ESXi fournit un module de chemins d'accès multiples extensible appelé Native Multipathing Plug-in (NMP) qui gère les sous-plug-ins, les Storage Array Type Plugins (SATPS) et les Path Selection Plugins (PSP). Ces règles SATP sont disponibles par défaut dans ESXi.
@@ -62,6 +64,7 @@ system      tpgs_on        VMW_PSP_RR                   NetApp arrays with ALUA 
 ----
 
 
+[[non-asa-configurations]]
 === Configurations non ASA
 
 Pour les configurations non ASA, il doit y avoir deux groupes de chemins avec des priorités différentes. Les chemins ayant des priorités plus élevées sont actifs/optimisés. Cela signifie qu'ils sont gérés par le contrôleur où se trouve l'agrégat. Les chemins avec des priorités inférieures sont actifs mais non optimisés, car ils sont desservis par un autre contrôleur. Les chemins non optimisés ne sont utilisés que lorsque les chemins optimisés ne sont pas disponibles.
@@ -181,6 +184,7 @@ fc.20000024ff171d37:21000024ff171d37-fc.202300a098ea5e27:201e00a098ea5e27-naa.60
 ----
 
 
+[[vvol]]
 == Vol
 
 Les volumes virtuels (vvols) sont des types d'objets VMware correspondant à un disque de machine virtuelle (VM), ainsi que ses snapshots et ses clones rapides.
@@ -208,10 +212,12 @@ Pour plus d'informations sur le provisionnement et la gestion des vVols, reporte
 
 
 
+[[recommended-settings]]
 == Paramètres recommandés
 
 
 
+[[ats-locking]]
 === Verrouillage ATS
 
 Le verrouillage ATS est *obligatoire* pour le stockage compatible VAAI et la mise à niveau du VMFS5. Il est nécessaire d'assurer une interopérabilité correcte et des performances d'E/S optimales du stockage partagé VMFS avec des LUN ONTAP. Pour plus d'informations sur l'activation du verrouillage ATS, reportez-vous à la documentation VMware.
@@ -234,6 +240,7 @@ NOTE: Activez le paramètre Space-alloc pour que toutes les LUN mappées à VMwa
 
 
 
+[[guest-os-timeouts]]
 === Délais d'expiration du système d'exploitation invité
 
 Vous pouvez configurer manuellement les machines virtuelles à l'aide des réglages de système d'exploitation invités recommandés. Après avoir effectué les mises à jour, vous devez redémarrer l'invité pour que les mises à jour prennent effet.
@@ -255,6 +262,7 @@ Vous pouvez configurer manuellement les machines virtuelles à l'aide des régla
 |===
 
 
+[[validating-the-vsphere-tunable]]
 === Validation du système vSphere ajustable
 
 Utiliser la commande suivante pour vérifier le paramètre HardwareAccélérationLocaliking.
@@ -276,6 +284,7 @@ Utiliser la commande suivante pour vérifier le paramètre HardwareAccélératio
 ----
 
 
+[[validate-the-disk-iops-setting]]
 === Validez le paramètre IOPS du disque
 
 Utilisez la commande suivante pour vérifier le paramètre IOPS.
@@ -296,6 +305,7 @@ naa.600a098038304731783f506670553355
 ----
 
 
+[[validating-the-qfullsamplesize]]
 === Validation de QFullSampleSize
 
 Utilisez la commande suivante pour vérifier QFullSampleSize
@@ -317,6 +327,7 @@ Utilisez la commande suivante pour vérifier QFullSampleSize
 ----
 
 
+[[known-issues]]
 == Problèmes connus
 
 VMware vSphere 7.x avec la version ONTAP ne présente aucun problème connu.
