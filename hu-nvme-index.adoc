@@ -16,8 +16,10 @@ summary: 'Vous pouvez configurer certains hôtes SAN pour le protocole NVMe over
 
 
 [role="lead"]
-Vous pouvez configurer les hôtes SAN pris en charge pour utiliser le protocole NVMe over Fabrics (NVMe-oF) avec ONTAP comme cible de stockage.  NVMe-oF inclut NVMe sur Fibre Channel (NVMe/FC) et NVMe sur TCP (NVMe/TCP).  Selon votre système d'exploitation hôte et la version ONTAP , vous configurez et validez le protocole NVMe/FC ou NVMe/TCP, ou les deux sur l'hôte.
+Vous pouvez configurer les hôtes SAN compatibles pour utiliser le protocole NVMe over Fabrics (NVMe-oF) avec ONTAP comme cible de stockage. NVMe-oF inclut NVMe over Fibre Channel (NVMe/FC) et NVMe over TCP (NVMe/TCP). Selon votre système d'exploitation hôte et la version d'ONTAP, vous configurez et validez le protocole NVMe/FC ou NVMe/TCP, ou les deux, sur le système d'exploitation hôte.
 
 .Informations associées
-* link:https://www.netapp.com/pdf.html?item=/media/10681-tr4684pdf.pdf["Base de connaissances NetApp : En savoir plus sur NVMe-oF"^] .
+* https://docs.netapp.com/us-en/ontap/san-admin/manage-nvme-concept.html["Découvrez le provisionnement NVMe"^]
+* link:https://docs.netapp.com/us-en/ontap/san-admin/start-nvme-fc-service-svm-task.html["Découvrez comment gérer les protocoles NVMe"^]
+* link:https://www.netapp.com/pdf.html?item=/media/10681-tr4684.pdf["TR-4684 : Mise en œuvre et configuration des SAN modernes avec NVMe-oF"^]
 
