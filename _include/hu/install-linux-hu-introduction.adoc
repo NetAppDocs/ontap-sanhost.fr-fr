@@ -2,4 +2,4 @@
 :allow-uri-read: 
 
 
-Les utilitaires d'hôte Linux vous aident à gérer le stockage ONTAP attaché à un hôte Linux.  NetApp recommande fortement d'installer les utilitaires hôtes Linux, mais ce n'est pas obligatoire.  Les utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
+Les utilitaires Linux Host vous aident à gérer le stockage ONTAP connecté à un hôte Linux. NetApp recommande fortement d’installer les utilitaires Linux Host, mais ce n’est pas obligatoire. Les utilitaires Linux Host améliorent la gestion et aident le support client NetApp à recueillir des informations sur votre configuration.

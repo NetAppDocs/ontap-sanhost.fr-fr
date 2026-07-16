@@ -16,7 +16,7 @@ summary: 'Décrit comment utiliser les utilitaires d"hôtes Linux 7.1 avec ONTAP
 
 
 [role="lead"]
-Les utilitaires d'hôte Linux vous aident à gérer le stockage ONTAP attaché à un hôte Linux.  NetApp recommande fortement d'installer les utilitaires hôtes Linux, mais ce n'est pas obligatoire.  Les utilitaires améliorent la gestion et aident le support client NetApp à collecter des informations sur votre configuration.
+Les utilitaires Linux Host vous aident à gérer le stockage ONTAP connecté à un hôte Linux. NetApp recommande fortement d’installer les utilitaires Linux Host, mais ce n’est pas obligatoire. Les utilitaires Linux Host améliorent la gestion et aident le support client NetApp à recueillir des informations sur votre configuration.
 
 Linux Host Utilities 7.1 prend en charge les types de distribution suivants :
 
@@ -31,7 +31,7 @@ Linux Host Utilities 7.1 prend en charge les types de distribution suivants :
 NOTE: Le logiciel Linux Host Utilities ne prend pas en charge les protocoles hôtes NVMe over Fibre Channel (NVMe/FC) et NVMe over TCP (NVMe/TCP).
 
 .Description de la tâche
-Lorsque vous installez les utilitaires de l'hôte Linux, cela ne modifie aucun paramètre sur votre hôte Linux.
+L'installation des utilitaires hôtes Linux ne modifie aucun paramètre ni comportement de votre hôte.
 
 .Avant de commencer
 * Pour un fonctionnement fiable, utilisez lelink:https://imt.netapp.com/matrix/#welcome["Matrice d'interopérabilité"^] pour vérifier que votre configuration iSCSI, FC ou FCoE est prise en charge.
