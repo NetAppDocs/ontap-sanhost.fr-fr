@@ -360,7 +360,7 @@ blacklist {
 [[step-5-customize-multipath-parameters-for-ontap-luns]]
 == Étape 5 : personnalisez les paramètres des chemins d'accès multiples pour les LUN ONTAP
 
-Si votre hôte est connecté à des LUN d'autres fournisseurs et que l'un des paramètres de chemins d'accès multiples est remplacé, vous devez les corriger en ajoutant la strophe plus loin dans `multipath.conf` le fichier qui s'applique spécifiquement aux LUN ONTAP. Si vous ne le faites pas, les LUN ONTAP risquent de ne pas fonctionner comme prévu.
+Si votre hôte est connecté à des LUN d'autres fournisseurs et que certains paramètres de multipath sont remplacés, vous devez les corriger en ajoutant des sections dans le fichier  `multipath.conf` qui s'appliquent spécifiquement aux LUN ONTAP. Vous faites défiler le fichier vers le bas pour ajouter ces sections. Si vous ne corrigez pas les paramètres, les LUN ONTAP pourraient ne pas fonctionner comme prévu.
 
 Vérifiez votre `/etc/multipath.conf` fichier, en particulier dans la section valeurs par défaut, pour les paramètres qui peuvent remplacer <<multipath-parameter-settings,paramètres par défaut pour les paramètres multivoies>>.
 

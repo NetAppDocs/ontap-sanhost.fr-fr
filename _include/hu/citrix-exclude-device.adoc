@@ -2,7 +2,7 @@
 :allow-uri-read: 
 
 
-Si nécessaire, vous pouvez exclure un périphérique du multipathing en ajoutant le WWID du périphérique indésirable à la strophe « blacklist » du `multipath.conf` fichier.
+Si nécessaire, vous pouvez exclure un périphérique du routage multiple en ajoutant le WWID du périphérique indésirable à la section « blacklist » pour le  `/etc/multipath/conf.d/custom.conf` fichier.
 
 .Étapes
 . Déterminez le WWID :
