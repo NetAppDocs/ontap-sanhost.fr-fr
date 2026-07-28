@@ -2,7 +2,7 @@
 :allow-uri-read: 
 
 
-Si votre hôte est connecté à des LUN d'autres fournisseurs et que certains paramètres de multipath sont remplacés, vous devez les corriger en modifiant les sections du fichier  `/etc/multipath/conf.d/custom.conf` qui s'appliquent spécifiquement aux LUN ONTAP. Faites défiler le fichier vers le bas pour ajouter ces sections. Si vous ne corrigez pas les paramètres, les LUN ONTAP pourraient ne pas fonctionner comme prévu.
+Si votre hôte est connecté à des LUN d'autres fournisseurs et que certains paramètres de multipath sont remplacés, vous devez les corriger en modifiant une section existante ou en ajoutant une nouvelle section dans le fichier  `/etc/multipath/conf.d/custom.conf` qui s'applique spécifiquement aux LUN ONTAP. Vous devez faire défiler le fichier pour examiner les modifications qui s'appliquent à votre hôte. Si vous ne corrigez pas les paramètres, les LUN ONTAP pourraient ne pas fonctionner comme prévu.
 
 
 CAUTION: Vous ne devez pas remplacer les paramètres recommandés pour les LUN ONTAP. Ces paramètres sont requis pour optimiser les performances de votre configuration hôte. Pour plus d'informations, contactez le support NetApp, le fournisseur de votre système d'exploitation ou les deux.

@@ -57,7 +57,7 @@ devices {
 EOF
 ----
 ====
-. Lors de la première configuration du multipath, vous devrez peut-être activer et démarrer les services multipath pour charger les paramètres recommandés :
+. Lors de la première configuration du multipathing, vous devrez peut-être activer et démarrer les services multipath pour charger les paramètres recommandés :
 +
 [source, cli]
 ----
