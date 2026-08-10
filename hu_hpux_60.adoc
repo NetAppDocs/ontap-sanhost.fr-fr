@@ -59,9 +59,5 @@ sanlun version
 ----
 
 
-
-
-[[whats-next]]
-== Et la suite ?
-
+.Quelle est la prochaine étape
 link:hu-hpux-sanlun-toolkit.html["En savoir plus sur la boîte à outils SAN"] .

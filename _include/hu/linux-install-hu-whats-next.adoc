@@ -1,12 +1,8 @@
-= Quelle est la prochaine étape ?
+= 
 :allow-uri-read: 
 
 
-
-
-[[whats-next]]
-== Et la suite ?
-
+.Quelle est la prochaine étape
 * Paramètres de pilote recommandés avec le noyau Linux
 +
 Lorsque vous configurez un environnement FC qui utilise des pilotes de boîte de réception natifs fournis avec le noyau Linux, vous pouvez utiliser les valeurs par défaut des pilotes.

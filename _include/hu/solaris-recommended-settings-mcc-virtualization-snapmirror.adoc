@@ -17,7 +17,7 @@ Pour plus d'informations et les modifications recommandées aux paramètres par 
 --
 ** Les options de virtualisation Solaris incluent les domaines logiques Solaris (également appelés LDOM ou Oracle VM Server pour SPARC), les domaines dynamiques Solaris, les zones Solaris et les conteneurs Solaris.  Ces technologies sont également appelées « machines virtuelles Oracle ».
 ** Vous pouvez utiliser plusieurs options ensemble, par exemple, un conteneur Solaris dans un domaine logique Solaris particulier.
-** NetApp prend en charge l'utilisation des technologies de virtualisation Solaris où la configuration globale est prise en charge par Oracle et toute partition avec accès direct aux LUN est répertoriée sur lelink:https://imt.netapp.com/matrix/#welcome["IMT"] dans une configuration prise en charge.  Cela inclut les conteneurs racine, les domaines d'E/S LDOM et LDOM utilisant NPIV pour accéder aux LUN.
+** NetApp prend en charge l'utilisation des technologies de virtualisation Solaris lorsque la configuration globale est prise en charge par Oracle et que toute partition ayant un accès direct aux LUN est répertoriée sur le link:https://imt.netapp.com/matrix/#welcome["IMT"^] dans une configuration prise en charge. Cela inclut les conteneurs racine, les domaines d'E/S LDOM et les LDOM utilisant NPIV pour accéder aux LUN.
 ** Partitions ou machines virtuelles qui utilisent uniquement des ressources de stockage virtualisées, telles qu'un `vdsk` , n'ont pas besoin de qualifications spécifiques car ils n'ont pas d'accès direct aux LUN ONTAP .  Il vous suffit de vérifier que la partition ou la machine virtuelle qui a un accès direct au LUN sous-jacent, comme un domaine d'E/S LDOM, est répertoriée sur lelink:https://imt.netapp.com/matrix/#welcome["IMT"^] .
 
 

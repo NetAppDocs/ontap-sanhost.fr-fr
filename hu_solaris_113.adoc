@@ -117,7 +117,7 @@ Pour plus d'informations et les modifications recommandées aux paramètres par 
 --
 ** Les options de virtualisation Solaris incluent les domaines logiques Solaris (également appelés LDOM ou Oracle VM Server pour SPARC), les domaines dynamiques Solaris, les zones Solaris et les conteneurs Solaris.  Ces technologies sont également appelées « machines virtuelles Oracle ».
 ** Vous pouvez utiliser plusieurs options ensemble, par exemple, un conteneur Solaris dans un domaine logique Solaris particulier.
-** NetApp prend en charge l'utilisation des technologies de virtualisation Solaris où la configuration globale est prise en charge par Oracle et toute partition avec accès direct aux LUN est répertoriée sur lelink:https://imt.netapp.com/matrix/#welcome["IMT"] dans une configuration prise en charge.  Cela inclut les conteneurs racine, les domaines d'E/S LDOM et LDOM utilisant NPIV pour accéder aux LUN.
+** NetApp prend en charge l'utilisation des technologies de virtualisation Solaris lorsque la configuration globale est prise en charge par Oracle et que toute partition ayant un accès direct aux LUN est répertoriée sur le link:https://imt.netapp.com/matrix/#welcome["IMT"^] dans une configuration prise en charge. Cela inclut les conteneurs racine, les domaines d'E/S LDOM et les LDOM utilisant NPIV pour accéder aux LUN.
 ** Partitions ou machines virtuelles qui utilisent uniquement des ressources de stockage virtualisées, telles qu'un `vdsk` , n'ont pas besoin de qualifications spécifiques car ils n'ont pas d'accès direct aux LUN ONTAP .  Il vous suffit de vérifier que la partition ou la machine virtuelle qui a un accès direct au LUN sous-jacent, comme un domaine d'E/S LDOM, est répertoriée sur lelink:https://imt.netapp.com/matrix/#welcome["IMT"^] .
 
 
@@ -200,7 +200,7 @@ NOTE: Après `scsi-vhci-failover-override` a été appliqué, `conf` est ajouté
 +
 [source, cli]
 ----
-pkg info entire`
+pkg info entire
 ----
 .. Vérifiez que le LUN ONTAP a `ostype` comme « Solaris », indépendamment de la taille du LUN :
 +
@@ -252,7 +252,7 @@ root@sparc-s7-55-148:~# sanlun lun show -pv
 +
 [source, cli]
 ----
-mpathadm show lu <LUN>`
+mpathadm show lu <LUN>
 ----
 +
 Les exemples de sortie suivants affichent l'état de chemin correct pour les LUN ONTAP dans une configuration ASA, AFF ou FAS .  Les priorités de chemin sont affichées par rapport à « État d'accès » pour chaque LUN dans la sortie.
@@ -435,9 +435,5 @@ La version Solaris 11.3 pour FCP et iSCSI avec stockage ONTAP présente les prob
 
 | link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1368957["1368957"^] | Solaris 11.x 'cfgadm -c configure' entraînant une erreur d'E/S avec la configuration Emulex de bout en bout | Exécution `cfgadm -c configure` Sur les configurations Emulex de bout en bout, les erreurs d'E/S sont à l'origine. Ceci est fixé dans ONTAP 9.5P17, 9.6P14, 9.7P13 et 9.8P2 | Sans objet 
 |===
-
-
-[[whats-next]]
-== Et la suite ?
-
+.Quelle est la prochaine étape
 link:hu-solaris-command-reference.html["En savoir plus sur l'utilisation de l'outil Solaris Host Utilities"] .

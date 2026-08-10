@@ -1,10 +1,6 @@
-= Quelle est la prochaine étape ?
+= 
 :allow-uri-read: 
 
 
-
-
-[[whats-next]]
-== Et la suite ?
-
+.Quelle est la prochaine étape
 link:hu-wuhu-configuration.html["Découvrez la configuration des utilitaires hôtes Windows pour le stockage ONTAP"]

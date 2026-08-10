@@ -332,9 +332,5 @@ up      secondary  path3  fcs1    fc_aix_4        1
 
 Il n'y a pas de problème connu.
 
-
-
-[[whats-next]]
-== Et la suite ?
-
+.Quelle est la prochaine étape
 link:hu-aix-command-reference.html["En savoir plus sur l'utilisation de l'outil AIX Host Utilities"] .

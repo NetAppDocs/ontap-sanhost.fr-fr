@@ -421,11 +421,7 @@ Il n'y a pas de problème connu.
 
 Pour les problèmes connus du noyau compatible CentOS Red Hat, consultez la link:hu-rhel-8x.html#step-7-review-the-known-issues["problèmes connus"] pour la série Red Hat Enterprise Linux (RHEL) 8.x.
 
-
-
-[[whats-next]]
-== Et la suite ?
-
+.Quelle est la prochaine étape
 * link:hu-luhu-command-reference.html["Découvrez comment utiliser l'outil Linux Host Utilities"] .
 * Découvrez la mise en miroir ASM
 +

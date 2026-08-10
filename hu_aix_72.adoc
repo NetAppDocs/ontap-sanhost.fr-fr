@@ -245,9 +245,5 @@ La version IBM AIX 7.2 et/ou PowerVM (VIOS 3.1) avec stockage ONTAP présente le
 
 | link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1307653["1307653"^] | Des problèmes d'E/S se produisent sur VIOS 3.1.1.10 pendant les pannes SFO et les E/S directes | Sur VIOS 3.1.1, des défaillances d'E/S peuvent se produire sur les disques client NPIV qui sont soutenus par des adaptateurs FC de 16 Go ou 32 Go. En outre, le `vfchost` pilote peut arrêter le traitement des demandes d'E/S du client. L'application d'IBM APAR IJ22290 IBM APAR IJ23222 résout le problème. | NA 
 |===
-
-
-[[whats-next]]
-== Et la suite ?
-
+.Quelle est la prochaine étape
 link:hu-aix-command-reference.html["En savoir plus sur l'utilisation de l'outil AIX Host Utilities"] .

@@ -40,9 +40,5 @@ Cette boîte à outils SAN est commune à toutes les configurations et protocole
 SAN Toolkit est pris en charge sur les versions des systèmes d'exploitation AIX et PowerVM/VIOS.
 
 ====
-
-
-[[whats-next]]
-== Et la suite ?
-
+.Quelle est la prochaine étape
 link:hu_hpux_60_cmd.html["En savoir plus sur l'utilisation de l'outil Utilitaires hôte HP-UX"] .

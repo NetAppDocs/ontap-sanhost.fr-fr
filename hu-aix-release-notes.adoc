@@ -70,9 +70,5 @@ link:https://mysupport.netapp.com/site/["NetApp bogues en ligne"^] fournit des i
 * FCP - AIX
 
 
-
-
-[[whats-next]]
-== Et la suite ?
-
+.Quelle est la prochaine étape
 link:hu-aix-80.html["En savoir plus sur l'installation des utilitaires hôtes AIX"]

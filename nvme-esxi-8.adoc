@@ -23,9 +23,9 @@ Vous pouvez configurer NVMe over Fabrics (NVMe-of) sur les hôtes initiateurs ex
 [[supportability]]
 == Prise en charge
 
-* Depuis ONTAP 9.16.1, l'allocation d'espace est activée par défaut pour tous les nouveaux espaces de noms NVMe.
-* À partir de la version ONTAP 9.9.1 P3, le protocole NVMe/FC est pris en charge pour ESXi 8 et les versions ultérieures.
-* Depuis la version ONTAP 9.10.1, le protocole NVMe/TCP est pris en charge pour ONTAP.
+* À partir d'ONTAP 9.16.1, l'allocation d'espace est activée par défaut pour tous les espaces de noms NVMe nouvellement créés.
+* À partir de ONTAP 9.9.1 P3, le protocole NVMe/FC est pris en charge pour ESXi 8.
+* À partir d'ONTAP 9.10.1, le protocole NVMe/TCP est pris en charge pour ONTAP.
 
 
 
