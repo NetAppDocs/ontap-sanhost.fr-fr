@@ -16,11 +16,32 @@ summary: Découvrez la prise en charge ONTAP et les fonctionnalités pour les h�
 
 
 [role="lead"]
+Les fonctionnalités prises en charge pour la configuration hôte avec NVMe over Fabrics (NVMe-oF) varient en fonction de votre version d'ONTAP et d'Ubuntu.
+
+[cols="50,25,25"]
+|===
+| Fonctionnalité | Version hôte Ubuntu | Version ONTAP 
+
+
+| NVMe/FC et NVMe/TCP signalent tous les chemins optimisés sur les systèmes ASA r2  a| 
+26.04 ou version ultérieure
+| 9.16.1 ou version ultérieure 
+
+
+| NVMe/TCP est une fonctionnalité d'entreprise entièrement prise en charge  a| 
+22.04 ou version ultérieure
+| 9.10.1 ou version ultérieure 
+|===
 ONTAP prend en charge les fonctionnalités hôtes SAN suivantes, quelle que soit la version ONTAP exécutée sur votre système.
 
 [cols="75,25"]
 |===
 | Fonctionnalité | Version hôte Ubuntu 
+
+
+| La stratégie iopolicy par défaut pour NVMe-oF est définie sur queue-depth  a| 
+26.04 ou version ultérieure
+
 
 
 | Le module d'extension NetApp dans le package natif affiche les détails ONTAP pour les espaces de noms NVMe/FC.  a| 
@@ -48,6 +69,9 @@ NOTE: Pour plus de détails sur les configurations prises en charge, consultez l
 [cols="50,50"]
 |===
 | Si votre version d'Ubuntu est .. | Découvrez... 
+
+
+| 26,04 | link:nvme-ubuntu-2604.html["Configuration de NVMe pour Ubuntu 26.04"] 
 
 
 | 24,04 | link:nvme-ubuntu-2404.html["Configuration de NVMe pour Ubuntu 24.04"] 

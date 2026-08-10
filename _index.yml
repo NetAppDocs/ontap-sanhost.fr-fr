@@ -17,9 +17,9 @@ indexpage:
       url: "/overview.html"
     - title: Notes de version des utilitaires hôtes AIX
       url: "/hu-aix-release-notes.html"
-    - title: Notes de mise à jour des utilitaires hôtes HP-UX
+    - title: Notes de publication des utilitaires hôtes HP-UX
       url: "/hu-hpux-release-notes.html"
-    - title: Notes de version des utilitaires hôtes Linux
+    - title: Notes de publication des utilitaires hôtes Linux
       url: "/hu-luhu-release-notes.html"
     - title: Notes de publication des utilitaires hôtes Solaris
       url: "/hu-solaris-release-notes.html"

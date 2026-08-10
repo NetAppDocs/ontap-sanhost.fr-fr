@@ -16,11 +16,16 @@ summary: Découvrez la prise en charge et les fonctionnalités ONTAP pour les h�
 
 
 [role="lead"]
-Les fonctionnalités prises en charge pour la configuration hôte avec NVMe over Fabrics (NVMe-oF) varient en fonction de votre version d' ONTAP et d'Oracle Linux.
+Les fonctionnalités prises en charge pour la configuration hôte avec NVMe over Fabrics (NVMe-oF) varient en fonction de votre version d'ONTAP et d'Oracle Linux.
 
 [cols="50,25,25"]
 |===
 | Fonctionnalité | Version hôte Oracle Linux | Version ONTAP 
+
+
+| NVMe/FC et NVMe/TCP signalent tous les chemins optimisés sur les systèmes ASA r2  a| 
+9.0 ou version ultérieure
+| 9.16.1 ou version ultérieure 
 
 
 | À partir d'Oracle Linux 9.6, nvme prend en charge la politique d'E/S « queue-depth » et est activé comme option par défaut.  a| 

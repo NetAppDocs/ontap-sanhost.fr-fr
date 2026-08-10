@@ -16,11 +16,16 @@ summary: Découvrez la prise en charge et les fonctionnalités ONTAP pour les h�
 
 
 [role="lead"]
-Les fonctionnalités prises en charge pour la configuration de l'hôte avec NVMe over Fabrics (NVMe-oF) varient en fonction de votre version d' ONTAP et de Proxmox.
+Les fonctionnalités prises en charge pour la configuration de l'hôte avec NVMe over Fabrics (NVMe-oF) varient en fonction de votre version d'ONTAP et de Proxmox.
 
 [cols="30,20,20"]
 |===
 | Fonctionnalité ONTAP | Version hôte Proxmox | Version ONTAP 
+
+
+| NVMe/FC et NVMe/TCP signalent tous les chemins optimisés sur les systèmes ASA r2  a| 
+9.0 ou version ultérieure
+| 9.16.1 ou version ultérieure 
 
 
 | NVMe/TCP est une fonctionnalité d'entreprise entièrement prise en charge  a| 
