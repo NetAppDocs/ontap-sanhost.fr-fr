@@ -45,7 +45,7 @@ Exemple de version du noyau Proxmox VE 9.x :
 +
 [listing]
 ----
-6.17.2-2-pve
+7.0.14-5-pve
 ----
 . Installer le `nvme-cli` groupe :
 +
@@ -87,7 +87,7 @@ L'exemple suivant montre un `hostnqn` valeur:
 +
 [listing]
 ----
-nqn.2014-08.org.nvmexpress:uuid:3933xxxx-3333-xxxx-4844-325xxxxa524c
+nqn.2014-08.org.nvmexpress:uuid:3933xxxx-3333-xxxx-4844-325xxxxa5247
 ----
 . Sur le système ONTAP , vérifiez que le `hostnqn` La chaîne correspond à `hostnqn` chaîne de caractères pour le sous-système correspondant sur la matrice ONTAP :
 +
@@ -193,7 +193,7 @@ L'exemple suivant montre une version de pilote :
 +
 [listing]
 ----
-0:14.4.0.10
+0:14.4.0.13
 ----
 
 
@@ -295,8 +295,8 @@ L'exemple suivant montre les versions du pilote et du micrologiciel :
 +
 [listing]
 ----
-SN1700Q FW:v9.15.05 DVR:v10.02.09.400-k
-SN1700Q FW:v9.15.05 DVR:v10.02.09.400-k
+SN1700Q FW:v9.15.05 DVR:v10.02.10.100-k
+SN1700Q FW:v9.15.05 DVR:v10.02.10.100-k
 ----
 . Vérifiez-le `ql2xnvmeenable` est défini. L'adaptateur Marvell peut ainsi fonctionner en tant qu'initiateur NVMe/FC :
 +
@@ -465,7 +465,7 @@ round-robin
 
 
 
-NOTE: La nouvelle politique d'E/S s'applique automatiquement aux périphériques NetApp ONTAP Controller correspondants. Aucun redémarrage n'est nécessaire.
+NOTE: La nouvelle politique d'E/S s'applique automatiquement aux périphériques NetApp ONTAP Controller correspondants. Vous n'avez pas besoin de redémarrer.
 
 
 
@@ -630,7 +630,7 @@ nvme list
 ----
 Node          Generic     SN                   Model                    Namespace  Usage                      Format           FW Rev
 ------------- ----------- -------------------- ------------------------ ---------- -------------------------- ---------------- --------
-/dev/nvme2n1  /dev/ng2n1  81PqYFYq2aVAAAAAAAAB NetApp ONTAP Controller   0x1         17.88  GB / 171.80  GB      4 KiB +  0 B   9.17.1
+/dev/nvme2n1  /dev/ng2n1  81PqYFYq2aVAAAAAAAAB NetApp ONTAP Controller   0x1         17.88  GB / 171.80  GB      4 KiB +  0 B 9.19.1
 ----
 ====
 . Vérifiez que l'état du contrôleur de chaque chemin est actif et que l'état ANA est correct :
@@ -655,12 +655,12 @@ L'exemple suivant montre un espace de noms hébergé sur un contrôleur ONTAP à
 =====
 [listing, subs="+quotes"]
 ----
- nvme-subsys114 - NQN=nqn.1992-08.com.netapp:sn.9e30b9760a4911f08c87d039eab67a95:subsystem.sles_161_27
-                 hostnqn=nqn.2014-08.org.nvmexpress:uuid:f651xxxx-3133-xxxx-bbff-7edxxxxf123f iopolicy=round-robin\
-+- nvme114 *fc* traddr=nn-0x234ed039ea359e4a:pn-0x2360d039ea359e4a,host_traddr=nn-0x20000090fae0ec88:pn-0x10000090fae0ec88 *live optimized*
-+- nvme115 *fc* traddr=nn-0x234ed039ea359e4a:pn-0x2362d039ea359e4a,host_traddr=nn-0x20000090fae0ec88:pn-0x10000090fae0ec88 *live non-optimized*
-+- nvme116 *fc* traddr=nn-0x234ed039ea359e4a:pn-0x2361d039ea359e4a,host_traddr=nn-0x20000090fae0ec89:pn-0x10000090fae0ec89 *live optimized*
-+- nvme117 *fc* traddr=nn-0x234ed039ea359e4a:pn-0x2363d039ea359e4a,host_traddr=nn-0x20000090fae0ec89:pn-0x10000090fae0ec89 *live non-optimized*
+ nvme-subsys3 - NQN=nqn.1992-08.com.netapp:sn.94929fdb84eb11f0b624d039eac809ba:subsystem.sub_176
+                 hostnqn=nqn.2014-08.org.nvmexpress:uuid:3933xxxx-3333-xxxx-4844-325xxxxa524\
++- nvme1 *fc* traddr=nn-0x200dd039eac79573:pn-0x2360d039ea359e4a,host_traddr=nn-0x20000090fae0ec88:pn-0x10005ced8c531949 *live optimized*
++- nvme3 *fc* traddr=nn-0x200dd039eac79573:pn-0x200ed039eac79573,host_traddr=nn-0x20005ced8c531948:pn-0x10005ced8c531948 *live non-optimized*
++- nvme5 *fc* traddr=nn-0x200dd039eac79573:pn-0x200fd039eac79573,host_traddr=nn-0x20005ced8c531949:pn-0x10005ced8c531949 *live optimized*
++- nvme7 *fc* traddr=nn-0x200dd039eac7957a:pn-0x2011d039eac79573,host_traddr=nn-0x20005ced8c531948:pn-0x10005ced8c531948 *live non-optimized*
 ----
 =====
 .Afficher un exemple de sortie ASA r2
@@ -759,7 +759,7 @@ nvme netapp ontapdevices -o json
       "LBA_Size":4096,
       "Namespace_Size":32212254720,
       "UsedBytes":67899392,
-      "Version":"9.17.1"
+      "Version":"9.19.1"
     }
   ]
 ----

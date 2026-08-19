@@ -227,7 +227,7 @@ Vous devriez voir une sortie similaire à l’exemple suivant :
 +
 [listing]
 ----
-open-iscsi/stable,now 2.1.11-1+deb13u1 amd64
+open-iscsi/stable,now 2.1.11-1+deb13u2 amd64
 ----
 . Vérifiez le nom du nœud initiateur iSCSI, qui se trouve dans le fichier  `/etc/iscsi/initiatorname.iscsi` :
 +
