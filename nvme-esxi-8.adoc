@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
 permalink: nvme-esxi-8.html 
-keywords: nvme, esxi, ontap, nvme/fc, hypervisor 
-summary: 'Vous pouvez configurer NVMe over Fabrics (NVMe-of) sur les hôtes initiateurs exécutant ESXi 8.x et ONTAP comme cible.' 
+keywords: nvme, esxi, ontap, nvme fc, hypervisor 
+summary: Configurez NVMe over Fabrics sur les hôtes initiateurs exécutant ESXi 8.x et ONTAP en tant que cible. 
 ---
-= Configuration d'hôte NVMe-of pour ESXi 8.x avec ONTAP
+= Configurer ESXi 8.x pour NVMe-oF avec le stockage ONTAP
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -329,4 +329,4 @@ Les machines virtuelles Linux exécutant vSphere 8.x ou version ultérieure et u
 
 |===
 .Informations associées
-link:https://docs.netapp.com/us-en/ontap-apps-dbs/vmware/vmware-vsphere-overview.html["VMware vSphere avec ONTAP"^] link:https://kb.vmware.com/s/article/2031038["Prise en charge de VMware vSphere 5.x, 6.x et 7.x avec NetApp MetroCluster (2031038)"^] link:https://kb.vmware.com/s/article/83370["Prise en charge de VMware vSphere 6.x et 7.x avec la synchronisation active NetApp SnapMirror"^]
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/vmware/vmware-vsphere-overview.html["VMware vSphere avec ONTAP"^]

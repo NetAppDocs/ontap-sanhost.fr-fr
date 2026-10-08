@@ -4,7 +4,7 @@ permalink: nvme-aix.html
 keywords: nvme, linux, rhel, red hat, enterprise, aix, ontap 
 summary: Comment configurer un hôte NVMe/FC pour AIX avec ONTAP 
 ---
-= Configurer AIX avec NVMe-oF pour le stockage ONTAP
+= Configurer AIX pour NVMe-oF avec le stockage ONTAP
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 

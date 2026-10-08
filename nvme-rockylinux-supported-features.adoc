@@ -4,7 +4,7 @@ permalink: nvme-rockylinux-supported-features.html
 keywords: nvme, linux, rocky linux, red hat, enterprise 
 summary: Découvrez la prise en charge et les fonctionnalités ONTAP pour Rocky Linux. 
 ---
-= Découvrez la prise en charge et les fonctionnalités ONTAP pour Rocky Linux.
+= Prise en charge et fonctionnalités d’ONTAP pour Rocky Linux
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 

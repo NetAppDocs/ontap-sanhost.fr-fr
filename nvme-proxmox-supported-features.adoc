@@ -4,7 +4,7 @@ permalink: nvme-proxmox-supported-features.html
 keywords: nvme, proxmox, enterprise 
 summary: Découvrez la prise en charge et les fonctionnalités ONTAP pour les hôtes Proxmox. 
 ---
-= Découvrez la prise en charge et les fonctionnalités ONTAP pour les hôtes Proxmox.
+= Prise en charge et fonctionnalités ONTAP pour les hôtes Proxmox
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 

@@ -4,7 +4,7 @@ permalink: nvme-ubuntu-supported-features.html
 keywords: nvme, linux, ubuntu, red hat, enterprise 
 summary: Découvrez la prise en charge ONTAP et les fonctionnalités pour les hôtes Ubuntu 
 ---
-= Découvrez la prise en charge ONTAP et les fonctionnalités pour les hôtes Ubuntu
+= Prise en charge et fonctionnalités d’ONTAP pour les hôtes Ubuntu
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 

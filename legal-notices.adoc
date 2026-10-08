@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: legal, notices, copyright, trademarks, patents 
 summary: Les mentions légales donnent accès aux déclarations de copyright, aux marques, aux brevets, etc. 
 ---
-= Mentions légales
+= Mentions légales relatives aux utilitaires SAN Host pour le stockage ONTAP
 :allow-uri-read: 
 
 

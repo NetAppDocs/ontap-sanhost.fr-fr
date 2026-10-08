@@ -4,7 +4,7 @@ permalink: hu-hpux-sanlun-toolkit.html
 keywords: host utilities, unified, oracle, linux, 7.1, netapp, ontap 
 summary: Décrit comment utiliser les utilitaires hôtes HP-UX 6.0 avec le stockage ONTAP 
 ---
-= En savoir plus sur la boîte à outils SAN pour le stockage ONTAP
+= Découvrez le kit d'outils SAN HP-UX pour le stockage ONTAP
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
