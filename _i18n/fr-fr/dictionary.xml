@@ -2537,4 +2537,9 @@ La liaison du pilote FC est modifiée de<block ref="b9ca0a083600812be33f42f91f00
   <block id="2577436e0a1529b400f7af13bf054dd3" category="sidebar">Découvrez la configuration NVMe-oF</block>
   <block id="e00f09f4cda9392c891c49988b80edc8" category="sidebar">SLES-FCP</block>
   <block id="8becbe3ee64db6f436bf244fb25c7f57" category="sidebar">SLES-NVMe</block>
+  <block id="b69bffb1a1f55594751fbc58f7abb114" category="summary">Configurez Citrix Xenserver 9.0 pour le multipathing avec des paramètres et réglages spécifiques pour les opérations des protocoles FCP et iSCSI avec le stockage ONTAP.</block>
+  <block id="f52d84b92b78c6dad322e059e6943904" category="doc">Configurer Citrix Xenserver 9.0 pour FCP et iSCSI avec le stockage ONTAP</block>
+  <block id="aa6f72aa4dad8dc14f65a49c7b60982a" category="paragraph">Vous pouvez utiliser le multipathing avec Citrix Xenserver 9.0 pour gérer les LUN ONTAP.</block>
+  <block id="3f6d8773170dd1c73493c97ee36bb40a" category="paragraph">Une configuration AFF ou FAS doit comporter deux groupes de chemins, l’un à priorité élevée et l’autre à priorité faible. Les chemins actifs/optimisés à priorité élevée sont gérés par le contrôleur où se trouve l’agrégat. Les chemins à priorité faible sont actifs mais non optimisés, car ils sont gérés par un autre contrôleur. Les chemins non optimisés ne sont utilisés que lorsque les chemins optimisés ne sont pas disponibles.</block>
+  <block id="1d5076606adf1177c26a3f206e21498e" category="sidebar">XenServer 9.0</block>
 </blocks>
