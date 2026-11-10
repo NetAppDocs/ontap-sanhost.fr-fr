@@ -1252,7 +1252,6 @@ La liaison du pilote FC est modifiée de<block ref="b9ca0a083600812be33f42f91f00
   <block id="deeefe26777fb24a155fd5e2eac9f23b" category="paragraph">L'exemple suivant montre une version de package nvme-cli :</block>
   <block id="0825e58b251b6f1e1956c9f982c69b3d" category="doc">Configurer Citrix Hypervisor 8.2 pour FCP et iSCSI avec le stockage ONTAP</block>
   <block id="3e2e1ae5727d07e3ee9163e73df8e73f" category="paragraph">Vous pouvez utiliser le multipathing avec Citrix Hypervisor 8.2 pour gérer les LUN ONTAP.</block>
-  <block id="6d9eef6a4c2617ee0a8dfdc9ae7a468a" category="doc">Configurer Citrix Xenserver 8.4 pour FCP et iSCSI avec stockage ONTAP</block>
   <block id="73dbe2792e643c8d49d1c396963179b8" category="inline-link-macro">Créez un LUN de démarrage SAN et mappez-le à l'hôte</block>
   <block id="23f9932633d90fac9929676a3d96b73c" category="list-text"><block ref="d3b050efbc8875625662ab7a3bc1d82e" category="inline-link-macro-rx"></block>.</block>
   <block id="83946a5f9a0c9e6468d1616ca938bdd0" category="list-text">Sur l'hôte RHEL, vérifiez la chaîne hostnqn à <block ref="7c33f184451a7567af5a5fb5f2bc7ae1" prefix=" " category="inline-code"></block> :</block>
@@ -1498,7 +1497,6 @@ La liaison du pilote FC est modifiée de<block ref="b9ca0a083600812be33f42f91f00
   <block id="9b1f2a19fe68c5002ddcac15a60e5a23" category="list-text">Pour Linux Host Utilities 7.1, l'utilitaire « sanlun » est commun à toutes les configurations et tous les protocoles des Host Utilities.  Par conséquent, certains de ses contenus s’appliquent à une configuration, mais pas à une autre.  Le fait d’avoir des composants inutilisés n’affecte pas les performances de votre système.</block>
   <block id="4e8e3cc9caaec705b678e226588d4da9" category="list-text">L'utilitaire « sanlun » n'est pas pris en charge pour les types d'hyperviseurs suivants :</block>
   <block id="c0d026daf27c431888481ff7a1184613" category="paragraph">Pour Linux Host Utilities 8.0, l'utilitaire « sanlun » n'est pas pris en charge pour Citrix XenServer, Oracle VM et Red Hat Enterprise Virtualization.</block>
-  <block id="11bf6f85ac38e8f32d867da5ca4263c4" category="paragraph">Pour Linux Host Utilities 7.1, l'utilitaire « sanlun » n'est pas pris en charge pour Citrix Xenserver, Red Hat Enterprise Virtualization et Proxmox.</block>
   <block id="2b4a0c982d6640e362d3aca661ab4bfa" category="doc">Configurer Solaris 11.4 pour FCP et iSCSI avec le stockage ONTAP</block>
   <block id="6bcc4bcb21d11b9bdf1be5210fad0425" category="paragraph">Le logiciel Solaris Host Utilities fournit des outils de gestion et de diagnostic pour les hôtes Solaris connectés au stockage ONTAP .  Lorsque vous installez les utilitaires d'hôte Solaris sur un hôte Solaris 11.4, vous pouvez utiliser les utilitaires d'hôte pour vous aider à gérer les opérations de protocole FCP et iSCSI avec les LUN ONTAP .</block>
   <block id="be4981292be510d9bb0a8dc7383e77dd" category="inline-link-macro">Installer Solaris Host Utilities 8.0</block>
@@ -1815,11 +1813,7 @@ La liaison du pilote FC est modifiée de<block ref="b9ca0a083600812be33f42f91f00
   <block id="0fe3920489a515504bc99fd4bc2a0cfa" category="paragraph">L'exemple suivant montre un<block ref="24039a6c469b55da1dae1ff1197f8079" prefix=" " category="inline-code"></block> valeur:</block>
   <block id="bdd85bb9fb61697998b63578c3818344" category="paragraph">Le protocole NVMe/TCP ne prend pas en charge l'opération de connexion automatique.  Vous devez effectuer manuellement les opérations de connexion ou de connexion complète NVMe/TCP pour découvrir les sous-systèmes et espaces de noms NVMe/TCP.</block>
   <block id="3832446aa2ef6619ecfdb886641a60fe" category="list-text">Vérifiez que les autres combinaisons LIF initiateur-cible NVMe/TCP peuvent obtenir avec succès les données de la page du journal de découverte :</block>
-  <block id="1c79280a42a5cd3a48fa9fefe62fd0a5" category="summary">Configurez Citrix Xenserver 8.4 pour le multivoie et avec des paramètres et paramètres spécifiques pour les opérations de protocole FCP et iSCSI avec le stockage ONTAP .</block>
-  <block id="e3570aecc41d92af1fdf504fc5bd3927" category="paragraph">Le progiciel Linux Host Utilities ne prend pas en charge les systèmes d'exploitation Citrix Xenserver.</block>
-  <block id="405ee507e1b0e20ba609f39dc449664e" category="paragraph">Vous pouvez utiliser le multipathing avec Citrix Xenserver 8.4 pour gérer les LUN ONTAP .</block>
   <block id="813cc633e0459359ed043e6d76025c2c" category="paragraph">Par exemple, vous pouvez configurer le stockage ONTAP sur site pour vous connecter aux hôtes SAN sur site ou aux clients cloud SAN.  Vous pouvez également configurer des services de stockage exécutés sur un environnement cloud tel que<block ref="cdfecfe4eb59bc17d075f2da08aa8dad" category="inline-link-macro-rx"></block> ou<block ref="8ad7a6b53b9076e00c14225601db07c4" category="inline-link-macro-rx"></block> pour se connecter aux hôtes SAN sur site ou aux clients cloud SAN.</block>
-  <block id="9831e45ea03c86b202350b5eb137e309" category="sidebar">Xenserver 8.4</block>
   <block id="df472899f555ad076c9b90f4bd508f91" category="sidebar">Hyperviseur 8.2</block>
   <block id="acf2ddfd48a6a24bda067d6e04e94f29" category="doc">Étape 4 : Confirmez la configuration multi-chemins pour votre hôte</block>
   <block id="7aeddcaacf2b32401e7a3259c54bb6c0" category="paragraph">Installez le logiciel Microsoft Multipath I/O (MPIO) et activez le multipathing si votre hôte Windows possède plusieurs chemins d'accès au système de stockage.</block>
@@ -2537,9 +2531,15 @@ La liaison du pilote FC est modifiée de<block ref="b9ca0a083600812be33f42f91f00
   <block id="2577436e0a1529b400f7af13bf054dd3" category="sidebar">Découvrez la configuration NVMe-oF</block>
   <block id="e00f09f4cda9392c891c49988b80edc8" category="sidebar">SLES-FCP</block>
   <block id="8becbe3ee64db6f436bf244fb25c7f57" category="sidebar">SLES-NVMe</block>
-  <block id="b69bffb1a1f55594751fbc58f7abb114" category="summary">Configurez Citrix Xenserver 9.0 pour le multipathing avec des paramètres et réglages spécifiques pour les opérations des protocoles FCP et iSCSI avec le stockage ONTAP.</block>
-  <block id="f52d84b92b78c6dad322e059e6943904" category="doc">Configurer Citrix Xenserver 9.0 pour FCP et iSCSI avec le stockage ONTAP</block>
-  <block id="aa6f72aa4dad8dc14f65a49c7b60982a" category="paragraph">Vous pouvez utiliser le multipathing avec Citrix Xenserver 9.0 pour gérer les LUN ONTAP.</block>
   <block id="3f6d8773170dd1c73493c97ee36bb40a" category="paragraph">Une configuration AFF ou FAS doit comporter deux groupes de chemins, l’un à priorité élevée et l’autre à priorité faible. Les chemins actifs/optimisés à priorité élevée sont gérés par le contrôleur où se trouve l’agrégat. Les chemins à priorité faible sont actifs mais non optimisés, car ils sont gérés par un autre contrôleur. Les chemins non optimisés ne sont utilisés que lorsque les chemins optimisés ne sont pas disponibles.</block>
-  <block id="1d5076606adf1177c26a3f206e21498e" category="sidebar">XenServer 9.0</block>
+  <block id="37b28a1b8845fd9389675e1bd140fae9" category="summary">Configurez Citrix XenServer 9.0 pour le multicheminement, avec des paramètres et des réglages spécifiques pour les opérations des protocoles FCP et iSCSI avec le stockage ONTAP.</block>
+  <block id="7b6b47a474038f42ab5d1310bd108dae" category="doc">Configurer Citrix XenServer 9.0 pour FCP et iSCSI avec le stockage ONTAP</block>
+  <block id="ba51463edd725e02a97cc8adbc431646" category="paragraph">Le progiciel Linux Host Utilities ne prend pas en charge les systèmes d'exploitation Citrix XenServer.</block>
+  <block id="45042c97a0ec778933cec51e743b7fd3" category="paragraph">Vous pouvez utiliser le multicheminement avec Citrix XenServer 9.0 pour gérer les LUN ONTAP.</block>
+  <block id="63e7f1b1fd598b1fde3e6cd5b2553c3f" category="paragraph">Pour Linux Host Utilities 7.1, l’utilitaire « sanlun » n’est pas pris en charge pour Citrix XenServer, Red hat Enterprise Virtualization et Proxmox.</block>
+  <block id="4f1f23df51594490fd905d80ae2ec08a" category="summary">Configurez Citrix XenServer 8.4 pour le multipathing, avec des paramètres et réglages spécifiques pour les opérations des protocoles FCP et iSCSI avec le stockage ONTAP.</block>
+  <block id="27ae6acd8c616342cbd51da5588b27a3" category="doc">Configurer Citrix XenServer 8.4 pour FCP et iSCSI avec le stockage ONTAP</block>
+  <block id="1603592d786a7d0b05ea6d2349cd2c37" category="paragraph">Vous pouvez utiliser le multipathing avec Citrix XenServer 8.4 pour gérer les LUN ONTAP.</block>
+  <block id="80d7b416b0e7d5f227ea5b78edcc33cd" category="sidebar">XenServer 9.0</block>
+  <block id="7ef93303f99987d3f82b96411ca41f0f" category="sidebar">XenServer 8.4</block>
 </blocks>

@@ -44,7 +44,7 @@ Pour Linux Host Utilities 8.0, l'utilitaire « sanlun » n'est pas pris en charg
 --
 .7.1
 --
-Pour Linux Host Utilities 7.1, l'utilitaire « sanlun » n'est pas pris en charge pour Citrix Xenserver, Red Hat Enterprise Virtualization et Proxmox.
+Pour Linux Host Utilities 7.1, l’utilitaire « sanlun » n’est pas pris en charge pour Citrix XenServer, Red hat Enterprise Virtualization et Proxmox.
 
 --
 ====

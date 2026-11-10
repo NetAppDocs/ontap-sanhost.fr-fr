@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
 permalink: hu-citrix-90.html 
-keywords: host utilities, citrix, Xenserver, 9 series, netapp, ontap, san, boot 
-summary: Configurez Citrix Xenserver 9.0 pour le multipathing avec des paramètres et réglages spécifiques pour les opérations des protocoles FCP et iSCSI avec le stockage ONTAP. 
+keywords: host utilities, citrix, XenServer, 9 series, netapp, ontap, san, boot 
+summary: Configurez Citrix XenServer 9.0 pour le multicheminement, avec des paramètres et des réglages spécifiques pour les opérations des protocoles FCP et iSCSI avec le stockage ONTAP. 
 ---
-= Configurer Citrix Xenserver 9.0 pour FCP et iSCSI avec le stockage ONTAP
+= Configurer Citrix XenServer 9.0 pour FCP et iSCSI avec le stockage ONTAP
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,11 +16,11 @@ summary: Configurez Citrix Xenserver 9.0 pour le multipathing avec des paramètr
 
 
 [role="lead"]
-Configurez Citrix Xenserver 9.0 pour le multipathing avec des paramètres et réglages spécifiques pour les opérations des protocoles FCP et iSCSI avec le stockage ONTAP.
+Configurez Citrix XenServer 9.0 pour le multicheminement, avec des paramètres et des réglages spécifiques pour les opérations des protocoles FCP et iSCSI avec le stockage ONTAP.
 
 [NOTE]
 ====
-Le progiciel Linux Host Utilities ne prend pas en charge les systèmes d'exploitation Citrix Xenserver.
+Le progiciel Linux Host Utilities ne prend pas en charge les systèmes d'exploitation Citrix XenServer.
 
 ====
 
@@ -47,7 +47,7 @@ Pour plus d'informations sur l'activation du BIOS HBA, reportez-vous à la docum
 [[step-2-confirm-the-multipath-configuration-for-your-host]]
 == Étape 2 : Confirmez la configuration multi-chemins pour votre hôte
 
-Vous pouvez utiliser le multipathing avec Citrix Xenserver 9.0 pour gérer les LUN ONTAP.
+Vous pouvez utiliser le multicheminement avec Citrix XenServer 9.0 pour gérer les LUN ONTAP.
 
 Pour vous assurer que les chemins d'accès multiples sont correctement configurés pour votre hôte, vérifiez que le `/etc/multipath.conf` fichier est défini et que vous disposez des paramètres recommandés par NetApp pour vos LUN ONTAP.
 
